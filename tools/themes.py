@@ -30,14 +30,14 @@ note
   cell_alpha    목록 셀 불투명도 0.0~1.0. 1 미만이면 뒤의 배경 이미지가 비친다
   main_bg       목록 화면 배경 이미지. chat_bg 와 같은 형식
   flat          True 면 말풍선을 그라데이션 없이 단색으로 채운다. 두 색의 중간값을 쓴다
-  glow          (색, 진하기 0~255, 여백pt). 말풍선 바깥으로 빛을 흘리고 배경 가장자리에도 얹는다.
+  glow          (색, 진하기 0~255, 여백pt). 색이 'auto' 면 말풍선마다 자기 색으로 빛난다. 말풍선 바깥으로 빛을 흘리고 배경 가장자리에도 얹는다.
                 여백만큼 cap inset 이 자동으로 커진다 — 안 그러면 늘어날 때 글로우가 뭉개진다
 
 chat_bg
   None 이면 단색. ('linear', 위, 아래) 또는 ('aurora', 바탕, [색...]) 이면 이미지를 그린다.
 """
 
-VERSION = '0.5'
+VERSION = '0.6'
 
 THEMES = [
     dict(
@@ -146,3 +146,24 @@ def by_key(key):
         if t['key'] == key:
             return t
     raise KeyError(key)
+
+
+def _variant(src, key, name, note, **over):
+    """기존 테마를 베껴 일부만 바꾼 변형.
+
+    팔레트를 두 벌 관리하면 원본을 고칠 때 변형이 따라오지 않는다.
+    색은 원본 하나에만 두고 여기서는 바뀌는 것만 적는다.
+    """
+    t = dict(by_key(src))
+    t.update(key=key, name=name, note=note, **over)
+    return t
+
+
+THEMES += [
+    _variant('mixed04', 'mixed09', '믹스드 v2',
+             '믹스드에 글로우를 얹은 것. 말풍선마다 자기 색으로 빛남',
+             glow=('auto', 130, 12)),
+    _variant('candy06', 'candy10', '캔디 팝 v2',
+             '캔디 팝에 글로우를 얹은 것. 밝은 바탕이라 빛이 은은하게 걸림',
+             glow=('auto', 120, 11)),
+]

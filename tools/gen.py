@@ -114,6 +114,9 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
     ImageDraw.Draw(shape).rounded_rectangle(
         [pad, pad, pad + w - 1, pad + h - 1], radius=radius, fill=255)
     gc, ga = glow
+    if gc == 'auto':
+        # 말풍선마다 자기 색으로 빛난다. 칸마다 색이 다른 테마에 어울린다
+        gc = mid(colors[0], colors[1])
     halo.paste(Image.new('RGBA', (gw, gh), rgb(gc) + (ga,)), (0, 0), shape)
     halo = halo.filter(ImageFilter.GaussianBlur(radius=pad * 0.6))
     halo.alpha_composite(out, (pad, pad))
@@ -400,7 +403,10 @@ def background(t, spec, w, h):
     img = chat_bg(spec, w, h)
     g = t.get('glow')
     if g:
-        img = edge_glow(img, g[0], min(255, g[1] + 40))
+        # 배경에는 말풍선처럼 따라갈 색이 없다. auto 면 포인트색을 쓴다
+        color = t['accent'] if g[0] == 'auto' else g[0]
+        # 배경은 면적이 넓어서 말풍선과 같은 세기로 넣으면 화면이 뿌예진다
+        img = edge_glow(img, color, int(g[1] * 0.7))
     return img
 
 
