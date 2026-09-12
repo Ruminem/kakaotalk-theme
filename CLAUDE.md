@@ -11,10 +11,14 @@ CSS, `colors.xml`, `AndroidManifest.xml`, 말풍선 그림, 미리보기가 전�
 ```
 tools/themes.py     ← 팔레트 표. 여기만 고친다
 tools/gen.py        → build-src/<테마>/{ios,android}/
-tools/preview.py    → assets/*.png, docs/index.html
+tools/preview.py    → assets/*.png, docs/index.html, README 의 테마 목록
 build.ps1           → dist/iOS/*.ktheme, dist/android/*.apk
 release.ps1         → 태그 + 릴리스 자산 첨부
+.github/workflows/pages.yml → ruminem.github.io/kakaotalk-theme/
 ```
+
+`docs/` 안에서 **`index.html` 은 생성물이고 `share.html` 은 손으로 쓴 것**이다.
+같은 폴더에 있지만 성격이 반대다 — `index.html` 을 고치면 다음 미리보기에서 날아간다.
 
 **팔레트 표의 순서가 곧 README 와 갤러리 순서다.** 변형(v2)은 `_add_variant` 로
 원본 바로 뒤에 끼워 넣는다. 뒤에 몰아 붙이면 원본과 떨어져서 무엇을 고친 건지 안 보인다.
@@ -211,6 +215,39 @@ powershell -ExecutionPolicy Bypass -File release.ps1 -Version 0.4 -NotesFile not
 **릴리스 노트는 직접 쓴다.** 자동 생성에 맡기지 않는다 — main 에 바로 커밋하는 프로젝트라
 자동 노트는 링크 한 줄만 남고 비어버린다. 확인 못 한 것도 적는다.
 
+## 받는 길
+
+**iOS 링크는 공유 페이지를 거치고, 안드로이드 링크는 릴리스 자산을 바로 가리킨다.**
+비대칭이지만 의도한 것이다. APK 는 카톡에 보내는 게 아니라 설치하는 거라 공유할 이유가 없다.
+
+폰에서 릴리스 자산을 바로 누르면 사파리가 다운로드만 하고 끝난다. 파일 앱을 열어 찾아내고
+공유 시트를 거쳐 카톡에 넘겨야 설치가 시작된다. `docs/share.html` 이 그 구간을 대신한다 —
+버튼 하나가 파일을 그대로 iOS 공유 시트에 올린다. 카톡에 파일을 건네는 단계 자체는
+못 없앤다. 없앤 것은 "다운로드 → 파일 앱에서 찾기" 구간이다.
+
+**공유가 안 되는 자리에서는 그 페이지가 스스로 릴리스 자산으로 넘긴다.** 데스크톱과
+깃허브 앱 안의 웹뷰가 그렇다. 그래서 README 에 링크를 하나 더 붙이지 않았다 —
+`iOS` 링크 하나가 양쪽을 다 한다. 배치 규칙상 테마마다 링크를 늘릴 수 없기도 하다.
+
+**바이트는 릴리스가 아니라 사이트 안에서 읽는다.** 릴리스 자산에는
+`Access-Control-Allow-Origin` 이 없어서 `fetch` 로 못 읽는다. `api.github.com` 입구에는
+붙어 있지만 최종 목적지인 `release-assets.githubusercontent.com` 에 없고,
+`fetch` 는 리다이렉트 매 홉을 검사하므로 거기서 막힌다. 그래서 Pages 워크플로가
+릴리스에서 `.ktheme` 을 받아 사이트에 한 벌 둔다. **저장소에 커밋하는 게 아니다** —
+`dist/` 를 커밋하지 않는다는 규칙은 그대로다.
+
+**사이트는 저장소 구조를 그대로 옮긴다.** `docs/` 는 `docs/` 로, `assets/` 는 `assets/` 로.
+그래야 `docs/index.html` 이 쓰는 `../assets/` 경로가 로컬에서 파일로 열 때와 사이트에서
+똑같이 동작한다. 경로를 두 벌 관리하지 않으려는 것이다. 내려받은 테마는 `files/` 에 들어간다.
+
+**릴리스를 내면 사이트도 따라간다.** 워크플로가 `release: published` 에 걸려 있어서
+새 릴리스의 자산으로 갱신된다. 파일 이름을 바꾸는 릴리스를 낼 때는 README 링크와
+사이트의 파일 이름이 같이 바뀌므로 따로 할 일이 없다.
+
+**공유 단추가 눌린 뒤에 파일을 받아오면 안 된다.** `share()` 는 탭이 만든 일시적 활성화를
+소비하는데 그 창이 짧다. 누른 뒤에 내려받기 시작하면 느린 회선에서 `NotAllowedError` 로
+떨어진다. 페이지를 열 때 미리 받고, 다 받기 전까지 단추를 잠가 둔다.
+
 ## 저장소에 넣지 않는 것
 
 `.gitignore` 에 있지만 이유를 적어둔다. 파일은 로컬에 그대로 둔다 — 지우는 게 아니다.
@@ -255,3 +292,7 @@ powershell -ExecutionPolicy Bypass -File release.ps1 -Version 0.4 -NotesFile not
   내려가는 테마가 생기고, 안드로이드는 그걸 다운그레이드로 보고 설치를 거부한다.
   키 끝의 번호와 테마 버전으로 만든다 — `mixed09` + `0.8` → `9008`.
 - PowerShell 스크립트는 **UTF-8 BOM** 으로 저장한다. BOM 이 없으면 5.1 이 ANSI 로 읽어 한글이 깨진다.
+- **릴리스 자산은 자바스크립트로 못 읽는다.** CORS 헤더가 없다. 브라우저에서 파일 내용이
+  필요하면 Pages 사이트 안(같은 출처)이나 `raw.githubusercontent.com` 에서 읽어야 한다.
+- **안드로이드는 `.apk` 를 웹 공유로 못 보낸다.** 크롬의 공유 API 는 확장자 허용목록 방식이라
+  실행 파일류가 아예 빠져 있다. 공유 방식은 iOS 전용으로 생각한다.

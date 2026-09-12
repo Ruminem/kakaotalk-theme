@@ -412,6 +412,13 @@ START = '<!-- THEMES:START -->'
 END = '<!-- THEMES:END -->'
 BASE = 'https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/'
 
+# iOS 링크는 공유 페이지를 거친다. 폰에서 자산을 바로 누르면 사파리가 다운로드만 하고 끝나서,
+# 파일 앱을 열어 찾아내고 공유 시트로 카톡에 넘기는 구간이 남는다. 그 페이지가 그걸 대신한다.
+# 공유가 안 되는 자리(데스크톱, 인앱 웹뷰)에서는 스스로 릴리스 자산으로 넘기므로
+# 링크는 여전히 테마마다 둘이다. 안드로이드는 그대로 BASE 다 — APK 는 카톡에 보내는 게 아니라
+# 설치하는 거라 공유할 이유가 없고, 크롬의 공유 API 는 확장자 허용목록이라 .apk 를 받지도 않는다.
+SHARE = 'https://ruminem.github.io/kakaotalk-theme/docs/share.html?f='
+
 # --- 배치 규칙 (폰에서 보는 것을 기준으로 잡은 값) ---------------------------
 # GitHub 은 넓은 표를 가로 스크롤 상자에 넣는다. 칸이 넷을 넘거나 그림이 크면
 # 폰에서 옆으로 한참 밀어야 다 본다. 셋과 200px 이 한 화면에 들어오는 한계다.
@@ -515,7 +522,7 @@ def readme_block(ts):
                            '<a href="%s%s.ktheme">iOS</a> · <a href="%s%s.apk">Android</a>'
                            '</td>'
                            % (cell, T.file_slug(m), W_VARIANT, m['variant'], m['note'],
-                              BASE, T.file_slug(m), BASE, T.file_slug(m)))
+                              SHARE, T.file_slug(m), BASE, T.file_slug(m)))
             out.append('</tr>')
         out.append('</table>')
         out.append('')
