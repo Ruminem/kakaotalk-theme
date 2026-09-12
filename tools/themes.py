@@ -37,7 +37,7 @@ chat_bg
   None 이면 단색. ('linear', 위, 아래) 또는 ('aurora', 바탕, [색...]) 이면 이미지를 그린다.
 """
 
-VERSION = '0.7'
+VERSION = '0.8'
 
 THEMES = [
     dict(
@@ -120,7 +120,7 @@ THEMES = [
         recv=('#FFFFFF', '#E6EDF7'), recv_alt=('#F3F7FF', '#DCE6F4'),
         send_text='#0B2D50', recv_text='#1F2733',
         bubble_style='glass', bubble_alpha=165, cell_alpha=0.55,
-        glow=('#6FB6FF', 90, 10),
+        glow=('#6FB6FF', 110, 5),
         chat_bg=('blobs', '#EFF3FA', ['#9BD4FF', '#C9B6FF', '#9BF0DC', '#FFC8E4']),
         main_bg=('blobs', '#F4F6FB', ['#BFE2FF', '#DCD0FF', '#C4F3E6', '#FFD9EC']),
     ),
@@ -134,7 +134,7 @@ THEMES = [
         recv=('#39404F', '#262C38'), recv_alt=('#454D5E', '#2F3542'),
         send_text='#EAF4FF', recv_text='#E8EDF6',
         bubble_style='glass', bubble_alpha=175, cell_alpha=0.55,
-        glow=('#5AB5FF', 120, 12),
+        glow=('#5AB5FF', 150, 6),
         chat_bg=('blobs', '#0B0E14', ['#2F6FB5', '#6A4FB0', '#2E8C7E', '#B0487F']),
         main_bg=('blobs', '#10131A', ['#27568C', '#4E3C86', '#256B61', '#8A3A64']),
     ),
@@ -162,8 +162,8 @@ def _variant(src, key, name, note, **over):
 THEMES += [
     _variant('mixed04', 'mixed09', '믹스드 v2',
              '믹스드에 글로우를 얹은 것. 말풍선마다 자기 색으로 빛남',
-             glow=('auto', 130, 12)),
+             glow=('auto', 160, 6)),
     _variant('candy06', 'candy10', '캔디 팝 v2',
              '캔디 팝에 글로우를 얹은 것. 밝은 바탕이라 빛이 은은하게 걸림',
-             glow=('auto', 120, 11)),
+             glow=('auto', 150, 5)),
 ]

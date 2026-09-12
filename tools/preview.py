@@ -168,16 +168,24 @@ def chat(t):
     d = ImageDraw.Draw(img)
 
     # 실제 테마의 edgeinsets 와 같은 값을 쓴다. 미리보기만 넉넉하면 폰에서 짜쳐 보인다
-    pad_x, pad_y = gen.INSET_H, gen.INSET_V
-    y = HEAD + 18
+    # 카톡이 말풍선을 잡는 방식 그대로 그린다.
+    #   프레임 = 글자 + edgeinsets, 말풍선 그림은 그 프레임을 통째로 채운다.
+    #   글로우가 있으면 그림 바깥 여백이 프레임 안에 들어가므로 몸통이 안으로 밀리고,
+    #   프레임 높이가 커진 만큼 말풍선 사이도 벌어진다.
+    # 미리보기만 이상적으로 그리면 여기서 생기는 문제를 못 잡는다.
+    glow, pad = gen.glow_of(t)
+    ins_v, ins_h = gen.INSET_V + pad, gen.INSET_H + pad
+    line_h = 22
+    gap = 8                      # 카톡이 말풍선 사이에 두는 간격
+
+    y = HEAD + 14
     for i, (side, msg) in enumerate(CHAT):
-        # 짝수/홀수로 01 과 02 를 번갈아 쓴다. 두 칸의 색 차이가 눈에 보이게
         key = ('recv' if side == 'them' else 'send') + ('' if i % 4 < 2 else '_alt')
         colors = t[key]
         tc = rgb(t['recv_text'] if side == 'them' else t['send_text'])
 
-        tw = _text_w(d, msg, F_MSG)
-        bw, bh = tw + pad_x * 2, 24 + pad_y * 2
+        fw = _text_w(d, msg, F_MSG) + ins_h * 2
+        fh = line_h + ins_v * 2
 
         if side == 'them':
             if i == 0 or CHAT[i - 1][0] != 'them':
@@ -185,21 +193,23 @@ def chat(t):
                 img.paste(av, (18, y), av)
                 d.text((70, y + 2), '아무개1', font=F_NAME, fill=rgb(t['subtext']))
                 y += 24
-            bx = 70
-            b, gp = bubble_box(t, bw, bh, colors)
-            img.paste(b, (bx - gp, y - gp), b)
-            d.text((bx + pad_x, y + pad_y + 1), msg, font=F_MSG, fill=tc)
-            d.text((bx + bw + 8, y + bh - 12), '오후 2:43',
+            fx = 70 - pad        # 몸통 왼쪽이 아바타 옆에 오도록 여백만큼 당긴다
+        else:
+            fx = W - 18 + pad - fw
+
+        b, _ = bubble_box(t, fw - pad * 2, fh - pad * 2, colors)
+        img.paste(b, (fx, y), b)
+        d.text((fx + ins_h, y + ins_v + 1), msg, font=F_MSG, fill=tc)
+
+        if side == 'them':
+            d.text((fx + fw - pad + 6, y + fh - pad - 8), '오후 2:43',
                    font=F_TIME, fill=rgb(t['subtext']), anchor='lm')
         else:
-            bx = W - 18 - bw
-            b, gp = bubble_box(t, bw, bh, colors)
-            img.paste(b, (bx - gp, y - gp), b)
-            d.text((bx + pad_x, y + pad_y + 1), msg, font=F_MSG, fill=tc)
-            d.text((bx - 8, y + bh - 12), '오후 2:43',
+            d.text((fx + pad - 6, y + fh - pad - 8), '오후 2:43',
                    font=F_TIME, fill=rgb(t['subtext']), anchor='rm')
-            d.text((bx - 8, y + 12), '1', font=F_TIME, fill=rgb(t['accent']), anchor='rm')
-        y += bh + 14
+            d.text((fx + pad - 6, y + pad + 10), '1',
+                   font=F_TIME, fill=rgb(t['accent']), anchor='rm')
+        y += fh + gap
 
     # 입력바
     ca = t.get('cell_alpha', 1.0)

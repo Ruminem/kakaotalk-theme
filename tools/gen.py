@@ -28,7 +28,9 @@ OUT = os.path.join(ROOT, 'build-src')
 
 # 말풍선 기하 (pt). CAP 은 CSS 의 cap inset 과 반드시 같아야 한다
 SIZE, RADIUS, CAP = 44, 14, 18
-INSET_V, INSET_H = 11, 16   # 글자와 말풍선 사이 기본 여백 (pt)
+INSET_V, INSET_H = 9, 16    # 글자와 말풍선 사이 기본 여백 (pt)
+# 세로를 가로보다 좁게 두는 이유: 말풍선 프레임 높이가 곧 말풍선 사이 간격이 된다.
+# 세로 여백을 키우면 글자 주변이 아니라 말풍선끼리 벌어져 보인다.
 
 
 def rgb(h):
@@ -119,10 +121,10 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
         # 말풍선마다 자기 색으로 빛난다. 칸마다 색이 다른 테마에 어울린다
         gc = mid(colors[0], colors[1])
     halo.paste(Image.new('RGBA', (gw, gh), rgb(gc) + (255,)), (0, 0), shape)
-    halo = halo.filter(ImageFilter.GaussianBlur(radius=pad * 0.42))
+    halo = halo.filter(ImageFilter.GaussianBlur(radius=pad * 0.55))
     # 흐리면 알파가 얇게 퍼져서 거의 안 보인다. 몸통 가까운 쪽을 끌어올린다
     halo.putalpha(halo.getchannel('A').point(
-        lambda v: min(255, int(v * 2.4 * ga / 255))))
+        lambda v: min(255, int(v * 3.2 * ga / 255))))
     halo.alpha_composite(out, (pad, pad))
     return halo
 
@@ -320,6 +322,9 @@ InputBarStyle-Chat
  edgeinsets 는 글자와 프레임 사이 여백이다. 글로우가 있으면 그림 바깥쪽 여백이
  프레임 안에 들어가므로 몸통이 그만큼 안으로 밀린다. 여백을 같이 키우지 않으면
  글자가 몸통 가장자리에 붙어버린다.
+
+ 반대로 여백이 크면 말풍선 사이가 벌어진다. 프레임 높이가 곧 간격이기 때문이다.
+ 그래서 글로우 여백은 필요한 만큼만 두고 세기로 보완한다.
 
  01 과 02 에 다른 색을 주면 눌린 말풍선과 그룹 말풍선이 달라 보인다.
 */
