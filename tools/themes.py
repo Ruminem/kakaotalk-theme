@@ -40,7 +40,7 @@ chat_bg
 
 import re
 
-VERSION = '0.24'
+VERSION = '0.24.1'
 
 THEMES = [
     dict(
