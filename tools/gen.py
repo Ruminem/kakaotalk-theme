@@ -57,23 +57,33 @@ def vgradient(w, h, top, bottom):
 SS = 4   # 4배로 그렸다 줄여서 계단현상을 없앤다
 
 
-def bubble_box(w, h, colors, radius, style='solid', alpha=255):
+def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
+               flat=False):
     """말풍선 하나를 정확히 w x h 로 그린다. 세로 그라데이션.
 
     style 이 glass 면 반투명하게 깔고 위쪽 테두리에 빛나는 선을 얹는다.
     유리 모서리에서 빛이 꺾이는 느낌을 내려는 것이다. 반투명이라 채팅방 배경이 비친다.
+
+    glow 가 있으면 말풍선 바깥으로 빛을 흘린다. 그만큼 pad 만큼 여백이 생기므로
+    돌려주는 그림은 (w + 2*pad, h + 2*pad) 다. cap inset 도 pad 만큼 키워야 한다 —
+    안 그러면 늘어나는 구간에 글로우가 걸려서 뭉개진다.
     """
     mask = Image.new('L', (w * SS, h * SS), 0)
     ImageDraw.Draw(mask).rounded_rectangle([0, 0, w * SS - 1, h * SS - 1],
                                            radius=radius * SS, fill=255)
     mask = mask.resize((w, h), Image.LANCZOS)
 
-    body = vgradient(w, h, rgb(colors[0]), rgb(colors[1])).convert('RGBA')
+    if flat:
+        c = rgb(mid(colors[0], colors[1]))
+        body = Image.new('RGB', (w, h), c).convert('RGBA')
+    else:
+        body = vgradient(w, h, rgb(colors[0]), rgb(colors[1])).convert('RGBA')
     if alpha < 255:
         body.putalpha(Image.new('L', (w, h), alpha))
 
     out = Image.new('RGBA', (w, h), (0, 0, 0, 0))
     out.paste(body, (0, 0), mask)
+    # (글로우는 아래에서 이 그림을 여백 있는 판에 옮겨 담은 뒤 깐다)
 
     if style == 'glass':
         # 테두리에 빛나는 선을 얹고, 위에서 아래로 갈수록 흐리게 만든다.
@@ -93,12 +103,36 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255):
         faded = ImageChops.multiply(rim.getchannel('A'), ramp)
         rim.putalpha(ImageChops.multiply(faded, mask))
         out.alpha_composite(rim)
-    return out
+
+    if not pad:
+        return out
+
+    # 바깥 글로우: 같은 모양을 글로우 색으로 찍어 흐린 뒤 본체를 그 위에 얹는다
+    gw, gh = w + pad * 2, h + pad * 2
+    halo = Image.new('RGBA', (gw, gh), (0, 0, 0, 0))
+    shape = Image.new('L', (gw, gh), 0)
+    ImageDraw.Draw(shape).rounded_rectangle(
+        [pad, pad, pad + w - 1, pad + h - 1], radius=radius, fill=255)
+    gc, ga = glow
+    halo.paste(Image.new('RGBA', (gw, gh), rgb(gc) + (ga,)), (0, 0), shape)
+    halo = halo.filter(ImageFilter.GaussianBlur(radius=pad * 0.6))
+    halo.alpha_composite(out, (pad, pad))
+    return halo
 
 
-def bubble(scale, colors, style='solid', alpha=255):
-    """안드로이드 9-patch 용 정사각 말풍선."""
-    return bubble_box(SIZE * scale, SIZE * scale, colors, RADIUS * scale, style, alpha)
+def bubble(scale, colors, style='solid', alpha=255, glow=None, pad=0, flat=False):
+    """안드로이드 9-patch 와 iOS 용 정사각 말풍선."""
+    return bubble_box(SIZE * scale, SIZE * scale, colors, RADIUS * scale,
+                      style, alpha, glow, pad * scale, flat)
+
+
+def glow_of(t):
+    """테마의 글로우 설정을 (색, 진하기, 여백pt) 로 푼다. 없으면 여백 0."""
+    g = t.get('glow')
+    if not g:
+        return None, 0
+    color, strength, pad = g
+    return (color, strength), pad
 
 
 def ninepatch(img, cap):
@@ -159,6 +193,26 @@ def chat_bg(spec, w, h):
                       fill=rgb(c))
     layer = layer.filter(ImageFilter.GaussianBlur(radius=w // 7))
     return Image.blend(base, layer, 0.55)
+
+
+def edge_glow(img, color, strength, width_ratio=0.22):
+    """배경 가장자리에 빛을 흘린다. 화면 테두리에서 빛이 새어 들어오는 느낌."""
+    w, h = img.size
+    ramp = Image.new('L', (w, h), 0)
+    d = ImageDraw.Draw(ramp)
+    steps = 40
+    bw = int(min(w, h) * width_ratio)
+    for i in range(steps):
+        t = i / (steps - 1)
+        inset = int(bw * t)
+        d.rectangle([inset, inset, w - 1 - inset, h - 1 - inset],
+                    outline=int(strength * (1 - t) ** 2))
+    ramp = ramp.filter(ImageFilter.GaussianBlur(radius=bw // 3 or 1))
+    layer = Image.new('RGBA', (w, h), rgb(color) + (255,))
+    layer.putalpha(ramp)
+    out = img.convert('RGBA')
+    out.alpha_composite(layer)
+    return out.convert('RGB')
 
 
 # --- iOS ----------------------------------------------------------------
@@ -341,33 +395,44 @@ BottomBannerStyle
 """
 
 
+def background(t, spec, w, h):
+    """배경 이미지 한 장. 테마에 글로우가 있으면 가장자리에 빛을 흘린다."""
+    img = chat_bg(spec, w, h)
+    g = t.get('glow')
+    if g:
+        img = edge_glow(img, g[0], min(255, g[1] + 40))
+    return img
+
+
 def gen_ios(t, root):
     img_dir = os.path.join(root, 'Images')
     os.makedirs(img_dir, exist_ok=True)
 
     style, alpha = t.get('bubble_style', 'solid'), t.get('bubble_alpha', 255)
+    glow, pad = glow_of(t)
     for side, key in (('Send', 'send'), ('Receive', 'recv')):
         for variant, pal in (('01', t[key]), ('02', t[key + '_alt'])):
             for scale in (2, 3):
                 name = 'chatroomBubble%s%s@%dx.png' % (side, variant, scale)
-                bubble(scale, pal, style, alpha).save(os.path.join(img_dir, name))
+                bubble(scale, pal, style, alpha, glow, pad,
+                       t.get('flat', False)).save(os.path.join(img_dir, name))
 
     chatbg = ''
     if t['chat_bg']:
-        chat_bg(t['chat_bg'], 600, 1300).save(os.path.join(img_dir, 'chatroomBgImage@2x.png'))
-        chat_bg(t['chat_bg'], 900, 1950).save(os.path.join(img_dir, 'chatroomBgImage@3x.png'))
+        background(t, t['chat_bg'], 600, 1300).save(os.path.join(img_dir, 'chatroomBgImage@2x.png'))
+        background(t, t['chat_bg'], 900, 1950).save(os.path.join(img_dir, 'chatroomBgImage@3x.png'))
         chatbg = "\n    -ios-background-image: 'chatroomBgImage.png';"
 
     mainbg = ''
     if t.get('main_bg'):
-        chat_bg(t['main_bg'], 600, 1300).save(os.path.join(img_dir, 'mainBgImage@2x.png'))
-        chat_bg(t['main_bg'], 900, 1950).save(os.path.join(img_dir, 'mainBgImage@3x.png'))
+        background(t, t['main_bg'], 600, 1300).save(os.path.join(img_dir, 'mainBgImage@2x.png'))
+        background(t, t['main_bg'], 900, 1950).save(os.path.join(img_dir, 'mainBgImage@3x.png'))
         mainbg = "\n    -ios-background-image: 'mainBgImage.png';"
 
     ca = t.get('cell_alpha', 1.0)
     fields = dict(t)
     fields.pop('cell_alpha', None)          # 아래에서 문자열로 다시 넣는다
-    css = CSS.format(version=themes.VERSION, cap=CAP, chatbg=chatbg, mainbg=mainbg,
+    css = CSS.format(version=themes.VERSION, cap=CAP + pad, chatbg=chatbg, mainbg=mainbg,
                      cell_alpha='%.2f' % ca,
                      cell_alpha_sel='%.2f' % min(1.0, ca + 0.15), **fields)
     with open(os.path.join(root, 'KakaoTalkTheme.css'), 'w', encoding='utf-8') as f:
@@ -476,17 +541,19 @@ def gen_android(t, root, code):
         f.write('\n'.join(lines))
 
     style, alpha = t.get('bubble_style', 'solid'), t.get('bubble_alpha', 255)
+    glow, pad = glow_of(t)
     for who, key in (('me', 'send'), ('you', 'recv')):
         for variant, pal in (('01', t[key]), ('02', t[key + '_alt'])):
             name = 'theme_chatroom_bubble_%s_%s_image.9.png' % (who, variant)
-            ninepatch(bubble(3, pal, style, alpha), CAP * 3).save(os.path.join(draw, name))
+            ninepatch(bubble(3, pal, style, alpha, glow, pad, t.get('flat', False)),
+                      (CAP + pad) * 3).save(os.path.join(draw, name))
 
     splash(t, 1080, 1920).save(os.path.join(draw, 'theme_splash_image.png'), optimize=True)
     if t['chat_bg']:
-        chat_bg(t['chat_bg'], 1080, 1920).save(
+        background(t, t['chat_bg'], 1080, 1920).save(
             os.path.join(draw, 'theme_chatroom_background_image.png'), optimize=True)
     if t.get('main_bg'):
-        chat_bg(t['main_bg'], 1080, 1920).save(
+        background(t, t['main_bg'], 1080, 1920).save(
             os.path.join(draw, 'theme_background_image.png'), optimize=True)
 
 

@@ -29,12 +29,15 @@ note
   bubble_alpha  말풍선 불투명도 0~255. 낮을수록 채팅방 배경이 비친다
   cell_alpha    목록 셀 불투명도 0.0~1.0. 1 미만이면 뒤의 배경 이미지가 비친다
   main_bg       목록 화면 배경 이미지. chat_bg 와 같은 형식
+  flat          True 면 말풍선을 그라데이션 없이 단색으로 채운다. 두 색의 중간값을 쓴다
+  glow          (색, 진하기 0~255, 여백pt). 말풍선 바깥으로 빛을 흘리고 배경 가장자리에도 얹는다.
+                여백만큼 cap inset 이 자동으로 커진다 — 안 그러면 늘어날 때 글로우가 뭉개진다
 
 chat_bg
   None 이면 단색. ('linear', 위, 아래) 또는 ('aurora', 바탕, [색...]) 이면 이미지를 그린다.
 """
 
-VERSION = '0.4'
+VERSION = '0.5'
 
 THEMES = [
     dict(
@@ -77,6 +80,7 @@ THEMES = [
         border='#352D4C', text='#EDE9F7', subtext='#9A91B5',
         accent='#FFC24D', accent_dim='#D89A2B', on_accent='#2A1E05',
         # 네 칸에 전부 다른 색을 넣었다. 눌린 말풍선과 그룹 말풍선이 확 달라진다
+        flat=True,
         send=('#FF8A5B', '#FFC24D'), send_alt=('#5BE0B4', '#3D9BD9'),
         recv=('#7C6BE0', '#D96BB0'), recv_alt=('#4DC9E0', '#6BE09B'),
         send_text='#3A1E05', recv_text='#FFFFFF',
@@ -100,6 +104,7 @@ THEMES = [
         border='#F2E2BE', text='#3A3A46', subtext='#8A8698',
         accent='#FF7AA2', accent_dim='#E0537F', on_accent='#FFFFFF',
         # 라이트 쪽 알록달록. 네 칸이 전부 다르다
+        flat=True,
         send=('#FFD166', '#FF9F68'), send_alt=('#8AE0C0', '#4FC3D9'),
         recv=('#C2A7FF', '#FF9BC6'), recv_alt=('#9BD6FF', '#7ED7C1'),
         send_text='#4A2E10', recv_text='#3A2440',
@@ -115,6 +120,7 @@ THEMES = [
         recv=('#FFFFFF', '#E6EDF7'), recv_alt=('#F3F7FF', '#DCE6F4'),
         send_text='#0B2D50', recv_text='#1F2733',
         bubble_style='glass', bubble_alpha=165, cell_alpha=0.55,
+        glow=('#6FB6FF', 90, 10),
         chat_bg=('blobs', '#EFF3FA', ['#9BD4FF', '#C9B6FF', '#9BF0DC', '#FFC8E4']),
         main_bg=('blobs', '#F4F6FB', ['#BFE2FF', '#DCD0FF', '#C4F3E6', '#FFD9EC']),
     ),
@@ -128,6 +134,7 @@ THEMES = [
         recv=('#39404F', '#262C38'), recv_alt=('#454D5E', '#2F3542'),
         send_text='#EAF4FF', recv_text='#E8EDF6',
         bubble_style='glass', bubble_alpha=175, cell_alpha=0.55,
+        glow=('#5AB5FF', 120, 12),
         chat_bg=('blobs', '#0B0E14', ['#2F6FB5', '#6A4FB0', '#2E8C7E', '#B0487F']),
         main_bg=('blobs', '#10131A', ['#27568C', '#4E3C86', '#256B61', '#8A3A64']),
     ),

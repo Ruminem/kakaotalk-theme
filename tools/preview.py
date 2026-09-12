@@ -74,8 +74,10 @@ def bubble_box(t, w, h, colors):
     9-slice 로 늘리지 않는다. 목표 크기가 고정 가장자리의 두 배보다 작아지면
     모서리가 겹쳐 깨진다. 어차피 둥근 사각형이라 필요한 크기로 바로 그리면 된다.
     """
-    return gen.bubble_box(w, h, colors, RADIUS,
-                          t.get('bubble_style', 'solid'), t.get('bubble_alpha', 255))
+    glow, pad = gen.glow_of(t)
+    img = gen.bubble_box(w, h, colors, RADIUS, t.get('bubble_style', 'solid'),
+                         t.get('bubble_alpha', 255), glow, pad, t.get('flat', False))
+    return img, pad
 
 
 def avatar(size, t, i):
@@ -159,7 +161,7 @@ def chat(t):
     img = Image.new('RGB', (W, H), rgb(t['bg']))
     body = H - HEAD - FOOT
     if t['chat_bg']:
-        img.paste(gen.chat_bg(t['chat_bg'], W, body), (0, HEAD))
+        img.paste(gen.background(t, t['chat_bg'], W, body), (0, HEAD))
     else:
         img.paste(Image.new('RGB', (W, body), rgb(t['bg_deep'])), (0, HEAD))
     _header(img, t, '아무개1', back=True)
@@ -183,15 +185,15 @@ def chat(t):
                 d.text((70, y + 2), '아무개1', font=F_NAME, fill=rgb(t['subtext']))
                 y += 24
             bx = 70
-            b = bubble_box(t, bw, bh, colors)
-            img.paste(b, (bx, y), b)
+            b, gp = bubble_box(t, bw, bh, colors)
+            img.paste(b, (bx - gp, y - gp), b)
             d.text((bx + pad_x, y + pad_y + 1), msg, font=F_MSG, fill=tc)
             d.text((bx + bw + 8, y + bh - 12), '오후 2:43',
                    font=F_TIME, fill=rgb(t['subtext']), anchor='lm')
         else:
             bx = W - 18 - bw
-            b = bubble_box(t, bw, bh, colors)
-            img.paste(b, (bx, y), b)
+            b, gp = bubble_box(t, bw, bh, colors)
+            img.paste(b, (bx - gp, y - gp), b)
             d.text((bx + pad_x, y + pad_y + 1), msg, font=F_MSG, fill=tc)
             d.text((bx - 8, y + bh - 12), '오후 2:43',
                    font=F_TIME, fill=rgb(t['subtext']), anchor='rm')
@@ -231,7 +233,7 @@ def chat_list(t):
     """
     ca = t.get('cell_alpha', 1.0)
     if t.get('main_bg'):
-        base = gen.chat_bg(t['main_bg'], W, H).convert('RGBA')
+        base = gen.background(t, t['main_bg'], W, H).convert('RGBA')
     else:
         base = Image.new('RGBA', (W, H), rgb(t['bg']) + (255,))
 
