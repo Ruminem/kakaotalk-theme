@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  리소스만 든 APK 다. 코드가 없으므로 hasCode="false".
+  카카오톡은 com.kakao.talk.theme.* 로 시작하는 패키지를 테마로 인식한다.
+  패키지 이름이 겹치면 서로 덮어쓰므로 고유해야 한다.
+  권한은 하나도 요구하지 않는다. 설치할 때 권한 안내가 뜨면 뭔가 잘못된 것이다.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.kakao.talk.theme.inkmint01"
+    android:versionCode="1"
+    android:versionName="0.1">
+
+    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34" />
+
+    <application
+        android:label="@string/app_name"
+        android:hasCode="false"
+        android:allowBackup="false" />
+</manifest>

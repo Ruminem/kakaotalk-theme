@@ -1,6 +1,6 @@
-﻿# mytheme 폴더를 .ktheme 로 패키징한다.
-#   powershell -ExecutionPolicy Bypass -File build.ps1
-# 결과: dist\mytheme.ktheme
+﻿# mytheme 폴더를 iOS 용 .ktheme 로 패키징한다.
+#   powershell -ExecutionPolicy Bypass -File build-ios.ps1
+# 결과: dist\iOS\inkmint01.ktheme
 
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
@@ -9,8 +9,8 @@ Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $src  = Join-Path $root 'mytheme'
-$dist = Join-Path $root 'dist'
-$out  = Join-Path $dist 'mytheme.ktheme'
+$dist = Join-Path $root 'dist\iOS'
+$out  = Join-Path $dist 'inkmint01.ktheme'
 $css  = Join-Path $src 'KakaoTalkTheme.css'
 
 if (-not (Test-Path $css)) { throw "KakaoTalkTheme.css 가 없습니다: $css" }
@@ -23,7 +23,7 @@ $id = ([regex]"-kakaotalk-theme-id:\s*'([^']*)'").Match($text).Groups[1].Value
 Write-Host "테마 이름 : $nm"
 Write-Host "테마 ID   : $id   <- 기존 테마와 같으면 그걸 덮어씁니다"
 
-if (-not (Test-Path $dist)) { New-Item -ItemType Directory -Path $dist | Out-Null }
+if (-not (Test-Path $dist)) { New-Item -ItemType Directory -Path $dist -Force | Out-Null }
 if (Test-Path $out) { Remove-Item $out -Force }
 
 # zip 최상단에 KakaoTalkTheme.css 와 Images/ 가 오도록 직접 엔트리를 만든다.

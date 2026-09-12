@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  먹빛 민트 — 안드로이드 카카오톡 테마 (색만)
+
+  이름은 카카오 공식 테마 가이드(9.2.5 Android)에 정의된 것 그대로다.
+  없는 이름을 만들어 넣으면 무시되고, 빠뜨린 항목은 카톡 기본값이 나온다.
+  iOS 와 달리 말풍선을 PNG 없이 색으로 지정할 수 있다.
+
+  #101215 바닥 / #16181C 기본 / #1E2126 한 단계 위 / #242830 눌림
+  #2A2E35 구분선 / #E8EBEE 본문 / #98A1AB 보조 / #4FD1B0 민트 / #2E9E85 민트 눌림
+-->
+<resources>
+
+    <!-- 전체 배경 -->
+    <color name="theme_background_color">#FF16181C</color>
+
+    <!-- 상단 헤더 -->
+    <color name="theme_header_color">#FFE8EBEE</color>
+    <color name="theme_header_cell_color">#FF16181C</color>
+    <color name="theme_tab_bannerbadge_background_color">#FF4FD1B0</color>
+
+    <!-- 목록(친구/채팅) -->
+    <color name="theme_section_title_color">#FF98A1AB</color>
+    <color name="theme_title_color">#FFE8EBEE</color>
+    <color name="theme_title_pressed_color">#FFFFFFFF</color>
+    <color name="theme_paragraph_color">#FF98A1AB</color>
+    <color name="theme_paragraph_pressed_color">#FFB8C0C8</color>
+    <color name="theme_description_color">#FF98A1AB</color>
+    <color name="theme_description_pressed_color">#FFB8C0C8</color>
+    <color name="theme_body_cell_color">#FF16181C</color>
+    <color name="theme_body_cell_pressed_color">#FF242830</color>
+    <color name="theme_body_cell_border_color">#FF2A2E35</color>
+    <color name="theme_body_secondary_cell_color">#FF1E2126</color>
+
+    <!-- 강조 -->
+    <color name="theme_feature_primary_color">#FF4FD1B0</color>
+    <color name="theme_feature_primary_pressed_color">#FF2E9E85</color>
+    <color name="theme_feature_browse_tab_color">#FF98A1AB</color>
+    <color name="theme_feature_browse_tab_focused_color">#FF4FD1B0</color>
+
+    <!-- 하단 탭바 (아이콘 PNG 는 v0 에서 안 넣는다) -->
+    <color name="theme_maintab_cell_color">#FF16181C</color>
+
+    <!-- 채팅방 -->
+    <color name="theme_chatroom_background_color">#FF101215</color>
+    <color name="theme_chatroom_bubble_me_color">#FF4FD1B0</color>
+    <color name="theme_chatroom_bubble_you_color">#FF242830</color>
+    <color name="theme_chatroom_unread_count_color">#FF4FD1B0</color>
+
+    <!-- 채팅 입력바 -->
+    <color name="theme_chatroom_input_bar_color">#FFE8EBEE</color>
+    <color name="theme_chatroom_input_bar_background_color">#FF1E2126</color>
+    <color name="theme_chatroom_input_bar_menu_icon_color">#FF98A1AB</color>
+    <color name="theme_chatroom_input_bar_send_button_color">#FF4FD1B0</color>
+    <color name="theme_chatroom_input_bar_send_icon_color">#FF10241F</color>
+
+    <!-- 공유 시트 -->
+    <color name="theme_direct_share_color">#FFE8EBEE</color>
+    <color name="theme_direct_share_button_color">#FF4FD1B0</color>
+    <color name="theme_direct_share_background_color">#FF1E2126</color>
+
+    <!-- 알림 배너 -->
+    <color name="theme_notification_color">#FFE8EBEE</color>
+    <color name="theme_notification_background_color">#FF1E2126</color>
+    <color name="theme_notification_background_pressed_color">#FF242830</color>
+
+    <!-- 잠금화면 -->
+    <color name="theme_passcode_color">#FFE8EBEE</color>
+    <color name="theme_passcode_background_color">#FF101215</color>
+    <color name="theme_passcode_keypad_color">#FFE8EBEE</color>
+    <color name="theme_passcode_keypad_pressed_color">#FF4FD1B0</color>
+    <color name="theme_passcode_keypad_background_color">#FF1E2126</color>
+    <color name="theme_passcode_keypad_pressed_background_color">#FF242830</color>
+    <color name="theme_passcode_pattern_line_color">#FF4FD1B0</color>
+
+</resources>
