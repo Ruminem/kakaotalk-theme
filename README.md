@@ -29,13 +29,23 @@
 </tr>
 <tr>
 <td width="33%" align="center"><a href="#user-content-캔디-팝"><img src="assets/preview-candy-basic-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-고요"><img src="assets/preview-calm-olive-chat.png" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-차분"><img src="assets/preview-calm-sage-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-도형"><img src="assets/preview-geo-basic-chat.png" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><img src="assets/icon-candy-basic.png" width="20" valign="middle"> <b><a href="#user-content-캔디-팝">캔디 팝</a></b><br><sub>기본 · 사탕 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
+<td align="center"><img src="assets/icon-calm-olive.png" width="20" valign="middle"> <b><a href="#user-content-고요">고요</a></b><br><sub>올리브 · 안개 · 자두 · 먹</sub><br>누런 풀빛 회색. 밝고 흙내 나는 쪽</td>
 <td align="center"><img src="assets/icon-calm-sage.png" width="20" valign="middle"> <b><a href="#user-content-차분">차분</a></b><br><sub>세이지 · 샌드 · 슬레이트 · 모카</sub><br>탁한 연둣빛 회색. 가장 순한 쪽</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="#user-content-도형"><img src="assets/preview-geo-basic-chat.png" width="190"></a></td>
+<td width="33%"></td>
+<td width="33%"></td>
+</tr>
+<tr>
 <td align="center"><img src="assets/icon-geo-basic.png" width="20" valign="middle"> <b><a href="#user-content-도형">도형</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>도형을 걷어낸 미색 바탕</td>
+<td width="33%"></td>
+<td width="33%"></td>
 </tr>
 </table>
 
@@ -245,6 +255,41 @@
 **글로우+배경** — 사탕 배경에 빛나는 말풍선
 
 <img src="assets/preview-candy-glow-image-list.png" width="180"> <img src="assets/preview-candy-glow-image-passcode.png" width="180"> <img src="assets/preview-candy-glow-image-splash.png" width="180">
+
+</details>
+
+<a name="고요"></a>
+
+#### <img src="assets/icon-calm-olive.png" width="26" valign="middle"> 고요
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-calm-olive-chat.png" width="200"><br><b>올리브</b><br><sub>누런 풀빛 회색. 밝고 흙내 나는 쪽</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=calm-olive.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/calm-olive.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-calm-fog-chat.png" width="200"><br><b>안개</b><br><sub>보랏빛 도는 옅은 회색. 밝고 서늘한 쪽</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=calm-fog.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/calm-fog.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-calm-plum-chat.png" width="200"><br><b>자두</b><br><sub>탁한 자줏빛. 어둡고 부드러운 쪽</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=calm-plum.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/calm-plum.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-calm-ink-chat.png" width="200"><br><b>먹</b><br><sub>색을 거의 뺀 먹빛. 가장 어둡고 조용함</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=calm-ink.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/calm-ink.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**올리브** — 누런 풀빛 회색. 밝고 흙내 나는 쪽
+
+<img src="assets/preview-calm-olive-list.png" width="180"> <img src="assets/preview-calm-olive-passcode.png" width="180"> <img src="assets/preview-calm-olive-splash.png" width="180">
+
+**안개** — 보랏빛 도는 옅은 회색. 밝고 서늘한 쪽
+
+<img src="assets/preview-calm-fog-list.png" width="180"> <img src="assets/preview-calm-fog-passcode.png" width="180"> <img src="assets/preview-calm-fog-splash.png" width="180">
+
+**자두** — 탁한 자줏빛. 어둡고 부드러운 쪽
+
+<img src="assets/preview-calm-plum-list.png" width="180"> <img src="assets/preview-calm-plum-passcode.png" width="180"> <img src="assets/preview-calm-plum-splash.png" width="180">
+
+**먹** — 색을 거의 뺀 먹빛. 가장 어둡고 조용함
+
+<img src="assets/preview-calm-ink-list.png" width="180"> <img src="assets/preview-calm-ink-passcode.png" width="180"> <img src="assets/preview-calm-ink-splash.png" width="180">
 
 </details>
 

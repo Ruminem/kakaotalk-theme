@@ -40,7 +40,7 @@ chat_bg
 
 import re
 
-VERSION = '0.26'
+VERSION = '0.27'
 
 THEMES = [
     dict(
@@ -206,6 +206,55 @@ THEMES = [
         bubble_style='glass', bubble_alpha=170, cell_alpha=0.55,
         chat_bg=None, main_bg=None, passcode_bg=None,
     ),
+    # --- 고요 -------------------------------------------------------------
+    # 차분의 두 번째 벌. 기준은 차분과 같다(채도 0.25 근처, 순백·순흑 없음,
+    # 글로우·배경 그림 없음). 차분이 무채색에 가까운 중성색이었다면 여기는
+    # 색 이름이 하나씩 붙는 쪽이다 — 올리브, 안개, 자두, 먹.
+    dict(
+        key='calm81', name='고요 올리브',
+        note='누런 풀빛 회색. 밝고 흙내 나는 쪽',
+        bg='#ECEBE2', bg_deep='#E2E1D6', surface='#F5F4EE', pressed='#DFDED2',
+        border='#D3D2C4', text='#34352B', subtext='#72735F',
+        accent='#7A785C', accent_dim='#5F5D47', on_accent='#F7F7F2',
+        send=('#CFCDB2', '#CFCDB2'), send_alt=('#E0DFCB', '#E0DFCB'),
+        recv=('#FAFAF6', '#FAFAF6'), recv_alt=('#E6E5DA', '#E6E5DA'),
+        send_text='#2C2D23', recv_text='#34352B',
+        flat=True, chat_bg=None, main_bg=None, passcode_bg=None,
+    ),
+    dict(
+        key='calm82', name='고요 안개',
+        note='보랏빛 도는 옅은 회색. 밝고 서늘한 쪽',
+        bg='#ECEBF0', bg_deep='#E2E1E8', surface='#F5F4F8', pressed='#DEDCE5',
+        border='#D3D1DC', text='#33323A', subtext='#747280',
+        accent='#7B7494', accent_dim='#605A76', on_accent='#F7F6FA',
+        send=('#CFCBDC', '#CFCBDC'), send_alt=('#E0DDE8', '#E0DDE8'),
+        recv=('#FAFAFC', '#FAFAFC'), recv_alt=('#E6E4EC', '#E6E4EC'),
+        send_text='#2B2A32', recv_text='#33323A',
+        flat=True, chat_bg=None, main_bg=None, passcode_bg=None,
+    ),
+    dict(
+        key='calm83', name='고요 자두',
+        note='탁한 자줏빛. 어둡고 부드러운 쪽',
+        bg='#27222A', bg_deep='#1E1A21', surface='#312B34', pressed='#3B343E',
+        border='#443C47', text='#E6DEE8', subtext='#9C92A0',
+        accent='#A38CA8', accent_dim='#806C85', on_accent='#1C171E',
+        send=('#4A3D4E', '#4A3D4E'), send_alt=('#57495B', '#57495B'),
+        recv=('#332C36', '#332C36'), recv_alt=('#3E3641', '#3E3641'),
+        send_text='#EEE6F0', recv_text='#E6DEE8',
+        flat=True, chat_bg=None, main_bg=None, passcode_bg=None,
+    ),
+    dict(
+        key='calm84', name='고요 먹',
+        note='색을 거의 뺀 먹빛. 가장 어둡고 조용함',
+        bg='#1F1F21', bg_deep='#18181A', surface='#29292C', pressed='#333336',
+        border='#3C3C40', text='#DEDEE0', subtext='#929296',
+        accent='#9A9AA2', accent_dim='#78787F', on_accent='#161618',
+        send=('#3F3F44', '#3F3F44'), send_alt=('#4B4B50', '#4B4B50'),
+        recv=('#2C2C30', '#2C2C30'), recv_alt=('#37373B', '#37373B'),
+        send_text='#E6E6E8', recv_text='#DEDEE0',
+        flat=True, chat_bg=None, main_bg=None, passcode_bg=None,
+    ),
+
     # --- 스테인드 글래스 --------------------------------------------------
     # 색 유리. 계열 축이 밝기가 아니라 색이라 네 벌이 곧 네 가지 색이다.
     # 바탕은 넷 다 같은 어두운 회보라로 두고 색만 바꾼다 — 납선에 끼운 색유리처럼
@@ -677,6 +726,10 @@ FAMILY = {
     'calm78':     ('차분', '샌드'),
     'calm79':     ('차분', '슬레이트'),
     'calm80':     ('차분', '모카'),
+    'calm81':     ('고요', '올리브'),
+    'calm82':     ('고요', '안개'),
+    'calm83':     ('고요', '자두'),
+    'calm84':     ('고요', '먹'),
     'stained65':  ('스테인드 글래스', '앰버'),
     'stained66':  ('스테인드 글래스', '에메랄드'),
     'stained67':  ('스테인드 글래스', '자수정'),
@@ -718,7 +771,8 @@ def families():
              'light': 0, 'dark': 1, 'light-plain': 2, 'dark-plain': 3,
              'oak': 0, 'walnut': 1, 'oak-plain': 2, 'walnut-plain': 3,
              'amber': 0, 'emerald': 1, 'amethyst': 2, 'rose': 3,
-             'sage': 0, 'sand': 1, 'slate': 2, 'mocha': 3}
+             'sage': 0, 'sand': 1, 'slate': 2, 'mocha': 3,
+             'olive': 0, 'fog': 1, 'plum': 2, 'ink': 3}
     out, seen = [], {}
     for t in THEMES:
         t['family'], t['variant'] = _fam_of(t)
@@ -770,6 +824,7 @@ CATEGORY = {
     '프로스트 글래스': '유리',
     '도형': '무늬',
     '차분': '무늬',
+    '고요': '무늬',
 
     '벚꽃 그늘': '자연',
     '오로라': '자연',
@@ -960,6 +1015,10 @@ VARIANT_SLUG = {
     '샌드': 'sand',
     '슬레이트': 'slate',
     '모카': 'mocha',
+    '올리브': 'olive',
+    '안개': 'fog',
+    '자두': 'plum',
+    '먹': 'ink',
     '앰버': 'amber',
     '에메랄드': 'emerald',
     '자수정': 'amethyst',
