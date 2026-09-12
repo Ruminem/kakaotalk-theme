@@ -115,39 +115,48 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
         out.alpha_composite(rim)
 
     if glow:
-        # 몸통 안쪽 테두리를 밝힌다. 바깥 halo 는 여백만큼 프레임을 키우지만
-        # 이건 자리를 차지하지 않는다. 여백을 좁게 두고도 빛나 보이게 하는 쪽.
         gc = glow[0]
-        lit = lighten(mid(colors[0], colors[1]) if gc == 'auto' else gc, 0.55)
-        band = max(2, radius // 3)
-        inner = Image.new('RGBA', (w * SS, h * SS), (0, 0, 0, 0))
-        ImageDraw.Draw(inner).rounded_rectangle(
-            [SS, SS, w * SS - SS - 1, h * SS - SS - 1],
-            radius=radius * SS, outline=rgb(lit) + (255,), width=band * SS)
-        inner = inner.resize((w, h), Image.LANCZOS)
-        inner = inner.filter(ImageFilter.GaussianBlur(radius=band * 0.7))
-        inner.putalpha(ImageChops.multiply(
-            inner.getchannel('A').point(lambda v: int(v * 0.85)), mask))
+        ga = glow[1]
+        base = mid(colors[0], colors[1]) if gc == 'auto' else gc
+
+        # 안쪽 발광. mask 에서 흐린 mask 를 빼면 가장자리에서 최대가 되는 띠가 나온다.
+        # 둥근 모서리를 그대로 따라가므로 테두리를 직접 그리는 것보다 훨씬 매끈하다.
+        r_in = max(2, int(min(w, h) * 0.055))
+        band = ImageChops.subtract(mask, mask.filter(ImageFilter.GaussianBlur(r_in)))
+        band = ImageChops.multiply(band, mask)
+        inner = Image.new('RGBA', (w, h), rgb(lighten(base, 0.62)) + (255,))
+        inner.putalpha(band.point(lambda v: min(255, int(v * 1.7))))
         out.alpha_composite(inner)
 
     if not pad:
         return out
 
-    # 바깥 글로우: 같은 모양을 글로우 색으로 찍어 흐린 뒤 본체를 그 위에 얹는다
+    # 바깥 halo. 반경이 다른 흐림을 겹쳐서 가까이는 진하고 멀리는 길게 끌리게 만든다.
+    # 한 번만 흐리면 낙차가 일정해서 띠처럼 보인다.
     gw, gh = w + pad * 2, h + pad * 2
-    halo = Image.new('RGBA', (gw, gh), (0, 0, 0, 0))
-    shape = Image.new('L', (gw, gh), 0)
-    ImageDraw.Draw(shape).rounded_rectangle(
-        [pad, pad, pad + w - 1, pad + h - 1], radius=radius, fill=255)
-    gc, ga = glow
-    if gc == 'auto':
-        # 말풍선마다 자기 색으로 빛난다. 칸마다 색이 다른 테마에 어울린다
-        gc = mid(colors[0], colors[1])
-    halo.paste(Image.new('RGBA', (gw, gh), rgb(gc) + (255,)), (0, 0), shape)
-    halo = halo.filter(ImageFilter.GaussianBlur(radius=pad * 0.55))
-    # 흐리면 알파가 얇게 퍼져서 거의 안 보인다. 몸통 가까운 쪽을 끌어올린다
-    halo.putalpha(halo.getchannel('A').point(
-        lambda v: min(255, int(v * 3.2 * ga / 255))))
+    m = Image.new('L', (gw, gh), 0)
+    m.paste(mask, (pad, pad))
+
+    acc = Image.new('L', (gw, gh), 0)
+    for r, k in ((pad * 0.30, 0.55), (pad * 0.60, 0.30), (pad * 1.05, 0.15)):
+        blurred = m.filter(ImageFilter.GaussianBlur(r))
+        acc = ImageChops.add(acc, blurred.point(lambda v, k=k: int(v * k)))
+    acc = ImageChops.subtract(acc, m)          # 몸통 안쪽은 뺀다
+    # 몸통 바로 바깥이 흐림 때문에 절반쯤으로 깎여 있다. 다시 끌어올린다
+    acc = acc.point(lambda v: min(255, int(v * 1.9)))
+
+    # 그림 가장자리에서 0 이 되게 창을 씌운다.
+    # 이게 없으면 흐림이 경계에서 잘려 네모난 테두리가 그대로 보인다.
+    win = Image.new('L', (gw, gh), 0)
+    ImageDraw.Draw(win).rectangle([1, 1, gw - 2, gh - 2], fill=255)
+    win = win.filter(ImageFilter.GaussianBlur(max(1.0, pad * 0.38)))
+    acc = ImageChops.multiply(acc, win)
+
+    ga = glow[1]
+    gc = glow[0]
+    base = mid(colors[0], colors[1]) if gc == 'auto' else gc
+    halo = Image.new('RGBA', (gw, gh), rgb(base) + (255,))
+    halo.putalpha(acc.point(lambda v: int(v * ga / 255)))
     halo.alpha_composite(out, (pad, pad))
     return halo
 
