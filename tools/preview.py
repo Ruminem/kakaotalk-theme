@@ -409,7 +409,8 @@ BASE = 'https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/'
 # --- 배치 규칙 (폰에서 보는 것을 기준으로 잡은 값) ---------------------------
 # GitHub 은 넓은 표를 가로 스크롤 상자에 넣는다. 칸이 넷을 넘거나 그림이 크면
 # 폰에서 옆으로 한참 밀어야 다 본다. 셋과 200px 이 한 화면에 들어오는 한계다.
-PER_ROW = 3          # 한 줄에 놓는 칸 수. 넷 이상 두지 않는다
+PER_ROW = 3          # 맨 위 계열 격자. 한 줄에 세 칸
+VARIANT_MAX_N = 4    # 한 계열의 변형 수 상한. 넷이면 2x2 로 접는다
 W_GRID = 190         # 맨 위 계열 격자 그림 폭
 W_VARIANT = 200      # 계열 안 변형 그림 폭
 W_DETAIL = 180       # 접어둔 화면 그림 폭
@@ -427,9 +428,10 @@ def _check(fams):
             if len(m['variant']) > VARIANT_MAX:
                 raise ValueError('%s: 변형 이름이 %d자다. %d자 넘으면 칸 안에서 줄바꿈된다'
                                  % (m['key'], len(m['variant']), VARIANT_MAX))
-        if len(members) > PER_ROW:
-            raise ValueError('%s 계열에 변형이 %d개다. 한 줄에 %d개까지만 놓는다'
-                             % (name, len(members), PER_ROW))
+        if len(members) > VARIANT_MAX_N:
+            raise ValueError('%s 계열에 변형이 %d개다. %d개까지만 둔다 — 그 이상은 '
+                             '폰에서 한 계열로 안 보인다'
+                             % (name, len(members), VARIANT_MAX_N))
 
 
 def anchor(name):
@@ -482,17 +484,23 @@ def readme_block(ts):
                    % (members[0]['key'], name))
         out.append('')
 
-        # 변형을 한 줄에 나란히
-        out.append('<table><tr>')
-        for m in members:
-            out.append('<td width="33%%" align="center">'
-                       '<img src="assets/preview-%s-chat.png" width="%d"><br>'
-                       '<b>%s</b><br><sub>%s</sub><br>'
-                       '<a href="%s%s.ktheme">iOS</a> · <a href="%s%s.apk">Android</a>'
-                       '</td>'
-                       % (m['key'], W_VARIANT, m['variant'], m['note'],
-                          BASE, m['key'], BASE, m['key']))
-        out.append('</tr></table>')
+        # 변형 배치. 넷이면 2x2 로 접는다 — 한 줄에 넷을 놓으면 폰에서 옆으로 밀어야 한다.
+        # 계열 안에서는 표 하나에 갇혀 있으므로 두 줄이어도 한 묶음으로 읽힌다.
+        per = 2 if len(members) == 4 else min(len(members), PER_ROW)
+        cell = 100 // per
+        out.append('<table>')
+        for i in range(0, len(members), per):
+            out.append('<tr>')
+            for m in members[i:i + per]:
+                out.append('<td width="%d%%" align="center">'
+                           '<img src="assets/preview-%s-chat.png" width="%d"><br>'
+                           '<b>%s</b><br><sub>%s</sub><br>'
+                           '<a href="%s%s.ktheme">iOS</a> · <a href="%s%s.apk">Android</a>'
+                           '</td>'
+                           % (cell, m['key'], W_VARIANT, m['variant'], m['note'],
+                              BASE, m['key'], BASE, m['key']))
+            out.append('</tr>')
+        out.append('</table>')
         out.append('')
 
         out.append('<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>')

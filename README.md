@@ -67,9 +67,11 @@
 
 ### <img src="assets/icon-inkmint01.png" width="26" valign="middle"> 먹빛 민트
 
-<table><tr>
-<td width="33%" align="center"><img src="assets/preview-inkmint01-chat.png" width="200"><br><b>기본</b><br><sub>먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint01.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint01.apk">Android</a></td>
-</tr></table>
+<table>
+<tr>
+<td width="100%" align="center"><img src="assets/preview-inkmint01-chat.png" width="200"><br><b>기본</b><br><sub>먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint01.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint01.apk">Android</a></td>
+</tr>
+</table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 
@@ -83,9 +85,11 @@
 
 ### <img src="assets/icon-cream02.png" width="26" valign="middle"> 크림 라떼
 
-<table><tr>
-<td width="33%" align="center"><img src="assets/preview-cream02-chat.png" width="200"><br><b>기본</b><br><sub>밝은 쪽. 베이지 바탕에 브라운. 눈이 제일 안 피로한 조합임</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream02.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream02.apk">Android</a></td>
-</tr></table>
+<table>
+<tr>
+<td width="100%" align="center"><img src="assets/preview-cream02-chat.png" width="200"><br><b>기본</b><br><sub>밝은 쪽. 베이지 바탕에 브라운. 눈이 제일 안 피로한 조합임</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream02.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream02.apk">Android</a></td>
+</tr>
+</table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 
@@ -99,10 +103,12 @@
 
 ### <img src="assets/icon-sakura03.png" width="26" valign="middle"> 벚꽃 그늘
 
-<table><tr>
-<td width="33%" align="center"><img src="assets/preview-sakura03-chat.png" width="200"><br><b>기본</b><br><sub>밝은 분홍. 채팅방 배경 이미지가 깔림</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura03.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura03.apk">Android</a></td>
-<td width="33%" align="center"><img src="assets/preview-sakura13-chat.png" width="200"><br><b>벚꽃 배경</b><br><sub>벚꽃 그늘에 가지와 꽃잎을 그려 넣었음</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura13.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura13.apk">Android</a></td>
-</tr></table>
+<table>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-sakura03-chat.png" width="200"><br><b>기본</b><br><sub>밝은 분홍. 채팅방 배경 이미지가 깔림</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura03.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura03.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-sakura13-chat.png" width="200"><br><b>벚꽃 배경</b><br><sub>벚꽃 그늘에 가지와 꽃잎을 그려 넣었음</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura13.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura13.apk">Android</a></td>
+</tr>
+</table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 
@@ -120,10 +126,12 @@
 
 ### <img src="assets/icon-mixed04.png" width="26" valign="middle"> 믹스드
 
-<table><tr>
-<td width="33%" align="center"><img src="assets/preview-mixed04-chat.png" width="200"><br><b>기본</b><br><sub>어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed04.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed04.apk">Android</a></td>
-<td width="33%" align="center"><img src="assets/preview-mixed09-chat.png" width="200"><br><b>글로우</b><br><sub>믹스드에 글로우를 얹은 것. 말풍선마다 자기 색으로 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed09.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed09.apk">Android</a></td>
-</tr></table>
+<table>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-mixed04-chat.png" width="200"><br><b>기본</b><br><sub>어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed04.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed04.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-mixed09-chat.png" width="200"><br><b>글로우</b><br><sub>믹스드에 글로우를 얹은 것. 말풍선마다 자기 색으로 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed09.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed09.apk">Android</a></td>
+</tr>
+</table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 
@@ -141,9 +149,11 @@
 
 ### <img src="assets/icon-aurora05.png" width="26" valign="middle"> 오로라
 
-<table><tr>
-<td width="33%" align="center"><img src="assets/preview-aurora05-chat.png" width="200"><br><b>기본</b><br><sub>가장 어두운 테마. 채팅방 배경에 오로라가 번짐</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora05.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora05.apk">Android</a></td>
-</tr></table>
+<table>
+<tr>
+<td width="100%" align="center"><img src="assets/preview-aurora05-chat.png" width="200"><br><b>기본</b><br><sub>가장 어두운 테마. 채팅방 배경에 오로라가 번짐</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora05.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora05.apk">Android</a></td>
+</tr>
+</table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 
@@ -157,11 +167,13 @@
 
 ### <img src="assets/icon-candy06.png" width="26" valign="middle"> 캔디 팝
 
-<table><tr>
+<table>
+<tr>
 <td width="33%" align="center"><img src="assets/preview-candy06-chat.png" width="200"><br><b>기본</b><br><sub>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy06.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy06.apk">Android</a></td>
 <td width="33%" align="center"><img src="assets/preview-candy10-chat.png" width="200"><br><b>글로우</b><br><sub>캔디 팝에 글로우를 얹은 것. 밝은 바탕이라 빛이 은은하게 걸림</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy10.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy10.apk">Android</a></td>
 <td width="33%" align="center"><img src="assets/preview-candy12-chat.png" width="200"><br><b>사탕 배경</b><br><sub>캔디 팝 v2 에 사탕을 흩뿌린 배경을 깔았음</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy12.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy12.apk">Android</a></td>
-</tr></table>
+</tr>
+</table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 
@@ -183,10 +195,12 @@
 
 ### <img src="assets/icon-glass07.png" width="26" valign="middle"> 리퀴드 글래스
 
-<table><tr>
-<td width="33%" align="center"><img src="assets/preview-glass07-chat.png" width="200"><br><b>라이트</b><br><sub>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass07.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass07.apk">Android</a></td>
-<td width="33%" align="center"><img src="assets/preview-glass08-chat.png" width="200"><br><b>다크</b><br><sub>같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass08.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass08.apk">Android</a></td>
-</tr></table>
+<table>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-glass07-chat.png" width="200"><br><b>라이트</b><br><sub>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass07.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass07.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-glass08-chat.png" width="200"><br><b>다크</b><br><sub>같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass08.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass08.apk">Android</a></td>
+</tr>
+</table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 
@@ -204,9 +218,11 @@
 
 ### <img src="assets/icon-midnight11.png" width="26" valign="middle"> 심야
 
-<table><tr>
-<td width="33%" align="center"><img src="assets/preview-midnight11-chat.png" width="200"><br><b>기본</b><br><sub>밤하늘을 그려 넣은 테마. 잠금화면에 달과 능선이 나옴</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight11.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight11.apk">Android</a></td>
-</tr></table>
+<table>
+<tr>
+<td width="100%" align="center"><img src="assets/preview-midnight11-chat.png" width="200"><br><b>기본</b><br><sub>밤하늘을 그려 넣은 테마. 잠금화면에 달과 능선이 나옴</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight11.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight11.apk">Android</a></td>
+</tr>
+</table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 
@@ -220,9 +236,11 @@
 
 ### <img src="assets/icon-sea14.png" width="26" valign="middle"> 바다
 
-<table><tr>
-<td width="33%" align="center"><img src="assets/preview-sea14-chat.png" width="200"><br><b>기본</b><br><sub>수평선 너머로 해가 지는 바다. 말풍선 네 칸이 산호·모래·물빛·하늘색</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea14.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea14.apk">Android</a></td>
-</tr></table>
+<table>
+<tr>
+<td width="100%" align="center"><img src="assets/preview-sea14-chat.png" width="200"><br><b>기본</b><br><sub>수평선 너머로 해가 지는 바다. 말풍선 네 칸이 산호·모래·물빛·하늘색</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea14.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea14.apk">Android</a></td>
+</tr>
+</table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 
@@ -236,9 +254,11 @@
 
 ### <img src="assets/icon-forest15.png" width="26" valign="middle"> 숲
 
-<table><tr>
-<td width="33%" align="center"><img src="assets/preview-forest15-chat.png" width="200"><br><b>기본</b><br><sub>안개 낀 침엽수 숲. 이끼·호박·하늘·흙빛 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest15.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest15.apk">Android</a></td>
-</tr></table>
+<table>
+<tr>
+<td width="100%" align="center"><img src="assets/preview-forest15-chat.png" width="200"><br><b>기본</b><br><sub>안개 낀 침엽수 숲. 이끼·호박·하늘·흙빛 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest15.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest15.apk">Android</a></td>
+</tr>
+</table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 
@@ -252,9 +272,11 @@
 
 ### <img src="assets/icon-city16.png" width="26" valign="middle"> 야경
 
-<table><tr>
-<td width="33%" align="center"><img src="assets/preview-city16-chat.png" width="200"><br><b>기본</b><br><sub>창문 불빛이 켜진 도시. 네온 네 색 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city16.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city16.apk">Android</a></td>
-</tr></table>
+<table>
+<tr>
+<td width="100%" align="center"><img src="assets/preview-city16-chat.png" width="200"><br><b>기본</b><br><sub>창문 불빛이 켜진 도시. 네온 네 색 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city16.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city16.apk">Android</a></td>
+</tr>
+</table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 
@@ -268,9 +290,11 @@
 
 ### <img src="assets/icon-snow17.png" width="26" valign="middle"> 설원
 
-<table><tr>
-<td width="33%" align="center"><img src="assets/preview-snow17-chat.png" width="200"><br><b>기본</b><br><sub>눈 내리는 언덕. 얼음·살구·민트·라벤더 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow17.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow17.apk">Android</a></td>
-</tr></table>
+<table>
+<tr>
+<td width="100%" align="center"><img src="assets/preview-snow17-chat.png" width="200"><br><b>기본</b><br><sub>눈 내리는 언덕. 얼음·살구·민트·라벤더 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow17.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow17.apk">Android</a></td>
+</tr>
+</table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 
@@ -284,9 +308,11 @@
 
 ### <img src="assets/icon-geo18.png" width="26" valign="middle"> 도형
 
-<table><tr>
-<td width="33%" align="center"><img src="assets/preview-geo18-chat.png" width="200"><br><b>기본</b><br><sub>큰 도형이 겹친 무늬. 주황·민트·보라·하늘 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo18.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo18.apk">Android</a></td>
-</tr></table>
+<table>
+<tr>
+<td width="100%" align="center"><img src="assets/preview-geo18-chat.png" width="200"><br><b>기본</b><br><sub>큰 도형이 겹친 무늬. 주황·민트·보라·하늘 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo18.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo18.apk">Android</a></td>
+</tr>
+</table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 

@@ -239,10 +239,12 @@ def standard(key, name, note, **kw):
     t.pop('glow', None)
     t.pop('bubble_style', None)
 
-    for slot in ('chat_bg', 'main_bg', 'passcode_bg'):
-        if not t.get(slot):
-            raise ValueError('%s: %s 가 없다. 배경 이미지는 세 화면에 다 있어야 한다'
-                             % (key, slot))
+    # 배경은 여기서 강제하지 않는다. 네 벌 중 둘은 배경이 없는 것이 정상이다.
+    # 대신 quartet() 이 계열에 배경 있는 변형이 포함되게 보장한다.
+    got = [slot for slot in ('chat_bg', 'main_bg', 'passcode_bg') if t.get(slot)]
+    if got and len(got) != 3:
+        raise ValueError('%s: 배경을 넣으려면 세 화면에 다 넣는다. 지금 %s 뿐이다'
+                         % (key, ', '.join(got)))
 
     # 단색으로 칠할 때 쓰는 값이 네 칸 모두 달라야 한다
     seen = {}
@@ -386,4 +388,46 @@ def families():
             seen[t['family']] = []
             out.append((t['family'], seen[t['family']]))
         seen[t['family']].append(t)
+    return out
+
+
+def quartet(slug, no, family, palette, bg, notes, glow=('auto', 170, 8)):
+    """테마 하나를 더할 때 네 벌을 함께 만든다.
+
+        1 기본            2 기본 + 배경 이미지
+        3 글로우          4 글로우 + 배경 이미지
+
+    색을 한 벌 정하면 네 가지 인상이 나온다. 배경 없는 쪽은 담백하고 배경 있는 쪽은
+    분위기가 있으며, 글로우는 같은 색이 떠 보인다. 고르는 사람마다 원하는 게 달라서
+    하나만 내면 절반은 아쉬워한다.
+
+    키는 slug + 번호로 넷을 연달아 쓴다(no, no+1, no+2, no+3).
+    번호는 versionCode 에 쓰이므로 이미 쓴 번호와 겹치면 안 된다.
+
+    notes 는 네 벌의 한 줄 소개 — 길이 검사는 preview 가 한다.
+    """
+    if len(notes) != 4:
+        raise ValueError('%s: 한 줄 소개를 네 개 줘야 한다' % slug)
+    for k in ('chat_bg', 'main_bg', 'passcode_bg'):
+        if k not in bg:
+            raise ValueError('%s: bg 에 %s 가 없다' % (slug, k))
+
+    out = []
+    for i, (variant, use_bg, use_glow) in enumerate((
+            ('기본', False, False),
+            ('배경', True, False),
+            ('글로우', False, True),
+            ('글로우+배경', True, True))):
+        kw = dict(palette)
+        if use_bg:
+            kw.update(bg)
+        else:
+            kw.update(chat_bg=None, main_bg=None, passcode_bg=None)
+        t = standard('%s%d' % (slug, no + i), '%s %s' % (family, variant),
+                     notes[i], **kw)
+        if use_glow:
+            t['glow'] = glow
+        t['family'] = family
+        t['variant'] = variant
+        out.append(t)
     return out
