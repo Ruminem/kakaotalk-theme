@@ -602,11 +602,10 @@ ManifestStyle
     -kakaotalk-theme-id: 'com.kakao.talk.theme.{pkg}';
 }}
 
-/* 탭바. 아이콘 8종은 아직 카톡 기본값이다 */
 TabBarStyle-Main
 {{
     background-color: {bg};
-}}
+{tabicons}}}
 
 HeaderStyle-Main
 {{
@@ -796,6 +795,20 @@ def gen_ios(t, root):
 
     icon(t, 120).save(os.path.join(img_dir, 'commonIcoTheme.png'))
 
+    # 탭 아이콘 7종 × 보통/선택. 보통은 보조색, 선택은 포인트색 —
+    # 둘이 다른 그림이라 탭을 누를 때 카톡이 사이를 이어준다.
+    tab_lines = []
+    for kind in TAB_KINDS:
+        name = 'maintabIco' + kind.capitalize()
+        for suffix, col in (('', t['subtext']), ('Selected', t['accent'])):
+            for scale in (2, 3):
+                tab_icon(kind, 28 * scale, col).save(
+                    os.path.join(img_dir, '%s%s@%dx.png' % (name, suffix, scale)))
+        tab_lines.append("    -ios-%s-normal-icon-image: '%s.png';" % (kind, name))
+        tab_lines.append("    -ios-%s-selected-icon-image: '%sSelected.png';"
+                         % (kind, name))
+    tabicons = chr(10).join(tab_lines) + chr(10)
+
     chatbg = ''
     if t['chat_bg']:
         background(t, t['chat_bg'], 600, 1300).save(os.path.join(img_dir, 'chatroomBgImage@2x.png'))
@@ -824,6 +837,7 @@ def gen_ios(t, root):
     ins = '%dpx %dpx %dpx %dpx' % (INSET_V + pad, INSET_H + pad,
                                   INSET_V + pad, INSET_H + pad)
     css = CSS.format(version=themes.VERSION, cap=CAP + pad, ins=ins,
+                     tabicons=tabicons,
                      chatbg=chatbg, mainbg=mainbg, passbg=passbg,
                      cell_alpha='%.2f' % ca,
                      cell_alpha_sel='%.2f' % min(1.0, ca + 0.15), **fields)
@@ -962,6 +976,11 @@ def gen_android(t, root, code):
             ninepatch(bubble(3, pal, style, alpha, glow, pad, t.get('flat', False)),
                       (CAP + pad) * 3).save(os.path.join(draw, name))
 
+    for kind in TAB_KINDS:
+        for suffix, col in (('', t['subtext']), ('_focused', t['accent'])):
+            tab_icon(kind, 84, col).save(
+                os.path.join(draw, 'theme_maintab_ico_%s%s_image.png' % (kind, suffix)))
+
     splash(t, 1080, 1920).save(os.path.join(draw, 'theme_splash_image.png'), optimize=True)
     if t['chat_bg']:
         background(t, t['chat_bg'], 1080, 1920).save(
@@ -997,6 +1016,52 @@ def main():
     print('\n%d 개 테마 -> build-src/' % len(themes.THEMES))
     preview.generate(themes.THEMES)
     print('미리보기 -> docs/index.html')
+
+
+# --- 탭 아이콘 -----------------------------------------------------------
+# 7종 × 보통/선택. 규격에 있는데 지금까지 안 써서 스물한 테마가 전부 카톡 기본
+# 아이콘을 쓰고 있었다. 팔레트 색으로 그리면 테마마다 하단이 달라진다.
+# 보통과 선택이 별개 그림이라 탭을 누를 때 전환도 생긴다.
+
+TAB_KINDS = ('friends', 'chats', 'browse', 'find', 'piccoma', 'shopping', 'more')
+
+
+def tab_icon(kind, px, color, ss=4):
+    """탭 아이콘 하나. 채운 도형으로 그린다 — 작은 크기에서 선보다 잘 읽힌다."""
+    S = px * ss
+    img = Image.new('RGBA', (S, S), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    c = rgb(color) + (255,)
+    u = S / 100.0                      # 100 기준 좌표로 그린다
+    lw = max(1, int(7 * u))
+
+    if kind == 'friends':
+        d.ellipse([36 * u, 16 * u, 64 * u, 44 * u], fill=c)
+        d.pieslice([20 * u, 44 * u, 80 * u, 96 * u], 180, 360, fill=c)
+    elif kind == 'chats':
+        d.rounded_rectangle([14 * u, 20 * u, 86 * u, 70 * u], radius=16 * u, fill=c)
+        d.polygon([(30 * u, 66 * u), (48 * u, 66 * u), (30 * u, 88 * u)], fill=c)
+    elif kind == 'browse':
+        d.ellipse([16 * u, 16 * u, 84 * u, 84 * u], outline=c, width=lw)
+        d.polygon([(42 * u, 34 * u), (70 * u, 50 * u), (42 * u, 66 * u)], fill=c)
+    elif kind == 'find':
+        d.ellipse([20 * u, 18 * u, 68 * u, 66 * u], outline=c, width=lw)
+        d.line([(62 * u, 60 * u), (82 * u, 82 * u)], fill=c, width=lw)
+    elif kind == 'piccoma':
+        d.rounded_rectangle([20 * u, 18 * u, 80 * u, 82 * u], radius=8 * u, fill=c)
+        d.line([(50 * u, 22 * u), (50 * u, 78 * u)],
+               fill=(0, 0, 0, 0), width=max(2, int(5 * u)))
+        d.rectangle([47 * u, 18 * u, 53 * u, 82 * u], fill=(0, 0, 0, 0))
+    elif kind == 'shopping':
+        d.rounded_rectangle([22 * u, 38 * u, 78 * u, 84 * u], radius=8 * u, fill=c)
+        d.arc([36 * u, 14 * u, 64 * u, 54 * u], 180, 360, fill=c, width=lw)
+    elif kind == 'more':
+        for k in (-26, 0, 26):
+            d.ellipse([(50 + k - 8) * u, 42 * u, (50 + k + 8) * u, 58 * u], fill=c)
+    else:
+        raise ValueError('모르는 탭 아이콘: %s' % kind)
+
+    return img.resize((px, px), Image.LANCZOS)
 
 
 if __name__ == '__main__':

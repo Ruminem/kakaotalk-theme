@@ -293,13 +293,16 @@ def chat_list(t):
         d.line([(90, y + 83), (W, y + 83)], fill=rgb(t['border']))
 
     d.line([(0, H - FOOT), (W, H - FOOT)], fill=rgb(t['border']))
-    tabs = [('친구', ic_person), ('채팅', ic_bubble), ('오픈채팅', ic_circle),
-            ('쇼핑', ic_bag), ('더보기', ic_dots)]
-    for i, (label, icon) in enumerate(tabs):
+    # 실제 테마에 들어가는 아이콘을 그대로 쓴다. 미리보기만 다른 그림을 쓰면
+    # 폰에서 어떻게 보일지 알 수 없다.
+    tabs = [('친구', 'friends'), ('채팅', 'chats'), ('오픈채팅', 'browse'),
+            ('쇼핑', 'shopping'), ('더보기', 'more')]
+    for i, (label, kind) in enumerate(tabs):
         cx = int(W * (i + 0.5) / len(tabs))
-        c = rgb(t['accent'] if i == 1 else t['subtext'])
-        icon(d, cx, H - FOOT + 34, c)
-        d.text((cx, H - FOOT + 64), label, font=F_TAB, fill=c, anchor='mm')
+        c = t['accent'] if i == 1 else t['subtext']
+        ic = gen.tab_icon(kind, 26, c)
+        img.paste(ic, (cx - 13, H - FOOT + 22), ic)
+        d.text((cx, H - FOOT + 64), label, font=F_TAB, fill=rgb(c), anchor='mm')
     return img
 
 

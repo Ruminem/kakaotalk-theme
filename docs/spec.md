@@ -17,7 +17,7 @@
 | 목록/채팅방 배경 이미지 | 됨 | 됨 | 씀 |
 | 실행화면 | **없음** | 됨 | 안드로이드만 |
 | 잠금화면 배경 이미지 | 됨 | 됨 | 심야에서 씀 |
-| 탭 아이콘 8종 | 됨 | 됨 | **안 씀** |
+| 탭 아이콘 7종 | 됨 | 됨 | 씀 |
 | 기본 프로필 | 됨 | 됨 | **안 씀** |
 | 친구추가 버튼 | 됨 | 됨 | **안 씀** |
 | 잠금화면 동그라미 | 됨 | 됨 | **안 씀** |
@@ -63,12 +63,12 @@
 | 목록 배경 | `mainBgImage` | `theme_background_image` |
 | 실행화면 | **없음** | `theme_splash_image` |
 | 잠금화면 배경 | `passcodeBgImage` | `theme_passcode_background_image` |
+| 탭 아이콘 7종 × 보통/선택 | `maintabIco*` / `*Selected` | `theme_maintab_ico_*_image` / `*_focused_image` |
 
 ### 아직 안 쓰는 것 — 남은 재료
 
 | 자리 | iOS | Android | 메모 |
 |---|---|---|---|
-| **탭 아이콘 8종** | `-ios-{friends,chats,find,browse,view,piccoma,shopping,more}-{normal,selected}-icon-image` | `theme_maintab_ico_*_image` / `*_focused_image` | 보통/선택 두 장씩. 남은 것 중 제일 티가 남 |
 | **탭바 배경** | `TabBarStyle-Main` 의 `-ios-background-image` | `theme_maintab_cell_image` | 지금은 색만 씀 |
 | **기본 프로필** | `-ios-profile-images` | `theme_profile_01_image` 등 | 사진 없는 친구에게 뜨는 그림 |
 | **친구추가 버튼** | `ButtonStyle-AddFriend` 의 `-ios-image` | `theme_find_add_friend_button_image` (+`_pressed`) | |
