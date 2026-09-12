@@ -40,7 +40,7 @@ chat_bg
 
 import re
 
-VERSION = '0.25'
+VERSION = '0.26'
 
 THEMES = [
     dict(
@@ -383,6 +383,59 @@ THEMES = [
         bubble_style='glass', bubble_alpha=155, cell_alpha=0.55, frost=0.45,
         chat_bg=None, main_bg=None, passcode_bg=None,
     ),
+    # --- 차분 -------------------------------------------------------------
+    # 오래 봐도 눈이 덜 피로한 쪽. 지금까지 만든 것들이 대체로 채도가 높아서
+    # 반대쪽 자리가 비어 있었다. 네 벌 규칙의 축(배경/글로우) 대신 색이 축이다 —
+    # 글로우와 배경 그림은 이 계열의 목적과 정면으로 어긋나서 아예 안 쓴다.
+    #
+    # 숫자로 잡은 기준이 셋이다.
+    #   채도 0.25 아래       — 레드가 1.00, 캔디 팝이 0.60 이다
+    #   바탕↔말풍선 대비 1.2~2.0 — 말풍선이 구분되면서 경계가 튀지 않는 구간
+    #   순백·순흑을 안 쓴다   — #FFF 와 #000 은 그 자체로 눈이 아프다
+    dict(
+        key='calm77', name='차분 세이지',
+        note='탁한 연둣빛 회색. 가장 순한 쪽',
+        bg='#EDEFE9', bg_deep='#E3E6DE', surface='#F6F7F3', pressed='#E0E4DA',
+        border='#D5D9CE', text='#333A32', subtext='#6E756B',
+        accent='#6E8A6A', accent_dim='#566E53', on_accent='#F6F8F4',
+        send=('#C7D3C0', '#C7D3C0'), send_alt=('#DCE3D6', '#DCE3D6'),
+        recv=('#FBFCF9', '#FBFCF9'), recv_alt=('#E6E9E1', '#E6E9E1'),
+        send_text='#252A24', recv_text='#333A32',
+        flat=True, chat_bg=None, main_bg=None, passcode_bg=None,
+    ),
+    dict(
+        key='calm78', name='차분 샌드',
+        note='누런 기 도는 종이색. 따뜻한 쪽',
+        bg='#F1EDE6', bg_deep='#E7E2D9', surface='#F9F6F1', pressed='#E4DED3',
+        border='#D9D2C6', text='#3A342D', subtext='#787066',
+        accent='#A8845C', accent_dim='#876848', on_accent='#FBF8F3',
+        send=('#DCD0BE', '#DCD0BE'), send_alt=('#EBE3D6', '#EBE3D6'),
+        recv=('#FDFBF7', '#FDFBF7'), recv_alt=('#EDE8E0', '#EDE8E0'),
+        send_text='#2B261F', recv_text='#3A342D',
+        flat=True, chat_bg=None, main_bg=None, passcode_bg=None,
+    ),
+    dict(
+        key='calm79', name='차분 슬레이트',
+        note='푸른 기 도는 회색. 어두운 쪽',
+        bg='#22262B', bg_deep='#1A1D21', surface='#2B3036', pressed='#343A41',
+        border='#3C434B', text='#DCE0E4', subtext='#8E969E',
+        accent='#7E97A8', accent_dim='#5E7686', on_accent='#151A1E',
+        send=('#3C4750', '#3C4750'), send_alt=('#4A555E', '#4A555E'),
+        recv=('#2E343A', '#2E343A'), recv_alt=('#394046', '#394046'),
+        send_text='#E4E9ED', recv_text='#DCE0E4',
+        flat=True, chat_bg=None, main_bg=None, passcode_bg=None,
+    ),
+    dict(
+        key='calm80', name='차분 모카',
+        note='탁한 갈회색. 어둡고 따뜻한 쪽',
+        bg='#262220', bg_deep='#1D1A18', surface='#302B28', pressed='#3A3431',
+        border='#433C38', text='#E4DCD5', subtext='#9A9088',
+        accent='#A18A78', accent_dim='#7E6B5C', on_accent='#1A1614',
+        send=('#473D37', '#473D37'), send_alt=('#544840', '#544840'),
+        recv=('#322C29', '#322C29'), recv_alt=('#3D3632', '#3D3632'),
+        send_text='#EDE6DF', recv_text='#E4DCD5',
+        flat=True, chat_bg=None, main_bg=None, passcode_bg=None,
+    ),
     dict(
         key='midnight11', name='심야',
         note='밤하늘을 그려 넣은 테마. 잠금화면에 달과 능선이 나옴',
@@ -620,6 +673,10 @@ FAMILY = {
     'glass08':    ('리퀴드 글래스', '다크'),
     'glass51':    ('리퀴드 글래스', '라이트 단색'),
     'glass52':    ('리퀴드 글래스', '다크 단색'),
+    'calm77':     ('차분', '세이지'),
+    'calm78':     ('차분', '샌드'),
+    'calm79':     ('차분', '슬레이트'),
+    'calm80':     ('차분', '모카'),
     'stained65':  ('스테인드 글래스', '앰버'),
     'stained66':  ('스테인드 글래스', '에메랄드'),
     'stained67':  ('스테인드 글래스', '자수정'),
@@ -660,7 +717,8 @@ def families():
     order = {'basic': 0, 'image': 1, 'glow': 2, 'glow-image': 3,
              'light': 0, 'dark': 1, 'light-plain': 2, 'dark-plain': 3,
              'oak': 0, 'walnut': 1, 'oak-plain': 2, 'walnut-plain': 3,
-             'amber': 0, 'emerald': 1, 'amethyst': 2, 'rose': 3}
+             'amber': 0, 'emerald': 1, 'amethyst': 2, 'rose': 3,
+             'sage': 0, 'sand': 1, 'slate': 2, 'mocha': 3}
     out, seen = [], {}
     for t in THEMES:
         t['family'], t['variant'] = _fam_of(t)
@@ -711,6 +769,7 @@ CATEGORY = {
     '프리즘 글래스': '유리',
     '프로스트 글래스': '유리',
     '도형': '무늬',
+    '차분': '무늬',
 
     '벚꽃 그늘': '자연',
     '오로라': '자연',
@@ -897,6 +956,10 @@ VARIANT_SLUG = {
     '다크': 'dark',
     '라이트 단색': 'light-plain',
     '다크 단색': 'dark-plain',
+    '세이지': 'sage',
+    '샌드': 'sand',
+    '슬레이트': 'slate',
+    '모카': 'mocha',
     '앰버': 'amber',
     '에메랄드': 'emerald',
     '자수정': 'amethyst',
