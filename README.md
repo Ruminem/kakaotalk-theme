@@ -635,3 +635,24 @@ release.ps1         → 태그 + 릴리스 자산 첨부
 - [Android 사용자 테마 가이드 (9.2.5)](https://t1.kakaocdn.net/kakaocorp/Service/Theme/KakaoTalk/9.2.5_UserThemeGuide_Android.pdf)
 
 가이드 PDF는 폰트 인코딩이 밀려 있어서 그냥 열면 안 읽힘. 글자 코드에 +31 하면 영문이 나옴.
+
+---
+
+## 링크 테스트 (임시)
+
+GitHub 앱에서 목차 링크가 안 먹혀서 어느 형태가 동작하는지 보는 중임.
+앱으로 아래를 하나씩 눌러보고 **야경 자리로 내려가는 게 어느 것인지** 알려주면 됨.
+확인되면 이 절은 지움.
+
+| | 링크 | 형태 |
+|---|---|---|
+| A | [A 눌러보기](#user-content-야경) | 같은 문서, 진짜 id |
+| B | [B 눌러보기](#야경) | 같은 문서, GitHub 스크립트 방식 |
+| C | [C 눌러보기](https://github.com/Ruminem/kakaotalk-theme/blob/main/README.md#user-content-야경) | 전체 주소 |
+| D | [D 눌러보기](https://www.github.com/Ruminem/kakaotalk-theme/blob/main/README.md#user-content-야경) | 전체 주소 + www |
+| E | [E 눌러보기](https://github.com/Ruminem/kakaotalk-theme#user-content-야경) | 저장소 첫 화면 + 앵커 |
+| F | [F 눌러보기](https://www.github.com/Ruminem/kakaotalk-theme#user-content-야경) | 저장소 첫 화면 + www |
+| G | [G 눌러보기](docs/anchor-test.md) | 앵커 없이 다른 문서 열기 |
+
+G 는 앵커가 아니라 **다른 문서로 이동**임. A~F 가 전부 안 되면 목차를 문서 분리로
+바꾸면 되는지 보려는 것임 — G 도 안 되면 앱 안에서는 방법이 없는 것.
