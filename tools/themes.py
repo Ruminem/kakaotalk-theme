@@ -38,7 +38,7 @@ chat_bg
   None 이면 단색. ('linear', 위, 아래) 또는 ('aurora', 바탕, [색...]) 이면 이미지를 그린다.
 """
 
-VERSION = '0.15'
+VERSION = '0.16'
 
 THEMES = [
     dict(
@@ -297,19 +297,6 @@ THEMES += [
                      dict(layers=['#1A3329', '#224134', '#2C5241', '#3A6A52'],
                           fog='#CFE4D8')),
     ),
-    standard(
-        'city16', '야경',
-        '창문 불빛이 켜진 도시. 네온 네 색 말풍선',
-        bg='#0F1320', bg_deep='#080B14', surface='#191F32', pressed='#232B44',
-        border='#2E3854', text='#E9EDF8', subtext='#8C96B2',
-        accent='#FFD98A', accent_dim='#CFA55E', on_accent='#1E1605',
-        send=('#FFC24D', '#FFC24D'), send_alt=('#FF6FA5', '#FF6FA5'),
-        recv=('#2A3352', '#2A3352'), recv_alt=('#4FD1D9', '#4FD1D9'),
-        send_text='#2A1C02', recv_text='#E9EDF8',
-        chat_bg=('city', '#1A2340', '#3A4A72', dict(lit=0.28, dim=0.34)),
-        main_bg=('city', '#161D36', '#2C3960', dict(lit=0.22, dim=0.48)),
-        passcode_bg=('city', '#1E2748', '#4A5A88', dict(lit=0.40)),
-    ),
 ]
 
 THEMES += [
@@ -374,16 +361,22 @@ FAMILY = {
     'geo18':      ('도형', '기본'),
 }
 
-for _t in THEMES:
-    _fam, _var = FAMILY.get(_t['key'], (_t['name'], '기본'))
-    _t['family'] = _fam
-    _t['variant'] = _var
+def _fam_of(t):
+    """테마가 속한 계열과 변형 이름.
+
+    quartet() 이 만든 테마는 자기가 들고 있고, 그 전 테마는 FAMILY 표에서 찾는다.
+    표에도 없으면 혼자 계열이 된다.
+    """
+    if t.get('family'):
+        return t['family'], t.get('variant', '기본')
+    return FAMILY.get(t['key'], (t['name'], '기본'))
 
 
 def families():
     """계열 순서대로 (계열이름, [테마...]) 를 돌려준다. THEMES 순서를 따른다."""
     out, seen = [], {}
     for t in THEMES:
+        t['family'], t['variant'] = _fam_of(t)
         if t['family'] not in seen:
             seen[t['family']] = []
             out.append((t['family'], seen[t['family']]))
@@ -391,7 +384,17 @@ def families():
     return out
 
 
-def quartet(slug, no, family, palette, bg, notes, glow=('auto', 170, 8)):
+# 네 벌의 이름표. 폰의 테마 목록에도 이대로 붙는다 — 넷을 나란히 깔았을 때
+# 어느 것이 어느 것인지 목록에서 바로 구분돼야 한다.
+TYPES = (
+    ('기본', False, False),
+    ('배경', True, False),
+    ('글로우', False, True),
+    ('글로우+배경', True, True),
+)
+
+
+def quartet(slug, no, family, palette, bg, notes, glow=('auto', 170, 8), keys=None):
     """테마 하나를 더할 때 네 벌을 함께 만든다.
 
         1 기본            2 기본 + 배경 이미지
@@ -403,6 +406,8 @@ def quartet(slug, no, family, palette, bg, notes, glow=('auto', 170, 8)):
 
     키는 slug + 번호로 넷을 연달아 쓴다(no, no+1, no+2, no+3).
     번호는 versionCode 에 쓰이므로 이미 쓴 번호와 겹치면 안 된다.
+    keys 를 주면 그 키를 그대로 쓴다 — 이미 나간 테마를 네 벌 중 하나로 편입할 때 쓴다.
+    키를 바꾸면 이미 깐 사람이 업데이트를 못 받는다.
 
     notes 는 네 벌의 한 줄 소개 — 길이 검사는 preview 가 한다.
     """
@@ -413,21 +418,36 @@ def quartet(slug, no, family, palette, bg, notes, glow=('auto', 170, 8)):
             raise ValueError('%s: bg 에 %s 가 없다' % (slug, k))
 
     out = []
-    for i, (variant, use_bg, use_glow) in enumerate((
-            ('기본', False, False),
-            ('배경', True, False),
-            ('글로우', False, True),
-            ('글로우+배경', True, True))):
+    for i, (variant, use_bg, use_glow) in enumerate(TYPES):
         kw = dict(palette)
         if use_bg:
             kw.update(bg)
         else:
             kw.update(chat_bg=None, main_bg=None, passcode_bg=None)
-        t = standard('%s%d' % (slug, no + i), '%s %s' % (family, variant),
-                     notes[i], **kw)
+        key = keys[i] if keys else '%s%d' % (slug, no + i)
+        t = standard(key, '%s %s' % (family, variant), notes[i], **kw)
         if use_glow:
             t['glow'] = glow
         t['family'] = family
         t['variant'] = variant
         out.append(t)
     return out
+
+
+# 야경 — 네 벌. city16 은 이미 나간 키라 그대로 두고 '배경' 자리에 넣는다.
+THEMES += quartet(
+    'city', 0, '야경',
+    dict(bg='#0F1320', bg_deep='#080B14', surface='#191F32', pressed='#232B44',
+         border='#2E3854', text='#E9EDF8', subtext='#8C96B2',
+         accent='#FFD98A', accent_dim='#CFA55E', on_accent='#1E1605',
+         send=('#FFC24D', '#FFC24D'), send_alt=('#FF6FA5', '#FF6FA5'),
+         recv=('#2A3352', '#2A3352'), recv_alt=('#4FD1D9', '#4FD1D9'),
+         send_text='#2A1C02', recv_text='#E9EDF8'),
+    dict(chat_bg=('city', '#1A2340', '#3A4A72', dict(lit=0.28, dim=0.34)),
+         main_bg=('city', '#161D36', '#2C3960', dict(lit=0.22, dim=0.48)),
+         passcode_bg=('city', '#1E2748', '#4A5A88', dict(lit=0.40))),
+    ['담백한 남색 바탕. 네온 네 색 말풍선',
+     '창문 불빛이 켜진 도시가 깔림',
+     '말풍선이 네온처럼 빛남',
+     '도시 배경 위에 네온 말풍선까지'],
+    keys=['city19', 'city16', 'city20', 'city21'])

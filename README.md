@@ -47,19 +47,19 @@
 </tr>
 <tr>
 <td width="33%" align="center"><a href="#숲"><img src="assets/preview-forest15-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#야경"><img src="assets/preview-city16-chat.png" width="190"></a></td>
 <td width="33%" align="center"><a href="#설원"><img src="assets/preview-snow17-chat.png" width="190"></a></td>
-</tr>
-<tr>
-<td align="center"><img src="assets/icon-forest15.png" width="20" valign="middle"> <b><a href="#숲">숲</a></b><br>안개 낀 침엽수 숲. 이끼·호박·하늘·흙빛 말풍선</td>
-<td align="center"><img src="assets/icon-city16.png" width="20" valign="middle"> <b><a href="#야경">야경</a></b><br>창문 불빛이 켜진 도시. 네온 네 색 말풍선</td>
-<td align="center"><img src="assets/icon-snow17.png" width="20" valign="middle"> <b><a href="#설원">설원</a></b><br>눈 내리는 언덕. 얼음·살구·민트·라벤더 말풍선</td>
-</tr>
-<tr>
 <td width="33%" align="center"><a href="#도형"><img src="assets/preview-geo18-chat.png" width="190"></a></td>
 </tr>
 <tr>
+<td align="center"><img src="assets/icon-forest15.png" width="20" valign="middle"> <b><a href="#숲">숲</a></b><br>안개 낀 침엽수 숲. 이끼·호박·하늘·흙빛 말풍선</td>
+<td align="center"><img src="assets/icon-snow17.png" width="20" valign="middle"> <b><a href="#설원">설원</a></b><br>눈 내리는 언덕. 얼음·살구·민트·라벤더 말풍선</td>
 <td align="center"><img src="assets/icon-geo18.png" width="20" valign="middle"> <b><a href="#도형">도형</a></b><br>큰 도형이 겹친 무늬. 주황·민트·보라·하늘 말풍선</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="#야경"><img src="assets/preview-city19-chat.png" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/icon-city19.png" width="20" valign="middle"> <b><a href="#야경">야경</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>담백한 남색 바탕. 네온 네 색 말풍선</td>
 </tr>
 </table>
 
@@ -268,24 +268,6 @@
 
 </details>
 
-<a name="야경"></a>
-
-### <img src="assets/icon-city16.png" width="26" valign="middle"> 야경
-
-<table>
-<tr>
-<td width="100%" align="center"><img src="assets/preview-city16-chat.png" width="200"><br><b>기본</b><br><sub>창문 불빛이 켜진 도시. 네온 네 색 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city16.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city16.apk">Android</a></td>
-</tr>
-</table>
-
-<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
-
-**기본** — 창문 불빛이 켜진 도시. 네온 네 색 말풍선
-
-<img src="assets/preview-city16-list.png" width="180"> <img src="assets/preview-city16-passcode.png" width="180"> <img src="assets/preview-city16-splash.png" width="180">
-
-</details>
-
 <a name="설원"></a>
 
 ### <img src="assets/icon-snow17.png" width="26" valign="middle"> 설원
@@ -319,6 +301,41 @@
 **기본** — 큰 도형이 겹친 무늬. 주황·민트·보라·하늘 말풍선
 
 <img src="assets/preview-geo18-list.png" width="180"> <img src="assets/preview-geo18-passcode.png" width="180"> <img src="assets/preview-geo18-splash.png" width="180">
+
+</details>
+
+<a name="야경"></a>
+
+### <img src="assets/icon-city19.png" width="26" valign="middle"> 야경
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-city19-chat.png" width="200"><br><b>기본</b><br><sub>담백한 남색 바탕. 네온 네 색 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city19.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city19.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-city16-chat.png" width="200"><br><b>배경</b><br><sub>창문 불빛이 켜진 도시가 깔림</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city16.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city16.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-city20-chat.png" width="200"><br><b>글로우</b><br><sub>말풍선이 네온처럼 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city20.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city20.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-city21-chat.png" width="200"><br><b>글로우+배경</b><br><sub>도시 배경 위에 네온 말풍선까지</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city21.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city21.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**기본** — 담백한 남색 바탕. 네온 네 색 말풍선
+
+<img src="assets/preview-city19-list.png" width="180"> <img src="assets/preview-city19-passcode.png" width="180"> <img src="assets/preview-city19-splash.png" width="180">
+
+**배경** — 창문 불빛이 켜진 도시가 깔림
+
+<img src="assets/preview-city16-list.png" width="180"> <img src="assets/preview-city16-passcode.png" width="180"> <img src="assets/preview-city16-splash.png" width="180">
+
+**글로우** — 말풍선이 네온처럼 빛남
+
+<img src="assets/preview-city20-list.png" width="180"> <img src="assets/preview-city20-passcode.png" width="180"> <img src="assets/preview-city20-splash.png" width="180">
+
+**글로우+배경** — 도시 배경 위에 네온 말풍선까지
+
+<img src="assets/preview-city21-list.png" width="180"> <img src="assets/preview-city21-passcode.png" width="180"> <img src="assets/preview-city21-splash.png" width="180">
 
 </details>
 
