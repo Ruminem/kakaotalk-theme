@@ -657,3 +657,44 @@ def wood(spec, w, h):
     if dim:
         img = Image.blend(img, Image.new('RGB', (w, h), (0, 0, 0)), dim)
     return img
+
+
+# --- 별 ------------------------------------------------------------------
+
+def stars(spec, w, h):
+    """흩뿌린 별. 선 없이 까맣게 찍거나, 테두리 선을 둘러 스티커처럼 찍는다.
+
+    spec = ('stars', 위색, 아래색, 옵션dict)
+      count        별 개수
+      rmin, rmax   반지름. 화면 폭에 대한 비율
+      fill         별 색
+      outline      테두리 색. None 이면 선 없음
+      outline_w    테두리 굵기(px, 두 배 판 기준)
+      dim          0~1
+
+    두 배 크기로 그렸다 줄인다. 별 꼭짓점은 뾰족해서 그대로 찍으면 계단이 보인다.
+    바탕을 RGB 로 두고 불투명한 색만 쓴다 — 알파를 섞어 그리면 PIL 이 덮어쓴다.
+    """
+    gen = _g()
+    from toon import star_points
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20260923))
+    W, H = w * 2, h * 2
+    img = gen.vgradient(W, H, gen.rgb(spec[1]), gen.rgb(spec[2]))
+    d = ImageDraw.Draw(img)
+    fill = gen.rgb(o.get('fill', '#2A2A2A'))
+    oc = gen.rgb(o['outline']) if o.get('outline') else None
+    for _ in range(o.get('count', 16)):
+        r = rnd.uniform(o.get('rmin', 0.03), o.get('rmax', 0.06)) * W
+        cx, cy = rnd.random() * W, rnd.random() * H
+        pts = star_points(cx, cy, r, rot=-90 + rnd.uniform(-24, 24),
+                          inner=o.get('inner', 0.46))
+        if oc:
+            d.polygon(pts, fill=oc)
+            d.line(pts + [pts[0]], fill=oc, width=o.get('outline_w', 4), joint='curve')
+        d.polygon(pts, fill=fill)
+    img = img.resize((w, h), Image.LANCZOS)
+    dim = o.get('dim', 0.0)
+    if dim:
+        img = Image.blend(img, Image.new('RGB', (w, h), (0, 0, 0)), dim)
+    return img

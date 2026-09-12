@@ -162,6 +162,8 @@ def _header(img, t, title, back=False):
 
 def chat(t):
     """채팅방. 말풍선 네 칸을 모두 보여준다 — 알록달록한 테마는 여기서 드러난다."""
+    if t.get('bubble_style') == 'toon':
+        return chat_toon(t)
     img = Image.new('RGB', (W, H), rgb(t['bg']))
     body = H - HEAD - FOOT
     if t['chat_bg']:
@@ -217,6 +219,85 @@ def chat(t):
         y += fh + gap
 
     # 입력바
+    ca = t.get('cell_alpha', 1.0)
+    bar = Image.new('RGBA', (W, FOOT), rgb(t['surface']) + (int(255 * ca),))
+    img.paste(Image.alpha_composite(
+        img.crop((0, H - FOOT, W, H)).convert('RGBA'), bar).convert('RGB'),
+        (0, H - FOOT))
+    d = ImageDraw.Draw(img)
+    ic_plus(d, 32, H - FOOT + 48, rgb(t['subtext']))
+    _round(d, [54, H - FOOT + 26, W - 84, H - FOOT + 70], 22, rgb(t['pressed']))
+    d.text((70, H - FOOT + 48), '메시지 입력', font=F_LIST_MSG,
+           fill=rgb(t['subtext']), anchor='lm')
+    d.ellipse([W - 74, H - FOOT + 26, W - 30, H - FOOT + 70], fill=rgb(t['accent']))
+    ic_send(d, W - 52, H - FOOT + 48, rgb(t['on_accent']))
+    return img
+
+
+# 그림 말풍선은 연달아 보낸 말이 있어야 01 과 02 의 차이가 보인다
+CHAT_GROUP = [
+    ('them', '안녕! 오랜만이야'),
+    ('them', '요즘 뭐 해?'),
+    ('them', '테마 만든다며'),
+    ('me', '응 거의 다 됐어'),
+    ('me', '다섯 개 나왔어'),
+]
+
+
+def chat_toon(t):
+    """그림 말풍선 채팅방. 카톡이 하는 그대로 그린다.
+
+    묶음의 첫 말풍선은 01(그림·꼬리), 이어지는 말은 02. 말풍선 그림은 새로 그리지 않고
+    테마에 들어가는 그 장을 cap 자리의 한 줄만 늘여 붙인다 — 그림이 늘어나는 줄에
+    걸려 뭉개지는지는 이렇게 해야 보인다.
+    """
+    import toon
+    img = Image.new('RGB', (W, H), rgb(t['bg']))
+    body = H - HEAD - FOOT
+    if t['chat_bg']:
+        img.paste(gen.background(t, t['chat_bg'], W, body), (0, HEAD))
+    else:
+        img.paste(Image.new('RGB', (W, body), rgb(t['bg_deep'])), (0, HEAD))
+    _header(img, t, '아무개1', back=True)
+    d = ImageDraw.Draw(img)
+
+    line_h = 22
+    y = HEAD + 14
+    for i, (side, msg) in enumerate(CHAT_GROUP):
+        key = 'recv' if side == 'them' else 'send'
+        first = i == 0 or CHAT_GROUP[i - 1][0] != side
+        last = i == len(CHAT_GROUP) - 1 or CHAT_GROUP[i + 1][0] != side
+        if first and i:
+            y += 10                     # 말한 사람이 바뀌면 조금 더 띄운다
+        if side == 'them' and first:
+            av = avatar(42, t, i)
+            img.paste(av, (18, y), av)
+            d.text((70, y + 2), '아무개1', font=F_NAME, fill=rgb(t['subtext']))
+            y += 22
+        sheet, geo = toon.bubble(t, key, '01' if first else '02', 1)
+        top, left, bottom, right = geo['ins']
+        fw = _text_w(d, msg, F_MSG) + left + right
+        fh = line_h + top + bottom
+        b = toon.stretch(sheet, geo['cap'], fw, fh)
+        fw, fh = b.size
+        if side == 'them':
+            fx = 70 - geo['outer']      # 몸통 왼쪽이 아바타 옆에 오게
+        else:
+            fx = W - 18 + geo['outer'] - fw
+        img.paste(b, (fx, y), b)
+        d = ImageDraw.Draw(img)
+        tc = rgb(t['recv_text'] if side == 'them' else t['send_text'])
+        d.text((fx + left, y + top + 1), msg, font=F_MSG, fill=tc)
+        if last:
+            by = y + fh - geo['bottom'] - 8
+            if side == 'them':
+                d.text((fx + fw - geo['inner'] + 6, by), '오후 2:43',
+                       font=F_TIME, fill=rgb(t['subtext']), anchor='lm')
+            else:
+                d.text((fx + geo['inner'] - 6, by), '오후 2:43',
+                       font=F_TIME, fill=rgb(t['subtext']), anchor='rm')
+        y += fh + 2
+
     ca = t.get('cell_alpha', 1.0)
     bar = Image.new('RGBA', (W, FOOT), rgb(t['surface']) + (int(255 * ca),))
     img.paste(Image.alpha_composite(
