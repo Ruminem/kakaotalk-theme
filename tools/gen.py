@@ -733,6 +733,11 @@ FeatureStyle-Primary
     -ios-text-color: {accent};
 }}
 
+ButtonStyle-AddFriend
+{{
+    -ios-image: 'findBtnAddFriend.png';
+}}
+
 DefaultProfileStyle
 {{
     -ios-profile-images: {profiles};
@@ -814,7 +819,8 @@ PasscodeStyle
 {{
     -ios-keypad-background-color: {surface};
     -ios-keypad-text-normal-color: {text};
-}}
+    -ios-keypad-number-highlighted-image: 'passcodeKeypadPressed.png';
+{bullets}}}
 
 BackgroundStyle-MessageNotificationBar
 {{
@@ -904,6 +910,28 @@ def gen_ios(t, root):
                          % (kind, name))
     tabicons = chr(10).join(tab_lines) + chr(10)
 
+    # 친구추가 단추. iOS 는 눌린 그림 자리가 따로 없어 한 장만 쓴다
+    for scale, px in ((2, 48), (3, 72)):
+        add_friend_icon(t, px).save(
+            os.path.join(img_dir, 'findBtnAddFriend@%dx.png' % scale))
+
+    # 잠금화면 — 키패드 눌림과 네 자리 동그라미
+    for scale, px in ((2, 128), (3, 192)):
+        keypad_pressed(t, px).save(
+            os.path.join(img_dir, 'passcodeKeypadPressed@%dx.png' % scale))
+    bullet_lines = []
+    for i, slot in enumerate(BULLET_SLOTS):
+        nm = 'passcodeImgCode%02d' % (i + 1)
+        for scale, px in ((2, 36), (3, 54)):
+            bullet_image(t, i, px, False).save(
+                os.path.join(img_dir, '%s@%dx.png' % (nm, scale)))
+            bullet_image(t, i, px, True).save(
+                os.path.join(img_dir, '%sSelected@%dx.png' % (nm, scale)))
+        bullet_lines.append("    -ios-bullet-%s-image: '%s.png';" % (slot, nm))
+        bullet_lines.append("    -ios-bullet-selected-%s-image: '%sSelected.png';"
+                            % (slot, nm))
+    bullets = chr(10).join(bullet_lines) + chr(10)
+
     names = []
     for i in range(3):
         nm = 'profileImg%02d' % (i + 1)
@@ -943,7 +971,7 @@ def gen_ios(t, root):
     iv, ih = insets_of(t)
     ins = '%dpx %dpx %dpx %dpx' % (iv + pad, ih + pad, iv + pad, ih + pad)
     css = CSS.format(version=themes.VERSION, cap=CAP + pad, ins=ins,
-                     tabicons=tabicons, profiles=profiles,
+                     tabicons=tabicons, profiles=profiles, bullets=bullets,
                      chatbg=chatbg, mainbg=mainbg, passbg=passbg,
                      cell_alpha='%.2f' % ca,
                      cell_alpha_sel='%.2f' % min(1.0, ca + 0.15), **fields)
@@ -1091,6 +1119,21 @@ def gen_android(t, root, code):
         profile_image(t, i, 162).save(
             os.path.join(draw, 'theme_profile_%02d_image.png' % (i + 1)))
 
+    tabbar_image(t).save(os.path.join(draw, 'theme_maintab_cell_image.png'))
+
+    # 친구추가 단추. 안드로이드는 눌린 그림을 따로 받는다
+    add_friend_icon(t, 72).save(
+        os.path.join(draw, 'theme_find_add_friend_button_image.png'))
+    add_friend_icon(t, 72, pressed=True).save(
+        os.path.join(draw, 'theme_find_add_friend_button_pressed_image.png'))
+
+    # 잠금화면 동그라미 네 자리 × 빈 것/채운 것
+    for i in range(4):
+        bullet_image(t, i, 54).save(
+            os.path.join(draw, 'theme_passcode_%02d_image.png' % (i + 1)))
+        bullet_image(t, i, 54, True).save(
+            os.path.join(draw, 'theme_passcode_%02d_checked_image.png' % (i + 1)))
+
     splash(t, 1080, 1920).save(os.path.join(draw, 'theme_splash_image.png'), optimize=True)
     if t['chat_bg']:
         background(t, t['chat_bg'], 1080, 1920).save(
@@ -1151,6 +1194,115 @@ def profile_image(t, idx, px):
 # 7종 × 보통/선택. 규격에 있는데 지금까지 안 써서 스물한 테마가 전부 카톡 기본
 # 아이콘을 쓰고 있었다. 팔레트 색으로 그리면 테마마다 하단이 달라진다.
 # 보통과 선택이 별개 그림이라 탭을 누를 때 전환도 생긴다.
+
+# --- 잠금화면과 친구추가 단추 ---------------------------------------------
+# 규격에서 마지막까지 안 쓰고 남아 있던 자리들이다. 색만 바꾸면 이 자리들은
+# 카톡 기본 그림 그대로 남아서, 테마를 깔아도 여기만 남의 집처럼 보인다.
+
+def bullet_color(t, idx):
+    """비밀번호 네 자리의 색.
+
+    자리마다 다른 이미지를 넣을 수 있다. 말풍선 네 칸에서 색을 하나씩 빌려와
+    다 채웠을 때 팔레트가 한 줄로 늘어서게 한다. 받은 말풍선의 어두운 칸은
+    빼고 쓴다 — 어두운 바탕에 어두운 점을 찍으면 안 보인다.
+    """
+    pals = (t['send'], t['send_alt'], t['recv_alt'])
+    cols = [mid(*p) for p in pals] + [t['accent']]
+    c = cols[idx % 4]
+
+    # 바탕과 밝기가 비슷하면 점이 안 보인다. 빈 점은 테두리뿐이라 특히 그렇다.
+    # 그럴 때만 글자색 쪽으로 당긴다 — 색상은 살리고 밝기만 벌린다.
+    def lum(h):
+        r, g, b = rgb(h)
+        return (r * 299 + g * 587 + b * 114) / 1000
+    base = t.get('bg_deep') or t['bg']
+    if abs(lum(c) - lum(base)) < 70:
+        c = mix(c, t['text'], 0.45)
+    return c
+
+
+def bullet_image(t, idx, px, checked=False):
+    """비밀번호 점 하나. 빈 것은 테두리만, 채운 것은 속까지 칠한다."""
+    c = rgb(bullet_color(t, idx))
+    S = px * SS
+    img = Image.new('RGBA', (S, S), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    r = int(S * 0.32)                      # 둘레에 여백을 남긴다. 글로우가 들어갈 자리다
+    box = [S // 2 - r, S // 2 - r, S // 2 + r, S // 2 + r]
+    if checked:
+        d.ellipse(box, fill=c + (255,))
+    else:
+        d.ellipse(box, outline=c + (130,), width=max(SS, int(S * 0.055)))
+    img = img.resize((px, px), Image.LANCZOS)
+
+    if checked and t.get('glow'):
+        halo = img.getchannel('A').filter(ImageFilter.GaussianBlur(px * 0.10))
+        lay = Image.new('RGBA', (px, px), rgb(lighten(bullet_color(t, idx), 0.5)) + (255,))
+        lay.putalpha(halo.point(lambda v: int(v * 0.55)))
+        out = Image.new('RGBA', (px, px), (0, 0, 0, 0))
+        out.alpha_composite(lay)
+        out.alpha_composite(img)
+        return out
+    return img
+
+
+def keypad_pressed(t, px):
+    """키패드 숫자를 눌렀을 때 뒤에 깔리는 동그라미."""
+    S = px * SS
+    img = Image.new('RGBA', (S, S), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    r = int(S * 0.46)
+    d.ellipse([S // 2 - r, S // 2 - r, S // 2 + r, S // 2 + r],
+              fill=rgb(t['pressed']) + (255,))
+    if t.get('glow'):
+        d.ellipse([S // 2 - r, S // 2 - r, S // 2 + r, S // 2 + r],
+                  outline=rgb(t['accent']) + (160,), width=max(SS, int(S * 0.02)))
+    return img.resize((px, px), Image.LANCZOS)
+
+
+def add_friend_icon(t, px, pressed=False):
+    """친구 탭 머리의 친구추가 단추. 사람 옆에 더하기 하나."""
+    c = rgb(t['accent'] if pressed else t['text'])
+    S = px * SS
+    img = Image.new('RGBA', (S, S), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+
+    # 사람 — 머리와 어깨. 어깨는 반원이라 아래를 잘라 쓴다
+    hr = int(S * 0.145)
+    hx, hy = int(S * 0.37), int(S * 0.30)
+    d.ellipse([hx - hr, hy - hr, hx + hr, hy + hr], fill=c + (255,))
+    bw, bh = int(S * 0.23), int(S * 0.22)
+    d.pieslice([hx - bw, hy + int(S * 0.10), hx + bw, hy + int(S * 0.10) + bh * 2],
+               180, 360, fill=c + (255,))
+
+    # 더하기
+    px_, py = int(S * 0.76), int(S * 0.30)
+    th = max(SS, int(S * 0.045))
+    arm = int(S * 0.11)
+    d.rounded_rectangle([px_ - arm, py - th, px_ + arm, py + th],
+                        radius=th, fill=c + (255,))
+    d.rounded_rectangle([px_ - th, py - arm, px_ + th, py + arm],
+                        radius=th, fill=c + (255,))
+    return img.resize((px, px), Image.LANCZOS)
+
+def tabbar_image(t, w=12, h=168):
+    """탭바 배경. 위로 갈수록 밝은 아주 옅은 그라데이션과 머리선 하나.
+
+    안드로이드에만 넣는다(`theme_maintab_cell_image`). iOS 가이드에는 탭바에
+    이미지를 넣는 속성이 없어서 색으로만 칠한다 — 이름을 지어내지 않는다.
+
+    셀마다 깔리는 그림일 수도 있어서 가로로는 아무 변화를 주지 않는다.
+    가로로 무늬가 있으면 셀이 나뉜 자리마다 끊긴 자국이 보인다.
+    """
+    img = vgradient(w, h, rgb(t['surface']), rgb(t['bg'])).convert('RGBA')
+    d = ImageDraw.Draw(img)
+    d.rectangle([0, 0, w, 1], fill=rgb(t['border']) + (255,))
+    a = int(round(t.get('cell_alpha', 1.0) * 255))
+    if a < 255:                      # 유리 테마는 탭바도 비쳐야 한다
+        img.putalpha(Image.new('L', (w, h), a))
+    return img
+
+BULLET_SLOTS = ('first', 'second', 'third', 'fourth')
 
 TAB_KINDS = ('friends', 'chats', 'browse', 'find', 'piccoma', 'shopping', 'more')
 

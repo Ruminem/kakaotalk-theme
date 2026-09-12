@@ -65,18 +65,28 @@
 | 잠금화면 배경 | `passcodeBgImage` | `theme_passcode_background_image` |
 | 탭 아이콘 7종 × 보통/선택 | `maintabIco*` / `*Selected` | `theme_maintab_ico_*_image` / `*_focused_image` |
 | 기본 프로필 3장 | `-ios-profile-images` 에 세 장 나열 | `theme_profile_01~03_image` |
+| 친구추가 단추 | `findBtnAddFriend` | `theme_find_add_friend_button_image` (+`_pressed`) |
+| 잠금화면 동그라미 4자리 × 빈/채움 | `passcodeImgCode01~04` (+`Selected`) | `theme_passcode_01~04_image` (+`_checked`) |
+| 키패드 눌림 | `passcodeKeypadPressed` | **없음** (색으로만) |
+| 탭바 배경 | **없음** (색으로만) | `theme_maintab_cell_image` |
 
 목록 배경만 크게 흐려서 내보낸다. 카톡이 그 위에 불투명한 칩 줄·광고 카드·셀을 얹기 때문에,
 그림을 그대로 깔면 얹힌 것의 가장자리마다 잘린 자국이 네모로 보인다.
 
+잠금화면 동그라미는 **네 자리를 따로 받는다.** 그래서 자리마다 다른 색을 줬음 —
+말풍선 네 칸에서 하나씩 빌려와 다 채우면 팔레트가 한 줄로 늘어섬.
+바탕과 밝기 차가 70 미만이면 글자색 쪽으로 당김. 빈 점은 테두리뿐이라 안 그러면 안 보임.
+
+탭바 배경은 **가로로 무늬를 넣지 않음.** 셀마다 깔리는 그림일 수 있어서,
+가로 무늬가 있으면 셀이 나뉜 자리마다 끊긴 자국이 보임.
+
 ### 아직 안 쓰는 것 — 남은 재료
 
-| 자리 | iOS | Android | 메모 |
-|---|---|---|---|
-| **탭바 배경** | `TabBarStyle-Main` 의 `-ios-background-image` | `theme_maintab_cell_image` | 지금은 색만 씀 |
-| **친구추가 버튼** | `ButtonStyle-AddFriend` 의 `-ios-image` | `theme_find_add_friend_button_image` (+`_pressed`) | |
-| **잠금화면 동그라미 4개** | `-ios-bullet-{first..fourth}-image` (+`selected`) | `theme_passcode_0X_image` (+`_checked`) | 비밀번호 입력 점 |
-| **키패드 눌림** | `-ios-keypad-number-highlighted-image` | — | |
+**없음.** 가이드에 적힌 iOS 속성 60개와 안드로이드 리소스를 전부 씀(0.23).
+남은 건 규격 밖의 것들뿐임 — 앱 아이콘(공식 테마 전용), 설정 화면(블록 자체가 없음).
+
+확인은 `tools/` 를 가이드 원문에서 뽑은 이름 목록과 맞춰보는 식으로 함.
+새 카톡 버전이 나와 규격이 늘면 다시 맞춰봐야 함 — 지금 기준은 9.2.5 임.
 
 ---
 

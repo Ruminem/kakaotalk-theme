@@ -324,7 +324,8 @@ def passcode(t):
     """잠금화면. 카톡 비밀번호를 걸어야 보이는 화면이다.
 
     색은 모든 테마에 넣고 있었지만 한 번도 보여준 적이 없어서 여기 추가했다.
-    동그라미와 키패드 눌림은 이미지로도 바꿀 수 있는데 아직 안 쓴다.
+    동그라미와 키패드 눌림은 테마가 넣는 그림을 그대로 붙인다 — 미리보기가
+    따로 그리면 폰에서만 다르게 보이는 것을 못 잡는다.
     """
     if t.get('passcode_bg'):
         img = gen.background(t, t['passcode_bg'], W, H).convert('RGB')
@@ -335,15 +336,14 @@ def passcode(t):
     d.text((W // 2, 150), '비밀번호 입력', font=_font(17),
            fill=rgb(t['text']), anchor='mm')
 
-    # 입력 점 네 개. 앞의 둘은 채워진 상태
+    # 입력 점 네 개. 앞의 둘은 채워진 상태. 자리마다 색이 다르다
+    img = img.convert('RGBA')
     for i in range(4):
         cx = W // 2 + (i - 1.5) * 34
-        r = 8
-        if i < 2:
-            d.ellipse([cx - r, 208 - r, cx + r, 208 + r], fill=rgb(t['accent']))
-        else:
-            d.ellipse([cx - r, 208 - r, cx + r, 208 + r],
-                      outline=rgb(t['subtext']), width=2)
+        dot = gen.bullet_image(t, i, 40, checked=i < 2)
+        img.alpha_composite(dot, (int(cx - 20), 208 - 20))
+    img = img.convert('RGB')
+    d = ImageDraw.Draw(img)
 
     # 키패드
     keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '0', '']
@@ -353,8 +353,12 @@ def passcode(t):
             continue
         cx = W // 2 + (i % 3 - 1) * 110
         cy = top + (i // 3) * 104
-        fill = t['pressed'] if k == '5' else t['surface']      # 하나는 눌린 상태
-        d.ellipse([cx - kr, cy - kr, cx + kr, cy + kr], fill=rgb(fill))
+        if k == '5':                                          # 하나는 눌린 상태
+            press = gen.keypad_pressed(t, int(kr / 0.46))
+            img.paste(press, (int(cx - press.width / 2), int(cy - press.height / 2)),
+                      press)
+        else:
+            d.ellipse([cx - kr, cy - kr, cx + kr, cy + kr], fill=rgb(t['surface']))
         d.text((cx, cy), k, font=_font(26),
                fill=rgb(t['accent'] if k == '5' else t['text']), anchor='mm')
     return img
