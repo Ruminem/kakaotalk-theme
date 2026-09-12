@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- theme_title 은 카톡 테마 목록에 뜨는 이름, app_name 은 안드로이드 앱 이름 -->
-    <string name="theme_title">먹빛 민트 01</string>
-    <string name="app_name">먹빛 민트 01</string>
-</resources>

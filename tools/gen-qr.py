@@ -12,11 +12,13 @@ from qrcode.image.styledpil import StyledPilImage
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS = os.path.join(ROOT, 'docs')
-BASE = 'https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/'
+# 테마가 여러 개라 특정 파일이 아니라 릴리스 목록으로 보낸다.
+# 거기서 원하는 테마를 고르게 하는 편이 낫다.
+BASE = 'https://github.com/Ruminem/kakaotalk-theme/releases/latest'
 
 TARGETS = {
-    'qr-ios.png': BASE + 'inkmint01.ktheme',
-    'qr-android.png': BASE + 'inkmint01.apk',
+    'qr-ios.png': BASE,
+    'qr-android.png': BASE,
 }
 
 
