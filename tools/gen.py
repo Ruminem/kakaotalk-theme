@@ -10,6 +10,7 @@ iOS 와 안드로이드는 같은 그림을 다른 형식으로 요구한다.
   iOS     @2x / @3x 두 장. 늘어나는 범위는 CSS 의 cap inset 숫자로 따로 적는다.
   Android 9-patch 한 장. 늘어나는 범위를 이미지 1픽셀 테두리에 그려 넣는다.
 """
+import math
 import os
 import random
 import re
@@ -122,12 +123,37 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
 
         # 안쪽 발광. mask 에서 흐린 mask 를 빼면 가장자리에서 최대가 되는 띠가 나온다.
         # 둥근 모서리를 그대로 따라가므로 테두리를 직접 그리는 것보다 훨씬 매끈하다.
-        r_in = max(2, int(min(w, h) * 0.055))
-        band = ImageChops.subtract(mask, mask.filter(ImageFilter.GaussianBlur(r_in)))
+        # 얇고 밝은 띠와 넓고 은은한 띠를 겹친다. 한 겹만 쓰면 두께가 일정한 링이 되어
+        # 스티커를 붙인 것처럼 보인다.
+        thin = ImageChops.subtract(
+            mask, mask.filter(ImageFilter.GaussianBlur(max(1.5, min(w, h) * 0.022))))
+        wide = ImageChops.subtract(
+            mask, mask.filter(ImageFilter.GaussianBlur(max(3.0, min(w, h) * 0.085))))
+        band = ImageChops.add(thin.point(lambda v: int(v * 0.75)),
+                              wide.point(lambda v: int(v * 0.5)))
         band = ImageChops.multiply(band, mask)
-        inner = Image.new('RGBA', (w, h), rgb(lighten(base, 0.62)) + (255,))
-        inner.putalpha(band.point(lambda v: min(255, int(v * 1.7))))
+
+        # 위쪽을 더 밝게. 사방이 똑같이 빛나면 평평해 보인다 — 빛은 한쪽에서 든다
+        ramp = Image.new('L', (1, h))
+        rp = ramp.load()
+        for y in range(h):
+            rp[0, y] = int(255 * (1.0 - 0.55 * (y / max(h - 1, 1)) ** 0.8))
+        band = ImageChops.multiply(band, ramp.resize((w, h)))
+
+        inner = Image.new('RGBA', (w, h), rgb(lighten(base, 0.66)) + (255,))
+        inner.putalpha(band.point(lambda v: min(255, int(v * 2.1))))
         out.alpha_composite(inner)
+
+        # 맨 위 모서리에만 얇은 반사광. 유리나 금속에서 보이는 그 선
+        spec_h = max(2, int(h * 0.16))
+        sp = ImageChops.subtract(
+            mask, mask.filter(ImageFilter.GaussianBlur(max(1.0, min(w, h) * 0.012))))
+        top = Image.new('L', (w, h), 0)
+        top.paste(sp.crop((0, 0, w, spec_h)), (0, 0))
+        top = ImageChops.multiply(top, mask)
+        sheen = Image.new('RGBA', (w, h), (255, 255, 255, 255))
+        sheen.putalpha(top.point(lambda v: min(255, int(v * 0.85))))
+        out.alpha_composite(sheen)
 
     if not pad:
         return out
@@ -143,8 +169,9 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
         blurred = m.filter(ImageFilter.GaussianBlur(r))
         acc = ImageChops.add(acc, blurred.point(lambda v, k=k: int(v * k)))
     acc = ImageChops.subtract(acc, m)          # 몸통 안쪽은 뺀다
-    # 몸통 바로 바깥이 흐림 때문에 절반쯤으로 깎여 있다. 다시 끌어올린다
-    acc = acc.point(lambda v: min(255, int(v * 1.9)))
+    # 몸통 바로 바깥이 흐림 때문에 절반쯤으로 깎여 있다. 다시 끌어올린다.
+    # 감마를 씌워 가까운 쪽은 살리고 먼 쪽은 더 빨리 떨어뜨린다 — 빛은 선형으로 안 준다
+    acc = acc.point(lambda v: min(255, int(255 * ((v / 255.0) ** 0.78) * 1.55)))
 
     # 그림 가장자리에서 0 이 되게 창을 씌운다.
     # 이게 없으면 흐림이 경계에서 잘려 네모난 테두리가 그대로 보인다.
@@ -156,7 +183,10 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
     ga = glow[1]
     gc = glow[0]
     base = mid(colors[0], colors[1]) if gc == 'auto' else gc
+    # 밝은 곳일수록 색이 옅어진다. 실제 빛이 그렇고, 단색으로 두면 색종이처럼 보인다
+    core = acc.point(lambda v: int(255 * (v / 255.0) ** 2.2))
     halo = Image.new('RGBA', (gw, gh), rgb(base) + (255,))
+    halo.paste(Image.new('RGB', (gw, gh), rgb(lighten(base, 0.55))), (0, 0), core)
     halo.putalpha(acc.point(lambda v: int(v * ga / 255)))
     halo.alpha_composite(out, (pad, pad))
     return halo
@@ -205,11 +235,44 @@ def splash(t, w, h):
     return Image.alpha_composite(img, glow).convert('RGB')
 
 
+def _fbm(seed, n, octaves=4):
+    """부드러운 1차원 잡음. 능선 실루엣에 쓴다.
+
+    주파수를 배로 올리며 진폭을 반으로 줄여 겹친다. 큰 굴곡 위에 작은 굴곡이 얹혀
+    자연스러운 산등성이가 된다. 제어점을 그냥 이으면 각진 저폴리가 된다.
+    """
+    rnd = random.Random(seed)
+    out = [0.0] * n
+    amp, freq, total = 1.0, 3, 0.0
+    for _ in range(octaves):
+        ctrl = [rnd.uniform(-1, 1) for _ in range(freq + 1)]
+        for i in range(n):
+            t = i / (n - 1) * freq
+            j = min(int(t), freq - 1)
+            f = t - j
+            f = f * f * (3 - 2 * f)            # smoothstep
+            out[i] += (ctrl[j] + (ctrl[j + 1] - ctrl[j]) * f) * amp
+        total += amp
+        amp *= 0.5
+        freq *= 2
+    return [v / total for v in out]
+
+
+def _star_color(rnd):
+    """별빛 색온도. 전부 흰색이면 인쇄물처럼 납작해진다."""
+    k = rnd.random()
+    if k < 0.62:
+        return (255, 255, 255)
+    if k < 0.84:
+        return (198, 216, 255)                 # 푸른 별
+    return (255, 226, 196)                     # 붉은 별
+
+
 def scene_night(spec, w, h):
-    """밤하늘. 별과 달과 능선을 그린다.
+    """밤하늘. 별·은하수·달·능선을 그린다.
 
     사진을 가져다 쓸 수 없으니(저작권) 코드로 그린다.
-    시드를 고정한다 — 안 그러면 빌드할 때마다 별자리가 바뀌어서 diff 가 매번 더러워진다.
+    시드를 고정한다 — 안 그러면 빌드할 때마다 별자리가 바뀌어 diff 가 매번 더러워진다.
 
     spec = ('night', 위색, 아래색, 옵션dict)
       moon   달 색. None 이면 안 그림
@@ -218,74 +281,131 @@ def scene_night(spec, w, h):
       dim    0~1. 클수록 어둡게 덮는다. 글자가 얹히는 화면은 올린다
     """
     o = spec[3] if len(spec) > 3 else {}
+    unit = w / 500.0
     img = vgradient(w, h, rgb(spec[1]), rgb(spec[2])).convert('RGB')
+
+    # 하늘에 아주 옅은 잡음을 섞는다. 매끈한 그라데이션은 띠(밴딩)가 보인다
+    # 잡음을 살짝 흐려서 섞는다. 픽셀 단위 잡음은 PNG 가 못 줄여서 파일이 몇 배로 커진다.
+    # 흐린 잡음도 띠를 깨는 데는 충분하다.
+    noise = Image.effect_noise((w, h), 7).filter(
+        ImageFilter.GaussianBlur(1.1)).convert('RGB')
+    img = Image.blend(img, noise, 0.05)
+
+    horizon = h * (0.74 if o.get('ridge') else 1.0)
+
+    # --- 은하수. 비스듬한 띠에만 별을 몰아 넣고 옅은 빛을 깐다 ---
+    band = Image.new('L', (w, h), 0)
+    bd = ImageDraw.Draw(band)
+    bd.polygon([(-w * 0.1, h * 0.02), (w * 0.55, -h * 0.05),
+                (w * 1.1, h * 0.42), (w * 0.72, h * 0.60),
+                (w * 0.05, h * 0.30)], fill=255)
+    band = band.filter(ImageFilter.GaussianBlur(w * 0.10))
+    wash = Image.new('RGBA', (w, h), (150, 170, 230, 255))
+    wash.putalpha(band.point(lambda v: int(v * 0.14)))
+    img = Image.alpha_composite(img.convert('RGBA'), wash).convert('RGB')
+
     d = ImageDraw.Draw(img, 'RGBA')
     rnd = random.Random(20260912)
-    unit = w / 500.0
+    bpx = band.load()
 
-    horizon = h * (0.72 if o.get('ridge') else 1.0)
-    for _ in range(o.get('stars', 220)):
+    n = o.get('stars', 220)
+    for _ in range(n * 2):
         x, y = rnd.random() * w, rnd.random() * horizon
-        # 위쪽일수록 촘촘하게 보이도록 아래쪽 별은 솎아낸다
-        if rnd.random() < (y / horizon) * 0.5:
+        # 은하수 안쪽은 촘촘하게, 지평선 가까이는 성기게
+        p = 0.16 + bpx[int(x), int(y)] / 255.0 * 0.9
+        p *= 1.0 - (y / horizon) * 0.45
+        if rnd.random() > p:
             continue
-        r = rnd.choice([0.6, 0.7, 0.9, 1.1, 1.5, 2.0]) * unit
-        a = rnd.randint(70, 240)
-        d.ellipse([x - r, y - r, x + r, y + r], fill=(255, 255, 255, a))
+        r = rnd.choice([0.5, 0.6, 0.8, 1.0, 1.3, 1.7, 2.2]) * unit
+        a = rnd.randint(60, 255)
+        c = _star_color(rnd)
+        if r > 1.4 * unit:                      # 큰 별엔 옅은 무리를 씌운다
+            for k in (3.2, 2.0):
+                rr = r * k
+                d.ellipse([x - rr, y - rr, x + rr, y + rr],
+                          fill=c + (int(a * 0.07),))
+        d.ellipse([x - r, y - r, x + r, y + r], fill=c + (a,))
 
-    # 밝은 별 몇 개에는 십자 광채를 준다. 전부 주면 지저분하다
     for _ in range(o.get('glints', 7)):
-        x, y = rnd.random() * w, rnd.random() * horizon * 0.8
-        L = rnd.uniform(5, 11) * unit
+        x, y = rnd.random() * w, rnd.random() * horizon * 0.85
+        L = rnd.uniform(6, 13) * unit
         for dx, dy in ((L, 0), (0, L)):
-            d.line([(x - dx, y - dy), (x + dx, y + dy)], fill=(255, 255, 255, 110),
-                   width=max(1, int(unit)))
+            d.line([(x - dx, y - dy), (x + dx, y + dy)],
+                   fill=(255, 255, 255, 95), width=max(1, int(unit)))
 
+    # --- 달 ---
     moon = o.get('moon')
     if moon:
         mx, my = w * o.get('moon_x', 0.72), h * o.get('moon_y', 0.17)
         mr = w * o.get('moon_r', 0.085)
         halo = Image.new('RGBA', (w, h), (0, 0, 0, 0))
         hd = ImageDraw.Draw(halo)
-        for i in range(40, 0, -1):
-            rr = mr * (1 + i * 0.14)
+        for i in range(60, 0, -1):
+            rr = mr * (1 + i * 0.16)
             hd.ellipse([mx - rr, my - rr, mx + rr, my + rr],
-                       fill=rgb(moon) + (int(30 * (1 - i / 40) ** 2),))
+                       fill=rgb(moon) + (int(26 * (1 - i / 60) ** 2.4),))
         img = Image.alpha_composite(img.convert('RGBA'), halo).convert('RGB')
-        d = ImageDraw.Draw(img, 'RGBA')
 
-        disc = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+        ss = 4
+        disc = Image.new('RGBA', (int(mr * 3 * ss), int(mr * 3 * ss)), (0, 0, 0, 0))
         dd = ImageDraw.Draw(disc)
-        dd.ellipse([mx - mr, my - mr, mx + mr, my + mr], fill=rgb(moon) + (255,))
+        cx = cy = mr * 1.5 * ss
+        R = mr * ss
+        dd.ellipse([cx - R, cy - R, cx + R, cy + R], fill=rgb(moon) + (255,))
+        # 크레이터. 밝은 쪽에만 아주 옅게
+        cr = random.Random(77)
+        for _ in range(14):
+            ang, dist = cr.uniform(0, 6.28), cr.uniform(0.15, 0.8) * R
+            px, py = cx + math.cos(ang) * dist, cy + math.sin(ang) * dist
+            pr = cr.uniform(0.08, 0.2) * R
+            dd.ellipse([px - pr, py - pr, px + pr, py + pr], fill=(0, 0, 0, 12))
+        disc = disc.filter(ImageFilter.GaussianBlur(R * 0.03))
         if o.get('crescent', True):
-            # 살짝 겹친 원으로 지워서 초승달을 만든다
-            off = mr * 0.55
-            dd.ellipse([mx - mr + off, my - mr - off * 0.3,
-                        mx + mr + off, my + mr - off * 0.3], fill=(0, 0, 0, 0))
-        img = Image.alpha_composite(img.convert('RGBA'), disc).convert('RGB')
+            off = R * 0.62
+            dd.ellipse([cx - R + off, cy - R - off * 0.34,
+                        cx + R + off, cy + R - off * 0.34], fill=(0, 0, 0, 0))
+        disc = disc.resize((int(mr * 3), int(mr * 3)), Image.LANCZOS)
+        img = img.convert('RGBA')
+        img.alpha_composite(disc, (int(mx - mr * 1.5), int(my - mr * 1.5)))
+        img = img.convert('RGB')
         d = ImageDraw.Draw(img, 'RGBA')
 
+    # --- 능선 ---
     ridge = o.get('ridge')
     if ridge:
-        for layer, (base_y, shade, seed) in enumerate(
-                ((0.80, 0.55, 3), (0.88, 0.28, 9), (0.95, 0.0, 17))):
-            r2 = random.Random(seed)
+        # 지평선 부근에 옅은 빛. 대기가 있는 것처럼 보이게 한다
+        glowh = int(h * 0.22)
+        hg = Image.new('RGBA', (w, glowh), (0, 0, 0, 0))
+        hgd = ImageDraw.Draw(hg)
+        for i in range(glowh):
+            hgd.line([(0, i), (w, i)],
+                     fill=rgb(o.get('haze', '#33406B')) + (int(70 * (i / glowh) ** 1.6),))
+        hg = hg.filter(ImageFilter.GaussianBlur(w * 0.03))
+        img = img.convert('RGBA')
+        img.alpha_composite(hg, (0, int(h * 0.74) - glowh))
+        img = img.convert('RGB')
+        d = ImageDraw.Draw(img, 'RGBA')
+
+        N = 240
+        layers = ((0.78, 0.30, 5), (0.86, 0.14, 11), (0.94, 0.0, 23))
+        for base_y, haze, seed in layers:
+            prof = _fbm(seed, N)
+            amp = h * (0.085 if base_y < 0.8 else 0.055)
             pts = [(0, h)]
-            x = 0.0
-            y = h * base_y
-            while x < w:
-                x += w * r2.uniform(0.06, 0.16)
-                y = h * base_y + h * r2.uniform(-0.055, 0.055)
-                pts.append((min(x, w), y))
-            pts += [(w, h)]
+            for i in range(N):
+                pts.append((w * i / (N - 1), h * base_y + prof[i] * amp))
+            pts.append((w, h))
             c = rgb(ridge)
-            c = tuple(round(v + (255 - v) * shade * 0.12) for v in c)
+            # 멀수록 하늘색이 섞여 흐릿하게 — 대기 원근
+            sky = rgb(spec[2])
+            c = tuple(round(c[k] + (sky[k] - c[k]) * haze) for k in range(3))
             d.polygon(pts, fill=c + (255,))
 
     dim = o.get('dim', 0.0)
     if dim:
         img = Image.blend(img, Image.new('RGB', (w, h), (0, 0, 0)), dim)
     return img
+
 
 
 def chat_bg(spec, w, h):
