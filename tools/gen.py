@@ -10,6 +10,7 @@ iOS 와 안드로이드는 같은 그림을 다른 형식으로 요구한다.
   iOS     @2x / @3x 두 장. 늘어나는 범위는 CSS 의 cap inset 숫자로 따로 적는다.
   Android 9-patch 한 장. 늘어나는 범위를 이미지 1픽셀 테두리에 그려 넣는다.
 """
+import colorsys
 import math
 import os
 import random
@@ -70,6 +71,24 @@ def lighten(h, f):
     return '#%02X%02X%02X' % tuple(round(v + (255 - v) * f) for v in c)
 
 
+def glow_tint(h, f):
+    """빛나는 가장자리 색. 흰쪽으로 당기지 않고 밝기만 올린다.
+
+    lighten() 은 채널마다 255 쪽으로 당기므로 어둡고 진한 색일수록 회색이 된다.
+    레드의 받은 말풍선(#3B0B16)이 채도 0.81 에서 0.09 로 떨어져 테두리가 잿빛이었다.
+    빨간 테마인데 테두리만 회색이면 빛이 아니라 덧그린 선으로 보인다.
+
+    밝은 파스텔은 원래 채도가 낮아 lighten 이어도 티가 안 났다 — 그래서 어떤
+    테마는 예쁘고 어떤 테마는 아니었다. 색상은 그대로 두고 명도만 올린다.
+    """
+    r, g, b = (v / 255.0 for v in rgb(h))
+    hh, ss, vv = colorsys.rgb_to_hsv(r, g, b)
+    vv = vv + (1.0 - vv) * f
+    ss = ss * (1.0 - f * SAT_LOSS)     # 실제 빛도 아주 밝아지면 조금은 옅어진다
+    r, g, b = colorsys.hsv_to_rgb(hh, ss, vv)
+    return '#%02X%02X%02X' % tuple(round(v * 255) for v in (r, g, b))
+
+
 def mix(a, b, f):
     """a 에서 b 쪽으로 f 만큼 끌어당긴 색."""
     ca, cb = rgb(a), rgb(b)
@@ -108,6 +127,14 @@ def vgradient(w, h, top, bottom):
 
 
 SS = 4   # 4배로 그렸다 줄여서 계단현상을 없앤다
+
+# 글로우가 밝아질 때 잃는 채도. 0 이면 색이 그대로라 형광펜처럼 뜨고,
+# 1 이면 흰색이 되어 몸통 색과 남남이 된다.
+SAT_LOSS = 0.38
+
+# 맨 위 반사광. 순백을 얼마나 글로우 색 쪽으로 당길지(TINT)와 얼마나 진하게
+# 얹을지(ALPHA). 진하면 아래 깔린 빛 띠를 덮어 위쪽만 흰 선이 된다.
+SPEC_TINT, SPEC_ALPHA = 0.60, 0.35
 
 
 def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
@@ -229,7 +256,7 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
             rp[0, y] = int(255 * (1.0 - 0.55 * (y / max(h - 1, 1)) ** 0.8))
         band = ImageChops.multiply(band, ramp.resize((w, h)))
 
-        inner = Image.new('RGBA', (w, h), rgb(lighten(base, 0.66)) + (255,))
+        inner = Image.new('RGBA', (w, h), rgb(glow_tint(base, 0.66)) + (255,))
         inner.putalpha(band.point(lambda v: min(255, int(v * 2.1))))
         out.alpha_composite(inner)
 
@@ -240,8 +267,12 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
         top = Image.new('L', (w, h), 0)
         top.paste(sp.crop((0, 0, w, spec_h)), (0, 0))
         top = ImageChops.multiply(top, mask)
-        sheen = Image.new('RGBA', (w, h), (255, 255, 255, 255))
-        sheen.putalpha(top.point(lambda v: min(255, int(v * 0.85))))
+        # 반사광은 환경의 흰빛이라 흰색이 맞지만, 순백을 진하게 얹으면 아래 깔린
+        # 빛 띠를 덮어버려 위쪽만 색이 사라진다. 진한 색 위에서 그게 흰 연필선으로
+        # 보였다. 글로우 색을 조금 섞고 옅게 얹어, 띠 위에 덧나게만 한다.
+        spec_c = mix('#FFFFFF', glow_tint(base, 0.88), SPEC_TINT)
+        sheen = Image.new('RGBA', (w, h), rgb(spec_c) + (255,))
+        sheen.putalpha(top.point(lambda v: min(255, int(v * SPEC_ALPHA))))
         out.alpha_composite(sheen)
 
     if not pad:
@@ -282,7 +313,7 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
     # 밝은 곳일수록 색이 옅어진다. 실제 빛이 그렇고, 단색으로 두면 색종이처럼 보인다
     core = acc.point(lambda v: int(255 * (v / 255.0) ** 2.2))
     halo = Image.new('RGBA', (gw, gh), rgb(base) + (255,))
-    halo.paste(Image.new('RGB', (gw, gh), rgb(lighten(base, 0.55))), (0, 0), core)
+    halo.paste(Image.new('RGB', (gw, gh), rgb(glow_tint(base, 0.55))), (0, 0), core)
     halo.putalpha(acc.point(lambda v: int(v * ga / 255)))
     halo.alpha_composite(out, (pad, pad))
     return halo
