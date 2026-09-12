@@ -1,0 +1,4 @@
+# 원본 테마가 LF라 그대로 유지한다. CRLF로 바뀌어도 카톡은 읽지만 diff가 지저분해진다
+* text=auto eol=lf
+*.png binary
+*.ktheme binary

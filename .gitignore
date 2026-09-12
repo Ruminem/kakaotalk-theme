@@ -1,0 +1,5 @@
+# 빌드 결과. build.ps1 돌리면 다시 나온다
+dist/
+
+Thumbs.db
+.DS_Store
