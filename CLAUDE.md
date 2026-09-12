@@ -60,6 +60,11 @@ powershell -ExecutionPolicy Bypass -File preview.ps1
 
 `docs/` 는 저장소에 넣는다. README 가 그 그림들로 테마 목록을 만들기 때문이다.
 
+**README 의 테마 목록도 생성물이다.** `<!-- THEMES:START -->` 와 `<!-- THEMES:END -->` 사이는
+`tools/preview.py` 가 채운다. 손으로 고치지 말고 팔레트 표의 `name` 과 `note` 를 고친다.
+마커 바깥의 글은 손으로 쓴다. 맨 위 썸네일을 누르면 해당 테마 자리로 스크롤한다 —
+GitHub 이 제목 텍스트로 앵커를 만들기 때문에 테마 이름을 바꾸면 링크도 같이 따라간다.
+
 ## 릴리스 규칙
 
 **릴리스마다 모든 테마의 `.ktheme` 과 `.apk` 를 전부 자산으로 붙인다.** 한쪽만 올리지 않는다.

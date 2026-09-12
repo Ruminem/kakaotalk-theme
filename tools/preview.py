@@ -315,6 +315,74 @@ CARD = """<section class="card">
 </section>"""
 
 
+# --- README 테마 목록 ----------------------------------------------------
+# README 의 마커 사이를 여기서 채운다. 테마를 추가할 때 README 를 따로 손보지 않으려는 것.
+# 썸네일을 누르면 해당 테마 자리로 스크롤한다 — GitHub 은 제목 텍스트로 앵커를 만든다.
+
+START = '<!-- THEMES:START -->'
+END = '<!-- THEMES:END -->'
+BASE = 'https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/'
+PER_ROW = 3
+
+
+def anchor(name):
+    """GitHub 이 제목에서 만드는 앵커. 소문자로 바꾸고 공백을 하이픈으로."""
+    return '#' + name.strip().lower().replace(' ', '-')
+
+
+def readme_block(ts):
+    out = [START, '']
+
+    # 썸네일 격자
+    out.append('<table>')
+    for i in range(0, len(ts), PER_ROW):
+        row = ts[i:i + PER_ROW]
+        out.append('<tr>')
+        for t in row:
+            out.append(
+                '<td width="33%%" align="center"><a href="%s">'
+                '<img src="docs/preview-%s-chat.png" width="190"></a></td>'
+                % (anchor(t['name']), t['key']))
+        out.append('</tr>')
+        out.append('<tr>')
+        for t in row:
+            out.append('<td align="center"><b><a href="%s">%s</a></b><br>%s</td>'
+                       % (anchor(t['name']), t['name'], t['note']))
+        out.append('</tr>')
+    out.append('</table>')
+    out.append('')
+
+    # 테마별 자세히
+    for t in ts:
+        out.append('### %s' % t['name'])
+        out.append('')
+        out.append(' '.join(
+            '<img src="docs/preview-%s-%s.png" width="200">' % (t['key'], kind)
+            for kind, _ in SHOTS))
+        out.append('')
+        out.append(t['note'] + '.')
+        out.append('')
+        out.append('[iOS 받기](%s%s.ktheme) · [Android 받기](%s%s.apk)'
+                   % (BASE, t['key'], BASE, t['key']))
+        out.append('')
+
+    out.append(END)
+    return '\n'.join(out)
+
+
+def write_readme(ts):
+    p = os.path.join(os.path.dirname(gen.DOCS), 'README.md')
+    if not os.path.exists(p):
+        return
+    s = open(p, encoding='utf-8').read()
+    if START not in s or END not in s:
+        print('README 에 마커가 없어 건너뜀')
+        return
+    head, rest = s.split(START, 1)
+    _, tail = rest.split(END, 1)
+    open(p, 'w', encoding='utf-8').write(head + readme_block(ts) + tail)
+
+
 def generate(ts):
     os.makedirs(gen.DOCS, exist_ok=True)
     cards = []
@@ -330,6 +398,7 @@ def generate(ts):
         cards.append(CARD % dict(name=t['name'], key=t['key'], chips=chips, shots=shots))
     with open(os.path.join(gen.DOCS, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(PAGE % '\n'.join(cards))
+    write_readme(ts)
 
 
 if __name__ == '__main__':

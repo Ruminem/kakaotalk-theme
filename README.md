@@ -12,11 +12,36 @@
 받는 링크는 항상 **최신 릴리스**를 가리킴. 지난 버전은 [릴리스 목록](https://github.com/Ruminem/kakaotalk-theme/releases)에 있음.
 세 번째 그림인 실행화면은 **안드로이드에만 있음** — iOS 테마 규격에는 스플래시 블록이 아예 없음.
 
+<!-- THEMES:START -->
+
+<table>
+<tr>
+<td width="33%" align="center"><a href="#먹빛-민트"><img src="docs/preview-inkmint01-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#크림-라떼"><img src="docs/preview-cream02-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#벚꽃-그늘"><img src="docs/preview-sakura03-chat.png" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><b><a href="#먹빛-민트">먹빛 민트</a></b><br>먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름</td>
+<td align="center"><b><a href="#크림-라떼">크림 라떼</a></b><br>밝은 쪽. 베이지 바탕에 브라운. 눈이 제일 안 피로한 조합임</td>
+<td align="center"><b><a href="#벚꽃-그늘">벚꽃 그늘</a></b><br>밝은 분홍. 채팅방 배경 이미지가 깔림</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="#믹스드"><img src="docs/preview-mixed04-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#오로라"><img src="docs/preview-aurora05-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#캔디-팝"><img src="docs/preview-candy06-chat.png" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><b><a href="#믹스드">믹스드</a></b><br>어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임</td>
+<td align="center"><b><a href="#오로라">오로라</a></b><br>가장 어두운 테마. 채팅방 배경에 오로라가 번짐</td>
+<td align="center"><b><a href="#캔디-팝">캔디 팝</a></b><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
+</tr>
+</table>
+
 ### 먹빛 민트
 
 <img src="docs/preview-inkmint01-list.png" width="200"> <img src="docs/preview-inkmint01-chat.png" width="200"> <img src="docs/preview-inkmint01-splash.png" width="200">
 
-먹색 바탕에 민트 포인트. 말풍선은 민트→하늘, 보라→자주 그라데이션임.
+먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름.
 
 [iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint01.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint01.apk)
 
@@ -32,7 +57,7 @@
 
 <img src="docs/preview-sakura03-list.png" width="200"> <img src="docs/preview-sakura03-chat.png" width="200"> <img src="docs/preview-sakura03-splash.png" width="200">
 
-밝은 분홍. **채팅방 배경 이미지**가 들어간 테마임.
+밝은 분홍. 채팅방 배경 이미지가 깔림.
 
 [iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura03.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura03.apk)
 
@@ -40,8 +65,7 @@
 
 <img src="docs/preview-mixed04-list.png" width="200"> <img src="docs/preview-mixed04-chat.png" width="200"> <img src="docs/preview-mixed04-splash.png" width="200">
 
-어두운 보라 바탕. **말풍선 네 칸이 전부 다른 색**임 — 보낸 것은 주황→노랑, 눌리면 민트→하늘,
-받은 것은 보라→자주, 눌리면 하늘→연두로 바뀜.
+어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임.
 
 [iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed04.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed04.apk)
 
@@ -49,7 +73,7 @@
 
 <img src="docs/preview-aurora05-list.png" width="200"> <img src="docs/preview-aurora05-chat.png" width="200"> <img src="docs/preview-aurora05-splash.png" width="200">
 
-가장 어두운 테마. 채팅방 배경에 오로라가 깔림.
+가장 어두운 테마. 채팅방 배경에 오로라가 번짐.
 
 [iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora05.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora05.apk)
 
@@ -57,9 +81,11 @@
 
 <img src="docs/preview-candy06-list.png" width="200"> <img src="docs/preview-candy06-chat.png" width="200"> <img src="docs/preview-candy06-splash.png" width="200">
 
-밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 채팅방 배경도 있음.
+밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음.
 
 [iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy06.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy06.apk)
+
+<!-- THEMES:END -->
 
 ---
 
