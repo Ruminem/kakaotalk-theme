@@ -113,9 +113,13 @@ powershell -ExecutionPolicy Bypass -File release.ps1 -Version 0.4 -NotesFile not
 - [iOS 가이드](https://t1.kakaocdn.net/kakaocorp/Service/Theme/KakaoTalk/9.2.5_UserThemeGuide_iOS.pdf)
 - [Android 가이드](https://t1.kakaocdn.net/kakaocorp/Service/Theme/KakaoTalk/9.2.5_UserThemeGuide_Android.pdf)
 
-가이드 PDF 는 폰트 인코딩이 밀려 있어서 그냥 열면 안 읽힌다.
-글자 코드에 +31 하면 영문이 나온다(`0x42`~`0x5B` → `a`~`z`, `0x40` → `_`).
-한글은 커스텀 인코딩이라 복구가 안 된다. 이름만 뽑는 용도로 쓴다.
+가이드 PDF 는 폰트 인코딩이 밀려 있어서 그냥 열면 안 읽힌다. 글자 코드에 +31 하면
+영문이 나온다(`0x42`~`0x5B` → `a`~`z`, `0x40` → `_`, `0x0E` → `-`, `0x0F` → `.`,
+`0x11`~`0x1A` → `0`~`9`). 한글은 커스텀 인코딩이라 복구가 안 된다. 이름만 뽑는 용도로 쓴다.
+
+**규격 전체는 `docs/spec.md` 에 정리해뒀다.** 새 테마를 구상하기 전에 거기서
+안 쓴 재료를 먼저 본다. 지금 안 쓰는 것은 거의 다 이미지 슬롯이다 —
+탭 아이콘 8종, 기본 프로필, 친구추가 버튼, 잠금화면 동그라미.
 
 ## 함정
 
