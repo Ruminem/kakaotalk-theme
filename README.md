@@ -25,6 +25,31 @@ build-android.ps1        → dist/android/inkmint01.apk
 위 링크는 항상 최신 릴리스를 가리킨다.
 지난 버전은 [릴리스 목록](https://github.com/Ruminem/kakaotalk-theme/releases)에서 받는다.
 
+### 폰에서 바로 받기
+
+PC 로 받아서 폰으로 옮길 필요 없다. 카메라로 찍으면 바로 내려받는다.
+
+| iOS | Android |
+|---|---|
+| <img src="docs/qr-ios.png" width="160"> | <img src="docs/qr-android.png" width="160"> |
+
+**iOS** — 받은 뒤 파일 앱 > 다운로드 에서 `inkmint01.ktheme` 을 길게 눌러 **공유 → 카카오톡**.
+카카오톡으로 파일을 건네는 이 단계는 없앨 수 없다. 테마를 받는 경로가 그것뿐이다.
+
+**Android** — 받은 뒤 알림을 눌러 설치. "출처를 알 수 없는 앱" 허용이 한 번 필요하다.
+설치 후 카톡 더보기 > 설정 > 테마 설정.
+
+### 한 번에 하고 싶으면 (iOS 단축어)
+
+단축어 앱에서 세 동작짜리 단축어를 만들면 홈 화면 아이콘 한 번으로 공유 시트까지 간다.
+
+1. **URL** — `https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint01.ktheme`
+2. **URL의 콘텐츠 가져오기**
+3. **공유 시트 보기**
+
+만든 뒤 홈 화면에 추가한다. 누르면 최신 테마를 받아서 바로 공유 시트를 띄우고,
+거기서 카카오톡만 고르면 된다. 새 버전이 나와도 링크가 `latest` 라 그대로 쓴다.
+
 ## 빌드
 
 ```powershell
