@@ -14,7 +14,7 @@ import sys
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
-from PIL import Image, ImageChops, ImageDraw, ImageFilter
+from PIL import Image, ImageChops, ImageDraw, ImageEnhance, ImageFilter
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -1097,6 +1097,9 @@ def stained(spec, w, h):
 
     조각 안을 단색으로 채우면 색종이다. 세 겹을 얹는다 — 조각마다 다른 두께(밝기),
     유리 속의 얼룩, 한쪽에서 드는 빛. 납선 옆은 그늘이 져서 조각 가운데가 떠 보인다.
+
+      backlight  역광 세기. 0 이면 달아오름·후광·빛줄기가 없다
+      rays       빛줄기 개수
     """
     gen = _g()
     o = spec[3] if len(spec) > 3 else {}
@@ -1137,7 +1140,7 @@ def stained(spec, w, h):
     for poly in polys:
         pts = [(x * S, y * S) for x, y in poly]
         c = rnd.choice(colors)
-        f = rnd.uniform(0.62, 1.12)           # 유리 두께가 조각마다 달라 밝기가 다르다
+        f = rnd.uniform(0.45, 1.15)           # 유리 두께가 조각마다 달라 밝기가 다르다
         gd.polygon(pts, fill=tuple(min(255, int(v * f)) for v in c))
         md.line(pts + [pts[0]], fill=255, width=lw, joint='curve')
     for row in V:                             # 납땜 자리. 선이 만나는 곳이 조금 도톰하다
@@ -1152,22 +1155,57 @@ def stained(spec, w, h):
     mott = mott.point(lambda v: int(228 + (v - 128) * 0.22))
     glass = ImageChops.multiply(glass, Image.merge('RGB', (mott, mott, mott)))
 
-    # 빛. 창 너머 위쪽 한 곳에서 들어온다. 아래로 갈수록 어둡다
-    lx, ly = rnd.uniform(0.25, 0.75) * w, rnd.uniform(0.05, 0.30) * h
-    R = max(w, h) * 0.95
+    # 빛. 창 뒤 위쪽 한 곳에 광원이 있다. 예전에는 빛 지도를 곱해 먼 곳을 누르기만 해서
+    # 빛이 "안 닿는 곳"만 있고 "비쳐 드는 곳"이 없었다. 역광 유리는 광원 앞 조각이 제 색을
+    # 지닌 채 달아오르고, 바로 앞은 흰빛에 가깝게 타며, 그 빛이 납선을 넘어 번진다.
+    lx, ly = rnd.uniform(0.3, 0.7) * w, rnd.uniform(0.06, 0.24) * h
     amb = o.get('ambient', 0.22)
-    lm = Image.new('L', (w, h), int(255 * amb))
-    ld = ImageDraw.Draw(lm)
-    for i in range(48, 0, -1):
-        f = i / 48
-        ld.ellipse([lx - R * f, ly - R * f, lx + R * f, ly + R * f],
-                   fill=int(255 * (amb + (1 - amb) * (1 - f) ** 1.7)))
-    lm = lm.filter(ImageFilter.GaussianBlur(w * 0.05))
-    glass = ImageChops.multiply(glass, Image.merge('RGB', (lm, lm, lm)))
+    power = o.get('backlight', 1.0)
 
-    # 납선 옆 그늘
-    shade = mask.filter(ImageFilter.GaussianBlur(lw / S * 2.2)).point(lambda v: 255 - int(v * 0.6))
-    glass = ImageChops.multiply(glass, Image.merge('RGB', (shade, shade, shade)))
+    def radial(radius, expo):
+        m = Image.new('L', (w, h), 0)
+        d = ImageDraw.Draw(m)
+        for i in range(48, 0, -1):
+            f = i / 48
+            d.ellipse([lx - radius * f, ly - radius * f, lx + radius * f, ly + radius * f],
+                      fill=int(255 * (1 - f) ** expo))
+        return m.filter(ImageFilter.GaussianBlur(w * 0.04))
+
+    def gray(m):
+        return Image.merge('RGB', (m, m, m))
+
+    near = radial(max(w, h) * 0.95, 1.7)          # 멀어질수록 어두워지는 넓은 빛
+    hot = radial(w * 0.85, 2.0)                    # 광원 앞 달아오르는 자리
+    core_m = radial(w * 0.32, 2.4)                 # 흰빛에 가깝게 타는 한가운데
+
+    raw = glass
+    lm = near.point(lambda v: int(255 * amb + v * (1 - amb)))
+    glass = ImageChops.multiply(raw, gray(lm))
+
+    # 조각 가운데가 가장자리보다 밝다. 빛이 유리를 통과해 나오는 자리라 납선에서 먼 곳이 더 탄다
+    inner = mask.filter(ImageFilter.GaussianBlur(lw / S * 7)).point(
+        lambda v: 255 - min(255, int(v * 2.2)))
+
+    # 달아오름. 제 색을 곱한 것을 screen 으로 얹으면 색상은 두고 명도만 오른다.
+    # 흰색을 얹으면 색이 빠져 뿌연 창이 된다 — 유리는 빛을 받을수록 제 색이 진해져 보인다
+    k = ImageChops.multiply(hot, inner).point(lambda v: min(255, int(v * power)))
+    lit = ImageChops.multiply(raw, gray(k))
+    glass = ImageChops.screen(glass, lit)
+    glass = ImageChops.screen(glass, lit.point(lambda v: int(v * 0.7)))
+
+    # 한가운데는 유리색이 옅게 섞인 흰빛
+    tint = tuple(int(v + (255 - v) * 0.30) for v in max(colors, key=sum))
+    cm = ImageChops.multiply(core_m, inner).point(lambda v: min(255, int(v * 0.45 * power)))
+    glass = ImageChops.screen(glass, ImageChops.multiply(Image.new('RGB', (w, h), tint), gray(cm)))
+    # 빛을 받은 유리는 색이 진해 보인다. 밝히기만 하면 광원 쪽이 우유빛으로 뿌예진다
+    vivid = ImageEnhance.Color(glass).enhance(1.0 + 0.5 * power)
+    glass = Image.composite(vivid, glass, near)
+    lit_glass = glass
+
+    # 납선 옆 그늘. 광원 앞에서는 빛이 그늘을 덮으므로 덜 진다
+    shade = mask.filter(ImageFilter.GaussianBlur(lw / S * 2.2))
+    shade = ImageChops.subtract(shade, hot.point(lambda v: int(v * 0.5)))
+    glass = ImageChops.multiply(glass, gray(shade.point(lambda v: 255 - int(v * 0.6))))
 
     # 납선. 가운데가 살짝 밝아야 납작한 먹선이 아니라 둥근 금속 띠로 보인다
     glass.paste(Image.new('RGB', (w, h), lead), (0, 0), mask)
@@ -1175,9 +1213,30 @@ def stained(spec, w, h):
     hi = tuple(min(255, int(v + (255 - v) * 0.22)) for v in lead)
     glass.paste(Image.new('RGB', (w, h), hi), (0, 0), core.point(lambda v: int(v * 0.45)))
 
-    # 번짐. 밝은 조각의 빛이 납선 위로 조금 넘어온다. 없으면 오려 붙인 판화 같다
+    # 후광. 밝은 조각의 빛이 납선 위로 넘어온다. 광원 앞에서는 납선이 빛에 먹혀 가늘어 보인다.
+    # 없으면 오려 붙인 판화 같다
     bloom = glass.filter(ImageFilter.GaussianBlur(w * 0.025))
-    glass = ImageChops.screen(glass, bloom.point(lambda v: int(v * 0.45)))
+    glass = ImageChops.screen(glass, bloom.point(lambda v: int(v * 0.18)))
+    halo = ImageChops.multiply(lit_glass.filter(ImageFilter.GaussianBlur(w * 0.03)), gray(hot))
+    glass = ImageChops.screen(glass, halo.point(lambda v: min(255, int(v * 0.5 * power))))
+
+    # 빛줄기. 광원에서 아래로 퍼지는 옅은 띠. 창 앞 공기 속의 먼지에 걸린 빛이다
+    n_rays = o.get('rays', 7)
+    if n_rays:
+        rays = Image.new('L', (w, h), 0)
+        rd = ImageDraw.Draw(rays)
+        far = h * 2.2
+        for _ in range(n_rays):
+            ang = math.radians(rnd.uniform(35, 145))
+            half = math.radians(rnd.uniform(0.8, 2.6))
+            rd.polygon([(lx, ly),
+                        (lx + math.cos(ang - half) * far, ly + math.sin(ang - half) * far),
+                        (lx + math.cos(ang + half) * far, ly + math.sin(ang + half) * far)],
+                       fill=rnd.randint(50, 110))
+        rays = rays.filter(ImageFilter.GaussianBlur(w * 0.015))
+        rays = ImageChops.multiply(rays, near)
+        glass = ImageChops.screen(glass, ImageChops.multiply(
+            Image.new('RGB', (w, h), tint), gray(rays.point(lambda v: int(v * 0.45 * power)))))
 
     dim = o.get('dim', 0.0)
     if dim:
