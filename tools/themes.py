@@ -38,7 +38,7 @@ chat_bg
   None 이면 단색. ('linear', 위, 아래) 또는 ('aurora', 바탕, [색...]) 이면 이미지를 그린다.
 """
 
-VERSION = '0.14'
+VERSION = '0.15'
 
 THEMES = [
     dict(
@@ -219,3 +219,129 @@ _add_variant('sakura03', 'sakura13', '벚꽃 그늘 v2',
                       dict(flowers=10, petals=22, bokeh=10, branch=False, dim=0.52)),
              passcode_bg=('sakura', '#FFF0F5', '#F8D3E2',
                           dict(flowers=30, petals=46, bokeh=18, branch=True, dim=0.0)))
+
+
+# --- 기본 생성 규칙 -------------------------------------------------------
+
+def standard(key, name, note, **kw):
+    """새 테마는 이 규칙으로 만든다.
+
+    1. 글로우 없음
+    2. 말풍선에 그라데이션 없음 — 단색
+    3. 말풍선 네 칸이 서로 다른 색
+    4. 배경 이미지가 세 화면에 다 있음 (목록·채팅방·잠금화면)
+    5. 아이콘 — 모든 테마에 자동으로 생성되므로 따로 할 일 없음
+
+    어기면 여기서 멈춘다. 규칙을 글로만 적어두면 다음에 만들 때 잊는다.
+    앞서 만든 테마들은 이 규칙 이전에 나온 것이라 그대로 둔다.
+    """
+    t = dict(key=key, name=name, note=note, flat=True, **kw)
+    t.pop('glow', None)
+    t.pop('bubble_style', None)
+
+    for slot in ('chat_bg', 'main_bg', 'passcode_bg'):
+        if not t.get(slot):
+            raise ValueError('%s: %s 가 없다. 배경 이미지는 세 화면에 다 있어야 한다'
+                             % (key, slot))
+
+    # 단색으로 칠할 때 쓰는 값이 네 칸 모두 달라야 한다
+    seen = {}
+    for slot in ('send', 'send_alt', 'recv', 'recv_alt'):
+        a, b = t[slot]
+        c = '#%02X%02X%02X' % tuple(
+            (int(a.lstrip('#')[i:i + 2], 16) + int(b.lstrip('#')[i:i + 2], 16)) // 2
+            for i in (0, 2, 4))
+        if c in seen:
+            raise ValueError('%s: %s 와 %s 의 말풍선 색이 같다(%s)'
+                             % (key, seen[c], slot, c))
+        seen[c] = slot
+    return t
+
+
+THEMES += [
+    standard(
+        'sea14', '바다',
+        '수평선 너머로 해가 지는 바다. 말풍선 네 칸이 산호·모래·물빛·하늘색',
+        bg='#0E1E2A', bg_deep='#081520', surface='#16303F', pressed='#1E3E51',
+        border='#27506A', text='#E6F1F7', subtext='#8FAABB',
+        accent='#FFC489', accent_dim='#D19455', on_accent='#1B2A16',
+        send=('#FF9A76', '#FF9A76'), send_alt=('#FFD6A5', '#FFD6A5'),
+        recv=('#2E6E86', '#2E6E86'), recv_alt=('#7FC4D8', '#7FC4D8'),
+        send_text='#3A1B0C', recv_text='#EAF6FA',
+        chat_bg=('sea', '#14344A', '#2E6A7E',
+                 dict(horizon=0.40, sun_x=0.72, water_top='#1E4B63',
+                      water_bottom='#0A1A26', waves=70, dim=0.30)),
+        main_bg=('sea', '#14344A', '#2E6A7E',
+                 dict(horizon=0.34, water_top='#1A4257', water_bottom='#08141D',
+                      waves=50, dim=0.45)),
+        passcode_bg=('sea', '#1B3E56', '#D98A5C',
+                     dict(horizon=0.46, sun_x=0.66, sun_y=0.72, sun='#FFD9A0',
+                          water_top='#2A5E76', water_bottom='#0A1A26', waves=80)),
+    ),
+    standard(
+        'forest15', '숲',
+        '안개 낀 침엽수 숲. 이끼·호박·하늘·흙빛 말풍선',
+        bg='#16241D', bg_deep='#0E1A15', surface='#1E322A', pressed='#284034',
+        border='#33513F', text='#E4F0E8', subtext='#93AC9D',
+        accent='#8FD6A0', accent_dim='#5FA872', on_accent='#0C1A11',
+        send=('#7CB98C', '#7CB98C'), send_alt=('#D8B06A', '#D8B06A'),
+        recv=('#2C4A3B', '#2C4A3B'), recv_alt=('#6E93A8', '#6E93A8'),
+        send_text='#10261A', recv_text='#E4F0E8',
+        chat_bg=('forest', '#20404F', '#5B8A78',
+                 dict(layers=['#1A3329', '#224134', '#2C5241'], dim=0.34)),
+        main_bg=('forest', '#1C3743', '#4F7A6A',
+                 dict(layers=['#162C23', '#1E3A2E'], dim=0.48)),
+        passcode_bg=('forest', '#27505F', '#7FB49C',
+                     dict(layers=['#1A3329', '#224134', '#2C5241', '#3A6A52'],
+                          fog='#CFE4D8')),
+    ),
+    standard(
+        'city16', '야경',
+        '창문 불빛이 켜진 도시. 네온 네 색 말풍선',
+        bg='#0F1320', bg_deep='#080B14', surface='#191F32', pressed='#232B44',
+        border='#2E3854', text='#E9EDF8', subtext='#8C96B2',
+        accent='#FFD98A', accent_dim='#CFA55E', on_accent='#1E1605',
+        send=('#FFC24D', '#FFC24D'), send_alt=('#FF6FA5', '#FF6FA5'),
+        recv=('#2A3352', '#2A3352'), recv_alt=('#4FD1D9', '#4FD1D9'),
+        send_text='#2A1C02', recv_text='#E9EDF8',
+        chat_bg=('city', '#1A2340', '#3A4A72', dict(lit=0.28, dim=0.34)),
+        main_bg=('city', '#161D36', '#2C3960', dict(lit=0.22, dim=0.48)),
+        passcode_bg=('city', '#1E2748', '#4A5A88', dict(lit=0.40)),
+    ),
+]
+
+THEMES += [
+    standard(
+        'snow17', '설원',
+        '눈 내리는 언덕. 얼음·살구·민트·라벤더 말풍선',
+        bg='#F2F6FB', bg_deep='#E7EEF7', surface='#FFFFFF', pressed='#DCE6F2',
+        border='#CBD9E8', text='#26323F', subtext='#6D7E90',
+        accent='#5C93C4', accent_dim='#3E6E9B', on_accent='#FFFFFF',
+        send=('#A8CFEE', '#A8CFEE'), send_alt=('#F7C9A8', '#F7C9A8'),
+        recv=('#FFFFFF', '#FFFFFF'), recv_alt=('#C9BDEA', '#C9BDEA'),
+        send_text='#17303F', recv_text='#26323F',
+        chat_bg=('snow', '#DCE8F5', '#F4F8FC',
+                 dict(flakes=200, hills=[(0.76, '#EDF3FA'), (0.86, '#F8FBFE')], dim=0.30)),
+        main_bg=('snow', '#E4EDF7', '#F7FAFD',
+                 dict(flakes=140, hills=[(0.82, '#F2F7FC')], dim=0.45)),
+        passcode_bg=('snow', '#C9DCEF', '#EFF5FB',
+                     dict(flakes=300, hills=[(0.70, '#E7F0F9'), (0.80, '#F3F8FC'),
+                                             (0.90, '#FBFDFE')])),
+    ),
+    standard(
+        'geo18', '도형',
+        '큰 도형이 겹친 무늬. 주황·민트·보라·하늘 말풍선',
+        bg='#FBFAF7', bg_deep='#F4F2EE', surface='#FFFFFF', pressed='#EDEAE3',
+        border='#E0DCD3', text='#2B2A27', subtext='#7A776F',
+        accent='#FF7A45', accent_dim='#D65A2A', on_accent='#FFFFFF',
+        send=('#FFA86B', '#FFA86B'), send_alt=('#6FD9BE', '#6FD9BE'),
+        recv=('#FFFFFF', '#FFFFFF'), recv_alt=('#A99BE8', '#A99BE8'),
+        send_text='#3A1B08', recv_text='#2B2A27',
+        chat_bg=('geo', '#FBFAF7', '#F2EFE8',
+                 dict(count=8, alpha_lo=18, alpha_hi=40, blur=0.012)),
+        main_bg=('geo', '#FBFAF7', '#F5F2EC',
+                 dict(count=6, alpha_lo=14, alpha_hi=30, blur=0.02)),
+        passcode_bg=('geo', '#F7F4EE', '#EDE8DE',
+                     dict(count=12, alpha_lo=30, alpha_hi=72)),
+    ),
+]

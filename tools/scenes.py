@@ -211,3 +211,217 @@ def sakura(spec, w, h):
     if dim:
         img = Image.blend(img, Image.new('RGB', (w, h), (255, 255, 255)), dim)
     return img
+
+
+# --- 바다 ---------------------------------------------------------------
+
+def sea(spec, w, h):
+    """수평선과 물결. spec = ('sea', 하늘위, 하늘아래, 옵션dict)"""
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(20260915)
+    unit = w / 500.0
+    hz = int(h * o.get('horizon', 0.46))
+
+    img = gen.vgradient(w, hz, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGBA')
+    full = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+    full.alpha_composite(img)
+
+    # 해
+    sun_c = o.get('sun', '#FFD9A0')
+    sx, sy, sr = w * o.get('sun_x', 0.7), hz * o.get('sun_y', 0.55), w * 0.075
+    full.alpha_composite(*_soft_blob(sr * 3.2, gen.rgb(sun_c) + (60,), sr * 1.1, sx, sy))
+    ImageDraw.Draw(full).ellipse([sx - sr, sy - sr, sx + sr, sy + sr],
+                                 fill=gen.rgb(sun_c) + (255,))
+
+    water = gen.vgradient(w, h - hz, gen.rgb(o.get('water_top', '#2E5F7A')),
+                          gen.rgb(o.get('water_bottom', '#12293A'))).convert('RGBA')
+    full.alpha_composite(water, (0, hz))
+
+    d = ImageDraw.Draw(full)
+    # 물결. 아래로 갈수록 굵고 성기게
+    for i in range(o.get('waves', 60)):
+        t = rnd.random()
+        y = hz + (h - hz) * (t ** 1.5)
+        ln = rnd.uniform(0.05, 0.22) * w * (0.5 + t)
+        x = rnd.random() * w
+        a = int(70 + 90 * (1 - t))
+        d.line([(x, y), (x + ln, y)], fill=(255, 255, 255, a),
+               width=max(1, int((1 + t * 2.2) * unit)))
+    # 해가 비친 길
+    for i in range(26):
+        t = i / 25
+        y = hz + (h - hz) * (t ** 1.6)
+        ln = w * (0.03 + 0.10 * t) * rnd.uniform(0.5, 1.3)
+        d.line([(sx - ln / 2, y), (sx + ln / 2, y)],
+               fill=gen.rgb(sun_c) + (int(120 * (1 - t)),),
+               width=max(1, int((1 + t * 2) * unit)))
+
+    img = full.convert('RGB')
+    dim = o.get('dim', 0.0)
+    if dim:
+        img = Image.blend(img, Image.new('RGB', (w, h), o.get('dim_to', (0, 0, 0))), dim)
+    return img
+
+
+# --- 숲 -----------------------------------------------------------------
+
+def forest(spec, w, h):
+    """겹쳐진 나무 실루엣과 안개. spec = ('forest', 위색, 아래색, 옵션dict)"""
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(20260916)
+    unit = w / 500.0
+    img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGBA')
+
+    layers = o.get('layers', ['#1E3A2E', '#27503E', '#33654D', '#3F7A5C'])
+    for li, col in enumerate(layers):
+        t = li / max(len(layers) - 1, 1)
+        base_y = h * (0.42 + 0.16 * t)
+        d = ImageDraw.Draw(img)
+        x = -w * 0.05
+        while x < w * 1.05:
+            tw = rnd.uniform(0.05, 0.11) * w * (0.7 + t * 0.8)
+            th = rnd.uniform(0.9, 1.5) * tw * 3.2
+            top = base_y - th
+            # 침엽수: 삼각형 세 겹
+            for k in range(3):
+                f = 1 - k * 0.24
+                cy = top + th * (0.18 + k * 0.26)
+                d.polygon([(x + tw / 2, top + th * k * 0.22),
+                           (x + tw * (0.5 - 0.62 * f), cy + th * 0.30),
+                           (x + tw * (0.5 + 0.62 * f), cy + th * 0.30)],
+                          fill=gen.rgb(col) + (255,))
+            d.rectangle([x + tw * 0.45, base_y - th * 0.08, x + tw * 0.55, base_y + 2],
+                        fill=gen.rgb(col) + (255,))
+            x += tw * rnd.uniform(0.55, 0.95)
+        # 층 사이에 안개를 끼워 원근을 만든다
+        if li < len(layers) - 1:
+            fog = Image.new('RGBA', (w, h), gen.rgb(o.get('fog', '#DCE9E2')) + (0,))
+            fd = ImageDraw.Draw(fog)
+            band = int(h * 0.14)
+            for i in range(band):
+                fd.line([(0, base_y - band + i), (w, base_y - band + i)],
+                        fill=gen.rgb(o.get('fog', '#DCE9E2')) + (int(60 * (i / band)),))
+            img.alpha_composite(fog.filter(ImageFilter.GaussianBlur(w * 0.02)))
+
+    img = img.convert('RGB')
+    dim = o.get('dim', 0.0)
+    if dim:
+        img = Image.blend(img, Image.new('RGB', (w, h), o.get('dim_to', (0, 0, 0))), dim)
+    return img
+
+
+# --- 도시 ---------------------------------------------------------------
+
+def city(spec, w, h):
+    """건물 실루엣과 창문 불빛. spec = ('city', 하늘위, 하늘아래, 옵션dict)"""
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(20260917)
+    unit = w / 500.0
+    img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGBA')
+
+    win_c = gen.rgb(o.get('window', '#FFD98A'))
+    for li, (col, base, wf) in enumerate(o.get('layers', [
+            ('#1A2238', 0.62, 0.9), ('#121829', 0.74, 1.0), ('#0B0F1C', 0.86, 1.1)])):
+        d = ImageDraw.Draw(img)
+        x = -w * 0.04
+        base_y = h * base
+        while x < w * 1.04:
+            bw = rnd.uniform(0.06, 0.14) * w * wf
+            bh = rnd.uniform(0.10, 0.34) * h
+            top = base_y - bh
+            d.rectangle([x, top, x + bw, h], fill=gen.rgb(col) + (255,))
+            if li >= 1:                      # 앞줄 건물에만 창문
+                cols = max(2, int(bw / (11 * unit)))
+                rows = max(2, int(bh / (15 * unit)))
+                for cx in range(cols):
+                    for cy in range(rows):
+                        if rnd.random() > o.get('lit', 0.34):
+                            continue
+                        px = x + bw * (cx + 0.28) / cols
+                        py = top + bh * (cy + 0.32) / rows
+                        d.rectangle([px, py, px + 4 * unit, py + 6 * unit],
+                                    fill=win_c + (rnd.randint(120, 235),))
+            x += bw * rnd.uniform(1.02, 1.3)
+
+    img = img.convert('RGB')
+    dim = o.get('dim', 0.0)
+    if dim:
+        img = Image.blend(img, Image.new('RGB', (w, h), o.get('dim_to', (0, 0, 0))), dim)
+    return img
+
+
+# --- 눈 -----------------------------------------------------------------
+
+def snow(spec, w, h):
+    """내리는 눈과 언덕. spec = ('snow', 위색, 아래색, 옵션dict)"""
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(20260918)
+    unit = w / 500.0
+    img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGBA')
+
+    for base, col in o.get('hills', [(0.72, '#E8EEF6'), (0.82, '#F3F7FC')]):
+        prof = gen._fbm(int(base * 100), 200)
+        pts = [(0, h)]
+        for i in range(200):
+            pts.append((w * i / 199, h * base + prof[i] * h * 0.045))
+        pts.append((w, h))
+        ImageDraw.Draw(img).polygon(pts, fill=gen.rgb(col) + (255,))
+
+    d = ImageDraw.Draw(img)
+    for _ in range(o.get('flakes', 260)):
+        x, y = rnd.random() * w, rnd.random() * h
+        r = rnd.uniform(1.0, 3.4) * unit
+        a = rnd.randint(90, 240)
+        d.ellipse([x - r, y - r, x + r, y + r], fill=(255, 255, 255, a))
+        if r > 2.6 * unit:                   # 큰 눈송이는 살짝 흐리게
+            img.alpha_composite(*_soft_blob(r * 2.2, (255, 255, 255, 40), r, x, y))
+
+    img = img.convert('RGB')
+    dim = o.get('dim', 0.0)
+    if dim:
+        img = Image.blend(img, Image.new('RGB', (w, h), o.get('dim_to', (255, 255, 255))), dim)
+    return img
+
+
+# --- 도형 ---------------------------------------------------------------
+
+def geo(spec, w, h):
+    """큰 도형 몇 개를 겹친 배경. 그림이라기보다 무늬에 가깝다.
+
+    spec = ('geo', 위색, 아래색, 옵션dict)
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(20260919)
+    img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGBA')
+    pal = o.get('colors', ['#FF8A5B', '#5BE0B4', '#7C6BE0'])
+
+    for _ in range(o.get('count', 9)):
+        c = gen.rgb(rnd.choice(pal))
+        a = rnd.randint(o.get('alpha_lo', 26), o.get('alpha_hi', 64))
+        r = rnd.uniform(0.14, 0.42) * w
+        x, y = rnd.uniform(-0.1, 1.1) * w, rnd.uniform(-0.05, 1.05) * h
+        lay = Image.new('RGBA', (int(r * 2), int(r * 2)), (0, 0, 0, 0))
+        ld = ImageDraw.Draw(lay)
+        kind = rnd.random()
+        if kind < 0.45:
+            ld.ellipse([0, 0, r * 2 - 1, r * 2 - 1], fill=c + (a,))
+        elif kind < 0.8:
+            ld.rounded_rectangle([0, 0, r * 2 - 1, r * 2 - 1],
+                                 radius=int(r * 0.3), fill=c + (a,))
+        else:
+            ld.polygon([(r, 0), (r * 2 - 1, r * 1.8), (0, r * 1.8)], fill=c + (a,))
+        lay = lay.rotate(rnd.uniform(0, 360), expand=True, resample=Image.BICUBIC)
+        img.alpha_composite(lay, (int(x - lay.size[0] / 2), int(y - lay.size[1] / 2)))
+
+    if o.get('blur', 0):
+        img = img.filter(ImageFilter.GaussianBlur(w * o['blur']))
+    img = img.convert('RGB')
+    dim = o.get('dim', 0.0)
+    if dim:
+        img = Image.blend(img, Image.new('RGB', (w, h), o.get('dim_to', (255, 255, 255))), dim)
+    return img

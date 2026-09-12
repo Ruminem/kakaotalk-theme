@@ -57,9 +57,23 @@
 </tr>
 <tr>
 <td width="33%" align="center"><a href="#심야"><img src="assets/preview-midnight11-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#바다"><img src="assets/preview-sea14-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#숲"><img src="assets/preview-forest15-chat.png" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><img src="assets/icon-midnight11.png" width="20" valign="middle"> <b><a href="#심야">심야</a></b><br>밤하늘을 그려 넣은 테마. 잠금화면에 달과 능선이 나옴</td>
+<td align="center"><img src="assets/icon-sea14.png" width="20" valign="middle"> <b><a href="#바다">바다</a></b><br>수평선 너머로 해가 지는 바다. 말풍선 네 칸이 산호·모래·물빛·하늘색</td>
+<td align="center"><img src="assets/icon-forest15.png" width="20" valign="middle"> <b><a href="#숲">숲</a></b><br>안개 낀 침엽수 숲. 이끼·호박·하늘·흙빛 말풍선</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="#야경"><img src="assets/preview-city16-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#설원"><img src="assets/preview-snow17-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#도형"><img src="assets/preview-geo18-chat.png" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/icon-city16.png" width="20" valign="middle"> <b><a href="#야경">야경</a></b><br>창문 불빛이 켜진 도시. 네온 네 색 말풍선</td>
+<td align="center"><img src="assets/icon-snow17.png" width="20" valign="middle"> <b><a href="#설원">설원</a></b><br>눈 내리는 언덕. 얼음·살구·민트·라벤더 말풍선</td>
+<td align="center"><img src="assets/icon-geo18.png" width="20" valign="middle"> <b><a href="#도형">도형</a></b><br>큰 도형이 겹친 무늬. 주황·민트·보라·하늘 말풍선</td>
 </tr>
 </table>
 
@@ -166,6 +180,46 @@
 <img src="assets/preview-midnight11-list.png" width="200"> <img src="assets/preview-midnight11-chat.png" width="200"> <img src="assets/preview-midnight11-passcode.png" width="200"> <img src="assets/preview-midnight11-splash.png" width="200">
 
 밤하늘을 그려 넣은 테마. 잠금화면에 달과 능선이 나옴.
+
+<a name="바다"></a>
+
+### <img src="assets/icon-sea14.png" width="26" valign="middle"> 바다 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea14.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea14.apk)</sub>
+
+<img src="assets/preview-sea14-list.png" width="200"> <img src="assets/preview-sea14-chat.png" width="200"> <img src="assets/preview-sea14-passcode.png" width="200"> <img src="assets/preview-sea14-splash.png" width="200">
+
+수평선 너머로 해가 지는 바다. 말풍선 네 칸이 산호·모래·물빛·하늘색.
+
+<a name="숲"></a>
+
+### <img src="assets/icon-forest15.png" width="26" valign="middle"> 숲 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest15.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest15.apk)</sub>
+
+<img src="assets/preview-forest15-list.png" width="200"> <img src="assets/preview-forest15-chat.png" width="200"> <img src="assets/preview-forest15-passcode.png" width="200"> <img src="assets/preview-forest15-splash.png" width="200">
+
+안개 낀 침엽수 숲. 이끼·호박·하늘·흙빛 말풍선.
+
+<a name="야경"></a>
+
+### <img src="assets/icon-city16.png" width="26" valign="middle"> 야경 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city16.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city16.apk)</sub>
+
+<img src="assets/preview-city16-list.png" width="200"> <img src="assets/preview-city16-chat.png" width="200"> <img src="assets/preview-city16-passcode.png" width="200"> <img src="assets/preview-city16-splash.png" width="200">
+
+창문 불빛이 켜진 도시. 네온 네 색 말풍선.
+
+<a name="설원"></a>
+
+### <img src="assets/icon-snow17.png" width="26" valign="middle"> 설원 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow17.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow17.apk)</sub>
+
+<img src="assets/preview-snow17-list.png" width="200"> <img src="assets/preview-snow17-chat.png" width="200"> <img src="assets/preview-snow17-passcode.png" width="200"> <img src="assets/preview-snow17-splash.png" width="200">
+
+눈 내리는 언덕. 얼음·살구·민트·라벤더 말풍선.
+
+<a name="도형"></a>
+
+### <img src="assets/icon-geo18.png" width="26" valign="middle"> 도형 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo18.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo18.apk)</sub>
+
+<img src="assets/preview-geo18-list.png" width="200"> <img src="assets/preview-geo18-chat.png" width="200"> <img src="assets/preview-geo18-passcode.png" width="200"> <img src="assets/preview-geo18-splash.png" width="200">
+
+큰 도형이 겹친 무늬. 주황·민트·보라·하늘 말풍선.
 
 <!-- THEMES:END -->
 
