@@ -11,7 +11,7 @@ CSS, `colors.xml`, `AndroidManifest.xml`, 말풍선 그림, 미리보기가 전�
 ```
 tools/themes.py     ← 팔레트 표. 여기만 고친다
 tools/gen.py        → build-src/<테마>/{ios,android}/
-tools/preview.py    → docs/preview-*.png, docs/index.html
+tools/preview.py    → assets/*.png, docs/index.html
 build.ps1           → dist/iOS/*.ktheme, dist/android/*.apk
 release.ps1         → 태그 + 릴리스 자산 첨부
 ```
@@ -67,7 +67,8 @@ powershell -ExecutionPolicy Bypass -File preview.ps1
 말풍선 사이도 벌어진다. 한때 미리보기가 글로우를 말풍선 바깥에 그렸는데,
 그래서 폰에서만 글자가 몸통에 붙고 간격이 벌어지는 걸 못 잡았다.
 
-`docs/` 는 저장소에 넣는다. README 가 그 그림들로 테마 목록을 만들기 때문이다.
+`assets/` 와 `docs/` 는 저장소에 넣는다. README 가 그 그림들로 테마 목록을 만들기 때문이다.
+**그림은 `assets/`, 글은 `docs/`** 로 나눈다 — 문서 폴더에 PNG 수십 장이 섞이면 뭐가 있는지 안 보인다.
 
 **README 의 테마 목록도 생성물이다.** `<!-- THEMES:START -->` 와 `<!-- THEMES:END -->` 사이는
 `tools/preview.py` 가 채운다. 손으로 고치지 말고 팔레트 표의 `name` 과 `note` 를 고친다.

@@ -11,7 +11,7 @@ import qrcode
 from qrcode.image.styledpil import StyledPilImage
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DOCS = os.path.join(ROOT, 'docs')
+ASSETS = os.path.join(ROOT, 'assets')
 # 테마가 여러 개라 특정 파일이 아니라 릴리스 목록으로 보낸다.
 # 거기서 원하는 테마를 고르게 하는 편이 낫다.
 BASE = 'https://github.com/Ruminem/kakaotalk-theme/releases/latest'
@@ -23,7 +23,7 @@ TARGETS = {
 
 
 def main():
-    os.makedirs(DOCS, exist_ok=True)
+    os.makedirs(ASSETS, exist_ok=True)
     for name, url in TARGETS.items():
         # 흑백 그대로 둔다. 테마 색을 입히면 예쁘지만 인식률이 떨어진다
         qr = qrcode.QRCode(box_size=8, border=2,
@@ -31,7 +31,7 @@ def main():
         qr.add_data(url)
         qr.make(fit=True)
         img = qr.make_image(fill_color='black', back_color='white')
-        p = os.path.join(DOCS, name)
+        p = os.path.join(ASSETS, name)
         img.save(p)
         print(f'{os.path.relpath(p, ROOT):24} {os.path.getsize(p):>7,} bytes  {url}')
 

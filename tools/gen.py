@@ -969,7 +969,8 @@ def gen_android(t, root, code):
 
 
 # 미리보기와 갤러리는 tools/preview.py 가 만든다
-DOCS = os.path.join(ROOT, 'docs')
+DOCS = os.path.join(ROOT, 'docs')        # 문서만 — spec.md, index.html
+ASSETS = os.path.join(ROOT, 'assets')    # 생성된 그림 — 미리보기, 아이콘, QR
 
 
 def main():
@@ -977,6 +978,7 @@ def main():
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
     os.makedirs(DOCS, exist_ok=True)
+    os.makedirs(ASSETS, exist_ok=True)
     for t in themes.THEMES:
         root = os.path.join(OUT, t['key'])
         gen_ios(t, os.path.join(root, 'ios'))

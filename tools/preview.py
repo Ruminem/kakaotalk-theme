@@ -25,6 +25,8 @@ from PIL import Image, ImageDraw, ImageFont
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gen  # noqa: E402
 
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 rgb = gen.rgb
 W, H = 460, 820
 HEAD, FOOT = 96, 100
@@ -422,12 +424,12 @@ def readme_block(ts):
         for t in row:
             out.append(
                 '<td width="33%%" align="center"><a href="%s">'
-                '<img src="docs/preview-%s-chat.png" width="190"></a></td>'
+                '<img src="assets/preview-%s-chat.png" width="190"></a></td>'
                 % (anchor(t['name']), t['key']))
         out.append('</tr>')
         out.append('<tr>')
         for t in row:
-            out.append('<td align="center"><img src="docs/icon-%s.png" width="20" '
+            out.append('<td align="center"><img src="assets/icon-%s.png" width="20" '
                        'valign="middle"> <b><a href="%s">%s</a></b><br>%s</td>'
                        % (t['key'], anchor(t['name']), t['name'], t['note']))
         out.append('</tr>')
@@ -440,13 +442,13 @@ def readme_block(ts):
         # 링크 글자까지 슬러그에 섞여 썸네일 점프가 깨진다. 앵커를 따로 박아 고정한다.
         out.append('<a name="%s"></a>' % anchor(t['name']).lstrip('#'))
         out.append('')
-        out.append('### <img src="docs/icon-%s.png" width="26" valign="middle"> '
+        out.append('### <img src="assets/icon-%s.png" width="26" valign="middle"> '
                    '%s &nbsp; <sub>[iOS 받기](%s%s.ktheme) · '
                    '[Android 받기](%s%s.apk)</sub>'
                    % (t['key'], t['name'], BASE, t['key'], BASE, t['key']))
         out.append('')
         out.append(' '.join(
-            '<img src="docs/preview-%s-%s.png" width="200">' % (t['key'], kind)
+            '<img src="assets/preview-%s-%s.png" width="200">' % (t['key'], kind)
             for kind, _ in SHOTS))
         out.append('')
         out.append(t['note'] + '.')
@@ -457,7 +459,7 @@ def readme_block(ts):
 
 
 def write_readme(ts):
-    p = os.path.join(os.path.dirname(gen.DOCS), 'README.md')
+    p = os.path.join(ROOT_DIR, 'README.md')
     if not os.path.exists(p):
         return
     s = open(p, encoding='utf-8').read()
@@ -470,18 +472,18 @@ def write_readme(ts):
 
 
 def generate(ts):
-    os.makedirs(gen.DOCS, exist_ok=True)
+    os.makedirs(gen.ASSETS, exist_ok=True)
     cards = []
     for t in ts:
-        gen.icon(t, 128).save(os.path.join(gen.DOCS, 'icon-%s.png' % t['key']),
+        gen.icon(t, 128).save(os.path.join(gen.ASSETS, 'icon-%s.png' % t['key']),
                               optimize=True)
         for kind, draw in (('list', chat_list), ('chat', chat),
                            ('passcode', passcode), ('splash', splash)):
-            draw(t).save(os.path.join(gen.DOCS, 'preview-%s-%s.png' % (t['key'], kind)),
+            draw(t).save(os.path.join(gen.ASSETS, 'preview-%s-%s.png' % (t['key'], kind)),
                          optimize=True)
         chips = ''.join('<span class="chip" style="background:%s" title="%s"></span>'
                         % (t[k], k) for k in ('bg', 'bg_deep', 'surface', 'accent', 'text'))
-        shots = ''.join('<figure><img src="preview-%s-%s.png" alt="%s %s">'
+        shots = ''.join('<figure><img src="../assets/preview-%s-%s.png" alt="%s %s">'
                         '<figcaption>%s</figcaption></figure>'
                         % (t['key'], kind, t['name'], label, label) for kind, label in SHOTS)
         cards.append(CARD % dict(name=t['name'], key=t['key'], chips=chips, shots=shots))
