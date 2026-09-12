@@ -393,8 +393,8 @@ CARD = """<section class="card">
   <h2>%(name)s <small>%(key)s</small></h2>
   <div class="chips">%(chips)s</div>
   <div class="shots">%(shots)s</div>
-  <p class="dl"><a href="../dist/iOS/%(key)s.ktheme">iOS .ktheme</a> &middot;
-     <a href="../dist/android/%(key)s.apk">Android .apk</a></p>
+  <p class="dl"><a href="../dist/iOS/%(slug)s.ktheme">iOS .ktheme</a> &middot;
+     <a href="../dist/android/%(slug)s.apk">Android .apk</a></p>
 </section>"""
 
 
@@ -498,7 +498,7 @@ def readme_block(ts):
                            '<a href="%s%s.ktheme">iOS</a> · <a href="%s%s.apk">Android</a>'
                            '</td>'
                            % (cell, m['key'], W_VARIANT, m['variant'], m['note'],
-                              BASE, m['key'], BASE, m['key']))
+                              BASE, T.file_slug(m), BASE, T.file_slug(m)))
             out.append('</tr>')
         out.append('</table>')
         out.append('')
@@ -547,7 +547,9 @@ def generate(ts):
         shots = ''.join('<figure><img src="../assets/preview-%s-%s.png" alt="%s %s">'
                         '<figcaption>%s</figcaption></figure>'
                         % (t['key'], kind, t['name'], label, label) for kind, label in SHOTS)
-        cards.append(CARD % dict(name=t['name'], key=t['key'], chips=chips, shots=shots))
+        import themes as T2
+        cards.append(CARD % dict(name=t['name'], key=t['key'],
+                                 slug=T2.file_slug(t), chips=chips, shots=shots))
     with open(os.path.join(gen.DOCS, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(PAGE % '\n'.join(cards))
     write_readme(ts)

@@ -599,7 +599,7 @@ ManifestStyle
     -kakaotalk-theme-name: '{name}';
     -kakaotalk-theme-version: '{version}';
     -kakaotalk-author-name: 'Ruminem';
-    -kakaotalk-theme-id: 'com.kakao.talk.theme.{key}';
+    -kakaotalk-theme-id: 'com.kakao.talk.theme.{pkg}';
 }}
 
 /* 탭바. 아이콘 8종은 아직 카톡 기본값이다 */
@@ -819,6 +819,7 @@ def gen_ios(t, root):
     ca = t.get('cell_alpha', 1.0)
     fields = dict(t)
     fields.update(derived(t))          # 눌림 상태 색
+    fields['pkg'] = themes.pkg_slug(t)
     fields.pop('cell_alpha', None)          # 아래에서 문자열로 다시 넣는다
     ins = '%dpx %dpx %dpx %dpx' % (INSET_V + pad, INSET_H + pad,
                                   INSET_V + pad, INSET_H + pad)
@@ -840,7 +841,7 @@ MANIFEST = """<?xml version="1.0" encoding="utf-8"?>
   tools/themes.py 에서 생성된다.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kakao.talk.theme.{key}"
+    package="com.kakao.talk.theme.{pkg}"
     android:versionCode="{code}"
     android:versionName="{version}">
 
@@ -923,7 +924,8 @@ def gen_android(t, root, code):
     os.makedirs(draw, exist_ok=True)
 
     with open(os.path.join(root, 'AndroidManifest.xml'), 'w', encoding='utf-8') as f:
-        f.write(MANIFEST.format(key=t['key'], version=themes.VERSION, code=code))
+        f.write(MANIFEST.format(pkg=themes.pkg_slug(t), version=themes.VERSION,
+                                code=code))
 
     with open(os.path.join(values, 'strings.xml'), 'w', encoding='utf-8') as f:
         f.write('<?xml version="1.0" encoding="utf-8"?>\n<resources>\n'
@@ -984,12 +986,14 @@ def main():
     os.makedirs(DOCS, exist_ok=True)
     os.makedirs(ASSETS, exist_ok=True)
     for t in themes.THEMES:
-        root = os.path.join(OUT, t['key'])
+        # 폴더 이름이 곧 배포 파일 이름이 된다. 빌드 스크립트가 폴더명을 그대로 쓴다.
+        root = os.path.join(OUT, themes.file_slug(t))
         gen_ios(t, os.path.join(root, 'ios'))
         gen_android(t, os.path.join(root, 'android'), code=version_code(t))
         n = sum(len(f) for _, _, f in os.walk(root))
         extra = '  + 채팅방 배경' if t['chat_bg'] else ''
-        print('%-12s %-9s 파일 %2d개%s' % (t['key'], t['name'], n, extra))
+        print('%-18s %-14s 파일 %2d개%s'
+              % (themes.file_slug(t), t['name'], n, extra))
     print('\n%d 개 테마 -> build-src/' % len(themes.THEMES))
     preview.generate(themes.THEMES)
     print('미리보기 -> docs/index.html')

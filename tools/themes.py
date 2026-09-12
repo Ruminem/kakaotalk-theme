@@ -38,7 +38,9 @@ chat_bg
   None 이면 단색. ('linear', 위, 아래) 또는 ('aurora', 바탕, [색...]) 이면 이미지를 그린다.
 """
 
-VERSION = '0.16'
+import re
+
+VERSION = '0.17'
 
 THEMES = [
     dict(
@@ -451,3 +453,45 @@ THEMES += quartet(
      '말풍선이 네온처럼 빛남',
      '도시 배경 위에 네온 말풍선까지'],
     keys=['city19', 'city16', 'city20', 'city21'])
+
+
+# --- 배포 파일 이름 -------------------------------------------------------
+# city21.ktheme 은 뭐가 뭔지 알 수 없다. 계열과 변형이 드러나게 바꾼다.
+# 키(city21)는 그대로 둔다 — 안드로이드 패키지 이름과 versionCode 가 거기서 나오고,
+# 그걸 바꾸면 이미 깐 사람이 업데이트를 못 받는다. 파일 이름만 따로 만든다.
+
+VARIANT_SLUG = {
+    '기본': 'basic',
+    '배경': 'image',
+    '글로우': 'glow',
+    '글로우+배경': 'glow-image',
+    '벚꽃 배경': 'image',
+    '사탕 배경': 'image',
+    '라이트': 'light',
+    '다크': 'dark',
+}
+
+
+def file_slug(t):
+    """배포 파일 이름. 예: city-glow-image
+
+    URL 에 들어가므로 영문으로 쓴다. 한글은 퍼센트 인코딩돼서 링크가 지저분해진다.
+    """
+    fam, var = _fam_of(t)
+    base = re.sub(r'\d+$', '', t['key'])            # city21 -> city
+    tail = VARIANT_SLUG.get(var)
+    if not tail:
+        raise ValueError('%s: 변형 "%s" 의 파일 이름 조각이 VARIANT_SLUG 에 없다'
+                         % (t['key'], var))
+    return '%s-%s' % (base, tail)
+
+
+def pkg_slug(t):
+    """패키지 이름 / iOS 테마 ID 에 들어갈 조각. 예: city_glow_image
+
+    파일 이름과 같은 말을 쓰되 하이픈을 밑줄로 바꾼다 —
+    안드로이드 패키지 이름은 자바 식별자 규칙을 따라서 하이픈을 못 쓴다.
+
+    키(city21)는 이제 versionCode 를 매기는 번호로만 쓴다. 겉으로 드러나지 않는다.
+    """
+    return file_slug(t).replace('-', '_')
