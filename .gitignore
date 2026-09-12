@@ -8,3 +8,7 @@ theme.keystore
 
 Thumbs.db
 .DS_Store
+
+# 파이썬 바이트코드
+__pycache__/
+*.pyc
