@@ -11,6 +11,7 @@ iOS 와 안드로이드는 같은 그림을 다른 형식으로 요구한다.
   Android 9-patch 한 장. 늘어나는 범위를 이미지 1픽셀 테두리에 그려 넣는다.
 """
 import os
+import re
 import shutil
 import sys
 
@@ -528,6 +529,21 @@ COLORS = [
 ]
 
 
+def version_code(t):
+    """안드로이드 versionCode.
+
+    목록 순서로 매기면 안 된다. 테마 순서를 바꾸는 순간 번호가 내려가는 테마가 생기고,
+    안드로이드는 versionCode 가 낮아지면 설치를 거부한다(다운그레이드로 본다).
+
+    그래서 키 끝의 번호와 테마 버전으로 만든다. 키 번호는 안 바뀌고 버전은 올라가기만 한다.
+    mixed09 + 0.8 -> 9 * 1000 + 8 = 9008.
+    """
+    m = re.search(r'(\d+)$', t['key'])
+    no = int(m.group(1)) if m else 1
+    major, _, minor = themes.VERSION.partition('.')
+    return no * 1000 + int(major) * 100 + int(minor or 0)
+
+
 def gen_android(t, root, code):
     values = os.path.join(root, 'res', 'values')
     draw = os.path.join(root, 'res', 'drawable-xxhdpi')
@@ -588,10 +604,10 @@ def main():
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
     os.makedirs(DOCS, exist_ok=True)
-    for i, t in enumerate(themes.THEMES, start=1):
+    for t in themes.THEMES:
         root = os.path.join(OUT, t['key'])
         gen_ios(t, os.path.join(root, 'ios'))
-        gen_android(t, os.path.join(root, 'android'), code=i)
+        gen_android(t, os.path.join(root, 'android'), code=version_code(t))
         n = sum(len(f) for _, _, f in os.walk(root))
         extra = '  + 채팅방 배경' if t['chat_bg'] else ''
         print('%-12s %-9s 파일 %2d개%s' % (t['key'], t['name'], n, extra))

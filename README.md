@@ -27,29 +27,29 @@
 </tr>
 <tr>
 <td width="33%" align="center"><a href="#믹스드"><img src="docs/preview-mixed04-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#믹스드-v2"><img src="docs/preview-mixed09-chat.png" width="190"></a></td>
 <td width="33%" align="center"><a href="#오로라"><img src="docs/preview-aurora05-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#캔디-팝"><img src="docs/preview-candy06-chat.png" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><b><a href="#믹스드">믹스드</a></b><br>어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임</td>
-<td align="center"><b><a href="#오로라">오로라</a></b><br>가장 어두운 테마. 채팅방 배경에 오로라가 번짐</td>
-<td align="center"><b><a href="#캔디-팝">캔디 팝</a></b><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
-</tr>
-<tr>
-<td width="33%" align="center"><a href="#리퀴드-글래스"><img src="docs/preview-glass07-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#리퀴드-글래스-다크"><img src="docs/preview-glass08-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#믹스드-v2"><img src="docs/preview-mixed09-chat.png" width="190"></a></td>
-</tr>
-<tr>
-<td align="center"><b><a href="#리퀴드-글래스">리퀴드 글래스</a></b><br>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</td>
-<td align="center"><b><a href="#리퀴드-글래스-다크">리퀴드 글래스 다크</a></b><br>같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림</td>
 <td align="center"><b><a href="#믹스드-v2">믹스드 v2</a></b><br>믹스드에 글로우를 얹은 것. 말풍선마다 자기 색으로 빛남</td>
+<td align="center"><b><a href="#오로라">오로라</a></b><br>가장 어두운 테마. 채팅방 배경에 오로라가 번짐</td>
 </tr>
 <tr>
+<td width="33%" align="center"><a href="#캔디-팝"><img src="docs/preview-candy06-chat.png" width="190"></a></td>
 <td width="33%" align="center"><a href="#캔디-팝-v2"><img src="docs/preview-candy10-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#리퀴드-글래스"><img src="docs/preview-glass07-chat.png" width="190"></a></td>
 </tr>
 <tr>
+<td align="center"><b><a href="#캔디-팝">캔디 팝</a></b><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
 <td align="center"><b><a href="#캔디-팝-v2">캔디 팝 v2</a></b><br>캔디 팝에 글로우를 얹은 것. 밝은 바탕이라 빛이 은은하게 걸림</td>
+<td align="center"><b><a href="#리퀴드-글래스">리퀴드 글래스</a></b><br>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="#리퀴드-글래스-다크"><img src="docs/preview-glass08-chat.png" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><b><a href="#리퀴드-글래스-다크">리퀴드 글래스 다크</a></b><br>같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림</td>
 </tr>
 </table>
 
@@ -85,6 +85,14 @@
 
 [iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed04.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed04.apk)
 
+### 믹스드 v2
+
+<img src="docs/preview-mixed09-list.png" width="200"> <img src="docs/preview-mixed09-chat.png" width="200"> <img src="docs/preview-mixed09-splash.png" width="200">
+
+믹스드에 글로우를 얹은 것. 말풍선마다 자기 색으로 빛남.
+
+[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed09.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed09.apk)
+
 ### 오로라
 
 <img src="docs/preview-aurora05-list.png" width="200"> <img src="docs/preview-aurora05-chat.png" width="200"> <img src="docs/preview-aurora05-splash.png" width="200">
@@ -101,6 +109,14 @@
 
 [iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy06.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy06.apk)
 
+### 캔디 팝 v2
+
+<img src="docs/preview-candy10-list.png" width="200"> <img src="docs/preview-candy10-chat.png" width="200"> <img src="docs/preview-candy10-splash.png" width="200">
+
+캔디 팝에 글로우를 얹은 것. 밝은 바탕이라 빛이 은은하게 걸림.
+
+[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy10.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy10.apk)
+
 ### 리퀴드 글래스
 
 <img src="docs/preview-glass07-list.png" width="200"> <img src="docs/preview-glass07-chat.png" width="200"> <img src="docs/preview-glass07-splash.png" width="200">
@@ -116,22 +132,6 @@
 같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림.
 
 [iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass08.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass08.apk)
-
-### 믹스드 v2
-
-<img src="docs/preview-mixed09-list.png" width="200"> <img src="docs/preview-mixed09-chat.png" width="200"> <img src="docs/preview-mixed09-splash.png" width="200">
-
-믹스드에 글로우를 얹은 것. 말풍선마다 자기 색으로 빛남.
-
-[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed09.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed09.apk)
-
-### 캔디 팝 v2
-
-<img src="docs/preview-candy10-list.png" width="200"> <img src="docs/preview-candy10-chat.png" width="200"> <img src="docs/preview-candy10-splash.png" width="200">
-
-캔디 팝에 글로우를 얹은 것. 밝은 바탕이라 빛이 은은하게 걸림.
-
-[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy10.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy10.apk)
 
 <!-- THEMES:END -->
 

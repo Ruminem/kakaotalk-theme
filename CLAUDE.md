@@ -16,6 +16,9 @@ build.ps1           → dist/iOS/*.ktheme, dist/android/*.apk
 release.ps1         → 태그 + 릴리스 자산 첨부
 ```
 
+**팔레트 표의 순서가 곧 README 와 갤러리 순서다.** 변형(v2)은 `_add_variant` 로
+원본 바로 뒤에 끼워 넣는다. 뒤에 몰아 붙이면 원본과 떨어져서 무엇을 고친 건지 안 보인다.
+
 **생성물을 직접 고치지 않는다.** `build-src/` 는 매번 지워지고 다시 만들어진다.
 색을 바꾸려면 팔레트 표를 고치고 다시 돌린다. 새 테마는 표에 한 덩어리 더 쓰면 된다.
 
@@ -130,4 +133,7 @@ powershell -ExecutionPolicy Bypass -File release.ps1 -Version 0.4 -NotesFile not
 - **파이썬 출력은 UTF-8 로 고정한다.** 윈도우 기본이 cp949 라 한글이 깨진다.
   `sys.stdout.reconfigure(encoding='utf-8')` 을 도구 맨 위에 둔다.
   PowerShell 쪽은 `[Console]::OutputEncoding` 을 UTF-8 로 둔다.
+- **안드로이드 `versionCode` 를 목록 순서로 매기지 않는다.** 테마 순서를 바꾸면 번호가
+  내려가는 테마가 생기고, 안드로이드는 그걸 다운그레이드로 보고 설치를 거부한다.
+  키 끝의 번호와 테마 버전으로 만든다 — `mixed09` + `0.8` → `9008`.
 - PowerShell 스크립트는 **UTF-8 BOM** 으로 저장한다. BOM 이 없으면 5.1 이 ANSI 로 읽어 한글이 깨진다.

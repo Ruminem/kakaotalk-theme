@@ -37,7 +37,7 @@ chat_bg
   None 이면 단색. ('linear', 위, 아래) 또는 ('aurora', 바탕, [색...]) 이면 이미지를 그린다.
 """
 
-VERSION = '0.8'
+VERSION = '0.9'
 
 THEMES = [
     dict(
@@ -148,6 +148,13 @@ def by_key(key):
     raise KeyError(key)
 
 
+def _index(key):
+    for i, t in enumerate(THEMES):
+        if t['key'] == key:
+            return i
+    raise KeyError(key)
+
+
 def _variant(src, key, name, note, **over):
     """기존 테마를 베껴 일부만 바꾼 변형.
 
@@ -159,11 +166,18 @@ def _variant(src, key, name, note, **over):
     return t
 
 
-THEMES += [
-    _variant('mixed04', 'mixed09', '믹스드 v2',
+def _add_variant(src, key, name, note, **over):
+    """변형을 원본 바로 뒤에 끼워 넣는다.
+
+    목록 순서가 곧 README 와 갤러리 순서다. 뒤에 몰아 붙이면 원본과 떨어져서
+    무엇을 고친 것인지 안 보인다.
+    """
+    THEMES.insert(_index(src) + 1, _variant(src, key, name, note, **over))
+
+
+_add_variant('mixed04', 'mixed09', '믹스드 v2',
              '믹스드에 글로우를 얹은 것. 말풍선마다 자기 색으로 빛남',
-             glow=('auto', 160, 6)),
-    _variant('candy06', 'candy10', '캔디 팝 v2',
+             glow=('auto', 160, 6))
+_add_variant('candy06', 'candy10', '캔디 팝 v2',
              '캔디 팝에 글로우를 얹은 것. 밝은 바탕이라 빛이 은은하게 걸림',
-             glow=('auto', 150, 5)),
-]
+             glow=('auto', 150, 5))
