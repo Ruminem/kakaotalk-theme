@@ -405,7 +405,31 @@ CARD = """<section class="card">
 START = '<!-- THEMES:START -->'
 END = '<!-- THEMES:END -->'
 BASE = 'https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/'
-PER_ROW = 3
+
+# --- 배치 규칙 (폰에서 보는 것을 기준으로 잡은 값) ---------------------------
+# GitHub 은 넓은 표를 가로 스크롤 상자에 넣는다. 칸이 넷을 넘거나 그림이 크면
+# 폰에서 옆으로 한참 밀어야 다 본다. 셋과 200px 이 한 화면에 들어오는 한계다.
+PER_ROW = 3          # 한 줄에 놓는 칸 수. 넷 이상 두지 않는다
+W_GRID = 190         # 맨 위 계열 격자 그림 폭
+W_VARIANT = 200      # 계열 안 변형 그림 폭
+W_DETAIL = 180       # 접어둔 화면 그림 폭
+NOTE_MAX = 45        # 한 줄 소개. 길면 표 칸이 세로로 늘어나 폰에서 들쭉날쭉해진다
+VARIANT_MAX = 8      # 변형 이름. 길면 칸 안에서 줄바꿈된다
+
+
+def _check(fams):
+    """배치가 무너질 값을 미리 막는다. 규칙을 글로만 두면 다음에 잊는다."""
+    for name, members in fams:
+        for m in members:
+            if len(m['note']) > NOTE_MAX:
+                raise ValueError('%s: 한 줄 소개가 %d자다. %d자 넘으면 폰에서 표가 '
+                                 '들쭉날쭉해진다' % (m['key'], len(m['note']), NOTE_MAX))
+            if len(m['variant']) > VARIANT_MAX:
+                raise ValueError('%s: 변형 이름이 %d자다. %d자 넘으면 칸 안에서 줄바꿈된다'
+                                 % (m['key'], len(m['variant']), VARIANT_MAX))
+        if len(members) > PER_ROW:
+            raise ValueError('%s 계열에 변형이 %d개다. 한 줄에 %d개까지만 놓는다'
+                             % (name, len(members), PER_ROW))
 
 
 def anchor(name):
@@ -424,6 +448,7 @@ def readme_block(ts):
     """
     import themes as T
     fams = T.families()
+    _check(fams)
     out = [START, '']
 
     # 계열 썸네일 격자
@@ -434,8 +459,8 @@ def readme_block(ts):
         for name, members in row:
             out.append(
                 '<td width="33%%" align="center"><a href="%s">'
-                '<img src="assets/preview-%s-chat.png" width="190"></a></td>'
-                % (anchor(name), members[0]['key']))
+                '<img src="assets/preview-%s-chat.png" width="%d"></a></td>'
+                % (anchor(name), members[0]['key'], W_GRID))
         out.append('</tr>')
         out.append('<tr>')
         for name, members in row:
@@ -461,11 +486,11 @@ def readme_block(ts):
         out.append('<table><tr>')
         for m in members:
             out.append('<td width="33%%" align="center">'
-                       '<img src="assets/preview-%s-chat.png" width="200"><br>'
+                       '<img src="assets/preview-%s-chat.png" width="%d"><br>'
                        '<b>%s</b><br><sub>%s</sub><br>'
                        '<a href="%s%s.ktheme">iOS</a> · <a href="%s%s.apk">Android</a>'
                        '</td>'
-                       % (m['key'], m['variant'], m['note'],
+                       % (m['key'], W_VARIANT, m['variant'], m['note'],
                           BASE, m['key'], BASE, m['key']))
         out.append('</tr></table>')
         out.append('')
@@ -476,7 +501,7 @@ def readme_block(ts):
             out.append('**%s** — %s' % (m['variant'], m['note']))
             out.append('')
             out.append(' '.join(
-                '<img src="assets/preview-%s-%s.png" width="180">' % (m['key'], kind)
+                '<img src="assets/preview-%s-%s.png" width="%d">' % (m['key'], kind, W_DETAIL)
                 for kind, _ in SHOTS if kind != 'chat'))
             out.append('')
         out.append('</details>')
