@@ -12,6 +12,7 @@ iOS 와 안드로이드는 같은 그림을 다른 형식으로 요구한다.
 """
 import colorsys
 import math
+import multiprocessing
 import os
 import random
 import zlib
@@ -1244,22 +1245,45 @@ DOCS = os.path.join(ROOT, 'docs')        # 문서만 — spec.md, index.html
 ASSETS = os.path.join(ROOT, 'assets')    # 생성된 그림 — 미리보기, 아이콘, QR
 
 
+def build_one(t):
+    """테마 한 벌을 만들고 한 줄 보고를 돌려준다. 워커 프로세스가 이걸 부른다.
+
+    테마끼리 공유하는 것이 없다 — 폴더가 다르고, build-tmp 도 따로 쓰고, 난수
+    씨앗은 키에서 나온다. 그래서 몇 개를 동시에 돌려도 나오는 그림이 같다.
+    """
+    # 폴더 이름이 곧 배포 파일 이름이 된다. 빌드 스크립트가 폴더명을 그대로 쓴다.
+    root = os.path.join(OUT, themes.file_slug(t))
+    gen_ios(t, os.path.join(root, 'ios'))
+    gen_android(t, os.path.join(root, 'android'), code=version_code(t))
+    n = sum(len(f) for _, _, f in os.walk(root))
+    extra = '  + 채팅방 배경' if t['chat_bg'] else ''
+    return '%-18s %-14s 파일 %2d개%s' % (themes.file_slug(t), t['name'], n, extra)
+
+
+def workers():
+    """동시에 돌릴 수. 코어를 다 쓰되 8을 넘기지 않는다.
+
+    테마 하나가 1080x1920 배경을 여러 장 물고 있어서, 코어가 많은 기계에서
+    전부 띄우면 메모리로 먼저 막힌다. 그 위로는 더 빨라지지도 않는다.
+    """
+    return max(1, min(os.cpu_count() or 1, 8))
+
+
 def main():
     import preview                      # 순환 임포트를 피하려고 여기서 부른다
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
     os.makedirs(DOCS, exist_ok=True)
     os.makedirs(ASSETS, exist_ok=True)
-    for t in themes.THEMES:
-        # 폴더 이름이 곧 배포 파일 이름이 된다. 빌드 스크립트가 폴더명을 그대로 쓴다.
-        root = os.path.join(OUT, themes.file_slug(t))
-        gen_ios(t, os.path.join(root, 'ios'))
-        gen_android(t, os.path.join(root, 'android'), code=version_code(t))
-        n = sum(len(f) for _, _, f in os.walk(root))
-        extra = '  + 채팅방 배경' if t['chat_bg'] else ''
-        print('%-18s %-14s 파일 %2d개%s'
-              % (themes.file_slug(t), t['name'], n, extra))
-    print('\n%d 개 테마 -> build-src/' % len(themes.THEMES))
+
+    # 테마를 여러 프로세스에 나눠 만든다. 시간을 먹는 것은 배경 그림인데 그건
+    # 순수 계산이라 파이썬 스레드로는 못 나눈다(GIL). imap 은 끝난 차례가 아니라
+    # 건네준 차례로 돌려주므로 출력 순서는 직렬로 돌릴 때와 같다.
+    n = workers()
+    with multiprocessing.Pool(n) as pool:
+        for line in pool.imap(build_one, themes.THEMES):
+            print(line, flush=True)
+    print('\n%d 개 테마 -> build-src/  (%d개씩 동시에)' % (len(themes.THEMES), n))
     preview.generate(themes.THEMES)
     print('미리보기 -> docs/index.html')
 
