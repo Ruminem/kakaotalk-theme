@@ -16,65 +16,65 @@
 
 <table>
 <tr>
-<td width="33%" align="center"><a href="#user-content-먹빛-민트"><img src="assets/preview-inkmint01-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-크림-라떼"><img src="assets/preview-cream02-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-벚꽃-그늘"><img src="assets/preview-sakura03-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-먹빛-민트"><img src="assets/preview-inkmint-basic-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-크림-라떼"><img src="assets/preview-cream-basic-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-벚꽃-그늘"><img src="assets/preview-sakura-basic-chat.png" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-inkmint01.png" width="20" valign="middle"> <b><a href="#user-content-먹빛-민트">먹빛 민트</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름</td>
-<td align="center"><img src="assets/icon-cream02.png" width="20" valign="middle"> <b><a href="#user-content-크림-라떼">크림 라떼</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽. 베이지 바탕에 브라운. 눈이 제일 안 피로한 조합임</td>
-<td align="center"><img src="assets/icon-sakura03.png" width="20" valign="middle"> <b><a href="#user-content-벚꽃-그늘">벚꽃 그늘</a></b><br><sub>기본 · 벚꽃 배경 · 글로우 · 글로우+배경</sub><br>밝은 분홍. 채팅방 배경 이미지가 깔림</td>
+<td align="center"><img src="assets/icon-inkmint-basic.png" width="20" valign="middle"> <b><a href="#user-content-먹빛-민트">먹빛 민트</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름</td>
+<td align="center"><img src="assets/icon-cream-basic.png" width="20" valign="middle"> <b><a href="#user-content-크림-라떼">크림 라떼</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽. 베이지 바탕에 브라운. 눈이 제일 안 피로한 조합임</td>
+<td align="center"><img src="assets/icon-sakura-basic.png" width="20" valign="middle"> <b><a href="#user-content-벚꽃-그늘">벚꽃 그늘</a></b><br><sub>기본 · 벚꽃 배경 · 글로우 · 글로우+배경</sub><br>밝은 분홍. 채팅방 배경 이미지가 깔림</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#user-content-믹스드"><img src="assets/preview-mixed04-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-오로라"><img src="assets/preview-aurora32-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-캔디-팝"><img src="assets/preview-candy06-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-믹스드"><img src="assets/preview-mixed-basic-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-오로라"><img src="assets/preview-aurora-basic-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-캔디-팝"><img src="assets/preview-candy-basic-chat.png" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-mixed04.png" width="20" valign="middle"> <b><a href="#user-content-믹스드">믹스드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임</td>
-<td align="center"><img src="assets/icon-aurora32.png" width="20" valign="middle"> <b><a href="#user-content-오로라">오로라</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>오로라를 걷어낸 가장 어두운 바탕</td>
-<td align="center"><img src="assets/icon-candy06.png" width="20" valign="middle"> <b><a href="#user-content-캔디-팝">캔디 팝</a></b><br><sub>기본 · 사탕 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
+<td align="center"><img src="assets/icon-mixed-basic.png" width="20" valign="middle"> <b><a href="#user-content-믹스드">믹스드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임</td>
+<td align="center"><img src="assets/icon-aurora-basic.png" width="20" valign="middle"> <b><a href="#user-content-오로라">오로라</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>오로라를 걷어낸 가장 어두운 바탕</td>
+<td align="center"><img src="assets/icon-candy-basic.png" width="20" valign="middle"> <b><a href="#user-content-캔디-팝">캔디 팝</a></b><br><sub>기본 · 사탕 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#user-content-리퀴드-글래스"><img src="assets/preview-glass07-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-심야"><img src="assets/preview-midnight36-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-바다"><img src="assets/preview-sea39-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-리퀴드-글래스"><img src="assets/preview-glass-light-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-심야"><img src="assets/preview-midnight-basic-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-바다"><img src="assets/preview-sea-basic-chat.png" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-glass07.png" width="20" valign="middle"> <b><a href="#user-content-리퀴드-글래스">리퀴드 글래스</a></b><br><sub>라이트 · 다크</sub><br>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</td>
-<td align="center"><img src="assets/icon-midnight36.png" width="20" valign="middle"> <b><a href="#user-content-심야">심야</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밤하늘을 걷어낸 남색 바탕</td>
-<td align="center"><img src="assets/icon-sea39.png" width="20" valign="middle"> <b><a href="#user-content-바다">바다</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>바다를 걷어낸 짙은 물빛 바탕</td>
+<td align="center"><img src="assets/icon-glass-light.png" width="20" valign="middle"> <b><a href="#user-content-리퀴드-글래스">리퀴드 글래스</a></b><br><sub>라이트 · 다크 · 라이트 단색 · 다크 단색</sub><br>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</td>
+<td align="center"><img src="assets/icon-midnight-basic.png" width="20" valign="middle"> <b><a href="#user-content-심야">심야</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밤하늘을 걷어낸 남색 바탕</td>
+<td align="center"><img src="assets/icon-sea-basic.png" width="20" valign="middle"> <b><a href="#user-content-바다">바다</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>바다를 걷어낸 짙은 물빛 바탕</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#user-content-숲"><img src="assets/preview-forest42-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-설원"><img src="assets/preview-snow45-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-도형"><img src="assets/preview-geo48-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-숲"><img src="assets/preview-forest-basic-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-설원"><img src="assets/preview-snow-basic-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-도형"><img src="assets/preview-geo-basic-chat.png" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-forest42.png" width="20" valign="middle"> <b><a href="#user-content-숲">숲</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>숲을 걷어낸 이끼빛 바탕</td>
-<td align="center"><img src="assets/icon-snow45.png" width="20" valign="middle"> <b><a href="#user-content-설원">설원</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>눈을 걷어낸 얼음빛 바탕</td>
-<td align="center"><img src="assets/icon-geo48.png" width="20" valign="middle"> <b><a href="#user-content-도형">도형</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>도형을 걷어낸 미색 바탕</td>
+<td align="center"><img src="assets/icon-forest-basic.png" width="20" valign="middle"> <b><a href="#user-content-숲">숲</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>숲을 걷어낸 이끼빛 바탕</td>
+<td align="center"><img src="assets/icon-snow-basic.png" width="20" valign="middle"> <b><a href="#user-content-설원">설원</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>눈을 걷어낸 얼음빛 바탕</td>
+<td align="center"><img src="assets/icon-geo-basic.png" width="20" valign="middle"> <b><a href="#user-content-도형">도형</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>도형을 걷어낸 미색 바탕</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#user-content-야경"><img src="assets/preview-city19-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-야경"><img src="assets/preview-city-basic-chat.png" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-city19.png" width="20" valign="middle"> <b><a href="#user-content-야경">야경</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>담백한 남색 바탕. 네온 네 색 말풍선</td>
+<td align="center"><img src="assets/icon-city-basic.png" width="20" valign="middle"> <b><a href="#user-content-야경">야경</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>담백한 남색 바탕. 네온 네 색 말풍선</td>
 </tr>
 </table>
 
 <a name="먹빛-민트"></a>
 
-### <img src="assets/icon-inkmint01.png" width="26" valign="middle"> 먹빛 민트
+### <img src="assets/icon-inkmint-basic.png" width="26" valign="middle"> 먹빛 민트
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-inkmint01-chat.png" width="200"><br><b>기본</b><br><sub>먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-inkmint22-chat.png" width="200"><br><b>배경</b><br><sub>먹빛 위에 민트 빛 덩어리가 번짐</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-inkmint-basic-chat.png" width="200"><br><b>기본</b><br><sub>먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-inkmint-image-chat.png" width="200"><br><b>배경</b><br><sub>먹빛 위에 민트 빛 덩어리가 번짐</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-inkmint23-chat.png" width="200"><br><b>글로우</b><br><sub>말풍선이 민트와 보라로 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-inkmint24-chat.png" width="200"><br><b>글로우+배경</b><br><sub>배경과 글로우를 함께</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-inkmint-glow-chat.png" width="200"><br><b>글로우</b><br><sub>말풍선이 민트와 보라로 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-inkmint-glow-image-chat.png" width="200"><br><b>글로우+배경</b><br><sub>배경과 글로우를 함께</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -82,34 +82,34 @@
 
 **기본** — 먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름
 
-<img src="assets/preview-inkmint01-list.png" width="180"> <img src="assets/preview-inkmint01-passcode.png" width="180"> <img src="assets/preview-inkmint01-splash.png" width="180">
+<img src="assets/preview-inkmint-basic-list.png" width="180"> <img src="assets/preview-inkmint-basic-passcode.png" width="180"> <img src="assets/preview-inkmint-basic-splash.png" width="180">
 
 **배경** — 먹빛 위에 민트 빛 덩어리가 번짐
 
-<img src="assets/preview-inkmint22-list.png" width="180"> <img src="assets/preview-inkmint22-passcode.png" width="180"> <img src="assets/preview-inkmint22-splash.png" width="180">
+<img src="assets/preview-inkmint-image-list.png" width="180"> <img src="assets/preview-inkmint-image-passcode.png" width="180"> <img src="assets/preview-inkmint-image-splash.png" width="180">
 
 **글로우** — 말풍선이 민트와 보라로 빛남
 
-<img src="assets/preview-inkmint23-list.png" width="180"> <img src="assets/preview-inkmint23-passcode.png" width="180"> <img src="assets/preview-inkmint23-splash.png" width="180">
+<img src="assets/preview-inkmint-glow-list.png" width="180"> <img src="assets/preview-inkmint-glow-passcode.png" width="180"> <img src="assets/preview-inkmint-glow-splash.png" width="180">
 
 **글로우+배경** — 배경과 글로우를 함께
 
-<img src="assets/preview-inkmint24-list.png" width="180"> <img src="assets/preview-inkmint24-passcode.png" width="180"> <img src="assets/preview-inkmint24-splash.png" width="180">
+<img src="assets/preview-inkmint-glow-image-list.png" width="180"> <img src="assets/preview-inkmint-glow-image-passcode.png" width="180"> <img src="assets/preview-inkmint-glow-image-splash.png" width="180">
 
 </details>
 
 <a name="크림-라떼"></a>
 
-### <img src="assets/icon-cream02.png" width="26" valign="middle"> 크림 라떼
+### <img src="assets/icon-cream-basic.png" width="26" valign="middle"> 크림 라떼
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-cream02-chat.png" width="200"><br><b>기본</b><br><sub>밝은 쪽. 베이지 바탕에 브라운. 눈이 제일 안 피로한 조합임</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-cream25-chat.png" width="200"><br><b>배경</b><br><sub>크림빛 바탕에 둥근 도형이 겹침</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-cream-basic-chat.png" width="200"><br><b>기본</b><br><sub>밝은 쪽. 베이지 바탕에 브라운. 눈이 제일 안 피로한 조합임</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-cream-image-chat.png" width="200"><br><b>배경</b><br><sub>크림빛 바탕에 둥근 도형이 겹침</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-cream26-chat.png" width="200"><br><b>글로우</b><br><sub>브라운 말풍선이 은은하게 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-cream27-chat.png" width="200"><br><b>글로우+배경</b><br><sub>도형 배경에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-cream-glow-chat.png" width="200"><br><b>글로우</b><br><sub>브라운 말풍선이 은은하게 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-cream-glow-image-chat.png" width="200"><br><b>글로우+배경</b><br><sub>도형 배경에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -117,34 +117,34 @@
 
 **기본** — 밝은 쪽. 베이지 바탕에 브라운. 눈이 제일 안 피로한 조합임
 
-<img src="assets/preview-cream02-list.png" width="180"> <img src="assets/preview-cream02-passcode.png" width="180"> <img src="assets/preview-cream02-splash.png" width="180">
+<img src="assets/preview-cream-basic-list.png" width="180"> <img src="assets/preview-cream-basic-passcode.png" width="180"> <img src="assets/preview-cream-basic-splash.png" width="180">
 
 **배경** — 크림빛 바탕에 둥근 도형이 겹침
 
-<img src="assets/preview-cream25-list.png" width="180"> <img src="assets/preview-cream25-passcode.png" width="180"> <img src="assets/preview-cream25-splash.png" width="180">
+<img src="assets/preview-cream-image-list.png" width="180"> <img src="assets/preview-cream-image-passcode.png" width="180"> <img src="assets/preview-cream-image-splash.png" width="180">
 
 **글로우** — 브라운 말풍선이 은은하게 빛남
 
-<img src="assets/preview-cream26-list.png" width="180"> <img src="assets/preview-cream26-passcode.png" width="180"> <img src="assets/preview-cream26-splash.png" width="180">
+<img src="assets/preview-cream-glow-list.png" width="180"> <img src="assets/preview-cream-glow-passcode.png" width="180"> <img src="assets/preview-cream-glow-splash.png" width="180">
 
 **글로우+배경** — 도형 배경에 빛나는 말풍선
 
-<img src="assets/preview-cream27-list.png" width="180"> <img src="assets/preview-cream27-passcode.png" width="180"> <img src="assets/preview-cream27-splash.png" width="180">
+<img src="assets/preview-cream-glow-image-list.png" width="180"> <img src="assets/preview-cream-glow-image-passcode.png" width="180"> <img src="assets/preview-cream-glow-image-splash.png" width="180">
 
 </details>
 
 <a name="벚꽃-그늘"></a>
 
-### <img src="assets/icon-sakura03.png" width="26" valign="middle"> 벚꽃 그늘
+### <img src="assets/icon-sakura-basic.png" width="26" valign="middle"> 벚꽃 그늘
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-sakura03-chat.png" width="200"><br><b>기본</b><br><sub>밝은 분홍. 채팅방 배경 이미지가 깔림</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-sakura13-chat.png" width="200"><br><b>벚꽃 배경</b><br><sub>벚꽃 그늘에 가지와 꽃잎을 그려 넣었음</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-sakura-basic-chat.png" width="200"><br><b>기본</b><br><sub>밝은 분홍. 채팅방 배경 이미지가 깔림</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-sakura-image-chat.png" width="200"><br><b>벚꽃 배경</b><br><sub>벚꽃 그늘에 가지와 꽃잎을 그려 넣었음</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-sakura28-chat.png" width="200"><br><b>글로우</b><br><sub>분홍 말풍선이 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-sakura29-chat.png" width="200"><br><b>글로우+배경</b><br><sub>벚꽃 배경에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-sakura-glow-chat.png" width="200"><br><b>글로우</b><br><sub>분홍 말풍선이 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-sakura-glow-image-chat.png" width="200"><br><b>글로우+배경</b><br><sub>벚꽃 배경에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -152,34 +152,34 @@
 
 **기본** — 밝은 분홍. 채팅방 배경 이미지가 깔림
 
-<img src="assets/preview-sakura03-list.png" width="180"> <img src="assets/preview-sakura03-passcode.png" width="180"> <img src="assets/preview-sakura03-splash.png" width="180">
+<img src="assets/preview-sakura-basic-list.png" width="180"> <img src="assets/preview-sakura-basic-passcode.png" width="180"> <img src="assets/preview-sakura-basic-splash.png" width="180">
 
 **벚꽃 배경** — 벚꽃 그늘에 가지와 꽃잎을 그려 넣었음
 
-<img src="assets/preview-sakura13-list.png" width="180"> <img src="assets/preview-sakura13-passcode.png" width="180"> <img src="assets/preview-sakura13-splash.png" width="180">
+<img src="assets/preview-sakura-image-list.png" width="180"> <img src="assets/preview-sakura-image-passcode.png" width="180"> <img src="assets/preview-sakura-image-splash.png" width="180">
 
 **글로우** — 분홍 말풍선이 빛남
 
-<img src="assets/preview-sakura28-list.png" width="180"> <img src="assets/preview-sakura28-passcode.png" width="180"> <img src="assets/preview-sakura28-splash.png" width="180">
+<img src="assets/preview-sakura-glow-list.png" width="180"> <img src="assets/preview-sakura-glow-passcode.png" width="180"> <img src="assets/preview-sakura-glow-splash.png" width="180">
 
 **글로우+배경** — 벚꽃 배경에 빛나는 말풍선
 
-<img src="assets/preview-sakura29-list.png" width="180"> <img src="assets/preview-sakura29-passcode.png" width="180"> <img src="assets/preview-sakura29-splash.png" width="180">
+<img src="assets/preview-sakura-glow-image-list.png" width="180"> <img src="assets/preview-sakura-glow-image-passcode.png" width="180"> <img src="assets/preview-sakura-glow-image-splash.png" width="180">
 
 </details>
 
 <a name="믹스드"></a>
 
-### <img src="assets/icon-mixed04.png" width="26" valign="middle"> 믹스드
+### <img src="assets/icon-mixed-basic.png" width="26" valign="middle"> 믹스드
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-mixed04-chat.png" width="200"><br><b>기본</b><br><sub>어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-mixed30-chat.png" width="200"><br><b>배경</b><br><sub>어두운 보라 위에 큰 도형이 겹침</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-mixed-basic-chat.png" width="200"><br><b>기본</b><br><sub>어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-mixed-image-chat.png" width="200"><br><b>배경</b><br><sub>어두운 보라 위에 큰 도형이 겹침</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-mixed09-chat.png" width="200"><br><b>글로우</b><br><sub>믹스드에 글로우를 얹은 것. 말풍선마다 자기 색으로 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-mixed31-chat.png" width="200"><br><b>글로우+배경</b><br><sub>도형 배경에 네 색 말풍선이 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-mixed-glow-chat.png" width="200"><br><b>글로우</b><br><sub>믹스드에 글로우를 얹은 것. 말풍선마다 자기 색으로 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-mixed-glow-image-chat.png" width="200"><br><b>글로우+배경</b><br><sub>도형 배경에 네 색 말풍선이 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -187,34 +187,34 @@
 
 **기본** — 어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임
 
-<img src="assets/preview-mixed04-list.png" width="180"> <img src="assets/preview-mixed04-passcode.png" width="180"> <img src="assets/preview-mixed04-splash.png" width="180">
+<img src="assets/preview-mixed-basic-list.png" width="180"> <img src="assets/preview-mixed-basic-passcode.png" width="180"> <img src="assets/preview-mixed-basic-splash.png" width="180">
 
 **배경** — 어두운 보라 위에 큰 도형이 겹침
 
-<img src="assets/preview-mixed30-list.png" width="180"> <img src="assets/preview-mixed30-passcode.png" width="180"> <img src="assets/preview-mixed30-splash.png" width="180">
+<img src="assets/preview-mixed-image-list.png" width="180"> <img src="assets/preview-mixed-image-passcode.png" width="180"> <img src="assets/preview-mixed-image-splash.png" width="180">
 
 **글로우** — 믹스드에 글로우를 얹은 것. 말풍선마다 자기 색으로 빛남
 
-<img src="assets/preview-mixed09-list.png" width="180"> <img src="assets/preview-mixed09-passcode.png" width="180"> <img src="assets/preview-mixed09-splash.png" width="180">
+<img src="assets/preview-mixed-glow-list.png" width="180"> <img src="assets/preview-mixed-glow-passcode.png" width="180"> <img src="assets/preview-mixed-glow-splash.png" width="180">
 
 **글로우+배경** — 도형 배경에 네 색 말풍선이 빛남
 
-<img src="assets/preview-mixed31-list.png" width="180"> <img src="assets/preview-mixed31-passcode.png" width="180"> <img src="assets/preview-mixed31-splash.png" width="180">
+<img src="assets/preview-mixed-glow-image-list.png" width="180"> <img src="assets/preview-mixed-glow-image-passcode.png" width="180"> <img src="assets/preview-mixed-glow-image-splash.png" width="180">
 
 </details>
 
 <a name="오로라"></a>
 
-### <img src="assets/icon-aurora32.png" width="26" valign="middle"> 오로라
+### <img src="assets/icon-aurora-basic.png" width="26" valign="middle"> 오로라
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-aurora32-chat.png" width="200"><br><b>기본</b><br><sub>오로라를 걷어낸 가장 어두운 바탕</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-aurora05-chat.png" width="200"><br><b>배경</b><br><sub>가장 어두운 테마. 채팅방 배경에 오로라가 번짐</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-aurora-basic-chat.png" width="200"><br><b>기본</b><br><sub>오로라를 걷어낸 가장 어두운 바탕</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-aurora-image-chat.png" width="200"><br><b>배경</b><br><sub>가장 어두운 테마. 채팅방 배경에 오로라가 번짐</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-aurora33-chat.png" width="200"><br><b>글로우</b><br><sub>말풍선이 오로라 색으로 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-aurora34-chat.png" width="200"><br><b>글로우+배경</b><br><sub>오로라 배경에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-aurora-glow-chat.png" width="200"><br><b>글로우</b><br><sub>말풍선이 오로라 색으로 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-aurora-glow-image-chat.png" width="200"><br><b>글로우+배경</b><br><sub>오로라 배경에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -222,34 +222,34 @@
 
 **기본** — 오로라를 걷어낸 가장 어두운 바탕
 
-<img src="assets/preview-aurora32-list.png" width="180"> <img src="assets/preview-aurora32-passcode.png" width="180"> <img src="assets/preview-aurora32-splash.png" width="180">
+<img src="assets/preview-aurora-basic-list.png" width="180"> <img src="assets/preview-aurora-basic-passcode.png" width="180"> <img src="assets/preview-aurora-basic-splash.png" width="180">
 
 **배경** — 가장 어두운 테마. 채팅방 배경에 오로라가 번짐
 
-<img src="assets/preview-aurora05-list.png" width="180"> <img src="assets/preview-aurora05-passcode.png" width="180"> <img src="assets/preview-aurora05-splash.png" width="180">
+<img src="assets/preview-aurora-image-list.png" width="180"> <img src="assets/preview-aurora-image-passcode.png" width="180"> <img src="assets/preview-aurora-image-splash.png" width="180">
 
 **글로우** — 말풍선이 오로라 색으로 빛남
 
-<img src="assets/preview-aurora33-list.png" width="180"> <img src="assets/preview-aurora33-passcode.png" width="180"> <img src="assets/preview-aurora33-splash.png" width="180">
+<img src="assets/preview-aurora-glow-list.png" width="180"> <img src="assets/preview-aurora-glow-passcode.png" width="180"> <img src="assets/preview-aurora-glow-splash.png" width="180">
 
 **글로우+배경** — 오로라 배경에 빛나는 말풍선
 
-<img src="assets/preview-aurora34-list.png" width="180"> <img src="assets/preview-aurora34-passcode.png" width="180"> <img src="assets/preview-aurora34-splash.png" width="180">
+<img src="assets/preview-aurora-glow-image-list.png" width="180"> <img src="assets/preview-aurora-glow-image-passcode.png" width="180"> <img src="assets/preview-aurora-glow-image-splash.png" width="180">
 
 </details>
 
 <a name="캔디-팝"></a>
 
-### <img src="assets/icon-candy06.png" width="26" valign="middle"> 캔디 팝
+### <img src="assets/icon-candy-basic.png" width="26" valign="middle"> 캔디 팝
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-candy06-chat.png" width="200"><br><b>기본</b><br><sub>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-candy12-chat.png" width="200"><br><b>사탕 배경</b><br><sub>캔디 팝 v2 에 사탕을 흩뿌린 배경을 깔았음</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-candy-basic-chat.png" width="200"><br><b>기본</b><br><sub>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-candy-image-chat.png" width="200"><br><b>사탕 배경</b><br><sub>사탕을 흩뿌린 배경. 글로우는 빼서 글로우+배경과 구분됨</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-candy10-chat.png" width="200"><br><b>글로우</b><br><sub>캔디 팝에 글로우를 얹은 것. 밝은 바탕이라 빛이 은은하게 걸림</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-candy35-chat.png" width="200"><br><b>글로우+배경</b><br><sub>사탕 배경에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-candy-glow-chat.png" width="200"><br><b>글로우</b><br><sub>캔디 팝에 글로우를 얹은 것. 밝은 바탕이라 빛이 은은하게 걸림</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-candy-glow-image-chat.png" width="200"><br><b>글로우+배경</b><br><sub>사탕 배경에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -257,30 +257,34 @@
 
 **기본** — 밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음
 
-<img src="assets/preview-candy06-list.png" width="180"> <img src="assets/preview-candy06-passcode.png" width="180"> <img src="assets/preview-candy06-splash.png" width="180">
+<img src="assets/preview-candy-basic-list.png" width="180"> <img src="assets/preview-candy-basic-passcode.png" width="180"> <img src="assets/preview-candy-basic-splash.png" width="180">
 
-**사탕 배경** — 캔디 팝 v2 에 사탕을 흩뿌린 배경을 깔았음
+**사탕 배경** — 사탕을 흩뿌린 배경. 글로우는 빼서 글로우+배경과 구분됨
 
-<img src="assets/preview-candy12-list.png" width="180"> <img src="assets/preview-candy12-passcode.png" width="180"> <img src="assets/preview-candy12-splash.png" width="180">
+<img src="assets/preview-candy-image-list.png" width="180"> <img src="assets/preview-candy-image-passcode.png" width="180"> <img src="assets/preview-candy-image-splash.png" width="180">
 
 **글로우** — 캔디 팝에 글로우를 얹은 것. 밝은 바탕이라 빛이 은은하게 걸림
 
-<img src="assets/preview-candy10-list.png" width="180"> <img src="assets/preview-candy10-passcode.png" width="180"> <img src="assets/preview-candy10-splash.png" width="180">
+<img src="assets/preview-candy-glow-list.png" width="180"> <img src="assets/preview-candy-glow-passcode.png" width="180"> <img src="assets/preview-candy-glow-splash.png" width="180">
 
 **글로우+배경** — 사탕 배경에 빛나는 말풍선
 
-<img src="assets/preview-candy35-list.png" width="180"> <img src="assets/preview-candy35-passcode.png" width="180"> <img src="assets/preview-candy35-splash.png" width="180">
+<img src="assets/preview-candy-glow-image-list.png" width="180"> <img src="assets/preview-candy-glow-image-passcode.png" width="180"> <img src="assets/preview-candy-glow-image-splash.png" width="180">
 
 </details>
 
 <a name="리퀴드-글래스"></a>
 
-### <img src="assets/icon-glass07.png" width="26" valign="middle"> 리퀴드 글래스
+### <img src="assets/icon-glass-light.png" width="26" valign="middle"> 리퀴드 글래스
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-glass07-chat.png" width="200"><br><b>라이트</b><br><sub>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass-light.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-glass08-chat.png" width="200"><br><b>다크</b><br><sub>같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-glass-light-chat.png" width="200"><br><b>라이트</b><br><sub>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-glass-dark-chat.png" width="200"><br><b>다크</b><br><sub>같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass-dark.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-glass-light-plain-chat.png" width="200"><br><b>라이트 단색</b><br><sub>배경 그림 없이 유리만. 바탕색을 머금어 색이 가라앉음</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass-light-plain.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass-light-plain.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-glass-dark-plain-chat.png" width="200"><br><b>다크 단색</b><br><sub>어두운 바탕에 유리만. 빛나는 것 없이 테두리만 남음</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass-dark-plain.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass-dark-plain.apk">Android</a></td>
 </tr>
 </table>
 
@@ -288,26 +292,34 @@
 
 **라이트** — 유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침
 
-<img src="assets/preview-glass07-list.png" width="180"> <img src="assets/preview-glass07-passcode.png" width="180"> <img src="assets/preview-glass07-splash.png" width="180">
+<img src="assets/preview-glass-light-list.png" width="180"> <img src="assets/preview-glass-light-passcode.png" width="180"> <img src="assets/preview-glass-light-splash.png" width="180">
 
 **다크** — 같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림
 
-<img src="assets/preview-glass08-list.png" width="180"> <img src="assets/preview-glass08-passcode.png" width="180"> <img src="assets/preview-glass08-splash.png" width="180">
+<img src="assets/preview-glass-dark-list.png" width="180"> <img src="assets/preview-glass-dark-passcode.png" width="180"> <img src="assets/preview-glass-dark-splash.png" width="180">
+
+**라이트 단색** — 배경 그림 없이 유리만. 바탕색을 머금어 색이 가라앉음
+
+<img src="assets/preview-glass-light-plain-list.png" width="180"> <img src="assets/preview-glass-light-plain-passcode.png" width="180"> <img src="assets/preview-glass-light-plain-splash.png" width="180">
+
+**다크 단색** — 어두운 바탕에 유리만. 빛나는 것 없이 테두리만 남음
+
+<img src="assets/preview-glass-dark-plain-list.png" width="180"> <img src="assets/preview-glass-dark-plain-passcode.png" width="180"> <img src="assets/preview-glass-dark-plain-splash.png" width="180">
 
 </details>
 
 <a name="심야"></a>
 
-### <img src="assets/icon-midnight36.png" width="26" valign="middle"> 심야
+### <img src="assets/icon-midnight-basic.png" width="26" valign="middle"> 심야
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-midnight36-chat.png" width="200"><br><b>기본</b><br><sub>밤하늘을 걷어낸 남색 바탕</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-midnight11-chat.png" width="200"><br><b>배경</b><br><sub>밤하늘을 그려 넣은 테마. 잠금화면에 달과 능선이 나옴</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-midnight-basic-chat.png" width="200"><br><b>기본</b><br><sub>밤하늘을 걷어낸 남색 바탕</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-midnight-image-chat.png" width="200"><br><b>배경</b><br><sub>밤하늘을 그려 넣은 테마. 잠금화면에 달과 능선이 나옴</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-midnight37-chat.png" width="200"><br><b>글로우</b><br><sub>말풍선이 달빛처럼 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-midnight38-chat.png" width="200"><br><b>글로우+배경</b><br><sub>밤하늘에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-midnight-glow-chat.png" width="200"><br><b>글로우</b><br><sub>말풍선이 달빛처럼 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-midnight-glow-image-chat.png" width="200"><br><b>글로우+배경</b><br><sub>밤하늘에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -315,34 +327,34 @@
 
 **기본** — 밤하늘을 걷어낸 남색 바탕
 
-<img src="assets/preview-midnight36-list.png" width="180"> <img src="assets/preview-midnight36-passcode.png" width="180"> <img src="assets/preview-midnight36-splash.png" width="180">
+<img src="assets/preview-midnight-basic-list.png" width="180"> <img src="assets/preview-midnight-basic-passcode.png" width="180"> <img src="assets/preview-midnight-basic-splash.png" width="180">
 
 **배경** — 밤하늘을 그려 넣은 테마. 잠금화면에 달과 능선이 나옴
 
-<img src="assets/preview-midnight11-list.png" width="180"> <img src="assets/preview-midnight11-passcode.png" width="180"> <img src="assets/preview-midnight11-splash.png" width="180">
+<img src="assets/preview-midnight-image-list.png" width="180"> <img src="assets/preview-midnight-image-passcode.png" width="180"> <img src="assets/preview-midnight-image-splash.png" width="180">
 
 **글로우** — 말풍선이 달빛처럼 빛남
 
-<img src="assets/preview-midnight37-list.png" width="180"> <img src="assets/preview-midnight37-passcode.png" width="180"> <img src="assets/preview-midnight37-splash.png" width="180">
+<img src="assets/preview-midnight-glow-list.png" width="180"> <img src="assets/preview-midnight-glow-passcode.png" width="180"> <img src="assets/preview-midnight-glow-splash.png" width="180">
 
 **글로우+배경** — 밤하늘에 빛나는 말풍선
 
-<img src="assets/preview-midnight38-list.png" width="180"> <img src="assets/preview-midnight38-passcode.png" width="180"> <img src="assets/preview-midnight38-splash.png" width="180">
+<img src="assets/preview-midnight-glow-image-list.png" width="180"> <img src="assets/preview-midnight-glow-image-passcode.png" width="180"> <img src="assets/preview-midnight-glow-image-splash.png" width="180">
 
 </details>
 
 <a name="바다"></a>
 
-### <img src="assets/icon-sea39.png" width="26" valign="middle"> 바다
+### <img src="assets/icon-sea-basic.png" width="26" valign="middle"> 바다
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-sea39-chat.png" width="200"><br><b>기본</b><br><sub>바다를 걷어낸 짙은 물빛 바탕</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-sea14-chat.png" width="200"><br><b>배경</b><br><sub>수평선 너머로 해가 지는 바다. 말풍선 네 칸이 산호·모래·물빛·하늘색</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-sea-basic-chat.png" width="200"><br><b>기본</b><br><sub>바다를 걷어낸 짙은 물빛 바탕</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-sea-image-chat.png" width="200"><br><b>배경</b><br><sub>수평선 너머로 해가 지는 바다. 말풍선 네 칸이 산호·모래·물빛·하늘색</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-sea40-chat.png" width="200"><br><b>글로우</b><br><sub>산호와 물빛 말풍선이 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-sea41-chat.png" width="200"><br><b>글로우+배경</b><br><sub>바다 배경에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-sea-glow-chat.png" width="200"><br><b>글로우</b><br><sub>산호와 물빛 말풍선이 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-sea-glow-image-chat.png" width="200"><br><b>글로우+배경</b><br><sub>바다 배경에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -350,34 +362,34 @@
 
 **기본** — 바다를 걷어낸 짙은 물빛 바탕
 
-<img src="assets/preview-sea39-list.png" width="180"> <img src="assets/preview-sea39-passcode.png" width="180"> <img src="assets/preview-sea39-splash.png" width="180">
+<img src="assets/preview-sea-basic-list.png" width="180"> <img src="assets/preview-sea-basic-passcode.png" width="180"> <img src="assets/preview-sea-basic-splash.png" width="180">
 
 **배경** — 수평선 너머로 해가 지는 바다. 말풍선 네 칸이 산호·모래·물빛·하늘색
 
-<img src="assets/preview-sea14-list.png" width="180"> <img src="assets/preview-sea14-passcode.png" width="180"> <img src="assets/preview-sea14-splash.png" width="180">
+<img src="assets/preview-sea-image-list.png" width="180"> <img src="assets/preview-sea-image-passcode.png" width="180"> <img src="assets/preview-sea-image-splash.png" width="180">
 
 **글로우** — 산호와 물빛 말풍선이 빛남
 
-<img src="assets/preview-sea40-list.png" width="180"> <img src="assets/preview-sea40-passcode.png" width="180"> <img src="assets/preview-sea40-splash.png" width="180">
+<img src="assets/preview-sea-glow-list.png" width="180"> <img src="assets/preview-sea-glow-passcode.png" width="180"> <img src="assets/preview-sea-glow-splash.png" width="180">
 
 **글로우+배경** — 바다 배경에 빛나는 말풍선
 
-<img src="assets/preview-sea41-list.png" width="180"> <img src="assets/preview-sea41-passcode.png" width="180"> <img src="assets/preview-sea41-splash.png" width="180">
+<img src="assets/preview-sea-glow-image-list.png" width="180"> <img src="assets/preview-sea-glow-image-passcode.png" width="180"> <img src="assets/preview-sea-glow-image-splash.png" width="180">
 
 </details>
 
 <a name="숲"></a>
 
-### <img src="assets/icon-forest42.png" width="26" valign="middle"> 숲
+### <img src="assets/icon-forest-basic.png" width="26" valign="middle"> 숲
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-forest42-chat.png" width="200"><br><b>기본</b><br><sub>숲을 걷어낸 이끼빛 바탕</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-forest15-chat.png" width="200"><br><b>배경</b><br><sub>안개 낀 침엽수 숲. 이끼·호박·하늘·흙빛 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-forest-basic-chat.png" width="200"><br><b>기본</b><br><sub>숲을 걷어낸 이끼빛 바탕</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-forest-image-chat.png" width="200"><br><b>배경</b><br><sub>안개 낀 침엽수 숲. 이끼·호박·하늘·흙빛 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-forest43-chat.png" width="200"><br><b>글로우</b><br><sub>이끼와 호박빛 말풍선이 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-forest44-chat.png" width="200"><br><b>글로우+배경</b><br><sub>숲 배경에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-forest-glow-chat.png" width="200"><br><b>글로우</b><br><sub>이끼와 호박빛 말풍선이 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-forest-glow-image-chat.png" width="200"><br><b>글로우+배경</b><br><sub>숲 배경에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -385,34 +397,34 @@
 
 **기본** — 숲을 걷어낸 이끼빛 바탕
 
-<img src="assets/preview-forest42-list.png" width="180"> <img src="assets/preview-forest42-passcode.png" width="180"> <img src="assets/preview-forest42-splash.png" width="180">
+<img src="assets/preview-forest-basic-list.png" width="180"> <img src="assets/preview-forest-basic-passcode.png" width="180"> <img src="assets/preview-forest-basic-splash.png" width="180">
 
 **배경** — 안개 낀 침엽수 숲. 이끼·호박·하늘·흙빛 말풍선
 
-<img src="assets/preview-forest15-list.png" width="180"> <img src="assets/preview-forest15-passcode.png" width="180"> <img src="assets/preview-forest15-splash.png" width="180">
+<img src="assets/preview-forest-image-list.png" width="180"> <img src="assets/preview-forest-image-passcode.png" width="180"> <img src="assets/preview-forest-image-splash.png" width="180">
 
 **글로우** — 이끼와 호박빛 말풍선이 빛남
 
-<img src="assets/preview-forest43-list.png" width="180"> <img src="assets/preview-forest43-passcode.png" width="180"> <img src="assets/preview-forest43-splash.png" width="180">
+<img src="assets/preview-forest-glow-list.png" width="180"> <img src="assets/preview-forest-glow-passcode.png" width="180"> <img src="assets/preview-forest-glow-splash.png" width="180">
 
 **글로우+배경** — 숲 배경에 빛나는 말풍선
 
-<img src="assets/preview-forest44-list.png" width="180"> <img src="assets/preview-forest44-passcode.png" width="180"> <img src="assets/preview-forest44-splash.png" width="180">
+<img src="assets/preview-forest-glow-image-list.png" width="180"> <img src="assets/preview-forest-glow-image-passcode.png" width="180"> <img src="assets/preview-forest-glow-image-splash.png" width="180">
 
 </details>
 
 <a name="설원"></a>
 
-### <img src="assets/icon-snow45.png" width="26" valign="middle"> 설원
+### <img src="assets/icon-snow-basic.png" width="26" valign="middle"> 설원
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-snow45-chat.png" width="200"><br><b>기본</b><br><sub>눈을 걷어낸 얼음빛 바탕</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-snow17-chat.png" width="200"><br><b>배경</b><br><sub>눈 내리는 언덕. 얼음·살구·민트·라벤더 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-snow-basic-chat.png" width="200"><br><b>기본</b><br><sub>눈을 걷어낸 얼음빛 바탕</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-snow-image-chat.png" width="200"><br><b>배경</b><br><sub>눈 내리는 언덕. 얼음·살구·민트·라벤더 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-snow46-chat.png" width="200"><br><b>글로우</b><br><sub>파스텔 말풍선이 은은하게 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-snow47-chat.png" width="200"><br><b>글로우+배경</b><br><sub>설원 배경에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-snow-glow-chat.png" width="200"><br><b>글로우</b><br><sub>파스텔 말풍선이 은은하게 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-snow-glow-image-chat.png" width="200"><br><b>글로우+배경</b><br><sub>설원 배경에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -420,34 +432,34 @@
 
 **기본** — 눈을 걷어낸 얼음빛 바탕
 
-<img src="assets/preview-snow45-list.png" width="180"> <img src="assets/preview-snow45-passcode.png" width="180"> <img src="assets/preview-snow45-splash.png" width="180">
+<img src="assets/preview-snow-basic-list.png" width="180"> <img src="assets/preview-snow-basic-passcode.png" width="180"> <img src="assets/preview-snow-basic-splash.png" width="180">
 
 **배경** — 눈 내리는 언덕. 얼음·살구·민트·라벤더 말풍선
 
-<img src="assets/preview-snow17-list.png" width="180"> <img src="assets/preview-snow17-passcode.png" width="180"> <img src="assets/preview-snow17-splash.png" width="180">
+<img src="assets/preview-snow-image-list.png" width="180"> <img src="assets/preview-snow-image-passcode.png" width="180"> <img src="assets/preview-snow-image-splash.png" width="180">
 
 **글로우** — 파스텔 말풍선이 은은하게 빛남
 
-<img src="assets/preview-snow46-list.png" width="180"> <img src="assets/preview-snow46-passcode.png" width="180"> <img src="assets/preview-snow46-splash.png" width="180">
+<img src="assets/preview-snow-glow-list.png" width="180"> <img src="assets/preview-snow-glow-passcode.png" width="180"> <img src="assets/preview-snow-glow-splash.png" width="180">
 
 **글로우+배경** — 설원 배경에 빛나는 말풍선
 
-<img src="assets/preview-snow47-list.png" width="180"> <img src="assets/preview-snow47-passcode.png" width="180"> <img src="assets/preview-snow47-splash.png" width="180">
+<img src="assets/preview-snow-glow-image-list.png" width="180"> <img src="assets/preview-snow-glow-image-passcode.png" width="180"> <img src="assets/preview-snow-glow-image-splash.png" width="180">
 
 </details>
 
 <a name="도형"></a>
 
-### <img src="assets/icon-geo48.png" width="26" valign="middle"> 도형
+### <img src="assets/icon-geo-basic.png" width="26" valign="middle"> 도형
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-geo48-chat.png" width="200"><br><b>기본</b><br><sub>도형을 걷어낸 미색 바탕</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-geo18-chat.png" width="200"><br><b>배경</b><br><sub>큰 도형이 겹친 무늬. 주황·민트·보라·하늘 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-geo-basic-chat.png" width="200"><br><b>기본</b><br><sub>도형을 걷어낸 미색 바탕</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-geo-image-chat.png" width="200"><br><b>배경</b><br><sub>큰 도형이 겹친 무늬. 주황·민트·보라·하늘 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-geo49-chat.png" width="200"><br><b>글로우</b><br><sub>주황과 민트 말풍선이 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-geo50-chat.png" width="200"><br><b>글로우+배경</b><br><sub>도형 배경에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-geo-glow-chat.png" width="200"><br><b>글로우</b><br><sub>주황과 민트 말풍선이 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-geo-glow-image-chat.png" width="200"><br><b>글로우+배경</b><br><sub>도형 배경에 빛나는 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -455,34 +467,34 @@
 
 **기본** — 도형을 걷어낸 미색 바탕
 
-<img src="assets/preview-geo48-list.png" width="180"> <img src="assets/preview-geo48-passcode.png" width="180"> <img src="assets/preview-geo48-splash.png" width="180">
+<img src="assets/preview-geo-basic-list.png" width="180"> <img src="assets/preview-geo-basic-passcode.png" width="180"> <img src="assets/preview-geo-basic-splash.png" width="180">
 
 **배경** — 큰 도형이 겹친 무늬. 주황·민트·보라·하늘 말풍선
 
-<img src="assets/preview-geo18-list.png" width="180"> <img src="assets/preview-geo18-passcode.png" width="180"> <img src="assets/preview-geo18-splash.png" width="180">
+<img src="assets/preview-geo-image-list.png" width="180"> <img src="assets/preview-geo-image-passcode.png" width="180"> <img src="assets/preview-geo-image-splash.png" width="180">
 
 **글로우** — 주황과 민트 말풍선이 빛남
 
-<img src="assets/preview-geo49-list.png" width="180"> <img src="assets/preview-geo49-passcode.png" width="180"> <img src="assets/preview-geo49-splash.png" width="180">
+<img src="assets/preview-geo-glow-list.png" width="180"> <img src="assets/preview-geo-glow-passcode.png" width="180"> <img src="assets/preview-geo-glow-splash.png" width="180">
 
 **글로우+배경** — 도형 배경에 빛나는 말풍선
 
-<img src="assets/preview-geo50-list.png" width="180"> <img src="assets/preview-geo50-passcode.png" width="180"> <img src="assets/preview-geo50-splash.png" width="180">
+<img src="assets/preview-geo-glow-image-list.png" width="180"> <img src="assets/preview-geo-glow-image-passcode.png" width="180"> <img src="assets/preview-geo-glow-image-splash.png" width="180">
 
 </details>
 
 <a name="야경"></a>
 
-### <img src="assets/icon-city19.png" width="26" valign="middle"> 야경
+### <img src="assets/icon-city-basic.png" width="26" valign="middle"> 야경
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-city19-chat.png" width="200"><br><b>기본</b><br><sub>담백한 남색 바탕. 네온 네 색 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-city16-chat.png" width="200"><br><b>배경</b><br><sub>창문 불빛이 켜진 도시가 깔림</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-city-basic-chat.png" width="200"><br><b>기본</b><br><sub>담백한 남색 바탕. 네온 네 색 말풍선</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-city-image-chat.png" width="200"><br><b>배경</b><br><sub>창문 불빛이 켜진 도시가 깔림</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-city20-chat.png" width="200"><br><b>글로우</b><br><sub>말풍선이 네온처럼 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-city21-chat.png" width="200"><br><b>글로우+배경</b><br><sub>도시 배경 위에 네온 말풍선까지</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-city-glow-chat.png" width="200"><br><b>글로우</b><br><sub>말풍선이 네온처럼 빛남</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-city-glow-image-chat.png" width="200"><br><b>글로우+배경</b><br><sub>도시 배경 위에 네온 말풍선까지</sub><br><a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/city-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -490,19 +502,19 @@
 
 **기본** — 담백한 남색 바탕. 네온 네 색 말풍선
 
-<img src="assets/preview-city19-list.png" width="180"> <img src="assets/preview-city19-passcode.png" width="180"> <img src="assets/preview-city19-splash.png" width="180">
+<img src="assets/preview-city-basic-list.png" width="180"> <img src="assets/preview-city-basic-passcode.png" width="180"> <img src="assets/preview-city-basic-splash.png" width="180">
 
 **배경** — 창문 불빛이 켜진 도시가 깔림
 
-<img src="assets/preview-city16-list.png" width="180"> <img src="assets/preview-city16-passcode.png" width="180"> <img src="assets/preview-city16-splash.png" width="180">
+<img src="assets/preview-city-image-list.png" width="180"> <img src="assets/preview-city-image-passcode.png" width="180"> <img src="assets/preview-city-image-splash.png" width="180">
 
 **글로우** — 말풍선이 네온처럼 빛남
 
-<img src="assets/preview-city20-list.png" width="180"> <img src="assets/preview-city20-passcode.png" width="180"> <img src="assets/preview-city20-splash.png" width="180">
+<img src="assets/preview-city-glow-list.png" width="180"> <img src="assets/preview-city-glow-passcode.png" width="180"> <img src="assets/preview-city-glow-splash.png" width="180">
 
 **글로우+배경** — 도시 배경 위에 네온 말풍선까지
 
-<img src="assets/preview-city21-list.png" width="180"> <img src="assets/preview-city21-passcode.png" width="180"> <img src="assets/preview-city21-splash.png" width="180">
+<img src="assets/preview-city-glow-image-list.png" width="180"> <img src="assets/preview-city-glow-image-passcode.png" width="180"> <img src="assets/preview-city-glow-image-splash.png" width="180">
 
 </details>
 

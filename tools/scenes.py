@@ -90,7 +90,7 @@ def candy(spec, w, h):
     o = spec[3] if len(spec) > 3 else {}
     img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGBA')
     pal = o.get('colors', ['#FF7AA2', '#FFC24D', '#7ED7C1', '#9BD6FF', '#C2A7FF'])
-    rnd = random.Random(20260913)
+    rnd = random.Random(o.get('seed', 20260913))
     unit = w / 500.0
 
     for _ in range(o.get('count', 26)):
@@ -156,7 +156,7 @@ def sakura(spec, w, h):
     petal_c = o.get('petal', '#FFB7CE')
     deep_c = o.get('deep', '#F58AB0')
     core_c = o.get('core', '#FFE1A0')
-    rnd = random.Random(20260914)
+    rnd = random.Random(o.get('seed', 20260914))
     unit = w / 500.0
 
     for _ in range(o.get('bokeh', 16)):
@@ -219,7 +219,7 @@ def sea(spec, w, h):
     """수평선과 물결. spec = ('sea', 하늘위, 하늘아래, 옵션dict)"""
     gen = _g()
     o = spec[3] if len(spec) > 3 else {}
-    rnd = random.Random(20260915)
+    rnd = random.Random(o.get('seed', 20260915))
     unit = w / 500.0
     hz = int(h * o.get('horizon', 0.46))
 
@@ -270,7 +270,7 @@ def forest(spec, w, h):
     """겹쳐진 나무 실루엣과 안개. spec = ('forest', 위색, 아래색, 옵션dict)"""
     gen = _g()
     o = spec[3] if len(spec) > 3 else {}
-    rnd = random.Random(20260916)
+    rnd = random.Random(o.get('seed', 20260916))
     unit = w / 500.0
     img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGBA')
 
@@ -318,7 +318,7 @@ def city(spec, w, h):
     """건물 실루엣과 창문 불빛. spec = ('city', 하늘위, 하늘아래, 옵션dict)"""
     gen = _g()
     o = spec[3] if len(spec) > 3 else {}
-    rnd = random.Random(20260917)
+    rnd = random.Random(o.get('seed', 20260917))
     unit = w / 500.0
     img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGBA')
 
@@ -359,7 +359,7 @@ def snow(spec, w, h):
     """내리는 눈과 언덕. spec = ('snow', 위색, 아래색, 옵션dict)"""
     gen = _g()
     o = spec[3] if len(spec) > 3 else {}
-    rnd = random.Random(20260918)
+    rnd = random.Random(o.get('seed', 20260918))
     unit = w / 500.0
     img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGBA')
 
@@ -396,7 +396,7 @@ def geo(spec, w, h):
     """
     gen = _g()
     o = spec[3] if len(spec) > 3 else {}
-    rnd = random.Random(20260919)
+    rnd = random.Random(o.get('seed', 20260919))
     img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGBA')
     pal = o.get('colors', ['#FF8A5B', '#5BE0B4', '#7C6BE0'])
 

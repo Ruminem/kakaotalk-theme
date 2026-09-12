@@ -479,7 +479,7 @@ def readme_block(ts):
             out.append(
                 '<td width="33%%" align="center"><a href="%s">'
                 '<img src="assets/preview-%s-chat.png" width="%d"></a></td>'
-                % (anchor(name), members[0]['key'], W_GRID))
+                % (anchor(name), T.file_slug(members[0]), W_GRID))
         out.append('</tr>')
         out.append('<tr>')
         for name, members in row:
@@ -487,7 +487,7 @@ def readme_block(ts):
                      else '<br><sub>%s</sub>' % ' · '.join(m['variant'] for m in members))
             out.append('<td align="center"><img src="assets/icon-%s.png" width="20" '
                        'valign="middle"> <b><a href="%s">%s</a></b>%s<br>%s</td>'
-                       % (members[0]['key'], anchor(name), name, extra,
+                       % (T.file_slug(members[0]), anchor(name), name, extra,
                           members[0]['note']))
         out.append('</tr>')
     out.append('</table>')
@@ -498,7 +498,7 @@ def readme_block(ts):
         out.append('<a name="%s"></a>' % slug(name))
         out.append('')
         out.append('### <img src="assets/icon-%s.png" width="26" valign="middle"> %s'
-                   % (members[0]['key'], name))
+                   % (T.file_slug(members[0]), name))
         out.append('')
 
         # 변형 배치. 넷이면 2x2 로 접는다 — 한 줄에 넷을 놓으면 폰에서 옆으로 밀어야 한다.
@@ -514,7 +514,7 @@ def readme_block(ts):
                            '<b>%s</b><br><sub>%s</sub><br>'
                            '<a href="%s%s.ktheme">iOS</a> · <a href="%s%s.apk">Android</a>'
                            '</td>'
-                           % (cell, m['key'], W_VARIANT, m['variant'], m['note'],
+                           % (cell, T.file_slug(m), W_VARIANT, m['variant'], m['note'],
                               BASE, T.file_slug(m), BASE, T.file_slug(m)))
             out.append('</tr>')
         out.append('</table>')
@@ -526,7 +526,7 @@ def readme_block(ts):
             out.append('**%s** — %s' % (m['variant'], m['note']))
             out.append('')
             out.append(' '.join(
-                '<img src="assets/preview-%s-%s.png" width="%d">' % (m['key'], kind, W_DETAIL)
+                '<img src="assets/preview-%s-%s.png" width="%d">' % (T.file_slug(m), kind, W_DETAIL)
                 for kind, _ in SHOTS if kind != 'chat'))
             out.append('')
         out.append('</details>')
@@ -552,21 +552,24 @@ def write_readme(ts):
 def generate(ts):
     os.makedirs(gen.ASSETS, exist_ok=True)
     cards = []
+    import themes as T2
     for t in ts:
-        gen.icon(t, 128).save(os.path.join(gen.ASSETS, 'icon-%s.png' % t['key']),
+        # 그림 이름도 배포 파일과 같은 이름을 쓴다. 키(midnight38)는 겉으로 안 드러나는
+        # 번호라 README 에서 어느 변형인지 읽히지 않는다.
+        slug = T2.file_slug(t)
+        gen.icon(t, 128).save(os.path.join(gen.ASSETS, 'icon-%s.png' % slug),
                               optimize=True)
         for kind, draw in (('list', chat_list), ('chat', chat),
                            ('passcode', passcode), ('splash', splash)):
-            draw(t).save(os.path.join(gen.ASSETS, 'preview-%s-%s.png' % (t['key'], kind)),
+            draw(t).save(os.path.join(gen.ASSETS, 'preview-%s-%s.png' % (slug, kind)),
                          optimize=True)
         chips = ''.join('<span class="chip" style="background:%s" title="%s"></span>'
                         % (t[k], k) for k in ('bg', 'bg_deep', 'surface', 'accent', 'text'))
         shots = ''.join('<figure><img src="../assets/preview-%s-%s.png" alt="%s %s">'
                         '<figcaption>%s</figcaption></figure>'
-                        % (t['key'], kind, t['name'], label, label) for kind, label in SHOTS)
-        import themes as T2
+                        % (slug, kind, t['name'], label, label) for kind, label in SHOTS)
         cards.append(CARD % dict(name=t['name'], key=t['key'],
-                                 slug=T2.file_slug(t), chips=chips, shots=shots))
+                                 slug=slug, chips=chips, shots=shots))
     with open(os.path.join(gen.DOCS, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(PAGE % '\n'.join(cards))
     write_readme(ts)

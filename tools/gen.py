@@ -13,6 +13,7 @@ iOS 와 안드로이드는 같은 그림을 다른 형식으로 요구한다.
 import math
 import os
 import random
+import zlib
 import re
 import shutil
 import sys
@@ -138,23 +139,39 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
     # (글로우는 아래에서 이 그림을 여백 있는 판에 옮겨 담은 뒤 깐다)
 
     if style == 'glass':
-        # 테두리에 빛나는 선을 얹고, 위에서 아래로 갈수록 흐리게 만든다.
-        # 빛이 한쪽에서만 들어오는 것처럼 보이게 하려는 것이다.
-        rim = Image.new('RGBA', (w * SS, h * SS), (0, 0, 0, 0))
-        ImageDraw.Draw(rim).rounded_rectangle(
-            [SS // 2, SS // 2, w * SS - SS // 2 - 1, h * SS - SS // 2 - 1],
-            radius=radius * SS, outline=(255, 255, 255, 215), width=SS)
-        rim = rim.resize((w, h), Image.LANCZOS)
+        # 유리판의 가장자리에서 빛은 두 번 꺾인다. 위쪽에 밝은 선이 서고
+        # 아래쪽에는 어두운 선이 남는다. 밝은 선만 그리면 흰 바탕 위에서는
+        # 아무것도 안 보인다 — 라이트 유리가 밋밋했던 게 이것 때문이다.
+        def edge(color, ramp_fn):
+            rim = Image.new('RGBA', (w * SS, h * SS), (0, 0, 0, 0))
+            ImageDraw.Draw(rim).rounded_rectangle(
+                [SS // 2, SS // 2, w * SS - SS // 2 - 1, h * SS - SS // 2 - 1],
+                radius=radius * SS, outline=color, width=SS)
+            rim = rim.resize((w, h), Image.LANCZOS)
+            ramp = Image.new('L', (1, h))
+            px = ramp.load()
+            for y in range(h):
+                px[0, y] = max(0, min(255, ramp_fn(y / max(h - 1, 1))))
+            faded = ImageChops.multiply(rim.getchannel('A'), ramp.resize((w, h)))
+            rim.putalpha(ImageChops.multiply(faded, mask))
+            return rim
 
-        ramp = Image.new('L', (1, h))
-        px = ramp.load()
-        for y in range(h):
-            px[0, y] = int(255 * max(0.0, 1.0 - (y / max(h - 1, 1)) * 1.5))
-        ramp = ramp.resize((w, h))
+        out.alpha_composite(edge((255, 255, 255, 230),
+                                 lambda t: int(255 * max(0.0, 1.0 - t * 1.45))))
+        out.alpha_composite(edge((0, 0, 0, 105),
+                                 lambda t: int(255 * max(0.0, (t - 0.30) * 1.5))))
 
-        faded = ImageChops.multiply(rim.getchannel('A'), ramp)
-        rim.putalpha(ImageChops.multiply(faded, mask))
-        out.alpha_composite(rim)
+        # 판 안쪽 위에 옅은 띠 하나. 유리가 종이가 아니라 두께가 있는 판으로 읽힌다.
+        sheen_h = max(3, int(h * 0.45))
+        grad = Image.new('L', (1, sheen_h))
+        gp = grad.load()
+        for y in range(sheen_h):
+            gp[0, y] = int(64 * (1.0 - y / max(sheen_h - 1, 1)) ** 1.5)
+        sh = Image.new('L', (w, h), 0)
+        sh.paste(grad.resize((w, sheen_h)), (0, 0))
+        band = Image.new('RGBA', (w, h), (255, 255, 255, 255))
+        band.putalpha(ImageChops.multiply(sh, mask))
+        out.alpha_composite(band)
 
     if glow:
         gc = glow[0]
@@ -352,7 +369,7 @@ def scene_night(spec, w, h):
     img = Image.alpha_composite(img.convert('RGBA'), wash).convert('RGB')
 
     d = ImageDraw.Draw(img, 'RGBA')
-    rnd = random.Random(20260912)
+    rnd = random.Random(o.get('seed', 20260912))
     bpx = band.load()
 
     n = o.get('stars', 220)
@@ -400,7 +417,7 @@ def scene_night(spec, w, h):
         R = mr * ss
         dd.ellipse([cx - R, cy - R, cx + R, cy + R], fill=rgb(moon) + (255,))
         # 크레이터. 밝은 쪽에만 아주 옅게
-        cr = random.Random(77)
+        cr = random.Random(_opts(spec).get('seed', 77) + 77)
         for _ in range(14):
             ang, dist = cr.uniform(0, 6.28), cr.uniform(0.15, 0.8) * R
             px, py = cx + math.cos(ang) * dist, cy + math.sin(ang) * dist
@@ -455,6 +472,27 @@ def scene_night(spec, w, h):
 
 
 
+def _opts(spec):
+    """배경 규격 끝에 붙는 선택값 묶음. 없으면 빈 것."""
+    return spec[3] if len(spec) > 3 and isinstance(spec[3], dict) else {}
+
+
+def seeded(spec, t):
+    """배경 그림의 난수 씨앗을 테마마다 다르게 준다.
+
+    장면마다 씨앗이 하나씩 박혀 있으면 같은 장면을 쓰는 테마가 전부 같은 그림이 된다.
+    한 계열 안에서도 마찬가지라 심야 배경과 심야 글로우+배경이 별 하나까지 똑같았다.
+    파일은 둘인데 그림이 같으면 왜 둘인지 알 수 없다.
+
+    씨앗은 키에서 만든다 — 같은 테마를 다시 돌리면 같은 그림이 나와야 한다.
+    """
+    o = dict(_opts(spec))
+    if 'seed' not in o:
+        o['seed'] = zlib.crc32(t['key'].encode('utf-8')) % 90000000 + 10000000
+    base = tuple(spec[:3]) if len(spec) >= 3 else tuple(spec)
+    return base + (o,)
+
+
 def chat_bg(spec, w, h):
     kind = spec[0]
     if kind == 'night':
@@ -475,8 +513,10 @@ def chat_bg(spec, w, h):
             c = rgb(spec[2][i % len(spec[2])])
             cx, cy, r = int(w * fx), int(h * fy), int(w * fr)
             d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=c)
-        base = base.filter(ImageFilter.GaussianBlur(radius=w // 4))
-        return Image.blend(Image.new('RGB', (w, h), rgb(spec[1])), base, 0.7)
+        base = base.filter(ImageFilter.GaussianBlur(radius=w // 5))
+        # 예전에는 0.7 로 섞어서 색 덩어리가 거의 안 보였다. 뒤가 비어 있으면
+        # 반투명 말풍선이 그냥 흐린 판으로 보인다 — 유리로 안 읽힌다.
+        return Image.blend(Image.new('RGB', (w, h), rgb(spec[1])), base, 0.88)
     # aurora: 바탕 위에 색 덩어리를 뿌리고 크게 흐린다. 오로라처럼 번지게
     base = Image.new('RGB', (w, h), rgb(spec[1]))
     layer = Image.new('RGB', (w, h), rgb(spec[1]))
@@ -821,7 +861,7 @@ def background(t, spec, w, h, flat=False):
     그래서 목록 배경은 그림이 아니라 질감이어야 한다. 크게 흐리고 대비를 죽인다.
     채팅방과 잠금화면은 얹히는 게 적어서 그림 그대로 쓴다.
     """
-    img = chat_bg(spec, w, h)
+    img = chat_bg(seeded(spec, t), w, h)
     if flat:
         img = img.filter(ImageFilter.GaussianBlur(w * 0.14))
         mid_c = img.resize((1, 1), Image.LANCZOS).getpixel((0, 0))

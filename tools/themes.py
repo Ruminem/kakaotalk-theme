@@ -40,7 +40,7 @@ chat_bg
 
 import re
 
-VERSION = '0.20.2'
+VERSION = '0.21'
 
 THEMES = [
     dict(
@@ -120,9 +120,9 @@ THEMES = [
         border='#D2DBE8', text='#1F2733', subtext='#6B7789',
         accent='#2F8CF0', accent_dim='#1E6FC4', on_accent='#FFFFFF',
         send=('#8FD3FF', '#5FA8F5'), send_alt=('#A9E7FF', '#79C2F8'),
-        recv=('#FFFFFF', '#E6EDF7'), recv_alt=('#F3F7FF', '#DCE6F4'),
+        recv=('#F4F9FF', '#DCE8F8'), recv_alt=('#EAF3FF', '#D2E2F6'),
         send_text='#0B2D50', recv_text='#1F2733',
-        bubble_style='glass', bubble_alpha=165, cell_alpha=0.55,
+        bubble_style='glass', bubble_alpha=150, cell_alpha=0.55,
         glow=('#6FB6FF', 140, 8),
         chat_bg=('blobs', '#EFF3FA', ['#9BD4FF', '#C9B6FF', '#9BF0DC', '#FFC8E4']),
         main_bg=('blobs', '#F4F6FB', ['#BFE2FF', '#DCD0FF', '#C4F3E6', '#FFD9EC']),
@@ -150,7 +150,7 @@ THEMES = [
         send=('#6E86E6', '#42589E'), send_alt=('#5F79DC', '#374C8E'),
         recv=('#2A3450', '#1B2236'), recv_alt=('#343F5E', '#232B42'),
         send_text='#F0F4FF', recv_text='#E6EAF5',
-        glow=('#8AA4FF', 130, 8),
+        glow=None,
         # 잠금화면은 글자가 적으니 달과 능선까지 다 그린다.
         # 채팅방은 말풍선이 얹히므로 별만 두고 어둡게 덮는다.
         chat_bg=('night', '#0B1020', '#121A30',
@@ -198,6 +198,19 @@ def _add_variant(src, key, name, note, **over):
     THEMES.insert(_index(src) + 1, _variant(src, key, name, note, **over))
 
 
+def _add_plain_variant(src, key, name, note, **over):
+    """배경 그림을 걷어낸 변형. 반투명 말풍선만 남는다.
+
+    반투명은 뒤에 그림이 있어야 값을 한다고 생각하기 쉬운데, 단색 바탕에서도
+    말풍선이 바탕색을 머금어 팔레트에 없는 중간색이 생긴다. 그림이 깔린 쪽보다
+    차분해서 배경을 싫어하는 사람이 쓸 자리가 된다.
+    """
+    t = _variant(src, key, name, note, **over)
+    for k in ('chat_bg', 'main_bg', 'passcode_bg'):
+        t[k] = None
+    THEMES.insert(_index(src) + 1, t)
+
+
 _add_variant('mixed04', 'mixed09', '믹스드 v2',
              '믹스드에 글로우를 얹은 것. 말풍선마다 자기 색으로 빛남',
              glow=('auto', 190, 8))
@@ -206,13 +219,21 @@ _add_variant('candy06', 'candy10', '캔디 팝 v2',
              glow=('auto', 175, 8))
 
 _add_variant('candy10', 'candy12', '캔디 팝 v3',
-             '캔디 팝 v2 에 사탕을 흩뿌린 배경을 깔았음',
+             '사탕을 흩뿌린 배경. 글로우는 빼서 글로우+배경과 구분됨',
+             glow=None,
              chat_bg=('candy', '#FFFDF5', '#FFE9D6',
                       dict(count=22, sprinkles=70, dim=0.42)),
              main_bg=('candy', '#FFFDF5', '#FFF1E2',
                       dict(count=16, sprinkles=50, dim=0.55)),
              passcode_bg=('candy', '#FFF8E8', '#FFD9C0',
                           dict(count=34, sprinkles=110, dim=0.12)))
+_add_plain_variant('glass07', 'glass51', '리퀴드 글래스 단색',
+                   '배경 그림 없이 유리만. 바탕색을 머금어 색이 가라앉음',
+                   bg='#DCE7F6', bg_deep='#CFDCEF', bubble_alpha=140)
+_add_plain_variant('glass08', 'glass52', '리퀴드 글래스 다크 단색',
+                   '어두운 바탕에 유리만. 빛나는 것 없이 테두리만 남음',
+                   bg='#171D28', bg_deep='#10151E', bubble_alpha=170)
+
 _add_variant('sakura03', 'sakura13', '벚꽃 그늘 v2',
              '벚꽃 그늘에 가지와 꽃잎을 그려 넣었음',
              chat_bg=('sakura', '#FFF3F6', '#FBE2EC',
@@ -355,6 +376,8 @@ FAMILY = {
     'candy12':    ('캔디 팝', '사탕 배경'),
     'glass07':    ('리퀴드 글래스', '라이트'),
     'glass08':    ('리퀴드 글래스', '다크'),
+    'glass51':    ('리퀴드 글래스', '라이트 단색'),
+    'glass52':    ('리퀴드 글래스', '다크 단색'),
     'midnight11': ('심야', '배경'),
     'sea14':      ('바다', '배경'),
     'forest15':   ('숲', '배경'),
@@ -377,7 +400,7 @@ def _fam_of(t):
 def families():
     """계열 순서대로 (계열이름, [테마...]) 를 돌려준다. THEMES 순서를 따른다."""
     order = {'basic': 0, 'image': 1, 'glow': 2, 'glow-image': 3,
-             'light': 0, 'dark': 1}
+             'light': 0, 'dark': 1, 'light-plain': 2, 'dark-plain': 3}
     out, seen = [], {}
     for t in THEMES:
         t['family'], t['variant'] = _fam_of(t)
@@ -477,7 +500,45 @@ VARIANT_SLUG = {
     '사탕 배경': 'image',
     '라이트': 'light',
     '다크': 'dark',
+    '라이트 단색': 'light-plain',
+    '다크 단색': 'dark-plain',
 }
+
+
+def _has_picture(t):
+    """배경에 그림이 깔렸는지. 단색이나 세로 그라데이션은 그림이 아니다."""
+    cb = t.get('chat_bg')
+    return bool(cb) and cb[0] != 'linear'
+
+
+# 옛 이름표도 뜻은 넷 중 하나다
+_MEANS = {'기본': (False, False), '배경': (True, False),
+          '글로우': (False, True), '글로우+배경': (True, True),
+          '벚꽃 배경': (True, False), '사탕 배경': (True, False)}
+
+
+def check_variants():
+    """이름표가 실제 내용과 맞는지 본다.
+
+    한 계열 안에서 이름만 다르고 내용이 같은 변형이 생기면 고르는 사람이
+    무엇을 고른 건지 알 수 없다. 심야 배경이 글로우를 달고 있어서
+    글로우+배경과 사실상 같은 테마였던 적이 있다 — 배경 그림까지 똑같았다.
+    """
+    for fam, members in families():
+        seen = {}
+        for t in members:
+            want = _MEANS.get(t['variant'])
+            got = (_has_picture(t), bool(t.get('glow')))
+            if want and got != want:
+                raise ValueError(
+                    '%s(%s %s): 이름표는 그림=%s 글로우=%s 인데 실제는 그림=%s 글로우=%s'
+                    % (t['key'], fam, t['variant'], want[0], want[1], got[0], got[1]))
+            if want is None:
+                continue          # 다른 축의 계열(리퀴드 글래스의 라이트/다크)
+            if got in seen:
+                raise ValueError('%s 계열의 "%s" 와 "%s" 가 내용이 같다 — 그림=%s 글로우=%s'
+                                 % (fam, seen[got], t['variant'], got[0], got[1]))
+            seen[got] = t['variant']
 
 
 def file_slug(t):
@@ -641,3 +702,5 @@ set_notes('도형',
           glow='주황과 민트 말풍선이 빛남',
           glow_image='도형 배경에 빛나는 말풍선')
 THEMES += fill_family('geo18', '도형', ['기본', '글로우', '글로우+배경'], 48)
+
+check_variants()
