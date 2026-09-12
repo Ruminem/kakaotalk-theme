@@ -40,7 +40,7 @@ chat_bg
 
 import re
 
-VERSION = '0.27.1'
+VERSION = '0.29'
 
 THEMES = [
     dict(
@@ -776,7 +776,8 @@ def families():
              'oak': 0, 'walnut': 1, 'oak-plain': 2, 'walnut-plain': 3,
              'amber': 0, 'emerald': 1, 'amethyst': 2, 'rose': 3,
              'sage': 0, 'sand': 1, 'slate': 2, 'mocha': 3,
-             'olive': 0, 'fog': 1, 'plum': 2, 'ink': 3}
+             'olive': 0, 'fog': 1, 'plum': 2, 'ink': 3,
+             'light-image': 0.5, 'dark-image': 1.5}
     out, seen = [], {}
     for t in THEMES:
         t['family'], t['variant'] = _fam_of(t)
@@ -812,6 +813,7 @@ CATEGORIES = (
     ('유리', '말풍선이 반투명하다'),
     ('자연', '배경이 장면을 그린다'),
     ('불빛', '어두운 바탕에 인공 불빛'),
+    ('캐릭터', '말풍선 모양과 캐릭터 프로필'),
 )
 
 # 계열 이름 -> 분류. 새 계열을 더하면 여기에 한 줄 쓴다. 안 쓰면 생성이 멈춘다 —
@@ -840,6 +842,12 @@ CATEGORY = {
     '야경': '불빛',
     '사이버펑크': '불빛',
     '레드': '불빛',
+
+    '우체국': '캐릭터',
+    '책상': '캐릭터',
+    '오락실': '캐릭터',
+    '빨래': '캐릭터',
+    '빨래 반짝': '캐릭터',
 }
 
 
@@ -1031,6 +1039,10 @@ VARIANT_SLUG = {
     '오크 단색': 'oak-plain',
     '월넛': 'walnut',
     '월넛 단색': 'walnut-plain',
+    '밝음': 'light',
+    '밝음+배경': 'light-image',
+    '어두움': 'dark',
+    '어두움+배경': 'dark-image',
 }
 
 
@@ -1056,6 +1068,19 @@ def check_variants():
     for fam, members in families():
         seen = {}
         for t in members:
+            if t['variant'] in CHAR_TYPES:
+                # 캐릭터 계열은 밝기 × 배경 축이다. 밝음이라고 적고 바탕이 어두우면 멈춘다
+                light, pic = CHAR_TYPES[t['variant']]
+                got = (_bg_is_light(t), _has_picture(t))
+                if got != (light, pic):
+                    raise ValueError(
+                        '%s(%s %s): 이름표는 밝음=%s 그림=%s 인데 실제는 밝음=%s 그림=%s'
+                        % (t['key'], fam, t['variant'], light, pic, got[0], got[1]))
+                if got in seen:
+                    raise ValueError('%s 계열의 "%s" 와 "%s" 가 내용이 같다'
+                                     % (fam, seen[got], t['variant']))
+                seen[got] = t['variant']
+                continue
             want = _MEANS.get(t['variant'])
             got = (_has_picture(t), bool(t.get('glow')))
             if want and got != want:
@@ -1231,5 +1256,201 @@ set_notes('도형',
           glow='주황과 민트 말풍선이 빛남',
           glow_image='도형 배경에 빛나는 말풍선')
 THEMES += fill_family('geo18', '도형', ['기본', '글로우', '글로우+배경'], 48)
+
+
+# --- 캐릭터 --------------------------------------------------------------
+# 말풍선에 모양이 있고(편지봉투·포스트잇·픽셀·젤리) 기본 프로필이 캐릭터인 계열.
+# 그림은 tools/charbubble.py, 배경은 scenes 의 letters·desk·arcade·laundry 가 그린다.
+#
+# 축이 기본/배경/글로우가 아니라 밝기 × 배경이다. 모양 있는 말풍선은 그 자체로 이미
+# 눈에 띄어서 글로우를 얹을지 말지가 고르는 사람의 관심사가 아니다 — 밝은 방에서 쓸지
+# 어두운 방에서 쓸지가 관심사다. 글로우는 계열이 원할 때만 넷 모두에 넣는다(char_glow).
+# 종이(편지·포스트잇)에 빛을 두르면 빛이 아니라 번진 테두리로 보인다.
+
+CHAR_TYPES = {
+    '밝음': (True, False),
+    '밝음+배경': (True, True),
+    '어두움': (False, False),
+    '어두움+배경': (False, True),
+}
+
+
+def _bg_is_light(t):
+    h = t['bg'].lstrip('#')
+    r, g, b = (int(h[i:i + 2], 16) for i in (0, 2, 4))
+    return (r * 299 + g * 587 + b * 114) / 1000 > 128
+
+
+def _scenes(kind, top, bottom, opts, dims):
+    """세 화면의 배경. 같은 장면을 목록은 더 누르고 잠금화면은 거의 안 누른다."""
+    return dict(chat_bg=(kind, top, bottom, dict(opts, dim=dims[0])),
+                main_bg=(kind, top, bottom, dict(opts, dim=dims[1])),
+                passcode_bg=(kind, top, bottom, dict(opts, dim=dims[2])))
+
+
+def character(slug, no, family, look, light, dark, bg_light, bg_dark, notes):
+    """캐릭터 계열 네 벌. 밝음 · 밝음+배경 · 어두움 · 어두움+배경.
+
+    look 은 넷이 같이 쓰는 것(말풍선 모양, 캐릭터, 광택), light/dark 는 밝기별 색이다.
+    말풍선 색은 한 가지를 (위, 아래) 짝으로 늘여 둔다 — 아이콘과 잠금화면 점이 짝으로 읽는다.
+    """
+    if len(notes) != 4:
+        raise ValueError('%s: 한 줄 소개를 네 개 줘야 한다' % slug)
+    out = []
+    for i, variant in enumerate(CHAR_TYPES):
+        is_light, pic = CHAR_TYPES[variant]
+        pal = dict(look, **(light if is_light else dark))
+        for k in ('send', 'send_alt', 'recv', 'recv_alt'):
+            pal[k] = (pal[k], pal[k])
+        t = dict(key='%s%d' % (slug, no + i), name='%s %s' % (family, variant),
+                 note=notes[i], family=family, variant=variant, flat=True, **pal)
+        if pic:
+            t.update(bg_light if is_light else bg_dark)
+        else:
+            t.update(chat_bg=None, main_bg=None, passcode_bg=None)
+        out.append(t)
+    return out
+
+
+THEMES += character(
+    'post', 85, '우체국',
+    dict(char_style='envelope', char='mailbox'),
+    dict(bg='#F6F1E7', bg_deep='#EFE7D8', surface='#FBF8F1', pressed='#EADFCB',
+         border='#E0D4BE', text='#3D3129', subtext='#8C7B69',
+         accent='#E8483B', accent_dim='#C23A2F', on_accent='#FFFFFF',
+         recv='#FFF9EE', recv_alt='#EFE6D6', send='#FFE3DC', send_alt='#F3D2C9',
+         recv_text='#3D3129', send_text='#3D3129',
+         char_outline='#5A4535', stamp='#FFC2BE',
+         char_backs=('#FFF3E0', '#FFE3DC', '#F3E7D3')),
+    dict(bg='#1F1A17', bg_deep='#191512', surface='#2A2420', pressed='#352D28',
+         border='#3E352F', text='#F2E9DE', subtext='#A69584',
+         accent='#FF6B5E', accent_dim='#D9544A', on_accent='#1F1A17',
+         recv='#2F2824', recv_alt='#3E3530', send='#5C2B27', send_alt='#733833',
+         recv_text='#F2E9DE', send_text='#FFE8E3',
+         char_outline='#C9B7A2', stamp='#E89A94',
+         char_backs=('#3A302A', '#4A2E2A', '#332B26')),
+    _scenes('letters', '#F6F1E7', '#EFE4D2',
+            dict(papers=['#FFFFFF', '#FFF3E0', '#FFE3DC', '#EAF2FF'], ink='#8C7B69',
+                 stamps=['#E8483B', '#6FA8DC', '#F2B544'], dim_to='#F6F1E7'),
+            (0.35, 0.5, 0.1)),
+    _scenes('letters', '#221C19', '#191512',
+            dict(papers=['#3A302A', '#4A2E2A', '#2F2824', '#34302E'], ink='#A69584',
+                 stamps=['#FF6B5E', '#7FB6E6', '#E0B04A'], dim_to='#191512'),
+            (0.35, 0.5, 0.1)),
+    ['크림빛 편지지 바탕. 첫 말풍선엔 우표 붙은 봉투',
+     '편지봉투가 흩어진 우체국 책상',
+     '밤의 우체국. 짙은 갈색 바탕에 봉투 말풍선',
+     '어둠 속에 흩어진 편지봉투'])
+
+THEMES += character(
+    'desk', 89, '책상',
+    dict(char_style='postit', char='kongkong'),
+    dict(bg='#EEF2E6', bg_deep='#E6ECDB', surface='#F7F9F2', pressed='#DDE6CF',
+         border='#D3DDC3', text='#35402B', subtext='#7F8A70',
+         accent='#6DBB61', accent_dim='#4F9A44', on_accent='#FFFFFF',
+         recv='#FFE98A', recv_alt='#F2CF5B', send='#C9F0D8', send_alt='#A5DCBA',
+         recv_fold='#F2CF5B', send_fold='#A5DCBA',
+         recv_text='#3E3413', send_text='#1F3D2B',
+         char_outline='#3D4A2E', char_backs=('#FFF6CC', '#E4F5E9', '#F1F6E8')),
+    dict(bg='#1C2118', bg_deep='#171B13', surface='#262C21', pressed='#2F3629',
+         border='#394232', text='#E8EEDD', subtext='#98A488',
+         accent='#8BD17E', accent_dim='#6BB25F', on_accent='#1C2118',
+         recv='#CDB85E', recv_alt='#A8923F', send='#6FAE8A', send_alt='#558D6F',
+         recv_fold='#A8923F', send_fold='#558D6F', tape_a=90,
+         recv_text='#2A2410', send_text='#0F261A',
+         char_outline='#2A3122', char_backs=('#3A3F2C', '#2F4234', '#353B2E')),
+    _scenes('desk', '#E9D2AE', '#DDBF94',
+            dict(wood=dict(dark='#8A5A2B', light='#FFF3E0', knots=0, planks=4),
+                 notes=['#FFE98A', '#C9F0D8', '#FFD1DC', '#CDE7FF'], ink='#6B7A5A',
+                 dim_to='#FFFFFF'),
+            (0.25, 0.4, 0.05)),
+    _scenes('desk', '#3A2A1D', '#2A1D13',
+            dict(wood=dict(dark='#120A05', light='#C08F57', knots=0, planks=4),
+                 notes=['#CDB85E', '#6FAE8A', '#C27C8E', '#6F93B8'], ink='#2A2410',
+                 dim_to='#000000'),
+            (0.35, 0.5, 0.1)),
+    ['연둣빛 바탕에 포스트잇 말풍선. 첫 장엔 테이프',
+     '나무 책상에 메모지가 붙어 있음',
+     '불 끈 책상. 색을 눌러 담은 포스트잇',
+     '짙은 원목 책상에 메모지'])
+
+THEMES += character(
+    'arcade', 93, '오락실',
+    dict(char_style='pixel', char='bulb'),
+    dict(bg='#EEF0FF', bg_deep='#E4E7FA', surface='#F7F8FF', pressed='#D9DDF5',
+         border='#CDD2EE', text='#1E2140', subtext='#6A6E9A',
+         accent='#FF9F1C', accent_dim='#E0850A', on_accent='#1E2140',
+         recv='#8BD3FF', recv_alt='#B5E3FF', send='#FFB86B', send_alt='#FFD29E',
+         recv_text='#1B1D36', send_text='#2B1A08',
+         char_outline='#1E2140', char_glow=5, char_glow_k=1.1,
+         char_backs=('#DDE2FF', '#FFE6C7', '#D6EEFF')),
+    dict(bg='#1E2140', bg_deep='#171A33', surface='#262A4F', pressed='#2F3460',
+         border='#353A6A', text='#EDEBFF', subtext='#9A9CC8',
+         accent='#FFD84D', accent_dim='#E0B92E', on_accent='#2B2B40',
+         recv='#8BD3FF', recv_alt='#5FA8D8', send='#FFB86B', send_alt='#E08F3F',
+         recv_text='#1B1D36', send_text='#2B1A08',
+         char_outline='#0E0F24', char_glow=6, char_glow_k=1.5,
+         char_backs=('#3A3F78', '#4A3C78', '#2F4A78')),
+    _scenes('arcade', '#BFD9FF', '#FFE6F2',
+            dict(clouds=7, hills=['#A9C7F2', '#8FB3E8'], ground='#7C8FD6', coins=4,
+                 block=0.014, sun='#FFD84D', dim_to='#FFFFFF'),
+            (0.3, 0.45, 0.05)),
+    _scenes('arcade', '#12132B', '#2A2156',
+            dict(stars=70, hills=['#2B2F66', '#353A80'], ground='#1B1D40', coins=3,
+                 block=0.014, moon='#FFE9A8', dim_to='#000000'),
+            (0.4, 0.5, 0.1)),
+    ['연보라 바탕에 빛나는 픽셀 말풍선과 계단 꼬리',
+     '픽셀 구름과 동전이 뜬 낮의 오락실',
+     '남색 바탕에 네온처럼 빛나는 픽셀 말풍선',
+     '픽셀 별이 뜬 밤 화면에 빛나는 말풍선'])
+
+_LAUNDRY_LIGHT = dict(
+    bg='#EAF4FB', bg_deep='#E0EEF8', surface='#F5FAFD', pressed='#D4E6F3',
+    border='#C9DDEC', text='#2E3A48', subtext='#7C8C9C',
+    accent='#6FA8DC', accent_dim='#4F88BC', on_accent='#FFFFFF',
+    recv='#FFA3CB', recv_alt='#DB76A6', send='#A6D8FF', send_alt='#6AA9D8',
+    recv_edge='#DB76A6', send_edge='#6AA9D8',
+    recv_text='#4F1733', send_text='#123A5A',
+    char_outline='#3D4A5C', char_backs=('#FFFFFF', '#FFE3EF', '#DDEFFC'))
+_LAUNDRY_DARK = dict(
+    bg='#1A2230', bg_deep='#151C28', surface='#222B3B', pressed='#2B3547',
+    border='#33405A', text='#E3EBF5', subtext='#8E9CB0',
+    accent='#7FB6E6', accent_dim='#5F96C6', on_accent='#10161F',
+    recv='#D9679C', recv_alt='#F29AC2', send='#4C8FC7', send_alt='#86BDEB',
+    recv_edge='#F29AC2', send_edge='#86BDEB', shade_a=45,
+    recv_text='#FFF0F6', send_text='#F0F8FF',
+    char_outline='#9FB1C8', char_backs=('#2B3547', '#40304A', '#243A52'))
+_LAUNDRY_SKY = dict(clouds=5, clothes=['#FFA3CB', '#A6D8FF', '#FFFFFF', '#FFE98A'],
+                    ink='#3D4A5C', line='#8B9BB0', peg='#FFC24D', dim_to='#FFFFFF')
+_LAUNDRY_NIGHT = dict(stars=80, moon='#F4EFD8',
+                      clothes=['#D9679C', '#4C8FC7', '#C9D3E0', '#CDB85E'],
+                      ink='#0D121B', line='#6F7F98', peg='#D9A33A', dim_to='#000000')
+
+THEMES += character(
+    'laundry', 97, '빨래',
+    dict(char_style='jelly', char='sock', gloss='normal'),
+    _LAUNDRY_LIGHT, _LAUNDRY_DARK,
+    _scenes('laundry', '#CFE8FA', '#F2F9FE', dict(_LAUNDRY_SKY, lines=3, bubbles=10),
+            (0.3, 0.45, 0.05)),
+    _scenes('laundry', '#141B2A', '#24304A', dict(_LAUNDRY_NIGHT, lines=3, bubbles=6),
+            (0.25, 0.4, 0.0)),
+    ['하늘색 바탕에 젤리 말풍선. 첫 말엔 물방울',
+     '빨랫줄에 짝짝이 양말이 널린 하늘',
+     '밤 빨래. 어두운 바탕에 젤리 말풍선',
+     '달밤 빨랫줄 아래 젤리 말풍선'])
+
+# 빨래와 색이 같고 광택만 다르다. 한 계열에 넣으면 여섯 벌이 되어 넷 규칙을 넘는다.
+THEMES += character(
+    'sparkle', 101, '빨래 반짝',
+    dict(char_style='jelly', char='sock', gloss='strong'),
+    _LAUNDRY_LIGHT, _LAUNDRY_DARK,
+    _scenes('laundry', '#CFE8FA', '#F2F9FE', dict(_LAUNDRY_SKY, lines=2, bubbles=34),
+            (0.3, 0.45, 0.05)),
+    _scenes('laundry', '#141B2A', '#24304A', dict(_LAUNDRY_NIGHT, lines=2, bubbles=24),
+            (0.25, 0.4, 0.0)),
+    ['빨래보다 광택이 또렷한 젤리 말풍선',
+     '비눗방울이 떠다니는 빨랫줄 하늘',
+     '어두운 바탕에서 광택이 더 도드라짐',
+     '달밤 비눗방울과 반짝이는 말풍선'])
 
 check_variants()

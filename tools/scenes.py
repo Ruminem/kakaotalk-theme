@@ -518,6 +518,340 @@ def neon(spec, w, h):
     return img
 
 
+# --- 캐릭터 테마의 장면 --------------------------------------------------
+# 우체국·책상·오락실·빨래. 밝음과 어두움이 같은 함수를 색만 바꿔 쓴다.
+# dim 은 dim_to 쪽으로 섞는다 — 밝은 테마는 흰 쪽, 어두운 테마는 검은 쪽으로 눌러야
+# 말풍선 뒤가 조용해진다. 한쪽으로만 누르면 밝은 테마가 잿빛이 된다.
+
+def _dim(img, o):
+    gen = _g()
+    img = img.convert('RGB')
+    dim = o.get('dim', 0.0)
+    if dim:
+        to = gen.rgb(o.get('dim_to', '#000000'))
+        img = Image.blend(img, Image.new('RGB', img.size, to), dim)
+    return img
+
+
+def _drop(img, piece, x, y, off, blur, alpha):
+    """조각을 그림자와 함께 가운데 (x, y) 에 얹는다. 그림자는 조각의 알파를 흐려 만든다."""
+    pad = int(blur * 3) + 2
+    a = Image.new('L', (piece.width + pad * 2, piece.height + pad * 2), 0)
+    a.paste(piece.getchannel('A').point(lambda v: v * alpha // 255), (pad, pad))
+    sh = Image.new('RGBA', a.size, (0, 0, 0, 255))
+    sh.putalpha(a.filter(ImageFilter.GaussianBlur(blur)))
+    x0, y0 = int(x - piece.width / 2), int(y - piece.height / 2)
+    img.alpha_composite(sh, (x0 - pad + int(off), y0 - pad + int(off * 1.6)))
+    img.alpha_composite(piece, (x0, y0))
+
+
+def _envelope(ew, eh, fill, ink, stamp, ss=3):
+    """편지봉투 한 장. 뒷면 삼각 날개와 우표, 소인 물결."""
+    W, H, o = int(ew * ss), int(eh * ss), 2 * ss
+    img = Image.new('RGBA', (W + o * 2, H + o * 2), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    lw = max(ss, int(W * 0.014))
+    d.rounded_rectangle([o, o, o + W, o + H], radius=int(W * 0.04), fill=fill + (255,),
+                        outline=ink + (255,), width=lw)
+    d.line([(o + lw, o + lw), (o + W / 2, o + H * 0.56), (o + W - lw, o + lw)],
+           fill=ink + (255,), width=lw, joint='curve')
+    if stamp:
+        sw = W * 0.18
+        sx, sy = o + W - sw - W * 0.07, o + H * 0.52
+        d.rectangle([sx, sy, sx + sw, sy + sw * 1.2], fill=stamp + (255,))
+        d.ellipse([sx + sw * 0.3, sy + sw * 0.35, sx + sw * 0.7, sy + sw * 0.8],
+                  fill=fill + (255,))
+        for k in range(3):
+            yy = sy + sw * (0.25 + k * 0.32)
+            pts = [(sx - sw * 1.1 + i * sw * 0.12, yy + math.sin(i * 1.3) * sw * 0.07)
+                   for i in range(13)]
+            d.line(pts, fill=ink + (255,), width=max(1, lw // 2))
+    return img.resize((img.width // ss, img.height // ss), Image.LANCZOS)
+
+
+def _cells(rnd, n, cols):
+    """격자 칸을 섞어 n 개 고른다. 그냥 흩뿌리면 몇 개가 한데 뭉치고 빈 곳이 크게 남는다."""
+    rows = max(1, math.ceil(n / cols))
+    cells = [(i, j) for j in range(rows) for i in range(cols)]
+    rnd.shuffle(cells)
+    return cells[:n], rows
+
+
+def letters(spec, w, h):
+    """흩어진 편지봉투. spec = ('letters', 위색, 아래색, 옵션dict)
+
+      papers  봉투 색들      ink     윤곽선 색     stamps  우표 색들
+      count   봉투 수        marks   소인 동그라미 수
+      dim / dim_to
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261001))
+    img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGBA')
+    unit = w / 500.0
+    ink = gen.rgb(o.get('ink', '#5A4535'))
+    papers = [gen.rgb(c) for c in o.get('papers', ['#FFFFFF'])]
+    stamps = [gen.rgb(c) for c in o.get('stamps', ['#E8483B'])]
+
+    # 소인 동그라미는 따로 만든 판에 그려 얹는다. RGBA 판에 반투명을 바로 그리면 덮어쓴다
+    lay = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(lay)
+    for _ in range(o.get('marks', 10)):
+        x, y, r = rnd.random() * w, rnd.random() * h, rnd.uniform(18, 30) * unit
+        d.ellipse([x - r, y - r, x + r, y + r], outline=ink + (60,), width=max(1, int(2 * unit)))
+    img.alpha_composite(lay)
+
+    cells, rows = _cells(rnd, o.get('count', 15), 3)
+    for i, j in cells:
+        ew = rnd.uniform(88, 128) * unit
+        env = _envelope(ew, ew * 0.62, rnd.choice(papers), ink,
+                        rnd.choice(stamps) if rnd.random() < 0.75 else None)
+        env = env.rotate(rnd.uniform(-24, 24), expand=True, resample=Image.BICUBIC)
+        x = (i + rnd.uniform(0.2, 0.8)) * w / 3
+        y = (j + rnd.uniform(0.2, 0.8)) * h / rows
+        _drop(img, env, x, y, 3 * unit, 4 * unit, 55)
+    return _dim(img, o)
+
+
+def desk(spec, w, h):
+    """나무 책상에 붙은 메모지. spec = ('desk', 위색, 아래색, 옵션dict)
+
+      wood   나무결 옵션(wood 로 넘긴다)
+      notes  메모지 색들    ink  낙서 색    count  메모지 수    dim / dim_to
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    seed = o.get('seed', 20261002)
+    img = wood(('wood', spec[1], spec[2], dict(o.get('wood', {}), seed=seed)), w, h)
+    img = img.convert('RGBA')
+    rnd = random.Random(seed + 1)
+    unit = w / 500.0
+    ink = gen.rgb(o.get('ink', '#5A6B4A'))
+    notes = [gen.rgb(c) for c in o.get('notes', ['#FFE98A'])]
+
+    cells, rows = _cells(rnd, o.get('count', 8), 2)
+    for i, j in cells:
+        s = rnd.uniform(96, 132) * unit
+        ss = 3
+        S = int(s * ss)
+        f = int(S * 0.16)
+        c = rnd.choice(notes)
+        piece = Image.new('RGBA', (S, S), (0, 0, 0, 0))
+        pd = ImageDraw.Draw(piece)
+        pd.polygon([(0, 0), (S, 0), (S, S - f), (S - f, S), (0, S)], fill=c + (255,))
+        fold = tuple(int(v * 0.84) for v in c)
+        pd.polygon([(S, S - f), (S - f, S - f), (S - f, S)], fill=fold + (255,))
+        # 낙서는 줄로만 — 읽히는 글자를 넣으면 말풍선 글자와 다툰다
+        lw = max(ss, int(S * 0.02))
+        for k in range(rnd.randint(2, 4)):
+            yy = S * (0.24 + k * 0.17)
+            x1 = S * rnd.uniform(0.55, 0.82)
+            pts = [(S * 0.14 + (x1 - S * 0.14) * q / 10,
+                    yy + math.sin(q * 1.7 + k) * S * 0.012) for q in range(11)]
+            pd.line(pts, fill=ink + (255,), width=lw, joint='curve')
+        piece = piece.resize((int(s), int(s)), Image.LANCZOS)
+        piece = piece.rotate(rnd.uniform(-14, 14), expand=True, resample=Image.BICUBIC)
+        x = (i + rnd.uniform(0.3, 0.7)) * w / 2
+        y = (j + rnd.uniform(0.2, 0.8)) * h / rows
+        _drop(img, piece, x, y, 3 * unit, 5 * unit, 70)
+    return _dim(img, o)
+
+
+def arcade(spec, w, h):
+    """오락실 화면 같은 픽셀 풍경. spec = ('arcade', 위색, 아래색, 옵션dict)
+
+      block   픽셀 한 칸 크기(폭 비율)   stars  별 수    clouds  구름 수
+      hills   뒤→앞 언덕 색들            ground 맨 앞 땅 색
+      coins   떠 있는 동전 수            sun / moon  해나 달 색
+      dim / dim_to
+
+    작게 그려 NEAREST 로 키운다. 부드럽게 키우면 픽셀 경계가 뭉개져 픽셀로 안 읽힌다.
+    하늘 그라데이션도 세 칸마다 한 번씩만 바꿔 계단으로 만든다.
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261003))
+    B = max(4, int(w * o.get('block', 0.02)))
+    gw, gh = w // B + 1, h // B + 1
+    top, bot = gen.rgb(spec[1]), gen.rgb(spec[2])
+
+    def sky(y):
+        q = min(1.0, (y // 3 * 3) / max(gh - 1, 1))
+        return tuple(int(top[i] + (bot[i] - top[i]) * q) for i in range(3))
+
+    img = Image.new('RGB', (gw, gh))
+    d = ImageDraw.Draw(img)
+    for y in range(gh):
+        d.line([(0, y), (gw, y)], fill=sky(y))
+
+    for _ in range(o.get('stars', 0)):
+        x, y = rnd.randrange(gw), rnd.randrange(int(gh * 0.7))
+        c = (255, 255, 255) if rnd.random() < 0.7 else gen.rgb(o.get('star2', '#FFE08A'))
+        d.point((x, y), fill=c)
+        if rnd.random() < 0.12:                       # 반짝이는 별은 십자
+            d.point([(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)], fill=c)
+
+    orb = o.get('sun') or o.get('moon')
+    if orb:
+        cx, cy, r = int(gw * 0.74), int(gh * 0.16), max(3, gw // 9)
+        for yy in range(-r, r + 1):
+            for xx in range(-r, r + 1):
+                if xx * xx + yy * yy <= r * r:
+                    d.point((cx + xx, cy + yy), fill=gen.rgb(orb))
+        if o.get('moon'):
+            # 초승달로 파내면 칸이 굵어 바나나처럼 보였다. 보름달에 구덩이 두 칸만 찍는다
+            pit = tuple(int(v * 0.82) for v in gen.rgb(orb))
+            d.rectangle([cx - r // 2, cy - r // 3, cx - r // 2 + 1, cy - r // 3 + 1], fill=pit)
+            d.point((cx + r // 3, cy + r // 3), fill=pit)
+
+    for _ in range(o.get('clouds', 0)):
+        cx, cy = rnd.randrange(gw), rnd.randrange(3, int(gh * 0.55))
+        cw = rnd.randint(10, 15)
+        d.rectangle([cx, cy, cx + cw, cy + 2], fill=(255, 255, 255))
+        d.rectangle([cx + 2, cy - 2, cx + cw - 3, cy], fill=(255, 255, 255))
+        d.rectangle([cx + 4, cy - 3, cx + cw - 6, cy - 2], fill=(255, 255, 255))
+
+    for k, col in enumerate(o.get('hills', [])):
+        base = gh * (0.64 + k * 0.08)
+        amp = gh * rnd.uniform(0.04, 0.07)
+        ph, fr = rnd.uniform(0, 6.28), rnd.uniform(0.08, 0.16)
+        for x in range(0, gw, 2):                     # 두 칸씩 끊어 계단 능선
+            yy = int(base - amp * (0.5 + 0.5 * math.sin(ph + x * fr)))
+            d.rectangle([x, yy, x + 1, gh], fill=gen.rgb(col))
+    if o.get('ground'):
+        gy = int(gh * 0.9)
+        g = gen.rgb(o['ground'])
+        d.rectangle([0, gy, gw, gh], fill=g)
+        edge = tuple(min(255, int(v * 1.35) + 14) for v in g)
+        d.line([(0, gy), (gw, gy)], fill=edge)
+        for row, y in enumerate(range(gy + 3, gh, 3)):  # 벽돌 줄눈
+            d.line([(0, y), (gw, y)], fill=edge)
+            for x in range(row % 2 * 2, gw, 4):
+                d.line([(x, y - 2), (x, y - 1)], fill=edge)
+
+    gold, dark = gen.rgb(o.get('coin', '#FFD84D')), gen.rgb(o.get('coin_dark', '#C98A1B'))
+    for _ in range(o.get('coins', 0)):
+        cx, cy = rnd.randrange(2, gw - 2), rnd.randrange(int(gh * 0.2), int(gh * 0.6))
+        d.rectangle([cx - 1, cy - 2, cx + 1, cy + 2], fill=gold)
+        d.rectangle([cx - 2, cy - 1, cx + 2, cy + 1], fill=gold)
+        d.line([(cx, cy - 1), (cx, cy + 1)], fill=dark)
+
+    img = img.resize((gw * B, gh * B), Image.NEAREST).crop((0, 0, w, h))
+    return _dim(img, o)
+
+
+def _hang(d, kind, x, y, s, c, ink, peg, lw):
+    """빨랫줄의 (x, y) 에 걸린 빨래 한 점. s 는 크기 단위. 차지한 폭을 돌려준다."""
+    oc = ink + (255,)
+    if kind == 'sock':
+        d.rounded_rectangle([x, y, x + 22 * s, y + 46 * s], radius=4 * s, fill=c,
+                            outline=oc, width=lw)
+        d.rounded_rectangle([x, y + 30 * s, x + 44 * s, y + 56 * s], radius=12 * s, fill=c,
+                            outline=oc, width=lw)
+        d.rectangle([x + lw, y + 28 * s, x + 22 * s - lw, y + 40 * s], fill=c)
+        stripe = tuple(int(v * 0.72) for v in c[:3]) + (255,)
+        d.rectangle([x + lw, y + 8 * s, x + 22 * s - lw, y + 13 * s], fill=stripe)
+        pegs, wide = (x + 11 * s,), 44 * s
+    elif kind == 'towel':
+        d.rectangle([x, y, x + 50 * s, y + 70 * s], fill=c, outline=oc, width=lw)
+        band = tuple(int(v * 0.8) for v in c[:3]) + (255,)
+        d.rectangle([x + lw, y + 52 * s, x + 50 * s - lw, y + 58 * s], fill=band)
+        pegs, wide = (x + 8 * s, x + 42 * s), 50 * s
+    else:
+        pts = [(x + 14 * s, y), (x + 50 * s, y), (x + 64 * s, y + 16 * s),
+               (x + 54 * s, y + 26 * s), (x + 50 * s, y + 22 * s), (x + 50 * s, y + 66 * s),
+               (x + 14 * s, y + 66 * s), (x + 14 * s, y + 22 * s), (x + 10 * s, y + 26 * s),
+               (x, y + 16 * s)]
+        d.polygon(pts, fill=c)
+        d.line(pts + [pts[0]], fill=oc, width=lw, joint='curve')
+        pegs, wide = (x + 20 * s, x + 44 * s), 64 * s
+    for px_ in pegs:
+        d.rectangle([px_ - 3 * s, y - 6 * s, px_ + 3 * s, y + 8 * s], fill=peg + (255,),
+                    outline=oc, width=max(1, lw // 2))
+    return wide
+
+
+def laundry(spec, w, h):
+    """빨랫줄 하늘. spec = ('laundry', 위색, 아래색, 옵션dict)
+
+      clothes  빨래 색들      ink  윤곽선      line  줄 색     peg  집게 색
+      lines    줄 수          bubbles  비눗방울 수
+      clouds / stars / moon   하늘            dim / dim_to
+
+    두 배로 그려 줄인다. 빨래는 윤곽선이 있는 그림이라 계단이 바로 보인다.
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261004))
+    k = 2
+    W, H = w * k, h * k
+    img = gen.vgradient(W, H, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGBA')
+    unit = W / 500.0
+
+    # 구름은 또렷한 동그라미를 겹친 한 덩어리로 그려 한 번에 얹는다. 흐린 원을 하나씩
+    # 얹으면 겹친 자리마다 진해져 솜뭉치 여러 개로 보였다. 바닥은 평평하게 자른다.
+    if o.get('clouds'):
+        lay = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+        cd = ImageDraw.Draw(lay)
+        for _ in range(o['clouds']):
+            cx, cy = rnd.random() * W, rnd.uniform(0.04, 0.5) * H
+            cw = rnd.uniform(110, 170) * unit
+            base = cy + 18 * unit
+            for q in range(5):
+                bx = cx - cw / 2 + cw * (q + 0.5) / 5
+                r = (1 - abs(q - 2) / 3.2) * cw * rnd.uniform(0.2, 0.26)
+                cd.ellipse([bx - r, base - r * 1.7, bx + r, base + r * 0.3],
+                           fill=(255, 255, 255, 255))
+            cd.rectangle([cx - cw / 2 - 20 * unit, base, cx + cw / 2 + 20 * unit, base + 60 * unit],
+                         fill=(0, 0, 0, 0))
+        lay = lay.filter(ImageFilter.GaussianBlur(1.5 * unit))
+        lay.putalpha(lay.getchannel('A').point(lambda v: v * 200 // 255))
+        img.alpha_composite(lay)
+    if o.get('moon'):
+        mx, my, mr = W * 0.78, H * 0.1, 34 * unit
+        img.alpha_composite(*_soft_blob(mr * 2.2, gen.rgb(o['moon']) + (40,), 24 * unit,
+                                        mx, my))
+
+    img = img.convert('RGB')                          # 여기부터는 RGB 판이라 반투명이 섞인다
+    d = ImageDraw.Draw(img, 'RGBA')
+    for _ in range(o.get('stars', 0)):
+        x, y, r = rnd.random() * W, rnd.random() * H * 0.8, rnd.uniform(0.8, 2.2) * unit
+        d.ellipse([x - r, y - r, x + r, y + r], fill=(255, 255, 255, rnd.randint(120, 230)))
+    if o.get('moon'):
+        d.ellipse([mx - mr, my - mr, mx + mr, my + mr], fill=gen.rgb(o['moon']) + (255,))
+
+    ink = gen.rgb(o.get('ink', '#3D4A5C'))
+    line_c = gen.rgb(o.get('line', '#8B9BB0')) + (255,)
+    peg = gen.rgb(o.get('peg', '#FFC24D'))
+    clothes = [gen.rgb(c) + (255,) for c in o.get('clothes', ['#FFFFFF'])]
+    lw = max(2, int(2.4 * unit))
+    rows = o.get('lines', 3)
+    for i in range(rows):
+        y0 = H * (0.2 + i * 0.7 / rows) + rnd.uniform(-0.03, 0.03) * H
+        sag = rnd.uniform(0.05, 0.09) * W
+        tilt = rnd.uniform(-0.05, 0.05) * H
+
+        def yat(x, y0=y0, sag=sag, tilt=tilt):
+            return y0 + tilt * x / W + sag * 4 * (x / W) * (1 - x / W)
+
+        d.line([(x, yat(x)) for x in range(-10, W + 11, 20)], fill=line_c, width=lw)
+        x = rnd.uniform(0.02, 0.1) * W
+        while x < W * 0.9:
+            s = rnd.uniform(1.0, 1.35) * unit
+            kind = rnd.choice(('sock', 'sock', 'towel', 'shirt'))
+            x += _hang(d, kind, x, yat(x + 16 * s), s, rnd.choice(clothes), ink, peg, lw)
+            x += rnd.uniform(0.05, 0.13) * W
+
+    for _ in range(o.get('bubbles', 0)):
+        x, y, r = rnd.random() * W, rnd.random() * H, rnd.uniform(8, 26) * unit
+        d.ellipse([x - r, y - r, x + r, y + r], fill=(255, 255, 255, 28),
+                  outline=(255, 255, 255, 150), width=max(1, int(1.6 * unit)))
+        d.ellipse([x - r * 0.55, y - r * 0.6, x - r * 0.15, y - r * 0.3],
+                  fill=(255, 255, 255, 190))
+    img = img.resize((w, h), Image.LANCZOS)
+    return _dim(img, o)
+
+
 # --- 잔불 ----------------------------------------------------------------
 
 def ember(spec, w, h):

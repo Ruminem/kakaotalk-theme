@@ -26,6 +26,7 @@ from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import gen  # noqa: E402
+import charbubble  # noqa: E402
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -261,6 +262,8 @@ def bubble_sheet(t, side, variant):
     몸통까지의 투명한 여백이다. 지금은 사방이 글로우 여백으로 같지만, 모양이 한쪽으로
     치우친 말풍선(꼬리 같은 것)이 생기면 여기서 갈라진다.
     """
+    if t.get('char_style'):
+        return charbubble.sheet(t, side, variant, S)
     glow, pad = gen.glow_of(t)
     rim, frost = gen.glass_of(t)
     pal = t[side] if variant == '01' else t[side + '_alt']

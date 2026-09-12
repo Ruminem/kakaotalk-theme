@@ -114,6 +114,31 @@
 </tr>
 </table>
 
+**[캐릭터](#user-content-캐릭터)** — 말풍선 모양과 캐릭터 프로필
+
+<table>
+<tr>
+<td width="33%" align="center"><a href="#user-content-우체국"><img src="assets/preview-post-light-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-책상"><img src="assets/preview-desk-light-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-오락실"><img src="assets/preview-arcade-light-chat.png" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/icon-post-light.png" width="20" valign="middle"> <b><a href="#user-content-우체국">우체국</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림빛 편지지 바탕. 첫 말풍선엔 우표 붙은 봉투</td>
+<td align="center"><img src="assets/icon-desk-light.png" width="20" valign="middle"> <b><a href="#user-content-책상">책상</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연둣빛 바탕에 포스트잇 말풍선. 첫 장엔 테이프</td>
+<td align="center"><img src="assets/icon-arcade-light.png" width="20" valign="middle"> <b><a href="#user-content-오락실">오락실</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연보라 바탕에 빛나는 픽셀 말풍선과 계단 꼬리</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="#user-content-빨래"><img src="assets/preview-laundry-light-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-빨래-반짝"><img src="assets/preview-sparkle-light-chat.png" width="190"></a></td>
+<td width="33%"></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/icon-laundry-light.png" width="20" valign="middle"> <b><a href="#user-content-빨래">빨래</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>하늘색 바탕에 젤리 말풍선. 첫 말엔 물방울</td>
+<td align="center"><img src="assets/icon-sparkle-light.png" width="20" valign="middle"> <b><a href="#user-content-빨래-반짝">빨래 반짝</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>빨래보다 광택이 또렷한 젤리 말풍선</td>
+<td width="33%"></td>
+</tr>
+</table>
+
 <a name="무늬"></a>
 
 ### 무늬
@@ -862,6 +887,185 @@
 **글로우+배경** — 불티 배경 위에 달아오른 빨강까지
 
 <img src="assets/preview-red-glow-image-list.png" width="180"> <img src="assets/preview-red-glow-image-passcode.png" width="180"> <img src="assets/preview-red-glow-image-splash.png" width="180">
+
+</details>
+
+<a name="캐릭터"></a>
+
+### 캐릭터
+
+<a name="우체국"></a>
+
+#### <img src="assets/icon-post-light.png" width="26" valign="middle"> 우체국
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-post-light-chat.png" width="200"><br><b>밝음</b><br><sub>크림빛 편지지 바탕. 첫 말풍선엔 우표 붙은 봉투</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=post-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/post-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-post-light-image-chat.png" width="200"><br><b>밝음+배경</b><br><sub>편지봉투가 흩어진 우체국 책상</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=post-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/post-light-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-post-dark-chat.png" width="200"><br><b>어두움</b><br><sub>밤의 우체국. 짙은 갈색 바탕에 봉투 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=post-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/post-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-post-dark-image-chat.png" width="200"><br><b>어두움+배경</b><br><sub>어둠 속에 흩어진 편지봉투</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=post-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/post-dark-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**밝음** — 크림빛 편지지 바탕. 첫 말풍선엔 우표 붙은 봉투
+
+<img src="assets/preview-post-light-list.png" width="180"> <img src="assets/preview-post-light-passcode.png" width="180"> <img src="assets/preview-post-light-splash.png" width="180">
+
+**밝음+배경** — 편지봉투가 흩어진 우체국 책상
+
+<img src="assets/preview-post-light-image-list.png" width="180"> <img src="assets/preview-post-light-image-passcode.png" width="180"> <img src="assets/preview-post-light-image-splash.png" width="180">
+
+**어두움** — 밤의 우체국. 짙은 갈색 바탕에 봉투 말풍선
+
+<img src="assets/preview-post-dark-list.png" width="180"> <img src="assets/preview-post-dark-passcode.png" width="180"> <img src="assets/preview-post-dark-splash.png" width="180">
+
+**어두움+배경** — 어둠 속에 흩어진 편지봉투
+
+<img src="assets/preview-post-dark-image-list.png" width="180"> <img src="assets/preview-post-dark-image-passcode.png" width="180"> <img src="assets/preview-post-dark-image-splash.png" width="180">
+
+</details>
+
+<a name="책상"></a>
+
+#### <img src="assets/icon-desk-light.png" width="26" valign="middle"> 책상
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-desk-light-chat.png" width="200"><br><b>밝음</b><br><sub>연둣빛 바탕에 포스트잇 말풍선. 첫 장엔 테이프</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=desk-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/desk-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-desk-light-image-chat.png" width="200"><br><b>밝음+배경</b><br><sub>나무 책상에 메모지가 붙어 있음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=desk-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/desk-light-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-desk-dark-chat.png" width="200"><br><b>어두움</b><br><sub>불 끈 책상. 색을 눌러 담은 포스트잇</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=desk-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/desk-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-desk-dark-image-chat.png" width="200"><br><b>어두움+배경</b><br><sub>짙은 원목 책상에 메모지</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=desk-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/desk-dark-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**밝음** — 연둣빛 바탕에 포스트잇 말풍선. 첫 장엔 테이프
+
+<img src="assets/preview-desk-light-list.png" width="180"> <img src="assets/preview-desk-light-passcode.png" width="180"> <img src="assets/preview-desk-light-splash.png" width="180">
+
+**밝음+배경** — 나무 책상에 메모지가 붙어 있음
+
+<img src="assets/preview-desk-light-image-list.png" width="180"> <img src="assets/preview-desk-light-image-passcode.png" width="180"> <img src="assets/preview-desk-light-image-splash.png" width="180">
+
+**어두움** — 불 끈 책상. 색을 눌러 담은 포스트잇
+
+<img src="assets/preview-desk-dark-list.png" width="180"> <img src="assets/preview-desk-dark-passcode.png" width="180"> <img src="assets/preview-desk-dark-splash.png" width="180">
+
+**어두움+배경** — 짙은 원목 책상에 메모지
+
+<img src="assets/preview-desk-dark-image-list.png" width="180"> <img src="assets/preview-desk-dark-image-passcode.png" width="180"> <img src="assets/preview-desk-dark-image-splash.png" width="180">
+
+</details>
+
+<a name="오락실"></a>
+
+#### <img src="assets/icon-arcade-light.png" width="26" valign="middle"> 오락실
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-arcade-light-chat.png" width="200"><br><b>밝음</b><br><sub>연보라 바탕에 빛나는 픽셀 말풍선과 계단 꼬리</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=arcade-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/arcade-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-arcade-light-image-chat.png" width="200"><br><b>밝음+배경</b><br><sub>픽셀 구름과 동전이 뜬 낮의 오락실</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=arcade-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/arcade-light-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-arcade-dark-chat.png" width="200"><br><b>어두움</b><br><sub>남색 바탕에 네온처럼 빛나는 픽셀 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=arcade-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/arcade-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-arcade-dark-image-chat.png" width="200"><br><b>어두움+배경</b><br><sub>픽셀 별이 뜬 밤 화면에 빛나는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=arcade-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/arcade-dark-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**밝음** — 연보라 바탕에 빛나는 픽셀 말풍선과 계단 꼬리
+
+<img src="assets/preview-arcade-light-list.png" width="180"> <img src="assets/preview-arcade-light-passcode.png" width="180"> <img src="assets/preview-arcade-light-splash.png" width="180">
+
+**밝음+배경** — 픽셀 구름과 동전이 뜬 낮의 오락실
+
+<img src="assets/preview-arcade-light-image-list.png" width="180"> <img src="assets/preview-arcade-light-image-passcode.png" width="180"> <img src="assets/preview-arcade-light-image-splash.png" width="180">
+
+**어두움** — 남색 바탕에 네온처럼 빛나는 픽셀 말풍선
+
+<img src="assets/preview-arcade-dark-list.png" width="180"> <img src="assets/preview-arcade-dark-passcode.png" width="180"> <img src="assets/preview-arcade-dark-splash.png" width="180">
+
+**어두움+배경** — 픽셀 별이 뜬 밤 화면에 빛나는 말풍선
+
+<img src="assets/preview-arcade-dark-image-list.png" width="180"> <img src="assets/preview-arcade-dark-image-passcode.png" width="180"> <img src="assets/preview-arcade-dark-image-splash.png" width="180">
+
+</details>
+
+<a name="빨래"></a>
+
+#### <img src="assets/icon-laundry-light.png" width="26" valign="middle"> 빨래
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-laundry-light-chat.png" width="200"><br><b>밝음</b><br><sub>하늘색 바탕에 젤리 말풍선. 첫 말엔 물방울</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=laundry-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/laundry-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-laundry-light-image-chat.png" width="200"><br><b>밝음+배경</b><br><sub>빨랫줄에 짝짝이 양말이 널린 하늘</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=laundry-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/laundry-light-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-laundry-dark-chat.png" width="200"><br><b>어두움</b><br><sub>밤 빨래. 어두운 바탕에 젤리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=laundry-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/laundry-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-laundry-dark-image-chat.png" width="200"><br><b>어두움+배경</b><br><sub>달밤 빨랫줄 아래 젤리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=laundry-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/laundry-dark-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**밝음** — 하늘색 바탕에 젤리 말풍선. 첫 말엔 물방울
+
+<img src="assets/preview-laundry-light-list.png" width="180"> <img src="assets/preview-laundry-light-passcode.png" width="180"> <img src="assets/preview-laundry-light-splash.png" width="180">
+
+**밝음+배경** — 빨랫줄에 짝짝이 양말이 널린 하늘
+
+<img src="assets/preview-laundry-light-image-list.png" width="180"> <img src="assets/preview-laundry-light-image-passcode.png" width="180"> <img src="assets/preview-laundry-light-image-splash.png" width="180">
+
+**어두움** — 밤 빨래. 어두운 바탕에 젤리 말풍선
+
+<img src="assets/preview-laundry-dark-list.png" width="180"> <img src="assets/preview-laundry-dark-passcode.png" width="180"> <img src="assets/preview-laundry-dark-splash.png" width="180">
+
+**어두움+배경** — 달밤 빨랫줄 아래 젤리 말풍선
+
+<img src="assets/preview-laundry-dark-image-list.png" width="180"> <img src="assets/preview-laundry-dark-image-passcode.png" width="180"> <img src="assets/preview-laundry-dark-image-splash.png" width="180">
+
+</details>
+
+<a name="빨래-반짝"></a>
+
+#### <img src="assets/icon-sparkle-light.png" width="26" valign="middle"> 빨래 반짝
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-sparkle-light-chat.png" width="200"><br><b>밝음</b><br><sub>빨래보다 광택이 또렷한 젤리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sparkle-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sparkle-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-sparkle-light-image-chat.png" width="200"><br><b>밝음+배경</b><br><sub>비눗방울이 떠다니는 빨랫줄 하늘</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sparkle-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sparkle-light-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-sparkle-dark-chat.png" width="200"><br><b>어두움</b><br><sub>어두운 바탕에서 광택이 더 도드라짐</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sparkle-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sparkle-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-sparkle-dark-image-chat.png" width="200"><br><b>어두움+배경</b><br><sub>달밤 비눗방울과 반짝이는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sparkle-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sparkle-dark-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**밝음** — 빨래보다 광택이 또렷한 젤리 말풍선
+
+<img src="assets/preview-sparkle-light-list.png" width="180"> <img src="assets/preview-sparkle-light-passcode.png" width="180"> <img src="assets/preview-sparkle-light-splash.png" width="180">
+
+**밝음+배경** — 비눗방울이 떠다니는 빨랫줄 하늘
+
+<img src="assets/preview-sparkle-light-image-list.png" width="180"> <img src="assets/preview-sparkle-light-image-passcode.png" width="180"> <img src="assets/preview-sparkle-light-image-splash.png" width="180">
+
+**어두움** — 어두운 바탕에서 광택이 더 도드라짐
+
+<img src="assets/preview-sparkle-dark-list.png" width="180"> <img src="assets/preview-sparkle-dark-passcode.png" width="180"> <img src="assets/preview-sparkle-dark-splash.png" width="180">
+
+**어두움+배경** — 달밤 비눗방울과 반짝이는 말풍선
+
+<img src="assets/preview-sparkle-dark-image-list.png" width="180"> <img src="assets/preview-sparkle-dark-image-passcode.png" width="180"> <img src="assets/preview-sparkle-dark-image-splash.png" width="180">
 
 </details>
 
