@@ -66,6 +66,9 @@
 | 탭 아이콘 7종 × 보통/선택 | `maintabIco*` / `*Selected` | `theme_maintab_ico_*_image` / `*_focused_image` |
 | 기본 프로필 3장 | `-ios-profile-images` 에 세 장 나열 | `theme_profile_01~03_image` |
 
+목록 배경만 크게 흐려서 내보낸다. 카톡이 그 위에 불투명한 칩 줄·광고 카드·셀을 얹기 때문에,
+그림을 그대로 깔면 얹힌 것의 가장자리마다 잘린 자국이 네모로 보인다.
+
 ### 아직 안 쓰는 것 — 남은 재료
 
 | 자리 | iOS | Android | 메모 |

@@ -813,9 +813,19 @@ BottomBannerStyle
 """
 
 
-def background(t, spec, w, h):
-    """배경 이미지 한 장. 테마에 글로우가 있으면 가장자리에 빛을 흘린다."""
+def background(t, spec, w, h, flat=False):
+    """배경 이미지 한 장. 테마에 글로우가 있으면 빛을 얹는다.
+
+    flat 은 목록 화면용이다. 카톡이 목록 위에 불투명한 것을 잔뜩 얹는다 —
+    칩 줄, 광고 카드, 셀. 배경에 굴곡이 있으면 얹힌 자리마다 잘린 자국이 보인다.
+    그래서 목록 배경은 그림이 아니라 질감이어야 한다. 크게 흐리고 대비를 죽인다.
+    채팅방과 잠금화면은 얹히는 게 적어서 그림 그대로 쓴다.
+    """
     img = chat_bg(spec, w, h)
+    if flat:
+        img = img.filter(ImageFilter.GaussianBlur(w * 0.14))
+        mid_c = img.resize((1, 1), Image.LANCZOS).getpixel((0, 0))
+        img = Image.blend(img, Image.new('RGB', (w, h), mid_c), 0.55)
     g = t.get('glow')
     if g:
         # 배경에는 말풍선처럼 따라갈 색이 없다. auto 면 포인트색을 쓴다
@@ -871,8 +881,10 @@ def gen_ios(t, root):
 
     mainbg = ''
     if t.get('main_bg'):
-        background(t, t['main_bg'], 600, 1300).save(os.path.join(img_dir, 'mainBgImage@2x.png'))
-        background(t, t['main_bg'], 900, 1950).save(os.path.join(img_dir, 'mainBgImage@3x.png'))
+        background(t, t['main_bg'], 600, 1300, flat=True).save(
+            os.path.join(img_dir, 'mainBgImage@2x.png'))
+        background(t, t['main_bg'], 900, 1950, flat=True).save(
+            os.path.join(img_dir, 'mainBgImage@3x.png'))
         mainbg = "\n    -ios-background-image: 'mainBgImage.png';"
 
     passbg = ''
@@ -1044,7 +1056,7 @@ def gen_android(t, root, code):
         background(t, t['chat_bg'], 1080, 1920).save(
             os.path.join(draw, 'theme_chatroom_background_image.png'), optimize=True)
     if t.get('main_bg'):
-        background(t, t['main_bg'], 1080, 1920).save(
+        background(t, t['main_bg'], 1080, 1920, flat=True).save(
             os.path.join(draw, 'theme_background_image.png'), optimize=True)
     if t.get('passcode_bg'):
         background(t, t['passcode_bg'], 1080, 1920).save(

@@ -16,50 +16,50 @@
 
 <table>
 <tr>
-<td width="33%" align="center"><a href="#먹빛-민트"><img src="assets/preview-inkmint01-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#크림-라떼"><img src="assets/preview-cream02-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#벚꽃-그늘"><img src="assets/preview-sakura03-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-먹빛-민트"><img src="assets/preview-inkmint01-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-크림-라떼"><img src="assets/preview-cream02-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-벚꽃-그늘"><img src="assets/preview-sakura03-chat.png" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-inkmint01.png" width="20" valign="middle"> <b><a href="#먹빛-민트">먹빛 민트</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름</td>
-<td align="center"><img src="assets/icon-cream02.png" width="20" valign="middle"> <b><a href="#크림-라떼">크림 라떼</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽. 베이지 바탕에 브라운. 눈이 제일 안 피로한 조합임</td>
-<td align="center"><img src="assets/icon-sakura03.png" width="20" valign="middle"> <b><a href="#벚꽃-그늘">벚꽃 그늘</a></b><br><sub>기본 · 벚꽃 배경 · 글로우 · 글로우+배경</sub><br>밝은 분홍. 채팅방 배경 이미지가 깔림</td>
+<td align="center"><img src="assets/icon-inkmint01.png" width="20" valign="middle"> <b><a href="#user-content-먹빛-민트">먹빛 민트</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름</td>
+<td align="center"><img src="assets/icon-cream02.png" width="20" valign="middle"> <b><a href="#user-content-크림-라떼">크림 라떼</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽. 베이지 바탕에 브라운. 눈이 제일 안 피로한 조합임</td>
+<td align="center"><img src="assets/icon-sakura03.png" width="20" valign="middle"> <b><a href="#user-content-벚꽃-그늘">벚꽃 그늘</a></b><br><sub>기본 · 벚꽃 배경 · 글로우 · 글로우+배경</sub><br>밝은 분홍. 채팅방 배경 이미지가 깔림</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#믹스드"><img src="assets/preview-mixed04-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#오로라"><img src="assets/preview-aurora32-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#캔디-팝"><img src="assets/preview-candy06-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-믹스드"><img src="assets/preview-mixed04-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-오로라"><img src="assets/preview-aurora32-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-캔디-팝"><img src="assets/preview-candy06-chat.png" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-mixed04.png" width="20" valign="middle"> <b><a href="#믹스드">믹스드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임</td>
-<td align="center"><img src="assets/icon-aurora32.png" width="20" valign="middle"> <b><a href="#오로라">오로라</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>오로라를 걷어낸 가장 어두운 바탕</td>
-<td align="center"><img src="assets/icon-candy06.png" width="20" valign="middle"> <b><a href="#캔디-팝">캔디 팝</a></b><br><sub>기본 · 사탕 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
+<td align="center"><img src="assets/icon-mixed04.png" width="20" valign="middle"> <b><a href="#user-content-믹스드">믹스드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임</td>
+<td align="center"><img src="assets/icon-aurora32.png" width="20" valign="middle"> <b><a href="#user-content-오로라">오로라</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>오로라를 걷어낸 가장 어두운 바탕</td>
+<td align="center"><img src="assets/icon-candy06.png" width="20" valign="middle"> <b><a href="#user-content-캔디-팝">캔디 팝</a></b><br><sub>기본 · 사탕 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#리퀴드-글래스"><img src="assets/preview-glass07-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#심야"><img src="assets/preview-midnight36-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#바다"><img src="assets/preview-sea39-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-리퀴드-글래스"><img src="assets/preview-glass07-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-심야"><img src="assets/preview-midnight36-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-바다"><img src="assets/preview-sea39-chat.png" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-glass07.png" width="20" valign="middle"> <b><a href="#리퀴드-글래스">리퀴드 글래스</a></b><br><sub>라이트 · 다크</sub><br>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</td>
-<td align="center"><img src="assets/icon-midnight36.png" width="20" valign="middle"> <b><a href="#심야">심야</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밤하늘을 걷어낸 남색 바탕</td>
-<td align="center"><img src="assets/icon-sea39.png" width="20" valign="middle"> <b><a href="#바다">바다</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>바다를 걷어낸 짙은 물빛 바탕</td>
+<td align="center"><img src="assets/icon-glass07.png" width="20" valign="middle"> <b><a href="#user-content-리퀴드-글래스">리퀴드 글래스</a></b><br><sub>라이트 · 다크</sub><br>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</td>
+<td align="center"><img src="assets/icon-midnight36.png" width="20" valign="middle"> <b><a href="#user-content-심야">심야</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밤하늘을 걷어낸 남색 바탕</td>
+<td align="center"><img src="assets/icon-sea39.png" width="20" valign="middle"> <b><a href="#user-content-바다">바다</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>바다를 걷어낸 짙은 물빛 바탕</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#숲"><img src="assets/preview-forest42-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#설원"><img src="assets/preview-snow45-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#도형"><img src="assets/preview-geo48-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-숲"><img src="assets/preview-forest42-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-설원"><img src="assets/preview-snow45-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-도형"><img src="assets/preview-geo48-chat.png" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-forest42.png" width="20" valign="middle"> <b><a href="#숲">숲</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>숲을 걷어낸 이끼빛 바탕</td>
-<td align="center"><img src="assets/icon-snow45.png" width="20" valign="middle"> <b><a href="#설원">설원</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>눈을 걷어낸 얼음빛 바탕</td>
-<td align="center"><img src="assets/icon-geo48.png" width="20" valign="middle"> <b><a href="#도형">도형</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>도형을 걷어낸 미색 바탕</td>
+<td align="center"><img src="assets/icon-forest42.png" width="20" valign="middle"> <b><a href="#user-content-숲">숲</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>숲을 걷어낸 이끼빛 바탕</td>
+<td align="center"><img src="assets/icon-snow45.png" width="20" valign="middle"> <b><a href="#user-content-설원">설원</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>눈을 걷어낸 얼음빛 바탕</td>
+<td align="center"><img src="assets/icon-geo48.png" width="20" valign="middle"> <b><a href="#user-content-도형">도형</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>도형을 걷어낸 미색 바탕</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#야경"><img src="assets/preview-city19-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-야경"><img src="assets/preview-city19-chat.png" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-city19.png" width="20" valign="middle"> <b><a href="#야경">야경</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>담백한 남색 바탕. 네온 네 색 말풍선</td>
+<td align="center"><img src="assets/icon-city19.png" width="20" valign="middle"> <b><a href="#user-content-야경">야경</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>담백한 남색 바탕. 네온 네 색 말풍선</td>
 </tr>
 </table>
 

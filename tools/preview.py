@@ -249,7 +249,7 @@ def chat_list(t):
     """
     ca = t.get('cell_alpha', 1.0)
     if t.get('main_bg'):
-        base = gen.background(t, t['main_bg'], W, H).convert('RGBA')
+        base = gen.background(t, t['main_bg'], W, H, flat=True).convert('RGBA')
     else:
         base = Image.new('RGBA', (W, H), rgb(t['bg']) + (255,))
 
@@ -406,7 +406,7 @@ CARD = """<section class="card">
 
 # --- README 테마 목록 ----------------------------------------------------
 # README 의 마커 사이를 여기서 채운다. 테마를 추가할 때 README 를 따로 손보지 않으려는 것.
-# 썸네일을 누르면 해당 테마 자리로 스크롤한다 — GitHub 은 제목 텍스트로 앵커를 만든다.
+# 썸네일을 누르면 해당 테마 자리로 스크롤한다. 앵커는 테마 이름에서 만든다.
 
 START = '<!-- THEMES:START -->'
 END = '<!-- THEMES:END -->'
@@ -440,9 +440,20 @@ def _check(fams):
                              % (name, len(members), VARIANT_MAX_N))
 
 
+def slug(name):
+    """앵커 이름. 소문자로 바꾸고 공백을 하이픈으로."""
+    return name.strip().lower().replace(' ', '-')
+
+
 def anchor(name):
-    """GitHub 이 제목에서 만드는 앵커. 소문자로 바꾸고 공백을 하이픈으로."""
-    return '#' + name.strip().lower().replace(' ', '-')
+    """그 계열 자리로 뛰는 링크.
+
+    GitHub 은 문서 안의 id 앞에 `user-content-` 를 붙여 놓고, 링크를 누르면
+    자바스크립트가 그 접두사를 붙여 찾아간다. 그 스크립트가 안 도는 자리가 있다 —
+    모바일 브라우저와 GitHub 앱. 거기서는 `#먹빛-민트` 를 눌러도 아무 일도 안 난다.
+    그래서 처음부터 진짜 id 를 가리킨다. 브라우저가 알아서 찾아가므로 어디서나 같다.
+    """
+    return '#user-content-' + slug(name)
 
 
 def readme_block(ts):
@@ -484,7 +495,7 @@ def readme_block(ts):
 
     # 계열별 상세
     for name, members in fams:
-        out.append('<a name="%s"></a>' % anchor(name).lstrip('#'))
+        out.append('<a name="%s"></a>' % slug(name))
         out.append('')
         out.append('### <img src="assets/icon-%s.png" width="26" valign="middle"> %s'
                    % (members[0]['key'], name))
