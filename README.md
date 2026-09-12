@@ -35,6 +35,14 @@
 <td align="center"><b><a href="#오로라">오로라</a></b><br>가장 어두운 테마. 채팅방 배경에 오로라가 번짐</td>
 <td align="center"><b><a href="#캔디-팝">캔디 팝</a></b><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
 </tr>
+<tr>
+<td width="33%" align="center"><a href="#리퀴드-글래스"><img src="docs/preview-glass07-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#리퀴드-글래스-다크"><img src="docs/preview-glass08-chat.png" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><b><a href="#리퀴드-글래스">리퀴드 글래스</a></b><br>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</td>
+<td align="center"><b><a href="#리퀴드-글래스-다크">리퀴드 글래스 다크</a></b><br>같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림</td>
+</tr>
 </table>
 
 ### 먹빛 민트
@@ -84,6 +92,22 @@
 밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음.
 
 [iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy06.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy06.apk)
+
+### 리퀴드 글래스
+
+<img src="docs/preview-glass07-list.png" width="200"> <img src="docs/preview-glass07-chat.png" width="200"> <img src="docs/preview-glass07-splash.png" width="200">
+
+유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침.
+
+[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass07.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass07.apk)
+
+### 리퀴드 글래스 다크
+
+<img src="docs/preview-glass08-list.png" width="200"> <img src="docs/preview-glass08-chat.png" width="200"> <img src="docs/preview-glass08-splash.png" width="200">
+
+같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림.
+
+[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass08.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass08.apk)
 
 <!-- THEMES:END -->
 

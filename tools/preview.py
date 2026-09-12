@@ -68,15 +68,14 @@ def _round(d, box, r, fill):
     d.rounded_rectangle(box, radius=r, fill=fill)
 
 
-def bubble_box(w, h, colors, radius=RADIUS):
-    """말풍선 하나를 정확히 w x h 로 그린다. 세로 그라데이션."""
-    mask = Image.new('L', (w * SS, h * SS), 0)
-    ImageDraw.Draw(mask).rounded_rectangle(
-        [0, 0, w * SS - 1, h * SS - 1], radius=radius * SS, fill=255)
-    mask = mask.resize((w, h), Image.LANCZOS)
-    out = Image.new('RGBA', (w, h), (0, 0, 0, 0))
-    out.paste(gen.vgradient(w, h, rgb(colors[0]), rgb(colors[1])), (0, 0), mask)
-    return out
+def bubble_box(t, w, h, colors):
+    """말풍선 하나. 유리 테마면 반투명에 테두리 하이라이트가 들어간다.
+
+    9-slice 로 늘리지 않는다. 목표 크기가 고정 가장자리의 두 배보다 작아지면
+    모서리가 겹쳐 깨진다. 어차피 둥근 사각형이라 필요한 크기로 바로 그리면 된다.
+    """
+    return gen.bubble_box(w, h, colors, RADIUS,
+                          t.get('bubble_style', 'solid'), t.get('bubble_alpha', 255))
 
 
 def avatar(size, t, i):
@@ -184,14 +183,14 @@ def chat(t):
                 d.text((70, y + 2), '아무개1', font=F_NAME, fill=rgb(t['subtext']))
                 y += 24
             bx = 70
-            b = bubble_box(bw, bh, colors)
+            b = bubble_box(t, bw, bh, colors)
             img.paste(b, (bx, y), b)
             d.text((bx + pad_x, y + pad_y + 1), msg, font=F_MSG, fill=tc)
             d.text((bx + bw + 8, y + bh - 12), '오후 2:43',
                    font=F_TIME, fill=rgb(t['subtext']), anchor='lm')
         else:
             bx = W - 18 - bw
-            b = bubble_box(bw, bh, colors)
+            b = bubble_box(t, bw, bh, colors)
             img.paste(b, (bx, y), b)
             d.text((bx + pad_x, y + pad_y + 1), msg, font=F_MSG, fill=tc)
             d.text((bx - 8, y + bh - 12), '오후 2:43',
@@ -200,7 +199,12 @@ def chat(t):
         y += bh + 14
 
     # 입력바
-    d.rectangle([0, H - FOOT, W, H], fill=rgb(t['surface']))
+    ca = t.get('cell_alpha', 1.0)
+    bar = Image.new('RGBA', (W, FOOT), rgb(t['surface']) + (int(255 * ca),))
+    img.paste(Image.alpha_composite(
+        img.crop((0, H - FOOT, W, H)).convert('RGBA'), bar).convert('RGB'),
+        (0, H - FOOT))
+    d = ImageDraw.Draw(img)
     ic_plus(d, 32, H - FOOT + 48, rgb(t['subtext']))
     _round(d, [54, H - FOOT + 26, W - 84, H - FOOT + 70], 22, rgb(t['pressed']))
     d.text((70, H - FOOT + 48), '메시지 입력', font=F_LIST_MSG,
@@ -220,20 +224,46 @@ ROWS = [
 
 
 def chat_list(t):
-    """채팅 목록. 목록 쪽 색과 눌린 줄이 여기서 드러난다."""
-    img = Image.new('RGB', (W, H), rgb(t['bg']))
-    _header(img, t, '채팅')
-    d = ImageDraw.Draw(img)
+    """채팅 목록. 목록 쪽 색과 눌린 줄이 여기서 드러난다.
 
-    y = HEAD + 12
-    d.text((22, y + 8), '채팅 5', font=F_LIST_MSG, fill=rgb(t['subtext']))
-    y += 34
+    main_bg 가 있으면 배경을 깔고 셀을 cell_alpha 만큼 투명하게 얹는다.
+    실제 테마에서 -ios-normal-background-alpha 가 하는 일과 같다.
+    """
+    ca = t.get('cell_alpha', 1.0)
+    if t.get('main_bg'):
+        base = gen.chat_bg(t['main_bg'], W, H).convert('RGBA')
+    else:
+        base = Image.new('RGBA', (W, H), rgb(t['bg']) + (255,))
+
+    # 면은 알파를 먹여 따로 얹는다
+    layer = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    ld = ImageDraw.Draw(layer)
+    a = int(255 * ca)
+    ld.rectangle([0, 0, W, HEAD], fill=rgb(t['bg']) + (a,))
+    y0 = HEAD + 46
+    for i in range(6):
+        y = y0 + i * 84
+        if y + 84 > H - FOOT:
+            break
+        ld.rectangle([0, y, W, y + 84],
+                     fill=rgb(t['pressed'] if i == 1 else t['bg']) + (a,))
+    ld.rectangle([0, H - FOOT, W, H], fill=rgb(t['bg']) + (a,))
+    img = Image.alpha_composite(base, layer).convert('RGB')
+
+    d = ImageDraw.Draw(img)
+    x = 22
+    d.text((x, 47), '채팅', font=F_TITLE, fill=rgb(t['text']), anchor='lm')
+    ic_search(d, W - 74, 47, rgb(t['subtext']))
+    ic_menu(d, W - 32, 47, rgb(t['subtext']))
+    d.line([(0, HEAD - 1), (W, HEAD - 1)], fill=rgb(t['border']))
+
+    d.text((22, HEAD + 20), '채팅 5', font=F_LIST_MSG, fill=rgb(t['subtext']))
+    d.line([(0, HEAD + 44), (W, HEAD + 44)], fill=rgb(t['border']))
 
     for i, (name, msg, when, unread) in enumerate(ROWS):
-        rh = 84
-        if y + rh > H - FOOT:
+        y = y0 + i * 84
+        if y + 84 > H - FOOT:
             break
-        d.rectangle([0, y, W, y + rh], fill=rgb(t['pressed'] if i == 1 else t['bg']))
         av = avatar(52, t, i)
         img.paste(av, (22, y + 16), av)
         d.text((90, y + 22), name, font=F_LIST_NAME, fill=rgb(t['text']))
@@ -245,11 +275,8 @@ def chat_list(t):
             d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=rgb(t['accent']))
             d.text((cx, cy - 1), str(unread), font=F_TIME,
                    fill=rgb(t['on_accent']), anchor='mm')
-        d.line([(90, y + rh - 1), (W, y + rh - 1)], fill=rgb(t['border']))
-        y += rh
+        d.line([(90, y + 83), (W, y + 83)], fill=rgb(t['border']))
 
-    # 탭바
-    d.rectangle([0, H - FOOT, W, H], fill=rgb(t['bg']))
     d.line([(0, H - FOOT), (W, H - FOOT)], fill=rgb(t['border']))
     tabs = [('친구', ic_person), ('채팅', ic_bubble), ('오픈채팅', ic_circle),
             ('쇼핑', ic_bag), ('더보기', ic_dots)]

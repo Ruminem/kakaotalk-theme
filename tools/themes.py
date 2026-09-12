@@ -24,11 +24,17 @@ CSS 도 colors.xml 도 이미지도 전부 이 표에서 나온다(tools/gen.py)
 note
   README 와 미리보기 페이지에 그대로 실리는 한 줄 소개. 음슴체로 쓴다.
 
+선택 항목 (없으면 기본값)
+  bubble_style  'glass' 면 말풍선을 반투명하게 깔고 테두리에 빛나는 선을 얹는다
+  bubble_alpha  말풍선 불투명도 0~255. 낮을수록 채팅방 배경이 비친다
+  cell_alpha    목록 셀 불투명도 0.0~1.0. 1 미만이면 뒤의 배경 이미지가 비친다
+  main_bg       목록 화면 배경 이미지. chat_bg 와 같은 형식
+
 chat_bg
   None 이면 단색. ('linear', 위, 아래) 또는 ('aurora', 바탕, [색...]) 이면 이미지를 그린다.
 """
 
-VERSION = '0.3'
+VERSION = '0.4'
 
 THEMES = [
     dict(
@@ -98,6 +104,32 @@ THEMES = [
         recv=('#C2A7FF', '#FF9BC6'), recv_alt=('#9BD6FF', '#7ED7C1'),
         send_text='#4A2E10', recv_text='#3A2440',
         chat_bg=('linear', '#FFFDF5', '#FFE9D6'),
+    ),
+    dict(
+        key='glass07', name='리퀴드 글래스',
+        note='유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침',
+        bg='#F2F4F8', bg_deep='#E9EEF5', surface='#FFFFFF', pressed='#DCE4EF',
+        border='#D2DBE8', text='#1F2733', subtext='#6B7789',
+        accent='#2F8CF0', accent_dim='#1E6FC4', on_accent='#FFFFFF',
+        send=('#8FD3FF', '#5FA8F5'), send_alt=('#A9E7FF', '#79C2F8'),
+        recv=('#FFFFFF', '#E6EDF7'), recv_alt=('#F3F7FF', '#DCE6F4'),
+        send_text='#0B2D50', recv_text='#1F2733',
+        bubble_style='glass', bubble_alpha=165, cell_alpha=0.55,
+        chat_bg=('blobs', '#EFF3FA', ['#9BD4FF', '#C9B6FF', '#9BF0DC', '#FFC8E4']),
+        main_bg=('blobs', '#F4F6FB', ['#BFE2FF', '#DCD0FF', '#C4F3E6', '#FFD9EC']),
+    ),
+    dict(
+        key='glass08', name='리퀴드 글래스 다크',
+        note='같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림',
+        bg='#12151C', bg_deep='#0B0E14', surface='#1A1F29', pressed='#232A37',
+        border='#2B3342', text='#E8EDF6', subtext='#8D99AC',
+        accent='#5AB5FF', accent_dim='#3789CC', on_accent='#06192B',
+        send=('#3E7FC9', '#2A5C9B'), send_alt=('#4E93DC', '#3468AA'),
+        recv=('#39404F', '#262C38'), recv_alt=('#454D5E', '#2F3542'),
+        send_text='#EAF4FF', recv_text='#E8EDF6',
+        bubble_style='glass', bubble_alpha=175, cell_alpha=0.55,
+        chat_bg=('blobs', '#0B0E14', ['#2F6FB5', '#6A4FB0', '#2E8C7E', '#B0487F']),
+        main_bg=('blobs', '#10131A', ['#27568C', '#4E3C86', '#256B61', '#8A3A64']),
     ),
 ]
 
