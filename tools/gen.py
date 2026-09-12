@@ -1067,7 +1067,7 @@ def gen_ios(t, root):
                      chatbg=chatbg, mainbg=mainbg, passbg=passbg,
                      cell_alpha='%.2f' % ca,
                      cell_alpha_sel='%.2f' % min(1.0, ca + 0.15), **fields)
-    with open(os.path.join(root, 'KakaoTalkTheme.css'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(root, 'KakaoTalkTheme.css'), 'w', encoding='utf-8', newline='\n') as f:
         f.write(css)
 
 
@@ -1163,11 +1163,11 @@ def gen_android(t, root, code):
     os.makedirs(values, exist_ok=True)
     os.makedirs(draw, exist_ok=True)
 
-    with open(os.path.join(root, 'AndroidManifest.xml'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(root, 'AndroidManifest.xml'), 'w', encoding='utf-8', newline='\n') as f:
         f.write(MANIFEST.format(pkg=themes.pkg_slug(t), version=themes.VERSION,
                                 code=code))
 
-    with open(os.path.join(values, 'strings.xml'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(values, 'strings.xml'), 'w', encoding='utf-8', newline='\n') as f:
         f.write('<?xml version="1.0" encoding="utf-8"?>\n<resources>\n'
                 '    <string name="theme_title">%s</string>\n'
                 '    <string name="app_name">%s</string>\n</resources>\n'
@@ -1191,7 +1191,7 @@ def gen_android(t, root, code):
               '    <color name="theme_chatroom_bubble_me_color">%s</color>' % argb(mid(*t['send']), ba),
               '    <color name="theme_chatroom_bubble_you_color">%s</color>' % argb(mid(*t['recv']), ba),
               '', '</resources>', '']
-    with open(os.path.join(values, 'colors.xml'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(values, 'colors.xml'), 'w', encoding='utf-8', newline='\n') as f:
         f.write('\n'.join(lines))
 
     style, alpha = t.get('bubble_style', 'solid'), t.get('bubble_alpha', 255)

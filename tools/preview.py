@@ -606,7 +606,7 @@ def write_readme(ts):
         return
     head, rest = s.split(START, 1)
     _, tail = rest.split(END, 1)
-    open(p, 'w', encoding='utf-8').write(head + readme_block(ts) + tail)
+    open(p, 'w', encoding='utf-8', newline='\n').write(head + readme_block(ts) + tail)
 
 
 def generate(ts):
@@ -640,7 +640,7 @@ def generate(ts):
             body.extend(cards.pop(m['key']) for m in ms if m['key'] in cards)
     body.extend(cards.values())      # 분류 밖의 테마가 있으면 뒤에 붙인다
 
-    with open(os.path.join(gen.DOCS, 'index.html'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(gen.DOCS, 'index.html'), 'w', encoding='utf-8', newline='\n') as f:
         f.write(PAGE % '\n'.join(body))
     write_readme(ts)
 
