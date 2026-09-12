@@ -1,0 +1,64 @@
+name: Pages
+
+# 미리보기 페이지와 공유 페이지를 GitHub Pages 로 내보낸다.
+#
+# 공유 페이지는 fetch 로 .ktheme 바이트를 읽어야 하는데, 릴리스 자산에는
+# Access-Control-Allow-Origin 헤더가 없다. api.github.com 입구에는 있지만 최종 목적지인
+# release-assets.githubusercontent.com 에는 없고, fetch 는 리다이렉트 매 홉을 검사하므로
+# 거기서 막힌다. 그래서 사이트 안에 같은 출처로 한 벌 둔다.
+# 저장소에 커밋하는 게 아니다 — dist/ 를 커밋하지 않는다는 규칙은 그대로다.
+
+on:
+  release:
+    types: [published]          # 새 릴리스가 나가면 사이트의 자산도 그 버전으로 바뀐다
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'assets/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # 사이트는 저장소 구조를 그대로 옮긴다. docs/ 안의 페이지가 쓰는 ../assets/ 경로가
+      # 로컬에서 파일로 열 때와 사이트에서 똑같이 동작한다 — 경로를 두 벌 관리하지 않으려는 것.
+      - name: 사이트 구성
+        run: |
+          mkdir -p _site/docs _site/assets _site/files
+          cp docs/index.html docs/share.html _site/docs/
+          cp assets/*.png _site/assets/
+          printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=docs/">' > _site/index.html
+
+      # 공유에 쓰는 건 iOS 테마뿐이다. APK 는 카톡에 보내는 게 아니라 설치하는 거라
+      # README 링크가 릴리스를 직접 가리키고, 여기 둘 이유가 없다.
+      - name: 릴리스 자산 내려받기
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh release download --dir _site/files --pattern '*.ktheme'
+          echo "내려받은 테마: $(ls -1 _site/files | wc -l)"
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v4
