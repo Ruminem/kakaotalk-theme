@@ -44,6 +44,12 @@ def argb(h, alpha=1.0):
     return '#%02X%s' % (round(max(0.0, min(1.0, alpha)) * 255), h.lstrip('#').upper())
 
 
+def lighten(h, f):
+    """색을 흰쪽으로 f 만큼 당긴다. 0 이면 그대로, 1 이면 흰색."""
+    c = rgb(h)
+    return '#%02X%02X%02X' % tuple(round(v + (255 - v) * f) for v in c)
+
+
 def mid(a, b):
     ca, cb = rgb(a), rgb(b)
     return '#%02X%02X%02X' % tuple((ca[i] + cb[i]) // 2 for i in range(3))
@@ -107,6 +113,22 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
         faded = ImageChops.multiply(rim.getchannel('A'), ramp)
         rim.putalpha(ImageChops.multiply(faded, mask))
         out.alpha_composite(rim)
+
+    if glow:
+        # 몸통 안쪽 테두리를 밝힌다. 바깥 halo 는 여백만큼 프레임을 키우지만
+        # 이건 자리를 차지하지 않는다. 여백을 좁게 두고도 빛나 보이게 하는 쪽.
+        gc = glow[0]
+        lit = lighten(mid(colors[0], colors[1]) if gc == 'auto' else gc, 0.55)
+        band = max(2, radius // 3)
+        inner = Image.new('RGBA', (w * SS, h * SS), (0, 0, 0, 0))
+        ImageDraw.Draw(inner).rounded_rectangle(
+            [SS, SS, w * SS - SS - 1, h * SS - SS - 1],
+            radius=radius * SS, outline=rgb(lit) + (255,), width=band * SS)
+        inner = inner.resize((w, h), Image.LANCZOS)
+        inner = inner.filter(ImageFilter.GaussianBlur(radius=band * 0.7))
+        inner.putalpha(ImageChops.multiply(
+            inner.getchannel('A').point(lambda v: int(v * 0.85)), mask))
+        out.alpha_composite(inner)
 
     if not pad:
         return out
