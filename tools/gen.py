@@ -138,7 +138,7 @@ SPEC_TINT, SPEC_ALPHA = 0.60, 0.35
 
 
 def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
-               flat=False):
+               flat=False, rim=None, frost=0.0):
     """말풍선 하나를 정확히 w x h 로 그린다. 세로 그라데이션.
 
     style 이 glass 면 반투명하게 깔고 위쪽 테두리에 빛나는 선을 얹는다.
@@ -169,23 +169,31 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
         # 유리판의 가장자리에서 빛은 두 번 꺾인다. 위쪽에 밝은 선이 서고
         # 아래쪽에는 어두운 선이 남는다. 밝은 선만 그리면 흰 바탕 위에서는
         # 아무것도 안 보인다 — 라이트 유리가 밋밋했던 게 이것 때문이다.
+        # 색 테두리는 흰 선보다 굵어야 보인다. 흰 선은 밝기로 눈에 띄지만
+        # 색은 1픽셀이면 그냥 어두운 선으로 뭉개진다.
+        rim_w = int(SS * (2.0 if rim else 1.0))
+
         def edge(color, ramp_fn):
-            rim = Image.new('RGBA', (w * SS, h * SS), (0, 0, 0, 0))
-            ImageDraw.Draw(rim).rounded_rectangle(
+            rim_img = Image.new('RGBA', (w * SS, h * SS), (0, 0, 0, 0))
+            ImageDraw.Draw(rim_img).rounded_rectangle(
                 [SS // 2, SS // 2, w * SS - SS // 2 - 1, h * SS - SS // 2 - 1],
-                radius=radius * SS, outline=color, width=SS)
-            rim = rim.resize((w, h), Image.LANCZOS)
+                radius=radius * SS, outline=color, width=rim_w)
+            rim_img = rim_img.resize((w, h), Image.LANCZOS)
             ramp = Image.new('L', (1, h))
             px = ramp.load()
             for y in range(h):
                 px[0, y] = max(0, min(255, ramp_fn(y / max(h - 1, 1))))
-            faded = ImageChops.multiply(rim.getchannel('A'), ramp.resize((w, h)))
-            rim.putalpha(ImageChops.multiply(faded, mask))
-            return rim
+            faded = ImageChops.multiply(rim_img.getchannel('A'), ramp.resize((w, h)))
+            rim_img.putalpha(ImageChops.multiply(faded, mask))
+            return rim_img
 
-        out.alpha_composite(edge((255, 255, 255, 230),
+        # 위아래 테두리 색. 기본은 흰 선과 검은 선이고, rim 을 주면 그 두 색으로
+        # 갈라진다 — 유리 모서리에서 빛이 파장별로 꺾이는 것을 흉내내는 자리다.
+        top_c = rgb(rim[0]) + (255,) if rim else (255, 255, 255, 230)
+        bot_c = rgb(rim[1]) + (235,) if rim else (0, 0, 0, 105)
+        out.alpha_composite(edge(top_c,
                                  lambda t: int(255 * max(0.0, 1.0 - t * 1.45))))
-        out.alpha_composite(edge((0, 0, 0, 105),
+        out.alpha_composite(edge(bot_c,
                                  lambda t: int(255 * max(0.0, (t - 0.30) * 1.5))))
 
         # 판 안쪽 위에 옅은 띠 하나. 유리가 종이가 아니라 두께가 있는 판으로 읽힌다.
@@ -199,6 +207,30 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
         band = Image.new('RGBA', (w, h), (255, 255, 255, 255))
         band.putalpha(ImageChops.multiply(sh, mask))
         out.alpha_composite(band)
+
+        if frost:
+            # 젖빛. 진짜 젖빛 유리는 뒤를 흐리게 하는데 우리는 PNG 한 장만 줄 수
+            # 있어서 그건 안 된다. 대신 유리 안에 밝고 어두운 알갱이를 뿌려
+            # 표면이 거칠어 보이게 한다. Image.effect_noise 는 씨앗을 못 줘서
+            # 돌릴 때마다 그림이 달라지므로 직접 뽑는다.
+            rnd = random.Random(w * 7919 + h * 104729 + int(frost * 1000))
+            grain = Image.new('L', (w, h))
+            gp = grain.load()
+            amp = int(110 * frost)
+            for y in range(h):
+                for x in range(w):
+                    gp[x, y] = 128 + rnd.randint(-amp, amp)
+            # 흐려서 알갱이를 뭉친다. 픽셀 하나짜리 잡음은 유리가 아니라 TV 화면이다.
+            # 흐리면 높은 주파수가 빠져서 PNG 도 같이 작아진다.
+            grain = grain.filter(ImageFilter.GaussianBlur(max(1.0, w * 0.018)))
+            lay = Image.new('RGBA', (w, h), (255, 255, 255, 255))
+            lay.putalpha(ImageChops.multiply(
+                grain.point(lambda v: int(max(0, v - 128) * 3.2)), mask))
+            out.alpha_composite(lay)
+            dk = Image.new('RGBA', (w, h), (0, 0, 0, 255))
+            dk.putalpha(ImageChops.multiply(
+                grain.point(lambda v: int(max(0, 128 - v) * 2.2)), mask))
+            out.alpha_composite(dk)
 
     if glow:
         gc = glow[0]
@@ -287,10 +319,20 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
     return halo
 
 
-def bubble(scale, colors, style='solid', alpha=255, glow=None, pad=0, flat=False):
+def bubble(scale, colors, style='solid', alpha=255, glow=None, pad=0, flat=False,
+           rim=None, frost=0.0):
     """안드로이드 9-patch 와 iOS 용 정사각 말풍선."""
     return bubble_box(SIZE * scale, SIZE * scale, colors, RADIUS * scale,
-                      style, alpha, glow, pad * scale, flat)
+                      style, alpha, glow, pad * scale, flat, rim, frost)
+
+
+def glass_of(t):
+    """유리 테마가 말풍선에 넘기는 값 — 테두리 색 두 개와 젖빛 세기.
+
+    rim 을 안 적으면 흰 선과 검은 선이다. 프리즘은 여기에 시안과 마젠타를 넣어
+    유리 모서리에서 빛이 갈라지는 것을 흉내낸다.
+    """
+    return t.get('rim'), t.get('frost', 0.0)
 
 
 def glow_of(t):
@@ -935,12 +977,14 @@ def gen_ios(t, root):
 
     style, alpha = t.get('bubble_style', 'solid'), t.get('bubble_alpha', 255)
     glow, pad = glow_of(t)
+    rim, frost = glass_of(t)
     for side, key in (('Send', 'send'), ('Receive', 'recv')):
         for variant, pal in (('01', t[key]), ('02', t[key + '_alt'])):
             for scale in (2, 3):
                 name = 'chatroomBubble%s%s@%dx.png' % (side, variant, scale)
                 bubble(scale, pal, style, alpha, glow, pad,
-                       t.get('flat', False)).save(os.path.join(img_dir, name))
+                       t.get('flat', False), rim, frost).save(
+                    os.path.join(img_dir, name))
 
     icon(t, 120).save(os.path.join(img_dir, 'commonIcoTheme.png'))
 
@@ -1155,7 +1199,8 @@ def gen_android(t, root, code):
     for who, key in (('me', 'send'), ('you', 'recv')):
         for variant, pal in (('01', t[key]), ('02', t[key + '_alt'])):
             name = 'theme_chatroom_bubble_%s_%s_image.9.png' % (who, variant)
-            ninepatch(bubble(3, pal, style, alpha, glow, pad, t.get('flat', False)),
+            ninepatch(bubble(3, pal, style, alpha, glow, pad, t.get('flat', False),
+                             *glass_of(t)),
                       (CAP + pad) * 3).save(os.path.join(draw, name))
 
     for kind in TAB_KINDS:
