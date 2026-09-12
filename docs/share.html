@@ -3,15 +3,19 @@
 <title>테마 받기</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
-  두 번째 길이다. `?f=<파일이름>.ktheme`.
+  README 의 iOS 링크가 여기로 들어온다. `?f=<파일이름>.ktheme`.
 
-  보통은 README 의 iOS 링크가 `files/` 의 테마 파일을 바로 가리키고, 카카오톡이 그걸
-  가로채 설치한다. 릴리스 자산과 달리 거기엔 `Content-Disposition: attachment` 가 없어서
-  브라우저가 카톡에 넘길 여지가 남는다.
+  브라우저마다 제일 짧은 길이 다르다. 그걸 여기서 고른다.
 
-  그 길이 막혀 그냥 내려받아지는 브라우저를 위해 이 페이지가 있다. 버튼 하나가 파일을
-  iOS 공유 시트에 올리고, 거기서 카톡으로 보내 채팅방에서 눌러 적용한다.
-  공유 자체가 안 되는 자리에서는 `files/` 로 넘겨 원래 길을 다시 태운다.
+  1) 카카오톡 인앱 브라우저 — 파일 주소로 넘기면 카톡이 그대로 가로채 바로 설치한다.
+     `테마 다운로드 완료` 가 뜨고 끝난다. 이게 제일 짧다.
+  2) 사파리 등 폰 브라우저 — 같은 주소를 줘도 그냥 내려받고 만다(실물로 확인함).
+     그래서 공유 시트를 띄운다. 카톡으로 보내면 채팅방에서 1) 의 길로 이어진다.
+  3) 그 밖(데스크톱) — 파일로 내려받는다.
+
+  릴리스 자산이 아니라 사이트의 `files/` 를 쓰는 이유는 헤더 하나다. 릴리스 자산은
+  `Content-Disposition: attachment` 를 달고 나와서 브라우저가 내려받는 것 말고 아무것도
+  못 한다. 여기엔 그 헤더가 없어서 카톡이 가로챌 여지가 남는다.
 
   이 파일은 손으로 쓴다. 같은 폴더의 index.html 은 tools/preview.py 가 만드는 생성물이라
   고쳐도 다음 미리보기에서 날아가지만, 이 파일은 아니다.
@@ -27,39 +31,41 @@
          font:15px/1.65 -apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;
          -webkit-text-size-adjust:100%; }
   main { max-width:360px; margin:0 auto; display:flex; flex-direction:column;
-         gap:20px; align-items:stretch; }
+         gap:18px; align-items:stretch; }
   h1 { font-size:19px; margin:0; text-align:center; }
-  .name { font-size:13px; color:var(--dim); text-align:center; margin:0;
+  .name { font-size:12.5px; color:var(--dim); text-align:center; margin:0;
           font-family:ui-monospace,SFMono-Regular,Consolas,monospace; word-break:break-all; }
-  img.shot { width:100%; max-width:230px; margin:0 auto; display:block;
+  img.shot { width:100%; max-width:220px; margin:0 auto; display:block;
              border-radius:12px; border:1px solid var(--line); }
+  .buttons { display:flex; flex-direction:column; gap:9px; }
   button {
-    font:600 16px/1 inherit; font-family:inherit; padding:16px; width:100%;
-    border:0; border-radius:11px; background:var(--accent); color:var(--on-accent);
-    cursor:pointer; transition:opacity .12s ease;
+    font:16px/1 inherit; font-family:inherit; padding:15px; width:100%;
+    border-radius:11px; cursor:pointer; transition:opacity .12s ease;
+    border:1px solid var(--line); background:var(--surface); color:var(--text);
   }
-  button:disabled { opacity:.5; cursor:default; }
+  button.primary { font-weight:700; border-color:var(--accent);
+                   background:var(--accent); color:var(--on-accent); }
+  button:disabled { opacity:.45; cursor:default; }
   button:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
   @media (prefers-reduced-motion: reduce) { button { transition:none; } }
+  .hint { color:var(--dim); font-size:12.5px; text-align:center; margin:-8px 0 0; }
   ol { margin:0; padding:0 0 0 20px; color:var(--dim); font-size:13.5px; }
   ol b { color:var(--text); font-weight:500; }
-  .alt { text-align:center; font-size:13px; }
+  .alt { text-align:center; font-size:13px; margin:0; }
   a { color:var(--accent); }
   .msg { text-align:center; font-size:13.5px; color:var(--dim); min-height:1.4em; margin:0; }
 </style>
 
 <main id="app">
   <noscript><p class="alt">자바스크립트가 꺼져 있음.
-    <a id="ns" href="https://github.com/Ruminem/kakaotalk-theme/releases/latest">릴리스에서 받기</a></p></noscript>
+    <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest">릴리스에서 받기</a></p></noscript>
 </main>
 
 <script>
 (function () {
-  // 넘길 곳은 릴리스 자산이 아니라 사이트 안의 파일이다. 릴리스 자산은
-  // Content-Disposition: attachment 를 달고 나와서 브라우저가 내려받는 것 말고 아무것도
-  // 못 하지만, 여기엔 그 헤더가 없어서 카카오톡이 파일을 가로채 바로 설치할 수 있다.
-  var FILES = '../files/';
   var app = document.getElementById('app');
+  var FILES = '../files/';
+  var RELEASE = 'https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/';
 
   // 파일 이름은 생성된 슬러그(소문자·하이픈)뿐이다. 그 밖의 값이 들어오면 받지 않는다 —
   // 주소창의 문자열이 그대로 경로와 링크가 되는 자리라 형태를 좁혀둔다.
@@ -69,9 +75,16 @@
     return;
   }
   var slug = f.slice(0, -'.ktheme'.length);
+  var fileUrl = new URL(FILES + f, location.href).href;
 
-  // 공유가 되는 자리인지 먼저 본다. 데스크톱에도 파일 공유가 있지만 거기선 그냥 받는 게 낫고,
-  // 깃허브 앱 안의 웹뷰에는 navigator.share 가 아예 없을 수 있다. 그런 곳은 원래대로 보낸다.
+  // 카카오톡 인앱 브라우저는 UA 에 KAKAOTALK 이 들어간다. 거기서는 파일 주소로 넘기기만 하면
+  // 카톡이 가로채 바로 설치한다 — 페이지를 보여줄 이유가 없다.
+  //
+  // 다른 사이트의 링크를 타고 인앱 브라우저로 들어온 경우엔 그 표시가 빠질 수 있다.
+  // 못 알아봐도 괜찮다. 그때는 아래 공유 시트 갈래로 가는데, 인앱 브라우저에는 대개
+  // 파일 공유가 없어서 결국 마지막 갈래인 파일 주소로 떨어진다. 같은 자리로 돌아온다.
+  if (/KAKAOTALK/i.test(navigator.userAgent)) { location.replace(fileUrl); return; }
+
   var probe = null;
   try { probe = new File([new Uint8Array(1)], f, { type: 'application/octet-stream' }); } catch (e) {}
   var canShare = !!(probe && typeof navigator.share === 'function' &&
@@ -79,51 +92,61 @@
                     navigator.canShare({ files: [probe] }) &&
                     window.matchMedia('(pointer: coarse)').matches);
 
-  if (!canShare) { location.replace(FILES + f); return; }
+  // 공유가 없는 자리는 데스크톱이다. 거기선 그냥 받는 게 맞다.
+  if (!canShare) { location.replace(fileUrl); return; }
 
   app.innerHTML =
-    '<h1>카카오톡으로 바로 보내기</h1>' +
+    '<h1>카카오톡으로 보내기</h1>' +
     '<img class="shot" src="../assets/preview-' + slug + '-chat.png" alt="">' +
     '<p class="name">' + f + '</p>' +
-    '<button id="go" disabled>준비 중…</button>' +
+    '<div class="buttons">' +
+      '<button class="primary" id="link">링크 보내기</button>' +
+      '<button id="file" disabled>파일 보내기</button>' +
+    '</div>' +
+    '<p class="hint">링크 쪽이 짧음. 채팅방에서 누르면 바로 설치됨</p>' +
     '<p class="msg" id="msg"></p>' +
-    '<ol><li>공유 시트에서 <b>카카오톡</b>을 고른다</li>' +
-    '<li>아무 채팅방에나 보낸다 (나와의 채팅도 됨)</li>' +
-    '<li>보낸 파일을 눌러 <b>테마를 적용</b>한다</li></ol>' +
-    '<p class="alt"><a href="' + FILES + f + '">대신 파일로 받기</a></p>';
+    '<ol><li>공유 시트에서 <b>카카오톡</b>을 고름</li>' +
+    '<li>아무 채팅방에나 보냄 (나와의 채팅도 됨)</li>' +
+    '<li>보낸 것을 눌러 <b>설치</b></li></ol>' +
+    '<p class="alt"><a href="' + fileUrl + '">대신 파일로 받기</a></p>';
 
-  var go = document.getElementById('go');
   var msg = document.getElementById('msg');
+  var fileBtn = document.getElementById('file');
 
-  // 바이트는 미리 받아둔다. share() 는 탭이 만든 일시적 활성화를 소비하는데 그 창이 짧아서,
-  // 누른 뒤에 내려받기 시작하면 느린 회선에서 NotAllowedError 로 떨어진다.
-  // 다 받기 전까지 버튼을 잠가두면 탭과 share() 사이에 기다릴 것이 남지 않는다.
-  //
-  // 릴리스 자산이 아니라 같은 출처에서 받는다. 릴리스 자산에는 CORS 헤더가 없어서
-  // fetch 로는 못 읽는다 — 그래서 Pages 워크플로가 사이트 안에 한 벌 둔다.
+  function send(data, done) {
+    msg.textContent = '';
+    navigator.share(data).then(function () {
+      msg.textContent = done;
+    }).catch(function (err) {
+      if (err && err.name === 'AbortError') return;   // 사용자가 닫은 것
+      msg.innerHTML = '공유가 안 됨. <a href="' + fileUrl + '">파일로 받기</a>';
+    });
+  }
+
+  // 링크 보내기가 기본이다. 받는 쪽이 채팅방에서 누르면 카톡 인앱 브라우저가 열리고,
+  // 위의 첫 갈래를 타서 곧장 설치된다. 내려받을 것이 없어 기다림도 없다.
+  document.getElementById('link').addEventListener('click', function () {
+    send({ url: fileUrl }, '보냈음. 채팅방에서 링크를 누르면 설치됨.');
+  });
+
+  // 파일 보내기는 채팅방에 파일 자체를 남긴다. 바이트를 미리 받아두고 그 전까지 잠가둔다 —
+  // share() 는 탭이 만든 일시적 활성화를 소비하는데 창이 짧아서, 누른 뒤에 받기 시작하면
+  // 느린 회선에서 NotAllowedError 로 떨어진다.
   var file = null;
-  fetch('../files/' + f, { cache: 'force-cache' })
+  fetch(FILES + f, { cache: 'force-cache' })
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.blob(); })
     .then(function (b) {
       file = new File([b], f, { type: 'application/octet-stream' });
-      go.disabled = false;
-      go.textContent = '카카오톡으로 보내기';
+      fileBtn.disabled = false;
     })
     .catch(function () {
       // 사이트에 파일이 없을 때다 — 릴리스 직후 배포 전이거나 이름이 바뀌었을 때.
-      // 방금 실패한 주소로 다시 보낼 수는 없으니 여기서만 릴리스 자산을 쓴다.
-      // 받아서 파일 앱을 거치는 긴 길이 되지만, 아무것도 못 받는 것보다 낫다.
-      location.replace('https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/' + f);
+      // 링크 갈래도 같은 주소라 못 쓴다. 여기서만 릴리스 자산으로 보낸다.
+      location.replace(RELEASE + f);
     });
 
-  go.addEventListener('click', function () {
-    msg.textContent = '';
-    navigator.share({ files: [file] }).then(function () {
-      msg.textContent = '보냈음. 채팅방에서 파일을 눌러 적용하면 됨.';
-    }).catch(function (err) {
-      if (err && err.name === 'AbortError') return;   // 사용자가 닫은 것
-      msg.innerHTML = '공유가 안 됨. <a href="' + FILES + f + '">파일로 받기</a>';
-    });
+  fileBtn.addEventListener('click', function () {
+    send({ files: [file] }, '보냈음. 채팅방에서 파일을 눌러 적용하면 됨.');
   });
 })();
 </script>

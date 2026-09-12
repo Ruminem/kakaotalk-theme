@@ -412,16 +412,17 @@ START = '<!-- THEMES:START -->'
 END = '<!-- THEMES:END -->'
 BASE = 'https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/'
 
-# iOS 링크는 릴리스가 아니라 Pages 사이트의 파일을 가리킨다. 같은 파일인데 헤더가 다르다.
+# iOS 링크는 Pages 의 공유 페이지를 거친다. 브라우저마다 제일 짧은 길이 달라서,
+# 그 페이지가 보고 고른다.
 #
-# 릴리스 자산은 `Content-Disposition: attachment` 를 달고 나온다. 그게 붙으면 브라우저는
-# 내려받는 것 말고 아무것도 못 하고, 거기서 파일 앱을 뒤져 공유 시트로 카톡에 넘기는
-# 긴 구간이 시작된다. Pages 에는 그 헤더가 없어서 카카오톡이 파일을 그대로 가로채
-# 바로 설치한다 — 채팅방에 보내고 파일을 누르는 단계가 통째로 없어진다.
+# 카카오톡 인앱 브라우저에서는 `files/` 의 파일 주소를 주기만 하면 카톡이 그대로 가로채
+# 바로 설치한다. 릴리스 자산으로는 안 되는 일이다 — 거긴 `Content-Disposition: attachment`
+# 가 붙어 나와서 브라우저가 내려받는 것 말고 아무것도 못 한다. 사이트의 같은 파일에는
+# 그 헤더가 없다. 사파리는 같은 주소를 줘도 그냥 내려받아서, 거기선 공유 시트를 띄운다.
 #
 # 안드로이드는 그대로 BASE 다. APK 는 카톡이 아니라 시스템이 설치하고,
 # 크롬의 공유 API 는 확장자 허용목록이라 .apk 를 받지도 않는다.
-IOS = 'https://ruminem.github.io/kakaotalk-theme/files/'
+IOS = 'https://ruminem.github.io/kakaotalk-theme/docs/share.html?f='
 
 # --- 배치 규칙 (폰에서 보는 것을 기준으로 잡은 값) ---------------------------
 # GitHub 은 넓은 표를 가로 스크롤 상자에 넣는다. 칸이 넷을 넘거나 그림이 크면
