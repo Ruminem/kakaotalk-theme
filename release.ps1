@@ -1,4 +1,4 @@
-# 릴리스를 만든다. 모든 테마를 빌드해서 GitHub 릴리스에 자산으로 붙인다.
+﻿# 릴리스를 만든다. 모든 테마를 빌드해서 GitHub 릴리스에 자산으로 붙인다.
 #   powershell -ExecutionPolicy Bypass -File release.ps1 -Version 0.3 -NotesFile notes.md
 #
 # 릴리스 노트는 직접 쓴다. 자동 생성에 맡기지 않는다 —
@@ -45,13 +45,29 @@ Write-Host "자산 $($assets.Count) 개:"
 $assets | ForEach-Object { "  " + (Split-Path -Leaf $_) }
 
 # --- 태그와 릴리스 ---
-git tag -a $tag -m "카카오톡 테마 $Version"
+# 한글을 명령줄 인자로 넘기지 않는다. PowerShell 이 네이티브 프로그램에 인자를 넘길 때
+# 시스템 코드페이지로 인코딩해서 한글이 깨진다(릴리스 제목이 "移댁뭅?ㅽ넚" 이 됐던 이유).
+# 태그 메시지와 릴리스 제목은 파일을 거쳐서 보낸다.
+$tagMsg = Join-Path $env:TEMP "ktheme-tag-$Version.txt"
+[System.IO.File]::WriteAllText($tagMsg, "카카오톡 테마 $Version", (New-Object System.Text.UTF8Encoding $false))
+git tag -a $tag -F $tagMsg
+Remove-Item $tagMsg -Force
 if ($LASTEXITCODE -ne 0) { throw "태그 생성 실패" }
 git push origin $tag
 if ($LASTEXITCODE -ne 0) { throw "태그 푸시 실패" }
 
-gh release create $tag $assets --title "카카오톡 테마 $Version" --notes-file $NotesFile
+# 자산만 먼저 올리고(제목 없이), 제목은 JSON 으로 따로 넣는다.
+gh release create $tag $assets --notes-file $NotesFile --title $tag
 if ($LASTEXITCODE -ne 0) { throw "릴리스 생성 실패" }
+
+$repo = (gh repo view --json nameWithOwner --jq '.nameWithOwner')
+$id = (gh api "repos/$repo/releases/tags/$tag" --jq '.id')
+$body = Join-Path $env:TEMP "ktheme-title-$Version.json"
+$json = '{"name":"카카오톡 테마 ' + $Version + '"}'
+[System.IO.File]::WriteAllText($body, $json, (New-Object System.Text.UTF8Encoding $false))
+gh api -X PATCH "repos/$repo/releases/$id" --input $body | Out-Null
+Remove-Item $body -Force
+if ($LASTEXITCODE -ne 0) { throw "릴리스 제목 설정 실패" }
 
 Write-Host ""
 Write-Host "완료: $tag  (자산 $($assets.Count) 개)"

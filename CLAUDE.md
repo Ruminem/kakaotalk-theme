@@ -112,6 +112,10 @@ powershell -ExecutionPolicy Bypass -File release.ps1 -Version 0.4 -NotesFile not
 - gradle 은 쓰지 않는다. 코드 없는 리소스 전용 APK 라 `aapt2` → `zipalign` → `apksigner` 면 끝난다.
 - **네이티브 exe 의 stderr 를 `2>&1` 로 받지 않는다.** PowerShell 5.1 은 그렇게 받으면 종료코드가
   0이어도 `NativeCommandError` 로 승격시켜 빌드가 실패한 것처럼 보인다. apksigner 가 여기 걸렸다.
+- **한글을 네이티브 프로그램의 명령줄 인자로 넘기지 않는다.** PowerShell 이 시스템 코드페이지로
+  인코딩해서 깨진다. `gh release create --title "카카오톡 테마 0.3"` 이 "移댁뭅?ㅽ넚" 이 됐다.
+  파일을 거쳐 보낸다 — `git tag -F`, `gh api --input <json>`. 표준입력이나 `--notes-file` 로
+  들어가는 내용은 멀쩡하다. 인자만 문제다.
 - **파이썬 출력은 UTF-8 로 고정한다.** 윈도우 기본이 cp949 라 한글이 깨진다.
   `sys.stdout.reconfigure(encoding='utf-8')` 을 도구 맨 위에 둔다.
   PowerShell 쪽은 `[Console]::OutputEncoding` 을 UTF-8 로 둔다.
