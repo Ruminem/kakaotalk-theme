@@ -29,22 +29,37 @@
 </tr>
 <tr>
 <td width="33%" align="center"><a href="#user-content-캔디-팝"><img src="assets/preview-candy-basic-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-리퀴드-글래스"><img src="assets/preview-glass-light-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-원목-글래스"><img src="assets/preview-wood-oak-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-도형"><img src="assets/preview-geo-basic-chat.png" width="190"></a></td>
+<td width="33%"></td>
 </tr>
 <tr>
 <td align="center"><img src="assets/icon-candy-basic.png" width="20" valign="middle"> <b><a href="#user-content-캔디-팝">캔디 팝</a></b><br><sub>기본 · 사탕 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
-<td align="center"><img src="assets/icon-glass-light.png" width="20" valign="middle"> <b><a href="#user-content-리퀴드-글래스">리퀴드 글래스</a></b><br><sub>라이트 · 다크 · 라이트 단색 · 다크 단색</sub><br>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</td>
-<td align="center"><img src="assets/icon-wood-oak.png" width="20" valign="middle"> <b><a href="#user-content-원목-글래스">원목 글래스</a></b><br><sub>오크 · 월넛 · 오크 단색 · 월넛 단색</sub><br>밝은 참나무 결 위에 반투명 유리 말풍선</td>
-</tr>
-<tr>
-<td width="33%" align="center"><a href="#user-content-도형"><img src="assets/preview-geo-basic-chat.png" width="190"></a></td>
-<td width="33%"></td>
-<td width="33%"></td>
-</tr>
-<tr>
 <td align="center"><img src="assets/icon-geo-basic.png" width="20" valign="middle"> <b><a href="#user-content-도형">도형</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>도형을 걷어낸 미색 바탕</td>
 <td width="33%"></td>
+</tr>
+</table>
+
+**[유리](#user-content-유리)** — 말풍선이 반투명하다
+
+<table>
+<tr>
+<td width="33%" align="center"><a href="#user-content-리퀴드-글래스"><img src="assets/preview-glass-light-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-원목-글래스"><img src="assets/preview-wood-oak-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-스테인드-글래스"><img src="assets/preview-stained-amber-chat.png" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/icon-glass-light.png" width="20" valign="middle"> <b><a href="#user-content-리퀴드-글래스">리퀴드 글래스</a></b><br><sub>라이트 · 다크 · 라이트 단색 · 다크 단색</sub><br>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</td>
+<td align="center"><img src="assets/icon-wood-oak.png" width="20" valign="middle"> <b><a href="#user-content-원목-글래스">원목 글래스</a></b><br><sub>오크 · 월넛 · 오크 단색 · 월넛 단색</sub><br>밝은 참나무 결 위에 반투명 유리 말풍선</td>
+<td align="center"><img src="assets/icon-stained-amber.png" width="20" valign="middle"> <b><a href="#user-content-스테인드-글래스">스테인드 글래스</a></b><br><sub>앰버 · 에메랄드 · 자수정 · 로즈</sub><br>검은 바탕에 호박색 유리. 등불 든 창처럼 보임</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="#user-content-프리즘-글래스"><img src="assets/preview-prism-light-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-프로스트-글래스"><img src="assets/preview-frost-light-chat.png" width="190"></a></td>
+<td width="33%"></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/icon-prism-light.png" width="20" valign="middle"> <b><a href="#user-content-프리즘-글래스">프리즘 글래스</a></b><br><sub>라이트 · 다크 · 라이트 단색 · 다크 단색</sub><br>맑은 바탕. 말풍선 테두리가 무지개로 갈라짐</td>
+<td align="center"><img src="assets/icon-frost-light.png" width="20" valign="middle"> <b><a href="#user-content-프로스트-글래스">프로스트 글래스</a></b><br><sub>라이트 · 다크 · 라이트 단색 · 다크 단색</sub><br>젖빛 유리. 알갱이가 도는 뿌연 말풍선</td>
 <td width="33%"></td>
 </tr>
 </table>
@@ -233,6 +248,45 @@
 
 </details>
 
+<a name="도형"></a>
+
+#### <img src="assets/icon-geo-basic.png" width="26" valign="middle"> 도형
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-geo-basic-chat.png" width="200"><br><b>기본</b><br><sub>도형을 걷어낸 미색 바탕</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=geo-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-geo-image-chat.png" width="200"><br><b>배경</b><br><sub>큰 도형이 겹친 무늬. 주황·민트·보라·하늘 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=geo-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-geo-glow-chat.png" width="200"><br><b>글로우</b><br><sub>주황과 민트 말풍선이 빛남</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=geo-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-geo-glow-image-chat.png" width="200"><br><b>글로우+배경</b><br><sub>도형 배경에 빛나는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=geo-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-glow-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**기본** — 도형을 걷어낸 미색 바탕
+
+<img src="assets/preview-geo-basic-list.png" width="180"> <img src="assets/preview-geo-basic-passcode.png" width="180"> <img src="assets/preview-geo-basic-splash.png" width="180">
+
+**배경** — 큰 도형이 겹친 무늬. 주황·민트·보라·하늘 말풍선
+
+<img src="assets/preview-geo-image-list.png" width="180"> <img src="assets/preview-geo-image-passcode.png" width="180"> <img src="assets/preview-geo-image-splash.png" width="180">
+
+**글로우** — 주황과 민트 말풍선이 빛남
+
+<img src="assets/preview-geo-glow-list.png" width="180"> <img src="assets/preview-geo-glow-passcode.png" width="180"> <img src="assets/preview-geo-glow-splash.png" width="180">
+
+**글로우+배경** — 도형 배경에 빛나는 말풍선
+
+<img src="assets/preview-geo-glow-image-list.png" width="180"> <img src="assets/preview-geo-glow-image-passcode.png" width="180"> <img src="assets/preview-geo-glow-image-splash.png" width="180">
+
+</details>
+
+<a name="유리"></a>
+
+### 유리
+
 <a name="리퀴드-글래스"></a>
 
 #### <img src="assets/icon-glass-light.png" width="26" valign="middle"> 리퀴드 글래스
@@ -303,38 +357,108 @@
 
 </details>
 
-<a name="도형"></a>
+<a name="스테인드-글래스"></a>
 
-#### <img src="assets/icon-geo-basic.png" width="26" valign="middle"> 도형
+#### <img src="assets/icon-stained-amber.png" width="26" valign="middle"> 스테인드 글래스
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-geo-basic-chat.png" width="200"><br><b>기본</b><br><sub>도형을 걷어낸 미색 바탕</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=geo-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-geo-image-chat.png" width="200"><br><b>배경</b><br><sub>큰 도형이 겹친 무늬. 주황·민트·보라·하늘 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=geo-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-stained-amber-chat.png" width="200"><br><b>앰버</b><br><sub>검은 바탕에 호박색 유리. 등불 든 창처럼 보임</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-amber.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/stained-amber.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-stained-emerald-chat.png" width="200"><br><b>에메랄드</b><br><sub>같은 바탕에 초록 유리. 가장 차분한 쪽</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-emerald.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/stained-emerald.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-geo-glow-chat.png" width="200"><br><b>글로우</b><br><sub>주황과 민트 말풍선이 빛남</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=geo-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-geo-glow-image-chat.png" width="200"><br><b>글로우+배경</b><br><sub>도형 배경에 빛나는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=geo-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/geo-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-stained-amethyst-chat.png" width="200"><br><b>자수정</b><br><sub>같은 바탕에 보라 유리. 어두운 쪽으로 가장 깊음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-amethyst.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/stained-amethyst.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-stained-rose-chat.png" width="200"><br><b>로즈</b><br><sub>같은 바탕에 분홍 유리. 가장 따뜻한 쪽</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-rose.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/stained-rose.apk">Android</a></td>
 </tr>
 </table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 
-**기본** — 도형을 걷어낸 미색 바탕
+**앰버** — 검은 바탕에 호박색 유리. 등불 든 창처럼 보임
 
-<img src="assets/preview-geo-basic-list.png" width="180"> <img src="assets/preview-geo-basic-passcode.png" width="180"> <img src="assets/preview-geo-basic-splash.png" width="180">
+<img src="assets/preview-stained-amber-list.png" width="180"> <img src="assets/preview-stained-amber-passcode.png" width="180"> <img src="assets/preview-stained-amber-splash.png" width="180">
 
-**배경** — 큰 도형이 겹친 무늬. 주황·민트·보라·하늘 말풍선
+**에메랄드** — 같은 바탕에 초록 유리. 가장 차분한 쪽
 
-<img src="assets/preview-geo-image-list.png" width="180"> <img src="assets/preview-geo-image-passcode.png" width="180"> <img src="assets/preview-geo-image-splash.png" width="180">
+<img src="assets/preview-stained-emerald-list.png" width="180"> <img src="assets/preview-stained-emerald-passcode.png" width="180"> <img src="assets/preview-stained-emerald-splash.png" width="180">
 
-**글로우** — 주황과 민트 말풍선이 빛남
+**자수정** — 같은 바탕에 보라 유리. 어두운 쪽으로 가장 깊음
 
-<img src="assets/preview-geo-glow-list.png" width="180"> <img src="assets/preview-geo-glow-passcode.png" width="180"> <img src="assets/preview-geo-glow-splash.png" width="180">
+<img src="assets/preview-stained-amethyst-list.png" width="180"> <img src="assets/preview-stained-amethyst-passcode.png" width="180"> <img src="assets/preview-stained-amethyst-splash.png" width="180">
 
-**글로우+배경** — 도형 배경에 빛나는 말풍선
+**로즈** — 같은 바탕에 분홍 유리. 가장 따뜻한 쪽
 
-<img src="assets/preview-geo-glow-image-list.png" width="180"> <img src="assets/preview-geo-glow-image-passcode.png" width="180"> <img src="assets/preview-geo-glow-image-splash.png" width="180">
+<img src="assets/preview-stained-rose-list.png" width="180"> <img src="assets/preview-stained-rose-passcode.png" width="180"> <img src="assets/preview-stained-rose-splash.png" width="180">
+
+</details>
+
+<a name="프리즘-글래스"></a>
+
+#### <img src="assets/icon-prism-light.png" width="26" valign="middle"> 프리즘 글래스
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-prism-light-chat.png" width="200"><br><b>라이트</b><br><sub>맑은 바탕. 말풍선 테두리가 무지개로 갈라짐</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=prism-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/prism-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-prism-dark-chat.png" width="200"><br><b>다크</b><br><sub>어두운 바탕. 갈라진 테두리가 더 또렷함</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=prism-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/prism-dark.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-prism-light-plain-chat.png" width="200"><br><b>라이트 단색</b><br><sub>배경 없이 갈라진 테두리만 남김</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=prism-light-plain.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/prism-light-plain.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-prism-dark-plain-chat.png" width="200"><br><b>다크 단색</b><br><sub>어두운 바탕에 갈라진 테두리만</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=prism-dark-plain.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/prism-dark-plain.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**라이트** — 맑은 바탕. 말풍선 테두리가 무지개로 갈라짐
+
+<img src="assets/preview-prism-light-list.png" width="180"> <img src="assets/preview-prism-light-passcode.png" width="180"> <img src="assets/preview-prism-light-splash.png" width="180">
+
+**다크** — 어두운 바탕. 갈라진 테두리가 더 또렷함
+
+<img src="assets/preview-prism-dark-list.png" width="180"> <img src="assets/preview-prism-dark-passcode.png" width="180"> <img src="assets/preview-prism-dark-splash.png" width="180">
+
+**라이트 단색** — 배경 없이 갈라진 테두리만 남김
+
+<img src="assets/preview-prism-light-plain-list.png" width="180"> <img src="assets/preview-prism-light-plain-passcode.png" width="180"> <img src="assets/preview-prism-light-plain-splash.png" width="180">
+
+**다크 단색** — 어두운 바탕에 갈라진 테두리만
+
+<img src="assets/preview-prism-dark-plain-list.png" width="180"> <img src="assets/preview-prism-dark-plain-passcode.png" width="180"> <img src="assets/preview-prism-dark-plain-splash.png" width="180">
+
+</details>
+
+<a name="프로스트-글래스"></a>
+
+#### <img src="assets/icon-frost-light.png" width="26" valign="middle"> 프로스트 글래스
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-frost-light-chat.png" width="200"><br><b>라이트</b><br><sub>젖빛 유리. 알갱이가 도는 뿌연 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=frost-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/frost-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-frost-dark-chat.png" width="200"><br><b>다크</b><br><sub>어두운 젖빛. 알갱이가 빛을 물고 있음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=frost-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/frost-dark.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-frost-light-plain-chat.png" width="200"><br><b>라이트 단색</b><br><sub>배경 없이 젖빛 말풍선만</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=frost-light-plain.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/frost-light-plain.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-frost-dark-plain-chat.png" width="200"><br><b>다크 단색</b><br><sub>어두운 바탕에 젖빛 말풍선만</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=frost-dark-plain.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/frost-dark-plain.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**라이트** — 젖빛 유리. 알갱이가 도는 뿌연 말풍선
+
+<img src="assets/preview-frost-light-list.png" width="180"> <img src="assets/preview-frost-light-passcode.png" width="180"> <img src="assets/preview-frost-light-splash.png" width="180">
+
+**다크** — 어두운 젖빛. 알갱이가 빛을 물고 있음
+
+<img src="assets/preview-frost-dark-list.png" width="180"> <img src="assets/preview-frost-dark-passcode.png" width="180"> <img src="assets/preview-frost-dark-splash.png" width="180">
+
+**라이트 단색** — 배경 없이 젖빛 말풍선만
+
+<img src="assets/preview-frost-light-plain-list.png" width="180"> <img src="assets/preview-frost-light-plain-passcode.png" width="180"> <img src="assets/preview-frost-light-plain-splash.png" width="180">
+
+**다크 단색** — 어두운 바탕에 젖빛 말풍선만
+
+<img src="assets/preview-frost-dark-plain-list.png" width="180"> <img src="assets/preview-frost-dark-plain-passcode.png" width="180"> <img src="assets/preview-frost-dark-plain-splash.png" width="180">
 
 </details>
 
