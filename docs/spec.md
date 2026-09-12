@@ -104,9 +104,39 @@
 
 ---
 
+## 애니메이션은 못 넣지만 "전환"은 설계할 수 있음
+
+규격에 시간 개념이 있는 속성은 없음. 그런데 **카톡이 스스로 하는 전환**이 있음 —
+말풍선을 누르면 보통 상태에서 선택 상태로 색이 부드럽게 바뀜.
+
+우리가 애니메이션을 넣는 게 아니라, **그 전환의 양 끝을 그려주는 것임.**
+두 끝을 같은 색으로 두면 앱이 아무리 이어줘도 아무 일도 안 일어남.
+
+전환이 있는 자리 — 여기를 대비되게 잡으면 움직임이 보임.
+
+| 자리 | 보통 | 눌림·선택 |
+|---|---|---|
+| 말풍선 배경 | `-ios-background-image` | `-ios-selected-background-image` |
+| 말풍선 글자 | `-ios-text-color` | `-ios-selected-text-color` |
+| 목록 셀 배경 | `-ios-normal-background-color` / `-alpha` | `-ios-selected-background-color` / `-alpha` |
+| 목록 이름 | `-ios-text-color` | `-ios-highlighted-text-color` |
+| 상태메시지 | `-ios-description-text-color` | `-ios-description-highlighted-text-color` |
+| 마지막 메시지 | `-ios-paragraph-text-color` | `-ios-paragraph-highlighted-text-color` |
+| 탭 글자 | `-ios-tab-text-color` | `-ios-tab-highlighted-text-color` |
+| 전송 버튼 | `-ios-send-normal-*` | `-ios-send-highlighted-*` |
+| 입력바 아이콘 | `-ios-button-normal-foreground-color` | `-ios-button-highlighted-foreground-color` |
+| 탭 아이콘 | `-ios-*-normal-icon-image` | `-ios-*-selected-icon-image` |
+| 잠금 동그라미 | `-ios-bullet-*-image` | `-ios-bullet-selected-*-image` |
+| 친구추가 버튼 | `theme_find_add_friend_button_image` | `..._pressed_image` (Android) |
+
+지금은 글자 계열을 포인트색 쪽으로 끌어당겨 놓음(`derived()`).
+말풍선은 보통/선택에 서로 다른 그림을 씀.
+
+---
+
 ## 안 되는 것
 
-- **애니메이션.** 양쪽 가이드에 시간 개념이 있는 속성이 하나도 없음. iOS 는 PNG 만 받고
+- **애니메이션.** 양쪽 가이드에 시간 개념이 있는 속성이 하나도 없음(위의 상태 전환은 앱이 하는 것임). iOS 는 PNG 만 받고
   APNG 를 넣어도 첫 프레임만 나옴. 안드로이드는 `animation-list` 를 넣어볼 수는 있지만
   누군가 `start()` 를 불러줘야 도는데 카톡이 그럴 이유가 없음
 - **폰트.** 글꼴을 바꾸는 속성이 없음

@@ -52,6 +52,29 @@ def lighten(h, f):
     return '#%02X%02X%02X' % tuple(round(v + (255 - v) * f) for v in c)
 
 
+def mix(a, b, f):
+    """a 에서 b 쪽으로 f 만큼 끌어당긴 색."""
+    ca, cb = rgb(a), rgb(b)
+    return '#%02X%02X%02X' % tuple(round(ca[i] + (cb[i] - ca[i]) * f) for i in range(3))
+
+
+def derived(t):
+    """눌림·선택 상태 색을 만든다.
+
+    카톡은 normal 과 selected 사이를 스스로 부드럽게 전환한다. 우리가 애니메이션을
+    넣을 수는 없지만 양 끝을 다르게 그려두면 그 전환이 눈에 보인다.
+    두 끝을 같은 색으로 두면 앱이 아무리 이어줘도 아무 일도 안 일어난다.
+
+    글자는 포인트색 쪽으로 끌어당기고, 말풍선 글자는 배경 대비를 살짝 키운다.
+    """
+    return dict(
+        text_hi=mix(t['text'], t['accent'], 0.55),
+        subtext_hi=mix(t['subtext'], t['accent'], 0.6),
+        send_text_hi=mix(t['send_text'], t['accent'], 0.45),
+        recv_text_hi=mix(t['recv_text'], t['accent'], 0.45),
+    )
+
+
 def mid(a, b):
     ca, cb = rgb(a), rgb(b)
     return '#%02X%02X%02X' % tuple((ca[i] + cb[i]) // 2 for i in range(3))
@@ -470,37 +493,89 @@ def edge_glow(img, color, strength, width_ratio=0.22):
 
 
 def icon(t, size=128):
-    """테마 아이콘. 둥근 사각형에 배경과 말풍선 둘을 축소해 넣는다.
+    """테마 아이콘. 카톡 테마 목록에 뜨는 그림이자 README 의 이름 앞 표식.
+
+    앱 아이콘처럼 보이게 만든다 — 배경에 비네팅을 깔아 말풍선이 뜨게 하고,
+    위에서 빛이 드는 광택과 얇은 안쪽 테두리를 얹는다. 평평한 사각형은 스티커로 보인다.
 
     두 곳에 쓴다.
-      - docs/icon-<key>.png : README 에서 테마 이름 왼쪽
-      - Images/commonIcoTheme.png : 카톡 테마 목록에 뜨는 아이콘 (iOS 규격에 있는 자리)
+      - docs/icon-<key>.png        README 의 테마 이름 왼쪽
+      - Images/commonIcoTheme.png  카톡 테마 목록 (iOS 규격에 있는 자리)
     """
     ss = 4
     W = size * ss
+    light = _is_light(t)
+
     if t.get('chat_bg'):
         base = chat_bg(t['chat_bg'], W, W).convert('RGBA')
     else:
         base = vgradient(W, W, rgb(t['bg']), rgb(t['bg_deep'])).convert('RGBA')
 
+    # 비네팅. 가장자리를 눌러 가운데가 떠 보이게 한다
+    vig = Image.new('L', (W, W), 0)
+    vd = ImageDraw.Draw(vig)
+    for i in range(40):
+        f = i / 39
+        inset = int(W * 0.5 * f)
+        vd.ellipse([inset - W * 0.12, inset - W * 0.12,
+                    W - inset + W * 0.12, W - inset + W * 0.12],
+                   fill=int(90 * (f ** 2)))
+    vig = vig.filter(ImageFilter.GaussianBlur(W * 0.06))
+    shade = Image.new('RGBA', (W, W), (255, 255, 255, 255) if light else (0, 0, 0, 255))
+    shade.putalpha(vig.point(lambda v: int(v * (0.35 if light else 0.8))))
+    base.alpha_composite(shade)
+
     glow, pad = glow_of(t)
     style, alpha = t.get('bubble_style', 'solid'), t.get('bubble_alpha', 255)
     flat = t.get('flat', False)
+    gp = max(1, pad * ss // 3) if glow else 0     # 글로우 없으면 여백도 없다
 
-    bw, bh, r = int(W * 0.46), int(W * 0.17), int(W * 0.075)
-    recv = bubble_box(bw, bh, t['recv'], r, style, alpha, glow, pad * ss // 2, flat)
-    send = bubble_box(int(bw * 0.86), bh, t['send'], r, style, alpha,
-                      glow, pad * ss // 2, flat)
-    m = int(W * 0.13)
-    base.alpha_composite(recv, (m, int(W * 0.26)))
-    base.alpha_composite(send, (W - m - send.size[0], int(W * 0.55)))
+    # 큰 말풍선 하나와 작은 것 하나. 카톡 기본 아이콘도 큰 말풍선이 주인공이다
+    big_w, big_h = int(W * 0.54), int(W * 0.21)
+    sml_w, sml_h = int(W * 0.33), int(W * 0.16)
+    r_big, r_sml = int(big_h * 0.42), int(sml_h * 0.42)
 
+    sml = bubble_box(sml_w, sml_h, t['recv'], r_sml, style, alpha, glow, gp, flat)
+    big = bubble_box(big_w, big_h, t['send'], r_big, style, alpha, glow, gp, flat)
+
+    # 큰 것 밑에 옅은 그림자를 깔아 떠 보이게 한다
+    sh = Image.new('RGBA', (W, W), (0, 0, 0, 0))
+    ImageDraw.Draw(sh).rounded_rectangle(
+        [int(W * 0.20), int(W * 0.52), int(W * 0.20) + big_w, int(W * 0.52) + big_h],
+        radius=r_big, fill=(0, 0, 0, 90 if not light else 45))
+    base.alpha_composite(sh.filter(ImageFilter.GaussianBlur(W * 0.035)))
+
+    base.alpha_composite(sml, (int(W * 0.13), int(W * 0.20)))
+    base.alpha_composite(big, (int(W * 0.20), int(W * 0.52)))
+
+    # 위쪽 광택
+    gloss = Image.new('L', (W, W), 0)
+    ImageDraw.Draw(gloss).ellipse([-W * 0.45, -W * 0.95, W * 1.45, W * 0.42], fill=255)
+    gloss = gloss.filter(ImageFilter.GaussianBlur(W * 0.05))
+    sheen = Image.new('RGBA', (W, W), (255, 255, 255, 255))
+    sheen.putalpha(gloss.point(lambda v: int(v * (0.10 if light else 0.13))))
+    base.alpha_composite(sheen)
+
+    # 둥근 사각형으로 자르고 안쪽에 얇은 테두리
+    radius = int(W * 0.22)
     mask = Image.new('L', (W, W), 0)
-    ImageDraw.Draw(mask).rounded_rectangle([0, 0, W - 1, W - 1],
-                                           radius=int(W * 0.22), fill=255)
+    ImageDraw.Draw(mask).rounded_rectangle([0, 0, W - 1, W - 1], radius=radius, fill=255)
     out = Image.new('RGBA', (W, W), (0, 0, 0, 0))
     out.paste(base, (0, 0), mask)
+
+    edge = Image.new('RGBA', (W, W), (0, 0, 0, 0))
+    ImageDraw.Draw(edge).rounded_rectangle(
+        [ss, ss, W - ss - 1, W - ss - 1], radius=radius - ss,
+        outline=(0, 0, 0, 60) if light else (255, 255, 255, 46), width=ss)
+    edge.putalpha(ImageChops.multiply(edge.getchannel('A'), mask))
+    out.alpha_composite(edge)
     return out.resize((size, size), Image.LANCZOS)
+
+
+def _is_light(t):
+    """밝은 테마인지. 배경 밝기로 판단한다."""
+    c = rgb(t['bg'])
+    return (c[0] * 299 + c[1] * 587 + c[2] * 114) / 1000 > 128
 
 
 # --- iOS ----------------------------------------------------------------
@@ -542,13 +617,13 @@ MainViewStyle-Primary
     background-color: {bg};{mainbg}
 
     -ios-text-color: {text};
-    -ios-highlighted-text-color: {text};
+    -ios-highlighted-text-color: {text_hi};
 
     -ios-description-text-color: {subtext};
-    -ios-description-highlighted-text-color: {subtext};
+    -ios-description-highlighted-text-color: {subtext_hi};
 
     -ios-paragraph-text-color: {subtext};
-    -ios-paragraph-highlighted-text-color: {subtext};
+    -ios-paragraph-highlighted-text-color: {subtext_hi};
 
     /* alpha 가 1 미만이면 뒤의 배경 이미지가 비친다. 유리 느낌은 여기서 나온다 */
     -ios-normal-background-color: {bg};
@@ -618,7 +693,7 @@ MessageCellStyle-Send
     -ios-group-title-edgeinsets: {ins};
 
     -ios-text-color: {send_text};
-    -ios-selected-text-color: {send_text};
+    -ios-selected-text-color: {send_text_hi};
     -ios-unread-text-color: {accent};
 }}
 
@@ -633,7 +708,7 @@ MessageCellStyle-Receive
     -ios-group-title-edgeinsets: {ins};
 
     -ios-text-color: {recv_text};
-    -ios-selected-text-color: {recv_text};
+    -ios-selected-text-color: {recv_text_hi};
     -ios-unread-text-color: {accent};
 }}
 
@@ -739,6 +814,7 @@ def gen_ios(t, root):
 
     ca = t.get('cell_alpha', 1.0)
     fields = dict(t)
+    fields.update(derived(t))          # 눌림 상태 색
     fields.pop('cell_alpha', None)          # 아래에서 문자열로 다시 넣는다
     ins = '%dpx %dpx %dpx %dpx' % (INSET_V + pad, INSET_H + pad,
                                   INSET_V + pad, INSET_H + pad)
@@ -780,11 +856,11 @@ COLORS = [
     ('theme_tab_bannerbadge_background_color', 'accent'),
     ('theme_section_title_color', 'subtext'),
     ('theme_title_color', 'text'),
-    ('theme_title_pressed_color', 'text'),
+    ('theme_title_pressed_color', 'text_hi'),
     ('theme_paragraph_color', 'subtext'),
-    ('theme_paragraph_pressed_color', 'subtext'),
+    ('theme_paragraph_pressed_color', 'subtext_hi'),
     ('theme_description_color', 'subtext'),
-    ('theme_description_pressed_color', 'subtext'),
+    ('theme_description_pressed_color', 'subtext_hi'),
     ('theme_body_cell_color', 'bg'),
     ('theme_body_cell_pressed_color', 'pressed'),
     ('theme_body_cell_border_color', 'border'),
@@ -854,13 +930,15 @@ def gen_android(t, root, code):
     lines = ['<?xml version="1.0" encoding="utf-8"?>',
              '<!-- %s. tools/themes.py 에서 생성된다. 직접 고치지 말 것. -->' % t['name'],
              '<resources>', '']
+    tok = dict(t)
+    tok.update(derived(t))
     ca = t.get('cell_alpha', 1.0)
     # 셀 배경만 알파를 먹인다. 글자색까지 투명해지면 안 읽힌다
     faded = {'theme_body_cell_color', 'theme_body_secondary_cell_color',
              'theme_maintab_cell_color', 'theme_header_cell_color'}
     for name, token in COLORS:
         a = ca if name in faded else 1.0
-        lines.append('    <color name="%s">%s</color>' % (name, argb(t[token], a)))
+        lines.append('    <color name="%s">%s</color>' % (name, argb(tok[token], a)))
     ba = t.get('bubble_alpha', 255) / 255.0
     lines += ['',
               '    <!-- 말풍선은 9-patch 이미지가 이긴다. 아래는 이미지가 안 먹을 때의 대비값 -->',
