@@ -394,16 +394,19 @@ def readme_block(ts):
 
     # 테마별 자세히
     for t in ts:
-        out.append('### %s' % t['name'])
+        # 받기 링크를 제목 줄에 같이 둔다. 다만 GitHub 은 제목 글자로 앵커를 만들기 때문에
+        # 링크 글자까지 슬러그에 섞여 썸네일 점프가 깨진다. 앵커를 따로 박아 고정한다.
+        out.append('<a name="%s"></a>' % anchor(t['name']).lstrip('#'))
+        out.append('')
+        out.append('### %s &nbsp; <sub>[iOS 받기](%s%s.ktheme) · '
+                   '[Android 받기](%s%s.apk)</sub>'
+                   % (t['name'], BASE, t['key'], BASE, t['key']))
         out.append('')
         out.append(' '.join(
             '<img src="docs/preview-%s-%s.png" width="200">' % (t['key'], kind)
             for kind, _ in SHOTS))
         out.append('')
         out.append(t['note'] + '.')
-        out.append('')
-        out.append('[iOS 받기](%s%s.ktheme) · [Android 받기](%s%s.apk)'
-                   % (BASE, t['key'], BASE, t['key']))
         out.append('')
 
     out.append(END)
