@@ -17,8 +17,13 @@ build-android.ps1        → dist/android/inkmint01.apk
 
 ## 받기
 
-[릴리스](https://github.com/Ruminem/kakaotalk-theme/releases)에서 받는다.
-릴리스마다 iOS `.ktheme` 과 안드로이드 `.apk` 가 같이 올라간다.
+| | 다운로드 | 적용 |
+|---|---|---|
+| iOS | [inkmint01.ktheme](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint01.ktheme) | 파일 앱에서 탭 → 공유 → 카카오톡 |
+| Android | [inkmint01.apk](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint01.apk) | 설치 후 카톡 더보기 > 설정 > 테마 설정 |
+
+위 링크는 항상 최신 릴리스를 가리킨다.
+지난 버전은 [릴리스 목록](https://github.com/Ruminem/kakaotalk-theme/releases)에서 받는다.
 
 ## 빌드
 
