@@ -345,14 +345,27 @@ def scene_night(spec, w, h):
       dim    0~1. 클수록 어둡게 덮는다. 글자가 얹히는 화면은 올린다
     """
     o = spec[3] if len(spec) > 3 else {}
+    seed = o.get('seed', 20260912)
     unit = w / 500.0
     img = vgradient(w, h, rgb(spec[1]), rgb(spec[2])).convert('RGB')
 
     # 하늘에 아주 옅은 잡음을 섞는다. 매끈한 그라데이션은 띠(밴딩)가 보인다
     # 잡음을 살짝 흐려서 섞는다. 픽셀 단위 잡음은 PNG 가 못 줄여서 파일이 몇 배로 커진다.
     # 흐린 잡음도 띠를 깨는 데는 충분하다.
-    noise = Image.effect_noise((w, h), 7).filter(
-        ImageFilter.GaussianBlur(1.1)).convert('RGB')
+    #
+    # 잡음도 씨앗을 받아야 한다. PIL 의 effect_noise 는 파이썬 random 이 아니라
+    # C 쪽 난수를 쓰고 씨앗을 줄 자리가 없어서, 별만 고정되고 잡음은 돌릴 때마다
+    # 달라졌다. 그래서 심야 그림 여덟 장이 미리보기를 돌릴 때마다 diff 에 떴다.
+    #
+    # 픽셀 하나씩 뽑는다. 절반 크기로 만들어 키우면 1.2초가 0.4초가 되지만,
+    # 키울 때 생긴 두 픽셀짜리 알갱이가 1.1 픽셀 흐림을 견뎌서 PNG 가 두 배로
+    # 커진다(108KB -> 197KB). 흐림을 1.6 으로 올리면 크기는 돌아오지만 그때는
+    # 그림이 예전과 달라진다. 여기서는 속도보다 예전 그대로가 낫다.
+    # 별과는 다른 난수를 쓴다 — 같은 것을 쓰면 뽑는 차례가 밀려 별자리까지 바뀐다.
+    nr = random.Random(seed ^ 0x5EED)
+    noise = Image.frombytes('L', (w, h), bytes(
+        min(255, max(0, int(nr.gauss(128, 7)))) for _ in range(w * h)))
+    noise = noise.filter(ImageFilter.GaussianBlur(1.1)).convert('RGB')
     img = Image.blend(img, noise, 0.05)
 
     horizon = h * (0.74 if o.get('ridge') else 1.0)
@@ -369,7 +382,7 @@ def scene_night(spec, w, h):
     img = Image.alpha_composite(img.convert('RGBA'), wash).convert('RGB')
 
     d = ImageDraw.Draw(img, 'RGBA')
-    rnd = random.Random(o.get('seed', 20260912))
+    rnd = random.Random(seed)
     bpx = band.load()
 
     n = o.get('stars', 220)
