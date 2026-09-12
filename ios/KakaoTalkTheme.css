@@ -1,9 +1,10 @@
 /*
  먹빛 민트 — iOS 카카오톡 테마
 
- v0. 이미지를 한 장도 넣지 않고 색만 지정한다.
- 지정하지 않은 항목은 카카오 기본 테마가 그대로 보이므로,
- 적용해보면 "색으로 바꿀 수 있는 범위"가 어디까지인지 눈으로 확인된다.
+ 색은 여기서, 말풍선 그림은 tools/gen-images.py 에서 나온다.
+ 지정하지 않은 항목은 카카오 기본 테마가 그대로 보인다.
+
+ iOS 테마에는 실행화면(스플래시) 블록이 없다. 안드로이드에만 있다.
 
  배색
    #101215  가장 어두운 바닥 (채팅방)
@@ -20,7 +21,7 @@
 ManifestStyle
 {
     -kakaotalk-theme-name: '먹빛 민트 01';
-    -kakaotalk-theme-version: '0.1';
+    -kakaotalk-theme-version: '0.2';
     -kakaotalk-author-name: 'Ruminem';
     -kakaotalk-theme-id: 'com.kakao.talk.theme.inkmint01';
 }
@@ -131,21 +132,39 @@ InputBarStyle-Chat
 /*
  말풍선.
  배경은 PNG 로만 지정할 수 있고 background-color 속성이 없다.
- v0 에서는 이미지를 안 넣으므로 기본 말풍선(노랑/흰색)이 그대로 뜬다.
- 그래서 글자색을 어두운 쪽으로 둔다. 말풍선 PNG 를 직접 그려 넣는 순간
- 받은 말풍선 글자색은 밝은 쪽(#E8EBEE)으로 뒤집어야 한다.
+ tools/gen-images.py 가 그린다. 세로 그라데이션인 이유는 말풍선이 가로로 늘어날 때
+ 각 줄의 색이 그대로 유지되기 때문이다. 가로 그라데이션이면 늘어나면서 뭉개진다.
+
+ 뒤의 숫자 두 개(18px 18px)가 늘어나지 않는 가장자리이고,
+ gen-images.py 의 CAP 값과 같아야 한다. 한쪽만 바꾸면 모서리가 뭉개진다.
  */
 MessageCellStyle-Send
 {
-    -ios-text-color: #16181C;
-    -ios-selected-text-color: #16181C;
-    -ios-unread-text-color: #4FD1B0;   /* 안 읽은 사람 수 */
+    -ios-background-image: 'chatroomBubbleSend01.png' 18px 18px;
+    -ios-selected-background-image: 'chatroomBubbleSend02.png' 18px 18px;
+    -ios-group-background-image: 'chatroomBubbleSend01.png' 18px 18px;
+    -ios-group-selected-background-image: 'chatroomBubbleSend02.png' 18px 18px;
+
+    -ios-title-edgeinsets: 9px 13px 9px 13px;        /* top, left, bottom, right */
+    -ios-group-title-edgeinsets: 9px 13px 9px 13px;
+
+    -ios-text-color: #0E2A24;                        /* 민트 위라 어두운 글자 */
+    -ios-selected-text-color: #0E2A24;
+    -ios-unread-text-color: #4FD1B0;                 /* 안 읽은 사람 수 */
 }
 
 MessageCellStyle-Receive
 {
-    -ios-text-color: #2A2E35;
-    -ios-selected-text-color: #2A2E35;
+    -ios-background-image: 'chatroomBubbleReceive01.png' 18px 18px;
+    -ios-selected-background-image: 'chatroomBubbleReceive02.png' 18px 18px;
+    -ios-group-background-image: 'chatroomBubbleReceive01.png' 18px 18px;
+    -ios-group-selected-background-image: 'chatroomBubbleReceive02.png' 18px 18px;
+
+    -ios-title-edgeinsets: 9px 13px 9px 13px;
+    -ios-group-title-edgeinsets: 9px 13px 9px 13px;
+
+    -ios-text-color: #FFFFFF;                        /* 보라 위라 흰 글자 */
+    -ios-selected-text-color: #FFFFFF;
     -ios-unread-text-color: #4FD1B0;
 }
 

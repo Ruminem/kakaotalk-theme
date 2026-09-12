@@ -41,10 +41,12 @@
     <!-- 하단 탭바 (아이콘 PNG 는 v0 에서 안 넣는다) -->
     <color name="theme_maintab_cell_color">#FF16181C</color>
 
-    <!-- 채팅방 -->
+    <!-- 채팅방.
+         말풍선은 9-patch 이미지(drawable-xxhdpi)가 우선이고, 아래 색은 이미지가
+         안 먹을 때의 대비값이다. 그라데이션 중간색으로 맞춰뒀다. -->
     <color name="theme_chatroom_background_color">#FF101215</color>
-    <color name="theme_chatroom_bubble_me_color">#FF4FD1B0</color>
-    <color name="theme_chatroom_bubble_you_color">#FF242830</color>
+    <color name="theme_chatroom_bubble_me_color">#FF4CBEC7</color>
+    <color name="theme_chatroom_bubble_you_color">#FFB36BC8</color>
     <color name="theme_chatroom_unread_count_color">#FF4FD1B0</color>
 
     <!-- 채팅 입력바 -->

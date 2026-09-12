@@ -37,6 +37,10 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 | 버전 | `-kakaotalk-theme-version` | `AndroidManifest.xml` 의 `versionCode` / `versionName` |
 | 이미지 | `ios/Images/name@3x.png` | `android/res/drawable-xxhdpi/name.png` |
 
+이미지는 `tools/gen-images.py` 가 그린다. 양쪽을 한 번에 만들어서 색이 어긋나지 않는다.
+말풍선의 `CAP` 값은 iOS CSS 의 cap inset 숫자와 같아야 한다 — 한쪽만 바꾸면 모서리가 뭉개진다.
+안드로이드는 같은 그림을 9-patch 로 내보낸다(늘어나는 범위를 1픽셀 테두리에 그려 넣는 형식).
+
 사용자에게 파일을 보낼 때도 두 개를 같이 보낸다. 한쪽만 보내면
 "내 기기는 어느 쪽이냐"를 되묻게 만든다.
 
@@ -89,6 +93,7 @@ README 가 `releases/latest/download/` 로 바로 거는데, 이름에 버전이
 
 - `.ktheme` 을 안드로이드에 넣을 수 없고 그 반대도 안 된다. 포맷이 완전히 다르다.
 - iOS 말풍선은 색상값으로 못 바꾼다. `MessageCellStyle` 에 `background-color` 가 없다. PNG 를 그려야 한다.
-- 안드로이드는 말풍선 색이 먹는다 (`theme_chatroom_bubble_me_color`).
+- 안드로이드는 말풍선 색이 먹는다 (`theme_chatroom_bubble_me_color`). 이미지를 넣으면 이미지가 이긴다.
+- **실행화면(스플래시)은 안드로이드만 된다** (`theme_splash_image`). iOS 규격에는 블록 자체가 없다.
 - 안드로이드 테마 APK 는 권한을 하나도 요구하지 않는다. 설치할 때 권한 안내가 뜨면 뭔가 잘못된 것이다.
 - gradle 은 쓰지 않는다. 코드 없는 리소스 전용 APK 라 `aapt2` → `zipalign` → `apksigner` 면 끝난다.
