@@ -18,9 +18,11 @@ build-android.ps1        → dist/android/inkmint01.apk
 ## 빌드
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File build-ios.ps1
-powershell -ExecutionPolicy Bypass -File build-android.ps1
+powershell -ExecutionPolicy Bypass -File build.ps1
 ```
+
+두 플랫폼을 함께 만든다. **배포는 항상 이걸로 한다** — 한쪽만 갱신하면 두 버전이 어긋난다.
+한쪽만 빠르게 확인할 때는 `build-ios.ps1` / `build-android.ps1` 을 따로 돌려도 된다.
 
 `dist/` 와 `theme.keystore` 는 저장소에 넣지 않는다.
 

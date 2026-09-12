@@ -69,7 +69,9 @@ $aligned = Join-Path $work 'aligned.apk'
 if ($LASTEXITCODE -ne 0) { throw "zipalign 실패" }
 
 if (Test-Path $out) { Remove-Item $out -Force }
-& $apksigner sign --ks $ks --ks-pass "pass:$ksPass" --key-pass "pass:$ksPass" --out $out $aligned
+# v4 서명(--v4-signing-enabled)은 adb 증분설치용이라 끈다. 켜두면 .idsig 가 같이 나온다.
+& $apksigner sign --ks $ks --ks-pass "pass:$ksPass" --key-pass "pass:$ksPass" `
+    --v4-signing-enabled false --out $out $aligned
 if ($LASTEXITCODE -ne 0) { throw "apksigner 실패" }
 
 & $apksigner verify $out
