@@ -40,7 +40,7 @@ chat_bg
 
 import re
 
-VERSION = '0.28'
+VERSION = '0.27'
 
 THEMES = [
     dict(
@@ -485,96 +485,6 @@ THEMES = [
         send_text='#EDE6DF', recv_text='#E4DCD5',
         flat=True, chat_bg=None, main_bg=None, passcode_bg=None,
     ),
-    # --- 말랑 -------------------------------------------------------------
-    # 그림 말풍선. 테두리 선이 있고 모양이 있고, 묶음의 첫 말풍선에만 소품이 붙는다
-    # (tools/toon.py). 네 벌 규칙의 축(배경/글로우) 대신 소재가 곧 벌이다.
-    # 몽실이는 여기서 새로 그린 캐릭터다 — 남의 테마 캐릭터를 흉내내지 않는다.
-    dict(
-        key='malang85', name='말랑 구름',
-        note='구름 말풍선 뒤로 무지개가 솟음. 노란 바탕',
-        bg='#FFF8E1', bg_deep='#FFF3D1', surface='#FFFDF4', pressed='#FFEFC4',
-        border='#EFE2B8', text='#3E4A63', subtext='#8A93A8',
-        accent='#FF8FAB', accent_dim='#E86F8E', on_accent='#FFFFFF',
-        send=('#FFFFFF', '#FFFFFF'), send_alt=('#FFFFFF', '#FFFFFF'),
-        recv=('#E3F0FF', '#E3F0FF'), recv_alt=('#E3F0FF', '#E3F0FF'),
-        send_text='#3E4A63', recv_text='#3E4A63',
-        bubble_style='toon', flat=True, outline='#6B7A99', outline_w=1.5,
-        shape=('pill', 'cloud'), tail=(True, False), deco=(None, 'rainbow'),
-        profile_deco='critter', critter='#FFFFFF',
-        chat_bg=None, main_bg=None, passcode_bg=None,
-    ),
-    dict(
-        key='malang86', name='말랑 어항',
-        note='받은 말은 어항, 보낸 말은 상자 속 몽실이',
-        bg='#F1F3F5', bg_deep='#E9ECEF', surface='#FAFBFC', pressed='#E3E7EB',
-        border='#D8DDE2', text='#2F3437', subtext='#7B838A',
-        accent='#FF9F43', accent_dim='#E0852A', on_accent='#FFFFFF',
-        send=('#FFFFFF', '#FFFFFF'), send_alt=('#FFFFFF', '#FFFFFF'),
-        recv=('#FFFFFF', '#FFFFFF'), recv_alt=('#FFFFFF', '#FFFFFF'),
-        send_text='#2F3437', recv_text='#2F3437',
-        bubble_style='toon', flat=True, outline='#3A3F44', outline_w=1.6,
-        shape=('box', 'bowl'), tail=False, deco=('critter', None),
-        water='#CFEAF7', fish='#FF9F43', weed='#5DBB8A',
-        profile_deco='critter', critter='#FFFFFF',
-        chat_bg=None, main_bg=None, passcode_bg=None,
-    ),
-    dict(
-        key='malang87', name='말랑 딸기우유',
-        note='분홍 말풍선에 꼬리. 첫 말엔 몽실이가 앉음',
-        bg='#FFF0F3', bg_deep='#FFE6EC', surface='#FFF9FA', pressed='#FFDCE5',
-        border='#F5CCD7', text='#5A3E48', subtext='#A2848E',
-        accent='#FF7A9C', accent_dim='#E35E82', on_accent='#FFFFFF',
-        send=('#FFC9D6', '#FFC9D6'), send_alt=('#FFC9D6', '#FFC9D6'),
-        recv=('#FFFFFF', '#FFFFFF'), recv_alt=('#FFFFFF', '#FFFFFF'),
-        send_text='#5A3E48', recv_text='#5A3E48',
-        bubble_style='toon', flat=True, outline='#7A5563', outline_w=1.5,
-        shape='pill', tail=True, deco=(None, 'critter'),
-        profile_deco='critter', critter='#FFFFFF',
-        chat_bg=None, main_bg=None, passcode_bg=None,
-    ),
-
-    # --- 반짝 -------------------------------------------------------------
-    dict(
-        key='banjjak88', name='반짝 먹별',
-        note='분홍 바탕에 까만 별. 까만 말풍선과 흰 말풍선',
-        bg='#FCEEF0', bg_deep='#F8E4E8', surface='#FFF8F9', pressed='#F3DDE2',
-        border='#E8CFD5', text='#262626', subtext='#8E7F83',
-        accent='#262626', accent_dim='#111111', on_accent='#FFFFFF',
-        send=('#FFFFFF', '#FFFFFF'), send_alt=('#FFFFFF', '#FFFFFF'),
-        recv=('#262626', '#262626'), recv_alt=('#262626', '#262626'),
-        send_text='#262626', recv_text='#FFFFFF',
-        bubble_style='toon', flat=True, outline='#262626', outline_w=1.5,
-        shape='pill', tail=True, deco=None,
-        profile_deco='star', star='#262626',
-        chat_bg=('stars', '#FCEEF0', '#FAE6EA',
-                 dict(count=16, rmin=0.035, rmax=0.06, fill='#2A2A2A')),
-        main_bg=('stars', '#FCEEF0', '#FAE6EA',
-                 dict(count=10, rmin=0.03, rmax=0.05, fill='#2A2A2A')),
-        passcode_bg=('stars', '#FCEEF0', '#F8DFE4',
-                     dict(count=24, rmin=0.035, rmax=0.07, fill='#2A2A2A')),
-    ),
-    dict(
-        key='banjjak89', name='반짝 하늘별',
-        note='하늘색 바탕에 노랑·분홍 말풍선. 첫 말엔 별',
-        bg='#DCEFFF', bg_deep='#CFE8FF', surface='#F2F9FF', pressed='#C6E0F5',
-        border='#B8D6EE', text='#2F2F3A', subtext='#6F7C8C',
-        accent='#FF8CB8', accent_dim='#E86A9C', on_accent='#FFFFFF',
-        send=('#FFE6F0', '#FFB3CF'), send_alt=('#FFE6F0', '#FFB3CF'),
-        recv=('#FFFBE3', '#FFE27A'), recv_alt=('#FFFBE3', '#FFE27A'),
-        send_text='#2F2F3A', recv_text='#2F2F3A',
-        bubble_style='toon', flat=False, outline='#2F2F3A', outline_w=1.6,
-        shape='pill', tail=False, deco=(None, 'star'),
-        profile_deco='star', star='#FFE27A',
-        chat_bg=('stars', '#BFE3FF', '#EAF6FF',
-                 dict(count=14, rmin=0.018, rmax=0.03, fill='#FFF6C8',
-                      outline='#2F2F3A', outline_w=4)),
-        main_bg=('stars', '#CDE9FF', '#EEF8FF',
-                 dict(count=8, rmin=0.015, rmax=0.025, fill='#FFF6C8',
-                      outline='#2F2F3A', outline_w=4)),
-        passcode_bg=('stars', '#B3DDFF', '#E6F4FF',
-                     dict(count=22, rmin=0.02, rmax=0.04, fill='#FFF6C8',
-                          outline='#2F2F3A', outline_w=4)),
-    ),
     dict(
         key='midnight11', name='심야',
         note='밤하늘을 그려 넣은 테마. 잠금화면에 달과 능선이 나옴',
@@ -820,11 +730,6 @@ FAMILY = {
     'calm82':     ('고요', '안개'),
     'calm83':     ('고요', '자두'),
     'calm84':     ('고요', '먹'),
-    'malang85':   ('말랑', '구름'),
-    'malang86':   ('말랑', '어항'),
-    'malang87':   ('말랑', '딸기우유'),
-    'banjjak88':  ('반짝', '먹별'),
-    'banjjak89':  ('반짝', '하늘별'),
     'stained65':  ('스테인드 글래스', '앰버'),
     'stained66':  ('스테인드 글래스', '에메랄드'),
     'stained67':  ('스테인드 글래스', '자수정'),
@@ -867,8 +772,7 @@ def families():
              'oak': 0, 'walnut': 1, 'oak-plain': 2, 'walnut-plain': 3,
              'amber': 0, 'emerald': 1, 'amethyst': 2, 'rose': 3,
              'sage': 0, 'sand': 1, 'slate': 2, 'mocha': 3,
-             'olive': 0, 'fog': 1, 'plum': 2, 'ink': 3,
-             'cloud': 0, 'bowl': 1, 'strawberry': 2, 'inkstar': 0, 'skystar': 1}
+             'olive': 0, 'fog': 1, 'plum': 2, 'ink': 3}
     out, seen = [], {}
     for t in THEMES:
         t['family'], t['variant'] = _fam_of(t)
@@ -904,7 +808,6 @@ CATEGORIES = (
     ('유리', '말풍선이 반투명하다'),
     ('자연', '배경이 장면을 그린다'),
     ('불빛', '어두운 바탕에 인공 불빛'),
-    ('모양', '말풍선에 모양과 그림이 붙는다'),
 )
 
 # 계열 이름 -> 분류. 새 계열을 더하면 여기에 한 줄 쓴다. 안 쓰면 생성이 멈춘다 —
@@ -922,8 +825,6 @@ CATEGORY = {
     '도형': '무늬',
     '차분': '무늬',
     '고요': '무늬',
-    '말랑': '모양',
-    '반짝': '모양',
 
     '벚꽃 그늘': '자연',
     '오로라': '자연',
@@ -1118,11 +1019,6 @@ VARIANT_SLUG = {
     '안개': 'fog',
     '자두': 'plum',
     '먹': 'ink',
-    '구름': 'cloud',
-    '어항': 'bowl',
-    '딸기우유': 'strawberry',
-    '먹별': 'inkstar',
-    '하늘별': 'skystar',
     '앰버': 'amber',
     '에메랄드': 'emerald',
     '자수정': 'amethyst',

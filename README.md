@@ -114,21 +114,6 @@
 </tr>
 </table>
 
-**[모양](#user-content-모양)** — 말풍선에 모양과 그림이 붙는다
-
-<table>
-<tr>
-<td width="33%" align="center"><a href="#user-content-말랑"><img src="assets/preview-malang-cloud-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-반짝"><img src="assets/preview-banjjak-inkstar-chat.png" width="190"></a></td>
-<td width="33%"></td>
-</tr>
-<tr>
-<td align="center"><img src="assets/icon-malang-cloud.png" width="20" valign="middle"> <b><a href="#user-content-말랑">말랑</a></b><br><sub>구름 · 어항 · 딸기우유</sub><br>구름 말풍선 뒤로 무지개가 솟음. 노란 바탕</td>
-<td align="center"><img src="assets/icon-banjjak-inkstar.png" width="20" valign="middle"> <b><a href="#user-content-반짝">반짝</a></b><br><sub>먹별 · 하늘별</sub><br>분홍 바탕에 까만 별. 까만 말풍선과 흰 말풍선</td>
-<td width="33%"></td>
-</tr>
-</table>
-
 <a name="무늬"></a>
 
 ### 무늬
@@ -877,61 +862,6 @@
 **글로우+배경** — 불티 배경 위에 달아오른 빨강까지
 
 <img src="assets/preview-red-glow-image-list.png" width="180"> <img src="assets/preview-red-glow-image-passcode.png" width="180"> <img src="assets/preview-red-glow-image-splash.png" width="180">
-
-</details>
-
-<a name="모양"></a>
-
-### 모양
-
-<a name="말랑"></a>
-
-#### <img src="assets/icon-malang-cloud.png" width="26" valign="middle"> 말랑
-
-<table>
-<tr>
-<td width="33%" align="center"><img src="assets/preview-malang-cloud-chat.png" width="200"><br><b>구름</b><br><sub>구름 말풍선 뒤로 무지개가 솟음. 노란 바탕</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=malang-cloud.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/malang-cloud.apk">Android</a></td>
-<td width="33%" align="center"><img src="assets/preview-malang-bowl-chat.png" width="200"><br><b>어항</b><br><sub>받은 말은 어항, 보낸 말은 상자 속 몽실이</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=malang-bowl.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/malang-bowl.apk">Android</a></td>
-<td width="33%" align="center"><img src="assets/preview-malang-strawberry-chat.png" width="200"><br><b>딸기우유</b><br><sub>분홍 말풍선에 꼬리. 첫 말엔 몽실이가 앉음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=malang-strawberry.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/malang-strawberry.apk">Android</a></td>
-</tr>
-</table>
-
-<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
-
-**구름** — 구름 말풍선 뒤로 무지개가 솟음. 노란 바탕
-
-<img src="assets/preview-malang-cloud-list.png" width="180"> <img src="assets/preview-malang-cloud-passcode.png" width="180"> <img src="assets/preview-malang-cloud-splash.png" width="180">
-
-**어항** — 받은 말은 어항, 보낸 말은 상자 속 몽실이
-
-<img src="assets/preview-malang-bowl-list.png" width="180"> <img src="assets/preview-malang-bowl-passcode.png" width="180"> <img src="assets/preview-malang-bowl-splash.png" width="180">
-
-**딸기우유** — 분홍 말풍선에 꼬리. 첫 말엔 몽실이가 앉음
-
-<img src="assets/preview-malang-strawberry-list.png" width="180"> <img src="assets/preview-malang-strawberry-passcode.png" width="180"> <img src="assets/preview-malang-strawberry-splash.png" width="180">
-
-</details>
-
-<a name="반짝"></a>
-
-#### <img src="assets/icon-banjjak-inkstar.png" width="26" valign="middle"> 반짝
-
-<table>
-<tr>
-<td width="50%" align="center"><img src="assets/preview-banjjak-inkstar-chat.png" width="200"><br><b>먹별</b><br><sub>분홍 바탕에 까만 별. 까만 말풍선과 흰 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=banjjak-inkstar.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/banjjak-inkstar.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-banjjak-skystar-chat.png" width="200"><br><b>하늘별</b><br><sub>하늘색 바탕에 노랑·분홍 말풍선. 첫 말엔 별</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=banjjak-skystar.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/banjjak-skystar.apk">Android</a></td>
-</tr>
-</table>
-
-<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
-
-**먹별** — 분홍 바탕에 까만 별. 까만 말풍선과 흰 말풍선
-
-<img src="assets/preview-banjjak-inkstar-list.png" width="180"> <img src="assets/preview-banjjak-inkstar-passcode.png" width="180"> <img src="assets/preview-banjjak-inkstar-splash.png" width="180">
-
-**하늘별** — 하늘색 바탕에 노랑·분홍 말풍선. 첫 말엔 별
-
-<img src="assets/preview-banjjak-skystar-list.png" width="180"> <img src="assets/preview-banjjak-skystar-passcode.png" width="180"> <img src="assets/preview-banjjak-skystar-splash.png" width="180">
 
 </details>
 
