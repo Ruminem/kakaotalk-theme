@@ -49,7 +49,7 @@ jobs:
         run: |
           mkdir -p _site/docs _site/assets _site/files
           cp docs/index.html docs/share.html _site/docs/
-          cp assets/*.png _site/assets/
+          cp assets/*.png assets/*.webp _site/assets/
           printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=docs/">' > _site/index.html
 
       # 공유에 쓰는 건 iOS 테마뿐이다. APK 는 카톡에 보내는 게 아니라 설치하는 거라

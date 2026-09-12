@@ -11,7 +11,7 @@ CSS, `colors.xml`, `AndroidManifest.xml`, 말풍선 그림, 미리보기가 전�
 ```
 tools/themes.py     ← 팔레트 표. 여기만 고친다
 tools/gen.py        → build-src/<테마>/{ios,android}/
-tools/preview.py    → assets/*.png, docs/index.html, README 의 테마 목록
+tools/preview.py    → assets/*.webp, docs/index.html, README 의 테마 목록
 build.ps1           → dist/iOS/*.ktheme, dist/android/*.apk
 release.ps1         → 태그 + 릴리스 자산 첨부
 .github/workflows/pages.yml → ruminem.github.io/kakaotalk-theme/
@@ -45,7 +45,7 @@ release.ps1         → 태그 + 릴리스 자산 첨부
 |---|---|---|
 | 배포 파일 | `city-glow-image` | `city-glow-image.ktheme` / `.apk`, README 링크 |
 | 패키지 · iOS 테마 ID | `city_glow_image` | `com.kakao.talk.theme.city_glow_image` |
-| 미리보기 그림 | `preview-city-glow-image-chat.png` | `assets/`, README |
+| 미리보기 그림 | `preview-city-glow-image-chat.webp` | `assets/`, README |
 | 키 | `city21` | 겉으로 안 드러난다. `versionCode` 번호로만 쓴다 |
 
 파일 이름은 하이픈, 패키지는 밑줄이다. **안드로이드 패키지 이름은 자바 식별자 규칙이라
@@ -231,8 +231,12 @@ powershell -ExecutionPolicy Bypass -File preview.ps1
 내보낸다. 한때 1배(460px)로 그렸는데 글로우의 흐림이 몇 픽셀짜리 계단이 되고 글자가
 뭉개져서, 폰에 깐 설원 글로우+배경 화면과 나란히 놓으니 미리보기만 훨씬 싸구려였다.
 README 에서 그 그림을 보고 지나치면 폰에서 예쁜 것은 소용이 없다.
-그림 한 장이 30KB 에서 110KB 가 된다. 256색으로 줄이면 45KB 지만 배경 그라데이션이
-얼룩덜룩하게 끊겨서 안 쓴다.
+**미리보기 그림은 무손실 WebP 로 내보낸다.** 3배로 바꾸면서 PNG 한 장이 30KB 에서 110KB 가
+됐고, 무손실 WebP 는 화질이 똑같이 67KB 다. 손실 WebP(품질 95, 32KB)는 3배로 확대하면
+매끈한 그라데이션에 옅은 얼룩이 보이고, 256색 PNG(45KB)는 배경 그라데이션이 얼룩덜룩하게
+끊겨서 안 쓴다. 아이콘과 QR 은 몇 KB 라 PNG 그대로 둔다.
+이미 쌓인 git 기록은 줄지 않는다 — 앞으로 전부 다시 그릴 때 붙는 용량이 줄 뿐이다.
+GitHub 앱에서 WebP 가 뜨는지는 확인 전이다.
 
 **머리 단추와 입력창은 테마가 아니라 iOS 26 이 그린다.** 떠 있는 유리 단추라 배경이
 화면 끝까지 깔린다. 불투명한 띠로 그리면 배경이 화면 가운데에만 보여 답답해진다.

@@ -556,8 +556,10 @@ def _render(t):
     gen.icon(t, 128).save(os.path.join(gen.ASSETS, 'icon-%s.png' % slug), optimize=True)
     for kind, draw in (('list', chat_list), ('chat', chat),
                        ('passcode', passcode), ('splash', splash)):
-        shrink(draw(t)).save(os.path.join(gen.ASSETS, 'preview-%s-%s.png' % (slug, kind)),
-                             optimize=True)
+        # 무손실 WebP. PNG 와 화질이 같고 크기는 60% 다. 손실 압축은 3배로 확대하면
+        # 매끈한 그라데이션(유리 다크 바탕)에 옅은 얼룩이 보여서 안 쓴다.
+        shrink(draw(t)).save(os.path.join(gen.ASSETS, 'preview-%s-%s.webp' % (slug, kind)),
+                             lossless=True, method=6)
     return slug
 
 
@@ -722,7 +724,7 @@ def readme_block(ts):
             out.append('<tr>')
             out.extend(_pad(
                 '<td width="33%%" align="center"><a href="%s">'
-                '<img src="assets/preview-%s-chat.png" width="%d"></a></td>'
+                '<img src="assets/preview-%s-chat.webp" width="%d"></a></td>'
                 % (anchor(fam), T.file_slug(ms[0]), W_GRID)
                 for fam, ms in row))
             out.append('</tr>')
@@ -769,7 +771,7 @@ def _family_block(T, name, members):
         out.append('<tr>')
         for m in members[i:i + per]:
             out.append('<td width="%d%%" align="center">'
-                       '<img src="assets/preview-%s-chat.png" width="%d"><br>'
+                       '<img src="assets/preview-%s-chat.webp" width="%d"><br>'
                        '<b>%s</b><br><sub>%s</sub><br>'
                        '<a href="%s%s.ktheme">iOS</a> · <a href="%s%s.apk">Android</a>'
                        '</td>'
@@ -785,7 +787,7 @@ def _family_block(T, name, members):
         out.append('**%s** — %s' % (m['variant'], m['note']))
         out.append('')
         out.append(' '.join(
-            '<img src="assets/preview-%s-%s.png" width="%d">' % (T.file_slug(m), kind, W_DETAIL)
+            '<img src="assets/preview-%s-%s.webp" width="%d">' % (T.file_slug(m), kind, W_DETAIL)
             for kind, _ in SHOTS if kind != 'chat'))
         out.append('')
     out.append('</details>')
@@ -816,7 +818,7 @@ def generate(ts):
     for t, slug in zip(ts, slugs):
         chips = ''.join('<span class="chip" style="background:%s" title="%s"></span>'
                         % (t[k], k) for k in ('bg', 'bg_deep', 'surface', 'accent', 'text'))
-        shots = ''.join('<figure><img src="../assets/preview-%s-%s.png" alt="%s %s">'
+        shots = ''.join('<figure><img src="../assets/preview-%s-%s.webp" alt="%s %s">'
                         '<figcaption>%s</figcaption></figure>'
                         % (slug, kind, t['name'], label, label) for kind, label in SHOTS)
         cards[t['key']] = CARD % dict(name=t['name'], key=t['key'],
