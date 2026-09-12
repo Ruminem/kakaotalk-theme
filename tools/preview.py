@@ -414,44 +414,72 @@ def anchor(name):
 
 
 def readme_block(ts):
+    """README 의 테마 절.
+
+    계열 단위로 나열한다. 변형이 늘어날 때 목록이 같이 길어지면 훑어보기가 안 된다.
+    계열 수는 고정되고 변형은 계열 안에서 옆으로 늘어난다.
+
+    맨 위 격자는 계열마다 대표 하나씩. 자세한 화면은 접어둔다 —
+    한 계열에 변형이 셋이면 그림이 열두 장이라 그냥 펼치면 스크롤이 감당이 안 된다.
+    """
+    import themes as T
+    fams = T.families()
     out = [START, '']
 
-    # 썸네일 격자
+    # 계열 썸네일 격자
     out.append('<table>')
-    for i in range(0, len(ts), PER_ROW):
-        row = ts[i:i + PER_ROW]
+    for i in range(0, len(fams), PER_ROW):
+        row = fams[i:i + PER_ROW]
         out.append('<tr>')
-        for t in row:
+        for name, members in row:
             out.append(
                 '<td width="33%%" align="center"><a href="%s">'
                 '<img src="assets/preview-%s-chat.png" width="190"></a></td>'
-                % (anchor(t['name']), t['key']))
+                % (anchor(name), members[0]['key']))
         out.append('</tr>')
         out.append('<tr>')
-        for t in row:
+        for name, members in row:
+            extra = ('' if len(members) == 1
+                     else '<br><sub>%s</sub>' % ' · '.join(m['variant'] for m in members))
             out.append('<td align="center"><img src="assets/icon-%s.png" width="20" '
-                       'valign="middle"> <b><a href="%s">%s</a></b><br>%s</td>'
-                       % (t['key'], anchor(t['name']), t['name'], t['note']))
+                       'valign="middle"> <b><a href="%s">%s</a></b>%s<br>%s</td>'
+                       % (members[0]['key'], anchor(name), name, extra,
+                          members[0]['note']))
         out.append('</tr>')
     out.append('</table>')
     out.append('')
 
-    # 테마별 자세히
-    for t in ts:
-        # 받기 링크를 제목 줄에 같이 둔다. 다만 GitHub 은 제목 글자로 앵커를 만들기 때문에
-        # 링크 글자까지 슬러그에 섞여 썸네일 점프가 깨진다. 앵커를 따로 박아 고정한다.
-        out.append('<a name="%s"></a>' % anchor(t['name']).lstrip('#'))
+    # 계열별 상세
+    for name, members in fams:
+        out.append('<a name="%s"></a>' % anchor(name).lstrip('#'))
         out.append('')
-        out.append('### <img src="assets/icon-%s.png" width="26" valign="middle"> '
-                   '%s &nbsp; <sub>[iOS 받기](%s%s.ktheme) · '
-                   '[Android 받기](%s%s.apk)</sub>'
-                   % (t['key'], t['name'], BASE, t['key'], BASE, t['key']))
+        out.append('### <img src="assets/icon-%s.png" width="26" valign="middle"> %s'
+                   % (members[0]['key'], name))
         out.append('')
-        out.append(' '.join(
-            '<img src="assets/preview-%s-%s.png" width="200">' % (t['key'], kind)
-            for kind, _ in SHOTS))
+
+        # 변형을 한 줄에 나란히
+        out.append('<table><tr>')
+        for m in members:
+            out.append('<td width="33%%" align="center">'
+                       '<img src="assets/preview-%s-chat.png" width="200"><br>'
+                       '<b>%s</b><br><sub>%s</sub><br>'
+                       '<a href="%s%s.ktheme">iOS</a> · <a href="%s%s.apk">Android</a>'
+                       '</td>'
+                       % (m['key'], m['variant'], m['note'],
+                          BASE, m['key'], BASE, m['key']))
+        out.append('</tr></table>')
         out.append('')
-        out.append(t['note'] + '.')
+
+        out.append('<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>')
+        out.append('')
+        for m in members:
+            out.append('**%s** — %s' % (m['variant'], m['note']))
+            out.append('')
+            out.append(' '.join(
+                '<img src="assets/preview-%s-%s.png" width="180">' % (m['key'], kind)
+                for kind, _ in SHOTS if kind != 'chat'))
+            out.append('')
+        out.append('</details>')
         out.append('')
 
     out.append(END)

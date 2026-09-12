@@ -345,3 +345,45 @@ THEMES += [
                      dict(count=12, alpha_lo=30, alpha_hi=72)),
     ),
 ]
+
+
+# --- 계열 ----------------------------------------------------------------
+# README 는 테마가 아니라 계열 단위로 나열한다. 변형이 늘어날 때 목록이 같이
+# 길어지면 훑어보기가 안 된다. 계열은 고정되고 변형은 그 안에서 옆으로 늘어난다.
+
+FAMILY = {
+    'inkmint01':  ('먹빛 민트', '기본'),
+    'cream02':    ('크림 라떼', '기본'),
+    'sakura03':   ('벚꽃 그늘', '기본'),
+    'sakura13':   ('벚꽃 그늘', '벚꽃 배경'),
+    'mixed04':    ('믹스드', '기본'),
+    'mixed09':    ('믹스드', '글로우'),
+    'aurora05':   ('오로라', '기본'),
+    'candy06':    ('캔디 팝', '기본'),
+    'candy10':    ('캔디 팝', '글로우'),
+    'candy12':    ('캔디 팝', '사탕 배경'),
+    'glass07':    ('리퀴드 글래스', '라이트'),
+    'glass08':    ('리퀴드 글래스', '다크'),
+    'midnight11': ('심야', '기본'),
+    'sea14':      ('바다', '기본'),
+    'forest15':   ('숲', '기본'),
+    'city16':     ('야경', '기본'),
+    'snow17':     ('설원', '기본'),
+    'geo18':      ('도형', '기본'),
+}
+
+for _t in THEMES:
+    _fam, _var = FAMILY.get(_t['key'], (_t['name'], '기본'))
+    _t['family'] = _fam
+    _t['variant'] = _var
+
+
+def families():
+    """계열 순서대로 (계열이름, [테마...]) 를 돌려준다. THEMES 순서를 따른다."""
+    out, seen = [], {}
+    for t in THEMES:
+        if t['family'] not in seen:
+            seen[t['family']] = []
+            out.append((t['family'], seen[t['family']]))
+        seen[t['family']].append(t)
+    return out
