@@ -417,6 +417,86 @@ def families():
     return out
 
 
+# --- 분류 ----------------------------------------------------------------
+# 계열이 열다섯이 되면서 격자 하나로는 훑어보기가 안 된다. 배경 그림이 무엇을
+# 그리는지로 묶는다.
+#
+# 다른 축은 전부 막힌다. 색으로 나누면 먹빛 민트나 믹스드처럼 대표색이 없는
+# 계열이 갈 곳이 없고, 단색/배경으로 나누면 네 벌 규칙과 축이 겹친다 —
+# 모든 계열이 단색 변형을 하나씩 갖고 있어서 전부 같은 칸에 들어간다.
+# 밝기로 나누는 것도 썸네일이 이미 말하는 것이라 줄만 늘어난다.
+#
+# 순서는 담백한 쪽에서 센 쪽으로 간다. 무늬는 색과 도형만 있고, 자연은 장면을
+# 그리고, 불빛은 어둠 속에서 빛난다.
+#
+# '기타' 는 두지 않는다. 분류가 아니라 유보라서 아무도 열지 않는다.
+# 어디에도 안 맞는 계열이 생기면 분류를 하나 더 만든다.
+CATEGORIES = (
+    ('무늬', '바탕에 색과 도형만. 담백한 쪽'),
+    ('자연', '배경이 장면을 그린다'),
+    ('불빛', '어두운 바탕에 인공 불빛'),
+)
+
+# 계열 이름 -> 분류. 새 계열을 더하면 여기에 한 줄 쓴다. 안 쓰면 생성이 멈춘다 —
+# 조용히 맨 뒤로 빠지면 README 에서 통째로 사라진 것을 한참 뒤에 안다.
+CATEGORY = {
+    '먹빛 민트': '무늬',
+    '크림 라떼': '무늬',
+    '믹스드': '무늬',
+    '캔디 팝': '무늬',
+    '리퀴드 글래스': '무늬',
+    '도형': '무늬',
+
+    '벚꽃 그늘': '자연',
+    '오로라': '자연',
+    '심야': '자연',
+    '바다': '자연',
+    '숲': '자연',
+    '설원': '자연',
+
+    '야경': '불빛',
+    '사이버펑크': '불빛',
+    '레드': '불빛',
+}
+
+
+def categorized():
+    """분류 순서대로 (분류, 설명, [(계열, [테마...]), ...]) 를 돌려준다.
+
+    분류 안의 계열 순서는 THEMES 순서 그대로다. 분류가 생기면서 README 순서는
+    '팔레트 표 순서' 에서 '분류 순 -> 그 안에서 팔레트 순' 으로 바뀌었다.
+    """
+    fams = families()
+    names = [n for n, _ in fams]
+    known = [n for n, _ in CATEGORIES]
+
+    bad = sorted({c for c in CATEGORY.values() if c not in known})
+    if bad:
+        raise ValueError('CATEGORIES 에 없는 분류를 썼다: %s' % ', '.join(bad))
+    missing = [n for n in names if n not in CATEGORY]
+    if missing:
+        raise ValueError('분류가 없는 계열: %s. CATEGORY 에 한 줄 쓴다 — '
+                         '안 쓰면 README 목록에서 통째로 빠진다' % ', '.join(missing))
+    stale = [n for n in CATEGORY if n not in names]
+    if stale:
+        raise ValueError('없는 계열이 CATEGORY 에 남아 있다: %s' % ', '.join(stale))
+    # README 안에서 분류와 계열이 같은 앵커를 쓴다. 이름이 겹치면 링크가
+    # 엉뚱한 자리로 뛴다.
+    clash = [n for n in names if n in known]
+    if clash:
+        raise ValueError('계열 이름과 분류 이름이 같다: %s. README 앵커가 겹친다'
+                         % ', '.join(clash))
+
+    out = []
+    for name, note in CATEGORIES:
+        members = [(f, ms) for f, ms in fams if CATEGORY[f] == name]
+        if not members:
+            raise ValueError('%s 분류가 비었다. 넣을 계열이 생길 때 만든다 — '
+                             '미리 만들면 README 에 빈 표가 나온다' % name)
+        out.append((name, note, members))
+    return out
+
+
 # 네 벌의 이름표. 폰의 테마 목록에도 이대로 붙는다 — 넷을 나란히 깔았을 때
 # 어느 것이 어느 것인지 목록에서 바로 구분돼야 한다.
 TYPES = (

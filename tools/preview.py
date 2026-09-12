@@ -379,6 +379,10 @@ PAGE = """<!doctype html>
   .card { border:1px solid #232833; border-radius:14px; padding:20px 20px 16px;
           margin-bottom:22px; background:#151922; }
   h2 { font-size:17px; margin:0 0 10px; }
+  .cat { font-size:13px; letter-spacing:.14em; color:#8b95a3; margin:30px 0 12px;
+        border-top:1px solid #232833; padding-top:18px; }
+  .cat:first-of-type { margin-top:0; border-top:0; padding-top:0; }
+  .cat b { color:#e6e9ee; letter-spacing:0; font-size:15px; margin-right:10px; }
   h2 small { color:#8b95a3; font-weight:400; font-size:13px; margin-left:8px; }
   .chips { margin-bottom:14px; }
   .chip { display:inline-block; width:26px; height:26px; border-radius:7px;
@@ -438,6 +442,7 @@ W_VARIANT = 200      # 계열 안 변형 그림 폭
 W_DETAIL = 180       # 접어둔 화면 그림 폭
 NOTE_MAX = 45        # 한 줄 소개. 길면 표 칸이 세로로 늘어나 폰에서 들쭉날쭉해진다
 VARIANT_MAX = 8      # 변형 이름. 길면 칸 안에서 줄바꿈된다
+CAT_NOTE_MAX = 20    # 분류 설명. 분류 이름과 한 줄에 들어가야 한다
 
 
 def _check(fams):
@@ -454,6 +459,25 @@ def _check(fams):
             raise ValueError('%s 계열에 변형이 %d개다. %d개까지만 둔다 — 그 이상은 '
                              '폰에서 한 계열로 안 보인다'
                              % (name, len(members), VARIANT_MAX_N))
+
+
+def _check_cats(cats):
+    """분류 줄이 한 줄에 들어가는지."""
+    for name, note, _ in cats:
+        if len(note) > CAT_NOTE_MAX:
+            raise ValueError('%s 분류 설명이 %d자다. %d자 넘으면 폰에서 두 줄이 된다'
+                             % (name, len(note), CAT_NOTE_MAX))
+
+
+def _pad(cells):
+    """짧은 줄을 빈 칸으로 채워 늘 세 칸으로 만든다.
+
+    `width="33%"` 는 그 표 안에서만 33% 다. 계열이 둘뿐인 분류는 표가 두 칸짜리가
+    되어 칸이 반반으로 벌어지고, 그림이 분류마다 다른 자리에 놓인다.
+    지금은 분류가 6/3/6 이라 안 드러나지만 계열 하나만 더해도 드러난다.
+    """
+    cells = list(cells)
+    return cells + ['<td width="33%"></td>'] * (PER_ROW - len(cells))
 
 
 def slug(name):
@@ -475,81 +499,101 @@ def anchor(name):
 def readme_block(ts):
     """README 의 테마 절.
 
-    계열 단위로 나열한다. 변형이 늘어날 때 목록이 같이 길어지면 훑어보기가 안 된다.
-    계열 수는 고정되고 변형은 계열 안에서 옆으로 늘어난다.
+    계열 단위로 나열하고, 계열을 다시 분류로 묶는다. 변형이 늘어날 때 목록이
+    같이 길어지면 훑어보기가 안 된다 — 계열 수는 고정되고 변형은 계열 안에서
+    옆으로 늘어난다. 계열이 열다섯을 넘으면서 그 계열 목록도 한 덩어리로는
+    길어져서, 배경 그림이 무엇을 그리는지로 한 겹 더 묶었다.
 
-    맨 위 격자는 계열마다 대표 하나씩. 자세한 화면은 접어둔다 —
-    한 계열에 변형이 셋이면 그림이 열두 장이라 그냥 펼치면 스크롤이 감당이 안 된다.
+    개요 격자는 위에 몰아 두고 상세는 그 아래로 내린다. 분류마다 격자와 상세를
+    번갈아 놓으면 전체를 한눈에 볼 수 없다 — 둘째 분류를 보려면 첫째 분류의
+    상세 여섯 개를 지나쳐야 한다.
     """
     import themes as T
-    fams = T.families()
+    cats = T.categorized()
+    fams = [fm for _, _, ms in cats for fm in ms]
     _check(fams)
+    _check_cats(cats)
     out = [START, '']
 
-    # 계열 썸네일 격자
-    out.append('<table>')
-    for i in range(0, len(fams), PER_ROW):
-        row = fams[i:i + PER_ROW]
-        out.append('<tr>')
-        for name, members in row:
-            out.append(
+    # 분류마다 계열 썸네일 격자 하나
+    for name, note, members in cats:
+        out.append('**[%s](%s)** — %s' % (name, anchor(name), note))
+        out.append('')
+        out.append('<table>')
+        for i in range(0, len(members), PER_ROW):
+            row = members[i:i + PER_ROW]
+            out.append('<tr>')
+            out.extend(_pad(
                 '<td width="33%%" align="center"><a href="%s">'
                 '<img src="assets/preview-%s-chat.png" width="%d"></a></td>'
-                % (anchor(name), T.file_slug(members[0]), W_GRID))
-        out.append('</tr>')
-        out.append('<tr>')
-        for name, members in row:
-            extra = ('' if len(members) == 1
-                     else '<br><sub>%s</sub>' % ' · '.join(m['variant'] for m in members))
-            out.append('<td align="center"><img src="assets/icon-%s.png" width="20" '
-                       'valign="middle"> <b><a href="%s">%s</a></b>%s<br>%s</td>'
-                       % (T.file_slug(members[0]), anchor(name), name, extra,
-                          members[0]['note']))
-        out.append('</tr>')
-    out.append('</table>')
-    out.append('')
-
-    # 계열별 상세
-    for name, members in fams:
-        out.append('<a name="%s"></a>' % slug(name))
-        out.append('')
-        out.append('### <img src="assets/icon-%s.png" width="26" valign="middle"> %s'
-                   % (T.file_slug(members[0]), name))
-        out.append('')
-
-        # 변형 배치. 넷이면 2x2 로 접는다 — 한 줄에 넷을 놓으면 폰에서 옆으로 밀어야 한다.
-        # 계열 안에서는 표 하나에 갇혀 있으므로 두 줄이어도 한 묶음으로 읽힌다.
-        per = 2 if len(members) == 4 else min(len(members), PER_ROW)
-        cell = 100 // per
-        out.append('<table>')
-        for i in range(0, len(members), per):
+                % (anchor(fam), T.file_slug(ms[0]), W_GRID)
+                for fam, ms in row))
+            out.append('</tr>')
             out.append('<tr>')
-            for m in members[i:i + per]:
-                out.append('<td width="%d%%" align="center">'
-                           '<img src="assets/preview-%s-chat.png" width="%d"><br>'
-                           '<b>%s</b><br><sub>%s</sub><br>'
-                           '<a href="%s%s.ktheme">iOS</a> · <a href="%s%s.apk">Android</a>'
-                           '</td>'
-                           % (cell, T.file_slug(m), W_VARIANT, m['variant'], m['note'],
-                              IOS, T.file_slug(m), BASE, T.file_slug(m)))
+            out.extend(_pad(
+                '<td align="center"><img src="assets/icon-%s.png" width="20" '
+                'valign="middle"> <b><a href="%s">%s</a></b>%s<br>%s</td>'
+                % (T.file_slug(ms[0]), anchor(fam), fam,
+                   ('' if len(ms) == 1 else '<br><sub>%s</sub>'
+                    % ' · '.join(m['variant'] for m in ms)),
+                   ms[0]['note'])
+                for fam, ms in row))
             out.append('</tr>')
         out.append('</table>')
         out.append('')
 
-        out.append('<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>')
+    # 분류별 상세. 분류가 제목이고 계열이 그 아래다 — 깃허브가 문서 목차를
+    # 그 층으로 접어준다.
+    for cat, _, members in cats:
+        out.append('<a name="%s"></a>' % slug(cat))
         out.append('')
-        for m in members:
-            out.append('**%s** — %s' % (m['variant'], m['note']))
-            out.append('')
-            out.append(' '.join(
-                '<img src="assets/preview-%s-%s.png" width="%d">' % (T.file_slug(m), kind, W_DETAIL)
-                for kind, _ in SHOTS if kind != 'chat'))
-            out.append('')
-        out.append('</details>')
+        out.append('### %s' % cat)
         out.append('')
+        for name, ms in members:
+            out.extend(_family_block(T, name, ms))
 
     out.append(END)
     return '\n'.join(out)
+
+
+def _family_block(T, name, members):
+    """계열 하나의 상세. 변형 표와 접어둔 화면들."""
+    out = ['<a name="%s"></a>' % slug(name), '']
+    out.append('#### <img src="assets/icon-%s.png" width="26" valign="middle"> %s'
+               % (T.file_slug(members[0]), name))
+    out.append('')
+
+    # 변형 배치. 넷이면 2x2 로 접는다 — 한 줄에 넷을 놓으면 폰에서 옆으로 밀어야 한다.
+    # 계열 안에서는 표 하나에 갇혀 있으므로 두 줄이어도 한 묶음으로 읽힌다.
+    per = 2 if len(members) == 4 else min(len(members), PER_ROW)
+    cell = 100 // per
+    out.append('<table>')
+    for i in range(0, len(members), per):
+        out.append('<tr>')
+        for m in members[i:i + per]:
+            out.append('<td width="%d%%" align="center">'
+                       '<img src="assets/preview-%s-chat.png" width="%d"><br>'
+                       '<b>%s</b><br><sub>%s</sub><br>'
+                       '<a href="%s%s.ktheme">iOS</a> · <a href="%s%s.apk">Android</a>'
+                       '</td>'
+                       % (cell, T.file_slug(m), W_VARIANT, m['variant'], m['note'],
+                          IOS, T.file_slug(m), BASE, T.file_slug(m)))
+        out.append('</tr>')
+    out.append('</table>')
+    out.append('')
+
+    out.append('<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>')
+    out.append('')
+    for m in members:
+        out.append('**%s** — %s' % (m['variant'], m['note']))
+        out.append('')
+        out.append(' '.join(
+            '<img src="assets/preview-%s-%s.png" width="%d">' % (T.file_slug(m), kind, W_DETAIL)
+            for kind, _ in SHOTS if kind != 'chat'))
+        out.append('')
+    out.append('</details>')
+    out.append('')
+    return out
 
 
 def write_readme(ts):
@@ -567,8 +611,8 @@ def write_readme(ts):
 
 def generate(ts):
     os.makedirs(gen.ASSETS, exist_ok=True)
-    cards = []
     import themes as T2
+    cards = {}
     for t in ts:
         # 그림 이름도 배포 파일과 같은 이름을 쓴다. 키(midnight38)는 겉으로 안 드러나는
         # 번호라 README 에서 어느 변형인지 읽히지 않는다.
@@ -584,12 +628,21 @@ def generate(ts):
         shots = ''.join('<figure><img src="../assets/preview-%s-%s.png" alt="%s %s">'
                         '<figcaption>%s</figcaption></figure>'
                         % (slug, kind, t['name'], label, label) for kind, label in SHOTS)
-        cards.append(CARD % dict(name=t['name'], key=t['key'],
-                                 slug=slug, chips=chips, shots=shots))
-    with open(os.path.join(gen.DOCS, 'index.html'), 'w', encoding='utf-8') as f:
-        f.write(PAGE % '\n'.join(cards))
-    write_readme(ts)
+        cards[t['key']] = CARD % dict(name=t['name'], key=t['key'],
+                                      slug=slug, chips=chips, shots=shots)
 
+    # 갤러리도 README 와 같은 순서로 둔다. 두 곳을 다른 순서로 두면 README 에서
+    # 본 것을 갤러리에서 다시 찾아야 한다.
+    body = []
+    for cat, note, members in T2.categorized():
+        body.append('<p class="cat"><b>%s</b>%s</p>' % (cat, note))
+        for _, ms in members:
+            body.extend(cards.pop(m['key']) for m in ms if m['key'] in cards)
+    body.extend(cards.values())      # 분류 밖의 테마가 있으면 뒤에 붙인다
+
+    with open(os.path.join(gen.DOCS, 'index.html'), 'w', encoding='utf-8') as f:
+        f.write(PAGE % '\n'.join(body))
+    write_readme(ts)
 
 if __name__ == '__main__':
     import themes
