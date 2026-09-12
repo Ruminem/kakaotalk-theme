@@ -29,6 +29,7 @@ note
   bubble_alpha  말풍선 불투명도 0~255. 낮을수록 채팅방 배경이 비친다
   cell_alpha    목록 셀 불투명도 0.0~1.0. 1 미만이면 뒤의 배경 이미지가 비친다
   main_bg       목록 화면 배경 이미지. chat_bg 와 같은 형식
+  passcode_bg   잠금화면 배경 이미지. 같은 형식. 카톡 비밀번호를 걸어야 보이는 화면이다
   flat          True 면 말풍선을 그라데이션 없이 단색으로 채운다. 두 색의 중간값을 쓴다
   glow          (색, 진하기 0~255, 여백pt). 색이 'auto' 면 말풍선마다 자기 색으로 빛난다. 말풍선 바깥으로 빛을 흘리고 배경 가장자리에도 얹는다.
                 여백만큼 cap inset 이 자동으로 커진다 — 안 그러면 늘어날 때 글로우가 뭉개진다
@@ -37,7 +38,7 @@ chat_bg
   None 이면 단색. ('linear', 위, 아래) 또는 ('aurora', 바탕, [색...]) 이면 이미지를 그린다.
 """
 
-VERSION = '0.11'
+VERSION = '0.12'
 
 THEMES = [
     dict(
@@ -137,6 +138,20 @@ THEMES = [
         glow=('#5AB5FF', 180, 8),
         chat_bg=('blobs', '#0B0E14', ['#2F6FB5', '#6A4FB0', '#2E8C7E', '#B0487F']),
         main_bg=('blobs', '#10131A', ['#27568C', '#4E3C86', '#256B61', '#8A3A64']),
+    ),
+    dict(
+        key='midnight11', name='심야',
+        note='배경 이미지를 세 화면에 다 깐 테마. 목록·채팅방·잠금화면이 각각 다름',
+        bg='#0F1320', bg_deep='#080B14', surface='#171C2B', pressed='#1F2637',
+        border='#29314A', text='#E6EAF5', subtext='#8C95AE',
+        accent='#8AA4FF', accent_dim='#5C76D6', on_accent='#060A1A',
+        send=('#6E86E6', '#42589E'), send_alt=('#5F79DC', '#374C8E'),
+        recv=('#2A3450', '#1B2236'), recv_alt=('#343F5E', '#232B42'),
+        send_text='#F0F4FF', recv_text='#E6EAF5',
+        glow=('#8AA4FF', 130, 8),
+        chat_bg=('blobs', '#080B14', ['#2A3A7A', '#5B3E8C', '#1E5A6E']),
+        main_bg=('linear', '#0F1320', '#161C2E'),
+        passcode_bg=('blobs', '#060912', ['#3B4FA0', '#6A4AA0', '#204F63']),
     ),
 ]
 

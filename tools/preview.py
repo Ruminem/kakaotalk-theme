@@ -312,7 +312,48 @@ def splash(t):
     return img
 
 
-SHOTS = (('list', '채팅 목록'), ('chat', '채팅방'), ('splash', '실행화면'))
+def passcode(t):
+    """잠금화면. 카톡 비밀번호를 걸어야 보이는 화면이다.
+
+    색은 모든 테마에 넣고 있었지만 한 번도 보여준 적이 없어서 여기 추가했다.
+    동그라미와 키패드 눌림은 이미지로도 바꿀 수 있는데 아직 안 쓴다.
+    """
+    if t.get('passcode_bg'):
+        img = gen.background(t, t['passcode_bg'], W, H).convert('RGB')
+    else:
+        img = Image.new('RGB', (W, H), rgb(t['bg_deep']))
+    d = ImageDraw.Draw(img)
+
+    d.text((W // 2, 150), '비밀번호 입력', font=_font(17),
+           fill=rgb(t['text']), anchor='mm')
+
+    # 입력 점 네 개. 앞의 둘은 채워진 상태
+    for i in range(4):
+        cx = W // 2 + (i - 1.5) * 34
+        r = 8
+        if i < 2:
+            d.ellipse([cx - r, 208 - r, cx + r, 208 + r], fill=rgb(t['accent']))
+        else:
+            d.ellipse([cx - r, 208 - r, cx + r, 208 + r],
+                      outline=rgb(t['subtext']), width=2)
+
+    # 키패드
+    keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '0', '']
+    top, kr = 300, 38
+    for i, k in enumerate(keys):
+        if not k:
+            continue
+        cx = W // 2 + (i % 3 - 1) * 110
+        cy = top + (i // 3) * 104
+        fill = t['pressed'] if k == '5' else t['surface']      # 하나는 눌린 상태
+        d.ellipse([cx - kr, cy - kr, cx + kr, cy + kr], fill=rgb(fill))
+        d.text((cx, cy), k, font=_font(26),
+               fill=rgb(t['accent'] if k == '5' else t['text']), anchor='mm')
+    return img
+
+
+SHOTS = (('list', '채팅 목록'), ('chat', '채팅방'),
+         ('passcode', '잠금화면'), ('splash', '실행화면'))
 
 PAGE = """<!doctype html>
 <html lang="ko"><meta charset="utf-8">
@@ -430,7 +471,8 @@ def generate(ts):
     os.makedirs(gen.DOCS, exist_ok=True)
     cards = []
     for t in ts:
-        for kind, draw in (('list', chat_list), ('chat', chat), ('splash', splash)):
+        for kind, draw in (('list', chat_list), ('chat', chat),
+                           ('passcode', passcode), ('splash', splash)):
             draw(t).save(os.path.join(gen.DOCS, 'preview-%s-%s.png' % (t['key'], kind)),
                          optimize=True)
         chips = ''.join('<span class="chip" style="background:%s" title="%s"></span>'

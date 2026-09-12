@@ -16,6 +16,7 @@
 | 말풍선 | PNG만 | PNG 우선, 색도 됨 | 씀 |
 | 목록/채팅방 배경 이미지 | 됨 | 됨 | 씀 |
 | 실행화면 | **없음** | 됨 | 안드로이드만 |
+| 잠금화면 배경 이미지 | 됨 | 됨 | 심야에서 씀 |
 | 탭 아이콘 8종 | 됨 | 됨 | **안 씀** |
 | 기본 프로필 | 됨 | 됨 | **안 씀** |
 | 친구추가 버튼 | 됨 | 됨 | **안 씀** |
@@ -61,6 +62,7 @@
 | 채팅방 배경 | `chatroomBgImage` | `theme_chatroom_background_image` |
 | 목록 배경 | `mainBgImage` | `theme_background_image` |
 | 실행화면 | **없음** | `theme_splash_image` |
+| 잠금화면 배경 | `passcodeBgImage` | `theme_passcode_background_image` |
 
 ### 아직 안 쓰는 것 — 남은 재료
 
@@ -71,7 +73,6 @@
 | **기본 프로필** | `-ios-profile-images` | `theme_profile_01_image` 등 | 사진 없는 친구에게 뜨는 그림 |
 | **친구추가 버튼** | `ButtonStyle-AddFriend` 의 `-ios-image` | `theme_find_add_friend_button_image` (+`_pressed`) | |
 | **잠금화면 동그라미 4개** | `-ios-bullet-{first..fourth}-image` (+`selected`) | `theme_passcode_0X_image` (+`_checked`) | 비밀번호 입력 점 |
-| **잠금화면 배경** | `BackgroundStyle-Passcode` 의 `-ios-background-image` | `theme_passcode_background_image` | 지금은 색만 씀 |
 | **키패드 눌림** | `-ios-keypad-number-highlighted-image` | — | |
 
 ---

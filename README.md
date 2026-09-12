@@ -47,9 +47,11 @@
 </tr>
 <tr>
 <td width="33%" align="center"><a href="#리퀴드-글래스-다크"><img src="docs/preview-glass08-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#심야"><img src="docs/preview-midnight11-chat.png" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><b><a href="#리퀴드-글래스-다크">리퀴드 글래스 다크</a></b><br>같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림</td>
+<td align="center"><b><a href="#심야">심야</a></b><br>배경 이미지를 세 화면에 다 깐 테마. 목록·채팅방·잠금화면이 각각 다름</td>
 </tr>
 </table>
 
@@ -57,7 +59,7 @@
 
 ### 먹빛 민트 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint01.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/inkmint01.apk)</sub>
 
-<img src="docs/preview-inkmint01-list.png" width="200"> <img src="docs/preview-inkmint01-chat.png" width="200"> <img src="docs/preview-inkmint01-splash.png" width="200">
+<img src="docs/preview-inkmint01-list.png" width="200"> <img src="docs/preview-inkmint01-chat.png" width="200"> <img src="docs/preview-inkmint01-passcode.png" width="200"> <img src="docs/preview-inkmint01-splash.png" width="200">
 
 먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름.
 
@@ -65,7 +67,7 @@
 
 ### 크림 라떼 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream02.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/cream02.apk)</sub>
 
-<img src="docs/preview-cream02-list.png" width="200"> <img src="docs/preview-cream02-chat.png" width="200"> <img src="docs/preview-cream02-splash.png" width="200">
+<img src="docs/preview-cream02-list.png" width="200"> <img src="docs/preview-cream02-chat.png" width="200"> <img src="docs/preview-cream02-passcode.png" width="200"> <img src="docs/preview-cream02-splash.png" width="200">
 
 밝은 쪽. 베이지 바탕에 브라운. 눈이 제일 안 피로한 조합임.
 
@@ -73,7 +75,7 @@
 
 ### 벚꽃 그늘 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura03.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura03.apk)</sub>
 
-<img src="docs/preview-sakura03-list.png" width="200"> <img src="docs/preview-sakura03-chat.png" width="200"> <img src="docs/preview-sakura03-splash.png" width="200">
+<img src="docs/preview-sakura03-list.png" width="200"> <img src="docs/preview-sakura03-chat.png" width="200"> <img src="docs/preview-sakura03-passcode.png" width="200"> <img src="docs/preview-sakura03-splash.png" width="200">
 
 밝은 분홍. 채팅방 배경 이미지가 깔림.
 
@@ -81,7 +83,7 @@
 
 ### 믹스드 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed04.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed04.apk)</sub>
 
-<img src="docs/preview-mixed04-list.png" width="200"> <img src="docs/preview-mixed04-chat.png" width="200"> <img src="docs/preview-mixed04-splash.png" width="200">
+<img src="docs/preview-mixed04-list.png" width="200"> <img src="docs/preview-mixed04-chat.png" width="200"> <img src="docs/preview-mixed04-passcode.png" width="200"> <img src="docs/preview-mixed04-splash.png" width="200">
 
 어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임.
 
@@ -89,7 +91,7 @@
 
 ### 믹스드 v2 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed09.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/mixed09.apk)</sub>
 
-<img src="docs/preview-mixed09-list.png" width="200"> <img src="docs/preview-mixed09-chat.png" width="200"> <img src="docs/preview-mixed09-splash.png" width="200">
+<img src="docs/preview-mixed09-list.png" width="200"> <img src="docs/preview-mixed09-chat.png" width="200"> <img src="docs/preview-mixed09-passcode.png" width="200"> <img src="docs/preview-mixed09-splash.png" width="200">
 
 믹스드에 글로우를 얹은 것. 말풍선마다 자기 색으로 빛남.
 
@@ -97,7 +99,7 @@
 
 ### 오로라 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora05.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora05.apk)</sub>
 
-<img src="docs/preview-aurora05-list.png" width="200"> <img src="docs/preview-aurora05-chat.png" width="200"> <img src="docs/preview-aurora05-splash.png" width="200">
+<img src="docs/preview-aurora05-list.png" width="200"> <img src="docs/preview-aurora05-chat.png" width="200"> <img src="docs/preview-aurora05-passcode.png" width="200"> <img src="docs/preview-aurora05-splash.png" width="200">
 
 가장 어두운 테마. 채팅방 배경에 오로라가 번짐.
 
@@ -105,7 +107,7 @@
 
 ### 캔디 팝 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy06.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy06.apk)</sub>
 
-<img src="docs/preview-candy06-list.png" width="200"> <img src="docs/preview-candy06-chat.png" width="200"> <img src="docs/preview-candy06-splash.png" width="200">
+<img src="docs/preview-candy06-list.png" width="200"> <img src="docs/preview-candy06-chat.png" width="200"> <img src="docs/preview-candy06-passcode.png" width="200"> <img src="docs/preview-candy06-splash.png" width="200">
 
 밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음.
 
@@ -113,7 +115,7 @@
 
 ### 캔디 팝 v2 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy10.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy10.apk)</sub>
 
-<img src="docs/preview-candy10-list.png" width="200"> <img src="docs/preview-candy10-chat.png" width="200"> <img src="docs/preview-candy10-splash.png" width="200">
+<img src="docs/preview-candy10-list.png" width="200"> <img src="docs/preview-candy10-chat.png" width="200"> <img src="docs/preview-candy10-passcode.png" width="200"> <img src="docs/preview-candy10-splash.png" width="200">
 
 캔디 팝에 글로우를 얹은 것. 밝은 바탕이라 빛이 은은하게 걸림.
 
@@ -121,7 +123,7 @@
 
 ### 리퀴드 글래스 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass07.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass07.apk)</sub>
 
-<img src="docs/preview-glass07-list.png" width="200"> <img src="docs/preview-glass07-chat.png" width="200"> <img src="docs/preview-glass07-splash.png" width="200">
+<img src="docs/preview-glass07-list.png" width="200"> <img src="docs/preview-glass07-chat.png" width="200"> <img src="docs/preview-glass07-passcode.png" width="200"> <img src="docs/preview-glass07-splash.png" width="200">
 
 유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침.
 
@@ -129,9 +131,17 @@
 
 ### 리퀴드 글래스 다크 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass08.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass08.apk)</sub>
 
-<img src="docs/preview-glass08-list.png" width="200"> <img src="docs/preview-glass08-chat.png" width="200"> <img src="docs/preview-glass08-splash.png" width="200">
+<img src="docs/preview-glass08-list.png" width="200"> <img src="docs/preview-glass08-chat.png" width="200"> <img src="docs/preview-glass08-passcode.png" width="200"> <img src="docs/preview-glass08-splash.png" width="200">
 
 같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림.
+
+<a name="심야"></a>
+
+### 심야 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight11.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight11.apk)</sub>
+
+<img src="docs/preview-midnight11-list.png" width="200"> <img src="docs/preview-midnight11-chat.png" width="200"> <img src="docs/preview-midnight11-passcode.png" width="200"> <img src="docs/preview-midnight11-splash.png" width="200">
+
+배경 이미지를 세 화면에 다 깐 테마. 목록·채팅방·잠금화면이 각각 다름.
 
 <!-- THEMES:END -->
 

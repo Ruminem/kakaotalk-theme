@@ -392,7 +392,7 @@ MessageCellStyle-Receive
 
 BackgroundStyle-Passcode
 {{
-    background-color: {bg_deep};
+    background-color: {bg_deep};{passbg}
 }}
 
 LabelStyle-PasscodeTitle
@@ -480,13 +480,21 @@ def gen_ios(t, root):
         background(t, t['main_bg'], 900, 1950).save(os.path.join(img_dir, 'mainBgImage@3x.png'))
         mainbg = "\n    -ios-background-image: 'mainBgImage.png';"
 
+    passbg = ''
+    if t.get('passcode_bg'):
+        background(t, t['passcode_bg'], 600, 1300).save(
+            os.path.join(img_dir, 'passcodeBgImage@2x.png'))
+        background(t, t['passcode_bg'], 900, 1950).save(
+            os.path.join(img_dir, 'passcodeBgImage@3x.png'))
+        passbg = "\n    -ios-background-image: 'passcodeBgImage.png';"
+
     ca = t.get('cell_alpha', 1.0)
     fields = dict(t)
     fields.pop('cell_alpha', None)          # 아래에서 문자열로 다시 넣는다
     ins = '%dpx %dpx %dpx %dpx' % (INSET_V + pad, INSET_H + pad,
                                   INSET_V + pad, INSET_H + pad)
     css = CSS.format(version=themes.VERSION, cap=CAP + pad, ins=ins,
-                     chatbg=chatbg, mainbg=mainbg,
+                     chatbg=chatbg, mainbg=mainbg, passbg=passbg,
                      cell_alpha='%.2f' % ca,
                      cell_alpha_sel='%.2f' % min(1.0, ca + 0.15), **fields)
     with open(os.path.join(root, 'KakaoTalkTheme.css'), 'w', encoding='utf-8') as f:
@@ -624,6 +632,9 @@ def gen_android(t, root, code):
     if t.get('main_bg'):
         background(t, t['main_bg'], 1080, 1920).save(
             os.path.join(draw, 'theme_background_image.png'), optimize=True)
+    if t.get('passcode_bg'):
+        background(t, t['passcode_bg'], 1080, 1920).save(
+            os.path.join(draw, 'theme_passcode_background_image.png'), optimize=True)
 
 
 # 미리보기와 갤러리는 tools/preview.py 가 만든다
