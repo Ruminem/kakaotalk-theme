@@ -40,7 +40,7 @@ chat_bg
 
 import re
 
-VERSION = '0.18'
+VERSION = '0.19'
 
 THEMES = [
     dict(
@@ -349,18 +349,18 @@ FAMILY = {
     'sakura13':   ('벚꽃 그늘', '벚꽃 배경'),
     'mixed04':    ('믹스드', '기본'),
     'mixed09':    ('믹스드', '글로우'),
-    'aurora05':   ('오로라', '기본'),
+    'aurora05':   ('오로라', '배경'),
     'candy06':    ('캔디 팝', '기본'),
     'candy10':    ('캔디 팝', '글로우'),
     'candy12':    ('캔디 팝', '사탕 배경'),
     'glass07':    ('리퀴드 글래스', '라이트'),
     'glass08':    ('리퀴드 글래스', '다크'),
-    'midnight11': ('심야', '기본'),
-    'sea14':      ('바다', '기본'),
-    'forest15':   ('숲', '기본'),
+    'midnight11': ('심야', '배경'),
+    'sea14':      ('바다', '배경'),
+    'forest15':   ('숲', '배경'),
     'city16':     ('야경', '기본'),
-    'snow17':     ('설원', '기본'),
-    'geo18':      ('도형', '기본'),
+    'snow17':     ('설원', '배경'),
+    'geo18':      ('도형', '배경'),
 }
 
 def _fam_of(t):
@@ -376,6 +376,8 @@ def _fam_of(t):
 
 def families():
     """계열 순서대로 (계열이름, [테마...]) 를 돌려준다. THEMES 순서를 따른다."""
+    order = {'basic': 0, 'image': 1, 'glow': 2, 'glow-image': 3,
+             'light': 0, 'dark': 1}
     out, seen = [], {}
     for t in THEMES:
         t['family'], t['variant'] = _fam_of(t)
@@ -383,6 +385,12 @@ def families():
             seen[t['family']] = []
             out.append((t['family'], seen[t['family']]))
         seen[t['family']].append(t)
+    # 계열 안은 늘 기본 → 배경 → 글로우 → 글로우+배경 순으로 읽히게 한다.
+    # THEMES 에 붙은 순서대로 두면 계열마다 차례가 달라 비교가 안 된다.
+    for _, members in out:
+        members.sort(key=lambda t: order.get(file_slug(t).rsplit('-', 1)[-1]
+                                             if file_slug(t).count('-') == 1
+                                             else file_slug(t).split('-', 1)[1], 9))
     return out
 
 
@@ -495,3 +503,141 @@ def pkg_slug(t):
     키(city21)는 이제 versionCode 를 매기는 번호로만 쓴다. 겉으로 드러나지 않는다.
     """
     return file_slug(t).replace('-', '_')
+
+
+# --- 계열 채우기 ----------------------------------------------------------
+
+def fill_family(base_key, family, add, no, bg=None, glow=('auto', 170, 8)):
+    """이미 있는 테마를 기준으로 계열의 빈 칸을 채운다.
+
+    quartet() 은 색부터 새로 정할 때 쓰고, 이건 이미 나간 테마에 형제를 붙일 때 쓴다.
+    바탕 테마의 말풍선 성격(그라데이션이냐 단색이냐)을 그대로 물려받는다 —
+    계열 안에서 말풍선 재질이 제각각이면 같은 계열로 안 보인다.
+
+    add 는 만들 변형 이름 목록. bg 를 주면 그걸 쓰고, 없으면 바탕 테마의 배경을 쓴다.
+    """
+    base = by_key(base_key)
+    src_bg = bg or {k: base.get(k) for k in ('chat_bg', 'main_bg', 'passcode_bg')}
+    if any(v for v in add if v in ('배경', '글로우+배경')) and not src_bg.get('chat_bg'):
+        raise ValueError('%s: 배경 변형을 만들려면 bg 가 필요하다' % family)
+
+    out = []
+    for i, variant in enumerate(add):
+        t = dict(base)
+        t['key'] = '%s%d' % (re.sub(r'\d+$', '', base_key), no + i)
+        t['name'] = '%s %s' % (family, variant)
+        t['family'] = family
+        t['variant'] = variant
+        t['note'] = NOTES.get((family, variant), base['note'])
+        if '배경' in variant:
+            t.update(src_bg)
+        else:
+            t.update(chat_bg=None, main_bg=None, passcode_bg=None)
+        if '글로우' in variant:
+            t['glow'] = glow
+        else:
+            t.pop('glow', None)
+        out.append(t)
+    return out
+
+
+# 변형마다 한 줄 소개를 따로 둔다. 같은 문장을 네 번 쓰면 목록에서 구분이 안 된다.
+NOTES = {}
+
+
+def set_notes(family, basic=None, image=None, glow=None, glow_image=None):
+    for v, n in (('기본', basic), ('배경', image),
+                 ('글로우', glow), ('글로우+배경', glow_image)):
+        if n:
+            NOTES[(family, v)] = n
+
+
+# --- 계열을 네 벌로 채운다 ------------------------------------------------
+# 리퀴드 글래스는 라이트/다크 축이라 예외로 둔다. 나머지 열두 계열을 채운다.
+# 배경이 없던 계열에는 배경을 새로 지정한다.
+
+set_notes('먹빛 민트',
+          image='먹빛 위에 민트 빛 덩어리가 번짐',
+          glow='말풍선이 민트와 보라로 빛남',
+          glow_image='배경과 글로우를 함께')
+THEMES += fill_family('inkmint01', '먹빛 민트', ['배경', '글로우', '글로우+배경'], 22,
+                      bg=dict(
+                          chat_bg=('blobs', '#101215', ['#4FD1B0', '#3D9BD9', '#8C6BE0']),
+                          main_bg=('blobs', '#16181C', ['#2E9E85', '#2F6FB5']),
+                          passcode_bg=('blobs', '#0C0E12', ['#4FD1B0', '#8C6BE0', '#3D9BD9'])))
+
+set_notes('크림 라떼',
+          image='크림빛 바탕에 둥근 도형이 겹침',
+          glow='브라운 말풍선이 은은하게 빛남',
+          glow_image='도형 배경에 빛나는 말풍선')
+THEMES += fill_family('cream02', '크림 라떼', ['배경', '글로우', '글로우+배경'], 25,
+                      bg=dict(
+                          chat_bg=('geo', '#F7F2EA', '#EFE7DA',
+                                   dict(count=7, alpha_lo=16, alpha_hi=34, blur=0.015,
+                                        colors=['#B07A4B', '#D3A468', '#8B7B67'])),
+                          main_bg=('geo', '#F7F2EA', '#F2ECE1',
+                                   dict(count=5, alpha_lo=12, alpha_hi=26, blur=0.022,
+                                        colors=['#B07A4B', '#D3A468'])),
+                          passcode_bg=('geo', '#F2EADD', '#E4D8C4',
+                                       dict(count=11, alpha_lo=28, alpha_hi=64,
+                                            colors=['#B07A4B', '#D3A468', '#8B7B67']))))
+
+set_notes('벚꽃 그늘',
+          glow='분홍 말풍선이 빛남',
+          glow_image='벚꽃 배경에 빛나는 말풍선')
+THEMES += fill_family('sakura03', '벚꽃 그늘', ['글로우'], 28)
+THEMES += fill_family('sakura13', '벚꽃 그늘', ['글로우+배경'], 29)
+
+set_notes('믹스드',
+          image='어두운 보라 위에 큰 도형이 겹침',
+          glow_image='도형 배경에 네 색 말풍선이 빛남')
+THEMES += fill_family('mixed04', '믹스드', ['배경', '글로우+배경'], 30,
+                      bg=dict(
+                          chat_bg=('geo', '#120F1C', '#1A1726',
+                                   dict(count=8, alpha_lo=22, alpha_hi=46, blur=0.014,
+                                        colors=['#FF8A5B', '#5BE0B4', '#7C6BE0', '#FFC24D'])),
+                          main_bg=('geo', '#1A1726', '#221E32',
+                                   dict(count=6, alpha_lo=16, alpha_hi=32, blur=0.02,
+                                        colors=['#7C6BE0', '#FF8A5B'])),
+                          passcode_bg=('geo', '#0E0C16', '#1E1A2C',
+                                       dict(count=12, alpha_lo=34, alpha_hi=78,
+                                            colors=['#FF8A5B', '#5BE0B4', '#7C6BE0']))))
+
+set_notes('오로라',
+          basic='오로라를 걷어낸 가장 어두운 바탕',
+          glow='말풍선이 오로라 색으로 빛남',
+          glow_image='오로라 배경에 빛나는 말풍선')
+THEMES += fill_family('aurora05', '오로라', ['기본', '글로우', '글로우+배경'], 32)
+
+set_notes('캔디 팝', glow_image='사탕 배경에 빛나는 말풍선')
+THEMES += fill_family('candy12', '캔디 팝', ['글로우+배경'], 35)
+
+set_notes('심야',
+          basic='밤하늘을 걷어낸 남색 바탕',
+          glow='말풍선이 달빛처럼 빛남',
+          glow_image='밤하늘에 빛나는 말풍선')
+THEMES += fill_family('midnight11', '심야', ['기본', '글로우', '글로우+배경'], 36)
+
+set_notes('바다',
+          basic='바다를 걷어낸 짙은 물빛 바탕',
+          glow='산호와 물빛 말풍선이 빛남',
+          glow_image='바다 배경에 빛나는 말풍선')
+THEMES += fill_family('sea14', '바다', ['기본', '글로우', '글로우+배경'], 39)
+
+set_notes('숲',
+          basic='숲을 걷어낸 이끼빛 바탕',
+          glow='이끼와 호박빛 말풍선이 빛남',
+          glow_image='숲 배경에 빛나는 말풍선')
+THEMES += fill_family('forest15', '숲', ['기본', '글로우', '글로우+배경'], 42)
+
+set_notes('설원',
+          basic='눈을 걷어낸 얼음빛 바탕',
+          glow='파스텔 말풍선이 은은하게 빛남',
+          glow_image='설원 배경에 빛나는 말풍선')
+THEMES += fill_family('snow17', '설원', ['기본', '글로우', '글로우+배경'], 45)
+
+set_notes('도형',
+          basic='도형을 걷어낸 미색 바탕',
+          glow='주황과 민트 말풍선이 빛남',
+          glow_image='도형 배경에 빛나는 말풍선')
+THEMES += fill_family('geo18', '도형', ['기본', '글로우', '글로우+배경'], 48)
