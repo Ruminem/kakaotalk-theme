@@ -40,7 +40,7 @@ chat_bg
 
 import re
 
-VERSION = '0.23'
+VERSION = '0.24'
 
 THEMES = [
     dict(
@@ -140,6 +140,71 @@ THEMES = [
         glow=('#5AB5FF', 180, 8),
         chat_bg=('blobs', '#0B0E14', ['#2F6FB5', '#6A4FB0', '#2E8C7E', '#B0487F']),
         main_bg=('blobs', '#10131A', ['#27568C', '#4E3C86', '#256B61', '#8A3A64']),
+    ),
+    # --- 원목 글래스 ------------------------------------------------------
+    # 유리는 뒤에 볼 것이 있어야 유리로 읽힌다. 색 덩어리는 저주파라 비쳐도 색만
+    # 보이는데, 나무결은 선이 있어서 반투명이라는 게 눈에 드러난다.
+    # 계열 축은 밝기(오크/월넛) × 배경 유무다. 글로우는 넣지 않는다 —
+    # 난색 중명도 바탕에서는 빛이 번질 자리가 없어 뿌연 테두리로만 보인다.
+    dict(
+        key='wood61', name='원목 글래스 오크',
+        note='밝은 참나무 결 위에 반투명 유리 말풍선',
+        bg='#E9DAC0', bg_deep='#DCC9A8', surface='#F7EFE1', pressed='#E2D0B2',
+        border='#CBB794', text='#3A2C1C', subtext='#7C6A50',
+        accent='#B5713A', accent_dim='#8C5427', on_accent='#FFF6EA',
+        send=('#E0A45F', '#E0A45F'), send_alt=('#C2803F', '#C2803F'),
+        recv=('#FFF6E8', '#FFF6E8'), recv_alt=('#EDDCC0', '#EDDCC0'),
+        send_text='#3A2208', recv_text='#3A2C1C',
+        bubble_style='glass', bubble_alpha=155, cell_alpha=0.55,
+        flat_list=False,
+        chat_bg=('wood', '#E8D4B4', '#D8BF98',
+                 dict(dark='#7A4E24', light='#FFF3E0', knots=2, planks=3)),
+        main_bg=('wood', '#E8D4B4', '#DCC6A2',
+                 dict(dark='#7A4E24', light='#FFF3E0', knots=0, planks=0, streaks=5)),
+        passcode_bg=('wood', '#E3CDA9', '#CFB287',
+                     dict(dark='#6E4520', light='#FFF3E0', knots=3, planks=4)),
+    ),
+    dict(
+        key='wood62', name='원목 글래스 오크 단색',
+        note='결 없이 나무색 바탕. 유리만 남김',
+        bg='#E4D3B6', bg_deep='#D6C29E', surface='#F4EADA', pressed='#DECBAA',
+        border='#C6B08B', text='#3A2C1C', subtext='#7C6A50',
+        accent='#B5713A', accent_dim='#8C5427', on_accent='#FFF6EA',
+        send=('#E0A45F', '#E0A45F'), send_alt=('#C2803F', '#C2803F'),
+        recv=('#FFF6E8', '#FFF6E8'), recv_alt=('#EDDCC0', '#EDDCC0'),
+        send_text='#3A2208', recv_text='#3A2C1C',
+        bubble_style='glass', bubble_alpha=150, cell_alpha=0.55,
+        chat_bg=None, main_bg=None, passcode_bg=None,
+    ),
+    dict(
+        key='wood63', name='원목 글래스 월넛',
+        note='짙은 호두나무. 결이 유리 너머로 비침',
+        bg='#2A1E15', bg_deep='#1B120B', surface='#3A2A1D', pressed='#4A3626',
+        border='#59422E', text='#F3E7D8', subtext='#B39C82',
+        accent='#E0A860', accent_dim='#B07F3F', on_accent='#241505',
+        send=('#8A5A2E', '#8A5A2E'), send_alt=('#A9743C', '#A9743C'),
+        recv=('#3F2F22', '#3F2F22'), recv_alt=('#5A4330', '#5A4330'),
+        send_text='#FFF3E2', recv_text='#F3E7D8',
+        bubble_style='glass', bubble_alpha=175, cell_alpha=0.55,
+        flat_list=False,
+        chat_bg=('wood', '#3C2C1E', '#261A11',
+                 dict(dark='#120A05', light='#C08F57', knots=2, planks=3)),
+        main_bg=('wood', '#38281B', '#241810',
+                 dict(dark='#120A05', light='#C08F57', knots=0, planks=0, streaks=5)),
+        passcode_bg=('wood', '#42301F', '#1E1409',
+                     dict(dark='#0E0704', light='#CE9A5E', knots=3, planks=4)),
+    ),
+    dict(
+        key='wood64', name='원목 글래스 월넛 단색',
+        note='어두운 나무색 바탕에 유리만',
+        bg='#2E2118', bg_deep='#1F150D', surface='#3E2E20', pressed='#4E3929',
+        border='#5C4530', text='#F3E7D8', subtext='#B39C82',
+        accent='#E0A860', accent_dim='#B07F3F', on_accent='#241505',
+        send=('#8A5A2E', '#8A5A2E'), send_alt=('#A9743C', '#A9743C'),
+        recv=('#3F2F22', '#3F2F22'), recv_alt=('#5A4330', '#5A4330'),
+        send_text='#FFF3E2', recv_text='#F3E7D8',
+        bubble_style='glass', bubble_alpha=170, cell_alpha=0.55,
+        chat_bg=None, main_bg=None, passcode_bg=None,
     ),
     dict(
         key='midnight11', name='심야',
@@ -378,6 +443,10 @@ FAMILY = {
     'glass08':    ('리퀴드 글래스', '다크'),
     'glass51':    ('리퀴드 글래스', '라이트 단색'),
     'glass52':    ('리퀴드 글래스', '다크 단색'),
+    'wood61':     ('원목 글래스', '오크'),
+    'wood62':     ('원목 글래스', '오크 단색'),
+    'wood63':     ('원목 글래스', '월넛'),
+    'wood64':     ('원목 글래스', '월넛 단색'),
     'midnight11': ('심야', '배경'),
     'sea14':      ('바다', '배경'),
     'forest15':   ('숲', '배경'),
@@ -400,7 +469,8 @@ def _fam_of(t):
 def families():
     """계열 순서대로 (계열이름, [테마...]) 를 돌려준다. THEMES 순서를 따른다."""
     order = {'basic': 0, 'image': 1, 'glow': 2, 'glow-image': 3,
-             'light': 0, 'dark': 1, 'light-plain': 2, 'dark-plain': 3}
+             'light': 0, 'dark': 1, 'light-plain': 2, 'dark-plain': 3,
+             'oak': 0, 'walnut': 1, 'oak-plain': 2, 'walnut-plain': 3}
     out, seen = [], {}
     for t in THEMES:
         t['family'], t['variant'] = _fam_of(t)
@@ -445,6 +515,7 @@ CATEGORY = {
     '믹스드': '무늬',
     '캔디 팝': '무늬',
     '리퀴드 글래스': '무늬',
+    '원목 글래스': '무늬',
     '도형': '무늬',
 
     '벚꽃 그늘': '자연',
@@ -632,6 +703,10 @@ VARIANT_SLUG = {
     '다크': 'dark',
     '라이트 단색': 'light-plain',
     '다크 단색': 'dark-plain',
+    '오크': 'oak',
+    '오크 단색': 'oak-plain',
+    '월넛': 'walnut',
+    '월넛 단색': 'walnut-plain',
 }
 
 

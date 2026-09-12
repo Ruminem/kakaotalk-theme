@@ -881,6 +881,10 @@ def background(t, spec, w, h, flat=False):
     채팅방과 잠금화면은 얹히는 게 적어서 그림 그대로 쓴다.
     """
     img = chat_bg(seeded(spec, t), w, h)
+    # 나무결처럼 방향만 있고 굴곡이 없는 질감은 흐리지 않는다. 어디서 잘라도
+    # 같은 무늬라 위에 무엇이 얹혀도 잘린 자국이 안 생긴다 — 흐리면 그냥 갈색 판이 된다.
+    if flat and not t.get('flat_list', True):
+        flat = False
     if flat:
         img = img.filter(ImageFilter.GaussianBlur(w * 0.14))
         mid_c = img.resize((1, 1), Image.LANCZOS).getpixel((0, 0))

@@ -575,3 +575,85 @@ def ember(spec, w, h):
     if dim:
         img = Image.blend(img, Image.new('RGB', (w, h), (0, 0, 0)), dim)
     return img
+
+
+# --- 나무 ----------------------------------------------------------------
+
+def wood(spec, w, h):
+    """세로로 흐르는 나무결. 판자 이음새와 옹이를 얹는다.
+
+    spec = ('wood', 위색, 아래색, 옵션dict)
+      grain    결 개수
+      planks   판자 개수. 0 이면 이음새 없이 한 장
+      knots    옹이 개수
+      warp     결이 휘는 정도
+      dim      0~1
+
+    결은 세로로만 흐르게 한다. 목록 배경으로 쓸 때 카톡이 위에 불투명한 것을
+    얹어도 잘린 자국이 안 보이는 이유가 이것이다 — 어디서 잘라도 같은 무늬다.
+    옹이는 그 성질을 깨므로 목록 쪽에서는 0 으로 둔다.
+
+    바탕을 RGB 로 둔 채 그린다. RGBA 이미지에 알파를 섞어 그리면 PIL 은 섞지 않고
+    덮어쓴다 — 알파 15 로 칠한 판자가 원색 띠로 나왔다.
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20260922))
+    img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2]))
+    d = ImageDraw.Draw(img, 'RGBA')
+
+    dark = gen.rgb(o.get('dark', '#2A1A0E'))
+    light = gen.rgb(o.get('light', '#FFF0DC'))
+
+    # 판자. 판자마다 밝기를 조금씩 달리해 한 장이 아니라 여러 장으로 보이게 한다
+    planks = o.get('planks', 3)
+    if planks > 1:
+        edges = [0.0] + [i / planks + rnd.uniform(-0.03, 0.03)
+                         for i in range(1, planks)] + [1.0]
+        for i in range(len(edges) - 1):
+            y0, y1 = int(h * edges[i]), int(h * edges[i + 1])
+            shade = rnd.uniform(-1.0, 1.0)
+            c = dark if shade < 0 else light
+            d.rectangle([0, y0, w, y1], fill=c + (int(abs(shade) * 26),))
+            if i:                       # 이음새 한 줄
+                d.line([(0, y0), (w, y0)], fill=dark + (95,), width=1)
+
+    # 결. 가늘고 긴 선을 세로로 흘린다. 굵기와 진하기를 섞어야 나무로 보인다 —
+    # 같은 선을 반복하면 커튼이 된다.
+    warp = o.get('warp', 0.010) * w
+
+    def streak(a, width):
+        x = rnd.uniform(-0.02, 1.02) * w
+        c = dark if rnd.random() < 0.62 else light
+        phase = rnd.uniform(0, 6.28)
+        amp = warp * rnd.uniform(0.3, 1.4)
+        freq = rnd.uniform(1.2, 2.6)
+        pts = [(x + math.sin(phase + (k / 22) * freq) * amp, (k / 22) * h)
+               for k in range(23)]
+        d.line(pts, fill=c + (a,), width=width, joint='curve')
+
+    for _ in range(o.get('grain', 140)):
+        streak(rnd.randint(12, 34), 1)
+    # 굵은 줄기 몇 개. 가는 선만 반복하면 나무가 아니라 천이 된다
+    for _ in range(o.get('streaks', 8)):
+        streak(rnd.randint(34, 62), rnd.choice((2, 3)))
+
+    # 옹이. 나이테가 겹겹이 도는 동심원이다
+    for _ in range(o.get('knots', 0)):
+        cx, cy = rnd.uniform(0.15, 0.85) * w, rnd.uniform(0.1, 0.9) * h
+        r0 = rnd.uniform(0.09, 0.15) * w
+        rings = rnd.randint(5, 8)
+        for k in range(rings, 0, -1):
+            rr = r0 * k / rings
+            ry = rr * rnd.uniform(0.55, 0.75)
+            c = dark if k % 2 else light
+            d.ellipse([cx - rr, cy - ry, cx + rr, cy + ry],
+                      outline=c + (rnd.randint(40, 75),), width=1 if k % 2 else 2)
+        d.ellipse([cx - r0 * 0.16, cy - r0 * 0.10, cx + r0 * 0.16, cy + r0 * 0.10],
+                  fill=dark + (95,))
+
+    img = img.filter(ImageFilter.GaussianBlur(o.get('blur', 0.5)))
+    dim = o.get('dim', 0.0)
+    if dim:
+        img = Image.blend(img, Image.new('RGB', (w, h), (0, 0, 0)), dim)
+    return img

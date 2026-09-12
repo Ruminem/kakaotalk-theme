@@ -30,12 +30,22 @@
 <tr>
 <td width="33%" align="center"><a href="#user-content-캔디-팝"><img src="assets/preview-candy-basic-chat.png" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-리퀴드-글래스"><img src="assets/preview-glass-light-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-도형"><img src="assets/preview-geo-basic-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-원목-글래스"><img src="assets/preview-wood-oak-chat.png" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><img src="assets/icon-candy-basic.png" width="20" valign="middle"> <b><a href="#user-content-캔디-팝">캔디 팝</a></b><br><sub>기본 · 사탕 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
 <td align="center"><img src="assets/icon-glass-light.png" width="20" valign="middle"> <b><a href="#user-content-리퀴드-글래스">리퀴드 글래스</a></b><br><sub>라이트 · 다크 · 라이트 단색 · 다크 단색</sub><br>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</td>
+<td align="center"><img src="assets/icon-wood-oak.png" width="20" valign="middle"> <b><a href="#user-content-원목-글래스">원목 글래스</a></b><br><sub>오크 · 월넛 · 오크 단색 · 월넛 단색</sub><br>밝은 참나무 결 위에 반투명 유리 말풍선</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="#user-content-도형"><img src="assets/preview-geo-basic-chat.png" width="190"></a></td>
+<td width="33%"></td>
+<td width="33%"></td>
+</tr>
+<tr>
 <td align="center"><img src="assets/icon-geo-basic.png" width="20" valign="middle"> <b><a href="#user-content-도형">도형</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>도형을 걷어낸 미색 바탕</td>
+<td width="33%"></td>
+<td width="33%"></td>
 </tr>
 </table>
 
@@ -255,6 +265,41 @@
 **다크 단색** — 어두운 바탕에 유리만. 빛나는 것 없이 테두리만 남음
 
 <img src="assets/preview-glass-dark-plain-list.png" width="180"> <img src="assets/preview-glass-dark-plain-passcode.png" width="180"> <img src="assets/preview-glass-dark-plain-splash.png" width="180">
+
+</details>
+
+<a name="원목-글래스"></a>
+
+#### <img src="assets/icon-wood-oak.png" width="26" valign="middle"> 원목 글래스
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-wood-oak-chat.png" width="200"><br><b>오크</b><br><sub>밝은 참나무 결 위에 반투명 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=wood-oak.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/wood-oak.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-wood-walnut-chat.png" width="200"><br><b>월넛</b><br><sub>짙은 호두나무. 결이 유리 너머로 비침</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=wood-walnut.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/wood-walnut.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-wood-oak-plain-chat.png" width="200"><br><b>오크 단색</b><br><sub>결 없이 나무색 바탕. 유리만 남김</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=wood-oak-plain.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/wood-oak-plain.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-wood-walnut-plain-chat.png" width="200"><br><b>월넛 단색</b><br><sub>어두운 나무색 바탕에 유리만</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=wood-walnut-plain.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/wood-walnut-plain.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**오크** — 밝은 참나무 결 위에 반투명 유리 말풍선
+
+<img src="assets/preview-wood-oak-list.png" width="180"> <img src="assets/preview-wood-oak-passcode.png" width="180"> <img src="assets/preview-wood-oak-splash.png" width="180">
+
+**월넛** — 짙은 호두나무. 결이 유리 너머로 비침
+
+<img src="assets/preview-wood-walnut-list.png" width="180"> <img src="assets/preview-wood-walnut-passcode.png" width="180"> <img src="assets/preview-wood-walnut-splash.png" width="180">
+
+**오크 단색** — 결 없이 나무색 바탕. 유리만 남김
+
+<img src="assets/preview-wood-oak-plain-list.png" width="180"> <img src="assets/preview-wood-oak-plain-passcode.png" width="180"> <img src="assets/preview-wood-oak-plain-splash.png" width="180">
+
+**월넛 단색** — 어두운 나무색 바탕에 유리만
+
+<img src="assets/preview-wood-walnut-plain-list.png" width="180"> <img src="assets/preview-wood-walnut-plain-passcode.png" width="180"> <img src="assets/preview-wood-walnut-plain-splash.png" width="180">
 
 </details>
 
