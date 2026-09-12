@@ -2,15 +2,21 @@ name: Pages
 
 # 미리보기 페이지와 공유 페이지를 GitHub Pages 로 내보낸다.
 #
+# 릴리스를 내면 release.ps1 이 이 워크플로를 main 에서 부른다. 그래야 사이트의 files/ 가
+# 새 릴리스 자산으로 바뀐다.
+#
 # 공유 페이지는 fetch 로 .ktheme 바이트를 읽어야 하는데, 릴리스 자산에는
 # Access-Control-Allow-Origin 헤더가 없다. api.github.com 입구에는 있지만 최종 목적지인
 # release-assets.githubusercontent.com 에는 없고, fetch 는 리다이렉트 매 홉을 검사하므로
 # 거기서 막힌다. 그래서 사이트 안에 같은 출처로 한 벌 둔다.
 # 저장소에 커밋하는 게 아니다 — dist/ 를 커밋하지 않는다는 규칙은 그대로다.
 
+# release: published 트리거는 쓰지 않는다. 그 런은 태그에서 돌고, github-pages 환경의
+# 배포 브랜치 정책이 태그를 거부해서 반드시 실패한다("Tag v0.24.1 is not allowed to
+# deploy to github-pages"). 실패해도 릴리스는 그대로 나가므로, 사이트만 조용히 옛 자산에
+# 머문다 — iOS 는 Pages 를 거쳐 받으므로 고친 테마가 아닌 것이 깔린다. 0.24 와 0.24.1 이
+# 그렇게 나갔다. 대신 release.ps1 이 릴리스를 낸 뒤 main 에서 이 워크플로를 부른다.
 on:
-  release:
-    types: [published]          # 새 릴리스가 나가면 사이트의 자산도 그 버전으로 바뀐다
   push:
     branches: [main]
     paths:

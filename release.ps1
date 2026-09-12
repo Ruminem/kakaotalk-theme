@@ -69,5 +69,20 @@ gh api -X PATCH "repos/$repo/releases/$id" --input $body | Out-Null
 Remove-Item $body -Force
 if ($LASTEXITCODE -ne 0) { throw "릴리스 제목 설정 실패" }
 
+# 사이트의 files/ 도 이 릴리스의 자산으로 바꾼다. iOS 는 릴리스 자산이 아니라 Pages 를
+# 거쳐 받기 때문이다(릴리스 자산에는 Content-Disposition: attachment 가 붙어 카톡이
+# 가로챌 수 없다). 여기서 안 부르면 사이트만 옛 자산에 머물러, 고친 테마를 냈는데
+# iOS 로 받는 사람은 옛것을 깐다 — 0.24 와 0.24.1 이 그렇게 나갔다.
+#
+# 워크플로의 release: published 트리거로는 안 된다. 그 런은 태그에서 돌고 github-pages
+# 환경의 배포 브랜치 정책이 태그를 거부한다. main 에서 불러야 통과한다.
+Write-Host ""
+Write-Host "사이트를 새 자산으로 갱신합니다"
+gh workflow run pages.yml --ref main
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "  경고: 워크플로 호출 실패. 릴리스는 나갔으므로 직접 돌리세요 —"
+    Write-Host "        gh workflow run pages.yml --ref main"
+}
+
 Write-Host ""
 Write-Host "완료: $tag  (자산 $($assets.Count) 개)"
