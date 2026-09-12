@@ -28,6 +28,7 @@ from PIL import Image, ImageChops, ImageDraw, ImageFilter
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import themes  # noqa: E402
+import charbubble  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, 'build-src')
@@ -864,13 +865,7 @@ InputBarStyle-Chat
 */
 MessageCellStyle-Send
 {{
-    -ios-background-image: 'chatroomBubbleSend01.png' {cap}px {cap}px;
-    -ios-selected-background-image: 'chatroomBubbleSend02.png' {cap}px {cap}px;
-    -ios-group-background-image: 'chatroomBubbleSend02.png' {cap}px {cap}px;
-    -ios-group-selected-background-image: 'chatroomBubbleSend01.png' {cap}px {cap}px;
-
-    -ios-title-edgeinsets: {ins};
-    -ios-group-title-edgeinsets: {ins};
+{send_cells}
 
     -ios-text-color: {send_text};
     -ios-selected-text-color: {send_text_hi};
@@ -879,13 +874,7 @@ MessageCellStyle-Send
 
 MessageCellStyle-Receive
 {{
-    -ios-background-image: 'chatroomBubbleReceive01.png' {cap}px {cap}px;
-    -ios-selected-background-image: 'chatroomBubbleReceive02.png' {cap}px {cap}px;
-    -ios-group-background-image: 'chatroomBubbleReceive02.png' {cap}px {cap}px;
-    -ios-group-selected-background-image: 'chatroomBubbleReceive01.png' {cap}px {cap}px;
-
-    -ios-title-edgeinsets: {ins};
-    -ios-group-title-edgeinsets: {ins};
+{recv_cells}
 
     -ios-text-color: {recv_text};
     -ios-selected-text-color: {recv_text_hi};
@@ -972,6 +961,35 @@ def background(t, spec, w, h, flat=False):
     return img
 
 
+def cell_css(side, t, pad, geos=None):
+    """MessageCellStyle 의 말풍선 그림과 글자 여백 줄.
+
+    기존 테마는 네 자리에 같은 cap 과 여백을 쓰고, 선택 상태에는 반대쪽 장을 끼운다.
+    캐릭터 테마는 01 과 02 의 크기가 달라서(우표·꼬리는 01 에만 있다) 장마다 cap 과
+    여백이 따로다. 선택 상태에 반대쪽 장을 끼우면 눌렀을 때 말풍선 모양이 바뀌므로
+    같은 장을 쓴다.
+    """
+    name = 'chatroomBubble' + side
+    if not geos:
+        iv, ih = insets_of(t)
+        cap = CAP + pad
+        ins = '%dpx %dpx %dpx %dpx' % (iv + pad, ih + pad, iv + pad, ih + pad)
+        imgs = (('01', cap), ('02', cap), ('02', cap), ('01', cap))
+        ins1 = ins2 = ins
+    else:
+        g1, g2 = geos
+        imgs = (('01', g1['cap']), ('01', g1['cap']), ('02', g2['cap']), ('02', g2['cap']))
+        ins1 = '%dpx %dpx %dpx %dpx' % g1['ins']
+        ins2 = '%dpx %dpx %dpx %dpx' % g2['ins']
+    props = ('-ios-background-image', '-ios-selected-background-image',
+             '-ios-group-background-image', '-ios-group-selected-background-image')
+    lines = ["    %s: '%s%s.png' %dpx %dpx;" % (pr, name, v, c, c)
+             for pr, (v, c) in zip(props, imgs)]
+    lines += ['', '    -ios-title-edgeinsets: %s;' % ins1,
+              '    -ios-group-title-edgeinsets: %s;' % ins2]
+    return chr(10).join(lines)
+
+
 def gen_ios(t, root):
     img_dir = os.path.join(root, 'Images')
     os.makedirs(img_dir, exist_ok=True)
@@ -979,13 +997,20 @@ def gen_ios(t, root):
     style, alpha = t.get('bubble_style', 'solid'), t.get('bubble_alpha', 255)
     glow, pad = glow_of(t)
     rim, frost = glass_of(t)
+    geos = {}
     for side, key in (('Send', 'send'), ('Receive', 'recv')):
         for variant, pal in (('01', t[key]), ('02', t[key + '_alt'])):
             for scale in (2, 3):
                 name = 'chatroomBubble%s%s@%dx.png' % (side, variant, scale)
+                if t.get('char_style'):
+                    img, geos[key, variant] = charbubble.sheet(t, key, variant, scale)
+                    img.save(os.path.join(img_dir, name))
+                    continue
                 bubble(scale, pal, style, alpha, glow, pad,
                        t.get('flat', False), rim, frost).save(
                     os.path.join(img_dir, name))
+    cells = {k: cell_css(side, t, pad, geos and (geos[k, '01'], geos[k, '02']))
+             for side, k in (('Send', 'send'), ('Receive', 'recv'))}
 
     icon(t, 120).save(os.path.join(img_dir, 'commonIcoTheme.png'))
 
@@ -1061,9 +1086,8 @@ def gen_ios(t, root):
     fields.update(derived(t))          # 눌림 상태 색
     fields['pkg'] = themes.pkg_slug(t)
     fields.pop('cell_alpha', None)          # 아래에서 문자열로 다시 넣는다
-    iv, ih = insets_of(t)
-    ins = '%dpx %dpx %dpx %dpx' % (iv + pad, ih + pad, iv + pad, ih + pad)
-    css = CSS.format(version=themes.VERSION, cap=CAP + pad, ins=ins,
+    css = CSS.format(version=themes.VERSION,
+                     send_cells=cells['send'], recv_cells=cells['recv'],
                      tabicons=tabicons, profiles=profiles, bullets=bullets,
                      chatbg=chatbg, mainbg=mainbg, passbg=passbg,
                      cell_alpha='%.2f' % ca,
@@ -1200,6 +1224,10 @@ def gen_android(t, root, code):
     for who, key in (('me', 'send'), ('you', 'recv')):
         for variant, pal in (('01', t[key]), ('02', t[key + '_alt'])):
             name = 'theme_chatroom_bubble_%s_%s_image.9.png' % (who, variant)
+            if t.get('char_style'):
+                img, geo = charbubble.sheet(t, key, variant, 3)
+                charbubble.ninepatch(img, geo, 3).save(os.path.join(draw, name))
+                continue
             ninepatch(bubble(3, pal, style, alpha, glow, pad, t.get('flat', False),
                              *glass_of(t)),
                       (CAP + pad) * 3).save(os.path.join(draw, name))
@@ -1295,6 +1323,8 @@ def main():
 
 def profile_image(t, idx, px):
     """기본 프로필 한 장. 세 장이 서로 다른 색이라야 목록에서 섞인 티가 난다."""
+    if t.get('char'):
+        return charbubble.profile(t, idx, px)
     ss = 4
     S = px * ss
     tone = (t['accent'], t['subtext'], t['accent_dim'])[idx % 3]
