@@ -38,7 +38,7 @@ chat_bg
   None 이면 단색. ('linear', 위, 아래) 또는 ('aurora', 바탕, [색...]) 이면 이미지를 그린다.
 """
 
-VERSION = '0.12'
+VERSION = '0.13'
 
 THEMES = [
     dict(
@@ -141,7 +141,7 @@ THEMES = [
     ),
     dict(
         key='midnight11', name='심야',
-        note='배경 이미지를 세 화면에 다 깐 테마. 목록·채팅방·잠금화면이 각각 다름',
+        note='밤하늘을 그려 넣은 테마. 잠금화면에 달과 능선이 나옴',
         bg='#0F1320', bg_deep='#080B14', surface='#171C2B', pressed='#1F2637',
         border='#29314A', text='#E6EAF5', subtext='#8C95AE',
         accent='#8AA4FF', accent_dim='#5C76D6', on_accent='#060A1A',
@@ -149,9 +149,15 @@ THEMES = [
         recv=('#2A3450', '#1B2236'), recv_alt=('#343F5E', '#232B42'),
         send_text='#F0F4FF', recv_text='#E6EAF5',
         glow=('#8AA4FF', 130, 8),
-        chat_bg=('blobs', '#080B14', ['#2A3A7A', '#5B3E8C', '#1E5A6E']),
-        main_bg=('linear', '#0F1320', '#161C2E'),
-        passcode_bg=('blobs', '#060912', ['#3B4FA0', '#6A4AA0', '#204F63']),
+        # 잠금화면은 글자가 적으니 달과 능선까지 다 그린다.
+        # 채팅방은 말풍선이 얹히므로 별만 두고 어둡게 덮는다.
+        chat_bg=('night', '#0B1020', '#121A30',
+                 dict(stars=150, glints=4, moon=None, ridge=None, dim=0.25)),
+        main_bg=('night', '#0D1222', '#151B2E',
+                 dict(stars=110, glints=3, moon=None, ridge=None, dim=0.35)),
+        passcode_bg=('night', '#070B18', '#16203C',
+                     dict(stars=260, glints=8, moon='#E8ECFF', ridge='#05070F',
+                          moon_x=0.74, moon_y=0.16, moon_r=0.09)),
     ),
 ]
 

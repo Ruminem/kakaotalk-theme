@@ -51,7 +51,7 @@
 </tr>
 <tr>
 <td align="center"><b><a href="#리퀴드-글래스-다크">리퀴드 글래스 다크</a></b><br>같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림</td>
-<td align="center"><b><a href="#심야">심야</a></b><br>배경 이미지를 세 화면에 다 깐 테마. 목록·채팅방·잠금화면이 각각 다름</td>
+<td align="center"><b><a href="#심야">심야</a></b><br>밤하늘을 그려 넣은 테마. 잠금화면에 달과 능선이 나옴</td>
 </tr>
 </table>
 
@@ -141,7 +141,7 @@
 
 <img src="docs/preview-midnight11-list.png" width="200"> <img src="docs/preview-midnight11-chat.png" width="200"> <img src="docs/preview-midnight11-passcode.png" width="200"> <img src="docs/preview-midnight11-splash.png" width="200">
 
-배경 이미지를 세 화면에 다 깐 테마. 목록·채팅방·잠금화면이 각각 다름.
+밤하늘을 그려 넣은 테마. 잠금화면에 달과 능선이 나옴.
 
 <!-- THEMES:END -->
 

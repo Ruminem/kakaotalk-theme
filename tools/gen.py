@@ -11,6 +11,7 @@ iOS 와 안드로이드는 같은 그림을 다른 형식으로 요구한다.
   Android 9-patch 한 장. 늘어나는 범위를 이미지 1픽셀 테두리에 그려 넣는다.
 """
 import os
+import random
 import re
 import shutil
 import sys
@@ -204,8 +205,93 @@ def splash(t, w, h):
     return Image.alpha_composite(img, glow).convert('RGB')
 
 
+def scene_night(spec, w, h):
+    """밤하늘. 별과 달과 능선을 그린다.
+
+    사진을 가져다 쓸 수 없으니(저작권) 코드로 그린다.
+    시드를 고정한다 — 안 그러면 빌드할 때마다 별자리가 바뀌어서 diff 가 매번 더러워진다.
+
+    spec = ('night', 위색, 아래색, 옵션dict)
+      moon   달 색. None 이면 안 그림
+      ridge  능선 색. None 이면 안 그림
+      stars  별 개수
+      dim    0~1. 클수록 어둡게 덮는다. 글자가 얹히는 화면은 올린다
+    """
+    o = spec[3] if len(spec) > 3 else {}
+    img = vgradient(w, h, rgb(spec[1]), rgb(spec[2])).convert('RGB')
+    d = ImageDraw.Draw(img, 'RGBA')
+    rnd = random.Random(20260912)
+    unit = w / 500.0
+
+    horizon = h * (0.72 if o.get('ridge') else 1.0)
+    for _ in range(o.get('stars', 220)):
+        x, y = rnd.random() * w, rnd.random() * horizon
+        # 위쪽일수록 촘촘하게 보이도록 아래쪽 별은 솎아낸다
+        if rnd.random() < (y / horizon) * 0.5:
+            continue
+        r = rnd.choice([0.6, 0.7, 0.9, 1.1, 1.5, 2.0]) * unit
+        a = rnd.randint(70, 240)
+        d.ellipse([x - r, y - r, x + r, y + r], fill=(255, 255, 255, a))
+
+    # 밝은 별 몇 개에는 십자 광채를 준다. 전부 주면 지저분하다
+    for _ in range(o.get('glints', 7)):
+        x, y = rnd.random() * w, rnd.random() * horizon * 0.8
+        L = rnd.uniform(5, 11) * unit
+        for dx, dy in ((L, 0), (0, L)):
+            d.line([(x - dx, y - dy), (x + dx, y + dy)], fill=(255, 255, 255, 110),
+                   width=max(1, int(unit)))
+
+    moon = o.get('moon')
+    if moon:
+        mx, my = w * o.get('moon_x', 0.72), h * o.get('moon_y', 0.17)
+        mr = w * o.get('moon_r', 0.085)
+        halo = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+        hd = ImageDraw.Draw(halo)
+        for i in range(40, 0, -1):
+            rr = mr * (1 + i * 0.14)
+            hd.ellipse([mx - rr, my - rr, mx + rr, my + rr],
+                       fill=rgb(moon) + (int(30 * (1 - i / 40) ** 2),))
+        img = Image.alpha_composite(img.convert('RGBA'), halo).convert('RGB')
+        d = ImageDraw.Draw(img, 'RGBA')
+
+        disc = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+        dd = ImageDraw.Draw(disc)
+        dd.ellipse([mx - mr, my - mr, mx + mr, my + mr], fill=rgb(moon) + (255,))
+        if o.get('crescent', True):
+            # 살짝 겹친 원으로 지워서 초승달을 만든다
+            off = mr * 0.55
+            dd.ellipse([mx - mr + off, my - mr - off * 0.3,
+                        mx + mr + off, my + mr - off * 0.3], fill=(0, 0, 0, 0))
+        img = Image.alpha_composite(img.convert('RGBA'), disc).convert('RGB')
+        d = ImageDraw.Draw(img, 'RGBA')
+
+    ridge = o.get('ridge')
+    if ridge:
+        for layer, (base_y, shade, seed) in enumerate(
+                ((0.80, 0.55, 3), (0.88, 0.28, 9), (0.95, 0.0, 17))):
+            r2 = random.Random(seed)
+            pts = [(0, h)]
+            x = 0.0
+            y = h * base_y
+            while x < w:
+                x += w * r2.uniform(0.06, 0.16)
+                y = h * base_y + h * r2.uniform(-0.055, 0.055)
+                pts.append((min(x, w), y))
+            pts += [(w, h)]
+            c = rgb(ridge)
+            c = tuple(round(v + (255 - v) * shade * 0.12) for v in c)
+            d.polygon(pts, fill=c + (255,))
+
+    dim = o.get('dim', 0.0)
+    if dim:
+        img = Image.blend(img, Image.new('RGB', (w, h), (0, 0, 0)), dim)
+    return img
+
+
 def chat_bg(spec, w, h):
     kind = spec[0]
+    if kind == 'night':
+        return scene_night(spec, w, h)
     if kind == 'linear':
         return vgradient(w, h, rgb(spec[1]), rgb(spec[2]))
     if kind == 'blobs':
