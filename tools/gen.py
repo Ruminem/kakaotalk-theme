@@ -173,11 +173,18 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
     # 감마를 씌워 가까운 쪽은 살리고 먼 쪽은 더 빨리 떨어뜨린다 — 빛은 선형으로 안 준다
     acc = acc.point(lambda v: min(255, int(255 * ((v / 255.0) ** 0.78) * 1.55)))
 
-    # 그림 가장자리에서 0 이 되게 창을 씌운다.
-    # 이게 없으면 흐림이 경계에서 잘려 네모난 테두리가 그대로 보인다.
+    # 꼬리를 잘라 0 으로 만든다.
+    # 알파가 10~20 쯤으로 여백 끝까지 남으면, 그 사각형 영역 전체가 옅게 떠서
+    # 말풍선 둘레에 네모가 생긴다. 눈에는 "둥근 빛"이 아니라 "네모 상자"로 보인다.
+    # 낮은 값을 잘라내면 빛이 모양을 따라가는 부분만 남는다.
+    floor = 38
+    acc = acc.point(lambda v: 0 if v <= floor
+                    else min(255, int((v - floor) * 255.0 / (255 - floor))))
+
+    # 그래도 가장자리는 확실히 0 으로 눌러둔다
     win = Image.new('L', (gw, gh), 0)
-    ImageDraw.Draw(win).rectangle([1, 1, gw - 2, gh - 2], fill=255)
-    win = win.filter(ImageFilter.GaussianBlur(max(1.0, pad * 0.38)))
+    ImageDraw.Draw(win).rectangle([2, 2, gw - 3, gh - 3], fill=255)
+    win = win.filter(ImageFilter.GaussianBlur(max(1.0, pad * 0.5)))
     acc = ImageChops.multiply(acc, win)
 
     ga = glow[1]
@@ -462,6 +469,40 @@ def edge_glow(img, color, strength, width_ratio=0.22):
     return out.convert('RGB')
 
 
+def icon(t, size=128):
+    """테마 아이콘. 둥근 사각형에 배경과 말풍선 둘을 축소해 넣는다.
+
+    두 곳에 쓴다.
+      - docs/icon-<key>.png : README 에서 테마 이름 왼쪽
+      - Images/commonIcoTheme.png : 카톡 테마 목록에 뜨는 아이콘 (iOS 규격에 있는 자리)
+    """
+    ss = 4
+    W = size * ss
+    if t.get('chat_bg'):
+        base = chat_bg(t['chat_bg'], W, W).convert('RGBA')
+    else:
+        base = vgradient(W, W, rgb(t['bg']), rgb(t['bg_deep'])).convert('RGBA')
+
+    glow, pad = glow_of(t)
+    style, alpha = t.get('bubble_style', 'solid'), t.get('bubble_alpha', 255)
+    flat = t.get('flat', False)
+
+    bw, bh, r = int(W * 0.46), int(W * 0.17), int(W * 0.075)
+    recv = bubble_box(bw, bh, t['recv'], r, style, alpha, glow, pad * ss // 2, flat)
+    send = bubble_box(int(bw * 0.86), bh, t['send'], r, style, alpha,
+                      glow, pad * ss // 2, flat)
+    m = int(W * 0.13)
+    base.alpha_composite(recv, (m, int(W * 0.26)))
+    base.alpha_composite(send, (W - m - send.size[0], int(W * 0.55)))
+
+    mask = Image.new('L', (W, W), 0)
+    ImageDraw.Draw(mask).rounded_rectangle([0, 0, W - 1, W - 1],
+                                           radius=int(W * 0.22), fill=255)
+    out = Image.new('RGBA', (W, W), (0, 0, 0, 0))
+    out.paste(base, (0, 0), mask)
+    return out.resize((size, size), Image.LANCZOS)
+
+
 # --- iOS ----------------------------------------------------------------
 
 CSS = """/*
@@ -674,6 +715,8 @@ def gen_ios(t, root):
                 bubble(scale, pal, style, alpha, glow, pad,
                        t.get('flat', False)).save(os.path.join(img_dir, name))
 
+    icon(t, 120).save(os.path.join(img_dir, 'commonIcoTheme.png'))
+
     chatbg = ''
     if t['chat_bg']:
         background(t, t['chat_bg'], 600, 1300).save(os.path.join(img_dir, 'chatroomBgImage@2x.png'))
@@ -781,12 +824,16 @@ def version_code(t):
     안드로이드는 versionCode 가 낮아지면 설치를 거부한다(다운그레이드로 본다).
 
     그래서 키 끝의 번호와 테마 버전으로 만든다. 키 번호는 안 바뀌고 버전은 올라가기만 한다.
-    mixed09 + 0.8 -> 9 * 1000 + 8 = 9008.
+    mixed09 + 0.13.1 -> 9 * 100000 + 1301 = 901301.
+
+    자리를 넉넉히 잡은 이유는 품질 개선을 패치 번호로 올리기 때문이다.
+    0.13 -> 0.13.1 -> 0.13.2 로 가도 번호가 계속 커져야 한다.
     """
     m = re.search(r'(\d+)$', t['key'])
     no = int(m.group(1)) if m else 1
-    major, _, minor = themes.VERSION.partition('.')
-    return no * 1000 + int(major) * 100 + int(minor or 0)
+    parts = (themes.VERSION.split('.') + ['0', '0'])[:3]
+    major, minor, patch = (int(x or 0) for x in parts)
+    return no * 100000 + major * 10000 + minor * 100 + patch
 
 
 def gen_android(t, root, code):

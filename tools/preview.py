@@ -427,8 +427,9 @@ def readme_block(ts):
         out.append('</tr>')
         out.append('<tr>')
         for t in row:
-            out.append('<td align="center"><b><a href="%s">%s</a></b><br>%s</td>'
-                       % (anchor(t['name']), t['name'], t['note']))
+            out.append('<td align="center"><img src="docs/icon-%s.png" width="20" '
+                       'valign="middle"> <b><a href="%s">%s</a></b><br>%s</td>'
+                       % (t['key'], anchor(t['name']), t['name'], t['note']))
         out.append('</tr>')
     out.append('</table>')
     out.append('')
@@ -439,9 +440,10 @@ def readme_block(ts):
         # 링크 글자까지 슬러그에 섞여 썸네일 점프가 깨진다. 앵커를 따로 박아 고정한다.
         out.append('<a name="%s"></a>' % anchor(t['name']).lstrip('#'))
         out.append('')
-        out.append('### %s &nbsp; <sub>[iOS 받기](%s%s.ktheme) · '
+        out.append('### <img src="docs/icon-%s.png" width="26" valign="middle"> '
+                   '%s &nbsp; <sub>[iOS 받기](%s%s.ktheme) · '
                    '[Android 받기](%s%s.apk)</sub>'
-                   % (t['name'], BASE, t['key'], BASE, t['key']))
+                   % (t['key'], t['name'], BASE, t['key'], BASE, t['key']))
         out.append('')
         out.append(' '.join(
             '<img src="docs/preview-%s-%s.png" width="200">' % (t['key'], kind)
@@ -471,6 +473,8 @@ def generate(ts):
     os.makedirs(gen.DOCS, exist_ok=True)
     cards = []
     for t in ts:
+        gen.icon(t, 128).save(os.path.join(gen.DOCS, 'icon-%s.png' % t['key']),
+                              optimize=True)
         for kind, draw in (('list', chat_list), ('chat', chat),
                            ('passcode', passcode), ('splash', splash)):
             draw(t).save(os.path.join(gen.DOCS, 'preview-%s-%s.png' % (t['key'], kind)),

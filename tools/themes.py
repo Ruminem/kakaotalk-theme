@@ -38,7 +38,7 @@ chat_bg
   None 이면 단색. ('linear', 위, 아래) 또는 ('aurora', 바탕, [색...]) 이면 이미지를 그린다.
 """
 
-VERSION = '0.13'
+VERSION = '0.13.1'
 
 THEMES = [
     dict(
