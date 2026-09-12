@@ -1,4 +1,4 @@
-﻿# mytheme 폴더를 iOS 용 .ktheme 로 패키징한다.
+﻿# ios 폴더를 iOS 용 .ktheme 로 패키징한다.
 #   powershell -ExecutionPolicy Bypass -File build-ios.ps1
 # 결과: dist\iOS\inkmint01.ktheme
 
@@ -8,7 +8,7 @@ Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
-$src  = Join-Path $root 'mytheme'
+$src  = Join-Path $root 'ios'
 $dist = Join-Path $root 'dist\iOS'
 $out  = Join-Path $dist 'inkmint01.ktheme'
 $css  = Join-Path $src 'KakaoTalkTheme.css'

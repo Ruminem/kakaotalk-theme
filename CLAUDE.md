@@ -17,13 +17,28 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 
 | 고칠 것 | iOS | Android |
 |---|---|---|
-| 색 | `mytheme/KakaoTalkTheme.css` | `android/res/values/colors.xml` |
+| 색 | `ios/KakaoTalkTheme.css` | `android/res/values/colors.xml` |
 | 이름 | `-kakaotalk-theme-name` | `res/values/strings.xml` 의 `theme_title` |
 | 버전 | `-kakaotalk-theme-version` | `AndroidManifest.xml` 의 `versionCode` / `versionName` |
-| 이미지 | `mytheme/Images/name@3x.png` | `android/res/drawable-xxhdpi/name.png` |
+| 이미지 | `ios/Images/name@3x.png` | `android/res/drawable-xxhdpi/name.png` |
 
 사용자에게 파일을 보낼 때도 두 개를 같이 보낸다. 한쪽만 보내면
 "내 기기는 어느 쪽이냐"를 되묻게 만든다.
+
+## 릴리스 규칙
+
+**릴리스마다 iOS `.ktheme` 과 안드로이드 `.apk` 를 둘 다 자산으로 붙인다.** 한쪽만 올리지 않는다.
+받는 사람은 저장소가 아니라 릴리스 자산에서 받는다 — 그래서 `dist/` 는 커밋하지 않는다.
+
+```powershell
+powershell -ExecutionPolicy Bypass -File release.ps1 -Version 0.2 -NotesFile notes.md
+```
+
+`release.ps1` 이 양쪽 버전이 같은지 확인하고 → 빌드하고 → 태그를 밀고 → 두 파일을 붙인다.
+버전이 어긋나면 거기서 멈춘다. 자산 이름에는 버전이 들어간다 (`inkmint01-0.2.apk`).
+
+릴리스 노트는 직접 쓴다. 자동 생성에 맡기지 않는다 — main 에 바로 커밋하는 프로젝트라
+자동 노트는 링크 한 줄만 남고 비어버린다. 직전 태그부터의 커밋 제목을 뽑아 붙이면 된다.
 
 ## 리소스 이름
 

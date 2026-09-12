@@ -4,7 +4,7 @@
 iOS 와 안드로이드는 방식이 완전히 달라서 소스도 빌드도 따로 간다.
 
 ```
-mytheme/                 ← iOS 소스
+ios/                     ← iOS 소스
   KakaoTalkTheme.css
   Images/                ← v0 에서는 비어 있다
 android/                 ← 안드로이드 소스
@@ -14,6 +14,11 @@ android/                 ← 안드로이드 소스
 build-ios.ps1            → dist/iOS/inkmint01.ktheme
 build-android.ps1        → dist/android/inkmint01.apk
 ```
+
+## 받기
+
+[릴리스](https://github.com/Ruminem/kakaotalk-theme/releases)에서 받는다.
+릴리스마다 iOS `.ktheme` 과 안드로이드 `.apk` 가 같이 올라간다.
 
 ## 빌드
 
