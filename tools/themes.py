@@ -516,25 +516,25 @@ THEMES += quartet(
 # 레드 — 네 벌
 THEMES += quartet(
     'red', 57, '레드',
-    dict(bg='#140A0B', bg_deep='#0A0405', surface='#1F1113', pressed='#2A171A',
-         border='#3C2024', text='#F9EAEA', subtext='#B48B8D',
-         accent='#FF4D4D', accent_dim='#C93A3A', on_accent='#2A0505',
-         send=('#E03A3A', '#E03A3A'), send_alt=('#FF8A4D', '#FF8A4D'),
-         recv=('#3A1F24', '#3A1F24'), recv_alt=('#8E2E52', '#8E2E52'),
-         send_text='#2C0606', recv_text='#F6E4E4'),
-    dict(chat_bg=('ember', '#180708', '#3A0E0C',
-                  dict(glow='#FF5A3C', spark='#FFC46B', smoke='#3A2030',
+    dict(bg='#160509', bg_deep='#0B0205', surface='#240A0F', pressed='#310D15',
+         border='#4A121F', text='#FFECEF', subtext='#C08E96',
+         accent='#FF1B3D', accent_dim='#C4122E', on_accent='#FFF2F4',
+         send=('#E60026', '#E60026'), send_alt=('#FF5C7A', '#FF5C7A'),
+         recv=('#3B0B16', '#3B0B16'), recv_alt=('#8E0F2E', '#8E0F2E'),
+         send_text='#FFF2F4', recv_text='#FFE8EC'),
+    dict(chat_bg=('ember', '#1A0207', '#5A0016',
+                  dict(glow='#FF0033', spark='#FF6B85', smoke='#2E0410',
                        count=70, dim=0.30)),
-         main_bg=('ember', '#140607', '#300B0A',
-                  dict(glow='#E84F34', spark='#F0B45F', smoke='#331B2A',
+         main_bg=('ember', '#150106', '#4A0012',
+                  dict(glow='#E60030', spark='#FF5C7A', smoke='#280310',
                        count=50, dim=0.46)),
-         passcode_bg=('ember', '#1E080A', '#4E1310',
-                      dict(glow='#FF6A45', spark='#FFD08A', smoke='#42253A',
+         passcode_bg=('ember', '#22030A', '#75001C',
+                      dict(glow='#FF1B45', spark='#FF8DA0', smoke='#360616',
                            count=110, pool_alpha=150, dim=0.04))),
-    ['짙은 적갈색 바탕. 불꽃·노을빛 말풍선',
-     '어둠 속에서 불티가 떠오르는 배경',
-     '말풍선이 잔불처럼 달아오름',
-     '불티 배경 위에 달아오른 말풍선까지'])
+    ['검붉은 바탕에 새빨간 말풍선 네 칸',
+     '어둠 속에서 붉은 불티가 떠오름',
+     '말풍선이 빨갛게 달아오름',
+     '불티 배경 위에 달아오른 빨강까지'])
 
 # --- 배포 파일 이름 -------------------------------------------------------
 # city21.ktheme 은 뭐가 뭔지 알 수 없다. 계열과 변형이 드러나게 바꾼다.

@@ -62,7 +62,7 @@
 <tr>
 <td align="center"><img src="assets/icon-city-basic.png" width="20" valign="middle"> <b><a href="#user-content-야경">야경</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>담백한 남색 바탕. 네온 네 색 말풍선</td>
 <td align="center"><img src="assets/icon-cyber-basic.png" width="20" valign="middle"> <b><a href="#user-content-사이버펑크">사이버펑크</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검붉은 보라 바탕. 마젠타·시안 네온 말풍선</td>
-<td align="center"><img src="assets/icon-red-basic.png" width="20" valign="middle"> <b><a href="#user-content-레드">레드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>짙은 적갈색 바탕. 불꽃·노을빛 말풍선</td>
+<td align="center"><img src="assets/icon-red-basic.png" width="20" valign="middle"> <b><a href="#user-content-레드">레드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검붉은 바탕에 새빨간 말풍선 네 칸</td>
 </tr>
 </table>
 
@@ -562,30 +562,30 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-red-basic-chat.png" width="200"><br><b>기본</b><br><sub>짙은 적갈색 바탕. 불꽃·노을빛 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=red-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/red-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-red-image-chat.png" width="200"><br><b>배경</b><br><sub>어둠 속에서 불티가 떠오르는 배경</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=red-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/red-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-red-basic-chat.png" width="200"><br><b>기본</b><br><sub>검붉은 바탕에 새빨간 말풍선 네 칸</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=red-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/red-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-red-image-chat.png" width="200"><br><b>배경</b><br><sub>어둠 속에서 붉은 불티가 떠오름</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=red-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/red-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-red-glow-chat.png" width="200"><br><b>글로우</b><br><sub>말풍선이 잔불처럼 달아오름</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=red-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/red-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-red-glow-image-chat.png" width="200"><br><b>글로우+배경</b><br><sub>불티 배경 위에 달아오른 말풍선까지</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=red-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/red-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-red-glow-chat.png" width="200"><br><b>글로우</b><br><sub>말풍선이 빨갛게 달아오름</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=red-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/red-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-red-glow-image-chat.png" width="200"><br><b>글로우+배경</b><br><sub>불티 배경 위에 달아오른 빨강까지</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=red-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/red-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 
-**기본** — 짙은 적갈색 바탕. 불꽃·노을빛 말풍선
+**기본** — 검붉은 바탕에 새빨간 말풍선 네 칸
 
 <img src="assets/preview-red-basic-list.png" width="180"> <img src="assets/preview-red-basic-passcode.png" width="180"> <img src="assets/preview-red-basic-splash.png" width="180">
 
-**배경** — 어둠 속에서 불티가 떠오르는 배경
+**배경** — 어둠 속에서 붉은 불티가 떠오름
 
 <img src="assets/preview-red-image-list.png" width="180"> <img src="assets/preview-red-image-passcode.png" width="180"> <img src="assets/preview-red-image-splash.png" width="180">
 
-**글로우** — 말풍선이 잔불처럼 달아오름
+**글로우** — 말풍선이 빨갛게 달아오름
 
 <img src="assets/preview-red-glow-list.png" width="180"> <img src="assets/preview-red-glow-passcode.png" width="180"> <img src="assets/preview-red-glow-splash.png" width="180">
 
-**글로우+배경** — 불티 배경 위에 달아오른 말풍선까지
+**글로우+배경** — 불티 배경 위에 달아오른 빨강까지
 
 <img src="assets/preview-red-glow-image-list.png" width="180"> <img src="assets/preview-red-glow-image-passcode.png" width="180"> <img src="assets/preview-red-glow-image-splash.png" width="180">
 
