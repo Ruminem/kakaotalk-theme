@@ -167,7 +167,8 @@ def chat(t):
     _header(img, t, '아무개1', back=True)
     d = ImageDraw.Draw(img)
 
-    pad_x, pad_y = 14, 10
+    # 실제 테마의 edgeinsets 와 같은 값을 쓴다. 미리보기만 넉넉하면 폰에서 짜쳐 보인다
+    pad_x, pad_y = gen.INSET_H, gen.INSET_V
     y = HEAD + 18
     for i, (side, msg) in enumerate(CHAT):
         # 짝수/홀수로 01 과 02 를 번갈아 쓴다. 두 칸의 색 차이가 눈에 보이게
@@ -176,7 +177,7 @@ def chat(t):
         tc = rgb(t['recv_text'] if side == 'them' else t['send_text'])
 
         tw = _text_w(d, msg, F_MSG)
-        bw, bh = tw + pad_x * 2, 26 + pad_y * 2
+        bw, bh = tw + pad_x * 2, 24 + pad_y * 2
 
         if side == 'them':
             if i == 0 or CHAT[i - 1][0] != 'them':

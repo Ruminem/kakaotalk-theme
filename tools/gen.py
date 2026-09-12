@@ -28,6 +28,7 @@ OUT = os.path.join(ROOT, 'build-src')
 
 # 말풍선 기하 (pt). CAP 은 CSS 의 cap inset 과 반드시 같아야 한다
 SIZE, RADIUS, CAP = 44, 14, 18
+INSET_V, INSET_H = 11, 16   # 글자와 말풍선 사이 기본 여백 (pt)
 
 
 def rgb(h):
@@ -117,8 +118,11 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
     if gc == 'auto':
         # 말풍선마다 자기 색으로 빛난다. 칸마다 색이 다른 테마에 어울린다
         gc = mid(colors[0], colors[1])
-    halo.paste(Image.new('RGBA', (gw, gh), rgb(gc) + (ga,)), (0, 0), shape)
-    halo = halo.filter(ImageFilter.GaussianBlur(radius=pad * 0.6))
+    halo.paste(Image.new('RGBA', (gw, gh), rgb(gc) + (255,)), (0, 0), shape)
+    halo = halo.filter(ImageFilter.GaussianBlur(radius=pad * 0.42))
+    # 흐리면 알파가 얇게 퍼져서 거의 안 보인다. 몸통 가까운 쪽을 끌어올린다
+    halo.putalpha(halo.getchannel('A').point(
+        lambda v: min(255, int(v * 2.4 * ga / 255))))
     halo.alpha_composite(out, (pad, pad))
     return halo
 
@@ -313,6 +317,10 @@ InputBarStyle-Chat
  세로 그라데이션인 이유는 말풍선이 가로로 늘어날 때 각 줄의 색이 유지되기 때문이다.
  뒤의 숫자 두 개가 늘어나지 않는 가장자리이고 gen.py 의 CAP 과 같아야 한다.
 
+ edgeinsets 는 글자와 프레임 사이 여백이다. 글로우가 있으면 그림 바깥쪽 여백이
+ 프레임 안에 들어가므로 몸통이 그만큼 안으로 밀린다. 여백을 같이 키우지 않으면
+ 글자가 몸통 가장자리에 붙어버린다.
+
  01 과 02 에 다른 색을 주면 눌린 말풍선과 그룹 말풍선이 달라 보인다.
 */
 MessageCellStyle-Send
@@ -322,8 +330,8 @@ MessageCellStyle-Send
     -ios-group-background-image: 'chatroomBubbleSend02.png' {cap}px {cap}px;
     -ios-group-selected-background-image: 'chatroomBubbleSend01.png' {cap}px {cap}px;
 
-    -ios-title-edgeinsets: 9px 13px 9px 13px;
-    -ios-group-title-edgeinsets: 9px 13px 9px 13px;
+    -ios-title-edgeinsets: {ins};
+    -ios-group-title-edgeinsets: {ins};
 
     -ios-text-color: {send_text};
     -ios-selected-text-color: {send_text};
@@ -337,8 +345,8 @@ MessageCellStyle-Receive
     -ios-group-background-image: 'chatroomBubbleReceive02.png' {cap}px {cap}px;
     -ios-group-selected-background-image: 'chatroomBubbleReceive01.png' {cap}px {cap}px;
 
-    -ios-title-edgeinsets: 9px 13px 9px 13px;
-    -ios-group-title-edgeinsets: 9px 13px 9px 13px;
+    -ios-title-edgeinsets: {ins};
+    -ios-group-title-edgeinsets: {ins};
 
     -ios-text-color: {recv_text};
     -ios-selected-text-color: {recv_text};
@@ -438,7 +446,10 @@ def gen_ios(t, root):
     ca = t.get('cell_alpha', 1.0)
     fields = dict(t)
     fields.pop('cell_alpha', None)          # 아래에서 문자열로 다시 넣는다
-    css = CSS.format(version=themes.VERSION, cap=CAP + pad, chatbg=chatbg, mainbg=mainbg,
+    ins = '%dpx %dpx %dpx %dpx' % (INSET_V + pad, INSET_H + pad,
+                                  INSET_V + pad, INSET_H + pad)
+    css = CSS.format(version=themes.VERSION, cap=CAP + pad, ins=ins,
+                     chatbg=chatbg, mainbg=mainbg,
                      cell_alpha='%.2f' % ca,
                      cell_alpha_sel='%.2f' % min(1.0, ca + 0.15), **fields)
     with open(os.path.join(root, 'KakaoTalkTheme.css'), 'w', encoding='utf-8') as f:
