@@ -442,6 +442,9 @@ def chat_bg(spec, w, h):
     kind = spec[0]
     if kind == 'night':
         return scene_night(spec, w, h)
+    if kind in ('candy', 'sakura'):
+        import scenes                      # 늦게 부른다. scenes 가 gen 을 쓴다
+        return getattr(scenes, kind)(spec, w, h)
     if kind == 'linear':
         return vgradient(w, h, rgb(spec[1]), rgb(spec[2]))
     if kind == 'blobs':

@@ -38,7 +38,7 @@ chat_bg
   None 이면 단색. ('linear', 위, 아래) 또는 ('aurora', 바탕, [색...]) 이면 이미지를 그린다.
 """
 
-VERSION = '0.13.2'
+VERSION = '0.14'
 
 THEMES = [
     dict(
@@ -202,3 +202,20 @@ _add_variant('mixed04', 'mixed09', '믹스드 v2',
 _add_variant('candy06', 'candy10', '캔디 팝 v2',
              '캔디 팝에 글로우를 얹은 것. 밝은 바탕이라 빛이 은은하게 걸림',
              glow=('auto', 175, 8))
+
+_add_variant('candy10', 'candy12', '캔디 팝 v3',
+             '캔디 팝 v2 에 사탕을 흩뿌린 배경을 깔았음',
+             chat_bg=('candy', '#FFFDF5', '#FFE9D6',
+                      dict(count=22, sprinkles=70, dim=0.42)),
+             main_bg=('candy', '#FFFDF5', '#FFF1E2',
+                      dict(count=16, sprinkles=50, dim=0.55)),
+             passcode_bg=('candy', '#FFF8E8', '#FFD9C0',
+                          dict(count=34, sprinkles=110, dim=0.12)))
+_add_variant('sakura03', 'sakura13', '벚꽃 그늘 v2',
+             '벚꽃 그늘에 가지와 꽃잎을 그려 넣었음',
+             chat_bg=('sakura', '#FFF3F6', '#FBE2EC',
+                      dict(flowers=16, petals=30, bokeh=12, branch=False, dim=0.38)),
+             main_bg=('sakura', '#FFF6F8', '#FCE8F0',
+                      dict(flowers=10, petals=22, bokeh=10, branch=False, dim=0.52)),
+             passcode_bg=('sakura', '#FFF0F5', '#F8D3E2',
+                          dict(flowers=30, petals=46, bokeh=18, branch=True, dim=0.0)))

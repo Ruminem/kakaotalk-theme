@@ -26,31 +26,39 @@
 <td align="center"><img src="assets/icon-sakura03.png" width="20" valign="middle"> <b><a href="#벚꽃-그늘">벚꽃 그늘</a></b><br>밝은 분홍. 채팅방 배경 이미지가 깔림</td>
 </tr>
 <tr>
+<td width="33%" align="center"><a href="#벚꽃-그늘-v2"><img src="assets/preview-sakura13-chat.png" width="190"></a></td>
 <td width="33%" align="center"><a href="#믹스드"><img src="assets/preview-mixed04-chat.png" width="190"></a></td>
 <td width="33%" align="center"><a href="#믹스드-v2"><img src="assets/preview-mixed09-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#오로라"><img src="assets/preview-aurora05-chat.png" width="190"></a></td>
 </tr>
 <tr>
+<td align="center"><img src="assets/icon-sakura13.png" width="20" valign="middle"> <b><a href="#벚꽃-그늘-v2">벚꽃 그늘 v2</a></b><br>벚꽃 그늘에 가지와 꽃잎을 그려 넣었음</td>
 <td align="center"><img src="assets/icon-mixed04.png" width="20" valign="middle"> <b><a href="#믹스드">믹스드</a></b><br>어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임</td>
 <td align="center"><img src="assets/icon-mixed09.png" width="20" valign="middle"> <b><a href="#믹스드-v2">믹스드 v2</a></b><br>믹스드에 글로우를 얹은 것. 말풍선마다 자기 색으로 빛남</td>
-<td align="center"><img src="assets/icon-aurora05.png" width="20" valign="middle"> <b><a href="#오로라">오로라</a></b><br>가장 어두운 테마. 채팅방 배경에 오로라가 번짐</td>
 </tr>
 <tr>
+<td width="33%" align="center"><a href="#오로라"><img src="assets/preview-aurora05-chat.png" width="190"></a></td>
 <td width="33%" align="center"><a href="#캔디-팝"><img src="assets/preview-candy06-chat.png" width="190"></a></td>
 <td width="33%" align="center"><a href="#캔디-팝-v2"><img src="assets/preview-candy10-chat.png" width="190"></a></td>
-<td width="33%" align="center"><a href="#리퀴드-글래스"><img src="assets/preview-glass07-chat.png" width="190"></a></td>
 </tr>
 <tr>
+<td align="center"><img src="assets/icon-aurora05.png" width="20" valign="middle"> <b><a href="#오로라">오로라</a></b><br>가장 어두운 테마. 채팅방 배경에 오로라가 번짐</td>
 <td align="center"><img src="assets/icon-candy06.png" width="20" valign="middle"> <b><a href="#캔디-팝">캔디 팝</a></b><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
 <td align="center"><img src="assets/icon-candy10.png" width="20" valign="middle"> <b><a href="#캔디-팝-v2">캔디 팝 v2</a></b><br>캔디 팝에 글로우를 얹은 것. 밝은 바탕이라 빛이 은은하게 걸림</td>
-<td align="center"><img src="assets/icon-glass07.png" width="20" valign="middle"> <b><a href="#리퀴드-글래스">리퀴드 글래스</a></b><br>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</td>
 </tr>
 <tr>
+<td width="33%" align="center"><a href="#캔디-팝-v3"><img src="assets/preview-candy12-chat.png" width="190"></a></td>
+<td width="33%" align="center"><a href="#리퀴드-글래스"><img src="assets/preview-glass07-chat.png" width="190"></a></td>
 <td width="33%" align="center"><a href="#리퀴드-글래스-다크"><img src="assets/preview-glass08-chat.png" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/icon-candy12.png" width="20" valign="middle"> <b><a href="#캔디-팝-v3">캔디 팝 v3</a></b><br>캔디 팝 v2 에 사탕을 흩뿌린 배경을 깔았음</td>
+<td align="center"><img src="assets/icon-glass07.png" width="20" valign="middle"> <b><a href="#리퀴드-글래스">리퀴드 글래스</a></b><br>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</td>
+<td align="center"><img src="assets/icon-glass08.png" width="20" valign="middle"> <b><a href="#리퀴드-글래스-다크">리퀴드 글래스 다크</a></b><br>같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림</td>
+</tr>
+<tr>
 <td width="33%" align="center"><a href="#심야"><img src="assets/preview-midnight11-chat.png" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-glass08.png" width="20" valign="middle"> <b><a href="#리퀴드-글래스-다크">리퀴드 글래스 다크</a></b><br>같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림</td>
 <td align="center"><img src="assets/icon-midnight11.png" width="20" valign="middle"> <b><a href="#심야">심야</a></b><br>밤하늘을 그려 넣은 테마. 잠금화면에 달과 능선이 나옴</td>
 </tr>
 </table>
@@ -78,6 +86,14 @@
 <img src="assets/preview-sakura03-list.png" width="200"> <img src="assets/preview-sakura03-chat.png" width="200"> <img src="assets/preview-sakura03-passcode.png" width="200"> <img src="assets/preview-sakura03-splash.png" width="200">
 
 밝은 분홍. 채팅방 배경 이미지가 깔림.
+
+<a name="벚꽃-그늘-v2"></a>
+
+### <img src="assets/icon-sakura13.png" width="26" valign="middle"> 벚꽃 그늘 v2 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura13.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura13.apk)</sub>
+
+<img src="assets/preview-sakura13-list.png" width="200"> <img src="assets/preview-sakura13-chat.png" width="200"> <img src="assets/preview-sakura13-passcode.png" width="200"> <img src="assets/preview-sakura13-splash.png" width="200">
+
+벚꽃 그늘에 가지와 꽃잎을 그려 넣었음.
 
 <a name="믹스드"></a>
 
@@ -118,6 +134,14 @@
 <img src="assets/preview-candy10-list.png" width="200"> <img src="assets/preview-candy10-chat.png" width="200"> <img src="assets/preview-candy10-passcode.png" width="200"> <img src="assets/preview-candy10-splash.png" width="200">
 
 캔디 팝에 글로우를 얹은 것. 밝은 바탕이라 빛이 은은하게 걸림.
+
+<a name="캔디-팝-v3"></a>
+
+### <img src="assets/icon-candy12.png" width="26" valign="middle"> 캔디 팝 v3 &nbsp; <sub>[iOS 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy12.ktheme) · [Android 받기](https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/candy12.apk)</sub>
+
+<img src="assets/preview-candy12-list.png" width="200"> <img src="assets/preview-candy12-chat.png" width="200"> <img src="assets/preview-candy12-passcode.png" width="200"> <img src="assets/preview-candy12-splash.png" width="200">
+
+캔디 팝 v2 에 사탕을 흩뿌린 배경을 깔았음.
 
 <a name="리퀴드-글래스"></a>
 
