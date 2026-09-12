@@ -40,7 +40,7 @@ chat_bg
 
 import re
 
-VERSION = '0.21'
+VERSION = '0.22'
 
 THEMES = [
     dict(
@@ -485,6 +485,56 @@ THEMES += quartet(
      '도시 배경 위에 네온 말풍선까지'],
     keys=['city19', 'city16', 'city20', 'city21'])
 
+
+# 사이버펑크 — 네 벌
+THEMES += quartet(
+    'cyber', 53, '사이버펑크',
+    dict(bg='#0C0718', bg_deep='#05030E', surface='#170E28', pressed='#211536',
+         border='#33204F', text='#EDE4FF', subtext='#9A8AC4',
+         accent='#FF2E88', accent_dim='#C41E68', on_accent='#14000A',
+         send=('#FF3D8B', '#FF3D8B'), send_alt=('#8A5BFF', '#8A5BFF'),
+         recv=('#0E3E52', '#0E3E52'), recv_alt=('#1D2A66', '#1D2A66'),
+         send_text='#1A0010', recv_text='#D8F6FF'),
+    dict(chat_bg=('neon', '#1B0A2E', '#42104A',
+                  dict(sun='#FF5FB0', sun_bottom='#FFC85C', glow='#FF2E88',
+                       grid='#31E8FF', ground='#0A0514', horizon=0.50,
+                       stars=60, dim=0.40)),
+         main_bg=('neon', '#170826', '#3A0E42',
+                  dict(sun='#FF5FB0', sun_bottom='#FFC85C', glow='#FF2E88',
+                       grid='#31E8FF', ground='#08040F', horizon=0.44,
+                       stars=40, dim=0.52)),
+         passcode_bg=('neon', '#220D3A', '#55155A',
+                      dict(sun='#FF6FBC', sun_bottom='#FFD27A', sun_r=0.32,
+                           glow='#FF2E88', grid='#3BF0FF', ground='#0C0618',
+                           horizon=0.56, stars=90, dim=0.06))),
+    ['검붉은 보라 바탕. 마젠타·시안 네온 말풍선',
+     '네온 격자와 가로로 잘린 해가 깔림',
+     '말풍선이 간판처럼 빛남',
+     '네온 격자 위에 빛나는 말풍선까지'])
+
+
+# 레드 — 네 벌
+THEMES += quartet(
+    'red', 57, '레드',
+    dict(bg='#140A0B', bg_deep='#0A0405', surface='#1F1113', pressed='#2A171A',
+         border='#3C2024', text='#F9EAEA', subtext='#B48B8D',
+         accent='#FF4D4D', accent_dim='#C93A3A', on_accent='#2A0505',
+         send=('#E03A3A', '#E03A3A'), send_alt=('#FF8A4D', '#FF8A4D'),
+         recv=('#3A1F24', '#3A1F24'), recv_alt=('#8E2E52', '#8E2E52'),
+         send_text='#2C0606', recv_text='#F6E4E4'),
+    dict(chat_bg=('ember', '#180708', '#3A0E0C',
+                  dict(glow='#FF5A3C', spark='#FFC46B', smoke='#3A2030',
+                       count=70, dim=0.30)),
+         main_bg=('ember', '#140607', '#300B0A',
+                  dict(glow='#E84F34', spark='#F0B45F', smoke='#331B2A',
+                       count=50, dim=0.46)),
+         passcode_bg=('ember', '#1E080A', '#4E1310',
+                      dict(glow='#FF6A45', spark='#FFD08A', smoke='#42253A',
+                           count=110, pool_alpha=150, dim=0.04))),
+    ['짙은 적갈색 바탕. 불꽃·노을빛 말풍선',
+     '어둠 속에서 불티가 떠오르는 배경',
+     '말풍선이 잔불처럼 달아오름',
+     '불티 배경 위에 달아오른 말풍선까지'])
 
 # --- 배포 파일 이름 -------------------------------------------------------
 # city21.ktheme 은 뭐가 뭔지 알 수 없다. 계열과 변형이 드러나게 바꾼다.

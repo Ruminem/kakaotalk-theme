@@ -425,3 +425,153 @@ def geo(spec, w, h):
     if dim:
         img = Image.blend(img, Image.new('RGB', (w, h), o.get('dim_to', (255, 255, 255))), dim)
     return img
+
+
+# --- 네온 격자 ------------------------------------------------------------
+
+def neon(spec, w, h):
+    """지평선까지 뻗은 네온 격자. 사이버펑크의 그 바닥이다.
+
+    spec = ('neon', 하늘 위색, 하늘 아래색, 옵션dict)
+      horizon  지평선 높이 0~1
+      grid     격자 색
+      glow     해와 안개 색
+      sun      해 색. None 이면 안 그림
+      rows     가로줄 수, cols 세로줄 수
+      dim      0~1. 클수록 어둡게 덮는다
+
+    격자는 두 번 그린다. 한 벌은 크게 흐려서 빛으로 깔고, 그 위에 또렷한 선을 얹는다.
+    한 겹만 그리면 선이 가늘어서 네온이 아니라 모눈종이가 된다.
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20260920))
+    hz = int(h * o.get('horizon', 0.52))
+    img = gen.vgradient(w, hz, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGBA')
+    img = img.resize((w, hz))
+    full = Image.new('RGBA', (w, h), gen.rgb(o.get('ground', '#0A0514')) + (255,))
+    full.paste(img, (0, 0))
+
+    glow_c = gen.rgb(o.get('glow', '#FF2E88'))
+    grid_c = gen.rgb(o.get('grid', '#31E8FF'))
+
+    # 해. 위아래 색이 다르고 가로로 잘린 원 — 레트로웨이브의 그 모양이다.
+    # 지평선 아래로는 안 넘긴다. 격자가 해를 가로지르면 바닥에 박힌 것처럼 보인다.
+    if o.get('sun'):
+        sr = int(w * o.get('sun_r', 0.27))
+        top_c, bot_c = o['sun'], o.get('sun_bottom', o['sun'])
+        disc = gen.vgradient(sr * 2, sr * 2, gen.rgb(top_c), gen.rgb(bot_c)).convert('RGBA')
+        m = Image.new('L', (sr * 2, sr * 2), 0)
+        ImageDraw.Draw(m).ellipse([0, 0, sr * 2 - 1, sr * 2 - 1], fill=255)
+        md = ImageDraw.Draw(m)
+        for i in range(8):                      # 아래로 갈수록 굵어지는 틈
+            y = int(sr * (0.90 + i * 0.13))
+            md.rectangle([0, y, sr * 2, y + 1 + i], fill=0)
+        disc.putalpha(m)
+        cx, cy = int(w * o.get('sun_x', 0.5)), int(hz - sr * 0.62)
+        bloom, at = _soft_blob(sr * 1.3, glow_c + (170,), w * 0.10, cx, cy)
+        full.alpha_composite(bloom, at)
+        sun_layer = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+        sun_layer.alpha_composite(disc, (cx - sr, cy - sr))
+        sun_layer = sun_layer.crop((0, 0, w, hz)).convert('RGBA')
+        full.alpha_composite(sun_layer, (0, 0))
+
+    # 격자. 소실점은 지평선 한가운데다
+    grid = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+    gd = ImageDraw.Draw(grid)
+    vx, vy = w * 0.5, float(hz)
+    cols = o.get('cols', 17)
+    for i in range(cols + 1):
+        t = i / cols
+        x = -w * 1.6 + (w * 4.2) * t
+        gd.line([(vx, vy), (x, h)], fill=grid_c + (190,), width=2)
+    rows = o.get('rows', 15)
+    for i in range(1, rows + 1):
+        t = i / rows
+        y = vy + (h - vy) * (t ** 2.3)          # 멀수록 촘촘하게
+        gd.line([(0, y), (w, y)], fill=grid_c + (190,), width=2)
+
+    # 빛은 두 겹으로 깐다. 가까운 쪽은 진하게, 먼 쪽은 넓게 퍼지게
+    full.alpha_composite(grid.filter(ImageFilter.GaussianBlur(w * 0.05)))
+    full.alpha_composite(grid.filter(ImageFilter.GaussianBlur(w * 0.015)))
+    full.alpha_composite(grid)
+
+    # 지평선의 안개. 바닥과 하늘이 맞닿은 자리를 흐린다
+    haze = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+    hd = ImageDraw.Draw(haze)
+    hd.rectangle([0, hz - int(h * 0.03), w, hz + int(h * 0.03)], fill=glow_c + (110,))
+    haze = haze.filter(ImageFilter.GaussianBlur(h * 0.035))
+    full.alpha_composite(haze)
+
+    # 별 몇 개. 하늘이 비어 있으면 격자만 동동 떠 보인다
+    sd = ImageDraw.Draw(full, 'RGBA')
+    for _ in range(o.get('stars', 70)):
+        x, y = rnd.random() * w, rnd.random() * hz * 0.85
+        r = rnd.choice((0.6, 0.8, 1.1))
+        a = rnd.randint(60, 170)
+        sd.ellipse([x - r, y - r, x + r, y + r], fill=(235, 235, 255, a))
+
+    img = full.convert('RGB')
+    dim = o.get('dim', 0.0)
+    if dim:
+        img = Image.blend(img, Image.new('RGB', (w, h), (0, 0, 0)), dim)
+    return img
+
+
+# --- 잔불 ----------------------------------------------------------------
+
+def ember(spec, w, h):
+    """어둠 속의 잔불. 아래에서 빛이 올라오고 불티가 떠다닌다.
+
+    spec = ('ember', 위색, 아래색, 옵션dict)
+      glow    아래쪽 불빛 색
+      count   불티 개수
+      smoke   연기 덩어리 개수
+      dim     0~1
+
+    불티는 아래쪽일수록 크고 밝게, 위로 갈수록 작고 흐리게 그린다.
+    같은 크기로 흩뿌리면 눈송이가 되고 불티로 안 보인다.
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20260921))
+    img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGBA')
+    glow_c = gen.rgb(o.get('glow', '#FF5A3C'))
+
+    # 아래에서 올라오는 불빛
+    pool, at = _soft_blob(w * 0.85, glow_c + (o.get('pool_alpha', 120),),
+                          w * 0.22, w * 0.5, h * 1.02)
+    img.alpha_composite(pool, at)
+
+    # 연기. 아주 옅은 덩어리라 뚜렷하게 보이면 안 된다
+    smoke_c = gen.rgb(o.get('smoke', '#3A2030'))
+    for _ in range(o.get('smoke_count', 5)):
+        r = rnd.uniform(0.22, 0.44) * w
+        x = rnd.uniform(0.05, 0.95) * w
+        y = rnd.uniform(0.15, 0.85) * h
+        lay, pos = _soft_blob(r, smoke_c + (rnd.randint(40, 80),), w * 0.12, x, y)
+        img.alpha_composite(lay, pos)
+
+    # 불티
+    d = ImageDraw.Draw(img, 'RGBA')
+    for _ in range(o.get('count', 70)):
+        near = rnd.random() ** 0.55              # 1 에 가까울수록 아래
+        y = h * (0.04 + near * 0.96)
+        x = rnd.random() * w
+        r = 0.6 + near * 1.6 + rnd.random() * 0.6
+        a = int(60 + near * 140)
+        c = glow_c if rnd.random() < 0.65 else gen.rgb(o.get('spark', '#FFC46B'))
+        # 심지는 흰 쪽으로 당긴다. 바탕이 붉어서 붉은 점만 찍으면 묻힌다
+        core = tuple(min(255, int(v + (255 - v) * (0.25 + near * 0.45))) for v in c)
+        halo, pos = _soft_blob(r * 4.0, c + (int(a * 0.45),), r * 2.4, x, y)
+        img.alpha_composite(halo, pos)
+        d.ellipse([x - r, y - r, x + r, y + r], fill=core + (min(255, a + 80),))
+        if near > 0.55 and rnd.random() < 0.5:   # 위로 끌린 꼬리
+            d.line([(x, y), (x + rnd.uniform(-1.5, 1.5), y - r * rnd.uniform(2.5, 5.0))],
+                   fill=c + (int(a * 0.5),), width=1)
+
+    img = img.convert('RGB')
+    dim = o.get('dim', 0.0)
+    if dim:
+        img = Image.blend(img, Image.new('RGB', (w, h), (0, 0, 0)), dim)
+    return img
