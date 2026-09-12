@@ -40,7 +40,7 @@ chat_bg
 
 import re
 
-VERSION = '0.27'
+VERSION = '0.27.1'
 
 THEMES = [
     dict(
@@ -160,7 +160,7 @@ THEMES = [
         chat_bg=('wood', '#E8D4B4', '#D8BF98',
                  dict(dark='#7A4E24', light='#FFF3E0', knots=2, planks=3)),
         main_bg=('wood', '#E8D4B4', '#DCC6A2',
-                 dict(dark='#7A4E24', light='#FFF3E0', knots=0, planks=0, streaks=5)),
+                 dict(dark='#7A4E24', light='#FFF3E0', knots=0, planks=0, figure=False)),
         passcode_bg=('wood', '#E3CDA9', '#CFB287',
                      dict(dark='#6E4520', light='#FFF3E0', knots=3, planks=4)),
     ),
@@ -190,7 +190,7 @@ THEMES = [
         chat_bg=('wood', '#3C2C1E', '#261A11',
                  dict(dark='#120A05', light='#C08F57', knots=2, planks=3)),
         main_bg=('wood', '#38281B', '#241810',
-                 dict(dark='#120A05', light='#C08F57', knots=0, planks=0, streaks=5)),
+                 dict(dark='#120A05', light='#C08F57', knots=0, planks=0, figure=False)),
         passcode_bg=('wood', '#42301F', '#1E1409',
                      dict(dark='#0E0704', light='#CE9A5E', knots=3, planks=4)),
     ),
@@ -259,9 +259,13 @@ THEMES = [
     # 색 유리. 계열 축이 밝기가 아니라 색이라 네 벌이 곧 네 가지 색이다.
     # 바탕은 넷 다 같은 어두운 회보라로 두고 색만 바꾼다 — 납선에 끼운 색유리처럼
     # 색이 유리에서만 나오게 하려는 것이다.
+    # 배경은 납선으로 이은 유리 조각이다(scenes.stained). 한때 흐린 색 덩어리였는데
+    # 이름만 스테인드 글래스고 조각도 납선도 없어서 어두운 그라데이션으로만 보였다.
+    # 유리색은 명도가 다른 같은 계열로 고른다. 옅은 노랑이나 산호색을 섞으면
+    # 어둡게 눌렀을 때 카키와 갈색이 되어 흙탕물처럼 탁해진다.
     dict(
         key='stained65', name='스테인드 글래스 앰버',
-        note='검은 바탕에 호박색 유리. 등불 든 창처럼 보임',
+        note='납선으로 이은 호박색 유리창. 등불이 뒤에서 비침',
         bg='#141218', bg_deep='#0C0A0F', surface='#1E1A24', pressed='#282232',
         border='#342C40', text='#F2ECE2', subtext='#A99C8C',
         accent='#FFB23F', accent_dim='#C8862A', on_accent='#2A1A02',
@@ -269,13 +273,13 @@ THEMES = [
         recv=('#3A2A16', '#3A2A16'), recv_alt=('#5E4420', '#5E4420'),
         send_text='#2A1A02', recv_text='#F2ECE2',
         bubble_style='glass', bubble_alpha=170, cell_alpha=0.55,
-        chat_bg=('blobs', '#0E0C12', ['#7A4E12', '#4E3009', '#2A1A05', '#9A6A1E']),
-        main_bg=('blobs', '#0D0B10', ['#5A3A0E', '#3A2408', '#231604', '#6E4A12']),
-        passcode_bg=('blobs', '#120F16', ['#A06A18', '#6E4610', '#3A2408', '#C8902E']),
+        chat_bg=('stained', '#0B0A0D', ['#E8871E', '#FFA62B', '#C2521B', '#8E2A12', '#FFB02E'], dict(dim=0.25)),
+        main_bg=('stained', '#0B0A0D', ['#E8871E', '#FFA62B', '#C2521B', '#8E2A12', '#FFB02E'], dict(dim=0.35)),
+        passcode_bg=('stained', '#0B0A0D', ['#E8871E', '#FFA62B', '#C2521B', '#8E2A12', '#FFB02E'], dict(dim=0.1, cols=5)),
     ),
     dict(
         key='stained66', name='스테인드 글래스 에메랄드',
-        note='같은 바탕에 초록 유리. 가장 차분한 쪽',
+        note='초록 유리창. 가장 차분한 쪽',
         bg='#141218', bg_deep='#0C0A0F', surface='#1E1A24', pressed='#282232',
         border='#342C40', text='#E6F2EC', subtext='#95AEA4',
         accent='#3FD9A0', accent_dim='#27A87A', on_accent='#04241A',
@@ -283,13 +287,13 @@ THEMES = [
         recv=('#123028', '#123028'), recv_alt=('#1D4A3C', '#1D4A3C'),
         send_text='#04241A', recv_text='#E6F2EC',
         bubble_style='glass', bubble_alpha=170, cell_alpha=0.55,
-        chat_bg=('blobs', '#0B100E', ['#0E5A42', '#0A3A2C', '#06221A', '#157050']),
-        main_bg=('blobs', '#0A0F0D', ['#0A4632', '#072E22', '#051A14', '#0E5A42']),
-        passcode_bg=('blobs', '#0D1310', ['#157050', '#0E5A42', '#072E22', '#1F9068']),
+        chat_bg=('stained', '#0B0A0D', ['#1FA97A', '#0E7A56', '#3FD9A0', '#0A5A48', '#5FC8B0'], dict(dim=0.25)),
+        main_bg=('stained', '#0B0A0D', ['#1FA97A', '#0E7A56', '#3FD9A0', '#0A5A48', '#5FC8B0'], dict(dim=0.35)),
+        passcode_bg=('stained', '#0B0A0D', ['#1FA97A', '#0E7A56', '#3FD9A0', '#0A5A48', '#5FC8B0'], dict(dim=0.1, cols=5)),
     ),
     dict(
         key='stained67', name='스테인드 글래스 자수정',
-        note='같은 바탕에 보라 유리. 어두운 쪽으로 가장 깊음',
+        note='보라 유리창. 어두운 쪽으로 가장 깊음',
         bg='#141218', bg_deep='#0C0A0F', surface='#1E1A24', pressed='#282232',
         border='#342C40', text='#EFE8F8', subtext='#A498B8',
         accent='#B07CFF', accent_dim='#8552D6', on_accent='#1A0A33',
@@ -297,13 +301,13 @@ THEMES = [
         recv=('#2A1F42', '#2A1F42'), recv_alt=('#3F2F63', '#3F2F63'),
         send_text='#F3ECFF', recv_text='#EFE8F8',
         bubble_style='glass', bubble_alpha=170, cell_alpha=0.55,
-        chat_bg=('blobs', '#0F0C16', ['#4A2A8A', '#2F1A5A', '#1C0F38', '#5E3AA8']),
-        main_bg=('blobs', '#0D0A12', ['#3A2070', '#26154A', '#170C2E', '#4A2A8A']),
-        passcode_bg=('blobs', '#110D19', ['#6A42BE', '#4A2A8A', '#2F1A5A', '#8552D6']),
+        chat_bg=('stained', '#0B0A0D', ['#8A56E0', '#5E32B0', '#B07CFF', '#3F2380', '#C06AD8'], dict(dim=0.25)),
+        main_bg=('stained', '#0B0A0D', ['#8A56E0', '#5E32B0', '#B07CFF', '#3F2380', '#C06AD8'], dict(dim=0.35)),
+        passcode_bg=('stained', '#0B0A0D', ['#8A56E0', '#5E32B0', '#B07CFF', '#3F2380', '#C06AD8'], dict(dim=0.1, cols=5)),
     ),
     dict(
         key='stained68', name='스테인드 글래스 로즈',
-        note='같은 바탕에 분홍 유리. 가장 따뜻한 쪽',
+        note='분홍 유리창. 가장 따뜻한 쪽',
         bg='#141218', bg_deep='#0C0A0F', surface='#1E1A24', pressed='#282232',
         border='#342C40', text='#F8E9EF', subtext='#B8969F',
         accent='#FF6F9C', accent_dim='#D14670', on_accent='#330A1B',
@@ -311,9 +315,9 @@ THEMES = [
         recv=('#3A1A28', '#3A1A28'), recv_alt=('#5A2A3E', '#5A2A3E'),
         send_text='#FFF0F5', recv_text='#F8E9EF',
         bubble_style='glass', bubble_alpha=170, cell_alpha=0.55,
-        chat_bg=('blobs', '#120B10', ['#8A2448', '#5C162F', '#380D1D', '#A82E58']),
-        main_bg=('blobs', '#100A0E', ['#6E1A38', '#4A1026', '#2C0917', '#8A2448']),
-        passcode_bg=('blobs', '#150C12', ['#B83A62', '#8A2448', '#5C162F', '#D14670']),
+        chat_bg=('stained', '#0B0A0D', ['#E04A79', '#B02E5A', '#FF6F9C', '#7A1A3E', '#D9408F'], dict(dim=0.25)),
+        main_bg=('stained', '#0B0A0D', ['#E04A79', '#B02E5A', '#FF6F9C', '#7A1A3E', '#D9408F'], dict(dim=0.35)),
+        passcode_bg=('stained', '#0B0A0D', ['#E04A79', '#B02E5A', '#FF6F9C', '#7A1A3E', '#D9408F'], dict(dim=0.1, cols=5)),
     ),
 
     # --- 프리즘 글래스 ----------------------------------------------------

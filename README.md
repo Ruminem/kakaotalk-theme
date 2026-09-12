@@ -60,7 +60,7 @@
 <tr>
 <td align="center"><img src="assets/icon-glass-light.png" width="20" valign="middle"> <b><a href="#user-content-리퀴드-글래스">리퀴드 글래스</a></b><br><sub>라이트 · 다크 · 라이트 단색 · 다크 단색</sub><br>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</td>
 <td align="center"><img src="assets/icon-wood-oak.png" width="20" valign="middle"> <b><a href="#user-content-원목-글래스">원목 글래스</a></b><br><sub>오크 · 월넛 · 오크 단색 · 월넛 단색</sub><br>밝은 참나무 결 위에 반투명 유리 말풍선</td>
-<td align="center"><img src="assets/icon-stained-amber.png" width="20" valign="middle"> <b><a href="#user-content-스테인드-글래스">스테인드 글래스</a></b><br><sub>앰버 · 에메랄드 · 자수정 · 로즈</sub><br>검은 바탕에 호박색 유리. 등불 든 창처럼 보임</td>
+<td align="center"><img src="assets/icon-stained-amber.png" width="20" valign="middle"> <b><a href="#user-content-스테인드-글래스">스테인드 글래스</a></b><br><sub>앰버 · 에메랄드 · 자수정 · 로즈</sub><br>납선으로 이은 호박색 유리창. 등불이 뒤에서 비침</td>
 </tr>
 <tr>
 <td width="33%" align="center"><a href="#user-content-프리즘-글래스"><img src="assets/preview-prism-light-chat.png" width="190"></a></td>
@@ -443,30 +443,30 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-stained-amber-chat.png" width="200"><br><b>앰버</b><br><sub>검은 바탕에 호박색 유리. 등불 든 창처럼 보임</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-amber.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/stained-amber.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-stained-emerald-chat.png" width="200"><br><b>에메랄드</b><br><sub>같은 바탕에 초록 유리. 가장 차분한 쪽</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-emerald.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/stained-emerald.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-stained-amber-chat.png" width="200"><br><b>앰버</b><br><sub>납선으로 이은 호박색 유리창. 등불이 뒤에서 비침</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-amber.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/stained-amber.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-stained-emerald-chat.png" width="200"><br><b>에메랄드</b><br><sub>초록 유리창. 가장 차분한 쪽</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-emerald.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/stained-emerald.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-stained-amethyst-chat.png" width="200"><br><b>자수정</b><br><sub>같은 바탕에 보라 유리. 어두운 쪽으로 가장 깊음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-amethyst.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/stained-amethyst.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-stained-rose-chat.png" width="200"><br><b>로즈</b><br><sub>같은 바탕에 분홍 유리. 가장 따뜻한 쪽</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-rose.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/stained-rose.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-stained-amethyst-chat.png" width="200"><br><b>자수정</b><br><sub>보라 유리창. 어두운 쪽으로 가장 깊음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-amethyst.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/stained-amethyst.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-stained-rose-chat.png" width="200"><br><b>로즈</b><br><sub>분홍 유리창. 가장 따뜻한 쪽</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-rose.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/stained-rose.apk">Android</a></td>
 </tr>
 </table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 
-**앰버** — 검은 바탕에 호박색 유리. 등불 든 창처럼 보임
+**앰버** — 납선으로 이은 호박색 유리창. 등불이 뒤에서 비침
 
 <img src="assets/preview-stained-amber-list.png" width="180"> <img src="assets/preview-stained-amber-passcode.png" width="180"> <img src="assets/preview-stained-amber-splash.png" width="180">
 
-**에메랄드** — 같은 바탕에 초록 유리. 가장 차분한 쪽
+**에메랄드** — 초록 유리창. 가장 차분한 쪽
 
 <img src="assets/preview-stained-emerald-list.png" width="180"> <img src="assets/preview-stained-emerald-passcode.png" width="180"> <img src="assets/preview-stained-emerald-splash.png" width="180">
 
-**자수정** — 같은 바탕에 보라 유리. 어두운 쪽으로 가장 깊음
+**자수정** — 보라 유리창. 어두운 쪽으로 가장 깊음
 
 <img src="assets/preview-stained-amethyst-list.png" width="180"> <img src="assets/preview-stained-amethyst-passcode.png" width="180"> <img src="assets/preview-stained-amethyst-splash.png" width="180">
 
-**로즈** — 같은 바탕에 분홍 유리. 가장 따뜻한 쪽
+**로즈** — 분홍 유리창. 가장 따뜻한 쪽
 
 <img src="assets/preview-stained-rose-list.png" width="180"> <img src="assets/preview-stained-rose-passcode.png" width="180"> <img src="assets/preview-stained-rose-splash.png" width="180">
 

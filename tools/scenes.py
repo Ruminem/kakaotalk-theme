@@ -14,7 +14,7 @@ import sys
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageChops, ImageDraw, ImageFilter
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -579,19 +579,42 @@ def ember(spec, w, h):
 
 # --- 나무 ----------------------------------------------------------------
 
+def _noise(rnd, nx, ny, w, h):
+    """부드러운 2차원 잡음. 성긴 격자에 난수를 찍고 목표 크기로 bicubic 으로 키운다.
+
+    격자 칸이 수십 픽셀이라 알갱이가 아니라 굴곡이 된다. Image.effect_noise 는
+    씨앗을 못 줘서 쓰지 않는다.
+    """
+    g = Image.new('L', (nx, ny))
+    g.putdata([rnd.randint(0, 255) for _ in range(nx * ny)])
+    return g.resize((w, h), Image.BICUBIC)
+
+
 def wood(spec, w, h):
     """세로로 흐르는 나무결. 판자 이음새와 옹이를 얹는다.
 
     spec = ('wood', 위색, 아래색, 옵션dict)
-      grain    결 개수
-      planks   판자 개수. 0 이면 이음새 없이 한 장
+      dark     늦재(나이테의 진한 줄) 색
+      light    결 사이 밝은 줄기 색
+      ring     나이테 간격. 폭에 대한 비율
+      figure   True 면 판자 가운데에 아치꼴 무늬결이 선다. False 면 곧은결
+      planks   세로 판자 개수. 0 이면 이음새 없이 한 장
       knots    옹이 개수
-      warp     결이 휘는 정도
+      contrast 결의 진하기 0~1
       dim      0~1
+
+    예전에는 가는 세로선을 수백 개 흘렸는데, 간격도 굵기도 제멋대로라 나무가 아니라
+    긁힌 자국이나 바코드로 보였다. 옹이도 동심 타원을 겹쳐 그려서 물 위의 파문 같았다.
+    진짜 나무결은 나이테를 비스듬히 자른 단면이다. 그래서 선을 긋지 않고 위상을 계산한다 —
+    판자 가운데 축에서의 거리가 나이테 번호가 되고, 아래로 갈수록 그 번호를 밀면
+    선이 아치꼴로 겹겹이 선다. 옹이는 그 위상을 부풀려 결이 옹이를 돌아 흐르게 한다.
+
+    판자는 결을 따라 세로로 잇는다. 예전 이음새는 가로선이라 결을 가로질렀는데,
+    나무는 그렇게 이어 붙이지 않는다.
 
     결은 세로로만 흐르게 한다. 목록 배경으로 쓸 때 카톡이 위에 불투명한 것을
     얹어도 잘린 자국이 안 보이는 이유가 이것이다 — 어디서 잘라도 같은 무늬다.
-    옹이는 그 성질을 깨므로 목록 쪽에서는 0 으로 둔다.
+    아치와 옹이는 그 성질을 깨므로 목록 쪽에서는 figure=False, knots=0 으로 둔다.
 
     바탕을 RGB 로 둔 채 그린다. RGBA 이미지에 알파를 섞어 그리면 PIL 은 섞지 않고
     덮어쓴다 — 알파 15 로 칠한 판자가 원색 띠로 나왔다.
@@ -599,61 +622,230 @@ def wood(spec, w, h):
     gen = _g()
     o = spec[3] if len(spec) > 3 else {}
     rnd = random.Random(o.get('seed', 20260922))
-    img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2]))
-    d = ImageDraw.Draw(img, 'RGBA')
-
     dark = gen.rgb(o.get('dark', '#2A1A0E'))
     light = gen.rgb(o.get('light', '#FFF0DC'))
-
-    # 판자. 판자마다 밝기를 조금씩 달리해 한 장이 아니라 여러 장으로 보이게 한다
+    k = 256.0 / (w * o.get('ring', 0.030))      # 픽셀당 위상. 256 이 나이테 한 줄
     planks = o.get('planks', 3)
+    n_knots = o.get('knots', 0)
+
     if planks > 1:
-        edges = [0.0] + [i / planks + rnd.uniform(-0.03, 0.03)
-                         for i in range(1, planks)] + [1.0]
-        for i in range(len(edges) - 1):
-            y0, y1 = int(h * edges[i]), int(h * edges[i + 1])
-            shade = rnd.uniform(-1.0, 1.0)
-            c = dark if shade < 0 else light
-            d.rectangle([0, y0, w, y1], fill=c + (int(abs(shade) * 26),))
-            if i:                       # 이음새 한 줄
-                d.line([(0, y0), (w, y0)], fill=dark + (95,), width=1)
+        cuts = sorted(i / planks + rnd.uniform(-0.06, 0.06) for i in range(1, planks))
+        edges = [0] + [int(w * c) for c in cuts] + [w]
+    else:
+        edges = [0, w]
+    spans = list(zip(edges, edges[1:]))
 
-    # 결. 가늘고 긴 선을 세로로 흘린다. 굵기와 진하기를 섞어야 나무로 보인다 —
-    # 같은 선을 반복하면 커튼이 된다.
-    warp = o.get('warp', 0.010) * w
+    # 위상. 판자마다 따로 계산해서 붙인다
+    phase = Image.new('L', (w, h))
+    for x0, x1 in spans:
+        pw = x1 - x0
+        # 나이테 간격이 고르면 줄무늬 천이 된다. 거리 축을 잡음으로 늘였다 줄였다 한다.
+        # 잡음 길이는 판자 폭이 아니라 화면 폭으로 잡는다. 판자 폭으로 잡으면 좁은 판자에서
+        # 굴곡이 촘촘해져 거리가 거꾸로 접히고, 아치 꼭대기가 톱니로 갈라진다
+        wob = gen._fbm(rnd.randint(0, 1 << 30), w + 1, octaves=3)
+        amp = w * o.get('ring', 0.030) * 1.2
+        if o.get('figure', True) and rnd.random() < 0.8:
+            lut = bytes(int(math.hypot(d + wob[d] * amp, pw * 0.22) * k) & 255
+                        for d in range(pw + 1))
+            wander = gen._fbm(rnd.randint(0, 1 << 30), h, octaves=2)
+            base = rnd.uniform(0.35, 0.65) * pw
+            rows = []
+            for y in range(h):
+                c = int(base + wander[y] * pw * 0.10)
+                c = max(1, min(pw - 1, c))
+                rows.append(lut[c:0:-1] + lut[0:pw - c])
+            plank = Image.frombytes('L', (pw, h), b''.join(rows))
+            # 아래로 갈수록 나이테 번호를 민다. 같은 번호의 선이 바깥으로 벌어지며 아치가 선다
+            slope = k * rnd.uniform(0.06, 0.14) * rnd.choice((1, -1))
+            col = Image.new('L', (1, h))
+            col.putdata([int(y * slope) & 255 for y in range(h)])
+            plank = ImageChops.add_modulo(plank, col.resize((pw, h), Image.NEAREST))
+        else:
+            off = rnd.uniform(0, pw)
+            row = bytes(int((x + off + wob[x] * amp) * k) & 255 for x in range(pw))
+            plank = Image.frombytes('L', (pw, h), row * h)
+        phase.paste(plank, (x0, 0))
 
-    def streak(a, width):
-        x = rnd.uniform(-0.02, 1.02) * w
-        c = dark if rnd.random() < 0.62 else light
-        phase = rnd.uniform(0, 6.28)
-        amp = warp * rnd.uniform(0.3, 1.4)
-        freq = rnd.uniform(1.2, 2.6)
-        pts = [(x + math.sin(phase + (k / 22) * freq) * amp, (k / 22) * h)
-               for k in range(23)]
-        d.line(pts, fill=c + (a,), width=width, joint='curve')
+    # 결의 물결. 세로로 길쭉한 격자라 선이 느리게 휜다
+    wave = _noise(rnd, max(4, w // 70), max(4, h // 260), w, h)
+    phase = ImageChops.add_modulo(phase, wave)
 
-    for _ in range(o.get('grain', 140)):
-        streak(rnd.randint(12, 34), 1)
-    # 굵은 줄기 몇 개. 가는 선만 반복하면 나무가 아니라 천이 된다
-    for _ in range(o.get('streaks', 8)):
-        streak(rnd.randint(34, 62), rnd.choice((2, 3)))
+    # 옹이. 위상을 부풀리면 나이테가 옹이를 겹겹이 감싸고 주변 결이 비켜 흐른다
+    knots = []
+    for i in range(n_knots):
+        x0, x1 = spans[i % len(spans)]
+        rx = rnd.uniform(0.035, 0.055) * w
+        ry = rx * rnd.uniform(1.6, 2.4)
+        kx = rnd.uniform(x0 + rx * 1.5, x1 - rx * 1.5) if x1 - x0 > rx * 3 else (x0 + x1) / 2
+        ky = rnd.uniform(0.12, 0.88) * h
+        knots.append((kx, ky, rx, ry))
+        bx0, bx1 = max(x0, int(kx - rx * 3)), min(x1, int(kx + rx * 3))
+        by0, by1 = max(0, int(ky - ry * 3)), min(h, int(ky + ry * 3))
+        top = k * rnd.uniform(5.0, 7.0)
+        bump = Image.new('L', (w, h), 0)
+        patch = Image.new('L', (bx1 - bx0, by1 - by0))
+        patch.putdata([int(top * math.exp(-(((x - kx) / rx) ** 2 + ((y - ky) / ry) ** 2)
+                                          * 0.6)) & 255
+                       for y in range(by0, by1) for x in range(bx0, bx1)])
+        bump.paste(patch, (bx0, by0))
+        phase = ImageChops.add_modulo(phase, bump)
 
-    # 옹이. 나이테가 겹겹이 도는 동심원이다
-    for _ in range(o.get('knots', 0)):
-        cx, cy = rnd.uniform(0.15, 0.85) * w, rnd.uniform(0.1, 0.9) * h
-        r0 = rnd.uniform(0.09, 0.15) * w
-        rings = rnd.randint(5, 8)
-        for k in range(rings, 0, -1):
-            rr = r0 * k / rings
-            ry = rr * rnd.uniform(0.55, 0.75)
-            c = dark if k % 2 else light
-            d.ellipse([cx - rr, cy - ry, cx + rr, cy + ry],
-                      outline=c + (rnd.randint(40, 75),), width=1 if k % 2 else 2)
-        d.ellipse([cx - r0 * 0.16, cy - r0 * 0.10, cx + r0 * 0.16, cy + r0 * 0.10],
-                  fill=dark + (95,))
+    # 위상을 진하기로. 나이테 한 줄 안에서 이른재는 옅게 넓고, 늦재는 좁고 진하다
+    prof = []
+    for p in range(256):
+        v = p / 256.0
+        late = math.exp(-((v - 0.80) / 0.075) ** 2)
+        prof.append(int(255 * min(1.0, 0.72 * late + 0.30 * v ** 3)))
+    grain = phase.point(prof)
 
-    img = img.filter(ImageFilter.GaussianBlur(o.get('blur', 0.5)))
+    img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2]))
+    # 결 사이로 긴 줄기 모양의 색 차이. 한 판자 안에서도 밝은 곳과 짙은 곳이 있다
+    tone = _noise(rnd, max(6, w // 28), 3, w, h)
+    img = Image.composite(Image.new('RGB', (w, h), light), img,
+                          tone.point(lambda v: max(0, v - 140) // 2))
+    img = Image.composite(Image.new('RGB', (w, h), dark), img,
+                          tone.point(lambda v: max(0, 110 - v) // 3))
+    con = o.get('contrast', 0.36)
+    img = Image.composite(Image.new('RGB', (w, h), dark), img,
+                          grain.point(lambda v: int(v * con)))
+
+    # 옹이 심. 가지가 박혀 있던 자리라 결보다 짙고 가장자리가 또렷하다
+    for kx, ky, rx, ry in knots:
+        m = Image.new('L', (w, h), 0)
+        ImageDraw.Draw(m).ellipse([kx - rx * 0.26, ky - ry * 0.18,
+                                   kx + rx * 0.26, ky + ry * 0.18], fill=140)
+        img = Image.composite(Image.new('RGB', (w, h), dark), img,
+                              m.filter(ImageFilter.GaussianBlur(rx * 0.12)))
+
+    # img 를 새로 만드는 합성이 위에서 끝난 뒤에 붓을 쥔다. 먼저 쥐면 옛 그림에 그린다
+    d = ImageDraw.Draw(img, 'RGBA')
+    # 물관. 결을 따라 짧게 긁힌 점. 이게 있어야 인쇄한 무늬가 아니라 나무 표면이 된다
+    s = w / 900.0
+    for _ in range(int(w * h / 700)):
+        x, y = rnd.uniform(0, w), rnd.uniform(0, h)
+        ln = rnd.uniform(3, 11) * s
+        d.line([(x, y), (x, y + ln)], fill=dark + (rnd.randint(18, 48),),
+               width=max(1, int(s)))
+
+
+    # 판자. 판자마다 밝기를 조금씩 달리하고, 이음새는 어두운 홈과 밝은 모서리로 판다.
+    # 판자 끝의 가로 이음매는 넣지 않는다 — 말풍선 사이를 가로지르면 화면의 구분선으로 읽힌다
+    if planks > 1:
+        for x0, x1 in spans:
+            f = rnd.uniform(-1.0, 1.0)
+            d.rectangle([x0, 0, x1, h], fill=(dark if f < 0 else light) + (int(abs(f) * 22),))
+        gw = max(2, int(3 * s))
+        for x in edges[1:-1]:
+            d.line([(x, 0), (x, h)], fill=dark + (150,), width=gw)
+            d.line([(x + gw, 0), (x + gw, h)], fill=light + (55,), width=max(1, int(s)))
+
+    img = img.filter(ImageFilter.GaussianBlur(o.get('blur', 0.6) * s))
     dim = o.get('dim', 0.0)
     if dim:
         img = Image.blend(img, Image.new('RGB', (w, h), (0, 0, 0)), dim)
     return img
+
+
+# --- 색유리 --------------------------------------------------------------
+
+def stained(spec, w, h):
+    """납선으로 이은 색유리 조각. 뒤에서 빛이 든다.
+
+    spec = ('stained', 납 색, [유리색...], 옵션dict)
+      cols     가로 칸 수. 칸을 대각선이나 가운데로 한 번 더 쪼개므로 조각은 이보다 많다
+      lead     납선 굵기. 폭에 대한 비율
+      ambient  빛이 안 닿는 곳의 밝기 0~1
+      dim      0~1
+
+    예전 스테인드 글래스는 흐린 색 덩어리였다. 이름은 성당 창인데 납선도 조각도 없어서
+    어두운 그라데이션일 뿐이었고, 앰버는 흙탕물 색이 됐다. 스테인드 글래스로 읽히게
+    하는 것은 색보다 조각과 그 사이의 검은 선이다.
+
+    조각 안을 단색으로 채우면 색종이다. 세 겹을 얹는다 — 조각마다 다른 두께(밝기),
+    유리 속의 얼룩, 한쪽에서 드는 빛. 납선 옆은 그늘이 져서 조각 가운데가 떠 보인다.
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20260913))
+    lead = gen.rgb(spec[1])
+    colors = [gen.rgb(c) for c in spec[2]]
+    cols = o.get('cols', 4)
+    cw = w / cols
+    rows = max(2, round(h / (cw * 1.1)))
+    ch = h / rows
+
+    V = [[(i * cw + (rnd.uniform(-0.32, 0.32) * cw if 0 < i < cols else 0),
+           j * ch + (rnd.uniform(-0.32, 0.32) * ch if 0 < j < rows else 0))
+          for i in range(cols + 1)] for j in range(rows + 1)]
+
+    def lerp(p, q, f):
+        return (p[0] + (q[0] - p[0]) * f, p[1] + (q[1] - p[1]) * f)
+
+    polys = []
+    for j in range(rows):
+        for i in range(cols):
+            a, b, c, d = V[j][i], V[j][i + 1], V[j + 1][i + 1], V[j + 1][i]
+            r = rnd.random()
+            if r < 0.40:                      # 대각선으로 쪼갠다
+                polys += ([a, b, c], [a, c, d]) if rnd.random() < 0.5 else \
+                         ([a, b, d], [b, c, d])
+            elif r < 0.65:                    # 위아래 변을 잇는 선으로 쪼갠다
+                p, q = lerp(a, b, rnd.uniform(0.3, 0.7)), lerp(d, c, rnd.uniform(0.3, 0.7))
+                polys += ([a, p, q, d], [p, b, c, q])
+            else:
+                polys.append([a, b, c, d])
+
+    S = 2                                     # 납선 가장자리를 매끈하게 두 배로 그린다
+    glass = Image.new('RGB', (w * S, h * S))
+    mask = Image.new('L', (w * S, h * S), 0)
+    gd, md = ImageDraw.Draw(glass), ImageDraw.Draw(mask)
+    lw = max(2, int(w * o.get('lead', 0.011) * S))
+    for poly in polys:
+        pts = [(x * S, y * S) for x, y in poly]
+        c = rnd.choice(colors)
+        f = rnd.uniform(0.62, 1.12)           # 유리 두께가 조각마다 달라 밝기가 다르다
+        gd.polygon(pts, fill=tuple(min(255, int(v * f)) for v in c))
+        md.line(pts + [pts[0]], fill=255, width=lw, joint='curve')
+    for row in V:                             # 납땜 자리. 선이 만나는 곳이 조금 도톰하다
+        for x, y in row:
+            r = lw * 0.9
+            md.ellipse([x * S - r, y * S - r, x * S + r, y * S + r], fill=255)
+    glass = glass.resize((w, h), Image.LANCZOS)
+    mask = mask.resize((w, h), Image.LANCZOS)
+
+    # 유리 속 얼룩. 손으로 부은 유리는 두께가 고르지 않다
+    mott = _noise(rnd, max(4, w // 70), max(4, h // 70), w, h)
+    mott = mott.point(lambda v: int(228 + (v - 128) * 0.22))
+    glass = ImageChops.multiply(glass, Image.merge('RGB', (mott, mott, mott)))
+
+    # 빛. 창 너머 위쪽 한 곳에서 들어온다. 아래로 갈수록 어둡다
+    lx, ly = rnd.uniform(0.25, 0.75) * w, rnd.uniform(0.05, 0.30) * h
+    R = max(w, h) * 0.95
+    amb = o.get('ambient', 0.22)
+    lm = Image.new('L', (w, h), int(255 * amb))
+    ld = ImageDraw.Draw(lm)
+    for i in range(48, 0, -1):
+        f = i / 48
+        ld.ellipse([lx - R * f, ly - R * f, lx + R * f, ly + R * f],
+                   fill=int(255 * (amb + (1 - amb) * (1 - f) ** 1.7)))
+    lm = lm.filter(ImageFilter.GaussianBlur(w * 0.05))
+    glass = ImageChops.multiply(glass, Image.merge('RGB', (lm, lm, lm)))
+
+    # 납선 옆 그늘
+    shade = mask.filter(ImageFilter.GaussianBlur(lw / S * 2.2)).point(lambda v: 255 - int(v * 0.6))
+    glass = ImageChops.multiply(glass, Image.merge('RGB', (shade, shade, shade)))
+
+    # 납선. 가운데가 살짝 밝아야 납작한 먹선이 아니라 둥근 금속 띠로 보인다
+    glass.paste(Image.new('RGB', (w, h), lead), (0, 0), mask)
+    core = mask.filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(lw / S * 0.3))
+    hi = tuple(min(255, int(v + (255 - v) * 0.22)) for v in lead)
+    glass.paste(Image.new('RGB', (w, h), hi), (0, 0), core.point(lambda v: int(v * 0.45)))
+
+    # 번짐. 밝은 조각의 빛이 납선 위로 조금 넘어온다. 없으면 오려 붙인 판화 같다
+    bloom = glass.filter(ImageFilter.GaussianBlur(w * 0.025))
+    glass = ImageChops.screen(glass, bloom.point(lambda v: int(v * 0.45)))
+
+    dim = o.get('dim', 0.0)
+    if dim:
+        glass = Image.blend(glass, Image.new('RGB', (w, h), (0, 0, 0)), dim)
+    return glass
