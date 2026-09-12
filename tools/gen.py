@@ -493,23 +493,46 @@ def chat_bg(spec, w, h):
     return Image.blend(base, layer, 0.55)
 
 
-def edge_glow(img, color, strength, width_ratio=0.22):
-    """배경 가장자리에 빛을 흘린다. 화면 테두리에서 빛이 새어 들어오는 느낌."""
+def light_wash(img, color, strength):
+    """배경에 빛을 얹는다.
+
+    사방 테두리를 똑같이 밝히면 액자처럼 보인다 — 실제 빛은 한 방향에서 든다.
+    화면 밖 왼쪽 위에 광원을 두고 대각선으로 흘린 뒤, 반대쪽 아래 구석을 살짝 누른다.
+    밝은 쪽과 어두운 쪽이 생겨야 평면이 아니라 공간으로 읽힌다.
+    """
     w, h = img.size
-    ramp = Image.new('L', (w, h), 0)
-    d = ImageDraw.Draw(ramp)
-    steps = 40
-    bw = int(min(w, h) * width_ratio)
-    for i in range(steps):
-        t = i / (steps - 1)
-        inset = int(bw * t)
-        d.rectangle([inset, inset, w - 1 - inset, h - 1 - inset],
-                    outline=int(strength * (1 - t) ** 2))
-    ramp = ramp.filter(ImageFilter.GaussianBlur(radius=bw // 3 or 1))
-    layer = Image.new('RGBA', (w, h), rgb(color) + (255,))
-    layer.putalpha(ramp)
     out = img.convert('RGBA')
+
+    # 광원. 화면 밖에 두어 가장자리에 경계가 안 생기게 한다
+    lx, ly = -w * 0.25, -h * 0.15
+    r = max(w, h) * 1.45
+    glow = Image.new('L', (w, h), 0)
+    gd = ImageDraw.Draw(glow)
+    steps = 56
+    for i in range(steps, 0, -1):
+        f = i / steps
+        rr = r * f
+        gd.ellipse([lx - rr, ly - rr, lx + rr, ly + rr],
+                   fill=int(strength * (1 - f) ** 1.8))
+    glow = glow.filter(ImageFilter.GaussianBlur(w * 0.06))
+    layer = Image.new('RGBA', (w, h), rgb(color) + (255,))
+    layer.putalpha(glow)
     out.alpha_composite(layer)
+
+    # 반대쪽 구석을 눌러 깊이를 만든다
+    shade = Image.new('L', (w, h), 0)
+    sd = ImageDraw.Draw(shade)
+    sx, sy = w * 1.2, h * 1.15
+    sr = max(w, h) * 1.3
+    for i in range(steps, 0, -1):
+        f = i / steps
+        rr = sr * f
+        sd.ellipse([sx - rr, sy - rr, sx + rr, sy + rr],
+                   fill=int(strength * 0.55 * (1 - f) ** 2.0))
+    shade = shade.filter(ImageFilter.GaussianBlur(w * 0.08))
+    dark = Image.new('RGBA', (w, h), (0, 0, 0, 255))
+    dark.putalpha(shade)
+    out.alpha_composite(dark)
     return out.convert('RGB')
 
 
@@ -798,7 +821,7 @@ def background(t, spec, w, h):
         # 배경에는 말풍선처럼 따라갈 색이 없다. auto 면 포인트색을 쓴다
         color = t['accent'] if g[0] == 'auto' else g[0]
         # 배경은 면적이 넓어서 말풍선과 같은 세기로 넣으면 화면이 뿌예진다
-        img = edge_glow(img, color, int(g[1] * 0.7))
+        img = light_wash(img, color, int(g[1] * 0.8))
     return img
 
 
