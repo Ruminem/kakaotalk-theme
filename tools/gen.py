@@ -32,6 +32,23 @@ OUT = os.path.join(ROOT, 'build-src')
 # 말풍선 기하 (pt). CAP 은 CSS 의 cap inset 과 반드시 같아야 한다
 SIZE, RADIUS, CAP = 44, 14, 18
 INSET_V, INSET_H = 9, 16    # 글자와 말풍선 사이 기본 여백 (pt)
+
+# 말풍선 여백 = 대화 밀도. 색을 한 글자도 안 바꾸고 인상을 바꾸는 축이다.
+# 세로 여백은 말풍선 사이 간격으로도 나타나므로 가로보다 조금씩만 움직인다.
+DENSITY = {
+    'tight': (7, 13),
+    'normal': (INSET_V, INSET_H),
+    'loose': (13, 21),
+}
+
+
+def insets_of(t):
+    """테마의 글자 여백. density 를 안 적으면 normal 이다."""
+    d = t.get('density', 'normal')
+    if d not in DENSITY:
+        raise ValueError('%s: 모르는 density "%s". %s 중 하나'
+                         % (t['key'], d, ' / '.join(DENSITY)))
+    return DENSITY[d]
 # 세로를 가로보다 좁게 두는 이유: 말풍선 프레임 높이가 곧 말풍선 사이 간격이 된다.
 # 세로 여백을 키우면 글자 주변이 아니라 말풍선끼리 벌어져 보인다.
 
@@ -653,6 +670,11 @@ FeatureStyle-Primary
     -ios-text-color: {accent};
 }}
 
+DefaultProfileStyle
+{{
+    -ios-profile-images: {profiles};
+}}
+
 BackgroundStyle-ChatRoom
 {{
     background-color: {bg_deep};{chatbg}
@@ -809,6 +831,15 @@ def gen_ios(t, root):
                          % (kind, name))
     tabicons = chr(10).join(tab_lines) + chr(10)
 
+    names = []
+    for i in range(3):
+        nm = 'profileImg%02d' % (i + 1)
+        for scale, px in ((2, 108), (3, 162)):
+            profile_image(t, i, px).save(
+                os.path.join(img_dir, '%s@%dx.png' % (nm, scale)))
+        names.append("'%s.png'" % nm)
+    profiles = ' '.join(names)
+
     chatbg = ''
     if t['chat_bg']:
         background(t, t['chat_bg'], 600, 1300).save(os.path.join(img_dir, 'chatroomBgImage@2x.png'))
@@ -834,10 +865,10 @@ def gen_ios(t, root):
     fields.update(derived(t))          # 눌림 상태 색
     fields['pkg'] = themes.pkg_slug(t)
     fields.pop('cell_alpha', None)          # 아래에서 문자열로 다시 넣는다
-    ins = '%dpx %dpx %dpx %dpx' % (INSET_V + pad, INSET_H + pad,
-                                  INSET_V + pad, INSET_H + pad)
+    iv, ih = insets_of(t)
+    ins = '%dpx %dpx %dpx %dpx' % (iv + pad, ih + pad, iv + pad, ih + pad)
     css = CSS.format(version=themes.VERSION, cap=CAP + pad, ins=ins,
-                     tabicons=tabicons,
+                     tabicons=tabicons, profiles=profiles,
                      chatbg=chatbg, mainbg=mainbg, passbg=passbg,
                      cell_alpha='%.2f' % ca,
                      cell_alpha_sel='%.2f' % min(1.0, ca + 0.15), **fields)
@@ -981,6 +1012,10 @@ def gen_android(t, root, code):
             tab_icon(kind, 84, col).save(
                 os.path.join(draw, 'theme_maintab_ico_%s%s_image.png' % (kind, suffix)))
 
+    for i in range(3):
+        profile_image(t, i, 162).save(
+            os.path.join(draw, 'theme_profile_%02d_image.png' % (i + 1)))
+
     splash(t, 1080, 1920).save(os.path.join(draw, 'theme_splash_image.png'), optimize=True)
     if t['chat_bg']:
         background(t, t['chat_bg'], 1080, 1920).save(
@@ -1016,6 +1051,25 @@ def main():
     print('\n%d 개 테마 -> build-src/' % len(themes.THEMES))
     preview.generate(themes.THEMES)
     print('미리보기 -> docs/index.html')
+
+
+# --- 기본 프로필 ---------------------------------------------------------
+# 사진 없는 친구에게 뜨는 그림. 규격에서 유일하게 여러 장을 받는 자리다 —
+# 세 장을 주면 앱이 친구마다 돌려가며 배정해서 목록에 세 가지가 섞여 보인다.
+# 가이드에 162x162 px 로 적혀 있다.
+
+def profile_image(t, idx, px):
+    """기본 프로필 한 장. 세 장이 서로 다른 색이라야 목록에서 섞인 티가 난다."""
+    ss = 4
+    S = px * ss
+    tone = (t['accent'], t['subtext'], t['accent_dim'])[idx % 3]
+    back = (t['surface'], t['pressed'], t['bg_deep'])[idx % 3]
+    img = Image.new('RGBA', (S, S), rgb(back) + (255,))
+    d = ImageDraw.Draw(img)
+    c = rgb(tone) + (255,)
+    d.ellipse([S * 0.32, S * 0.20, S * 0.68, S * 0.56], fill=c)      # 머리
+    d.pieslice([S * 0.16, S * 0.52, S * 0.84, S * 1.10], 180, 360, fill=c)
+    return img.resize((px, px), Image.LANCZOS)
 
 
 # --- 탭 아이콘 -----------------------------------------------------------

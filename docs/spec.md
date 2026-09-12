@@ -18,7 +18,7 @@
 | 실행화면 | **없음** | 됨 | 안드로이드만 |
 | 잠금화면 배경 이미지 | 됨 | 됨 | 심야에서 씀 |
 | 탭 아이콘 7종 | 됨 | 됨 | 씀 |
-| 기본 프로필 | 됨 | 됨 | **안 씀** |
+| 기본 프로필 3장 | 됨 | 됨 | 씀 |
 | 친구추가 버튼 | 됨 | 됨 | **안 씀** |
 | 잠금화면 동그라미 | 됨 | 됨 | **안 씀** |
 | 애니메이션 | 없음 | 사실상 없음 | — |
@@ -64,13 +64,13 @@
 | 실행화면 | **없음** | `theme_splash_image` |
 | 잠금화면 배경 | `passcodeBgImage` | `theme_passcode_background_image` |
 | 탭 아이콘 7종 × 보통/선택 | `maintabIco*` / `*Selected` | `theme_maintab_ico_*_image` / `*_focused_image` |
+| 기본 프로필 3장 | `-ios-profile-images` 에 세 장 나열 | `theme_profile_01~03_image` |
 
 ### 아직 안 쓰는 것 — 남은 재료
 
 | 자리 | iOS | Android | 메모 |
 |---|---|---|---|
 | **탭바 배경** | `TabBarStyle-Main` 의 `-ios-background-image` | `theme_maintab_cell_image` | 지금은 색만 씀 |
-| **기본 프로필** | `-ios-profile-images` | `theme_profile_01_image` 등 | 사진 없는 친구에게 뜨는 그림 |
 | **친구추가 버튼** | `ButtonStyle-AddFriend` 의 `-ios-image` | `theme_find_add_friend_button_image` (+`_pressed`) | |
 | **잠금화면 동그라미 4개** | `-ios-bullet-{first..fourth}-image` (+`selected`) | `theme_passcode_0X_image` (+`_checked`) | 비밀번호 입력 점 |
 | **키패드 눌림** | `-ios-keypad-number-highlighted-image` | — | |
@@ -102,6 +102,9 @@
 | **도형 무늬** | 큰 도형을 겹침 (`geo`) | 도형 |
 | **가장자리 빛** | 화면 테두리에서 안쪽으로 번지는 빛 | 글로우 있는 테마 |
 | **네 칸 다른 색** | 보통/눌림/그룹 칸에 서로 다른 색 | 믹스드, 캔디 팝 |
+| **탭 아이콘** | 7종 × 보통/선택을 팔레트 색으로 그림 | 전부 |
+| **기본 프로필 3장** | 색이 다른 세 장. 앱이 친구마다 돌려 배정 | 전부 |
+| **대화 밀도** | 글자 여백으로 두툼/촘촘을 가름 (`density`) | 아직 안 씀 |
 
 배경은 두 갈래임 — **색면**(`linear` / `blobs` / `aurora`)과 **그림**(`night`).
 사진은 저작권 때문에 못 씀. 필요한 그림은 코드로 그림. 시드를 고정해서 빌드할 때마다 바뀌지 않게 함.

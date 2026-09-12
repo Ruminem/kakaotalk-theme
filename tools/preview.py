@@ -83,16 +83,18 @@ def bubble_box(t, w, h, colors):
 
 
 def avatar(size, t, i):
-    """프로필. 카톡은 둥근 사각형이다."""
-    img = Image.new('RGBA', (size * SS, size * SS), (0, 0, 0, 0))
-    d = ImageDraw.Draw(img)
-    d.rounded_rectangle([0, 0, size * SS - 1, size * SS - 1],
-                        radius=int(size * SS * 0.32), fill=rgb(t['surface']))
-    c = rgb(t['accent'] if i % 2 == 0 else t['subtext'])
-    r = size * SS
-    d.ellipse([r * 0.32, r * 0.20, r * 0.68, r * 0.56], fill=c)          # 머리
-    d.ellipse([r * 0.16, r * 0.58, r * 0.84, r * 1.30], fill=c)          # 몸
-    return img.resize((size, size), Image.LANCZOS)
+    """프로필. 테마에 들어가는 그림 그대로를 둥근 사각형으로 잘라 쓴다.
+
+    카톡이 프로필을 둥근 사각형으로 마스킹한다. 세 장을 돌려가며 배정하므로
+    미리보기에서도 줄마다 다른 장이 나오게 한다.
+    """
+    src = gen.profile_image(t, i, size * SS)
+    mask = Image.new('L', (size * SS, size * SS), 0)
+    ImageDraw.Draw(mask).rounded_rectangle(
+        [0, 0, size * SS - 1, size * SS - 1], radius=int(size * SS * 0.32), fill=255)
+    out = Image.new('RGBA', (size * SS, size * SS), (0, 0, 0, 0))
+    out.paste(src, (0, 0), mask)
+    return out.resize((size, size), Image.LANCZOS)
 
 
 # --- 아이콘 --------------------------------------------------------------
@@ -176,7 +178,8 @@ def chat(t):
     #   프레임 높이가 커진 만큼 말풍선 사이도 벌어진다.
     # 미리보기만 이상적으로 그리면 여기서 생기는 문제를 못 잡는다.
     glow, pad = gen.glow_of(t)
-    ins_v, ins_h = gen.INSET_V + pad, gen.INSET_H + pad
+    iv, ih = gen.insets_of(t)
+    ins_v, ins_h = iv + pad, ih + pad
     line_h = 22
     gap = 8                      # 카톡이 말풍선 사이에 두는 간격
 
