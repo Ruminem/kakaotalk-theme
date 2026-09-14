@@ -10,33 +10,33 @@
 
 <table>
 <tr>
-<td width="33%" align="center"><a href="#user-content-야경"><img src="../../assets/preview-city-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-사이버펑크"><img src="../../assets/preview-cyber-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-레드"><img src="../../assets/preview-red-basic-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-야경"><img src="../../assets/preview-city-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-사이버펑크"><img src="../../assets/preview-cyber-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-레드"><img src="../../assets/preview-red-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-city-basic.png" width="20" valign="middle"> <b><a href="#user-content-야경">야경</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>담백한 남색 바탕. 네온 네 색 말풍선</td>
-<td align="center"><img src="../../assets/icon-cyber-basic.png" width="20" valign="middle"> <b><a href="#user-content-사이버펑크">사이버펑크</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검붉은 보라 바탕. 마젠타·시안 네온 말풍선</td>
-<td align="center"><img src="../../assets/icon-red-basic.png" width="20" valign="middle"> <b><a href="#user-content-레드">레드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검붉은 바탕에 새빨간 말풍선 네 칸</td>
+<td align="center"><img src="../../assets/icon-city-image.png" width="20" valign="middle"> <b><a href="#user-content-야경">야경</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>담백한 남색 바탕. 네온 네 색 말풍선</td>
+<td align="center"><img src="../../assets/icon-cyber-image.png" width="20" valign="middle"> <b><a href="#user-content-사이버펑크">사이버펑크</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검붉은 보라 바탕. 마젠타·시안 네온 말풍선</td>
+<td align="center"><img src="../../assets/icon-red-image.png" width="20" valign="middle"> <b><a href="#user-content-레드">레드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검붉은 바탕에 새빨간 말풍선 네 칸</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#user-content-불꽃놀이"><img src="../../assets/preview-firework-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-연등"><img src="../../assets/preview-lantern-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-알전구"><img src="../../assets/preview-garland-basic-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-불꽃놀이"><img src="../../assets/preview-firework-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-연등"><img src="../../assets/preview-lantern-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-알전구"><img src="../../assets/preview-garland-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-firework-basic.png" width="20" valign="middle"> <b><a href="#user-content-불꽃놀이">불꽃놀이</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>남색 밤 바탕에 금빛·분홍 말풍선</td>
-<td align="center"><img src="../../assets/icon-lantern-basic.png" width="20" valign="middle"> <b><a href="#user-content-연등">연등</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>자줏빛 밤 바탕에 분홍·노랑 연등 색</td>
-<td align="center"><img src="../../assets/icon-garland-basic.png" width="20" valign="middle"> <b><a href="#user-content-알전구">알전구</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>짙은 갈색 바탕에 금빛 말풍선</td>
+<td align="center"><img src="../../assets/icon-firework-image.png" width="20" valign="middle"> <b><a href="#user-content-불꽃놀이">불꽃놀이</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>남색 밤 바탕에 금빛·분홍 말풍선</td>
+<td align="center"><img src="../../assets/icon-lantern-image.png" width="20" valign="middle"> <b><a href="#user-content-연등">연등</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>자줏빛 밤 바탕에 분홍·노랑 연등 색</td>
+<td align="center"><img src="../../assets/icon-garland-image.png" width="20" valign="middle"> <b><a href="#user-content-알전구">알전구</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>짙은 갈색 바탕에 금빛 말풍선</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#user-content-고속도로"><img src="../../assets/preview-highway-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-터미널"><img src="../../assets/preview-terminal-basic-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-고속도로"><img src="../../assets/preview-highway-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-터미널"><img src="../../assets/preview-terminal-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-네온사인"><img src="../../assets/preview-neon-double-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-highway-basic.png" width="20" valign="middle"> <b><a href="#user-content-고속도로">고속도로</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검푸른 바탕에 빨강·주황 말풍선</td>
-<td align="center"><img src="../../assets/icon-terminal-basic.png" width="20" valign="middle"> <b><a href="#user-content-터미널">터미널</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 초록 바탕에 형광 초록·호박색 말풍선</td>
+<td align="center"><img src="../../assets/icon-highway-image.png" width="20" valign="middle"> <b><a href="#user-content-고속도로">고속도로</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검푸른 바탕에 빨강·주황 말풍선</td>
+<td align="center"><img src="../../assets/icon-terminal-image.png" width="20" valign="middle"> <b><a href="#user-content-터미널">터미널</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 초록 바탕에 형광 초록·호박색 말풍선</td>
 <td align="center"><img src="../../assets/icon-neon-double.png" width="20" valign="middle"> <b><a href="#user-content-네온사인">네온사인</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>벽돌 벽에 관 두 줄 네온. 첫 말엔 네온 별</td>
 </tr>
 </table>

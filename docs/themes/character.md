@@ -10,34 +10,34 @@
 
 <table>
 <tr>
-<td width="33%" align="center"><a href="#user-content-우체국"><img src="../../assets/preview-post-light-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-책상"><img src="../../assets/preview-desk-light-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-오락실"><img src="../../assets/preview-arcade-light-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-우체국"><img src="../../assets/preview-post-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-책상"><img src="../../assets/preview-desk-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-오락실"><img src="../../assets/preview-arcade-light-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-post-light.png" width="20" valign="middle"> <b><a href="#user-content-우체국">우체국</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림빛 편지지 바탕. 첫 말풍선엔 우표 붙은 봉투</td>
-<td align="center"><img src="../../assets/icon-desk-light.png" width="20" valign="middle"> <b><a href="#user-content-책상">책상</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연둣빛 바탕에 포스트잇 말풍선. 첫 장엔 테이프</td>
-<td align="center"><img src="../../assets/icon-arcade-light.png" width="20" valign="middle"> <b><a href="#user-content-오락실">오락실</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연보라 바탕에 빛나는 픽셀 말풍선과 계단 꼬리</td>
+<td align="center"><img src="../../assets/icon-post-light-image.png" width="20" valign="middle"> <b><a href="#user-content-우체국">우체국</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림빛 편지지 바탕. 첫 말풍선엔 우표 붙은 봉투</td>
+<td align="center"><img src="../../assets/icon-desk-light-image.png" width="20" valign="middle"> <b><a href="#user-content-책상">책상</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연둣빛 바탕에 포스트잇 말풍선. 첫 장엔 테이프</td>
+<td align="center"><img src="../../assets/icon-arcade-light-image.png" width="20" valign="middle"> <b><a href="#user-content-오락실">오락실</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연보라 바탕에 빛나는 픽셀 말풍선과 계단 꼬리</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#user-content-빨래"><img src="../../assets/preview-laundry-light-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-영화관"><img src="../../assets/preview-cinema-light-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-빵집"><img src="../../assets/preview-bakery-light-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-빨래"><img src="../../assets/preview-laundry-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-영화관"><img src="../../assets/preview-cinema-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-빵집"><img src="../../assets/preview-bakery-light-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-laundry-light.png" width="20" valign="middle"> <b><a href="#user-content-빨래">빨래</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>하늘색 바탕에 반짝이는 젤리 말풍선. 첫 말엔 물방울</td>
-<td align="center"><img src="../../assets/icon-cinema-light.png" width="20" valign="middle"> <b><a href="#user-content-영화관">영화관</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림빛 바탕에 영화표 말풍선. 첫 장엔 별 도장</td>
-<td align="center"><img src="../../assets/icon-bakery-light.png" width="20" valign="middle"> <b><a href="#user-content-빵집">빵집</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>버터빛 바탕에 식빵 말풍선. 첫 장엔 흘러내리는 잼</td>
+<td align="center"><img src="../../assets/icon-laundry-light-image.png" width="20" valign="middle"> <b><a href="#user-content-빨래">빨래</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>하늘색 바탕에 반짝이는 젤리 말풍선. 첫 말엔 물방울</td>
+<td align="center"><img src="../../assets/icon-cinema-light-image.png" width="20" valign="middle"> <b><a href="#user-content-영화관">영화관</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림빛 바탕에 영화표 말풍선. 첫 장엔 별 도장</td>
+<td align="center"><img src="../../assets/icon-bakery-light-image.png" width="20" valign="middle"> <b><a href="#user-content-빵집">빵집</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>버터빛 바탕에 식빵 말풍선. 첫 장엔 흘러내리는 잼</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#user-content-캠핑"><img src="../../assets/preview-camp-light-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-우주"><img src="../../assets/preview-space-light-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-온실"><img src="../../assets/preview-greenhouse-light-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-캠핑"><img src="../../assets/preview-camp-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-우주"><img src="../../assets/preview-space-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-온실"><img src="../../assets/preview-greenhouse-light-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-camp-light.png" width="20" valign="middle"> <b><a href="#user-content-캠핑">캠핑</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>풀빛 바탕에 나무 팻말 말풍선. 첫 장엔 말뚝</td>
-<td align="center"><img src="../../assets/icon-space-light.png" width="20" valign="middle"> <b><a href="#user-content-우주">우주</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연보라 바탕에 우주선 판 말풍선. 첫 장엔 안테나</td>
-<td align="center"><img src="../../assets/icon-greenhouse-light.png" width="20" valign="middle"> <b><a href="#user-content-온실">온실</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연둣빛 바탕에 잎 말풍선. 첫 장엔 잎자루와 이슬</td>
+<td align="center"><img src="../../assets/icon-camp-light-image.png" width="20" valign="middle"> <b><a href="#user-content-캠핑">캠핑</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>풀빛 바탕에 나무 팻말 말풍선. 첫 장엔 말뚝</td>
+<td align="center"><img src="../../assets/icon-space-light-image.png" width="20" valign="middle"> <b><a href="#user-content-우주">우주</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연보라 바탕에 우주선 판 말풍선. 첫 장엔 안테나</td>
+<td align="center"><img src="../../assets/icon-greenhouse-light-image.png" width="20" valign="middle"> <b><a href="#user-content-온실">온실</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연둣빛 바탕에 잎 말풍선. 첫 장엔 잎자루와 이슬</td>
 </tr>
 </table>
 

@@ -23,32 +23,32 @@
 
 <table>
 <tr>
-<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-먹빛-민트"><img src="assets/preview-inkmint-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-크림-라떼"><img src="assets/preview-cream-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-믹스드"><img src="assets/preview-mixed-basic-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-먹빛-민트"><img src="assets/preview-inkmint-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-크림-라떼"><img src="assets/preview-cream-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-믹스드"><img src="assets/preview-mixed-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-inkmint-basic.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-먹빛-민트">먹빛 민트</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름</td>
-<td align="center"><img src="assets/icon-cream-basic.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-크림-라떼">크림 라떼</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽. 베이지 바탕에 브라운. 눈이 제일 안 피로한 조합임</td>
-<td align="center"><img src="assets/icon-mixed-basic.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-믹스드">믹스드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임</td>
+<td align="center"><img src="assets/icon-inkmint-image.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-먹빛-민트">먹빛 민트</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름</td>
+<td align="center"><img src="assets/icon-cream-image.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-크림-라떼">크림 라떼</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽. 베이지 바탕에 브라운. 눈이 제일 안 피로한 조합임</td>
+<td align="center"><img src="assets/icon-mixed-image.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-믹스드">믹스드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-캔디-팝"><img src="assets/preview-candy-basic-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-캔디-팝"><img src="assets/preview-candy-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-고요"><img src="assets/preview-calm-olive-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-차분"><img src="assets/preview-calm-sage-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-candy-basic.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-캔디-팝">캔디 팝</a></b><br><sub>기본 · 사탕 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
+<td align="center"><img src="assets/icon-candy-image.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-캔디-팝">캔디 팝</a></b><br><sub>기본 · 사탕 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
 <td align="center"><img src="assets/icon-calm-olive.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-고요">고요</a></b><br><sub>올리브 · 안개 · 자두 · 먹</sub><br>누런 풀빛 회색. 밝고 흙내 나는 쪽</td>
 <td align="center"><img src="assets/icon-calm-sage.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-차분">차분</a></b><br><sub>세이지 · 샌드 · 슬레이트 · 모카</sub><br>탁한 연둣빛 회색. 가장 순한 쪽</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-도형"><img src="assets/preview-geo-basic-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-도형"><img src="assets/preview-geo-image-chat.webp" width="190"></a></td>
 <td width="33%"></td>
 <td width="33%"></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-geo-basic.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-도형">도형</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>도형을 걷어낸 미색 바탕</td>
+<td align="center"><img src="assets/icon-geo-image.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-도형">도형</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>도형을 걷어낸 미색 바탕</td>
 <td width="33%"></td>
 <td width="33%"></td>
 </tr>
@@ -83,24 +83,24 @@
 
 <table>
 <tr>
-<td width="33%" align="center"><a href="docs/themes/nature.md#user-content-벚꽃-그늘"><img src="assets/preview-sakura-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/nature.md#user-content-오로라"><img src="assets/preview-aurora-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/nature.md#user-content-심야"><img src="assets/preview-midnight-basic-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/nature.md#user-content-벚꽃-그늘"><img src="assets/preview-sakura-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/nature.md#user-content-오로라"><img src="assets/preview-aurora-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/nature.md#user-content-심야"><img src="assets/preview-midnight-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-sakura-basic.png" width="20" valign="middle"> <b><a href="docs/themes/nature.md#user-content-벚꽃-그늘">벚꽃 그늘</a></b><br><sub>기본 · 벚꽃 배경 · 글로우 · 글로우+배경</sub><br>밝은 분홍. 채팅방 배경 이미지가 깔림</td>
-<td align="center"><img src="assets/icon-aurora-basic.png" width="20" valign="middle"> <b><a href="docs/themes/nature.md#user-content-오로라">오로라</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>오로라를 걷어낸 가장 어두운 바탕</td>
-<td align="center"><img src="assets/icon-midnight-basic.png" width="20" valign="middle"> <b><a href="docs/themes/nature.md#user-content-심야">심야</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밤하늘을 걷어낸 남색 바탕</td>
+<td align="center"><img src="assets/icon-sakura-image.png" width="20" valign="middle"> <b><a href="docs/themes/nature.md#user-content-벚꽃-그늘">벚꽃 그늘</a></b><br><sub>기본 · 벚꽃 배경 · 글로우 · 글로우+배경</sub><br>밝은 분홍. 채팅방 배경 이미지가 깔림</td>
+<td align="center"><img src="assets/icon-aurora-image.png" width="20" valign="middle"> <b><a href="docs/themes/nature.md#user-content-오로라">오로라</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>오로라를 걷어낸 가장 어두운 바탕</td>
+<td align="center"><img src="assets/icon-midnight-image.png" width="20" valign="middle"> <b><a href="docs/themes/nature.md#user-content-심야">심야</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밤하늘을 걷어낸 남색 바탕</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="docs/themes/nature.md#user-content-바다"><img src="assets/preview-sea-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/nature.md#user-content-숲"><img src="assets/preview-forest-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/nature.md#user-content-설원"><img src="assets/preview-snow-basic-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/nature.md#user-content-바다"><img src="assets/preview-sea-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/nature.md#user-content-숲"><img src="assets/preview-forest-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/nature.md#user-content-설원"><img src="assets/preview-snow-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-sea-basic.png" width="20" valign="middle"> <b><a href="docs/themes/nature.md#user-content-바다">바다</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>바다를 걷어낸 짙은 물빛 바탕</td>
-<td align="center"><img src="assets/icon-forest-basic.png" width="20" valign="middle"> <b><a href="docs/themes/nature.md#user-content-숲">숲</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>숲을 걷어낸 이끼빛 바탕</td>
-<td align="center"><img src="assets/icon-snow-basic.png" width="20" valign="middle"> <b><a href="docs/themes/nature.md#user-content-설원">설원</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>눈을 걷어낸 얼음빛 바탕</td>
+<td align="center"><img src="assets/icon-sea-image.png" width="20" valign="middle"> <b><a href="docs/themes/nature.md#user-content-바다">바다</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>바다를 걷어낸 짙은 물빛 바탕</td>
+<td align="center"><img src="assets/icon-forest-image.png" width="20" valign="middle"> <b><a href="docs/themes/nature.md#user-content-숲">숲</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>숲을 걷어낸 이끼빛 바탕</td>
+<td align="center"><img src="assets/icon-snow-image.png" width="20" valign="middle"> <b><a href="docs/themes/nature.md#user-content-설원">설원</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>눈을 걷어낸 얼음빛 바탕</td>
 </tr>
 </table>
 
@@ -108,33 +108,33 @@
 
 <table>
 <tr>
-<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-야경"><img src="assets/preview-city-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-사이버펑크"><img src="assets/preview-cyber-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-레드"><img src="assets/preview-red-basic-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-야경"><img src="assets/preview-city-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-사이버펑크"><img src="assets/preview-cyber-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-레드"><img src="assets/preview-red-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-city-basic.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-야경">야경</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>담백한 남색 바탕. 네온 네 색 말풍선</td>
-<td align="center"><img src="assets/icon-cyber-basic.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-사이버펑크">사이버펑크</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검붉은 보라 바탕. 마젠타·시안 네온 말풍선</td>
-<td align="center"><img src="assets/icon-red-basic.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-레드">레드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검붉은 바탕에 새빨간 말풍선 네 칸</td>
+<td align="center"><img src="assets/icon-city-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-야경">야경</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>담백한 남색 바탕. 네온 네 색 말풍선</td>
+<td align="center"><img src="assets/icon-cyber-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-사이버펑크">사이버펑크</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검붉은 보라 바탕. 마젠타·시안 네온 말풍선</td>
+<td align="center"><img src="assets/icon-red-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-레드">레드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검붉은 바탕에 새빨간 말풍선 네 칸</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-불꽃놀이"><img src="assets/preview-firework-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-연등"><img src="assets/preview-lantern-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-알전구"><img src="assets/preview-garland-basic-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-불꽃놀이"><img src="assets/preview-firework-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-연등"><img src="assets/preview-lantern-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-알전구"><img src="assets/preview-garland-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-firework-basic.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-불꽃놀이">불꽃놀이</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>남색 밤 바탕에 금빛·분홍 말풍선</td>
-<td align="center"><img src="assets/icon-lantern-basic.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-연등">연등</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>자줏빛 밤 바탕에 분홍·노랑 연등 색</td>
-<td align="center"><img src="assets/icon-garland-basic.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-알전구">알전구</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>짙은 갈색 바탕에 금빛 말풍선</td>
+<td align="center"><img src="assets/icon-firework-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-불꽃놀이">불꽃놀이</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>남색 밤 바탕에 금빛·분홍 말풍선</td>
+<td align="center"><img src="assets/icon-lantern-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-연등">연등</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>자줏빛 밤 바탕에 분홍·노랑 연등 색</td>
+<td align="center"><img src="assets/icon-garland-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-알전구">알전구</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>짙은 갈색 바탕에 금빛 말풍선</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-고속도로"><img src="assets/preview-highway-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-터미널"><img src="assets/preview-terminal-basic-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-고속도로"><img src="assets/preview-highway-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-터미널"><img src="assets/preview-terminal-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/lights.md#user-content-네온사인"><img src="assets/preview-neon-double-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-highway-basic.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-고속도로">고속도로</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검푸른 바탕에 빨강·주황 말풍선</td>
-<td align="center"><img src="assets/icon-terminal-basic.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-터미널">터미널</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 초록 바탕에 형광 초록·호박색 말풍선</td>
+<td align="center"><img src="assets/icon-highway-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-고속도로">고속도로</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검푸른 바탕에 빨강·주황 말풍선</td>
+<td align="center"><img src="assets/icon-terminal-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-터미널">터미널</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 초록 바탕에 형광 초록·호박색 말풍선</td>
 <td align="center"><img src="assets/icon-neon-double.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-네온사인">네온사인</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>벽돌 벽에 관 두 줄 네온. 첫 말엔 네온 별</td>
 </tr>
 </table>
@@ -143,34 +143,34 @@
 
 <table>
 <tr>
-<td width="33%" align="center"><a href="docs/themes/character.md#user-content-우체국"><img src="assets/preview-post-light-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/character.md#user-content-책상"><img src="assets/preview-desk-light-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/character.md#user-content-오락실"><img src="assets/preview-arcade-light-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/character.md#user-content-우체국"><img src="assets/preview-post-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/character.md#user-content-책상"><img src="assets/preview-desk-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/character.md#user-content-오락실"><img src="assets/preview-arcade-light-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-post-light.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-우체국">우체국</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림빛 편지지 바탕. 첫 말풍선엔 우표 붙은 봉투</td>
-<td align="center"><img src="assets/icon-desk-light.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-책상">책상</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연둣빛 바탕에 포스트잇 말풍선. 첫 장엔 테이프</td>
-<td align="center"><img src="assets/icon-arcade-light.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-오락실">오락실</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연보라 바탕에 빛나는 픽셀 말풍선과 계단 꼬리</td>
+<td align="center"><img src="assets/icon-post-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-우체국">우체국</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림빛 편지지 바탕. 첫 말풍선엔 우표 붙은 봉투</td>
+<td align="center"><img src="assets/icon-desk-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-책상">책상</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연둣빛 바탕에 포스트잇 말풍선. 첫 장엔 테이프</td>
+<td align="center"><img src="assets/icon-arcade-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-오락실">오락실</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연보라 바탕에 빛나는 픽셀 말풍선과 계단 꼬리</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="docs/themes/character.md#user-content-빨래"><img src="assets/preview-laundry-light-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/character.md#user-content-영화관"><img src="assets/preview-cinema-light-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/character.md#user-content-빵집"><img src="assets/preview-bakery-light-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/character.md#user-content-빨래"><img src="assets/preview-laundry-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/character.md#user-content-영화관"><img src="assets/preview-cinema-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/character.md#user-content-빵집"><img src="assets/preview-bakery-light-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-laundry-light.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-빨래">빨래</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>하늘색 바탕에 반짝이는 젤리 말풍선. 첫 말엔 물방울</td>
-<td align="center"><img src="assets/icon-cinema-light.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-영화관">영화관</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림빛 바탕에 영화표 말풍선. 첫 장엔 별 도장</td>
-<td align="center"><img src="assets/icon-bakery-light.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-빵집">빵집</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>버터빛 바탕에 식빵 말풍선. 첫 장엔 흘러내리는 잼</td>
+<td align="center"><img src="assets/icon-laundry-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-빨래">빨래</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>하늘색 바탕에 반짝이는 젤리 말풍선. 첫 말엔 물방울</td>
+<td align="center"><img src="assets/icon-cinema-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-영화관">영화관</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림빛 바탕에 영화표 말풍선. 첫 장엔 별 도장</td>
+<td align="center"><img src="assets/icon-bakery-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-빵집">빵집</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>버터빛 바탕에 식빵 말풍선. 첫 장엔 흘러내리는 잼</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="docs/themes/character.md#user-content-캠핑"><img src="assets/preview-camp-light-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/character.md#user-content-우주"><img src="assets/preview-space-light-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/character.md#user-content-온실"><img src="assets/preview-greenhouse-light-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/character.md#user-content-캠핑"><img src="assets/preview-camp-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/character.md#user-content-우주"><img src="assets/preview-space-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/character.md#user-content-온실"><img src="assets/preview-greenhouse-light-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-camp-light.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-캠핑">캠핑</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>풀빛 바탕에 나무 팻말 말풍선. 첫 장엔 말뚝</td>
-<td align="center"><img src="assets/icon-space-light.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-우주">우주</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연보라 바탕에 우주선 판 말풍선. 첫 장엔 안테나</td>
-<td align="center"><img src="assets/icon-greenhouse-light.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-온실">온실</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연둣빛 바탕에 잎 말풍선. 첫 장엔 잎자루와 이슬</td>
+<td align="center"><img src="assets/icon-camp-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-캠핑">캠핑</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>풀빛 바탕에 나무 팻말 말풍선. 첫 장엔 말뚝</td>
+<td align="center"><img src="assets/icon-space-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-우주">우주</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연보라 바탕에 우주선 판 말풍선. 첫 장엔 안테나</td>
+<td align="center"><img src="assets/icon-greenhouse-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-온실">온실</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연둣빛 바탕에 잎 말풍선. 첫 장엔 잎자루와 이슬</td>
 </tr>
 </table>
 

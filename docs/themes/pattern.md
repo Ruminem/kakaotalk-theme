@@ -10,32 +10,32 @@
 
 <table>
 <tr>
-<td width="33%" align="center"><a href="#user-content-먹빛-민트"><img src="../../assets/preview-inkmint-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-크림-라떼"><img src="../../assets/preview-cream-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-믹스드"><img src="../../assets/preview-mixed-basic-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-먹빛-민트"><img src="../../assets/preview-inkmint-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-크림-라떼"><img src="../../assets/preview-cream-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-믹스드"><img src="../../assets/preview-mixed-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-inkmint-basic.png" width="20" valign="middle"> <b><a href="#user-content-먹빛-민트">먹빛 민트</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름</td>
-<td align="center"><img src="../../assets/icon-cream-basic.png" width="20" valign="middle"> <b><a href="#user-content-크림-라떼">크림 라떼</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽. 베이지 바탕에 브라운. 눈이 제일 안 피로한 조합임</td>
-<td align="center"><img src="../../assets/icon-mixed-basic.png" width="20" valign="middle"> <b><a href="#user-content-믹스드">믹스드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임</td>
+<td align="center"><img src="../../assets/icon-inkmint-image.png" width="20" valign="middle"> <b><a href="#user-content-먹빛-민트">먹빛 민트</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름</td>
+<td align="center"><img src="../../assets/icon-cream-image.png" width="20" valign="middle"> <b><a href="#user-content-크림-라떼">크림 라떼</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽. 베이지 바탕에 브라운. 눈이 제일 안 피로한 조합임</td>
+<td align="center"><img src="../../assets/icon-mixed-image.png" width="20" valign="middle"> <b><a href="#user-content-믹스드">믹스드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#user-content-캔디-팝"><img src="../../assets/preview-candy-basic-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-캔디-팝"><img src="../../assets/preview-candy-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-고요"><img src="../../assets/preview-calm-olive-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-차분"><img src="../../assets/preview-calm-sage-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-candy-basic.png" width="20" valign="middle"> <b><a href="#user-content-캔디-팝">캔디 팝</a></b><br><sub>기본 · 사탕 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
+<td align="center"><img src="../../assets/icon-candy-image.png" width="20" valign="middle"> <b><a href="#user-content-캔디-팝">캔디 팝</a></b><br><sub>기본 · 사탕 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
 <td align="center"><img src="../../assets/icon-calm-olive.png" width="20" valign="middle"> <b><a href="#user-content-고요">고요</a></b><br><sub>올리브 · 안개 · 자두 · 먹</sub><br>누런 풀빛 회색. 밝고 흙내 나는 쪽</td>
 <td align="center"><img src="../../assets/icon-calm-sage.png" width="20" valign="middle"> <b><a href="#user-content-차분">차분</a></b><br><sub>세이지 · 샌드 · 슬레이트 · 모카</sub><br>탁한 연둣빛 회색. 가장 순한 쪽</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#user-content-도형"><img src="../../assets/preview-geo-basic-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-도형"><img src="../../assets/preview-geo-image-chat.webp" width="190"></a></td>
 <td width="33%"></td>
 <td width="33%"></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-geo-basic.png" width="20" valign="middle"> <b><a href="#user-content-도형">도형</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>도형을 걷어낸 미색 바탕</td>
+<td align="center"><img src="../../assets/icon-geo-image.png" width="20" valign="middle"> <b><a href="#user-content-도형">도형</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>도형을 걷어낸 미색 바탕</td>
 <td width="33%"></td>
 <td width="33%"></td>
 </tr>

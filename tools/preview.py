@@ -721,6 +721,16 @@ def doc_path(cat):
     return '%s/%s.md' % (DOCS_DIR, T.CATEGORY_FILE[cat])
 
 
+def cover(T, ms):
+    """계열의 대표 변형. 배경 그림이 있는 변형이 있으면 그것, 없으면 첫 변형이다.
+
+    계열 안은 늘 기본·밝음이 먼저 오도록 줄을 세우는데, 그대로 대표로 쓰면 배경 그림이 있는
+    계열도 격자에서는 맨 바탕만 보였다. 격자는 계열을 훑어 고르는 자리라 그 계열에서 가장
+    분위기가 드러나는 화면이 앞에 와야 한다.
+    """
+    return next((m for m in ms if T._has_picture(m)), ms[0])
+
+
 def _grid(T, members, link, img):
     """계열 썸네일 격자. link(계열) 은 누르면 갈 주소, img 는 assets 까지의 상대 경로다."""
     out = ['<table>']
@@ -730,14 +740,14 @@ def _grid(T, members, link, img):
         out.extend(_pad(
             '<td width="33%%" align="center"><a href="%s">'
             '<img src="%spreview-%s-chat.webp" width="%d"></a></td>'
-            % (link(fam), img, T.file_slug(ms[0]), W_GRID)
+            % (link(fam), img, T.file_slug(cover(T, ms)), W_GRID)
             for fam, ms in row))
         out.append('</tr>')
         out.append('<tr>')
         out.extend(_pad(
             '<td align="center"><img src="%sicon-%s.png" width="20" '
             'valign="middle"> <b><a href="%s">%s</a></b>%s<br>%s</td>'
-            % (img, T.file_slug(ms[0]), link(fam), fam,
+            % (img, T.file_slug(cover(T, ms)), link(fam), fam,
                ('' if len(ms) == 1 else '<br><sub>%s</sub>'
                 % ' · '.join(m['variant'] for m in ms)),
                ms[0]['note'])

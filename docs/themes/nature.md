@@ -10,24 +10,24 @@
 
 <table>
 <tr>
-<td width="33%" align="center"><a href="#user-content-벚꽃-그늘"><img src="../../assets/preview-sakura-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-오로라"><img src="../../assets/preview-aurora-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-심야"><img src="../../assets/preview-midnight-basic-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-벚꽃-그늘"><img src="../../assets/preview-sakura-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-오로라"><img src="../../assets/preview-aurora-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-심야"><img src="../../assets/preview-midnight-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-sakura-basic.png" width="20" valign="middle"> <b><a href="#user-content-벚꽃-그늘">벚꽃 그늘</a></b><br><sub>기본 · 벚꽃 배경 · 글로우 · 글로우+배경</sub><br>밝은 분홍. 채팅방 배경 이미지가 깔림</td>
-<td align="center"><img src="../../assets/icon-aurora-basic.png" width="20" valign="middle"> <b><a href="#user-content-오로라">오로라</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>오로라를 걷어낸 가장 어두운 바탕</td>
-<td align="center"><img src="../../assets/icon-midnight-basic.png" width="20" valign="middle"> <b><a href="#user-content-심야">심야</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밤하늘을 걷어낸 남색 바탕</td>
+<td align="center"><img src="../../assets/icon-sakura-image.png" width="20" valign="middle"> <b><a href="#user-content-벚꽃-그늘">벚꽃 그늘</a></b><br><sub>기본 · 벚꽃 배경 · 글로우 · 글로우+배경</sub><br>밝은 분홍. 채팅방 배경 이미지가 깔림</td>
+<td align="center"><img src="../../assets/icon-aurora-image.png" width="20" valign="middle"> <b><a href="#user-content-오로라">오로라</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>오로라를 걷어낸 가장 어두운 바탕</td>
+<td align="center"><img src="../../assets/icon-midnight-image.png" width="20" valign="middle"> <b><a href="#user-content-심야">심야</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밤하늘을 걷어낸 남색 바탕</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#user-content-바다"><img src="../../assets/preview-sea-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-숲"><img src="../../assets/preview-forest-basic-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-설원"><img src="../../assets/preview-snow-basic-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-바다"><img src="../../assets/preview-sea-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-숲"><img src="../../assets/preview-forest-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-설원"><img src="../../assets/preview-snow-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-sea-basic.png" width="20" valign="middle"> <b><a href="#user-content-바다">바다</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>바다를 걷어낸 짙은 물빛 바탕</td>
-<td align="center"><img src="../../assets/icon-forest-basic.png" width="20" valign="middle"> <b><a href="#user-content-숲">숲</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>숲을 걷어낸 이끼빛 바탕</td>
-<td align="center"><img src="../../assets/icon-snow-basic.png" width="20" valign="middle"> <b><a href="#user-content-설원">설원</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>눈을 걷어낸 얼음빛 바탕</td>
+<td align="center"><img src="../../assets/icon-sea-image.png" width="20" valign="middle"> <b><a href="#user-content-바다">바다</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>바다를 걷어낸 짙은 물빛 바탕</td>
+<td align="center"><img src="../../assets/icon-forest-image.png" width="20" valign="middle"> <b><a href="#user-content-숲">숲</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>숲을 걷어낸 이끼빛 바탕</td>
+<td align="center"><img src="../../assets/icon-snow-image.png" width="20" valign="middle"> <b><a href="#user-content-설원">설원</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>눈을 걷어낸 얼음빛 바탕</td>
 </tr>
 </table>
 
