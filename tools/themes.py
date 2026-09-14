@@ -1053,11 +1053,11 @@ THEMES += quartet(
 _RED_HUE = 350.0
 
 
-def _hex_hue(h, deg):
+def _hex_hue(h, deg, dl=0.0):
     import colorsys
     r, g, b = (int(h.lstrip('#')[i:i + 2], 16) / 255.0 for i in (0, 2, 4))
     hh, l, s = colorsys.rgb_to_hls(r, g, b)
-    r, g, b = colorsys.hls_to_rgb((hh + deg / 360.0) % 1.0, l, s)
+    r, g, b = colorsys.hls_to_rgb((hh + deg / 360.0) % 1.0, min(1.0, max(0.0, l + dl)), s)
     return '#%02X%02X%02X' % tuple(round(v * 255) for v in (r, g, b))
 
 
@@ -1072,24 +1072,35 @@ def _contrast(a, b):
     return (la + 0.05) / (lb + 0.05)
 
 
-def solid_light(slug, no, family, hue, word):
-    """레드를 hue 도(보낸 말풍선 기준 색상)로 돌린 네 벌. word 는 한 줄 소개에 들어갈 색 이름."""
+def solid_light(slug, no, family, hue, word, recv_hue=0):
+    """레드를 hue 도(보낸 말풍선 기준 색상)로 돌린 네 벌. word 는 한 줄 소개에 들어갈 색 이름.
+
+    recv_hue 는 받은 말풍선(짙은 두 칸)만 더 돌리는 각도다. 노랑은 어두워지면 겨자색·올리브가
+    되어 불빛이 아니라 탁한 흙색으로 보인다 — 주황 쪽으로 조금 당기면 꺼져 가는 호박색으로 읽힌다.
+    """
     d = hue - _RED_HUE
     red, red_bg = by_key('red57'), by_key('red58')
     p = {k: _hex_hue(red[k], d) for k in ('bg', 'bg_deep', 'surface', 'pressed', 'border',
                                           'text', 'subtext', 'accent', 'accent_dim')}
     for slot in ('send', 'send_alt', 'recv', 'recv_alt'):
-        c = _hex_hue(red[slot][0], d)
+        c = _hex_hue(red[slot][0], d + (recv_hue if slot.startswith('recv') else 0))
         p[slot] = (c, c)
     # 한 글자색이 말풍선 두 칸 모두에 올라가므로, 두 칸 중 덜 읽히는 쪽이 더 나은 색을 고른다.
-    # 레드를 따라 짙은 칸과 밝은 칸이 섞여 있어서 한쪽 칸만 보고 고르면 다른 칸에서 글자가 사라진다
+    # 레드를 따라 짙은 칸과 밝은 칸이 섞여 있어서 한쪽 칸만 보고 고르면 다른 칸에서 글자가 사라진다.
+    # 그래도 4.5 가 안 되는 칸은 글자에서 멀어지는 쪽으로 명도를 조금씩 옮긴다 — 색상과 채도는 둔다
     dark = _hex_hue('#1A0206', d)
     for fills, on, light in ((('send', 'send_alt'), 'send_text', '#FFF2F4'),
                              (('recv', 'recv_alt'), 'recv_text', '#FFE8EC'),
                              (('accent',), 'on_accent', '#FFF2F4')):
         cols = [p[f][0] if isinstance(p[f], tuple) else p[f] for f in fills]
-        p[on] = max((_hex_hue(light, d), dark),
-                    key=lambda txt: min(_contrast(c, txt) for c in cols))
+        txt = max((_hex_hue(light, d), dark),
+                  key=lambda t: min(_contrast(c, t) for c in cols))
+        p[on] = txt
+        step = 0.01 if txt == dark else -0.01
+        for f, c in zip(fills, cols):
+            while _contrast(c, txt) < 4.5:
+                c = _hex_hue(c, 0, step)
+            p[f] = (c, c) if isinstance(p[f], tuple) else c
 
     def sc(spec):
         kind, top, bottom, o = spec
@@ -1104,9 +1115,10 @@ def solid_light(slug, no, family, hue, word):
 
 
 # 키 번호는 200 부터 쓴다. 다른 작업이 150~160 대를 잡고 있어 겹치지 않게 띄웠다
-for _i, (_slug, _family, _hue, _word) in enumerate([
+for _i, (_slug, _family, _hue, _word, *_more) in enumerate([
         ('orange', '오렌지', 25, '주황'),
-        ('yellow', '옐로', 52, '노랑'),
+        # 받은 칸 -8 도. -14 도는 오렌지의 받은 칸과 거의 같아졌다
+        ('yellow', '옐로', 52, '노랑', -8),
         ('lime', '라임', 80, '연두'),
         ('green', '그린', 130, '초록'),
         ('mint', '민트', 160, '민트'),
@@ -1115,7 +1127,7 @@ for _i, (_slug, _family, _hue, _word) in enumerate([
         ('violet', '바이올렛', 255, '남보라'),
         ('purple', '퍼플', 282, '보라'),
         ('pink', '핑크', 320, '분홍')]):
-    THEMES += solid_light(_slug, 200 + _i * 4, _family, _hue, _word)
+    THEMES += solid_light(_slug, 200 + _i * 4, _family, _hue, _word, *_more)
 
 # --- 배포 파일 이름 -------------------------------------------------------
 # city21.ktheme 은 뭐가 뭔지 알 수 없다. 계열과 변형이 드러나게 바꾼다.
