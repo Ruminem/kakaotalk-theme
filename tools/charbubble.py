@@ -654,9 +654,15 @@ def c_mailbox(p):
 
 CHARS = {'kongkong': c_kongkong, 'sock': c_sock, 'bulb': c_bulb, 'mailbox': c_mailbox}
 
+# 펜으로 그리지 않고 한 장을 통째로 만드는 프로필. 빛이 번지는 그림처럼 Pen 의 바탕 위 선 그리기로
+# 안 되는 것이 여기 온다. 이름 -> fn(t, idx, px)
+PROFILES = {}
+
 
 def profile(t, idx, px):
     """기본 프로필. 캐릭터를 바탕 세 가지 색 위에 그린다 — 세 장이 섞여 배정된다."""
+    if t['char'] in PROFILES:
+        return PROFILES[t['char']](t, idx, px)
     k = 3
     im = Image.new('RGB', (px * k, px * k), hexc(t['char_backs'][idx % 3])[:3])
     CHARS[t['char']](Pen(im, px * k / 100.0, t['char_outline']))
@@ -1114,3 +1120,44 @@ STYLES.update({
     'neon_electrode': dict(bw=40, bh=44, radius=12, draw=d_neon_electrode, features=f_neon_electrode),
     'neon_speech':    dict(bw=40, bh=44, radius=18, draw=d_neon_speech, features=f_neon_speech),
 })
+
+
+def p_neon(t, idx, px):
+    """네온사인 기본 프로필. 어두운 벽돌 조각 위에 하트·별·초승달 네온관 하나.
+
+    세 장이 하트는 보낸 색, 별은 받은 색, 초승달은 벽 낙서의 셋째 색이다. 목록 화면에서 가장 많이
+    반복되는 그림이라, 색만 바꾼 기본 사람 모양일 때는 목록이 테마와 따로 놀았다.
+    36pt 에서 읽혀야 해서 관을 굵게(폭의 7.5%) 두고 모양은 윤곽이 단순한 것만 쓴다.
+    """
+    import scenes
+    g = _g()
+    k = 3
+    S = px * k
+    img = Image.new('RGB', (S, S), (22, 14, 18))
+    d = ImageDraw.Draw(img)
+    bh = S / 6
+    mortar = (34, 22, 26)
+    for j in range(7):                                   # 벽돌 줄눈. 아주 옅게
+        y = j * bh
+        d.line([(0, y), (S, y)], fill=mortar, width=max(1, S // 90))
+        off = S / 6 if j % 2 else 0
+        for i in range(4):
+            x = off + i * S / 3
+            d.line([(x, y), (x, y + bh)], fill=mortar, width=max(1, S // 90))
+    kind = ('heart', 'star', 'moon')[idx % 3]
+    col = (_c(t['send']), _c(t['recv']), t.get('neon_third', '#B45CFF'))[idx % 3]
+    lay = Image.new('RGB', (S, S))
+    core = Image.new('RGB', (S, S))
+    ld, cd = ImageDraw.Draw(lay), ImageDraw.Draw(core)
+    cx = S / 2 + (S * 0.04 if kind == 'moon' else 0)
+    for line in scenes._neon_doodle(kind, cx, S / 2 + S * 0.02, S * 0.3):
+        ld.line(line, fill=g.rgb(col), width=int(S * 0.075), joint='curve')
+        cd.line(line, fill=g.rgb(g.glow_tint(col, 0.75)), width=int(S * 0.028), joint='curve')
+    halo = lay.filter(ImageFilter.GaussianBlur(S * 0.07)).point(lambda v: min(255, int(v * 1.7)))
+    img = ImageChops.screen(img, halo)
+    img = ImageChops.screen(img, lay)
+    img = ImageChops.screen(img, core)
+    return img.resize((px, px), Image.LANCZOS).convert('RGBA')
+
+
+PROFILES['neon'] = p_neon

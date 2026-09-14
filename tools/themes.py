@@ -1757,7 +1757,14 @@ def _neon_theme(no, variant, style, material, recv, send, recv_text, send_text, 
                 accent=send, accent_dim=accent_dim,
                 send=(send, send), send_alt=(send, send), recv=(recv, recv), recv_alt=(recv, recv),
                 send_text=send_text, recv_text=recv_text,
-                chat_bg=wall(5, 0.45), main_bg=wall(4, 0.6), passcode_bg=wall(6, 0.12))
+                # 프로필은 벽 낙서의 셋째 색까지 세 장. 탭 아이콘도 네온관이다
+                char='neon', neon_third=signs[2][1], tab_style='neon',
+                # 목록 배경은 셀·칩·광고 카드에 잘리므로 낙서를 빼고 벽돌 질감만 둔다. 줄눈만 반복되는
+                # 무늬라 어디서 잘려도 같아서 흐리지 않고(flat_list=False), 셀을 반투명하게 해 벽이 비치게 한다
+                flat_list=False, cell_alpha=0.5,
+                chat_bg=wall(5, 0.45), passcode_bg=wall(6, 0.12),
+                main_bg=('neonwall', '#3A1F1B', '#140C0B',
+                         dict(signs=[], count=0, dim=0.22, dim_to='#000000')))
 
 
 THEMES += [

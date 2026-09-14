@@ -493,7 +493,7 @@ def chat_list(t):
     for i, (label, kind) in enumerate(tabs):
         cx = PW * (i + 0.5) / len(tabs)
         c = t['accent'] if i == 1 else t['subtext']
-        ic = gen.tab_icon(kind, u(28), c)
+        ic = gen.tab_icon_for(t, kind, u(28), i == 1)
         img.paste(ic, (u(cx - 14), u(PH - TAB_H + 9)), ic)
         text(d, cx, PH - TAB_H + 48, label, 10.5, rgb(c), 500, 'mm')
 

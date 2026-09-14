@@ -1060,7 +1060,7 @@ def gen_ios(t, root):
         name = 'maintabIco' + kind.capitalize()
         for suffix, col in (('', t['subtext']), ('Selected', t['accent'])):
             for scale in (2, 3):
-                tab_icon(kind, 28 * scale, col).save(
+                tab_icon_for(t, kind, 28 * scale, suffix == 'Selected').save(
                     os.path.join(img_dir, '%s%s@%dx.png' % (name, suffix, scale)))
         tab_lines.append("    -ios-%s-normal-icon-image: '%s.png';" % (kind, name))
         tab_lines.append("    -ios-%s-selected-icon-image: '%sSelected.png';"
@@ -1273,7 +1273,7 @@ def gen_android(t, root, code):
 
     for kind in TAB_KINDS:
         for suffix, col in (('', t['subtext']), ('_focused', t['accent'])):
-            tab_icon(kind, 84, col).save(
+            tab_icon_for(t, kind, 84, suffix == '_focused').save(
                 os.path.join(draw, 'theme_maintab_ico_%s%s_image.png' % (kind, suffix)))
 
     for i in range(3):
@@ -1529,6 +1529,51 @@ def tab_icon(kind, px, color, ss=4):
         raise ValueError('모르는 탭 아이콘: %s' % kind)
 
     return img.resize((px, px), Image.LANCZOS)
+
+
+def tab_icon_for(t, kind, px, selected):
+    """테마의 탭 아이콘. 보통은 보조색, 선택은 포인트색이다.
+
+    tab_style 이 없는 테마는 tab_icon 을 그대로 부른다 — 이미 나간 테마의 아이콘이 한 픽셀도
+    바뀌면 안 된다. 네온사인은 같은 도형을 네온관으로 그린다(neon_tab_icon).
+    """
+    col = t['accent'] if selected else t['subtext']
+    if t.get('tab_style') == 'neon':
+        return neon_tab_icon(kind, px, col, selected)
+    return tab_icon(kind, px, col)
+
+
+def neon_tab_icon(kind, px, color, lit):
+    """네온관 탭 아이콘. 기본 도형의 테두리만 관으로 남긴다.
+
+    선택된 탭은 관이 달아오르고 가운데가 하얗게 타며 빛이 번진다. 나머지는 불 꺼진 유리관이다 —
+    탭을 누를 때 불이 켜지는 것처럼 보인다. 채운 도형을 그대로 빛나게 하면 네온이 아니라
+    형광 스티커로 보여서 테두리만 남긴다. 가는 선(돋보기 테·원)은 깎아내면 사라지므로
+    선 굵기의 절반만 깎는다 — 굵은 면은 테두리만, 가는 선은 통째로 관이 된다.
+
+    기본 도형은 100 칸 네모의 14~86 안에 있어서 빛이 번질 여백이 있다.
+    """
+    S = px * 2
+    base = tab_icon(kind, S, color)
+    a = base.getchannel('A')
+    k = max(3, int(S * 0.036) * 2 + 1)
+    tube = ImageChops.subtract(a, a.filter(ImageFilter.MinFilter(k)))
+    out = Image.new('RGBA', (S, S), (0, 0, 0, 0))
+
+    def put(col, alpha):
+        lay = Image.new('RGBA', (S, S), rgb(col) + (255,))
+        lay.putalpha(alpha)
+        out.alpha_composite(lay)
+
+    if lit:
+        halo = tube.filter(ImageFilter.GaussianBlur(S * 0.045)).point(lambda v: min(255, int(v * 1.8)))
+        put(color, halo)
+        put(color, tube)
+        core = tube.filter(ImageFilter.MinFilter(max(3, k // 2 | 1)))
+        put(glow_tint(color, 0.75), core)
+    else:
+        put(mix(color, '#000000', 0.25), tube)
+    return out.resize((px, px), Image.LANCZOS)
 
 
 if __name__ == '__main__':
