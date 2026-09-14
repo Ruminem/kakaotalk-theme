@@ -772,6 +772,52 @@ def readme_block(ts):
     return '\n'.join(out)
 
 
+# 분류 문서의 이동 단추. 깃허브는 마크다운에 넣은 CSS 를 전부 지워서 글자 링크를 단추처럼
+# 꾸밀 수 없다. 그림으로 그린다. 밝은/어두운 두 벌을 <picture> 로 바꿔 끼우는 길도 있었지만
+# 그 전환은 GitHub 테마가 아니라 OS 설정을 따라서, OS 가 다크 모드인데 GitHub 만 밝은 테마면
+# 어두운 단추가 나왔다. 어느 바탕에서도 또렷한 파란 알약 한 벌만 쓴다.
+NAV_BUTTONS = {'top': ('↑', '테마 목록'), 'all': ('←', '전체 테마')}
+NAV_H = 26                   # 문서에 보이는 높이(px). 그림은 두 배로 만든다
+NAV_BG = (31, 111, 235)      # 깃허브 링크 파랑. 흰 글자 대비가 밝은·어두운 바탕 모두에서 선다
+
+
+def nav_button(arrow, label):
+    """이동 단추 한 장. 표시 높이의 두 배로 만들고, 가장자리를 매끈하게 하려고 다시 4배로 그렸다 줄인다."""
+    ss = 4
+    h = NAV_H * 2 * ss
+
+    def face(px, weight):
+        if os.path.exists(_NOTO):
+            f = ImageFont.truetype(_NOTO, px)
+            f.set_variation_by_axes([weight])
+            return f
+        return ImageFont.truetype(os.path.join(r'C:\Windows\Fonts', 'malgunbd.ttf'), px)
+
+    fa, ft = face(int(h * 0.50), 700), face(int(h * 0.44), 600)
+    pad, gap = int(h * 0.42), int(h * 0.18)
+    aw, tw = fa.getlength(arrow), ft.getlength(label)
+    w = int(pad * 2 + aw + gap + tw)
+    img = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle([0, 0, w - 1, h - 1], radius=h // 2, fill=NAV_BG + (255,))
+    white = (255, 255, 255, 255)
+    d.text((pad, h / 2), arrow, font=fa, fill=white, anchor='lm')
+    d.text((pad + aw + gap, h / 2), label, font=ft, fill=white, anchor='lm')
+    return img.resize((w // ss, h // ss), Image.LANCZOS)
+
+
+def nav_link(key, href, img):
+    """이동 단추 링크. alt 에 글자를 넣어 그림이 안 뜨는 자리에서도 무엇인지 읽히게 한다."""
+    arrow, label = NAV_BUTTONS[key]
+    return ('<a href="%s"><img src="%sbtn-%s.png" height="%d" valign="middle" alt="%s %s"></a>'
+            % (href, img, key, NAV_H, arrow, label))
+
+
+def write_nav_buttons():
+    for key, (arrow, label) in NAV_BUTTONS.items():
+        nav_button(arrow, label).save(os.path.join(gen.ASSETS, 'btn-%s.png' % key), optimize=True)
+
+
 def category_doc(T, cat, note, members):
     """분류 문서 한 장. 맨 위에 그 분류의 격자, 아래에 계열 상세.
 
@@ -779,7 +825,7 @@ def category_doc(T, cat, note, members):
     돌아가는 링크를 두고, 문서 처음과 끝에는 README 의 분류 격자로 가는 링크를 둔다.
     분류가 # 이고 계열이 ## 다 — 깃허브 문서 목차가 그 층으로 접어준다.
     """
-    back = '[← 전체 테마](../../README.md%s)' % anchor(TOP)
+    back = nav_link('all', '../../README.md' + anchor(TOP), '../../assets/')
     out = ['<!-- tools/preview.py 가 만든다. 손으로 고치지 말고 tools/themes.py 를 고친다 -->',
            '', '<a name="%s"></a>' % TOP, '', back, '', '# %s' % cat, '', note, '']
     out.extend(_grid(T, members, anchor, '../../assets/'))
@@ -792,12 +838,11 @@ def category_doc(T, cat, note, members):
 def _family_block(T, name, members, img):
     """계열 하나의 상세. 변형 표와 접어둔 화면들. img 는 assets 까지의 상대 경로다."""
     out = ['<a name="%s"></a>' % slug(name), '']
-    # 테마 목록 링크는 제목 바로 오른쪽에 붙인다. 아래 줄 오른쪽 끝에 두었더니 넓은 화면에서
+    # 테마 목록 단추는 제목 바로 오른쪽에 붙인다. 아래 줄 오른쪽 끝에 두었더니 넓은 화면에서
     # 제목과 멀리 떨어져 짝으로 안 읽혔다. 마크다운으로는 한 줄 안에서 오른쪽 끝으로 밀 수가
-    # 없어 제목 안에 넣는다 — 깃허브 목차에 계열마다 "↑ 테마 목록" 이 같이 붙는 것은 감수한다.
-    out.append('## <img src="%sicon-%s.png" width="26" valign="middle"> %s'
-               ' &nbsp;<sub><a href="%s">↑ 테마 목록</a></sub>'
-               % (img, T.file_slug(members[0]), name, anchor(TOP)))
+    # 없어 제목 안에 넣는다.
+    out.append('## <img src="%sicon-%s.png" width="26" valign="middle"> %s &nbsp;%s'
+               % (img, T.file_slug(members[0]), name, nav_link('top', anchor(TOP), img)))
     out.append('')
 
     # 변형 배치. 넷이면 2x2 로 접는다 — 한 줄에 넷을 놓으면 폰에서 옆으로 밀어야 한다.
@@ -836,6 +881,7 @@ def _family_block(T, name, members, img):
 def write_theme_docs(ts):
     """분류 문서를 전부 새로 쓴다. 없어진 분류의 문서는 지운다 — 남겨 두면 옛 계열이 검색에 걸린다."""
     import themes as T
+    write_nav_buttons()
     d = os.path.join(ROOT_DIR, *DOCS_DIR.split('/'))
     os.makedirs(d, exist_ok=True)
     keep = set()

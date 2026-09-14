@@ -2,7 +2,7 @@
 
 <a name="theme-list"></a>
 
-[← 전체 테마](../../README.md#user-content-theme-list)
+<a href="../../README.md#user-content-theme-list"><img src="../../assets/btn-all.png" height="26" valign="middle" alt="← 전체 테마"></a>
 
 # 유리
 
@@ -33,7 +33,7 @@
 
 <a name="리퀴드-글래스"></a>
 
-## <img src="../../assets/icon-glass-light.png" width="26" valign="middle"> 리퀴드 글래스 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-glass-light.png" width="26" valign="middle"> 리퀴드 글래스 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -68,7 +68,7 @@
 
 <a name="원목-글래스"></a>
 
-## <img src="../../assets/icon-wood-oak.png" width="26" valign="middle"> 원목 글래스 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-wood-oak.png" width="26" valign="middle"> 원목 글래스 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -103,7 +103,7 @@
 
 <a name="스테인드-글래스"></a>
 
-## <img src="../../assets/icon-stained-amber.png" width="26" valign="middle"> 스테인드 글래스 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-stained-amber.png" width="26" valign="middle"> 스테인드 글래스 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -138,7 +138,7 @@
 
 <a name="프리즘-글래스"></a>
 
-## <img src="../../assets/icon-prism-light.png" width="26" valign="middle"> 프리즘 글래스 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-prism-light.png" width="26" valign="middle"> 프리즘 글래스 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -173,7 +173,7 @@
 
 <a name="프로스트-글래스"></a>
 
-## <img src="../../assets/icon-frost-light.png" width="26" valign="middle"> 프로스트 글래스 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-frost-light.png" width="26" valign="middle"> 프로스트 글래스 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -206,4 +206,4 @@
 
 </details>
 
-[← 전체 테마](../../README.md#user-content-theme-list)
+<a href="../../README.md#user-content-theme-list"><img src="../../assets/btn-all.png" height="26" valign="middle" alt="← 전체 테마"></a>

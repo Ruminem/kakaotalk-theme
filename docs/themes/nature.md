@@ -2,7 +2,7 @@
 
 <a name="theme-list"></a>
 
-[← 전체 테마](../../README.md#user-content-theme-list)
+<a href="../../README.md#user-content-theme-list"><img src="../../assets/btn-all.png" height="26" valign="middle" alt="← 전체 테마"></a>
 
 # 자연
 
@@ -33,7 +33,7 @@
 
 <a name="벚꽃-그늘"></a>
 
-## <img src="../../assets/icon-sakura-basic.png" width="26" valign="middle"> 벚꽃 그늘 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-sakura-basic.png" width="26" valign="middle"> 벚꽃 그늘 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -68,7 +68,7 @@
 
 <a name="오로라"></a>
 
-## <img src="../../assets/icon-aurora-basic.png" width="26" valign="middle"> 오로라 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-aurora-basic.png" width="26" valign="middle"> 오로라 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -103,7 +103,7 @@
 
 <a name="심야"></a>
 
-## <img src="../../assets/icon-midnight-basic.png" width="26" valign="middle"> 심야 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-midnight-basic.png" width="26" valign="middle"> 심야 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -138,7 +138,7 @@
 
 <a name="바다"></a>
 
-## <img src="../../assets/icon-sea-basic.png" width="26" valign="middle"> 바다 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-sea-basic.png" width="26" valign="middle"> 바다 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -173,7 +173,7 @@
 
 <a name="숲"></a>
 
-## <img src="../../assets/icon-forest-basic.png" width="26" valign="middle"> 숲 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-forest-basic.png" width="26" valign="middle"> 숲 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -208,7 +208,7 @@
 
 <a name="설원"></a>
 
-## <img src="../../assets/icon-snow-basic.png" width="26" valign="middle"> 설원 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-snow-basic.png" width="26" valign="middle"> 설원 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -241,4 +241,4 @@
 
 </details>
 
-[← 전체 테마](../../README.md#user-content-theme-list)
+<a href="../../README.md#user-content-theme-list"><img src="../../assets/btn-all.png" height="26" valign="middle" alt="← 전체 테마"></a>

@@ -2,7 +2,7 @@
 
 <a name="theme-list"></a>
 
-[← 전체 테마](../../README.md#user-content-theme-list)
+<a href="../../README.md#user-content-theme-list"><img src="../../assets/btn-all.png" height="26" valign="middle" alt="← 전체 테마"></a>
 
 # 불빛
 
@@ -43,7 +43,7 @@
 
 <a name="야경"></a>
 
-## <img src="../../assets/icon-city-basic.png" width="26" valign="middle"> 야경 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-city-basic.png" width="26" valign="middle"> 야경 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -78,7 +78,7 @@
 
 <a name="사이버펑크"></a>
 
-## <img src="../../assets/icon-cyber-basic.png" width="26" valign="middle"> 사이버펑크 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-cyber-basic.png" width="26" valign="middle"> 사이버펑크 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -113,7 +113,7 @@
 
 <a name="레드"></a>
 
-## <img src="../../assets/icon-red-basic.png" width="26" valign="middle"> 레드 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-red-basic.png" width="26" valign="middle"> 레드 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -148,7 +148,7 @@
 
 <a name="불꽃놀이"></a>
 
-## <img src="../../assets/icon-firework-basic.png" width="26" valign="middle"> 불꽃놀이 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-firework-basic.png" width="26" valign="middle"> 불꽃놀이 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -183,7 +183,7 @@
 
 <a name="연등"></a>
 
-## <img src="../../assets/icon-lantern-basic.png" width="26" valign="middle"> 연등 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-lantern-basic.png" width="26" valign="middle"> 연등 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -218,7 +218,7 @@
 
 <a name="알전구"></a>
 
-## <img src="../../assets/icon-garland-basic.png" width="26" valign="middle"> 알전구 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-garland-basic.png" width="26" valign="middle"> 알전구 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -253,7 +253,7 @@
 
 <a name="고속도로"></a>
 
-## <img src="../../assets/icon-highway-basic.png" width="26" valign="middle"> 고속도로 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-highway-basic.png" width="26" valign="middle"> 고속도로 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -288,7 +288,7 @@
 
 <a name="터미널"></a>
 
-## <img src="../../assets/icon-terminal-basic.png" width="26" valign="middle"> 터미널 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-terminal-basic.png" width="26" valign="middle"> 터미널 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -323,7 +323,7 @@
 
 <a name="네온사인"></a>
 
-## <img src="../../assets/icon-neon-double.png" width="26" valign="middle"> 네온사인 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-neon-double.png" width="26" valign="middle"> 네온사인 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -356,4 +356,4 @@
 
 </details>
 
-[← 전체 테마](../../README.md#user-content-theme-list)
+<a href="../../README.md#user-content-theme-list"><img src="../../assets/btn-all.png" height="26" valign="middle" alt="← 전체 테마"></a>

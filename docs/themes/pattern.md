@@ -2,7 +2,7 @@
 
 <a name="theme-list"></a>
 
-[← 전체 테마](../../README.md#user-content-theme-list)
+<a href="../../README.md#user-content-theme-list"><img src="../../assets/btn-all.png" height="26" valign="middle" alt="← 전체 테마"></a>
 
 # 무늬
 
@@ -43,7 +43,7 @@
 
 <a name="먹빛-민트"></a>
 
-## <img src="../../assets/icon-inkmint-basic.png" width="26" valign="middle"> 먹빛 민트 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-inkmint-basic.png" width="26" valign="middle"> 먹빛 민트 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -78,7 +78,7 @@
 
 <a name="크림-라떼"></a>
 
-## <img src="../../assets/icon-cream-basic.png" width="26" valign="middle"> 크림 라떼 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-cream-basic.png" width="26" valign="middle"> 크림 라떼 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -113,7 +113,7 @@
 
 <a name="믹스드"></a>
 
-## <img src="../../assets/icon-mixed-basic.png" width="26" valign="middle"> 믹스드 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-mixed-basic.png" width="26" valign="middle"> 믹스드 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -148,7 +148,7 @@
 
 <a name="캔디-팝"></a>
 
-## <img src="../../assets/icon-candy-basic.png" width="26" valign="middle"> 캔디 팝 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-candy-basic.png" width="26" valign="middle"> 캔디 팝 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -183,7 +183,7 @@
 
 <a name="고요"></a>
 
-## <img src="../../assets/icon-calm-olive.png" width="26" valign="middle"> 고요 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-calm-olive.png" width="26" valign="middle"> 고요 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -218,7 +218,7 @@
 
 <a name="차분"></a>
 
-## <img src="../../assets/icon-calm-sage.png" width="26" valign="middle"> 차분 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-calm-sage.png" width="26" valign="middle"> 차분 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -253,7 +253,7 @@
 
 <a name="도형"></a>
 
-## <img src="../../assets/icon-geo-basic.png" width="26" valign="middle"> 도형 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
+## <img src="../../assets/icon-geo-basic.png" width="26" valign="middle"> 도형 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -286,4 +286,4 @@
 
 </details>
 
-[← 전체 테마](../../README.md#user-content-theme-list)
+<a href="../../README.md#user-content-theme-list"><img src="../../assets/btn-all.png" height="26" valign="middle" alt="← 전체 테마"></a>
