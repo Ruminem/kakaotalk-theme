@@ -814,6 +814,7 @@ CATEGORIES = (
     ('유리', '말풍선이 반투명하다'),
     ('자연', '배경이 장면을 그린다'),
     ('불빛', '어두운 바탕에 인공 불빛'),
+    ('불빛 - 단색', '한 가지 색으로만 빛나는 불빛'),
     ('캐릭터', '말풍선 모양과 캐릭터 프로필'),
 )
 
@@ -824,6 +825,7 @@ CATEGORY_FILE = {
     '유리': 'glass',
     '자연': 'nature',
     '불빛': 'lights',
+    '불빛 - 단색': 'lights-solid',
     '캐릭터': 'character',
 }
 
@@ -852,13 +854,24 @@ CATEGORY = {
 
     '야경': '불빛',
     '사이버펑크': '불빛',
-    '레드': '불빛',
     '불꽃놀이': '불빛',
     '연등': '불빛',
     '알전구': '불빛',
     '고속도로': '불빛',
     '터미널': '불빛',
     '네온사인': '불빛',
+
+    '레드': '불빛 - 단색',
+    '오렌지': '불빛 - 단색',
+    '옐로': '불빛 - 단색',
+    '라임': '불빛 - 단색',
+    '그린': '불빛 - 단색',
+    '민트': '불빛 - 단색',
+    '시안': '불빛 - 단색',
+    '블루': '불빛 - 단색',
+    '바이올렛': '불빛 - 단색',
+    '퍼플': '불빛 - 단색',
+    '핑크': '불빛 - 단색',
 
     '우체국': '캐릭터',
     '책상': '캐릭터',
@@ -1027,6 +1040,82 @@ THEMES += quartet(
      '어둠 속에서 붉은 불티가 떠오름',
      '말풍선이 빨갛게 달아오름',
      '불티 배경 위에 달아오른 빨강까지'])
+
+
+# --- 불빛 - 단색 ------------------------------------------------------------
+# 레드처럼 한 색으로만 빛나는 계열 열 가지. 색을 따로 고르면 계열마다 명암 관계가 제각각이라
+# 나란히 놓았을 때 한 묶음으로 안 읽힌다. 레드의 색을 하나도 빼지 않고 색상만 돌린다 —
+# 밝기와 채도는 그대로라 바탕·말풍선·불티의 관계가 레드와 같다.
+#
+# 색상만 돌리면 노랑·라임·시안은 같은 명도에서도 훨씬 밝게 보여 흰 글자가 안 읽힌다.
+# 말풍선과 포인트색 위의 글자는 대비가 4.5 가 안 되면 그 색의 가장 짙은 쪽으로 바꾼다.
+
+_RED_HUE = 350.0
+
+
+def _hex_hue(h, deg):
+    import colorsys
+    r, g, b = (int(h.lstrip('#')[i:i + 2], 16) / 255.0 for i in (0, 2, 4))
+    hh, l, s = colorsys.rgb_to_hls(r, g, b)
+    r, g, b = colorsys.hls_to_rgb((hh + deg / 360.0) % 1.0, l, s)
+    return '#%02X%02X%02X' % tuple(round(v * 255) for v in (r, g, b))
+
+
+def _contrast(a, b):
+    def lum(h):
+        def ch(v):
+            v /= 255.0
+            return v / 12.92 if v <= 0.03928 else ((v + 0.055) / 1.055) ** 2.4
+        r, g, b = (int(h.lstrip('#')[i:i + 2], 16) for i in (0, 2, 4))
+        return 0.2126 * ch(r) + 0.7152 * ch(g) + 0.0722 * ch(b)
+    la, lb = sorted((lum(a), lum(b)), reverse=True)
+    return (la + 0.05) / (lb + 0.05)
+
+
+def solid_light(slug, no, family, hue, word):
+    """레드를 hue 도(보낸 말풍선 기준 색상)로 돌린 네 벌. word 는 한 줄 소개에 들어갈 색 이름."""
+    d = hue - _RED_HUE
+    red, red_bg = by_key('red57'), by_key('red58')
+    p = {k: _hex_hue(red[k], d) for k in ('bg', 'bg_deep', 'surface', 'pressed', 'border',
+                                          'text', 'subtext', 'accent', 'accent_dim')}
+    for slot in ('send', 'send_alt', 'recv', 'recv_alt'):
+        c = _hex_hue(red[slot][0], d)
+        p[slot] = (c, c)
+    # 한 글자색이 말풍선 두 칸 모두에 올라가므로, 두 칸 중 덜 읽히는 쪽이 더 나은 색을 고른다.
+    # 레드를 따라 짙은 칸과 밝은 칸이 섞여 있어서 한쪽 칸만 보고 고르면 다른 칸에서 글자가 사라진다
+    dark = _hex_hue('#1A0206', d)
+    for fills, on, light in ((('send', 'send_alt'), 'send_text', '#FFF2F4'),
+                             (('recv', 'recv_alt'), 'recv_text', '#FFE8EC'),
+                             (('accent',), 'on_accent', '#FFF2F4')):
+        cols = [p[f][0] if isinstance(p[f], tuple) else p[f] for f in fills]
+        p[on] = max((_hex_hue(light, d), dark),
+                    key=lambda txt: min(_contrast(c, txt) for c in cols))
+
+    def sc(spec):
+        kind, top, bottom, o = spec
+        return (kind, _hex_hue(top, d), _hex_hue(bottom, d),
+                {k: _hex_hue(v, d) if isinstance(v, str) else v for k, v in o.items()})
+    bg = {k: sc(red_bg[k]) for k in ('chat_bg', 'main_bg', 'passcode_bg')}
+    return quartet(slug, no, family, p, bg,
+                   ['검은 바탕에 %s 말풍선 네 칸' % word,
+                    '어둠 속에서 %s 불티가 떠오름' % word,
+                    '말풍선이 %s빛으로 달아오름' % word,
+                    '불티 배경 위에 달아오른 %s까지' % word])
+
+
+# 키 번호는 200 부터 쓴다. 다른 작업이 150~160 대를 잡고 있어 겹치지 않게 띄웠다
+for _i, (_slug, _family, _hue, _word) in enumerate([
+        ('orange', '오렌지', 25, '주황'),
+        ('yellow', '옐로', 52, '노랑'),
+        ('lime', '라임', 80, '연두'),
+        ('green', '그린', 130, '초록'),
+        ('mint', '민트', 160, '민트'),
+        ('cyan', '시안', 188, '하늘'),
+        ('blue', '블루', 215, '파랑'),
+        ('violet', '바이올렛', 255, '남보라'),
+        ('purple', '퍼플', 282, '보라'),
+        ('pink', '핑크', 320, '분홍')]):
+    THEMES += solid_light(_slug, 200 + _i * 4, _family, _hue, _word)
 
 # --- 배포 파일 이름 -------------------------------------------------------
 # city21.ktheme 은 뭐가 뭔지 알 수 없다. 계열과 변형이 드러나게 바꾼다.

@@ -12,32 +12,32 @@
 <tr>
 <td width="33%" align="center"><a href="#user-content-야경"><img src="../../assets/preview-city-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-사이버펑크"><img src="../../assets/preview-cyber-image-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-레드"><img src="../../assets/preview-red-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-불꽃놀이"><img src="../../assets/preview-firework-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><img src="../../assets/icon-city-image.png" width="20" valign="middle"> <b><a href="#user-content-야경">야경</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>담백한 남색 바탕. 네온 네 색 말풍선</td>
 <td align="center"><img src="../../assets/icon-cyber-image.png" width="20" valign="middle"> <b><a href="#user-content-사이버펑크">사이버펑크</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검붉은 보라 바탕. 마젠타·시안 네온 말풍선</td>
-<td align="center"><img src="../../assets/icon-red-image.png" width="20" valign="middle"> <b><a href="#user-content-레드">레드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검붉은 바탕에 새빨간 말풍선 네 칸</td>
+<td align="center"><img src="../../assets/icon-firework-image.png" width="20" valign="middle"> <b><a href="#user-content-불꽃놀이">불꽃놀이</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>남색 밤 바탕에 금빛·분홍 말풍선</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#user-content-불꽃놀이"><img src="../../assets/preview-firework-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-연등"><img src="../../assets/preview-lantern-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-알전구"><img src="../../assets/preview-garland-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-고속도로"><img src="../../assets/preview-highway-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-firework-image.png" width="20" valign="middle"> <b><a href="#user-content-불꽃놀이">불꽃놀이</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>남색 밤 바탕에 금빛·분홍 말풍선</td>
 <td align="center"><img src="../../assets/icon-lantern-image.png" width="20" valign="middle"> <b><a href="#user-content-연등">연등</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>자줏빛 밤 바탕에 분홍·노랑 연등 색</td>
 <td align="center"><img src="../../assets/icon-garland-image.png" width="20" valign="middle"> <b><a href="#user-content-알전구">알전구</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>짙은 갈색 바탕에 금빛 말풍선</td>
+<td align="center"><img src="../../assets/icon-highway-image.png" width="20" valign="middle"> <b><a href="#user-content-고속도로">고속도로</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검푸른 바탕에 빨강·주황 말풍선</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#user-content-고속도로"><img src="../../assets/preview-highway-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-터미널"><img src="../../assets/preview-terminal-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-네온사인"><img src="../../assets/preview-neon-double-chat.webp" width="190"></a></td>
+<td width="33%"></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-highway-image.png" width="20" valign="middle"> <b><a href="#user-content-고속도로">고속도로</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검푸른 바탕에 빨강·주황 말풍선</td>
 <td align="center"><img src="../../assets/icon-terminal-image.png" width="20" valign="middle"> <b><a href="#user-content-터미널">터미널</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 초록 바탕에 형광 초록·호박색 말풍선</td>
 <td align="center"><img src="../../assets/icon-neon-double.png" width="20" valign="middle"> <b><a href="#user-content-네온사인">네온사인</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>벽돌 벽에 관 두 줄 네온. 첫 말엔 네온 별</td>
+<td width="33%"></td>
 </tr>
 </table>
 
@@ -108,41 +108,6 @@
 **글로우+배경** — 네온 격자 위에 빛나는 말풍선까지
 
 <img src="../../assets/preview-cyber-glow-image-list.webp" width="180"> <img src="../../assets/preview-cyber-glow-image-passcode.webp" width="180"> <img src="../../assets/preview-cyber-glow-image-splash.webp" width="180">
-
-</details>
-
-<a name="레드"></a>
-
-## <img src="../../assets/icon-red-basic.png" width="26" valign="middle"> 레드 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
-
-<table>
-<tr>
-<td width="50%" align="center"><img src="../../assets/preview-red-basic-chat.webp" width="200"><br><b>기본</b><br><sub>검붉은 바탕에 새빨간 말풍선 네 칸</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=red-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/red-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-red-image-chat.webp" width="200"><br><b>배경</b><br><sub>어둠 속에서 붉은 불티가 떠오름</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=red-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/red-image.apk">Android</a></td>
-</tr>
-<tr>
-<td width="50%" align="center"><img src="../../assets/preview-red-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>말풍선이 빨갛게 달아오름</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=red-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/red-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-red-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>불티 배경 위에 달아오른 빨강까지</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=red-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/red-glow-image.apk">Android</a></td>
-</tr>
-</table>
-
-<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
-
-**기본** — 검붉은 바탕에 새빨간 말풍선 네 칸
-
-<img src="../../assets/preview-red-basic-list.webp" width="180"> <img src="../../assets/preview-red-basic-passcode.webp" width="180"> <img src="../../assets/preview-red-basic-splash.webp" width="180">
-
-**배경** — 어둠 속에서 붉은 불티가 떠오름
-
-<img src="../../assets/preview-red-image-list.webp" width="180"> <img src="../../assets/preview-red-image-passcode.webp" width="180"> <img src="../../assets/preview-red-image-splash.webp" width="180">
-
-**글로우** — 말풍선이 빨갛게 달아오름
-
-<img src="../../assets/preview-red-glow-list.webp" width="180"> <img src="../../assets/preview-red-glow-passcode.webp" width="180"> <img src="../../assets/preview-red-glow-splash.webp" width="180">
-
-**글로우+배경** — 불티 배경 위에 달아오른 빨강까지
-
-<img src="../../assets/preview-red-glow-image-list.webp" width="180"> <img src="../../assets/preview-red-glow-image-passcode.webp" width="180"> <img src="../../assets/preview-red-glow-image-splash.webp" width="180">
 
 </details>
 

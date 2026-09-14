@@ -9,7 +9,7 @@
 ## 테마
 
 받는 링크는 항상 **최신 릴리스**를 가리킴. 지난 버전은 [릴리스 목록](https://github.com/Ruminem/kakaotalk-theme/releases)에 있음.
-계열은 다섯 분류로 묶었음 — **무늬**는 색과 도형만, **유리**는 반투명 말풍선, **자연**은 장면, **불빛**은 어둠 속 인공 불빛, **캐릭터**는 모양 있는 말풍선과 캐릭터 프로필임.
+계열은 여섯 분류로 묶었음 — **무늬**는 색과 도형만, **유리**는 반투명 말풍선, **자연**은 장면, **불빛**은 어둠 속 인공 불빛, **불빛 - 단색**은 한 가지 색으로만 빛나는 불빛, **캐릭터**는 모양 있는 말풍선과 캐릭터 프로필임.
 받기 링크와 화면 그림은 **분류 문서**에 있음. 아래 썸네일을 누르면 그 계열로 바로 감.
 실행화면 그림은 **안드로이드에만 있음** — iOS 테마 규격에는 스플래시 블록이 아예 없음.
 
@@ -110,32 +110,77 @@
 <tr>
 <td width="33%" align="center"><a href="docs/themes/lights.md#user-content-야경"><img src="assets/preview-city-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/lights.md#user-content-사이버펑크"><img src="assets/preview-cyber-image-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-레드"><img src="assets/preview-red-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-불꽃놀이"><img src="assets/preview-firework-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><img src="assets/icon-city-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-야경">야경</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>담백한 남색 바탕. 네온 네 색 말풍선</td>
 <td align="center"><img src="assets/icon-cyber-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-사이버펑크">사이버펑크</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검붉은 보라 바탕. 마젠타·시안 네온 말풍선</td>
-<td align="center"><img src="assets/icon-red-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-레드">레드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검붉은 바탕에 새빨간 말풍선 네 칸</td>
+<td align="center"><img src="assets/icon-firework-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-불꽃놀이">불꽃놀이</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>남색 밤 바탕에 금빛·분홍 말풍선</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-불꽃놀이"><img src="assets/preview-firework-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/lights.md#user-content-연등"><img src="assets/preview-lantern-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/lights.md#user-content-알전구"><img src="assets/preview-garland-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-고속도로"><img src="assets/preview-highway-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-firework-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-불꽃놀이">불꽃놀이</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>남색 밤 바탕에 금빛·분홍 말풍선</td>
 <td align="center"><img src="assets/icon-lantern-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-연등">연등</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>자줏빛 밤 바탕에 분홍·노랑 연등 색</td>
 <td align="center"><img src="assets/icon-garland-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-알전구">알전구</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>짙은 갈색 바탕에 금빛 말풍선</td>
+<td align="center"><img src="assets/icon-highway-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-고속도로">고속도로</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검푸른 바탕에 빨강·주황 말풍선</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-고속도로"><img src="assets/preview-highway-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/lights.md#user-content-터미널"><img src="assets/preview-terminal-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/lights.md#user-content-네온사인"><img src="assets/preview-neon-double-chat.webp" width="190"></a></td>
+<td width="33%"></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-highway-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-고속도로">고속도로</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검푸른 바탕에 빨강·주황 말풍선</td>
 <td align="center"><img src="assets/icon-terminal-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-터미널">터미널</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 초록 바탕에 형광 초록·호박색 말풍선</td>
 <td align="center"><img src="assets/icon-neon-double.png" width="20" valign="middle"> <b><a href="docs/themes/lights.md#user-content-네온사인">네온사인</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>벽돌 벽에 관 두 줄 네온. 첫 말엔 네온 별</td>
+<td width="33%"></td>
+</tr>
+</table>
+
+**[불빛 - 단색](docs/themes/lights-solid.md)** — 한 가지 색으로만 빛나는 불빛
+
+<table>
+<tr>
+<td width="33%" align="center"><a href="docs/themes/lights-solid.md#user-content-레드"><img src="assets/preview-red-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights-solid.md#user-content-오렌지"><img src="assets/preview-orange-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights-solid.md#user-content-옐로"><img src="assets/preview-yellow-image-chat.webp" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/icon-red-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights-solid.md#user-content-레드">레드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검붉은 바탕에 새빨간 말풍선 네 칸</td>
+<td align="center"><img src="assets/icon-orange-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights-solid.md#user-content-오렌지">오렌지</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 바탕에 주황 말풍선 네 칸</td>
+<td align="center"><img src="assets/icon-yellow-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights-solid.md#user-content-옐로">옐로</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 바탕에 노랑 말풍선 네 칸</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="docs/themes/lights-solid.md#user-content-라임"><img src="assets/preview-lime-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights-solid.md#user-content-그린"><img src="assets/preview-green-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights-solid.md#user-content-민트"><img src="assets/preview-mint-image-chat.webp" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/icon-lime-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights-solid.md#user-content-라임">라임</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 바탕에 연두 말풍선 네 칸</td>
+<td align="center"><img src="assets/icon-green-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights-solid.md#user-content-그린">그린</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 바탕에 초록 말풍선 네 칸</td>
+<td align="center"><img src="assets/icon-mint-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights-solid.md#user-content-민트">민트</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 바탕에 민트 말풍선 네 칸</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="docs/themes/lights-solid.md#user-content-시안"><img src="assets/preview-cyan-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights-solid.md#user-content-블루"><img src="assets/preview-blue-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights-solid.md#user-content-바이올렛"><img src="assets/preview-violet-image-chat.webp" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/icon-cyan-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights-solid.md#user-content-시안">시안</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 바탕에 하늘 말풍선 네 칸</td>
+<td align="center"><img src="assets/icon-blue-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights-solid.md#user-content-블루">블루</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 바탕에 파랑 말풍선 네 칸</td>
+<td align="center"><img src="assets/icon-violet-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights-solid.md#user-content-바이올렛">바이올렛</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 바탕에 남보라 말풍선 네 칸</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="docs/themes/lights-solid.md#user-content-퍼플"><img src="assets/preview-purple-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights-solid.md#user-content-핑크"><img src="assets/preview-pink-image-chat.webp" width="190"></a></td>
+<td width="33%"></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/icon-purple-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights-solid.md#user-content-퍼플">퍼플</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 바탕에 보라 말풍선 네 칸</td>
+<td align="center"><img src="assets/icon-pink-image.png" width="20" valign="middle"> <b><a href="docs/themes/lights-solid.md#user-content-핑크">핑크</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 바탕에 분홍 말풍선 네 칸</td>
+<td width="33%"></td>
 </tr>
 </table>
 
