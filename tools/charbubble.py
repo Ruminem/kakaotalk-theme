@@ -28,6 +28,7 @@ import sys
 from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageOps
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import glow  # noqa: E402
 
 IV, IH = 11, 16         # 몸통 안에서 글자까지의 여백
 LINE = 22               # 글자 한 줄 높이(preview.LINE_H 와 같다). 몸통 44 = 22 + 11 * 2
@@ -424,17 +425,17 @@ def geometry(t, variant):
     name = t['char_style']
     st = STYLES[name]
     first = variant == '01'
-    G = t.get('char_glow') or 0
-    grow = math.ceil(G * 0.6)       # 글로우가 소품 둘레로 번지는 폭. 이 안도 늘어나면 안 된다
+    gl, gt, gr, gb = glow.margin(t)     # 글로우가 번질 여백. 모양마다 다르다(tools/glow.py)
+    grow = glow.grow(t)                 # 글로우가 소품 둘레로 번지는 폭. 이 안도 늘어나면 안 된다
     bw, bh, r = st['bw'], st['bh'], st['radius']
     for _ in range(80):
         feats = st['features'](t, bw, bh, first)
         if t.get('firelight'):
             feats = feats + firelight_features(bw, bh)
-        ml = math.ceil(max([2.0] + [-b[0] for b, z in feats])) + G
-        mr = math.ceil(max([2.0] + [b[2] - bw for b, z in feats])) + G
-        mt = math.ceil(max([2.0] + [-b[1] for b, z in feats])) + G
-        mb = math.ceil(max([2.0] + [b[3] - bh for b, z in feats])) + G
+        ml = math.ceil(max([2.0] + [-b[0] for b, z in feats])) + gl
+        mr = math.ceil(max([2.0] + [b[2] - bw for b, z in feats])) + gr
+        mt = math.ceil(max([2.0] + [-b[1] for b, z in feats])) + gt
+        mb = math.ceil(max([2.0] + [b[3] - bh for b, z in feats])) + gb
         W, H = ml + bw + mr, mt + bh + mb
 
         lo = [ml + r + 1, mr + r + 1, mt + r + 1]
@@ -535,10 +536,9 @@ def _firelit(img, t, mask, s):
 def sheet(t, side, variant, scale):
     """말풍선 한 장과 그 치수. 보낸 쪽은 받은 쪽 장을 뒤집는다.
 
-    글로우는 장을 흐림 반경보다 넉넉히 키운 뒤에 깐다(여백 G 가 geometry 에 들어 있다).
-    딱 맞는 장에서 흐리면 빛이 가장자리에서 잘려 네모가 남는다.
+    글로우는 장을 흐림 반경보다 넉넉히 키운 뒤에 깐다(여백이 geometry 에 들어 있다).
+    모양은 tools/glow.py 의 사전에서 고른다.
     """
-    g = _g()
     geo = geometry(t, variant)
     st = STYLES[t['char_style']]
     size = (int(round(geo['w'] * scale)), int(round(geo['h'] * scale)))
@@ -554,28 +554,7 @@ def sheet(t, side, variant, scale):
         fl = _firelight_mask(geo, size, scale)
         img = _firelit(img, t, fl, scale)
 
-    G = t.get('char_glow') or 0
-    if G:
-        a = img.getchannel('A')
-        halo = Image.new('L', size, 0)
-        for rr, k in ((0.3, 0.8), (0.75, 0.55)):
-            b = a.filter(ImageFilter.GaussianBlur(G * rr * scale))
-            halo = ImageChops.add(halo, b.point(lambda v, k=k: int(v * k)))
-        # 옅은 꼬리를 잘라낸다. 장 끝까지 알파가 남으면 말풍선 둘레에 네모가 뜬다
-        gk = t.get('char_glow_k', 1.35)
-        halo = halo.point(lambda v: 0 if v < 16 else min(255, int((v - 16) * gk)))
-        if fl is not None:
-            # 불 쪽 귀퉁이 둘레만 빛이 짙다. 아래변 전체를 짙게 두면 형광펜 밑줄로 보였다
-            halo = ImageChops.add(halo, ImageChops.multiply(halo, fl))
-        # 빛 색은 기본이 말풍선 색이다. 갈색 팻말처럼 몸통이 탁한 색이면 탁한 빛이 번져
-        # 빛이 아니라 얼룩으로 보이므로, 빛의 출처가 따로 있는 계열은 그 색을 준다(모닥불)
-        col = hexc(t.get('char_glow_color') or g.mix(_c(t[ck]), '#FFFFFF', 0.25))[:3]
-        glow = Image.new('RGBA', size, col + (255,))
-        glow.putalpha(halo)
-        out = Image.new('RGBA', size, (0, 0, 0, 0))
-        out.alpha_composite(glow)
-        out.alpha_composite(img)
-        img = out
+    img = glow.render(t, img, geo, scale, ck, fl)
 
     if side == 'send':
         img = ImageOps.mirror(img)
