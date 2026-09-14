@@ -842,11 +842,21 @@ CATEGORY = {
     '야경': '불빛',
     '사이버펑크': '불빛',
     '레드': '불빛',
+    '불꽃놀이': '불빛',
+    '연등': '불빛',
+    '알전구': '불빛',
+    '고속도로': '불빛',
+    '터미널': '불빛',
 
     '우체국': '캐릭터',
     '책상': '캐릭터',
     '오락실': '캐릭터',
     '빨래': '캐릭터',
+    '영화관': '캐릭터',
+    '빵집': '캐릭터',
+    '캠핑': '캐릭터',
+    '우주': '캐릭터',
+    '온실': '캐릭터',
 }
 
 
@@ -1287,11 +1297,12 @@ def _scenes(kind, top, bottom, opts, dims):
                 passcode_bg=(kind, top, bottom, dict(opts, dim=dims[2])))
 
 
-def character(slug, no, family, look, light, dark, bg_light, bg_dark, notes):
+def character(slug, no, family, look, light, dark, bg_light, bg_dark, notes, extra=None):
     """캐릭터 계열 네 벌. 밝음 · 밝음+배경 · 어두움 · 어두움+배경.
 
     look 은 넷이 같이 쓰는 것(말풍선 모양, 캐릭터, 광택), light/dark 는 밝기별 색이다.
     말풍선 색은 한 가지를 (위, 아래) 짝으로 늘여 둔다 — 아이콘과 잠금화면 점이 짝으로 읽는다.
+    extra 는 변형 이름 -> 그 변형에만 얹는 값. 배경 그림에 맞춰 말풍선을 바꿀 때 쓴다(캠핑의 불빛).
     """
     if len(notes) != 4:
         raise ValueError('%s: 한 줄 소개를 네 개 줘야 한다' % slug)
@@ -1307,6 +1318,8 @@ def character(slug, no, family, look, light, dark, bg_light, bg_dark, notes):
             t.update(bg_light if is_light else bg_dark)
         else:
             t.update(chat_bg=None, main_bg=None, passcode_bg=None)
+        if extra:
+            t.update(extra.get(variant, {}))
         out.append(t)
     return out
 
@@ -1449,5 +1462,260 @@ THEMES += character(
      '비눗방울이 떠다니는 빨랫줄 하늘',
      '밤 빨래. 어두운 바탕에서 광택이 도드라짐',
      '달밤 비눗방울과 반짝이는 말풍선'])
+
+
+# --- 불빛 두 번째 묶음 ----------------------------------------------------
+# 어둠 속 인공 불빛을 다섯 가지 더. 야경·사이버펑크·레드와 겹치지 않게 색과 장면을 갈랐다 —
+# 여러 색 불꽃, 분홍·노랑·초록 연등, 따뜻한 금빛 전구, 빨강·흰빛 차 불빛, 초록·호박색 모니터.
+
+THEMES += quartet(
+    'firework', 105, '불꽃놀이',
+    dict(bg='#0B0D1C', bg_deep='#06070F', surface='#141730', pressed='#1D2142',
+         border='#282D55', text='#ECEEFA', subtext='#8E93B8',
+         accent='#FFB84D', accent_dim='#D18E2C', on_accent='#1E1203',
+         send=('#FFB84D', '#FFB84D'), send_alt=('#FF7FB6', '#FF7FB6'),
+         recv=('#1F2548', '#1F2548'), recv_alt=('#5A3F9E', '#5A3F9E'),
+         send_text='#241603', recv_text='#ECEEFA'),
+    dict(chat_bg=('fireworks', '#0A0C22', '#1E1838', dict(bursts=6, dim=0.34)),
+         main_bg=('fireworks', '#0A0C22', '#1A1532', dict(bursts=5, dim=0.46)),
+         passcode_bg=('fireworks', '#0C0E28', '#241C44', dict(bursts=8, stars=80, dim=0.04))),
+    ['남색 밤 바탕에 금빛·분홍 말풍선',
+     '물가 위로 불꽃이 터지는 밤',
+     '말풍선이 불꽃처럼 빛남',
+     '불꽃 배경 위에 빛나는 말풍선까지'])
+
+THEMES += quartet(
+    'lantern', 109, '연등',
+    dict(bg='#140F1E', bg_deep='#0C0913', surface='#1E1729', pressed='#2A2038',
+         border='#382B48', text='#F5ECF2', subtext='#A897AE',
+         accent='#FF8FB1', accent_dim='#D66A8C', on_accent='#2A0B17',
+         send=('#FF8FB1', '#FF8FB1'), send_alt=('#FFD36B', '#FFD36B'),
+         recv=('#2A2138', '#2A2138'), recv_alt=('#2F6E55', '#2F6E55'),
+         send_text='#2A0B17', recv_text='#F5ECF2'),
+    dict(chat_bg=('lanterns', '#120C1E', '#2A1630',
+                  dict(colors=['#FF8FB1', '#FFD36B', '#7ED99B', '#FF9B5A'], dim=0.32)),
+         main_bg=('lanterns', '#120C1E', '#24142C',
+                  dict(colors=['#FF8FB1', '#FFD36B', '#7ED99B'], rows=2, dim=0.46)),
+         passcode_bg=('lanterns', '#140D22', '#361A3A',
+                      dict(colors=['#FF8FB1', '#FFD36B', '#7ED99B', '#FF9B5A'], rows=4,
+                           bokeh=40, dim=0.02))),
+    ['자줏빛 밤 바탕에 분홍·노랑 연등 색',
+     '줄줄이 매달린 연등이 깔림',
+     '말풍선이 등불처럼 빛남',
+     '연등 아래 빛나는 말풍선까지'])
+
+THEMES += quartet(
+    'garland', 113, '알전구',
+    dict(bg='#17130F', bg_deep='#0E0B08', surface='#221C16', pressed='#2E261E',
+         border='#3B3127', text='#F7EEDF', subtext='#B09D84',
+         accent='#FFC766', accent_dim='#D69E43', on_accent='#261803',
+         send=('#FFC766', '#FFC766'), send_alt=('#FFE3A8', '#FFE3A8'),
+         recv=('#2A2219', '#2A2219'), recv_alt=('#5A4630', '#5A4630'),
+         send_text='#261803', recv_text='#F7EEDF'),
+    dict(chat_bg=('garland', '#120E0B', '#241A12', dict(bulb=['#FFD27A', '#FFE3A8'], dim=0.3)),
+         main_bg=('garland', '#120E0B', '#20170F', dict(bulb=['#FFD27A'], strands=3, dim=0.45)),
+         passcode_bg=('garland', '#140F0B', '#2E2014',
+                      dict(bulb=['#FFD27A', '#FFE3A8', '#FFB45A'], strands=5, bokeh=34, dim=0.0))),
+    ['짙은 갈색 바탕에 금빛 말풍선',
+     '늘어진 전선에 알전구가 켜짐',
+     '말풍선이 전구처럼 따뜻하게 빛남',
+     '알전구 아래 빛나는 말풍선까지'])
+
+THEMES += quartet(
+    'highway', 117, '고속도로',
+    dict(bg='#0C1119', bg_deep='#070A10', surface='#141B26', pressed='#1C2533',
+         border='#263243', text='#EAF0F7', subtext='#8A97A8',
+         accent='#FF4D5E', accent_dim='#CC3746', on_accent='#FFF1F2',
+         send=('#FF4D5E', '#FF4D5E'), send_alt=('#FFB347', '#FFB347'),
+         recv=('#1B2432', '#1B2432'), recv_alt=('#33507A', '#33507A'),
+         send_text='#2A0508', recv_text='#EAF0F7'),
+    dict(chat_bg=('trails', '#0A0F1C', '#1B2233', dict(dim=0.3)),
+         main_bg=('trails', '#0A0F1C', '#161D2C', dict(lanes=6, dim=0.45)),
+         passcode_bg=('trails', '#0C1224', '#24304A', dict(lanes=10, horizon=0.36, dim=0.0))),
+    ['검푸른 바탕에 빨강·주황 말풍선',
+     '밤 고속도로의 빛줄기가 깔림',
+     '말풍선이 미등처럼 빛남',
+     '빛줄기 배경 위에 빛나는 말풍선까지'])
+
+THEMES += quartet(
+    'terminal', 121, '터미널',
+    dict(bg='#0A120D', bg_deep='#050A07', surface='#101C15', pressed='#16271D',
+         border='#1F3528', text='#D8F5E1', subtext='#7FA38B',
+         accent='#39E07A', accent_dim='#23B05E', on_accent='#03170A',
+         send=('#39E07A', '#39E07A'), send_alt=('#FFB000', '#FFB000'),
+         recv=('#11251A', '#11251A'), recv_alt=('#1E4A33', '#1E4A33'),
+         send_text='#03170A', recv_text='#D8F5E1'),
+    dict(chat_bg=('terminal', '#07100A', '#0B1A10', dict(dim=0.52)),
+         main_bg=('terminal', '#07100A', '#0A160E', dict(dim=0.58)),
+         passcode_bg=('terminal', '#08120B', '#0E2014', dict(cell=0.028, dim=0.1))),
+    ['검은 초록 바탕에 형광 초록·호박색 말풍선',
+     '옛 모니터에 코드가 흐름',
+     '말풍선이 모니터 글자처럼 빛남',
+     '코드 화면 위에 빛나는 말풍선까지'])
+
+
+# --- 캐릭터 두 번째 묶음 --------------------------------------------------
+# 영화표·식빵·팻말·우주선 판·잎 말풍선. 캐릭터는 팝콘 통·식빵·모닥불·행성·선인장.
+# 전부 새로 그렸다. 카카오 프렌즈와 겹치는 동물(고양이·개·토끼·오리·사자)은 피했다.
+# 글로우는 넣지 않는다 — 네온 느낌인 계열이 없다.
+
+THEMES += character(
+    'cinema', 125, '영화관',
+    dict(char_style='ticket', char='popcorn'),
+    dict(bg='#FBF3E6', bg_deep='#F4E8D4', surface='#FFFAF1', pressed='#EEDFC6',
+         border='#E6D3B5', text='#3B2522', subtext='#8E7466',
+         accent='#D93A3A', accent_dim='#B32C2C', on_accent='#FFFFFF',
+         recv='#FFFDF7', recv_alt='#F3E2C4', send='#FFD9D2', send_alt='#FFE7A8',
+         recv_text='#3B2522', send_text='#3B2522',
+         char_outline='#4A2C28', star='#E8B93A',
+         char_backs=('#FFF1D6', '#FFE0DA', '#F6E6CC')),
+    dict(bg='#1A1216', bg_deep='#130D10', surface='#241A1F', pressed='#2F2228',
+         border='#3A2A31', text='#F4E6E4', subtext='#A8908F',
+         accent='#FF5A5A', accent_dim='#D94444', on_accent='#1A1216',
+         recv='#2C2127', recv_alt='#3C2D33', send='#7A2530', send_alt='#7A5A22',
+         recv_text='#F4E6E4', send_text='#FFEDEA',
+         char_outline='#D8C0BC', star='#E8B93A',
+         char_backs=('#3A2A30', '#4A2A30', '#3A3228')),
+    _scenes('cinema', '#FBF3E6', '#F2E2C8',
+            dict(tickets=['#FFD9D2', '#FFE7A8', '#FFFFFF', '#D6E8FF'], ink='#8E7466',
+                 pop='#FFF8E6', star='#E8B93A', dim_to='#FBF3E6'),
+            (0.3, 0.45, 0.05)),
+    _scenes('cinema', '#1E1418', '#0E090B',
+            dict(screen='#DCE6FF', seats='#5A2632', dim_to='#000000'),
+            (0.35, 0.5, 0.05)),
+    ['크림빛 바탕에 영화표 말풍선. 첫 장엔 별 도장',
+     '영화표와 팝콘이 흩어진 매표소',
+     '상영관 조명 끈 어두운 바탕에 영화표',
+     '빛나는 스크린 앞 좌석 줄'])
+
+THEMES += character(
+    'bakery', 129, '빵집',
+    dict(char_style='toast', char='bread'),
+    dict(bg='#FFF6E6', bg_deep='#FAEDD5', surface='#FFFBF2', pressed='#F2E2C2',
+         border='#EBD7B2', text='#4A3320', subtext='#98795A',
+         accent='#E0913A', accent_dim='#BF7428', on_accent='#FFFFFF',
+         recv='#FFF8EA', recv_alt='#FCE9C8', send='#FFE6B0', send_alt='#F9D59A',
+         recv_crust='#D9A25F', send_crust='#C98A45',
+         recv_text='#4A3320', send_text='#4A3320',
+         char_outline='#5A3C22', jam='#E8455A',
+         char_backs=('#FFF1D2', '#FFE3C2', '#F6ECD8')),
+    dict(bg='#211A14', bg_deep='#18130E', surface='#2B221A', pressed='#362B21',
+         border='#43362A', text='#F5E9D8', subtext='#AF9A80',
+         accent='#F2A652', accent_dim='#CC8538', on_accent='#211A14',
+         recv='#3A2E22', recv_alt='#4A3A2A', send='#7A5530', send_alt='#8C6236',
+         recv_crust='#6B4A2A', send_crust='#A2743F',
+         recv_text='#F5E9D8', send_text='#FFF3E2',
+         char_outline='#E6CBA8', jam='#C23A52',
+         char_backs=('#3A2E22', '#4A3624', '#33291F')),
+    _scenes('bakery', '#FFF6E6', '#FAEDD5',
+            dict(check='#F2C58A', ink='#5A3C22', dim_to='#FFF6E6',
+                 breads=[('#D08A45', '#FFF1D2'), ('#E3A35C', '#FFF6E0')]),
+            (0.3, 0.45, 0.05)),
+    _scenes('bakery', '#2A2019', '#211A14',
+            dict(check='#5A4230', ink='#1A120B', dim_to='#000000',
+                 breads=[('#B8773C', '#E8D2AE'), ('#9A6230', '#D9C09A')]),
+            (0.3, 0.45, 0.05)),
+    ['버터빛 바탕에 식빵 말풍선. 첫 장엔 흘러내리는 잼',
+     '체크무늬 식탁보에 빵이 놓임',
+     '문 닫은 빵집. 갈색 바탕에 구운 식빵',
+     '어두운 체크 식탁보 위의 빵'])
+
+THEMES += character(
+    'camp', 133, '캠핑',
+    dict(char_style='sign', char='flame'),
+    dict(bg='#EEF3EA', bg_deep='#E4ECDF', surface='#F7FAF4', pressed='#DCE6D4',
+         border='#D0DCC6', text='#2F3A2A', subtext='#76836B',
+         accent='#E07A3A', accent_dim='#BF6128', on_accent='#FFFFFF',
+         recv='#F6E3BF', recv_alt='#EACF9E', send='#E8B67A', send_alt='#D9A263',
+         recv_text='#3A2A1C', send_text='#3A2A1C',
+         char_outline='#4A3522', post='#9C6B3E', nail='#8A7A6A',
+         char_glow=5, char_glow_k=1.1, char_glow_color='#FF9A4A',
+         char_backs=('#E4F0DC', '#FFE8CC', '#DCEAF2')),
+    # 어두운 쪽은 모닥불 빛이 팻말 모서리에 걸린 것처럼 주황으로 빛나게 한다.
+    # 밝은 쪽에도 넣는 것은 계열 안에서 말풍선 재질을 맞추려는 것이다 — 밝은 바탕에서는 거의 안 보인다
+    dict(bg='#141A1C', bg_deep='#0E1315', surface='#1C2427', pressed='#253033',
+         border='#2F3B3F', text='#EEE8DC', subtext='#97A09A',
+         accent='#FF9A4A', accent_dim='#D97A30', on_accent='#141A1C',
+         recv='#4A3A2A', recv_alt='#5A4633', send='#8A5A30', send_alt='#9C6A3A',
+         recv_text='#FBEFDF', send_text='#FFF3E4',
+         char_outline='#D9C3A5', post='#6E4A2A', nail='#C9B79C',
+         char_glow=6, char_glow_k=1.25, char_glow_color='#FF9A4A',
+         char_backs=('#26343A', '#3A2E24', '#1E2C30')),
+    _scenes('camp', '#BFE3F5', '#EAF6EC',
+            dict(sun='#FFE38A', clouds=4, hills=['#A9CBB8', '#86B09A'], trees='#4F8A68',
+                 ground='#7FB27A', tents=['#E07A3A', '#F2C14E'], ink='#3A2A1C', dim_to='#FFFFFF'),
+            (0.3, 0.45, 0.05)),
+    _scenes('camp', '#0C1424', '#1E2A3A',
+            dict(stars=120, hills=['#1E2C3A', '#18242E'], trees='#0F1A1E', ground='#141E20',
+                 tents=['#8A4A2A', '#7A6A2A'], fire='#FF8A3D', ink='#05080A', dim_to='#000000',
+                 fire_size=1.7, fire_reach=0.95, fire_y=0.84),
+            (0.25, 0.4, 0.0)),
+    ['풀빛 바탕에 나무 팻말 말풍선. 첫 장엔 말뚝',
+     '산 아래 풀밭에 텐트가 선 낮',
+     '밤 캠핑장. 모닥불 빛이 도는 팻말 말풍선',
+     '모닥불이 비추는 밤. 팻말도 불빛에 물듦'],
+    # 배경에 모닥불이 있는 쪽만 말풍선도 그 불에 비친 것처럼 아래와 불 쪽 귀퉁이를 달군다.
+    # 배경이 없는 어두움에 넣으면 빛의 출처가 화면에 없어서 까닭 없는 얼룩이 된다
+    extra={'어두움+배경': dict(firelight='#FF9A4A', firelight_k=1.0, char_glow_k=1.4)})
+
+THEMES += character(
+    'space', 137, '우주',
+    dict(char_style='panel', char='saturn'),
+    dict(bg='#EEF0FB', bg_deep='#E4E7F7', surface='#F7F8FE', pressed='#DADEF3',
+         border='#CDD2EC', text='#252A4A', subtext='#6E7399',
+         accent='#7B6CF6', accent_dim='#5E4FD9', on_accent='#FFFFFF',
+         recv='#FFFFFF', recv_alt='#E3E8FF', send='#DCD5FF', send_alt='#FFE0C2',
+         recv_text='#252A4A', send_text='#252A4A',
+         char_outline='#2E335A', star='#FFC94D',
+         char_backs=('#E3E0FF', '#FFE8D6', '#DDF0FF')),
+    dict(bg='#10122A', bg_deep='#0A0B1E', surface='#181B38', pressed='#212548',
+         border='#2B3058', text='#E8EAFF', subtext='#8F94C4',
+         accent='#9D90FF', accent_dim='#7B6CF6', on_accent='#10122A',
+         recv='#1F2448', recv_alt='#2C3260', send='#4B3FA8', send_alt='#7A4470',
+         recv_text='#E8EAFF', send_text='#F3F0FF',
+         char_outline='#AEB4E8', star='#FFD84D',
+         char_backs=('#2A2E5A', '#3A2E52', '#1F3050')),
+    _scenes('space', '#EEF0FB', '#F8E8F2',
+            dict(star='#9D90FF', stars=60, dim_to='#FFFFFF',
+                 planets=[('#FFC98A', '#F2A65A', '#B9A6FF'), ('#9FD8FF', '#7ABFEF', None),
+                          ('#C9B6FF', '#AA94F0', '#FFC98A')]),
+            (0.25, 0.4, 0.0)),
+    _scenes('space', '#0A0B1E', '#1A1540',
+            dict(dim_to='#000000',
+                 planets=[('#FFB86B', '#E08F3F', '#B9A6FF'), ('#6FA8DC', '#4F88BC', None),
+                          ('#9D90FF', '#7B6CF6', '#FFD27A')]),
+            (0.25, 0.4, 0.0)),
+    ['연보라 바탕에 우주선 판 말풍선. 첫 장엔 안테나',
+     '파스텔 하늘에 고리 행성이 뜸',
+     '깊은 남색 바탕에 우주선 판 말풍선',
+     '별과 행성이 뜬 밤 우주'])
+
+THEMES += character(
+    'greenhouse', 141, '온실',
+    dict(char_style='leaf', char='cactus'),
+    dict(bg='#EDF5EC', bg_deep='#E2EFE1', surface='#F7FBF6', pressed='#D6E8D4',
+         border='#C8DEC6', text='#24382A', subtext='#6B8570',
+         accent='#3FA66A', accent_dim='#2E8753', on_accent='#FFFFFF',
+         recv='#FFFFFF', recv_alt='#E3F2DC', send='#C4EBCB', send_alt='#F7DCE6',
+         recv_text='#24382A', send_text='#24382A',
+         char_outline='#27402E', stem='#5A9A5A', dew='#DFF3FF',
+         char_backs=('#E4F5E2', '#FFE6EE', '#F1F6E4')),
+    dict(bg='#111C16', bg_deep='#0C1510', surface='#18261E', pressed='#203227',
+         border='#2A3F32', text='#E2F2E6', subtext='#88A690',
+         accent='#6FD49A', accent_dim='#4FB47A', on_accent='#0C1510',
+         recv='#1E3026', recv_alt='#2A4234', send='#2F6B48', send_alt='#6E3A52',
+         recv_text='#E2F2E6', send_text='#F0FAF3',
+         char_outline='#A9CDB3', stem='#6FB46F', dew='#BFE3F2',
+         char_backs=('#1F3328', '#3A2A33', '#26352A')),
+    _scenes('greenhouse', '#CFEAF7', '#F2FAF0', dict(rays=True, dim_to='#FFFFFF'),
+            (0.3, 0.45, 0.05)),
+    _scenes('greenhouse', '#0E1A24', '#16261E',
+            dict(frame='#2F4A3A', lamps='#FFD27A', ink='#0A140F', shelf='#4A3A2A',
+                 dim_to='#000000'),
+            (0.25, 0.4, 0.0)),
+    ['연둣빛 바탕에 잎 말풍선. 첫 장엔 잎자루와 이슬',
+     '햇살 드는 온실 선반에 화분이 줄지음',
+     '밤 온실. 짙은 초록 바탕에 잎 말풍선',
+     '전등 켜진 밤 온실의 화분들'])
 
 check_variants()

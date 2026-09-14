@@ -429,6 +429,8 @@ def geometry(t, variant):
     bw, bh, r = st['bw'], st['bh'], st['radius']
     for _ in range(80):
         feats = st['features'](t, bw, bh, first)
+        if t.get('firelight'):
+            feats = feats + firelight_features(bw, bh)
         ml = math.ceil(max([2.0] + [-b[0] for b, z in feats])) + G
         mr = math.ceil(max([2.0] + [b[2] - bw for b, z in feats])) + G
         mt = math.ceil(max([2.0] + [-b[1] for b, z in feats])) + G
@@ -475,6 +477,61 @@ def geometry(t, variant):
                 outer=ml, inner=mr, top=mt, bottom=mb)
 
 
+# 불빛이 닿는 거리(pt). 안쪽 아래 귀퉁이에서 아래변을 따라 FL_RX, 옆변을 따라 FL_RY 가면 사라진다.
+# 둘의 합이 한 줄짜리 말풍선에서 늘어나는 줄이 지날 틈을 남기는 한계(대략 35)를 넘으면 몸통이 커진다.
+# 불이 아래에 있으니 아래변 쪽으로 길게 나눴다
+FL_RX, FL_RY = 22, 10
+FL_FILL, FL_RIM = 0.5, 1.0
+
+
+def firelight_features(bw, bh):
+    """불빛이 차지하는 자리. 세기가 가로세로로 다 바뀌므로 안쪽 아래 모서리 칸 안에 가둔다."""
+    return [((bw - FL_RX - 1, bh - FL_RY - 1, bw + OW, bh + OW), ('inner', 'bottom'))]
+
+
+def _firelight_mask(geo, size, s):
+    """안쪽 아래 귀퉁이에서 퍼져 멀어질수록 사라지는 빛. 받은 쪽 장 좌표다.
+
+    거리에 따라 줄인다. 한때 아래변 전체에 고른 띠를 깔았는데 형광펜으로 그은 밑줄처럼
+    보였다 — 실제 불빛은 가까운 곳만 밝고 멀어지면 금방 사그라든다. 흐린 원 하나를 쓴 적도 있는데
+    가운데가 평평하게 차서 모서리에 묻은 얼룩이 됐다.
+    """
+    W, H = size
+    cx, cy = (geo['ml'] + geo['bw']) * s, (geo['mt'] + geo['bh']) * s
+    RX, RY = FL_RX * s, FL_RY * s
+    m = Image.new('L', (W, H), 0)
+    d = ImageDraw.Draw(m)
+    n = 40
+    for i in range(n, 0, -1):
+        f = i / n
+        d.ellipse([cx - RX * f, cy - RY * f, cx + RX * f, cy + RY * f], fill=int(255 * (1 - f) ** 1.3))
+    return m.filter(ImageFilter.GaussianBlur(s))
+
+
+def _firelit(img, t, mask, s):
+    """배경의 모닥불에 비친 말풍선.
+
+    불은 화면 아래 가운데에 있다. 화면 가운데를 향한 안쪽 아래 귀퉁이가 불에 가장 가까워,
+    거기서 윤곽선을 따라 아래변과 옆변으로 빛이 번지다 사그라든다. 몸통은 그 귀퉁이 둘레만 옅게 물든다.
+    받은 쪽 장의 안쪽은 오른쪽이고 보낸 쪽은 이 장을 뒤집어 쓰므로 양쪽 모두 가운데 쪽이 밝다.
+    """
+    col = hexc(t['firelight'])[:3]
+    k = t.get('firelight_k', 1.0)
+    a = img.getchannel('A')
+    m = ImageChops.multiply(mask.point(lambda v: int(v * FL_FILL * k)), a)
+    rgb = ImageChops.screen(img.convert('RGB'), ImageChops.multiply(
+        Image.new('RGB', img.size, col), Image.merge('RGB', [m] * 3)))
+    # 윤곽선은 채움보다 빛을 멀리까지 받는다 — 모서리가 빛을 걸어 올리는 자리라서다.
+    # 이미 밝은 선이라 screen 으로는 흰 선이 되므로 불빛 색 쪽으로 끌어당긴다
+    edge = ImageChops.subtract(a, a.filter(ImageFilter.MinFilter(int(2 * s) * 2 + 1)))
+    reach = mask.point(lambda v: int(255 * (v / 255.0) ** 0.5))
+    em = ImageChops.multiply(edge, reach).point(lambda v: min(255, int(v * FL_RIM * k)))
+    rim = Image.new('RGB', img.size, hexc(_g().mix(t['firelight'], '#FFFFFF', 0.3))[:3])
+    out = Image.composite(rim, rgb, em).convert('RGBA')
+    out.putalpha(a)
+    return out
+
+
 def sheet(t, side, variant, scale):
     """말풍선 한 장과 그 치수. 보낸 쪽은 받은 쪽 장을 뒤집는다.
 
@@ -492,6 +549,10 @@ def sheet(t, side, variant, scale):
     st['draw'](Pen(img, scale, oc), Pen(lay, scale, oc), geo['ml'], geo['mt'],
                geo['bw'], geo['bh'], variant == '01', ck, t)
     img.alpha_composite(lay)
+    fl = None
+    if t.get('firelight'):
+        fl = _firelight_mask(geo, size, scale)
+        img = _firelit(img, t, fl, scale)
 
     G = t.get('char_glow') or 0
     if G:
@@ -503,7 +564,12 @@ def sheet(t, side, variant, scale):
         # 옅은 꼬리를 잘라낸다. 장 끝까지 알파가 남으면 말풍선 둘레에 네모가 뜬다
         gk = t.get('char_glow_k', 1.35)
         halo = halo.point(lambda v: 0 if v < 16 else min(255, int((v - 16) * gk)))
-        col = hexc(g.mix(_c(t[ck]), '#FFFFFF', 0.25))[:3]
+        if fl is not None:
+            # 불 쪽 귀퉁이 둘레만 빛이 짙다. 아래변 전체를 짙게 두면 형광펜 밑줄로 보였다
+            halo = ImageChops.add(halo, ImageChops.multiply(halo, fl))
+        # 빛 색은 기본이 말풍선 색이다. 갈색 팻말처럼 몸통이 탁한 색이면 탁한 빛이 번져
+        # 빛이 아니라 얼룩으로 보이므로, 빛의 출처가 따로 있는 계열은 그 색을 준다(모닥불)
+        col = hexc(t.get('char_glow_color') or g.mix(_c(t[ck]), '#FFFFFF', 0.25))[:3]
         glow = Image.new('RGBA', size, col + (255,))
         glow.putalpha(halo)
         out = Image.new('RGBA', size, (0, 0, 0, 0))
@@ -624,3 +690,302 @@ def check_all(themes):
         if t.get('char_style'):
             for v in ('01', '02'):
                 geometry(t, v)
+
+
+# --- 두 번째 묶음: 영화표·식빵·팻말·우주선 판·잎 -----------------------------
+
+def _star_pts(cx, cy, R, r, n=5, rot=-90):
+    return [(cx + math.cos(math.radians(rot + i * 180.0 / n)) * (R if i % 2 == 0 else r),
+             cy + math.sin(math.radians(rot + i * 180.0 / n)) * (R if i % 2 == 0 else r))
+            for i in range(n * 2)]
+
+
+def d_ticket(p, lp, x, y, w, h, first, ck, t):
+    """영화표. 양옆에 반달 홈이 파여 있다.
+
+    홈은 아래에서 잰 자리에 둔다. 늘어나는 줄이 홈 위를 지나므로 말이 길어지면 홈이
+    아래쪽을 따라 내려간다. 위에서 잰 자리에 두면 cap 이 홈 아래까지 내려가야 해서
+    짧은 말의 말풍선이 쓸데없이 넓어진다.
+    """
+    nr, ny = 5, y + h - 22
+    size = p.img.size
+
+    def mask(e_body, e_hole):
+        m = Image.new('L', size, 0)
+        md = ImageDraw.Draw(m)
+        md.rounded_rectangle(p._b(x - e_body, y - e_body, x + w + e_body, y + h + e_body),
+                             radius=(5 + e_body) * p.s, fill=255)
+        for cx in (x, x + w):
+            md.ellipse(p._b(cx - nr - e_hole, ny - nr - e_hole, cx + nr + e_hole, ny + nr + e_hole),
+                       fill=0)
+        return m
+
+    p.img.paste(Image.new('RGBA', size, p.oc), (0, 0), mask(OW, 0))
+    p.img.paste(Image.new('RGBA', size, hexc(_c(t[ck]))), (0, 0), mask(0, OW))
+    if first:
+        # 별 도장은 윗변에 걸쳐 붙인다 — 몸통 안에 두면 첫 글자 머리와 겹친다
+        p.poly(_star_pts(x + 11, y, 5.2, 2.3), hexc(t.get('star', '#E8B93A')), ow=1.2)
+
+
+def f_ticket(t, bw, bh, first):
+    nr, ny = 5, bh - 22
+    f = [((-OW, -OW, bw + OW, bh + OW), ()),
+         ((-OW, ny - nr - OW, nr + OW, ny + nr + OW), ('outer', 'bottom')),
+         ((bw - nr - OW, ny - nr - OW, bw + OW, ny + nr + OW), ('inner', 'bottom'))]
+    if first:
+        f.append(((4.5, -6.5, 17.5, 6.5), ('outer', 'top')))
+    return f
+
+
+def d_toast(p, lp, x, y, w, h, first, ck, t):
+    """식빵 한 쪽. 위가 어깨처럼 둥글게 넓고 껍질 띠가 두른다. 첫 장엔 흘러내리는 딸기잼."""
+    fill, crust = hexc(_c(t[ck])), hexc(t[ck + '_crust'])
+
+    def parts(e, inset=0):
+        return [(x - e, y - e, x + w + e, y + 16 + e, 8 + e),
+                (x + 2 - e, y + 6, x + w - 2 + e, y + h + e, 5 + e)]
+
+    for e, col in ((OW, p.oc), (0, crust), (-2.6, fill)):
+        for a, b, c, d_, r in parts(e):
+            p.d.rounded_rectangle(p._b(a, b, c, d_), radius=max(0.5, r) * p.s, fill=col)
+    if first:
+        _jam(p, lp, x, y, w, t)
+
+
+def _jam(p, lp, x, y, w, t):
+    """식빵 안쪽 위 귀퉁이에 퍼진 딸기잼. 모서리 곡선을 따라 퍼지고 앞면으로 줄기 셋이 흐른다.
+
+    처음엔 한 줄기가 굵기 그대로 옆면 바깥을 타고 내려갔는데 전선처럼 보였고, 말이 길어지면
+    그 줄이 말풍선 끝까지 늘어나 파이프가 됐다. 잼 줄기는 위가 굵고 아래로 가늘어지다 방울로
+    맺힌다. 줄기는 늘어나는 세로 줄보다 위에서 끝나게 해서 말 길이와 상관없이 같은 모양이다.
+    """
+    jam = hexc(t.get('jam', '#E8455A'))
+    ow = 1.1
+    # 퍼진 덩어리. 윗변을 따라 납작하게, 귀퉁이에서는 모서리를 감싸며 조금 흘러넘친다
+    blobs = [(x + w - 21.5, y + 0.6, 3.2, 2.6), (x + w - 14, y - 0.4, 6.6, 3.8),
+             (x + w - 5.5, y + 0.4, 5.6, 4.0), (x + w - 1.6, y + 4.4, 3.6, 4.4)]
+    # (가운데 x, 시작 y, 방울 y, 시작 굵기, 방울 반경)
+    drips = [(x + w - 5.2, y + 3.5, y + 18.0, 5.2, 2.9),
+             (x + w - 11.5, y + 1.5, y + 7.6, 4.2, 2.2),
+             (x + w - 19.0, y + 1.0, y + 4.6, 3.0, 1.7)]
+
+    def drip(cx, y0, yb, top_w, br, e, col):
+        pts_l, pts_r = [], []
+        for q in range(9):
+            f = q / 8
+            yy = y0 + (yb - y0) * f
+            half = (top_w / 2) * (1 - f) ** 0.9 + br * 0.55 * f + e
+            pts_l.append((cx - half, yy))
+            pts_r.append((cx + half, yy))
+        p.d.polygon([(a * p.s, b * p.s) for a, b in pts_l + pts_r[::-1]], fill=col)
+        p.d.ellipse(p._b(cx - br - e, yb - br * 0.95 - e, cx + br + e, yb + br * 1.1 + e), fill=col)
+
+    for e, col in ((ow, p.oc), (0, jam)):
+        for cx, cy, rx, ry in blobs:
+            p.d.ellipse(p._b(cx - rx - e, cy - ry - e, cx + rx + e, cy + ry + e), fill=col)
+        for d_ in drips:
+            drip(*d_, e=e, col=col)
+    # 윤기. 덩어리 위쪽에 긴 반사 하나, 긴 줄기에 짧은 반사, 방울마다 작은 점.
+    # 반사가 없으면 잼이 아니라 붉은 페인트다
+    shine = (255, 255, 255, 190)
+    lp.ell(x + w - 13, y - 1.8, 3.8, 1.1, shine, outline=False)
+    lp.line([(x + w - 6.4, y + 6), (x + w - 6.0, y + 12)], (255, 255, 255, 120), 0.9)
+    for cx, _, yb, _, br in drips:
+        lp.dot(cx - br * 0.35, yb - br * 0.3, br * 0.3, fill=shine)
+
+
+def f_toast(t, bw, bh, first):
+    f = [((-OW, -OW, bw + OW, bh + OW), ()),
+         ((-OW, -OW, bw + OW, 16 + OW), ('top',))]
+    if first:
+        # 잼은 덩어리와 줄기가 모두 늘어나는 세로 줄보다 위에서 끝난다
+        f.append(((bw - 26, -5.6, bw + 3.4, 22.5), ('inner', 'top')))
+    return f
+
+
+def d_sign(p, lp, x, y, w, h, first, ck, t):
+    """나무 팻말. 네 귀퉁이에 못, 아래쪽에 판자 두께. 첫 장엔 땅에 박는 말뚝."""
+    col = _c(t[ck])
+    if first:
+        p.rr(x + 12, y + h - 4, x + 20, y + h + 12, 1.5, hexc(t.get('post', '#9C6B3E')), ow=OW)
+    p.rr(x, y, x + w, y + h, 3, hexc(_g().mix(col, t['char_outline'], 0.28)), ow=OW)
+    p.d.rounded_rectangle(p._b(x, y, x + w, y + h - 3), radius=3 * p.s, fill=hexc(col))
+    nail = hexc(t.get('nail', '#8A7A6A'))
+    for nx, ny in ((x + 5, y + 5), (x + w - 5, y + 5), (x + 5, y + h - 7), (x + w - 5, y + h - 7)):
+        p.dot(nx, ny, 1.7, fill=nail)
+        lp.dot(nx - 0.5, ny - 0.5, 0.6, fill=(255, 255, 255, 170))
+
+
+def f_sign(t, bw, bh, first):
+    f = [((-OW, -OW, bw + OW, bh + OW), ()),
+         ((0, bh - 6, bw, bh), ('bottom',)),
+         ((3, 3, 7, 7), ('outer', 'top')), ((bw - 7, 3, bw - 3, 7), ('inner', 'top')),
+         ((3, bh - 9, 7, bh - 5), ('outer', 'bottom')), ((bw - 7, bh - 9, bw - 3, bh - 5), ('inner', 'bottom'))]
+    if first:
+        f.append(((12 - OW, bh - 4, 20 + OW, bh + 12 + OW), ('outer', 'bottom')))
+    return f
+
+
+def d_panel(p, lp, x, y, w, h, first, ck, t):
+    """우주선 판. 둥근 판 안쪽에 한 줄 더 두른다. 첫 장엔 안테나와 반짝이."""
+    col = _c(t[ck])
+    if first:
+        p.line([(x + 14, y + 2), (x + 10, y - 9)], p.oc, 1.8)
+        p.ell(x + 10, y - 10.5, 2.8, 2.8, hexc(t['accent']), ow=1.3)
+    p.rr(x, y, x + w, y + h, 12, hexc(col), ow=OW)
+    p.d.rounded_rectangle(p._b(x + 3.5, y + 3.5, x + w - 3.5, y + h - 3.5), radius=8.5 * p.s,
+                          outline=hexc(_g().mix(col, t['char_outline'], 0.3)),
+                          width=max(1, int(1.1 * p.s)))
+    if first:
+        cx, cy = x + w - 12, y - 2
+        q = 1.5
+        pts = [(cx, cy - 5.5), (cx + q, cy - q), (cx + 5.5, cy), (cx + q, cy + q),
+               (cx, cy + 5.5), (cx - q, cy + q), (cx - 5.5, cy), (cx - q, cy - q)]
+        p.poly(pts, hexc(t.get('star', '#FFD84D')), ow=1.1)
+
+
+def f_panel(t, bw, bh, first):
+    f = [((-OW, -OW, bw + OW, bh + OW), ())]
+    if first:
+        f += [((5, -15, 16, 2), ('outer', 'top')),
+              ((bw - 19, -9, bw - 5, 5), ('inner', 'top'))]
+    return f
+
+
+def d_leaf(p, lp, x, y, w, h, first, ck, t):
+    """잎. 바깥 위와 안쪽 아래 귀퉁이만 크게 둥글다. 첫 장엔 잎자루와 이슬 한 방울.
+
+    잎맥은 넣지 않는다 — 몸통을 가로지르는 선은 취소선으로 읽힌다(젤리에서 겪었다).
+    """
+    R, r = 16, 4
+    if first:
+        stem = hexc(t.get('stem', '#5A9A5A'))
+        pts = [(x + 8, y + h - 3), (x + 6, y + h + 5), (x + 3, y + h + 10)]
+        p.line(pts, p.oc, 3.8)
+        p.line(pts, stem, 1.8)
+        p.poly([(x + 6.5, y + h + 5), (x + 11, y + h + 3), (x + 15.5, y + h + 6.5), (x + 10, y + h + 8.5)],
+               stem, ow=1.1)
+
+    def shape(e, col):
+        p.d.rounded_rectangle(p._b(x - e, y - e, x + w + e, y + h + e), radius=(R + e) * p.s, fill=col)
+        p.d.rounded_rectangle(p._b(x + w / 2, y - e, x + w + e, y + h / 2), radius=(r + e) * p.s, fill=col)
+        p.d.rounded_rectangle(p._b(x - e, y + h / 2, x + w / 2, y + h + e), radius=(r + e) * p.s, fill=col)
+
+    shape(OW, p.oc)
+    shape(0, hexc(_c(t[ck])))
+    if first:
+        p.ell(x + w - 10, y + 5, 2.6, 3.2, hexc(t.get('dew', '#DFF3FF')), ow=1.1)
+        lp.dot(x + w - 10.8, y + 3.8, 0.8, fill=(255, 255, 255, 230))
+
+
+def f_leaf(t, bw, bh, first):
+    f = [((-OW, -OW, bw + OW, bh + OW), ())]
+    if first:
+        f += [((1, bh - 5, 17, bh + 12), ('outer', 'bottom')),
+              ((bw - 14, 0.5, bw - 6, 9.5), ('inner', 'top'))]
+    return f
+
+
+STYLES.update({
+    'ticket': dict(bw=40, bh=44, radius=5, draw=d_ticket, features=f_ticket),
+    'toast':  dict(bw=40, bh=44, radius=8, draw=d_toast, features=f_toast),
+    'sign':   dict(bw=40, bh=44, radius=3, draw=d_sign, features=f_sign),
+    'panel':  dict(bw=40, bh=44, radius=12, draw=d_panel, features=f_panel),
+    'leaf':   dict(bw=40, bh=44, radius=16, draw=d_leaf, features=f_leaf),
+})
+
+
+def c_popcorn(p):
+    """톡톡 — 팝콘 통. 줄무늬는 양 가장자리에만 둔다. 가운데까지 칠하면 36pt 에서 줄무늬만 읽힌다."""
+    face = hexc(FACE)
+    red, white, pop = hexc('#E8413B'), hexc('#FFFFFF'), hexc('#FFF4D6')
+    puffs = [(30, 38, 12), (50, 28, 14), (70, 38, 12), (40, 44, 11), (60, 44, 11)]
+    for cx, cy, r in puffs:
+        p.ell(cx, cy, r, r, pop, ow=4)
+    for cx, cy, r in puffs:
+        p.ell(cx, cy, r - 0.5, r - 0.5, pop, outline=False)
+    p.poly([(16, 50), (84, 50), (74, 97), (26, 97)], white, ow=4.5)
+    p.poly([(16, 50), (29, 50), (35, 97), (26, 97)], red, outline=False)
+    p.poly([(71, 50), (84, 50), (74, 97), (65, 97)], red, outline=False)
+    p.rr(12, 46, 88, 58, 4, red, ow=4)
+    p.dot(41, 72, 5, fill=face)
+    p.dot(59, 72, 5, fill=face)
+    p.ell(33, 81, 5, 3, hexc('#FFA8A8'), outline=False)
+    p.ell(67, 81, 5, 3, hexc('#FFA8A8'), outline=False)
+    p.arc((45, 73, 55, 84), 20, 160, w=3.5, fill=face)
+
+
+def c_bread(p):
+    """말랑 — 식빵 한 쪽."""
+    face = hexc(FACE)
+    crust, crumb = hexc('#D08A45'), hexc('#FFF1D2')
+    parts = lambda e: [(10 - e, 8 - e, 90 + e, 52 + e, 22 + e), (16 - e, 30, 84 + e, 94 + e, 8 + e)]
+    for e, col in ((4.5, p.oc), (0, crust), (-7, crumb)):
+        for x0, y0, x1, y1, r in parts(e):
+            p.d.rounded_rectangle(p._b(x0, y0, x1, y1), radius=max(1, r) * p.s, fill=col)
+    p.dot(38, 56, 5, fill=face)
+    p.dot(62, 56, 5, fill=face)
+    p.ell(28, 66, 6.5, 4, hexc('#FFB38A'), outline=False)
+    p.ell(72, 66, 6.5, 4, hexc('#FFB38A'), outline=False)
+    p.arc((44, 57, 56, 69), 20, 160, w=3.5, fill=face)
+
+
+def c_flame(p):
+    """타닥 — 장작 위의 모닥불. 얼굴은 안쪽 노란 불꽃에 둔다."""
+    face = hexc(FACE)
+    orange, yellow, log = hexc('#FF8A3D'), hexc('#FFD45A'), hexc('#9A6238')
+    tri = [(22, 60), (50, 4), (78, 60)]
+    p.ell(50, 62, 28, 26, orange, ow=4.5)
+    p.poly(tri, orange, ow=4.5)
+    p.ell(50, 62, 28, 26, orange, outline=False)
+    p.ell(50, 64, 18, 17, yellow, outline=False)
+    p.poly([(32, 62), (50, 26), (68, 62)], yellow, outline=False)
+    for pts in ([(10, 82), (82, 72), (86, 84), (14, 96)], [(90, 82), (18, 72), (14, 84), (86, 96)]):
+        p.poly(pts, log, ow=4)
+    p.dot(42, 60, 4.5, fill=face)
+    p.dot(58, 60, 4.5, fill=face)
+    p.arc((45, 61, 55, 71), 20, 160, w=3.5, fill=face)
+
+
+def c_saturn(p):
+    """링링 — 고리 두른 행성. 고리는 뒤 반쪽을 먼저, 앞 반쪽을 얼굴 아래로 나중에 긋는다."""
+    face = hexc(FACE)
+    ring, body = hexc('#B9A6FF'), hexc('#FFC98A')
+    box = (4, 44, 96, 80)
+    p.arc(box, 180, 360, w=11, fill=p.oc)
+    p.arc((5.5, 45.5, 94.5, 78.5), 180, 360, w=6, fill=ring)
+    p.ell(50, 50, 31, 31, body, ow=4.5)
+    p.arc(box, 0, 180, w=11, fill=p.oc)
+    p.arc((5.5, 45.5, 94.5, 78.5), 0, 180, w=6, fill=ring)
+    p.dot(39, 46, 5, fill=face)
+    p.dot(61, 46, 5, fill=face)
+    p.ell(30, 56, 5.5, 3.5, hexc('#FF9C7A'), outline=False)
+    p.ell(70, 56, 5.5, 3.5, hexc('#FF9C7A'), outline=False)
+    p.arc((45, 47, 55, 58), 20, 160, w=3.5, fill=face)
+
+
+def c_cactus(p):
+    """뾰족 — 화분에 심은 선인장. 머리에 꽃 한 송이."""
+    face = hexc(FACE)
+    green, pot, rim = hexc('#6CC57C'), hexc('#E07A4F'), hexc('#F09062')
+    parts = [(30, 18, 70, 76, 18), (10, 32, 26, 56, 8), (18, 46, 36, 57, 5),
+             (74, 24, 90, 48, 8), (64, 38, 82, 49, 5)]
+    for x0, y0, x1, y1, r in parts:
+        p.d.rounded_rectangle(p._b(x0 - 4.5, y0 - 4.5, x1 + 4.5, y1 + 4.5), radius=(r + 4.5) * p.s, fill=p.oc)
+    for x0, y0, x1, y1, r in parts:
+        p.d.rounded_rectangle(p._b(x0, y0, x1, y1), radius=r * p.s, fill=green)
+    for a in range(0, 360, 72):
+        p.ell(50 + math.cos(math.radians(a)) * 5, 15 + math.sin(math.radians(a)) * 5, 4, 4,
+              hexc('#FF8FB1'), ow=2)
+    p.dot(50, 15, 3, fill=hexc('#FFD45A'))
+    p.poly([(26, 74), (74, 74), (68, 97), (32, 97)], pot, ow=4.5)
+    p.rr(22, 68, 78, 80, 3, rim, ow=4)
+    p.dot(41, 44, 4.8, fill=face)
+    p.dot(59, 44, 4.8, fill=face)
+    p.ell(35, 54, 5, 3, hexc('#FFA8A8'), outline=False)
+    p.ell(65, 54, 5, 3, hexc('#FFA8A8'), outline=False)
+    p.arc((45, 46, 55, 56), 20, 160, w=3.5, fill=face)
+
+
+CHARS.update({'popcorn': c_popcorn, 'bread': c_bread, 'flame': c_flame,
+              'saturn': c_saturn, 'cactus': c_cactus})
