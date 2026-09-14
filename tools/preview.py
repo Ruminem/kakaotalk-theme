@@ -792,12 +792,12 @@ def category_doc(T, cat, note, members):
 def _family_block(T, name, members, img):
     """계열 하나의 상세. 변형 표와 접어둔 화면들. img 는 assets 까지의 상대 경로다."""
     out = ['<a name="%s"></a>' % slug(name), '']
+    # 테마 목록 링크는 제목 바로 오른쪽에 붙인다. 아래 줄 오른쪽 끝에 두었더니 넓은 화면에서
+    # 제목과 멀리 떨어져 짝으로 안 읽혔다. 마크다운으로는 한 줄 안에서 오른쪽 끝으로 밀 수가
+    # 없어 제목 안에 넣는다 — 깃허브 목차에 계열마다 "↑ 테마 목록" 이 같이 붙는 것은 감수한다.
     out.append('## <img src="%sicon-%s.png" width="26" valign="middle"> %s'
-               % (img, T.file_slug(members[0]), name))
-    out.append('')
-    # 제목 안에 넣지 않는다. 깃허브 목차가 제목 글자를 그대로 보여주므로 계열마다
-    # "↑ 테마 목록" 이 붙어 목차가 지저분해진다.
-    out.append('<p align="right"><sub><a href="%s">↑ 테마 목록</a></sub></p>' % anchor(TOP))
+               ' &nbsp;<sub><a href="%s">↑ 테마 목록</a></sub>'
+               % (img, T.file_slug(members[0]), name, anchor(TOP)))
     out.append('')
 
     # 변형 배치. 넷이면 2x2 로 접는다 — 한 줄에 넷을 놓으면 폰에서 옆으로 밀어야 한다.

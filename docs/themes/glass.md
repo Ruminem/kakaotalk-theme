@@ -33,9 +33,7 @@
 
 <a name="리퀴드-글래스"></a>
 
-## <img src="../../assets/icon-glass-light.png" width="26" valign="middle"> 리퀴드 글래스
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-glass-light.png" width="26" valign="middle"> 리퀴드 글래스 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -70,9 +68,7 @@
 
 <a name="원목-글래스"></a>
 
-## <img src="../../assets/icon-wood-oak.png" width="26" valign="middle"> 원목 글래스
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-wood-oak.png" width="26" valign="middle"> 원목 글래스 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -107,9 +103,7 @@
 
 <a name="스테인드-글래스"></a>
 
-## <img src="../../assets/icon-stained-amber.png" width="26" valign="middle"> 스테인드 글래스
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-stained-amber.png" width="26" valign="middle"> 스테인드 글래스 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -144,9 +138,7 @@
 
 <a name="프리즘-글래스"></a>
 
-## <img src="../../assets/icon-prism-light.png" width="26" valign="middle"> 프리즘 글래스
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-prism-light.png" width="26" valign="middle"> 프리즘 글래스 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -181,9 +173,7 @@
 
 <a name="프로스트-글래스"></a>
 
-## <img src="../../assets/icon-frost-light.png" width="26" valign="middle"> 프로스트 글래스
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-frost-light.png" width="26" valign="middle"> 프로스트 글래스 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>

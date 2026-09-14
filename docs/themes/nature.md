@@ -33,9 +33,7 @@
 
 <a name="벚꽃-그늘"></a>
 
-## <img src="../../assets/icon-sakura-basic.png" width="26" valign="middle"> 벚꽃 그늘
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-sakura-basic.png" width="26" valign="middle"> 벚꽃 그늘 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -70,9 +68,7 @@
 
 <a name="오로라"></a>
 
-## <img src="../../assets/icon-aurora-basic.png" width="26" valign="middle"> 오로라
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-aurora-basic.png" width="26" valign="middle"> 오로라 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -107,9 +103,7 @@
 
 <a name="심야"></a>
 
-## <img src="../../assets/icon-midnight-basic.png" width="26" valign="middle"> 심야
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-midnight-basic.png" width="26" valign="middle"> 심야 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -144,9 +138,7 @@
 
 <a name="바다"></a>
 
-## <img src="../../assets/icon-sea-basic.png" width="26" valign="middle"> 바다
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-sea-basic.png" width="26" valign="middle"> 바다 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -181,9 +173,7 @@
 
 <a name="숲"></a>
 
-## <img src="../../assets/icon-forest-basic.png" width="26" valign="middle"> 숲
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-forest-basic.png" width="26" valign="middle"> 숲 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -218,9 +208,7 @@
 
 <a name="설원"></a>
 
-## <img src="../../assets/icon-snow-basic.png" width="26" valign="middle"> 설원
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-snow-basic.png" width="26" valign="middle"> 설원 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>

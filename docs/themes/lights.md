@@ -43,9 +43,7 @@
 
 <a name="야경"></a>
 
-## <img src="../../assets/icon-city-basic.png" width="26" valign="middle"> 야경
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-city-basic.png" width="26" valign="middle"> 야경 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -80,9 +78,7 @@
 
 <a name="사이버펑크"></a>
 
-## <img src="../../assets/icon-cyber-basic.png" width="26" valign="middle"> 사이버펑크
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-cyber-basic.png" width="26" valign="middle"> 사이버펑크 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -117,9 +113,7 @@
 
 <a name="레드"></a>
 
-## <img src="../../assets/icon-red-basic.png" width="26" valign="middle"> 레드
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-red-basic.png" width="26" valign="middle"> 레드 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -154,9 +148,7 @@
 
 <a name="불꽃놀이"></a>
 
-## <img src="../../assets/icon-firework-basic.png" width="26" valign="middle"> 불꽃놀이
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-firework-basic.png" width="26" valign="middle"> 불꽃놀이 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -191,9 +183,7 @@
 
 <a name="연등"></a>
 
-## <img src="../../assets/icon-lantern-basic.png" width="26" valign="middle"> 연등
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-lantern-basic.png" width="26" valign="middle"> 연등 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -228,9 +218,7 @@
 
 <a name="알전구"></a>
 
-## <img src="../../assets/icon-garland-basic.png" width="26" valign="middle"> 알전구
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-garland-basic.png" width="26" valign="middle"> 알전구 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -265,9 +253,7 @@
 
 <a name="고속도로"></a>
 
-## <img src="../../assets/icon-highway-basic.png" width="26" valign="middle"> 고속도로
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-highway-basic.png" width="26" valign="middle"> 고속도로 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -302,9 +288,7 @@
 
 <a name="터미널"></a>
 
-## <img src="../../assets/icon-terminal-basic.png" width="26" valign="middle"> 터미널
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-terminal-basic.png" width="26" valign="middle"> 터미널 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>

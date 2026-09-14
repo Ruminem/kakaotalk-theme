@@ -43,9 +43,7 @@
 
 <a name="우체국"></a>
 
-## <img src="../../assets/icon-post-light.png" width="26" valign="middle"> 우체국
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-post-light.png" width="26" valign="middle"> 우체국 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -80,9 +78,7 @@
 
 <a name="책상"></a>
 
-## <img src="../../assets/icon-desk-light.png" width="26" valign="middle"> 책상
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-desk-light.png" width="26" valign="middle"> 책상 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -117,9 +113,7 @@
 
 <a name="오락실"></a>
 
-## <img src="../../assets/icon-arcade-light.png" width="26" valign="middle"> 오락실
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-arcade-light.png" width="26" valign="middle"> 오락실 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -154,9 +148,7 @@
 
 <a name="빨래"></a>
 
-## <img src="../../assets/icon-laundry-light.png" width="26" valign="middle"> 빨래
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-laundry-light.png" width="26" valign="middle"> 빨래 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -191,9 +183,7 @@
 
 <a name="영화관"></a>
 
-## <img src="../../assets/icon-cinema-light.png" width="26" valign="middle"> 영화관
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-cinema-light.png" width="26" valign="middle"> 영화관 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -228,9 +218,7 @@
 
 <a name="빵집"></a>
 
-## <img src="../../assets/icon-bakery-light.png" width="26" valign="middle"> 빵집
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-bakery-light.png" width="26" valign="middle"> 빵집 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -265,9 +253,7 @@
 
 <a name="캠핑"></a>
 
-## <img src="../../assets/icon-camp-light.png" width="26" valign="middle"> 캠핑
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-camp-light.png" width="26" valign="middle"> 캠핑 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -302,9 +288,7 @@
 
 <a name="우주"></a>
 
-## <img src="../../assets/icon-space-light.png" width="26" valign="middle"> 우주
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-space-light.png" width="26" valign="middle"> 우주 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
@@ -339,9 +323,7 @@
 
 <a name="온실"></a>
 
-## <img src="../../assets/icon-greenhouse-light.png" width="26" valign="middle"> 온실
-
-<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+## <img src="../../assets/icon-greenhouse-light.png" width="26" valign="middle"> 온실 &nbsp;<sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub>
 
 <table>
 <tr>
