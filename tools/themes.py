@@ -40,7 +40,7 @@ chat_bg
 
 import re
 
-VERSION = '0.31'
+VERSION = '0.31.1'
 
 THEMES = [
     dict(
@@ -1560,7 +1560,10 @@ THEMES += quartet(
          accent='#39E07A', accent_dim='#23B05E', on_accent='#03170A',
          send=('#39E07A', '#39E07A'), send_alt=('#FFB000', '#FFB000'),
          recv=('#11251A', '#11251A'), recv_alt=('#1E4A33', '#1E4A33'),
-         send_text='#03170A', recv_text='#D8F5E1'),
+         send_text='#03170A', recv_text='#D8F5E1',
+         # 기본 글로우의 흰 테두리와 반사선이 검은 초록 칸에서 광택 스티커로 읽혀서
+         # 모니터 창틀처럼 형광 초록으로 빛나게 한다(0.31.1)
+         glow_edge='phosphor'),
     dict(chat_bg=('terminal', '#07100A', '#0B1A10', dict(dim=0.52)),
          main_bg=('terminal', '#07100A', '#0A160E', dict(dim=0.58)),
          passcode_bg=('terminal', '#08120B', '#0E2014', dict(cell=0.028, dim=0.1))),

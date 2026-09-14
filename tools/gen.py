@@ -139,6 +139,35 @@ SAT_LOSS = 0.38
 SPEC_TINT, SPEC_ALPHA = 0.60, 0.35
 
 
+def _phosphor_color(base, accent):
+    """모니터 글자처럼 빛나는 말풍선의 빛 색. 어두운 칸은 제 색으로는 빛이 안 보여서 포인트색을 쓴다."""
+    r, g, b = rgb(base)
+    return accent if (r * 299 + g * 587 + b * 114) / 1000 < 90 else base
+
+
+def _phosphor_inner(out, mask, w, h, glow, colors):
+    """glow_edge='phosphor' 의 안쪽 빛. 옛 모니터 화면 속 창틀처럼 빛난다.
+
+    기본 글로우는 가장자리에 흰 쪽으로 밝힌 띠와 흰 반사선을 두른다. 터미널의 검은 초록 칸에서는
+    그게 빛이 아니라 회백색 테두리로 떠서 광택 스티커처럼 싸구려로 보였다. 모니터에는 광택이 없다 —
+    어두운 칸은 형광색 가는 선과 안쪽으로 옅게 번지는 빛만 두고, 밝은 칸은 몸통이 곧 빛이라
+    가장자리를 따로 칠하지 않는다. 사방이 고르게 빛난다 — 화면 속 빛은 위에서 들지 않는다.
+    """
+    base = mid(colors[0], colors[1]) if glow[0] == 'auto' else glow[0]
+    color = _phosphor_color(base, glow[3])
+    if color == base:
+        return
+    line = ImageChops.subtract(
+        mask, mask.filter(ImageFilter.GaussianBlur(max(1.0, min(w, h) * 0.02))))
+    wide = ImageChops.subtract(
+        mask, mask.filter(ImageFilter.GaussianBlur(max(3.0, min(w, h) * 0.07))))
+    a = ImageChops.add(line.point(lambda v: min(255, int(v * 1.6))),
+                       wide.point(lambda v: int(v * 0.35)))
+    lay = Image.new('RGBA', (w, h), rgb(color) + (255,))
+    lay.putalpha(ImageChops.multiply(a, mask))
+    out.alpha_composite(lay)
+
+
 def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
                flat=False, rim=None, frost=0.0):
     """말풍선 하나를 정확히 w x h 로 그린다. 세로 그라데이션.
@@ -234,7 +263,11 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
                 grain.point(lambda v: int(max(0, 128 - v) * 2.2)), mask))
             out.alpha_composite(dk)
 
-    if glow:
+    # 글로우 가장자리 모양. glow_of() 가 glow_edge 를 적은 테마만 네 칸으로 넘긴다
+    edge = glow[2] if glow and len(glow) > 2 else 'rim'
+    if glow and edge == 'phosphor':
+        _phosphor_inner(out, mask, w, h, glow, colors)
+    elif glow:
         gc = glow[0]
         ga = glow[1]
         base = mid(colors[0], colors[1]) if gc == 'auto' else gc
@@ -312,6 +345,8 @@ def bubble_box(w, h, colors, radius, style='solid', alpha=255, glow=None, pad=0,
     ga = glow[1]
     gc = glow[0]
     base = mid(colors[0], colors[1]) if gc == 'auto' else gc
+    if edge == 'phosphor':
+        base = _phosphor_color(base, glow[3])
     # 밝은 곳일수록 색이 옅어진다. 실제 빛이 그렇고, 단색으로 두면 색종이처럼 보인다
     core = acc.point(lambda v: int(255 * (v / 255.0) ** 2.2))
     halo = Image.new('RGBA', (gw, gh), rgb(base) + (255,))
@@ -343,6 +378,10 @@ def glow_of(t):
     if not g:
         return None, 0
     color, strength, pad = g
+    if t.get('glow_edge'):
+        # 가장자리 빛 모양을 따로 정한 테마만 모양과 포인트색을 더 얹는다. 나머지는 옛 두 칸
+        # 그대로 넘겨서 이미 나간 글로우 테마의 그림이 바뀌지 않는다
+        return (color, strength, t['glow_edge'], t['accent']), pad
     return (color, strength), pad
 
 
