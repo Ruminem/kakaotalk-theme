@@ -129,12 +129,12 @@
 </tr>
 <tr>
 <td width="33%" align="center"><a href="#user-content-빨래"><img src="assets/preview-laundry-light-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-빨래-반짝"><img src="assets/preview-sparkle-light-chat.webp" width="190"></a></td>
+<td width="33%"></td>
 <td width="33%"></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-laundry-light.png" width="20" valign="middle"> <b><a href="#user-content-빨래">빨래</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>하늘색 바탕에 젤리 말풍선. 첫 말엔 물방울</td>
-<td align="center"><img src="assets/icon-sparkle-light.png" width="20" valign="middle"> <b><a href="#user-content-빨래-반짝">빨래 반짝</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>빨래보다 광택이 또렷한 젤리 말풍선</td>
+<td align="center"><img src="assets/icon-laundry-light.png" width="20" valign="middle"> <b><a href="#user-content-빨래">빨래</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>하늘색 바탕에 반짝이는 젤리 말풍선. 첫 말엔 물방울</td>
+<td width="33%"></td>
 <td width="33%"></td>
 </tr>
 </table>
@@ -1005,67 +1005,32 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-laundry-light-chat.webp" width="200"><br><b>밝음</b><br><sub>하늘색 바탕에 젤리 말풍선. 첫 말엔 물방울</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=laundry-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/laundry-light.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-laundry-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>빨랫줄에 짝짝이 양말이 널린 하늘</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=laundry-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/laundry-light-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-laundry-light-chat.webp" width="200"><br><b>밝음</b><br><sub>하늘색 바탕에 반짝이는 젤리 말풍선. 첫 말엔 물방울</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=laundry-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/laundry-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-laundry-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>비눗방울이 떠다니는 빨랫줄 하늘</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=laundry-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/laundry-light-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="assets/preview-laundry-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>밤 빨래. 어두운 바탕에 젤리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=laundry-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/laundry-dark.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-laundry-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>달밤 빨랫줄 아래 젤리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=laundry-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/laundry-dark-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-laundry-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>밤 빨래. 어두운 바탕에서 광택이 도드라짐</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=laundry-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/laundry-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-laundry-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>달밤 비눗방울과 반짝이는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=laundry-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/laundry-dark-image.apk">Android</a></td>
 </tr>
 </table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 
-**밝음** — 하늘색 바탕에 젤리 말풍선. 첫 말엔 물방울
+**밝음** — 하늘색 바탕에 반짝이는 젤리 말풍선. 첫 말엔 물방울
 
 <img src="assets/preview-laundry-light-list.webp" width="180"> <img src="assets/preview-laundry-light-passcode.webp" width="180"> <img src="assets/preview-laundry-light-splash.webp" width="180">
 
-**밝음+배경** — 빨랫줄에 짝짝이 양말이 널린 하늘
+**밝음+배경** — 비눗방울이 떠다니는 빨랫줄 하늘
 
 <img src="assets/preview-laundry-light-image-list.webp" width="180"> <img src="assets/preview-laundry-light-image-passcode.webp" width="180"> <img src="assets/preview-laundry-light-image-splash.webp" width="180">
 
-**어두움** — 밤 빨래. 어두운 바탕에 젤리 말풍선
+**어두움** — 밤 빨래. 어두운 바탕에서 광택이 도드라짐
 
 <img src="assets/preview-laundry-dark-list.webp" width="180"> <img src="assets/preview-laundry-dark-passcode.webp" width="180"> <img src="assets/preview-laundry-dark-splash.webp" width="180">
 
-**어두움+배경** — 달밤 빨랫줄 아래 젤리 말풍선
-
-<img src="assets/preview-laundry-dark-image-list.webp" width="180"> <img src="assets/preview-laundry-dark-image-passcode.webp" width="180"> <img src="assets/preview-laundry-dark-image-splash.webp" width="180">
-
-</details>
-
-<a name="빨래-반짝"></a>
-
-#### <img src="assets/icon-sparkle-light.png" width="26" valign="middle"> 빨래 반짝
-
-<table>
-<tr>
-<td width="50%" align="center"><img src="assets/preview-sparkle-light-chat.webp" width="200"><br><b>밝음</b><br><sub>빨래보다 광택이 또렷한 젤리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sparkle-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sparkle-light.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-sparkle-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>비눗방울이 떠다니는 빨랫줄 하늘</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sparkle-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sparkle-light-image.apk">Android</a></td>
-</tr>
-<tr>
-<td width="50%" align="center"><img src="assets/preview-sparkle-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>어두운 바탕에서 광택이 더 도드라짐</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sparkle-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sparkle-dark.apk">Android</a></td>
-<td width="50%" align="center"><img src="assets/preview-sparkle-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>달밤 비눗방울과 반짝이는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sparkle-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sparkle-dark-image.apk">Android</a></td>
-</tr>
-</table>
-
-<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
-
-**밝음** — 빨래보다 광택이 또렷한 젤리 말풍선
-
-<img src="assets/preview-sparkle-light-list.webp" width="180"> <img src="assets/preview-sparkle-light-passcode.webp" width="180"> <img src="assets/preview-sparkle-light-splash.webp" width="180">
-
-**밝음+배경** — 비눗방울이 떠다니는 빨랫줄 하늘
-
-<img src="assets/preview-sparkle-light-image-list.webp" width="180"> <img src="assets/preview-sparkle-light-image-passcode.webp" width="180"> <img src="assets/preview-sparkle-light-image-splash.webp" width="180">
-
-**어두움** — 어두운 바탕에서 광택이 더 도드라짐
-
-<img src="assets/preview-sparkle-dark-list.webp" width="180"> <img src="assets/preview-sparkle-dark-passcode.webp" width="180"> <img src="assets/preview-sparkle-dark-splash.webp" width="180">
-
 **어두움+배경** — 달밤 비눗방울과 반짝이는 말풍선
 
-<img src="assets/preview-sparkle-dark-image-list.webp" width="180"> <img src="assets/preview-sparkle-dark-image-passcode.webp" width="180"> <img src="assets/preview-sparkle-dark-image-splash.webp" width="180">
+<img src="assets/preview-laundry-dark-image-list.webp" width="180"> <img src="assets/preview-laundry-dark-image-passcode.webp" width="180"> <img src="assets/preview-laundry-dark-image-splash.webp" width="180">
 
 </details>
 

@@ -40,7 +40,7 @@ chat_bg
 
 import re
 
-VERSION = '0.29.2'
+VERSION = '0.29.3'
 
 THEMES = [
     dict(
@@ -847,7 +847,6 @@ CATEGORY = {
     '책상': '캐릭터',
     '오락실': '캐릭터',
     '빨래': '캐릭터',
-    '빨래 반짝': '캐릭터',
 }
 
 
@@ -1417,7 +1416,7 @@ _LAUNDRY_DARK = dict(
     border='#33405A', text='#E3EBF5', subtext='#8E9CB0',
     accent='#7FB6E6', accent_dim='#5F96C6', on_accent='#10161F',
     recv='#D9679C', recv_alt='#F29AC2', send='#4C8FC7', send_alt='#86BDEB',
-    recv_edge='#F29AC2', send_edge='#86BDEB', shade_a=45,
+    recv_edge='#F29AC2', send_edge='#86BDEB',
     recv_text='#FFF0F6', send_text='#F0F8FF',
     char_outline='#9FB1C8', char_backs=('#2B3547', '#40304A', '#243A52'))
 _LAUNDRY_SKY = dict(clouds=5, clothes=['#FFA3CB', '#A6D8FF', '#FFFFFF', '#FFE98A'],
@@ -1426,31 +1425,29 @@ _LAUNDRY_NIGHT = dict(stars=80, moon='#F4EFD8',
                       clothes=['#D9679C', '#4C8FC7', '#C9D3E0', '#CDB85E'],
                       ink='#0D121B', line='#6F7F98', peg='#D9A33A', dim_to='#000000')
 
+def _seed_of(key):
+    """gen.seeded() 가 키에서 씨앗을 만드는 식. 다른 키의 그림을 그대로 물려받을 때 쓴다."""
+    import zlib
+    return zlib.crc32(key.encode('utf-8')) % 90000000 + 10000000
+
+
+# 빨래. 0.29.2 까지는 광택만 다른 '빨래'(보통)와 '빨래 반짝'(강함) 두 계열이었다.
+# 둘이 같이 있을 까닭이 없어 0.29.3 에서 반짝 쪽을 빨래로 옮기고 보통 광택은 없앴다.
+# 키는 빨래 것(laundry97~100)을 쓴다 — 빨래를 깐 사람은 업데이트로 이어지고, 빨래 반짝을 깐
+# 사람만 지우고 다시 깔면 된다. 배경은 반짝의 그림을 그대로 쓰려고 반짝 키의 씨앗을 넘긴다.
 THEMES += character(
     'laundry', 97, '빨래',
-    dict(char_style='jelly', char='sock', gloss='normal'),
+    dict(char_style='jelly', char='sock'),
     _LAUNDRY_LIGHT, _LAUNDRY_DARK,
-    _scenes('laundry', '#CFE8FA', '#F2F9FE', dict(_LAUNDRY_SKY, lines=3, bubbles=10),
+    _scenes('laundry', '#CFE8FA', '#F2F9FE',
+            dict(_LAUNDRY_SKY, lines=2, bubbles=34, seed=_seed_of('sparkle102')),
             (0.3, 0.45, 0.05)),
-    _scenes('laundry', '#141B2A', '#24304A', dict(_LAUNDRY_NIGHT, lines=3, bubbles=6),
+    _scenes('laundry', '#141B2A', '#24304A',
+            dict(_LAUNDRY_NIGHT, lines=2, bubbles=24, seed=_seed_of('sparkle104')),
             (0.25, 0.4, 0.0)),
-    ['하늘색 바탕에 젤리 말풍선. 첫 말엔 물방울',
-     '빨랫줄에 짝짝이 양말이 널린 하늘',
-     '밤 빨래. 어두운 바탕에 젤리 말풍선',
-     '달밤 빨랫줄 아래 젤리 말풍선'])
-
-# 빨래와 색이 같고 광택만 다르다. 한 계열에 넣으면 여섯 벌이 되어 넷 규칙을 넘는다.
-THEMES += character(
-    'sparkle', 101, '빨래 반짝',
-    dict(char_style='jelly', char='sock', gloss='strong'),
-    _LAUNDRY_LIGHT, _LAUNDRY_DARK,
-    _scenes('laundry', '#CFE8FA', '#F2F9FE', dict(_LAUNDRY_SKY, lines=2, bubbles=34),
-            (0.3, 0.45, 0.05)),
-    _scenes('laundry', '#141B2A', '#24304A', dict(_LAUNDRY_NIGHT, lines=2, bubbles=24),
-            (0.25, 0.4, 0.0)),
-    ['빨래보다 광택이 또렷한 젤리 말풍선',
+    ['하늘색 바탕에 반짝이는 젤리 말풍선. 첫 말엔 물방울',
      '비눗방울이 떠다니는 빨랫줄 하늘',
-     '어두운 바탕에서 광택이 더 도드라짐',
+     '밤 빨래. 어두운 바탕에서 광택이 도드라짐',
      '달밤 비눗방울과 반짝이는 말풍선'])
 
 check_variants()

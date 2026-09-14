@@ -205,12 +205,17 @@ def _lift(h, f):
     return tuple(int(round(c * 255)) for c in (r, g, b))
 
 
-def _ramp(size, s, stops):
+def _ramp(size, s, stops, axis='y'):
     """세로 가림막. y 만의 함수라 가로로 늘어나도 모든 열이 같다.
+
+    axis='x' 면 가로 가림막이다. 그때는 세기가 바뀌는 곳을 양 끝 모서리 자리에 가둬야 한다 —
+    가운데에서 바뀌면 늘어나는 열이 그 값 하나로 복사된다.
 
     stops 사이는 smoothstep 으로 잇는다. 선형으로 이으면 끝나는 줄에서 꺾인 자국이 보인다.
     """
     W, H = size
+    if axis == 'x':
+        return _ramp((H, W), s, stops).transpose(Image.TRANSPOSE)
     col = Image.new('L', (1, H), 0)
     px = col.load()
     ys = [(yy * s, vv) for yy, vv in stops]
@@ -242,6 +247,11 @@ def _k(m, f):
 
 
 def d_jelly(p, lp, x, y, w, h, first, ck, t):
+    """젤리 몸통. 방향이 없는 것만 그린다 — 그림자, 윤곽, 명암, 가장자리 두께, 아래에 고인 빛.
+
+    빛이 드는 방향을 타는 것(위를 감싸는 빛, 휜 반사, 아래 맺힌 빛)은 lit_jelly 가 장을 뒤집은
+    뒤에 그린다.
+    """
     S = p.s * JELLY_SS
     size = (p.img.width * JELLY_SS, p.img.height * JELLY_SS)
     W_, H_ = size
@@ -254,13 +264,7 @@ def d_jelly(p, lp, x, y, w, h, first, ck, t):
 
     fill = _c(t[ck])
     edge = t[ck + '_edge']
-    strong = t.get('gloss') == 'strong'
-    k = 1.0 if strong else 0.6
-    dx = x + w - 20
-
-    drops = []
-    if first:
-        drops = [(dx, y + h + 2.5, 6, 7.5), (dx + 1, y + h + 15.5, 3, 3.8)]
+    drops = _drops(x, y, w, h, first, 'recv')
 
     def shape_mask(grow):
         m = Image.new('L', size, 0)
@@ -285,12 +289,10 @@ def d_jelly(p, lp, x, y, w, h, first, ck, t):
     _paint(out, hexc(edge), outer)
 
     body = Image.new('RGBA', size, hexc(fill))
-    light, deep = _lift(fill, 0.55), _hsv(fill, 0.8, 1.15)
+    deep = _hsv(fill, 0.8, 1.15)
 
-    # 3. 몸통 명암. 위는 밝고 아래는 짙다. 가운데는 몸통 색 그대로 둔다 — 늘어나는 줄이 지나는 곳
-    #    위를 많이 밝히면 반사와 몸통 사이 대비가 사라져 반사가 안 읽힌다. 조금만 밝힌다
-    _paint(body, light, _ramp(size, S, [(y, 50 * k), (y + 16, 0)]))
-    _paint(body, deep, _ramp(size, S, [(y + h - 20, 0), (y + h - 3, 170 * k), (y + h + 40, 150 * k)]))
+    # 3. 몸통 명암. 아래는 짙다. 가운데는 몸통 색 그대로 둔다 — 늘어나는 줄이 지나는 곳
+    _paint(body, deep, _ramp(size, S, [(y + h - 20, 0), (y + h - 3, 170), (y + h + 40, 150)]))
 
     # 4. 가장자리 띠. 모양에서 흐린 모양을 빼면 테두리 안쪽만 남는다. 곧은 변을 따라 고르다
     inner = _k(ImageChops.subtract(shape, blur(shape, 2.4)), 2.0)
@@ -298,57 +300,104 @@ def d_jelly(p, lp, x, y, w, h, first, ck, t):
     top = _ramp(size, S, [(y, 255), (y + 12, 0)])
     bot = _ramp(size, S, [(y + h - 14, 0), (y + h - 1, 255)])
     #    옆과 아래 가장자리는 짙게 — 두께가 생긴다
-    _paint(body, deep, _k(ImageChops.multiply(inner, ImageOps.invert(top)), 0.12 + 0.4 * k))
+    _paint(body, deep, _k(ImageChops.multiply(inner, ImageOps.invert(top)), 0.52))
     #    아래 가장자리 안쪽에 모이는 빛 — 젤리 속을 지나온 빛이 반대편 테두리에 고인다
-    _paint(body, _lift(fill, 0.85), _k(ImageChops.multiply(wide, bot), 0.5 + 0.8 * k))
-    #    위 가장자리를 타고 도는 빛
-    _paint(body, (255, 255, 255), _k(ImageChops.multiply(inner, top), 0.55 * k))
+    _paint(body, _lift(fill, 0.85), _k(ImageChops.multiply(wide, bot), 1.3))
     body.putalpha(shape)
     out.alpha_composite(body)
-
-    # 5. 반사. 창이 비친 넓은 띠 — 몸통 위쪽 삼분의 일을 덮고, 위 끝은 또렷하고 아래로 사라진다.
-    #    얇게 두면 광택이 아니라 옅은 그라데이션으로만 읽혔다
-    sy0, sy1 = y + 2.4, y + (19 if strong else 17)
-    sp = Image.new('L', size, 0)
-    ImageDraw.Draw(sp).rounded_rectangle(B(x + 6, sy0, x + w - 6, sy1), radius=9 * S, fill=255)
-    #    아래 끝까지 옅게 남겼다가 끊는다. 0 으로 녹여 버리면 파스텔 몸통에서 반사가 아니라
-    #    그라데이션으로 읽혔다 — 반사는 경계가 있어야 반사다
-    stops = ([(sy0, 235), (sy0 + 5, 175), (sy1 - 1.2, 80), (sy1, 0)] if strong else
-             [(sy0, 175), (sy0 + 5, 115), (sy1 - 1.2, 45), (sy1, 0)])
-    sp = ImageChops.multiply(sp, _ramp(size, S, stops))
-    _paint(out, (255, 255, 255), blur(sp, 0.45))
-
-    # 6. 가장 밝은 점. 이게 있어야 표면이 젖어 보인다. 강한 광택은 점을 하나 더 두고
-    #    아래 가장자리에 빛이 맺힌 자국을 남긴다
-    hs = Image.new('L', size, 0)
-    hd = ImageDraw.Draw(hs)
-    if strong:
-        hd.ellipse(B(x + 9, y + 4, x + 23, y + 8.6), fill=255)
-        hd.ellipse(B(x + 24.4, y + 4.5, x + 27.6, y + 7.7), fill=245)
-    else:
-        hd.ellipse(B(x + 9, y + 4.4, x + 19, y + 8.2), fill=235)
-    for cx, cy, rx, ry in drops:
-        hd.ellipse(B(cx - rx * 0.6, cy - ry * 0.62, cx - rx * 0.05, cy - ry * 0.22), fill=235)
-    _paint(out, (255, 255, 255), blur(hs, 0.35))
-    if strong:
-        # 아래에 맺힌 빛은 번진 덩어리다. 또렷하게 그리면 흰 줄표로 읽혔다
-        cs = Image.new('L', size, 0)
-        ImageDraw.Draw(cs).ellipse(B(x + w - 28, y + h - 7.2, x + w - 13, y + h - 3.2), fill=150)
-        _paint(out, (255, 255, 255), blur(cs, 0.9))
 
     p.img.alpha_composite(out.resize(p.img.size, Image.LANCZOS))
 
 
+def _drops(x, y, w, h, first, side):
+    """첫 말풍선의 물방울 둘 (가운데x, 가운데y, 반지름x, 반지름y). 받은 쪽은 안쪽(오른쪽) 아래에 달린다.
+
+    보낸 쪽 장은 뒤집히므로 뒤집은 뒤에 그리는 lit_jelly 는 왼쪽에서 찾는다.
+    """
+    if not first:
+        return []
+    if side == 'recv':
+        return [(x + w - 20, y + h + 2.5, 6, 7.5), (x + w - 19, y + h + 15.5, 3, 3.8)]
+    return [(x + 20, y + h + 2.5, 6, 7.5), (x + 19, y + h + 15.5, 3, 3.8)]
+
+
+def lit_jelly(img, t, geo, scale, side, first):
+    """방향이 있는 빛. 늘 왼쪽 위에서 든다.
+
+    보낸 쪽은 받은 쪽 장을 뒤집어 만든다. 빛까지 같이 뒤집으면 보낸 말풍선만 오른쪽 위에서 빛을
+    받아, 한 화면에 해가 둘인 것처럼 보였다. 그래서 뒤집은 뒤에 여기서 그린다.
+
+    위쪽 빛은 몸통 안에 띠를 띄우지 않고 가장자리를 따라 감는다. 몸통 안에 떠 있는 납작한 띠는
+    둥근 표면이 아니라 뚜껑을 덮은 것처럼 읽혔다. 둥근 몸에 비친 빛은 곡면을 따라 휜다.
+    """
+    S = scale * JELLY_SS
+    size = (img.width * JELLY_SS, img.height * JELLY_SS)
+    x = geo['mr'] if side == 'send' else geo['ml']
+    y, w, h = geo['mt'], geo['bw'], geo['bh']
+
+    def B(*v):
+        return [q * S for q in v]
+
+    def blur(m, r):
+        return m.filter(ImageFilter.GaussianBlur(r * S))
+
+    fill = _c(t[side])
+    shape = Image.new('L', size, 0)
+    ImageDraw.Draw(shape).rounded_rectangle(B(x, y, x + w, y + h), radius=JELLY_R * S, fill=255)
+    out = Image.new('RGBA', size, (0, 0, 0, 0))
+    white = (255, 255, 255)
+
+    # 1. 위를 감싸는 빛. 가장자리 넓은 띠를 위쪽만 남기고, 왼쪽이 밝고 오른쪽 끝으로 옅어지게 한다.
+    #    가로 세기는 양 끝 모서리 안에서만 바뀌고 가운데는 고르다 — 늘어나는 열이 지나는 곳
+    band = _k(ImageChops.subtract(shape, blur(shape, 5.0)), 1.9)
+    wrap = ImageChops.multiply(band, _ramp(size, S, [(y, 255), (y + 5, 215), (y + 16, 0)]))
+    wrap = ImageChops.multiply(wrap, _ramp(size, S, [(x + 2, 255), (x + 28, 170),
+                                                      (x + w - 28, 170), (x + w - 2, 105)],
+                                           axis='x'))
+    _paint(out, _lift(fill, 0.92), wrap)
+
+    # 2. 가장 밝은 반사. 왼쪽 위 모서리의 곡면을 따라 휜 빛줄기가 윗변으로 조금 이어지다 사라진다.
+    #    알약이나 네모로 그리면 표면에 붙인 스티커로 읽혔다
+    hs = Image.new('L', size, 0)
+    hd = ImageDraw.Draw(hs)
+    rr = JELLY_R - 2.4
+    cx, cy = x + JELLY_R, y + JELLY_R
+    hd.arc(B(cx - rr, cy - rr, cx + rr, cy + rr), 194, 272, fill=255, width=int(round(2.5 * S)))
+    hd.rounded_rectangle(B(x + JELLY_R - 1, y + 2.4, x + 27, y + 4.9), radius=1.25 * S, fill=255)
+    hd.ellipse(B(x + 28.6, y + 2.7, x + 30.6, y + 4.7), fill=235)       # 떨어져 맺힌 작은 점
+    #    양 끝으로 가늘고 옅어져야 빛줄기다. 끝까지 같은 세기면 흰 테이프가 된다
+    hs = ImageChops.multiply(hs, _ramp(size, S, [(y + 7, 255), (y + 15.5, 30)]))
+    hs = ImageChops.multiply(hs, _ramp(size, S, [(x + 18, 255), (x + 27.5, 90), (x + 28.5, 235)],
+                                       axis='x'))
+    _paint(out, white, _k(blur(hs, 0.4), 0.97))
+
+    # 3. 오른쪽 아래에 맺힌 빛. 왼쪽 위에서 든 빛이 젤리를 지나 반대편에 모인다.
+    #    또렷하게 그리면 흰 줄표로 읽혀서 번진 덩어리로 둔다
+    cs = Image.new('L', size, 0)
+    ImageDraw.Draw(cs).ellipse(B(x + w - 28, y + h - 7.2, x + w - 13, y + h - 3.2), fill=165)
+    _paint(out, white, blur(cs, 0.9))
+
+    # 4. 물방울마다 왼쪽 위에 맺힌 점과 아래에 고인 빛
+    ds = Image.new('L', size, 0)
+    dd = ImageDraw.Draw(ds)
+    for dx, dy, rx, ry in _drops(x, y, w, h, first, side):
+        dd.ellipse(B(dx - rx * 0.62, dy - ry * 0.64, dx - rx * 0.05, dy - ry * 0.22), fill=240)
+        dd.ellipse(B(dx - rx * 0.1, dy + ry * 0.45, dx + rx * 0.55, dy + ry * 0.72), fill=120)
+    _paint(out, white, blur(ds, 0.35))
+
+    img.alpha_composite(out.resize(img.size, Image.LANCZOS))
+
+
 def f_jelly(t, bw, bh, first):
-    strong = t.get('gloss') == 'strong'
+    # 방향이 있는 빛은 뒤집은 뒤에 늘 왼쪽 위(아래 맺힌 빛은 오른쪽 아래)에 그린다. 받은 쪽 좌표로는
+    # 바깥쪽에도 안쪽에도 올 수 있어서 양쪽 자리를 다 잡는다
     f = [((-3, -1.5, bw + 3, bh + 4.5), ()),              # 윤곽과 그림자
-         ((0, 0, bw, 20), ('top',)),                       # 위 명암·가장자리 빛·반사
-         ((0, bh - 20, bw, bh), ('bottom',)),              # 아래 명암·고인 빛
-         ((4.5, 1.5, 16, 20), ('outer', 'top')),           # 반사의 둥근 끝
-         ((bw - 16, 1.5, bw - 4.5, 20), ('inner', 'top')),
-         ((8, 3, 28.5 if strong else 20, 9.5), ('outer', 'top'))]   # 밝은 점
-    if strong:
-        f.append(((bw - 28, bh - 7.5, bw - 13, bh - 2.5), ('inner', 'bottom')))
+         ((0, 0, bw, 17), ('top',)),                       # 위를 감싸는 빛
+         ((0, bh - 20, bw, bh), ('bottom',))]              # 아래 명암·고인 빛
+    for zone, a, b in (('outer', 0, 31.5), ('inner', bw - 31.5, bw)):
+        f.append(((a, 0, b, 17), (zone, 'top')))           # 휜 반사·작은 점·가로 세기
+    for zone, a, b in (('outer', 12, 29), ('inner', bw - 29, bw - 12)):
+        f.append(((a, bh - 8.5, b, bh - 2), (zone, 'bottom')))   # 아래 맺힌 빛
     if first:
         f.append(((bw - 30, bh - 8, bw - 10, bh + 25), ('inner', 'bottom')))
     return f
@@ -360,7 +409,8 @@ STYLES = {
     'pixel':    dict(bw=40, bh=44, radius=9.5, draw=d_pixel, features=f_pixel),
     # 젤리는 모서리 반경에 가장자리 띠의 흐림이 번지는 폭을 더한다. 늘어나는 줄이 그 안을 지나면
     # 모서리 근처의 옅은 명암이 같이 늘어난다
-    'jelly':    dict(bw=40, bh=44, radius=JELLY_R + 3, draw=d_jelly, features=f_jelly),
+    'jelly':    dict(bw=40, bh=44, radius=JELLY_R + 3, draw=d_jelly, features=f_jelly,
+                     lit=lit_jelly),
 }
 
 
@@ -463,6 +513,8 @@ def sheet(t, side, variant, scale):
 
     if side == 'send':
         img = ImageOps.mirror(img)
+    if st.get('lit'):
+        st['lit'](img, t, geo, scale, 'send' if side == 'send' else 'recv', variant == '01')
     return img, geo
 
 
