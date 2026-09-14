@@ -127,12 +127,12 @@
 <tr>
 <td width="33%" align="center"><a href="#user-content-고속도로"><img src="assets/preview-highway-basic-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-터미널"><img src="assets/preview-terminal-basic-chat.webp" width="190"></a></td>
-<td width="33%"></td>
+<td width="33%" align="center"><a href="#user-content-네온사인"><img src="assets/preview-neon-double-chat.webp" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><img src="assets/icon-highway-basic.png" width="20" valign="middle"> <b><a href="#user-content-고속도로">고속도로</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검푸른 바탕에 빨강·주황 말풍선</td>
 <td align="center"><img src="assets/icon-terminal-basic.png" width="20" valign="middle"> <b><a href="#user-content-터미널">터미널</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 초록 바탕에 형광 초록·호박색 말풍선</td>
-<td width="33%"></td>
+<td align="center"><img src="assets/icon-neon-double.png" width="20" valign="middle"> <b><a href="#user-content-네온사인">네온사인</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>벽돌 벽에 관 두 줄 네온. 첫 말엔 네온 별</td>
 </tr>
 </table>
 
@@ -1146,6 +1146,43 @@
 **글로우+배경** — 코드 화면 위에 빛나는 말풍선까지
 
 <img src="assets/preview-terminal-glow-image-list.webp" width="180"> <img src="assets/preview-terminal-glow-image-passcode.webp" width="180"> <img src="assets/preview-terminal-glow-image-splash.webp" width="180">
+
+</details>
+
+<a name="네온사인"></a>
+
+#### <img src="assets/icon-neon-double.png" width="26" valign="middle"> 네온사인
+
+<p align="right"><sub><a href="#user-content-theme-list">↑ 테마 목록</a></sub></p>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-neon-double-chat.webp" width="200"><br><b>이중관</b><br><sub>벽돌 벽에 관 두 줄 네온. 첫 말엔 네온 별</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neon-double.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neon-double.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-neon-sign-chat.webp" width="200"><br><b>간판</b><br><sub>금속 간판에 박힌 네온. 첫 말은 사슬에 매달림</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neon-sign.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neon-sign.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="assets/preview-neon-electrode-chat.webp" width="200"><br><b>전극</b><br><sub>끊긴 관 끝에 전극이 달린 진짜 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neon-electrode.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neon-electrode.apk">Android</a></td>
+<td width="50%" align="center"><img src="assets/preview-neon-speech-chat.webp" width="200"><br><b>말꼬리</b><br><sub>꼬리까지 관 하나로 이어진 네온 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neon-speech.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neon-speech.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**이중관** — 벽돌 벽에 관 두 줄 네온. 첫 말엔 네온 별
+
+<img src="assets/preview-neon-double-list.webp" width="180"> <img src="assets/preview-neon-double-passcode.webp" width="180"> <img src="assets/preview-neon-double-splash.webp" width="180">
+
+**간판** — 금속 간판에 박힌 네온. 첫 말은 사슬에 매달림
+
+<img src="assets/preview-neon-sign-list.webp" width="180"> <img src="assets/preview-neon-sign-passcode.webp" width="180"> <img src="assets/preview-neon-sign-splash.webp" width="180">
+
+**전극** — 끊긴 관 끝에 전극이 달린 진짜 네온관
+
+<img src="assets/preview-neon-electrode-list.webp" width="180"> <img src="assets/preview-neon-electrode-passcode.webp" width="180"> <img src="assets/preview-neon-electrode-splash.webp" width="180">
+
+**말꼬리** — 꼬리까지 관 하나로 이어진 네온 말풍선
+
+<img src="assets/preview-neon-speech-list.webp" width="180"> <img src="assets/preview-neon-speech-passcode.webp" width="180"> <img src="assets/preview-neon-speech-splash.webp" width="180">
 
 </details>
 

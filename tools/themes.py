@@ -777,7 +777,8 @@ def families():
              'amber': 0, 'emerald': 1, 'amethyst': 2, 'rose': 3,
              'sage': 0, 'sand': 1, 'slate': 2, 'mocha': 3,
              'olive': 0, 'fog': 1, 'plum': 2, 'ink': 3,
-             'light-image': 0.5, 'dark-image': 1.5}
+             'light-image': 0.5, 'dark-image': 1.5,
+             'double': 0, 'sign': 1, 'electrode': 2, 'speech': 3}
     out, seen = [], {}
     for t in THEMES:
         t['family'], t['variant'] = _fam_of(t)
@@ -847,6 +848,7 @@ CATEGORY = {
     '알전구': '불빛',
     '고속도로': '불빛',
     '터미널': '불빛',
+    '네온사인': '불빛',
 
     '우체국': '캐릭터',
     '책상': '캐릭터',
@@ -1052,6 +1054,10 @@ VARIANT_SLUG = {
     '밝음+배경': 'light-image',
     '어두움': 'dark',
     '어두움+배경': 'dark-image',
+    '이중관': 'double',
+    '간판': 'sign',
+    '전극': 'electrode',
+    '말꼬리': 'speech',
 }
 
 
@@ -1717,5 +1723,43 @@ THEMES += character(
      '햇살 드는 온실 선반에 화분이 줄지음',
      '밤 온실. 짙은 초록 바탕에 잎 말풍선',
      '전등 켜진 밤 온실의 화분들'])
+
+# --- 네온사인 --------------------------------------------------------------
+# 벽돌 벽에 걸린 네온관. 네 벌이 곧 말풍선 디자인 네 가지다 — 스테인드 글래스가 색 네 개로
+# 네 벌을 채운 것과 같다. 네온은 밝은 바탕에서 빛이 안 보여서 밝음/어두움 축이 맞지 않는다.
+# 글로우는 재질로 붙는다(tools/glow.py). 관은 tube → 강한 블룸, 간판은 sign → 아래로 떨어지는 빛.
+
+_NEON_BASE = dict(bg='#100C14', bg_deep='#0A070D', surface='#1A1520', pressed='#241D2C',
+                  border='#2E2638', text='#F2ECF7', subtext='#9A90A8', on_accent='#14000A',
+                  char_outline='#111114', flat=True)
+
+
+def _neon_theme(no, variant, style, material, recv, send, recv_text, send_text, accent_dim,
+                signs, note):
+    """네온사인 한 벌. 받은 쪽과 보낸 쪽이 서로 다른 네온 색이고, 벽의 낙서도 그 색을 쓴다."""
+    wall = lambda count, dim: ('neonwall', '#3A1F1B', '#140C0B',
+                               dict(signs=signs, count=count, dim=dim, dim_to='#000000'))
+    return dict(_NEON_BASE, key='neon%d' % no, name='네온사인 %s' % variant, note=note,
+                family='네온사인', variant=variant, char_style=style, material=material,
+                accent=send, accent_dim=accent_dim,
+                send=(send, send), send_alt=(send, send), recv=(recv, recv), recv_alt=(recv, recv),
+                send_text=send_text, recv_text=recv_text,
+                chat_bg=wall(5, 0.45), main_bg=wall(4, 0.6), passcode_bg=wall(6, 0.12))
+
+
+THEMES += [
+    _neon_theme(145, '이중관', 'neon_double', 'tube', '#35E0FF', '#FF3FA4', '#D9F8FF', '#FFE0F0',
+                '#C42D7E', [('heart', '#FF3FA4'), ('star', '#35E0FF'), ('moon', '#B45CFF')],
+                '벽돌 벽에 관 두 줄 네온. 첫 말엔 네온 별'),
+    _neon_theme(146, '간판', 'neon_sign', 'sign', '#4D7CFF', '#FF7A2F', '#DFE7FF', '#FFE6D6',
+                '#C85A1E', [('arrow', '#FF7A2F'), ('bolt', '#4D7CFF'), ('star', '#FFD23F')],
+                '금속 간판에 박힌 네온. 첫 말은 사슬에 매달림'),
+    _neon_theme(147, '전극', 'neon_electrode', 'tube', '#4CFF88', '#B45CFF', '#DDFFE8', '#EFE0FF',
+                '#8A40C8', [('moon', '#B45CFF'), ('bolt', '#4CFF88'), ('heart', '#FF3FA4')],
+                '끊긴 관 끝에 전극이 달린 진짜 네온관'),
+    _neon_theme(148, '말꼬리', 'neon_speech', 'tube', '#FFD23F', '#FF3B6B', '#FFF6D6', '#FFE0E8',
+                '#C42A52', [('star', '#FFD23F'), ('heart', '#FF3B6B'), ('arrow', '#35E0FF')],
+                '꼬리까지 관 하나로 이어진 네온 말풍선'),
+]
 
 check_variants()

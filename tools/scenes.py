@@ -2070,3 +2070,93 @@ def greenhouse(spec, w, h):
                        (x + 12 * s, sy), (x - 12 * s, sy)], fill=pc + (255,))
             x += rnd.uniform(56, 90) * unit
     return _dim(img, o)
+
+
+# --- 네온 벽 ---------------------------------------------------------------
+
+def _neon_doodle(kind, cx, cy, R):
+    """네온 낙서 한 개의 선들. 선마다 점 목록이다."""
+    if kind == 'heart':
+        pts = []
+        for i in range(61):
+            a = 2 * math.pi * i / 60
+            px_ = 16 * math.sin(a) ** 3
+            py_ = 13 * math.cos(a) - 5 * math.cos(2 * a) - 2 * math.cos(3 * a) - math.cos(4 * a)
+            pts.append((cx + px_ * R / 17, cy - py_ * R / 17))
+        return [pts]
+    if kind == 'star':
+        pts = [(cx + math.cos(math.radians(-90 + i * 36)) * (R if i % 2 == 0 else R * 0.42),
+                cy + math.sin(math.radians(-90 + i * 36)) * (R if i % 2 == 0 else R * 0.42))
+               for i in range(11)]
+        return [pts]
+    if kind == 'arrow':
+        return [[(cx - R, cy + R * 0.5), (cx + R * 0.8, cy - R * 0.4)],
+                [(cx + R * 0.2, cy - R * 0.55), (cx + R * 0.8, cy - R * 0.4), (cx + R * 0.45, cy + R * 0.12)]]
+    if kind == 'moon':
+        outer = [(cx + math.cos(math.radians(a)) * R, cy + math.sin(math.radians(a)) * R)
+                 for a in range(40, 321, 8)]
+        inner = [(cx + R * 0.45 + math.cos(math.radians(a)) * R * 0.78,
+                  cy + math.sin(math.radians(a)) * R * 0.78) for a in range(300, 59, -8)]
+        return [outer + inner + [outer[0]]]
+    # 번개
+    z = [(0.15, -1.0), (-0.35, 0.05), (0.05, 0.05), (-0.2, 1.0), (0.45, -0.15), (0.05, -0.15), (0.15, -1.0)]
+    return [[(cx + a * R, cy + b * R) for a, b in z]]
+
+
+def neonwall(spec, w, h):
+    """네온 낙서가 걸린 벽돌 벽. spec = ('neonwall', 벽돌색, 줄눈색, 옵션dict)
+
+      signs  [(모양, 색), ...] — heart · star · arrow · moon · bolt
+      count  낙서 수    wash  벽에 번지는 빛 세기    dim / dim_to
+
+    낙서는 모양만 있고 글자는 없다. 읽히는 글자를 넣으면 말풍선 글자와 다툰다.
+    관은 검은 판에 그려 흐린 빛과 함께 screen 으로 얹는다(_light) — 벽돌 위에 바로 칠하면
+    빛이 아니라 형광 페인트로 보인다.
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261301))
+    unit = w / 500.0
+    brick, mortar = gen.rgb(spec[1]), gen.rgb(spec[2])
+    img = Image.new('RGB', (w, h), mortar)
+    d = ImageDraw.Draw(img)
+    bw_, bh_ = 64 * unit, 26 * unit
+    j = 0
+    y = 0.0
+    while y < h:
+        x = -(bw_ / 2 if j % 2 else 0)
+        while x < w:
+            k = rnd.uniform(0.78, 1.12)
+            c = tuple(min(255, int(v * k)) for v in brick)
+            d.rectangle([x + 2 * unit, y + 2 * unit, x + bw_ - 2 * unit, y + bh_ - 2 * unit], fill=c)
+            x += bw_
+        y += bh_
+        j += 1
+
+    signs = o.get('signs', [('heart', '#FF3FA4'), ('star', '#35E0FF')])
+    lay = Image.new('RGB', (w, h))
+    core = Image.new('RGB', (w, h))
+    ld, cd = ImageDraw.Draw(lay), ImageDraw.Draw(core)
+    cells, rows = _cells(rnd, o.get('count', 5), 2)
+    for n, (i, jj) in enumerate(cells):
+        kind, col = signs[n % len(signs)]
+        cx = (i + rnd.uniform(0.3, 0.7)) * w / 2
+        cy = (jj + rnd.uniform(0.25, 0.75)) * h / rows
+        R = rnd.uniform(34, 52) * unit
+        rgb = gen.rgb(col)
+        hot = gen.rgb(gen.glow_tint(col, 0.7))
+        for line in _neon_doodle(kind, cx, cy, R):
+            ld.line(line, fill=rgb, width=max(2, int(4.5 * unit)), joint='curve')
+            cd.line(line, fill=hot, width=max(1, int(1.6 * unit)), joint='curve')
+    wash = lay.filter(ImageFilter.GaussianBlur(26 * unit)).point(
+        lambda v: min(255, int(v * o.get('wash', 2.2))))
+    img = ImageChops.screen(img, wash)
+    img = _light(img, lay, 5 * unit, 1.8)
+    img = ImageChops.screen(img, core)
+
+    # 가장자리 어둠. 없으면 벽이 화면 끝까지 고르게 밝아 조명이 아니라 벽지로 보인다
+    vig = Image.new('L', (w, h), 0)
+    ImageDraw.Draw(vig).ellipse([-w * 0.3, -h * 0.1, w * 1.3, h * 1.1], fill=255)
+    vig = vig.filter(ImageFilter.GaussianBlur(w * 0.15)).point(lambda v: 70 + v * 185 // 255)
+    img = ImageChops.multiply(img, Image.merge('RGB', [vig] * 3))
+    return _dim(img, o)

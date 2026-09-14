@@ -968,3 +968,149 @@ def c_cactus(p):
 
 CHARS.update({'popcorn': c_popcorn, 'bread': c_bread, 'flame': c_flame,
               'saturn': c_saturn, 'cactus': c_cactus})
+
+
+# --- 네온사인: 이중관·간판·전극·말꼬리 ---------------------------------------
+# 몸통은 어둡게 두고 테두리가 빛나는 유리관이 된다. 관 한가운데는 하얗게 달아오르고, 관 색이
+# 몸통 안쪽으로 번진다. 바깥 글로우는 재질로 고른다(tools/glow.py) — 관은 tube(강한 블룸),
+# 간판은 sign(아래로 떨어지는 빛).
+#
+# 관은 몸통 모양의 가장자리를 가운데에 둔 띠로 만든다. 모양을 그대로 따라 휘므로 꼬리까지
+# 이어진 말풍선도 관 하나로 두를 수 있다.
+
+NEON_TW = 2.6                       # 관 굵기(pt)
+NEON_BODY = (12, 8, 16, 215)        # 관 안쪽 몸통. 뒤 벽이 살짝 비친다
+
+
+def _neon_blank(p):
+    return Image.new('L', p.img.size, 0)
+
+
+def _neon_rr(p, x0, y0, x1, y1, r):
+    m = _neon_blank(p)
+    ImageDraw.Draw(m).rounded_rectangle(p._b(x0, y0, x1, y1), radius=r * p.s, fill=255)
+    return m
+
+
+def _neon_band(m, px):
+    """모양의 가장자리를 가운데에 둔 띠."""
+    k = max(3, int(round(px)) | 1)
+    return ImageChops.subtract(m.filter(ImageFilter.MaxFilter(k)), m.filter(ImageFilter.MinFilter(k)))
+
+
+def _neon_over(img, rgb, alpha):
+    lay = Image.new('RGBA', img.size, tuple(rgb) + (255,))
+    lay.putalpha(alpha)
+    img.alpha_composite(lay)
+
+
+def _neon(p, shape, col, tw=NEON_TW, fill=None, cut=None):
+    """shape 가장자리에 네온관을 두른다. cut 은 관이 끊긴 자리다."""
+    s = p.s
+    c = hexc(col)[:3]
+    if fill:
+        _neon_over(p.img, fill[:3], shape.point(lambda v: v * fill[3] // 255))
+    tube = _neon_band(shape, tw * s).filter(ImageFilter.GaussianBlur(0.5))
+    if cut is not None:
+        tube = ImageChops.subtract(tube, cut)
+    # 관에서 번진 빛이 몸통 안쪽을 물들인다
+    spill = ImageChops.multiply(tube.filter(ImageFilter.GaussianBlur(3.2 * s)), shape)
+    _neon_over(p.img, c, spill.point(lambda v: v * 130 // 255))
+    _neon_over(p.img, c, tube)
+    core = _neon_band(shape, tw * 0.38 * s).filter(ImageFilter.GaussianBlur(0.4))
+    if cut is not None:
+        core = ImageChops.subtract(core, cut)
+    _neon_over(p.img, hexc(_g().glow_tint(col, 0.72))[:3], core)
+
+
+def d_neon_double(p, lp, x, y, w, h, first, ck, t):
+    """이중관. 바깥 굵은 관 안에 가는 관이 한 줄 더 돈다. 첫 장엔 네온 별."""
+    col = _c(t[ck])
+    _neon(p, _neon_rr(p, x, y, x + w, y + h, 16), col, fill=NEON_BODY)
+    _neon(p, _neon_rr(p, x + 5, y + 5, x + w - 5, y + h - 5, 11), col, tw=1.5)
+    if first:
+        cx, cy, R, r = x + w - 10, y - 4, 7, 3
+        m = _neon_blank(p)
+        pts = [(cx + math.cos(math.radians(-90 + i * 36)) * (R if i % 2 == 0 else r),
+                cy + math.sin(math.radians(-90 + i * 36)) * (R if i % 2 == 0 else r)) for i in range(10)]
+        ImageDraw.Draw(m).polygon([(a * p.s, b * p.s) for a, b in pts], fill=255)
+        _neon(p, m, col, tw=1.6, fill=(12, 8, 16, 255))
+
+
+def f_neon_double(t, bw, bh, first):
+    f = [((-NEON_TW, -NEON_TW, bw + NEON_TW, bh + NEON_TW), ())]
+    if first:
+        f.append(((bw - 18.5, -12.5, bw - 1.5, 4), ('inner', 'top')))
+    return f
+
+
+def d_neon_sign(p, lp, x, y, w, h, first, ck, t):
+    """간판. 어두운 금속 판에 네온을 박고 모서리에 볼트. 첫 장은 사슬에 매달린다."""
+    col = _c(t[ck])
+    if first:
+        for cx in (x + 10, x + w - 10):
+            for k in range(3):
+                yy = y - 13.5 + k * 4.4
+                p.d.ellipse(p._b(cx - 1.6, yy, cx + 1.6, yy + 5.4), outline=(110, 104, 118, 255),
+                            width=max(1, int(1.0 * p.s)))
+    p.rr(x, y, x + w, y + h, 5, hexc('#18141D'), ow=1.4, oc=hexc('#2E2836'))
+    p.rect(x + 1, y + 0.6, x + w - 1, y + 1.4, (70, 64, 78, 255))
+    _neon(p, _neon_rr(p, x + 5, y + 5, x + w - 5, y + h - 5, 6), col, tw=2.2)
+    for bx, by in ((x + 2.5, y + 2.5), (x + w - 2.5, y + 2.5),
+                   (x + 2.5, y + h - 2.5), (x + w - 2.5, y + h - 2.5)):
+        p.dot(bx, by, 1.1, fill=hexc('#5A5462'))
+
+
+def f_neon_sign(t, bw, bh, first):
+    f = [((-1.4, -1.4, bw + 1.4, bh + 1.4), ()),
+         ((1, 1, 4, 4), ('outer', 'top')), ((bw - 4, 1, bw - 1, 4), ('inner', 'top')),
+         ((1, bh - 4, 4, bh - 1), ('outer', 'bottom')), ((bw - 4, bh - 4, bw - 1, bh - 1), ('inner', 'bottom'))]
+    if first:
+        f += [((7.5, -14, 12.5, 1), ('outer', 'top')), ((bw - 12.5, -14, bw - 7.5, 1), ('inner', 'top'))]
+    return f
+
+
+def d_neon_electrode(p, lp, x, y, w, h, first, ck, t):
+    """전극. 실제 네온관처럼 바깥 아래 귀퉁이에서 관이 끊기고 양 끝에 전극 캡이 있다.
+    첫 장엔 전극에서 전선이 늘어진다."""
+    col = _c(t[ck])
+    cut = _neon_blank(p)
+    ImageDraw.Draw(cut).rectangle(p._b(x + 8, y + h - 6, x + 16, y + h + 6), fill=255)
+    _neon(p, _neon_rr(p, x, y, x + w, y + h, 12), col, fill=NEON_BODY, cut=cut)
+    if first:
+        p.line([(x + 16, y + h + 1.5), (x + 17.5, y + h + 8), (x + 23, y + h + 13)], (14, 14, 16, 255), 1.6)
+    for ex in (x + 8, x + 16):
+        p.rr(ex - 1.9, y + h - 2.5, ex + 1.9, y + h + 2.5, 1, hexc('#26262B'), ow=0.8, oc=hexc('#08080A'))
+        p.rect(ex - 1.2, y + h - 2.0, ex - 0.6, y + h + 2.0, (110, 110, 118, 255))
+
+
+def f_neon_electrode(t, bw, bh, first):
+    f = [((-NEON_TW, -NEON_TW, bw + NEON_TW, bh + NEON_TW), ()),
+         ((5, bh - 4, 19, bh + 4), ('outer', 'bottom'))]
+    if first:
+        f.append(((14, bh, 24.5, bh + 14), ('outer', 'bottom')))
+    return f
+
+
+def d_neon_speech(p, lp, x, y, w, h, first, ck, t):
+    """말꼬리. 첫 장은 꼬리까지 관 하나로 이어진다."""
+    shape = _neon_rr(p, x, y, x + w, y + h, 18)
+    if first:
+        pts = [(x + 12, y + h - 6), (x + 27, y + h - 2), (x + 1, y + h + 12)]
+        ImageDraw.Draw(shape).polygon([(a * p.s, b * p.s) for a, b in pts], fill=255)
+    _neon(p, shape, _c(t[ck]), fill=NEON_BODY)
+
+
+def f_neon_speech(t, bw, bh, first):
+    f = [((-NEON_TW, -NEON_TW, bw + NEON_TW, bh + NEON_TW), ())]
+    if first:
+        f.append(((-1.5, bh - 8, 28.5, bh + 13.5), ('outer', 'bottom')))
+    return f
+
+
+STYLES.update({
+    'neon_double':    dict(bw=40, bh=44, radius=16, draw=d_neon_double, features=f_neon_double),
+    'neon_sign':      dict(bw=40, bh=44, radius=6, draw=d_neon_sign, features=f_neon_sign),
+    'neon_electrode': dict(bw=40, bh=44, radius=12, draw=d_neon_electrode, features=f_neon_electrode),
+    'neon_speech':    dict(bw=40, bh=44, radius=18, draw=d_neon_speech, features=f_neon_speech),
+})
