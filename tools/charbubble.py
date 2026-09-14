@@ -20,6 +20,7 @@
 
 치수는 pt 다. scale 을 곱해 픽셀로 바꾼다.
 """
+import colorsys
 import math
 import os
 import sys
@@ -183,69 +184,173 @@ def f_pixel(t, bw, bh, first):
     return f
 
 
-def d_jelly(p, lp, x, y, w, h, first, ck, t):
-    """젤리. 광택은 보통/강함 두 가지(t['gloss']).
+JELLY_SS = 2          # 두 배로 그려 줄인다. 반사의 둥근 끝과 방울 하이라이트가 계단 없이 나온다
+JELLY_R = 19          # 몸통 모서리 반경
+JELLY_OW = 1.2       # 젤리 윤곽. 두꺼우면 젤리가 아니라 스티커로 읽힌다
 
-    가로로 긋는 선은 넣지 않는다 — 폭 전체를 지나는 선은 광택이 아니라 취소선이나 밑줄로
-    읽혔다. 흐린 빛 덩어리도 넣지 않는다 — 광택이 아니라 얼룩으로 읽혔다.
+
+def _hsv(h, dv=1.0, ds=1.0):
+    """명도와 채도만 곱한다. 그림자와 짙은 가장자리 색."""
+    r, g, b = (v / 255.0 for v in hexc(h)[:3])
+    hh, s, v = colorsys.rgb_to_hsv(r, g, b)
+    r, g, b = colorsys.hsv_to_rgb(hh, min(1.0, s * ds), min(1.0, v * dv))
+    return tuple(int(round(c * 255)) for c in (r, g, b))
+
+
+def _lift(h, f):
+    """빛 받은 색. 흰색을 섞지 않고 명도를 올린다 — 흰색을 섞으면 분홍이 탁한 살색이 된다."""
+    r, g, b = (v / 255.0 for v in hexc(h)[:3])
+    hh, s, v = colorsys.rgb_to_hsv(r, g, b)
+    r, g, b = colorsys.hsv_to_rgb(hh, s * (1 - 0.6 * f), v + (1 - v) * f)
+    return tuple(int(round(c * 255)) for c in (r, g, b))
+
+
+def _ramp(size, s, stops):
+    """세로 가림막. y 만의 함수라 가로로 늘어나도 모든 열이 같다.
+
+    stops 사이는 smoothstep 으로 잇는다. 선형으로 이으면 끝나는 줄에서 꺾인 자국이 보인다.
     """
-    fill, edge = hexc(_c(t[ck])), hexc(t[ck + '_edge'])
+    W, H = size
+    col = Image.new('L', (1, H), 0)
+    px = col.load()
+    ys = [(yy * s, vv) for yy, vv in stops]
+    for i in range(H):
+        yc = i + 0.5
+        if yc <= ys[0][0]:
+            v = ys[0][1]
+        elif yc >= ys[-1][0]:
+            v = ys[-1][1]
+        else:
+            for (a, va), (b, vb) in zip(ys, ys[1:]):
+                if a <= yc <= b:
+                    tt = (yc - a) / (b - a) if b > a else 1.0
+                    tt = tt * tt * (3 - 2 * tt)
+                    v = va + (vb - va) * tt
+                    break
+        px[0, i] = max(0, min(255, int(round(v))))
+    return col.resize((W, H), Image.NEAREST)
+
+
+def _paint(dst, color, alpha):
+    lay = Image.new('RGBA', dst.size, tuple(color[:3]) + (255,))
+    lay.putalpha(alpha)
+    dst.alpha_composite(lay)
+
+
+def _k(m, f):
+    return m.point(lambda v: max(0, min(255, int(v * f))))
+
+
+def d_jelly(p, lp, x, y, w, h, first, ck, t):
+    S = p.s * JELLY_SS
+    size = (p.img.width * JELLY_SS, p.img.height * JELLY_SS)
+    W_, H_ = size
+
+    def B(*v):
+        return [q * S for q in v]
+
+    def blur(m, r):
+        return m.filter(ImageFilter.GaussianBlur(r * S))
+
+    fill = _c(t[ck])
+    edge = t[ck + '_edge']
     strong = t.get('gloss') == 'strong'
+    k = 1.0 if strong else 0.6
     dx = x + w - 20
+
+    drops = []
     if first:
-        p.ell(dx, y + h + 2, 6, 7.5, fill, ow=OW, oc=edge)
-    p.rr(x, y, x + w, y + h, 19, fill, ow=OW, oc=edge)
-    if first:
-        p.rect(dx - 4, y + h - 2.5, dx + 4, y + h + 1, fill)      # 몸통과 방울 사이 선을 지운다
-        p.ell(dx + 1, y + h + 15, 3, 3.8, fill, ow=1.4, oc=edge)
-    white = lambda a: (255, 255, 255, a)
+        drops = [(dx, y + h + 2.5, 6, 7.5), (dx + 1, y + h + 15.5, 3, 3.8)]
+
+    def shape_mask(grow):
+        m = Image.new('L', size, 0)
+        d = ImageDraw.Draw(m)
+        d.rounded_rectangle(B(x - grow, y - grow, x + w + grow, y + h + grow),
+                            radius=(JELLY_R + grow) * S, fill=255)
+        for cx, cy, rx, ry in drops:
+            d.ellipse(B(cx - rx - grow, cy - ry - grow, cx + rx + grow, cy + ry + grow), fill=255)
+        return m
+
+    shape = shape_mask(0)
+    outer = shape_mask(JELLY_OW)
+    out = Image.new('RGBA', size, (0, 0, 0, 0))
+
+    # 1. 그림자. 검정이 아니라 몸통 색을 짙게 한 색이다 — 빛이 젤리를 지나 바닥에 색을 남긴다
+    off = int(1.6 * S)
+    sh = Image.new('L', size, 0)
+    sh.paste(blur(outer, 1.4).crop((0, 0, W_, H_ - off)), (0, off))
+    _paint(out, _hsv(fill, 0.55, 1.2), _k(sh, 0.38))
+
+    # 2. 윤곽. 몸통보다 조금 크게 칠하고 그 위에 몸통을 얹는다
+    _paint(out, hexc(edge), outer)
+
+    body = Image.new('RGBA', size, hexc(fill))
+    light, deep = _lift(fill, 0.55), _hsv(fill, 0.8, 1.15)
+
+    # 3. 몸통 명암. 위는 밝고 아래는 짙다. 가운데는 몸통 색 그대로 둔다 — 늘어나는 줄이 지나는 곳
+    #    위를 많이 밝히면 반사와 몸통 사이 대비가 사라져 반사가 안 읽힌다. 조금만 밝힌다
+    _paint(body, light, _ramp(size, S, [(y, 50 * k), (y + 16, 0)]))
+    _paint(body, deep, _ramp(size, S, [(y + h - 20, 0), (y + h - 3, 170 * k), (y + h + 40, 150 * k)]))
+
+    # 4. 가장자리 띠. 모양에서 흐린 모양을 빼면 테두리 안쪽만 남는다. 곧은 변을 따라 고르다
+    inner = _k(ImageChops.subtract(shape, blur(shape, 2.4)), 2.0)
+    wide = _k(ImageChops.subtract(shape, blur(shape, 4.0)), 1.7)
+    top = _ramp(size, S, [(y, 255), (y + 12, 0)])
+    bot = _ramp(size, S, [(y + h - 14, 0), (y + h - 1, 255)])
+    #    옆과 아래 가장자리는 짙게 — 두께가 생긴다
+    _paint(body, deep, _k(ImageChops.multiply(inner, ImageOps.invert(top)), 0.12 + 0.4 * k))
+    #    아래 가장자리 안쪽에 모이는 빛 — 젤리 속을 지나온 빛이 반대편 테두리에 고인다
+    _paint(body, _lift(fill, 0.85), _k(ImageChops.multiply(wide, bot), 0.5 + 0.8 * k))
+    #    위 가장자리를 타고 도는 빛
+    _paint(body, (255, 255, 255), _k(ImageChops.multiply(inner, top), 0.55 * k))
+    body.putalpha(shape)
+    out.alpha_composite(body)
+
+    # 5. 반사. 창이 비친 넓은 띠 — 몸통 위쪽 삼분의 일을 덮고, 위 끝은 또렷하고 아래로 사라진다.
+    #    얇게 두면 광택이 아니라 옅은 그라데이션으로만 읽혔다
+    sy0, sy1 = y + 2.4, y + (19 if strong else 17)
+    sp = Image.new('L', size, 0)
+    ImageDraw.Draw(sp).rounded_rectangle(B(x + 6, sy0, x + w - 6, sy1), radius=9 * S, fill=255)
+    #    아래 끝까지 옅게 남겼다가 끊는다. 0 으로 녹여 버리면 파스텔 몸통에서 반사가 아니라
+    #    그라데이션으로 읽혔다 — 반사는 경계가 있어야 반사다
+    stops = ([(sy0, 235), (sy0 + 5, 175), (sy1 - 1.2, 80), (sy1, 0)] if strong else
+             [(sy0, 175), (sy0 + 5, 115), (sy1 - 1.2, 45), (sy1, 0)])
+    sp = ImageChops.multiply(sp, _ramp(size, S, stops))
+    _paint(out, (255, 255, 255), blur(sp, 0.45))
+
+    # 6. 가장 밝은 점. 이게 있어야 표면이 젖어 보인다. 강한 광택은 점을 하나 더 두고
+    #    아래 가장자리에 빛이 맺힌 자국을 남긴다
+    hs = Image.new('L', size, 0)
+    hd = ImageDraw.Draw(hs)
     if strong:
-        lp.d.rounded_rectangle(lp._b(x + 2.5, y + h - 18, x + w - 2.5, y + h - 1.8),
-                               radius=14 * lp.s, fill=(0, 0, 0, t.get('shade_a', 26)))
-        W_, H_ = lp.img.size
-        # 윗 광택: 가장자리보다 조금 안쪽이 가장 밝고 위아래로 옅어진다. 맨 윗줄을 가장
-        # 밝게 두면 밝기가 몇 줄에 몰려 흰 선으로 읽혔다. 옅어지는 가림막 한 장으로 만든다.
-        m = Image.new('L', (W_, H_), 0)
-        ImageDraw.Draw(m).rounded_rectangle(lp._b(x + 7, y + 3, x + w - 7, y + 14.5),
-                                            radius=8 * lp.s, fill=255)
-        ramp = Image.new('L', (1, H_), 0)
-        rp = ramp.load()
-        y0p, y1p = (y + 3) * lp.s, (y + 14.5) * lp.s
-        for yy in range(H_):
-            if y0p <= yy <= y1p:
-                tt = (yy - y0p) / (y1p - y0p)
-                v = tt / 0.3 if tt < 0.3 else (1 - (tt - 0.3) / 0.7) ** 1.4
-                rp[0, yy] = int(150 * v)
-        m = ImageChops.multiply(m, ramp.resize((W_, H_)))
-        m = m.filter(ImageFilter.GaussianBlur(1.2 * lp.s))
-        band = Image.new('RGBA', (W_, H_), white(255))
-        band.putalpha(m)
-        lp.img.alpha_composite(band)
-        lp.ell(x + 18, y + 8, 10.5, 3.8, white(240), outline=False)
-        lp.dot(x + 26, y + 6.2, 1.8, fill=white(235))
-        lp.ell(x + w - 22, y + h - 6.5, 4.5, 1.7, white(150), outline=False)
-        if first:
-            lp.dot(dx - 1.5, y + h + 3, 1.6, fill=white(220))
-            lp.dot(dx + 0.3, y + h + 13.5, 0.9, fill=white(220))
+        hd.ellipse(B(x + 9, y + 4, x + 23, y + 8.6), fill=255)
+        hd.ellipse(B(x + 24.4, y + 4.5, x + 27.6, y + 7.7), fill=245)
     else:
-        lp.d.rounded_rectangle(lp._b(x + 3, y + 2.5, x + w - 3, y + 19), radius=8 * lp.s,
-                               fill=white(55))
-        lp.ell(x + 16, y + 9.5, 7.5, 3.6, white(210), outline=False)
+        hd.ellipse(B(x + 9, y + 4.4, x + 19, y + 8.2), fill=235)
+    for cx, cy, rx, ry in drops:
+        hd.ellipse(B(cx - rx * 0.6, cy - ry * 0.62, cx - rx * 0.05, cy - ry * 0.22), fill=235)
+    _paint(out, (255, 255, 255), blur(hs, 0.35))
+    if strong:
+        # 아래에 맺힌 빛은 번진 덩어리다. 또렷하게 그리면 흰 줄표로 읽혔다
+        cs = Image.new('L', size, 0)
+        ImageDraw.Draw(cs).ellipse(B(x + w - 28, y + h - 7.2, x + w - 13, y + h - 3.2), fill=150)
+        _paint(out, (255, 255, 255), blur(cs, 0.9))
+
+    p.img.alpha_composite(out.resize(p.img.size, Image.LANCZOS))
 
 
 def f_jelly(t, bw, bh, first):
-    f = [((-OW, -OW, bw + OW, bh + OW), ())]
-    if t.get('gloss') == 'strong':
-        f += [((5, 1, bw - 5, 18.5), ('top',)),
-              ((7.5, 4.2, 28.5, 11.8), ('outer', 'top')),
-              ((24.2, 4.4, 27.8, 8), ('outer', 'top')),
-              ((bw - 26.5, bh - 8.2, bw - 17.5, bh - 4.8), ('inner', 'bottom')),
-              ((2.5, bh - 18, bw - 2.5, bh - 1.8), ('bottom',))]
-    else:
-        f += [((3, 2.5, bw - 3, 19), ('top',)),
-              ((8.5, 5.9, 23.5, 13.1), ('outer', 'top'))]
+    strong = t.get('gloss') == 'strong'
+    f = [((-3, -1.5, bw + 3, bh + 4.5), ()),              # 윤곽과 그림자
+         ((0, 0, bw, 20), ('top',)),                       # 위 명암·가장자리 빛·반사
+         ((0, bh - 20, bw, bh), ('bottom',)),              # 아래 명암·고인 빛
+         ((4.5, 1.5, 16, 20), ('outer', 'top')),           # 반사의 둥근 끝
+         ((bw - 16, 1.5, bw - 4.5, 20), ('inner', 'top')),
+         ((8, 3, 28.5 if strong else 20, 9.5), ('outer', 'top'))]   # 밝은 점
+    if strong:
+        f.append(((bw - 28, bh - 7.5, bw - 13, bh - 2.5), ('inner', 'bottom')))
     if first:
-        f.append(((bw - 27.6, bh - 5.5, bw - 12.4, bh + 20.2), ('inner', 'bottom')))
+        f.append(((bw - 30, bh - 8, bw - 10, bh + 25), ('inner', 'bottom')))
     return f
 
 
@@ -253,7 +358,9 @@ STYLES = {
     'envelope': dict(bw=40, bh=44, radius=6, draw=d_envelope, features=f_envelope),
     'postit':   dict(bw=40, bh=44, radius=1, draw=d_postit, features=f_postit),
     'pixel':    dict(bw=40, bh=44, radius=9.5, draw=d_pixel, features=f_pixel),
-    'jelly':    dict(bw=40, bh=44, radius=19, draw=d_jelly, features=f_jelly),
+    # 젤리는 모서리 반경에 가장자리 띠의 흐림이 번지는 폭을 더한다. 늘어나는 줄이 그 안을 지나면
+    # 모서리 근처의 옅은 명암이 같이 늘어난다
+    'jelly':    dict(bw=40, bh=44, radius=JELLY_R + 3, draw=d_jelly, features=f_jelly),
 }
 
 
