@@ -29,6 +29,7 @@ from PIL import Image, ImageChops, ImageDraw, ImageFilter
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import themes  # noqa: E402
 import charbubble  # noqa: E402
+import motif  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, 'build-src')
@@ -1361,19 +1362,12 @@ def main():
 # 가이드에 162x162 px 로 적혀 있다.
 
 def profile_image(t, idx, px):
-    """기본 프로필 한 장. 세 장이 서로 다른 색이라야 목록에서 섞인 티가 난다."""
+    """기본 프로필 한 장. 캐릭터 계열은 캐릭터, 유리는 유리구슬, 나머지는 계열 모티프(tools/motif.py)."""
     if t.get('char'):
         return charbubble.profile(t, idx, px)
-    ss = 4
-    S = px * ss
-    tone = (t['accent'], t['subtext'], t['accent_dim'])[idx % 3]
-    back = (t['surface'], t['pressed'], t['bg_deep'])[idx % 3]
-    img = Image.new('RGBA', (S, S), rgb(back) + (255,))
-    d = ImageDraw.Draw(img)
-    c = rgb(tone) + (255,)
-    d.ellipse([S * 0.32, S * 0.20, S * 0.68, S * 0.56], fill=c)      # 머리
-    d.pieslice([S * 0.16, S * 0.52, S * 0.84, S * 1.10], 180, 360, fill=c)
-    return img.resize((px, px), Image.LANCZOS)
+    if t.get('bubble_style') == 'glass':
+        return motif.marble(t, idx, px)
+    return motif.profile(t, idx, px)
 
 
 # --- 탭 아이콘 -----------------------------------------------------------
@@ -1534,11 +1528,11 @@ def tab_icon(kind, px, color, ss=4):
 def tab_icon_for(t, kind, px, selected):
     """테마의 탭 아이콘. 보통은 보조색, 선택은 포인트색이다.
 
-    tab_style 이 없는 테마는 tab_icon 을 그대로 부른다 — 이미 나간 테마의 아이콘이 한 픽셀도
-    바뀌면 안 된다. 네온사인은 같은 도형을 네온관으로 그린다(neon_tab_icon).
+    네온사인과 글로우 변형은 같은 도형을 네온관으로 그린다(neon_tab_icon). 글로우는 말풍선이
+    빛나는 변형이라 탭도 불이 켜져야 목록에서 글로우 없는 형제와 갈린다.
     """
     col = t['accent'] if selected else t['subtext']
-    if t.get('tab_style') == 'neon':
+    if t.get('tab_style') == 'neon' or t.get('glow'):
         return neon_tab_icon(kind, px, col, selected)
     return tab_icon(kind, px, col)
 
