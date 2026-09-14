@@ -638,6 +638,10 @@ BASE = 'https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/'
 # 크롬의 공유 API 는 확장자 허용목록이라 .apk 를 받지도 않는다.
 IOS = 'https://ruminem.github.io/kakaotalk-theme/docs/share.html?f='
 
+# 계열 상세에서 맨 위 분류 격자로 돌아가는 자리. 계열이 예순을 넘으면서 상세를 하나 보고 나면
+# 다른 계열을 고르러 한참 거슬러 올라가야 했다.
+TOP = 'theme-list'
+
 # --- 배치 규칙 (폰에서 보는 것을 기준으로 잡은 값) ---------------------------
 # GitHub 은 넓은 표를 가로 스크롤 상자에 넣는다. 칸이 넷을 넘거나 그림이 크면
 # 폰에서 옆으로 한참 밀어야 다 본다. 셋과 200px 이 한 화면에 들어오는 한계다.
@@ -719,7 +723,7 @@ def readme_block(ts):
     fams = [fm for _, _, ms in cats for fm in ms]
     _check(fams)
     _check_cats(cats)
-    out = [START, '']
+    out = [START, '', '<a name="%s"></a>' % TOP, '']
 
     # 분류마다 계열 썸네일 격자 하나
     for name, note, members in cats:
@@ -767,6 +771,10 @@ def _family_block(T, name, members):
     out = ['<a name="%s"></a>' % slug(name), '']
     out.append('#### <img src="assets/icon-%s.png" width="26" valign="middle"> %s'
                % (T.file_slug(members[0]), name))
+    out.append('')
+    # 제목 안에 넣지 않는다. 깃허브 목차가 제목 글자를 그대로 보여주므로 계열마다
+    # "↑ 테마 목록" 이 붙어 목차가 지저분해진다.
+    out.append('<p align="right"><sub><a href="%s">↑ 테마 목록</a></sub></p>' % anchor(TOP))
     out.append('')
 
     # 변형 배치. 넷이면 2x2 로 접는다 — 한 줄에 넷을 놓으면 폰에서 옆으로 밀어야 한다.
