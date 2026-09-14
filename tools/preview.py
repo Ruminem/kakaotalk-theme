@@ -721,7 +721,7 @@ def doc_path(cat):
     return '%s/%s.md' % (DOCS_DIR, T.CATEGORY_FILE[cat])
 
 
-def cover(T, ms):
+def grid_cover(T, ms):
     """계열의 대표 변형. 배경 그림이 있는 변형이 있으면 그것, 없으면 첫 변형이다.
 
     계열 안은 늘 기본·밝음이 먼저 오도록 줄을 세우는데, 그대로 대표로 쓰면 배경 그림이 있는
@@ -740,14 +740,14 @@ def _grid(T, members, link, img):
         out.extend(_pad(
             '<td width="33%%" align="center"><a href="%s">'
             '<img src="%spreview-%s-chat.webp" width="%d"></a></td>'
-            % (link(fam), img, T.file_slug(cover(T, ms)), W_GRID)
+            % (link(fam), img, T.file_slug(grid_cover(T, ms)), W_GRID)
             for fam, ms in row))
         out.append('</tr>')
         out.append('<tr>')
         out.extend(_pad(
             '<td align="center"><img src="%sicon-%s.png" width="20" '
             'valign="middle"> <b><a href="%s">%s</a></b>%s<br>%s</td>'
-            % (img, T.file_slug(cover(T, ms)), link(fam), fam,
+            % (img, T.file_slug(grid_cover(T, ms)), link(fam), fam,
                ('' if len(ms) == 1 else '<br><sub>%s</sub>'
                 % ' · '.join(m['variant'] for m in ms)),
                ms[0]['note'])
