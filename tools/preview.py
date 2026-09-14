@@ -673,7 +673,13 @@ def _check(fams):
 
 def _check_cats(cats):
     """분류 줄이 한 줄에 들어가는지."""
+    import re
+    import themes as T
     for name, note, _ in cats:
+        f = T.CATEGORY_FILE.get(name)
+        if not f or not re.fullmatch(r'[a-z0-9-]+', f):
+            raise ValueError('%s 분류의 문서 파일 이름이 없거나 영문이 아니다. '
+                             'themes.CATEGORY_FILE 에 한 줄 쓴다' % name)
         if len(note) > CAT_NOTE_MAX:
             raise ValueError('%s 분류 설명이 %d자다. %d자 넘으면 폰에서 두 줄이 된다'
                              % (name, len(note), CAT_NOTE_MAX))
@@ -706,71 +712,88 @@ def anchor(name):
     return '#user-content-' + slug(name)
 
 
+DOCS_DIR = 'docs/themes'   # 분류 문서 자리. 저장소 뿌리 기준
+
+
+def doc_path(cat):
+    """분류 문서의 저장소 안 경로."""
+    import themes as T
+    return '%s/%s.md' % (DOCS_DIR, T.CATEGORY_FILE[cat])
+
+
+def _grid(T, members, link, img):
+    """계열 썸네일 격자. link(계열) 은 누르면 갈 주소, img 는 assets 까지의 상대 경로다."""
+    out = ['<table>']
+    for i in range(0, len(members), PER_ROW):
+        row = members[i:i + PER_ROW]
+        out.append('<tr>')
+        out.extend(_pad(
+            '<td width="33%%" align="center"><a href="%s">'
+            '<img src="%spreview-%s-chat.webp" width="%d"></a></td>'
+            % (link(fam), img, T.file_slug(ms[0]), W_GRID)
+            for fam, ms in row))
+        out.append('</tr>')
+        out.append('<tr>')
+        out.extend(_pad(
+            '<td align="center"><img src="%sicon-%s.png" width="20" '
+            'valign="middle"> <b><a href="%s">%s</a></b>%s<br>%s</td>'
+            % (img, T.file_slug(ms[0]), link(fam), fam,
+               ('' if len(ms) == 1 else '<br><sub>%s</sub>'
+                % ' · '.join(m['variant'] for m in ms)),
+               ms[0]['note'])
+            for fam, ms in row))
+        out.append('</tr>')
+    out.append('</table>')
+    out.append('')
+    return out
+
+
 def readme_block(ts):
-    """README 의 테마 절.
+    """README 의 테마 절. 분류마다 계열 격자 하나만 둔다.
 
-    계열 단위로 나열하고, 계열을 다시 분류로 묶는다. 변형이 늘어날 때 목록이
-    같이 길어지면 훑어보기가 안 된다 — 계열 수는 고정되고 변형은 계열 안에서
-    옆으로 늘어난다. 계열이 열다섯을 넘으면서 그 계열 목록도 한 덩어리로는
-    길어져서, 배경 그림이 무엇을 그리는지로 한 겹 더 묶었다.
-
-    개요 격자는 위에 몰아 두고 상세는 그 아래로 내린다. 분류마다 격자와 상세를
-    번갈아 놓으면 전체를 한눈에 볼 수 없다 — 둘째 분류를 보려면 첫째 분류의
-    상세 여섯 개를 지나쳐야 한다.
+    README 는 고르는 자리, 분류 문서(docs/themes/*.md)는 보는 자리다. 계열이 서른다섯이
+    되면서 상세까지 한 장에 두니 README 가 1600줄을 넘어 폰에서 스크롤을 감당 못 했다.
+    GitHub 은 README 뿐 아니라 저장소 안의 어느 .md 든 렌더링하므로 나눌 수 있다.
+    썸네일을 누르면 그 분류 문서의 계열 자리로 바로 뛴다.
     """
     import themes as T
     cats = T.categorized()
     fams = [fm for _, _, ms in cats for fm in ms]
     _check(fams)
     _check_cats(cats)
-    out = [START, '', '<a name="%s"></a>' % TOP, '']
-
-    # 분류마다 계열 썸네일 격자 하나
+    out = [START, '', '<a name="%s"></a>' % TOP, '',
+           '<sub>썸네일을 누르면 분류 문서의 그 계열로 감</sub>', '']
     for name, note, members in cats:
-        out.append('**[%s](%s)** — %s' % (name, anchor(name), note))
+        page = doc_path(name)
+        out.append('**[%s](%s)** — %s' % (name, page, note))
         out.append('')
-        out.append('<table>')
-        for i in range(0, len(members), PER_ROW):
-            row = members[i:i + PER_ROW]
-            out.append('<tr>')
-            out.extend(_pad(
-                '<td width="33%%" align="center"><a href="%s">'
-                '<img src="assets/preview-%s-chat.webp" width="%d"></a></td>'
-                % (anchor(fam), T.file_slug(ms[0]), W_GRID)
-                for fam, ms in row))
-            out.append('</tr>')
-            out.append('<tr>')
-            out.extend(_pad(
-                '<td align="center"><img src="assets/icon-%s.png" width="20" '
-                'valign="middle"> <b><a href="%s">%s</a></b>%s<br>%s</td>'
-                % (T.file_slug(ms[0]), anchor(fam), fam,
-                   ('' if len(ms) == 1 else '<br><sub>%s</sub>'
-                    % ' · '.join(m['variant'] for m in ms)),
-                   ms[0]['note'])
-                for fam, ms in row))
-            out.append('</tr>')
-        out.append('</table>')
-        out.append('')
-
-    # 분류별 상세. 분류가 제목이고 계열이 그 아래다 — 깃허브가 문서 목차를
-    # 그 층으로 접어준다.
-    for cat, _, members in cats:
-        out.append('<a name="%s"></a>' % slug(cat))
-        out.append('')
-        out.append('### %s' % cat)
-        out.append('')
-        for name, ms in members:
-            out.extend(_family_block(T, name, ms))
-
+        out.extend(_grid(T, members, lambda fam, page=page: page + anchor(fam), 'assets/'))
     out.append(END)
     return '\n'.join(out)
 
 
-def _family_block(T, name, members):
-    """계열 하나의 상세. 변형 표와 접어둔 화면들."""
+def category_doc(T, cat, note, members):
+    """분류 문서 한 장. 맨 위에 그 분류의 격자, 아래에 계열 상세.
+
+    계열 하나를 보고 다른 계열로 넘어가는 길이 짧아야 한다. 계열마다 이 문서 맨 위 격자로
+    돌아가는 링크를 두고, 문서 처음과 끝에는 README 의 분류 격자로 가는 링크를 둔다.
+    분류가 # 이고 계열이 ## 다 — 깃허브 문서 목차가 그 층으로 접어준다.
+    """
+    back = '[← 전체 테마](../../README.md%s)' % anchor(TOP)
+    out = ['<!-- tools/preview.py 가 만든다. 손으로 고치지 말고 tools/themes.py 를 고친다 -->',
+           '', '<a name="%s"></a>' % TOP, '', back, '', '# %s' % cat, '', note, '']
+    out.extend(_grid(T, members, anchor, '../../assets/'))
+    for name, ms in members:
+        out.extend(_family_block(T, name, ms, '../../assets/'))
+    out.append(back)
+    return '\n'.join(out) + '\n'
+
+
+def _family_block(T, name, members, img):
+    """계열 하나의 상세. 변형 표와 접어둔 화면들. img 는 assets 까지의 상대 경로다."""
     out = ['<a name="%s"></a>' % slug(name), '']
-    out.append('#### <img src="assets/icon-%s.png" width="26" valign="middle"> %s'
-               % (T.file_slug(members[0]), name))
+    out.append('## <img src="%sicon-%s.png" width="26" valign="middle"> %s'
+               % (img, T.file_slug(members[0]), name))
     out.append('')
     # 제목 안에 넣지 않는다. 깃허브 목차가 제목 글자를 그대로 보여주므로 계열마다
     # "↑ 테마 목록" 이 붙어 목차가 지저분해진다.
@@ -786,11 +809,11 @@ def _family_block(T, name, members):
         out.append('<tr>')
         for m in members[i:i + per]:
             out.append('<td width="%d%%" align="center">'
-                       '<img src="assets/preview-%s-chat.webp" width="%d"><br>'
+                       '<img src="%spreview-%s-chat.webp" width="%d"><br>'
                        '<b>%s</b><br><sub>%s</sub><br>'
                        '<a href="%s%s.ktheme">iOS</a> · <a href="%s%s.apk">Android</a>'
                        '</td>'
-                       % (cell, T.file_slug(m), W_VARIANT, m['variant'], m['note'],
+                       % (cell, img, T.file_slug(m), W_VARIANT, m['variant'], m['note'],
                           IOS, T.file_slug(m), BASE, T.file_slug(m)))
         out.append('</tr>')
     out.append('</table>')
@@ -802,12 +825,28 @@ def _family_block(T, name, members):
         out.append('**%s** — %s' % (m['variant'], m['note']))
         out.append('')
         out.append(' '.join(
-            '<img src="assets/preview-%s-%s.webp" width="%d">' % (T.file_slug(m), kind, W_DETAIL)
+            '<img src="%spreview-%s-%s.webp" width="%d">' % (img, T.file_slug(m), kind, W_DETAIL)
             for kind, _ in SHOTS if kind != 'chat'))
         out.append('')
     out.append('</details>')
     out.append('')
     return out
+
+
+def write_theme_docs(ts):
+    """분류 문서를 전부 새로 쓴다. 없어진 분류의 문서는 지운다 — 남겨 두면 옛 계열이 검색에 걸린다."""
+    import themes as T
+    d = os.path.join(ROOT_DIR, *DOCS_DIR.split('/'))
+    os.makedirs(d, exist_ok=True)
+    keep = set()
+    for cat, note, members in T.categorized():
+        path = os.path.join(ROOT_DIR, *doc_path(cat).split('/'))
+        keep.add(os.path.basename(path))
+        open(path, 'w', encoding='utf-8', newline='\n').write(
+            category_doc(T, cat, note, members))
+    for f in os.listdir(d):
+        if f.endswith('.md') and f not in keep:
+            os.remove(os.path.join(d, f))
 
 
 def write_readme(ts):
@@ -851,6 +890,7 @@ def generate(ts):
     with open(os.path.join(gen.DOCS, 'index.html'), 'w', encoding='utf-8', newline='\n') as f:
         f.write(PAGE % '\n'.join(body))
     write_readme(ts)
+    write_theme_docs(ts)
 
 if __name__ == '__main__':
     import themes
