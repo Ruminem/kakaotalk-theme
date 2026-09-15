@@ -2781,3 +2781,255 @@ def checker(spec, w, h):
             if (i + j) % 2:
                 d.rectangle([i * s, j * s, i * s + s - 1, j * s + s - 1], fill=gen.rgb(spec[2]))
     return _dim(_weave(img.filter(ImageFilter.GaussianBlur(w * 0.001)), rnd, 8), o)
+
+
+# --- 유리: 씨글래스 · 글래스 블록 · 얼음 · 골판 유리 · 아크릴 · 레진 -------------------------
+# spec = (kind, 색1, 색2, 옵션dict). 유리는 뒤에 볼 것이 있어야 유리로 읽혀서 재질마다 뒤 그림을 따로 둔다.
+# bare 는 목록용이다. 목록은 흐리지 않으므로 셀에 잘릴 큰 조각을 빼고 질감만 남긴다.
+# 반투명 점은 RGB 판에 'RGBA' 로 섞어 찍는다 — RGBA 판에 바로 찍으면 PIL 이 덮어써 원색이 된다.
+
+def _blotch(rnd, w, h, down, blur):
+    """down 배 작게 뽑아 키운 잡음. down=1 은 고운 알갱이, 크게 주면 뭉친 얼룩이다."""
+    sw, sh = max(1, w // down), max(1, h // down)
+    g = Image.frombytes('L', (sw, sh), rnd.randbytes(sw * sh))
+    return g.resize((w, h), Image.BICUBIC).filter(ImageFilter.GaussianBlur(blur))
+
+
+def _put_col(img, col, alpha):
+    """RGBA 판에 한 색을 알파 판대로 얹는다."""
+    lay = Image.new('RGBA', img.size, _g().rgb(col) + (255,))
+    lay.putalpha(alpha)
+    img.alpha_composite(lay)
+
+
+def _over(img, patch, x, y):
+    """조각을 (x, y) 에 알파로 얹는다. 화면 밖으로 삐져나가도 된다."""
+    lay = Image.new('RGBA', img.size, (0, 0, 0, 0))
+    lay.paste(patch, (int(x), int(y)))
+    img.alpha_composite(lay)
+
+
+def seaglass(spec, w, h):
+    """모래 위에 흩어진, 파도에 닳은 뿌연 유리 조각. spec = ('seaglass', 모래색, 알갱이색, 옵션)
+
+      glass  조각 색들      bare  목록용 — 작은 조각 몇 개만
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261150))
+    grain = _blotch(rnd, w, h, 1, 0.6).point(lambda v: max(0, v - 150) * 2)
+    img = Image.composite(Image.new('RGB', (w, h), gen.rgb(spec[2])), Image.new('RGB', (w, h), gen.rgb(spec[1])), grain)
+    d = ImageDraw.Draw(img, 'RGBA')
+    for _ in range(w * h // 700):
+        x, y = rnd.uniform(0, w), rnd.uniform(0, h)
+        r = rnd.uniform(0.6, 1.8) * w / 400
+        d.ellipse([x - r, y - r, x + r, y + r], fill=gen.rgb(spec[2]) + (rnd.randint(60, 160),))
+    img = img.convert('RGBA')
+    bare = o.get('bare')
+    for _ in range(int((5 if bare else 16) * h / w)):
+        r = w * (rnd.uniform(0.015, 0.03) if bare else rnd.uniform(0.035, 0.075))
+        P = int(r * 2.8)
+        cx, cy = rnd.uniform(-r, w + r), rnd.uniform(-r, h + r)
+        m = Image.new('L', (P, P), 0)
+        a0 = rnd.uniform(0, 2 * math.pi)
+        ImageDraw.Draw(m).polygon([(P / 2 + math.cos(a0 + i * 2 * math.pi / 9) * r * rnd.uniform(0.7, 1.15),
+                                    P / 2 + math.sin(a0 + i * 2 * math.pi / 9) * r * rnd.uniform(0.55, 0.95))
+                                   for i in range(9)], fill=255)
+        # 한 번 흐려 문턱을 넘기면 모서리가 닳은 듯 둥글어진다
+        m = m.filter(ImageFilter.GaussianBlur(r * 0.12)).point(lambda v: 255 if v > 128 else 0)
+        m = m.filter(ImageFilter.GaussianBlur(r * 0.04))
+        patch = Image.new('RGBA', (P, P), (0, 0, 0, 0))
+        sh = Image.new('L', (P, P), 0)
+        sh.paste(m, (0, int(r * 0.22)))
+        _put_col(patch, gen.mix(spec[2], '#000000', 0.35),
+                 sh.filter(ImageFilter.GaussianBlur(r * 0.12)).point(lambda v: v * 80 // 255))
+        _put_col(patch, rnd.choice(o['glass']), m.point(lambda v: v * 165 // 255))
+        inner = m.filter(ImageFilter.GaussianBlur(r * 0.22)).point(lambda v: 255 if v > 215 else 0)
+        _put_col(patch, '#FFFFFF', ImageChops.subtract(m, inner).filter(ImageFilter.GaussianBlur(r * 0.06))
+                 .point(lambda v: v * 110 // 255))
+        frost = _blotch(rnd, P, P, 1, 0.8).point(lambda v: max(0, v - 140) * 2)
+        _put_col(patch, '#FFFFFF', ImageChops.multiply(frost, m).point(lambda v: v * 70 // 255))
+        hl = Image.new('L', (P, P), 0)
+        ImageDraw.Draw(hl).ellipse([P / 2 - r * 0.55, P / 2 - r * 0.5, P / 2 - r * 0.1, P / 2 - r * 0.25], fill=150)
+        _put_col(patch, '#FFFFFF', ImageChops.multiply(hl.filter(ImageFilter.GaussianBlur(r * 0.08)), m))
+        _over(img, patch, cx - P / 2, cy - P / 2)
+    return _dim(img.convert('RGB'), o)
+
+
+def glassblock(spec, w, h):
+    """유리 벽돌 벽. 벽돌마다 뒤 불빛이 뒤집혀 작게 비치고 둘레에 두께가 선다.
+    spec = ('glassblock', 불빛 뒤 바탕색, 줄눈색, 옵션)   lights  뒤 불빛 색들
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261151))
+    s, g = max(8, int(w * 0.2)), max(2, int(w * 0.014))
+    pad = s * 2                      # 그림 밖을 자르면 검은 칸이 끼어서 뒤 그림을 넉넉히 그린다
+    src = Image.new('RGB', (w + 2 * pad, h + 2 * pad), gen.rgb(spec[1]))
+    d = ImageDraw.Draw(src)
+    for _ in range(16):
+        cx, cy, r = rnd.uniform(0, w + 2 * pad), rnd.uniform(0, h + 2 * pad), rnd.uniform(0.12, 0.3) * w
+        d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=gen.rgb(rnd.choice(o['lights'])))
+    src = src.filter(ImageFilter.GaussianBlur(w * 0.08))
+    img = Image.new('RGBA', (w, h), gen.rgb(spec[2]) + (255,))
+    inner = s - g
+    cut = Image.new('L', (s, s), 0)
+    ImageDraw.Draw(cut).rounded_rectangle([g // 2, g // 2, g // 2 + inner - 1, g // 2 + inner - 1],
+                                          radius=s * 0.08, fill=255)
+    rim = ImageChops.subtract(cut, cut.filter(ImageFilter.GaussianBlur(s * 0.08)).point(lambda v: 255 if v > 230 else 0))
+    top = Image.linear_gradient('L').resize((s, s)).point(lambda v: 255 - v)
+    bottom = Image.linear_gradient('L').resize((s, s))
+    hi_top = ImageChops.multiply(ImageChops.multiply(rim, top), cut).point(lambda v: v * 120 // 255)
+    lo_bot = ImageChops.multiply(ImageChops.multiply(rim, bottom), cut).point(lambda v: v * 60 // 255)
+    ctr = Image.new('L', (s, s), 0)
+    ImageDraw.Draw(ctr).ellipse([s * 0.2, s * 0.15, s * 0.8, s * 0.6], fill=60)
+    ctr = ImageChops.multiply(ctr.filter(ImageFilter.GaussianBlur(s * 0.1)), cut)
+    big = int(s * 1.5)
+    for j in range(-1, h // s + 2):
+        for i in range(-1, w // s + 2):
+            x, y = i * s + (s // 2 if j % 2 else 0), j * s
+            bx, by = x - (big - s) // 2 + pad, y - (big - s) // 2 + pad
+            view = src.crop((bx, by, bx + big, by + big)).resize((inner, inner)).transpose(Image.ROTATE_180)
+            tile = Image.new('RGBA', (s, s), (0, 0, 0, 0))
+            tile.paste(view.filter(ImageFilter.GaussianBlur(s * 0.04)).convert('RGBA'), (g // 2, g // 2))
+            _put_col(tile, '#FFFFFF', hi_top)
+            _put_col(tile, '#000000', lo_bot)
+            _put_col(tile, '#FFFFFF', ctr)
+            tile.putalpha(cut)
+            img.paste(tile, (x, y), tile)
+    return _dim(img.convert('RGB'), o)
+
+
+def ice(spec, w, h):
+    """금 간 얼음판에 갇힌 기포. spec = ('ice', 위 색, 아래 색, 옵션)   bare  목록용 — 금을 셋만"""
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261152))
+    img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGBA')
+    _put_col(img, '#FFFFFF', _blotch(rnd, w, h, 60, w * 0.02).point(lambda v: max(0, v - 110)))
+    lay = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+    shl = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+    d, ds = ImageDraw.Draw(lay), ImageDraw.Draw(shl)
+    lw = max(1, int(w * 0.0025))
+    deep = gen.rgb(gen.mix(spec[2], '#000000', 0.35))
+
+    def crack(x, y, a, n, seg):
+        for _ in range(n):
+            a += rnd.uniform(-0.5, 0.5)
+            nx, ny = x + math.cos(a) * seg * rnd.uniform(0.6, 1.3), y + math.sin(a) * seg * rnd.uniform(0.6, 1.3)
+            d.line([(x, y), (nx, ny)], fill=(255, 255, 255, 215), width=lw)
+            ds.line([(x + lw, y + lw * 2), (nx + lw, ny + lw * 2)], fill=deep + (80,), width=lw)
+            if rnd.random() < 0.22 and n > 3:
+                crack(nx, ny, a + rnd.choice((-1, 1)) * rnd.uniform(0.6, 1.2), n // 2, seg * 0.7)
+            x, y = nx, ny
+
+    for _ in range(3 if o.get('bare') else 8):
+        crack(rnd.uniform(0, w), rnd.uniform(0, h), rnd.uniform(0, 2 * math.pi), 14, w * 0.05)
+    img.alpha_composite(shl.filter(ImageFilter.GaussianBlur(lw)))
+    img.alpha_composite(lay.filter(ImageFilter.GaussianBlur(lw * 0.4)))
+    img = img.convert('RGB')
+    bd = ImageDraw.Draw(img, 'RGBA')
+    for _ in range(int(60 * h / w)):
+        cx, cy, r = rnd.uniform(0, w), rnd.uniform(0, h), rnd.uniform(0.004, 0.013) * w
+        bd.ellipse([cx - r, cy - r, cx + r, cy + r], outline=(255, 255, 255, 170), width=lw)
+        bd.ellipse([cx - r * 0.5, cy - r * 0.55, cx - r * 0.15, cy - r * 0.2], fill=(255, 255, 255, 200))
+    return _dim(img, o)
+
+
+def reeded(spec, w, h):
+    """세로 골 유리 너머로 쪼개져 비치는 빛. 골마다 뒤 그림을 눌러 담고 왼쪽은 밝게 오른쪽은 어둡게.
+    spec = ('reeded', 바탕색, 쓰지 않음, 옵션)   blobs  뒤에 번진 빛 색들
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261153))
+    src = Image.new('RGB', (w, h), gen.rgb(spec[1]))
+    d = ImageDraw.Draw(src)
+    for _ in range(14):
+        cx, cy, r = rnd.uniform(0, w), rnd.uniform(0, h), rnd.uniform(0.08, 0.2) * w
+        d.ellipse([cx - r, cy - r * 1.3, cx + r, cy + r * 1.3], fill=gen.rgb(rnd.choice(o['blobs'])))
+    src = src.filter(ImageFilter.GaussianBlur(w * 0.035))
+    rw = max(4, int(w * 0.04))
+    img = Image.new('RGBA', (w, h))
+    for x0 in range(0, w, rw):
+        sh = int(math.sin(x0 * 0.05) * rw * 0.4)
+        img.paste(src.crop((x0 - rw // 2 + sh, 0, x0 + rw + rw // 2 + sh, h)).resize((rw, h)).convert('RGBA'), (x0, 0))
+    shade = Image.new('RGBA', (rw, 1))
+    for x in range(rw):
+        t = x / (rw - 1)
+        if t < 0.4:
+            shade.putpixel((x, 0), (255, 255, 255, int(70 * (1 - t / 0.4))))
+        elif t > 0.55:
+            shade.putpixel((x, 0), (0, 0, 0, int(55 * (t - 0.55) / 0.45)))
+        else:
+            shade.putpixel((x, 0), (0, 0, 0, 0))
+    tile = shade.resize((rw, h))
+    for x0 in range(0, w, rw):
+        img.alpha_composite(tile, (x0, 0)) if x0 + rw <= w else _over(img, tile, x0, 0)
+    return _dim(img.convert('RGB'), o)
+
+
+def acrylic(spec, w, h):
+    """겹쳐 놓은 아크릴판. 판은 옅게 비치고 잘린 모서리가 진한 색으로 빛난다.
+    spec = ('acrylic', 바탕색, 쓰지 않음, 옵션)   sheets  판 색들   shadow  그림자 색
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261154))
+    img = Image.new('RGBA', (w, h), gen.rgb(spec[1]) + (255,))
+    ew = max(2, int(w * 0.006))
+    for _ in range(int(9 * h / w)):
+        sw, sh = int(rnd.uniform(0.35, 0.7) * w), int(rnd.uniform(0.1, 0.22) * h)
+        col = rnd.choice(o['sheets'])
+        P = int(math.hypot(sw, sh)) + 40
+        patch = Image.new('RGBA', (P, P), (0, 0, 0, 0))
+        box = [(P - sw) / 2, (P - sh) / 2, (P + sw) / 2, (P + sh) / 2]
+        pd = ImageDraw.Draw(patch)
+        pd.rounded_rectangle(box, radius=w * 0.02, fill=gen.rgb(col) + (55,),
+                             outline=gen.rgb(gen.mix(col, '#000000', 0.08)) + (235,), width=ew)
+        pd.rounded_rectangle([box[0] + ew * 1.6, box[1] + ew * 1.6, box[2] - ew * 1.6, box[3] - ew * 1.6],
+                             radius=w * 0.016, outline=(255, 255, 255, 150), width=max(1, ew // 2))
+        patch = patch.rotate(rnd.uniform(-18, 18), resample=Image.BICUBIC)
+        shadow = Image.new('RGBA', (P, P), gen.rgb(o.get('shadow', '#3C325A')) + (0,))
+        shadow.putalpha(patch.getchannel('A').filter(ImageFilter.GaussianBlur(w * 0.012)).point(lambda v: v * 50 // 255))
+        x, y = rnd.uniform(-0.2, 1.0) * w - P / 2 + sw / 2, rnd.uniform(-0.05, 1.0) * h - P / 2
+        _over(img, shadow, x, y + w * 0.012)
+        _over(img, patch, x, y)
+    return _dim(img.convert('RGB'), o)
+
+
+def resin(spec, w, h):
+    """호박색 레진 속에 갇힌 금박·기포·마른 잎. spec = ('resin', 위 색, 아래 색, 옵션)
+
+      flake  금박 색     leaf  잎 색     bare  목록용 — 잎을 뺀다
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261155))
+    img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGBA')
+    _put_col(img, gen.mix(spec[1], '#FFD27A', 0.5), _blotch(rnd, w, h, 80, w * 0.04).point(lambda v: max(0, v - 120) * 3 // 2))
+    for _ in range(0 if o.get('bare') else 5):
+        cx, cy, r = rnd.uniform(0, w), rnd.uniform(0, h), rnd.uniform(0.05, 0.09) * w
+        lf = Image.new('L', (int(r * 3), int(r * 3)), 0)
+        ld = ImageDraw.Draw(lf)
+        ld.ellipse([r * 1.1, r * 0.2, r * 1.9, r * 2.8], fill=255)
+        ld.line([(r * 1.5, r * 0.3), (r * 1.5, r * 2.9)], fill=0, width=max(1, int(r * 0.06)))
+        lf = lf.rotate(rnd.uniform(0, 360), resample=Image.BICUBIC).filter(ImageFilter.GaussianBlur(r * 0.05))
+        patch = Image.new('RGBA', lf.size, gen.rgb(o['leaf']) + (255,))
+        patch.putalpha(lf.point(lambda v: v * 120 // 255))
+        _over(img, patch, cx - r * 1.5, cy - r * 1.5)
+    img = img.convert('RGB')
+    d = ImageDraw.Draw(img, 'RGBA')
+    for _ in range(int(w * h / 9000)):
+        cx, cy, r = rnd.uniform(0, w), rnd.uniform(0, h), rnd.uniform(0.002, 0.008) * w
+        n = rnd.randint(3, 6)
+        a0 = rnd.uniform(0, 2 * math.pi)
+        d.polygon([(cx + math.cos(a0 + i * 2 * math.pi / n) * r * rnd.uniform(0.5, 1.3),
+                    cy + math.sin(a0 + i * 2 * math.pi / n) * r) for i in range(n)],
+                  fill=gen.rgb(o['flake']) + (rnd.randint(120, 230),))
+    lw = max(1, int(w * 0.002))
+    for _ in range(int(40 * h / w)):
+        cx, cy, r = rnd.uniform(0, w), rnd.uniform(0, h), rnd.uniform(0.003, 0.011) * w
+        d.ellipse([cx - r, cy - r, cx + r, cy + r], outline=(255, 235, 190, 120), width=lw)
+        d.ellipse([cx - r * 0.5, cy - r * 0.55, cx - r * 0.1, cy - r * 0.15], fill=(255, 245, 220, 180))
+    return _dim(img, o)

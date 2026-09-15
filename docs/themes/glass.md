@@ -22,11 +22,31 @@
 <tr>
 <td width="33%" align="center"><a href="#user-content-프리즘-글래스"><img src="../../assets/preview-prism-light-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-프로스트-글래스"><img src="../../assets/preview-frost-light-chat.webp" width="190"></a></td>
-<td width="33%"></td>
+<td width="33%" align="center"><a href="#user-content-씨글래스"><img src="../../assets/preview-seaglass-light-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><b><a href="#user-content-프리즘-글래스"><img src="../../assets/icon-prism-light.png" width="20" valign="middle"> 프리즘 글래스</a></b><br><sub>라이트 · 다크 · 라이트 단색 · 다크 단색</sub><br>맑은 바탕. 말풍선 테두리가 무지개로 갈라짐</td>
 <td align="center"><b><a href="#user-content-프로스트-글래스"><img src="../../assets/icon-frost-light.png" width="20" valign="middle"> 프로스트 글래스</a></b><br><sub>라이트 · 다크 · 라이트 단색 · 다크 단색</sub><br>젖빛 유리. 알갱이가 도는 뿌연 말풍선</td>
+<td align="center"><b><a href="#user-content-씨글래스"><img src="../../assets/icon-seaglass-light-image.png" width="20" valign="middle"> 씨글래스</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>파도에 닳은 유리 조각 같은 무광 말풍선</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="#user-content-글래스-블록"><img src="../../assets/preview-glassblock-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-얼음"><img src="../../assets/preview-ice-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-골판-유리"><img src="../../assets/preview-reeded-light-image-chat.webp" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><b><a href="#user-content-글래스-블록"><img src="../../assets/icon-glassblock-light-image.png" width="20" valign="middle"> 글래스 블록</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>두께 띠가 도는 볼록 유리 말풍선</td>
+<td align="center"><b><a href="#user-content-얼음"><img src="../../assets/icon-ice-light-image.png" width="20" valign="middle"> 얼음</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>서리 낀 얼음 말풍선. 첫 말엔 기포와 금</td>
+<td align="center"><b><a href="#user-content-골판-유리"><img src="../../assets/icon-reeded-light-image.png" width="20" valign="middle"> 골판 유리</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>세로 골이 도는 유리 말풍선</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="#user-content-아크릴"><img src="../../assets/preview-acrylic-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-레진"><img src="../../assets/preview-resin-light-image-chat.webp" width="190"></a></td>
+<td width="33%"></td>
+</tr>
+<tr>
+<td align="center"><b><a href="#user-content-아크릴"><img src="../../assets/icon-acrylic-light-image.png" width="20" valign="middle"> 아크릴</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>형광 모서리 아크릴 말풍선. 첫 말엔 나사</td>
+<td align="center"><b><a href="#user-content-레진"><img src="../../assets/icon-resin-light-image.png" width="20" valign="middle"> 레진</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>꿀빛 레진 말풍선. 첫 말엔 갇힌 잎</td>
 <td width="33%"></td>
 </tr>
 </table>
@@ -203,6 +223,216 @@
 **다크 단색** — 어두운 바탕에 젖빛 말풍선만
 
 <img src="../../assets/preview-frost-dark-plain-list.webp" width="180"> <img src="../../assets/preview-frost-dark-plain-passcode.webp" width="180"> <img src="../../assets/preview-frost-dark-plain-splash.webp" width="180">
+
+</details>
+
+<a name="씨글래스"></a>
+
+## <a href="#user-content-씨글래스"><img src="../../assets/icon-seaglass-light.png" width="26" valign="middle"></a> 씨글래스 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-seaglass-light-chat.webp" width="200"><br><b>밝음</b><br><sub>파도에 닳은 유리 조각 같은 무광 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=seaglass-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/seaglass-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-seaglass-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>모래 위에 흩어진 뿌연 유리 조각</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=seaglass-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/seaglass-light-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-seaglass-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>어두운 바탕에 닳은 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=seaglass-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/seaglass-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-seaglass-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>밤바다 젖은 모래 위 유리 조각</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=seaglass-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/seaglass-dark-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**밝음** — 파도에 닳은 유리 조각 같은 무광 말풍선
+
+<img src="../../assets/preview-seaglass-light-list.webp" width="180"> <img src="../../assets/preview-seaglass-light-passcode.webp" width="180"> <img src="../../assets/preview-seaglass-light-splash.webp" width="180">
+
+**밝음+배경** — 모래 위에 흩어진 뿌연 유리 조각
+
+<img src="../../assets/preview-seaglass-light-image-list.webp" width="180"> <img src="../../assets/preview-seaglass-light-image-passcode.webp" width="180"> <img src="../../assets/preview-seaglass-light-image-splash.webp" width="180">
+
+**어두움** — 어두운 바탕에 닳은 유리 말풍선
+
+<img src="../../assets/preview-seaglass-dark-list.webp" width="180"> <img src="../../assets/preview-seaglass-dark-passcode.webp" width="180"> <img src="../../assets/preview-seaglass-dark-splash.webp" width="180">
+
+**어두움+배경** — 밤바다 젖은 모래 위 유리 조각
+
+<img src="../../assets/preview-seaglass-dark-image-list.webp" width="180"> <img src="../../assets/preview-seaglass-dark-image-passcode.webp" width="180"> <img src="../../assets/preview-seaglass-dark-image-splash.webp" width="180">
+
+</details>
+
+<a name="글래스-블록"></a>
+
+## <a href="#user-content-글래스-블록"><img src="../../assets/icon-glassblock-light.png" width="26" valign="middle"></a> 글래스 블록 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-glassblock-light-chat.webp" width="200"><br><b>밝음</b><br><sub>두께 띠가 도는 볼록 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glassblock-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glassblock-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-glassblock-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>유리 벽돌 너머로 번진 불빛</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glassblock-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glassblock-light-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-glassblock-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>어두운 바탕에 볼록 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glassblock-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glassblock-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-glassblock-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>밤, 유리 벽돌 너머 켜진 불빛</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glassblock-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glassblock-dark-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**밝음** — 두께 띠가 도는 볼록 유리 말풍선
+
+<img src="../../assets/preview-glassblock-light-list.webp" width="180"> <img src="../../assets/preview-glassblock-light-passcode.webp" width="180"> <img src="../../assets/preview-glassblock-light-splash.webp" width="180">
+
+**밝음+배경** — 유리 벽돌 너머로 번진 불빛
+
+<img src="../../assets/preview-glassblock-light-image-list.webp" width="180"> <img src="../../assets/preview-glassblock-light-image-passcode.webp" width="180"> <img src="../../assets/preview-glassblock-light-image-splash.webp" width="180">
+
+**어두움** — 어두운 바탕에 볼록 유리 말풍선
+
+<img src="../../assets/preview-glassblock-dark-list.webp" width="180"> <img src="../../assets/preview-glassblock-dark-passcode.webp" width="180"> <img src="../../assets/preview-glassblock-dark-splash.webp" width="180">
+
+**어두움+배경** — 밤, 유리 벽돌 너머 켜진 불빛
+
+<img src="../../assets/preview-glassblock-dark-image-list.webp" width="180"> <img src="../../assets/preview-glassblock-dark-image-passcode.webp" width="180"> <img src="../../assets/preview-glassblock-dark-image-splash.webp" width="180">
+
+</details>
+
+<a name="얼음"></a>
+
+## <a href="#user-content-얼음"><img src="../../assets/icon-ice-light.png" width="26" valign="middle"></a> 얼음 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-ice-light-chat.webp" width="200"><br><b>밝음</b><br><sub>서리 낀 얼음 말풍선. 첫 말엔 기포와 금</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=ice-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/ice-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-ice-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>금 간 얼음판에 갇힌 기포</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=ice-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/ice-light-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-ice-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>짙은 얼음빛 바탕에 서리 낀 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=ice-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/ice-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-ice-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>깊고 푸른 얼음 속 금과 기포</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=ice-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/ice-dark-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**밝음** — 서리 낀 얼음 말풍선. 첫 말엔 기포와 금
+
+<img src="../../assets/preview-ice-light-list.webp" width="180"> <img src="../../assets/preview-ice-light-passcode.webp" width="180"> <img src="../../assets/preview-ice-light-splash.webp" width="180">
+
+**밝음+배경** — 금 간 얼음판에 갇힌 기포
+
+<img src="../../assets/preview-ice-light-image-list.webp" width="180"> <img src="../../assets/preview-ice-light-image-passcode.webp" width="180"> <img src="../../assets/preview-ice-light-image-splash.webp" width="180">
+
+**어두움** — 짙은 얼음빛 바탕에 서리 낀 말풍선
+
+<img src="../../assets/preview-ice-dark-list.webp" width="180"> <img src="../../assets/preview-ice-dark-passcode.webp" width="180"> <img src="../../assets/preview-ice-dark-splash.webp" width="180">
+
+**어두움+배경** — 깊고 푸른 얼음 속 금과 기포
+
+<img src="../../assets/preview-ice-dark-image-list.webp" width="180"> <img src="../../assets/preview-ice-dark-image-passcode.webp" width="180"> <img src="../../assets/preview-ice-dark-image-splash.webp" width="180">
+
+</details>
+
+<a name="골판-유리"></a>
+
+## <a href="#user-content-골판-유리"><img src="../../assets/icon-reeded-light.png" width="26" valign="middle"></a> 골판 유리 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-reeded-light-chat.webp" width="200"><br><b>밝음</b><br><sub>세로 골이 도는 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=reeded-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/reeded-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-reeded-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>세로 골 너머로 쪼개져 비치는 초록과 햇빛</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=reeded-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/reeded-light-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-reeded-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>어두운 바탕에 골판 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=reeded-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/reeded-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-reeded-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>밤, 골판 유리 너머 등불</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=reeded-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/reeded-dark-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**밝음** — 세로 골이 도는 유리 말풍선
+
+<img src="../../assets/preview-reeded-light-list.webp" width="180"> <img src="../../assets/preview-reeded-light-passcode.webp" width="180"> <img src="../../assets/preview-reeded-light-splash.webp" width="180">
+
+**밝음+배경** — 세로 골 너머로 쪼개져 비치는 초록과 햇빛
+
+<img src="../../assets/preview-reeded-light-image-list.webp" width="180"> <img src="../../assets/preview-reeded-light-image-passcode.webp" width="180"> <img src="../../assets/preview-reeded-light-image-splash.webp" width="180">
+
+**어두움** — 어두운 바탕에 골판 유리 말풍선
+
+<img src="../../assets/preview-reeded-dark-list.webp" width="180"> <img src="../../assets/preview-reeded-dark-passcode.webp" width="180"> <img src="../../assets/preview-reeded-dark-splash.webp" width="180">
+
+**어두움+배경** — 밤, 골판 유리 너머 등불
+
+<img src="../../assets/preview-reeded-dark-image-list.webp" width="180"> <img src="../../assets/preview-reeded-dark-image-passcode.webp" width="180"> <img src="../../assets/preview-reeded-dark-image-splash.webp" width="180">
+
+</details>
+
+<a name="아크릴"></a>
+
+## <a href="#user-content-아크릴"><img src="../../assets/icon-acrylic-light.png" width="26" valign="middle"></a> 아크릴 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-acrylic-light-chat.webp" width="200"><br><b>밝음</b><br><sub>형광 모서리 아크릴 말풍선. 첫 말엔 나사</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=acrylic-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/acrylic-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-acrylic-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>겹쳐 놓은 파스텔 아크릴판</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=acrylic-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/acrylic-light-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-acrylic-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>어두운 바탕에 형광 모서리가 빛남</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=acrylic-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/acrylic-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-acrylic-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>어둠 속에 겹친 형광 아크릴판</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=acrylic-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/acrylic-dark-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**밝음** — 형광 모서리 아크릴 말풍선. 첫 말엔 나사
+
+<img src="../../assets/preview-acrylic-light-list.webp" width="180"> <img src="../../assets/preview-acrylic-light-passcode.webp" width="180"> <img src="../../assets/preview-acrylic-light-splash.webp" width="180">
+
+**밝음+배경** — 겹쳐 놓은 파스텔 아크릴판
+
+<img src="../../assets/preview-acrylic-light-image-list.webp" width="180"> <img src="../../assets/preview-acrylic-light-image-passcode.webp" width="180"> <img src="../../assets/preview-acrylic-light-image-splash.webp" width="180">
+
+**어두움** — 어두운 바탕에 형광 모서리가 빛남
+
+<img src="../../assets/preview-acrylic-dark-list.webp" width="180"> <img src="../../assets/preview-acrylic-dark-passcode.webp" width="180"> <img src="../../assets/preview-acrylic-dark-splash.webp" width="180">
+
+**어두움+배경** — 어둠 속에 겹친 형광 아크릴판
+
+<img src="../../assets/preview-acrylic-dark-image-list.webp" width="180"> <img src="../../assets/preview-acrylic-dark-image-passcode.webp" width="180"> <img src="../../assets/preview-acrylic-dark-image-splash.webp" width="180">
+
+</details>
+
+<a name="레진"></a>
+
+## <a href="#user-content-레진"><img src="../../assets/icon-resin-light.png" width="26" valign="middle"></a> 레진 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-resin-light-chat.webp" width="200"><br><b>밝음</b><br><sub>꿀빛 레진 말풍선. 첫 말엔 갇힌 잎</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=resin-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/resin-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-resin-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>밝은 호박색 레진 속 금박과 기포</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=resin-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/resin-light-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-resin-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>짙은 호박색 바탕에 레진 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=resin-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/resin-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-resin-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>호박색 레진 속 금박과 마른 잎</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=resin-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/resin-dark-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**밝음** — 꿀빛 레진 말풍선. 첫 말엔 갇힌 잎
+
+<img src="../../assets/preview-resin-light-list.webp" width="180"> <img src="../../assets/preview-resin-light-passcode.webp" width="180"> <img src="../../assets/preview-resin-light-splash.webp" width="180">
+
+**밝음+배경** — 밝은 호박색 레진 속 금박과 기포
+
+<img src="../../assets/preview-resin-light-image-list.webp" width="180"> <img src="../../assets/preview-resin-light-image-passcode.webp" width="180"> <img src="../../assets/preview-resin-light-image-splash.webp" width="180">
+
+**어두움** — 짙은 호박색 바탕에 레진 말풍선
+
+<img src="../../assets/preview-resin-dark-list.webp" width="180"> <img src="../../assets/preview-resin-dark-passcode.webp" width="180"> <img src="../../assets/preview-resin-dark-splash.webp" width="180">
+
+**어두움+배경** — 호박색 레진 속 금박과 마른 잎
+
+<img src="../../assets/preview-resin-dark-image-list.webp" width="180"> <img src="../../assets/preview-resin-dark-image-passcode.webp" width="180"> <img src="../../assets/preview-resin-dark-image-splash.webp" width="180">
 
 </details>
 

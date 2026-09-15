@@ -1718,3 +1718,173 @@ STYLES.update({
     'chips': dict(bw=40, bh=44, radius=9, draw=d_chips, features=f_chips),
     'flag': dict(bw=40, bh=44, radius=14, draw=d_flag, features=f_flag),
 })
+
+
+# --- 유리: 씨글래스 · 글래스 블록 · 얼음 · 골판 유리 · 아크릴 · 레진 -------------------------
+# 기존 유리(bubble_box 의 glass)는 모양이 전부 둥근 네모에 테두리 색만 달랐다. 여기는 재질을 말풍선
+# 표면으로 드러낸다 — 닳은 무광 테, 두께 띠, 서리, 세로 골, 형광 모서리, 꿀빛. 몸통은 반투명이라 배경이 비친다.
+# 둘레를 따라가는 무늬는 둘레 전체에 고르게 둔다. 늘어나는 줄에 걸려도 같은 모양이다.
+
+def _rim_in(p, m, pt):
+    """모양 안쪽 가장자리 pt 폭의 띠."""
+    k = max(3, int(pt * p.s) * 2 + 1)
+    return ImageChops.subtract(m, m.filter(ImageFilter.MinFilter(k)))
+
+
+def d_seaglass(p, lp, x, y, w, h, first, ck, t):
+    """파도에 닳은 유리. 반사 없이 둘레만 뿌옇게 밝다. 첫 말엔 바깥 아래에 작은 유리 조각."""
+    col = _c(t[ck])
+    s = p.s
+    m = _shape_mask(p, x, y, w, h, 16)
+    _lay(p, m, col, 205)
+    _lay(p, _rim_in(p, m, 2.5).filter(ImageFilter.GaussianBlur(1.4 * s)), '#FFFFFF', 130)
+    if first:
+        pm = Image.new('L', p.img.size, 0)
+        ImageDraw.Draw(pm).ellipse([(x - 6) * s, (y + h + 0.5) * s, (x + 3) * s, (y + h + 6.5) * s], fill=255)
+        pm = pm.filter(ImageFilter.GaussianBlur(0.5 * s))
+        _lay(p, pm, t['accent'], 190)
+        _lay(p, _rim_in(p, pm, 1.2).filter(ImageFilter.GaussianBlur(0.5 * s)), '#FFFFFF', 140)
+
+
+def f_seaglass(t, bw, bh, first):
+    f = [((-1, -1, bw + 1, bh + 1), ())]
+    if first:
+        f.append(((-7, bh - 1, 4, bh + 8), ('outer', 'bottom')))
+    return f
+
+
+def d_gblock(p, lp, x, y, w, h, first, ck, t):
+    """유리 벽돌. 둘레에 넓은 두께 띠, 바깥에 짙은 선, 아래 띠는 살짝 어둡다."""
+    col = _c(t[ck])
+    s = p.s
+    m = _shape_mask(p, x, y, w, h, 6)
+    _lay(p, m, col, 195)
+    band = _rim_in(p, m, 3.2)
+    _lay(p, ImageChops.subtract(band, _rim_in(p, m, 1.0)), '#FFFFFF', 75)
+    _lay(p, _rim_in(p, m, 0.9), _g().mix(col, t['text'], 0.45), 150)
+    low = Image.new('L', p.img.size, 0)
+    ImageDraw.Draw(low).rectangle([x * s, (y + h - 3.2) * s, (x + w) * s, (y + h) * s], fill=255)
+    _lay(p, ImageChops.multiply(band, low), '#000000', 40)
+
+
+def f_gblock(t, bw, bh, first):
+    return [((-1, -1, bw + 1, bh + 1), ())]
+
+
+def d_ice(p, lp, x, y, w, h, first, ck, t):
+    """서리 낀 얼음. 둘레가 하얗게 번진다. 첫 말엔 안쪽 아래에 기포 셋, 바깥 위에 금."""
+    col = _c(t[ck])
+    s = p.s
+    m = _shape_mask(p, x, y, w, h, 12)
+    _lay(p, m, col, 185)
+    _lay(p, _rim_in(p, m, 2.2).filter(ImageFilter.GaussianBlur(1.6 * s)), '#FFFFFF', 170)
+    if first:
+        b = Image.new('L', p.img.size, 0)
+        bd = ImageDraw.Draw(b)
+        for cx, cy, r in ((w - 7, h - 7, 2.2), (w - 12, h - 5, 1.4), (w - 6, h - 12, 1.1)):
+            bd.ellipse([(x + cx - r) * s, (y + cy - r) * s, (x + cx + r) * s, (y + cy + r) * s],
+                       outline=255, width=max(1, int(0.5 * s)))
+        _lay(p, b, '#FFFFFF', 220)
+        cr = Image.new('L', p.img.size, 0)
+        cd = ImageDraw.Draw(cr)
+        cd.line([((x + 3) * s, (y + 4) * s), ((x + 7) * s, (y + 7) * s), ((x + 6) * s, (y + 11) * s),
+                 ((x + 10) * s, (y + 13) * s)], fill=255, width=max(1, int(0.55 * s)))
+        cd.line([((x + 7) * s, (y + 7) * s), ((x + 12) * s, (y + 5) * s)], fill=255, width=max(1, int(0.45 * s)))
+        _lay(p, cr, '#FFFFFF', 200)
+
+
+def f_ice(t, bw, bh, first):
+    f = [((-1, -1, bw + 1, bh + 1), ())]
+    if first:
+        f.append(((bw - 15, bh - 15, bw - 3, bh - 3), ('inner', 'bottom')))
+        f.append(((2, 3, 13, 14), ('outer', 'top')))
+    return f
+
+
+def d_reed(p, lp, x, y, w, h, first, ck, t):
+    """골판 유리. 위 가장자리에 빛, 바깥쪽에 세로 골 셋. 세로 줄이라 위아래로 늘어나도 같다."""
+    col = _c(t[ck])
+    s = p.s
+    m = _shape_mask(p, x, y, w, h, 14)
+    _lay(p, m, col, 185)
+    _lay(p, ImageChops.subtract(m, _shape_mask(p, x, y + 1.1, w, h, 14)), '#FFFFFF', 170)
+    r = Image.new('L', p.img.size, 0)
+    rd = ImageDraw.Draw(r)
+    for i in range(3):
+        xx = x + 4 + i * 3.4
+        rd.line([(xx * s, (y + 3) * s), (xx * s, (y + h - 3) * s)], fill=255, width=max(1, int(0.9 * s)))
+    _lay(p, ImageChops.multiply(r.filter(ImageFilter.GaussianBlur(0.4 * s)), m), '#FFFFFF', 95)
+
+
+def f_reed(t, bw, bh, first):
+    return [((-1, -1, bw + 1, bh + 1), ()), ((2, 0, 14, bh), ('outer',))]
+
+
+def d_acrylic(p, lp, x, y, w, h, first, ck, t):
+    """투명 아크릴판. 잘린 모서리가 진한 색으로 빛나고 안쪽에 흰 선. 첫 말엔 위 양쪽에 나사."""
+    g = _g()
+    col = _c(t[ck])
+    s = p.s
+    m = _shape_mask(p, x, y, w, h, 10)
+    _lay(p, m, col, 150)
+    _lay(p, _rim_in(p, m, 2.0), t['edge'], 235)
+    _lay(p, ImageChops.subtract(_rim_in(p, m, 3.0), _rim_in(p, m, 2.4)), '#FFFFFF', 160)
+    if first:
+        for cx in (x + 6, x + w - 6):
+            head = Image.new('L', p.img.size, 0)
+            ImageDraw.Draw(head).ellipse([(cx - 1.8) * s, (y + 4.2) * s, (cx + 1.8) * s, (y + 7.8) * s], fill=255)
+            _lay(p, head, g.mix(t['edge'], '#FFFFFF', 0.55))
+            slot = Image.new('L', p.img.size, 0)
+            ImageDraw.Draw(slot).line([((cx - 1.1) * s, (y + 7.1) * s), ((cx + 1.1) * s, (y + 4.9) * s)],
+                                      fill=255, width=max(1, int(0.5 * s)))
+            _lay(p, slot, g.mix(t['edge'], '#000000', 0.3), 220)
+
+
+def f_acrylic(t, bw, bh, first):
+    f = [((-1, -1, bw + 1, bh + 1), ())]
+    if first:
+        f.append(((3, 3, 9, 9), ('outer', 'top')))
+        f.append(((bw - 9, 3, bw - 3, 9), ('inner', 'top')))
+    return f
+
+
+def d_resin(p, lp, x, y, w, h, first, ck, t):
+    """꿀빛 레진. 위 가장자리에 빛, 둘레에 금빛이 고인다. 첫 말엔 안쪽 아래에 갇힌 잎과 기포."""
+    g = _g()
+    col = _c(t[ck])
+    s = p.s
+    m = _shape_mask(p, x, y, w, h, 16)
+    _lay(p, m, col, 205)
+    _lay(p, ImageChops.subtract(m, _shape_mask(p, x, y + 1.2, w, h, 16)), '#FFF3D6', 150)
+    _lay(p, _rim_in(p, m, 2.5).filter(ImageFilter.GaussianBlur(1.5 * s)), '#FFD27A', 90)
+    if first:
+        cx, cy = x + w - 9, y + h - 8
+        lf = Image.new('L', p.img.size, 0)
+        ImageDraw.Draw(lf).polygon([((cx - 5) * s, (cy + 3) * s), ((cx - 1) * s, (cy - 1.5) * s),
+                                    ((cx + 5) * s, (cy - 3) * s), ((cx + 1) * s, (cy + 1.8) * s)], fill=255)
+        _lay(p, lf.filter(ImageFilter.GaussianBlur(0.35 * s)), t['leaf'], 200)
+        vein = Image.new('L', p.img.size, 0)
+        ImageDraw.Draw(vein).line([((cx - 5) * s, (cy + 3) * s), ((cx + 4.5) * s, (cy - 2.7) * s)],
+                                  fill=255, width=max(1, int(0.35 * s)))
+        _lay(p, vein, g.mix(t['leaf'], '#000000', 0.4), 160)
+        bub = Image.new('L', p.img.size, 0)
+        ImageDraw.Draw(bub).ellipse([(x + w - 16) * s, (y + h - 13) * s, (x + w - 13.6) * s, (y + h - 10.6) * s],
+                                    outline=255, width=max(1, int(0.4 * s)))
+        _lay(p, bub, '#FFF3D6', 200)
+
+
+def f_resin(t, bw, bh, first):
+    f = [((-1, -1, bw + 1, bh + 1), ())]
+    if first:
+        f.append(((bw - 18, bh - 14, bw - 3, bh - 3), ('inner', 'bottom')))
+    return f
+
+
+STYLES.update({
+    'seaglass': dict(bw=40, bh=44, radius=17, draw=d_seaglass, features=f_seaglass),
+    'gblock': dict(bw=40, bh=44, radius=8, draw=d_gblock, features=f_gblock),
+    'ice': dict(bw=40, bh=44, radius=13, draw=d_ice, features=f_ice),
+    'reed': dict(bw=40, bh=44, radius=15, draw=d_reed, features=f_reed),
+    'acrylic': dict(bw=40, bh=44, radius=11, draw=d_acrylic, features=f_acrylic),
+    'resin': dict(bw=40, bh=44, radius=17, draw=d_resin, features=f_resin),
+})

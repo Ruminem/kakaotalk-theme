@@ -843,6 +843,12 @@ CATEGORY = {
     '스테인드 글래스': '유리',
     '프리즘 글래스': '유리',
     '프로스트 글래스': '유리',
+    '씨글래스': '유리',
+    '글래스 블록': '유리',
+    '얼음': '유리',
+    '골판 유리': '유리',
+    '아크릴': '유리',
+    '레진': '유리',
     '도형': '무늬',
     '깅엄 체크': '무늬',
     '폴카 도트': '무늬',
@@ -2150,6 +2156,142 @@ THEMES += character(
      '라벤더 체커보드 타일',
      '어두운 보라 바탕에 깃발 말풍선',
      '짙은 보라 체커보드'])
+
+
+# --- 유리: 씨글래스 · 글래스 블록 · 얼음 · 골판 유리 · 아크릴 · 레진 -------------------------
+# 색만 다른 유리는 더 만들지 않는다. 여섯 모두 말풍선 표면(charbubble 의 같은 이름)과 뒤 그림(scenes)이
+# 재질을 따로 드러낸다. bubble_style='glass' 라서 프로필은 뒤 그림을 비추는 유리구슬이다.
+# 축은 밝음/어두움 × 배경이고, 목록은 흐리지 않되 큰 조각을 뺀 질감만 깐다 — 흐렸더니 일곱 시안이 전부 단색이었다.
+
+def _glass_scenes(kind, top, bottom, opts):
+    sc = _scenes(kind, top, bottom, opts, (0.0, 0.0, 0.0))
+    sc['main_bg'] = _bare(sc['main_bg'], 0.12)
+    return sc
+
+
+_GLASS_LOOK = dict(bubble_style='glass', cell_alpha=0.55, flat_list=False)
+
+THEMES += character(
+    'seaglass', 201, '씨글래스', dict(_GLASS_LOOK, char_style='seaglass'),
+    dict(bg='#EDE6DA', bg_deep='#E6DDCE', surface='#F7F3EC', pressed='#E0D6C6',
+         border='#D6CBB8', text='#2F3A38', subtext='#6F7A76', accent='#5E9E94',
+         accent_dim='#4A8278', on_accent='#FFFFFF', recv='#F4F8F6', recv_alt='#E3EEEA',
+         send='#A9D6CC', send_alt='#C6E3F0', recv_text='#2F3A38', send_text='#1F3531',
+         char_outline='#8FB3AC'),
+    dict(bg='#1F2322', bg_deep='#191C1B', surface='#272C2A', pressed='#303634',
+         border='#39403D', text='#E4ECE9', subtext='#94A19C', accent='#7CC2B6',
+         accent_dim='#5EA095', on_accent='#0F2420', recv='#2B3230', recv_alt='#343C39',
+         send='#3F6E66', send_alt='#40607A', recv_text='#E4ECE9', send_text='#EEF7F4',
+         char_outline='#5E706A'),
+    _glass_scenes('seaglass', '#E9E1D2', '#CDBFA6',
+                  dict(glass=['#9ED3C6', '#BFE3EE', '#F2F4F0', '#B98A5E', '#6F9BD1', '#C9E6B3'], dim_to='#EDE6DA')),
+    _glass_scenes('seaglass', '#2A2723', '#1A1815',
+                  dict(glass=['#5FA597', '#7FB0C4', '#C8D0CC', '#8A6444', '#4F74A8', '#8DB07A'], dim_to='#1F2322')),
+    ['파도에 닳은 유리 조각 같은 무광 말풍선',
+     '모래 위에 흩어진 뿌연 유리 조각',
+     '어두운 바탕에 닳은 유리 말풍선',
+     '밤바다 젖은 모래 위 유리 조각'])
+
+THEMES += character(
+    'glassblock', 205, '글래스 블록', dict(_GLASS_LOOK, char_style='gblock'),
+    dict(bg='#EEF1F3', bg_deep='#E6EAEE', surface='#FAFBFC', pressed='#DDE3E8',
+         border='#D0D8DF', text='#253038', subtext='#6B7780', accent='#3E88A8',
+         accent_dim='#2F6D88', on_accent='#FFFFFF', recv='#F7FAFC', recv_alt='#E6EEF3',
+         send='#A9D2E4', send_alt='#CBE3D6', recv_text='#253038', send_text='#15303D',
+         char_outline='#9FB4C2'),
+    dict(bg='#1B1F24', bg_deep='#15181C', surface='#232830', pressed='#2C323B',
+         border='#353C46', text='#E6EBF0', subtext='#8F99A4', accent='#6FB6D6',
+         accent_dim='#4F94B4', on_accent='#0C1E28', recv='#2A3038', recv_alt='#333A43',
+         send='#335A6E', send_alt='#3E5A4C', recv_text='#E6EBF0', send_text='#EEF5F9',
+         char_outline='#56626E'),
+    _glass_scenes('glassblock', '#E8EDF1', '#C3CDD5',
+                  dict(lights=['#FFD9A0', '#A8D8F0', '#C8E8C0', '#F5C6D6', '#FFFFFF'], dim_to='#EEF1F3')),
+    _glass_scenes('glassblock', '#1E232A', '#0E1114',
+                  dict(lights=['#E0A050', '#4F8FB8', '#6FA070', '#C06E8C', '#F0D8A0'], dim_to='#1B1F24')),
+    ['두께 띠가 도는 볼록 유리 말풍선',
+     '유리 벽돌 너머로 번진 불빛',
+     '어두운 바탕에 볼록 유리 말풍선',
+     '밤, 유리 벽돌 너머 켜진 불빛'])
+
+THEMES += character(
+    'ice', 209, '얼음', dict(_GLASS_LOOK, char_style='ice'),
+    dict(bg='#EAF2F6', bg_deep='#DFEAF0', surface='#F6FAFC', pressed='#D5E3EB',
+         border='#C8D9E3', text='#1F2F3A', subtext='#667A87', accent='#3A8FC4',
+         accent_dim='#2A71A0', on_accent='#FFFFFF', recv='#F4FAFD', recv_alt='#E2EEF5',
+         send='#9FCDEB', send_alt='#BFE0F0', recv_text='#1F2F3A', send_text='#12324A',
+         char_outline='#9CB9CA'),
+    dict(bg='#141D26', bg_deep='#10171F', surface='#1B2631', pressed='#23303C',
+         border='#2C3A47', text='#E2EEF5', subtext='#8BA2B2', accent='#7CC4EE',
+         accent_dim='#58A2CE', on_accent='#0A1C28', recv='#223040', recv_alt='#2A394A',
+         send='#2E5B7C', send_alt='#35647F', recv_text='#E2EEF5', send_text='#EEF7FC',
+         char_outline='#4E6678'),
+    _glass_scenes('ice', '#DCEBF3', '#AFCBDC', dict(dim_to='#EAF2F6')),
+    _glass_scenes('ice', '#1C3346', '#0B141D', dict(dim_to='#141D26')),
+    ['서리 낀 얼음 말풍선. 첫 말엔 기포와 금',
+     '금 간 얼음판에 갇힌 기포',
+     '짙은 얼음빛 바탕에 서리 낀 말풍선',
+     '깊고 푸른 얼음 속 금과 기포'])
+
+THEMES += character(
+    'reeded', 213, '골판 유리', dict(_GLASS_LOOK, char_style='reed'),
+    dict(bg='#EFEBE4', bg_deep='#E7E2D9', surface='#F9F7F3', pressed='#E0D9CD',
+         border='#D5CDBF', text='#2E2A25', subtext='#756E64', accent='#A0784A',
+         accent_dim='#84613A', on_accent='#FFFFFF', recv='#FBF9F5', recv_alt='#EDE7DD',
+         send='#E4CFAE', send_alt='#CFDDC4', recv_text='#2E2A25', send_text='#2E2418',
+         char_outline='#B7AA96'),
+    dict(bg='#211E1A', bg_deep='#1A1814', surface='#2A2621', pressed='#332E28',
+         border='#3D3730', text='#EFE9E0', subtext='#A39A8E', accent='#E0AE6E',
+         accent_dim='#BC8C50', on_accent='#261A0A', recv='#2F2A24', recv_alt='#38322B',
+         send='#6A5234', send_alt='#445238', recv_text='#EFE9E0', send_text='#FBF4EA',
+         char_outline='#6A6052'),
+    _glass_scenes('reeded', '#E9E3D8', '#D8CFBF',
+                  dict(blobs=['#F2C277', '#8DB27A', '#F5E3C0', '#6E9A66', '#E7A96A'], dim_to='#EFEBE4')),
+    _glass_scenes('reeded', '#231F1A', '#171410',
+                  dict(blobs=['#C8862E', '#4E6E3E', '#E8B060', '#3A5A34', '#A85E2E'], dim_to='#211E1A')),
+    ['세로 골이 도는 유리 말풍선',
+     '세로 골 너머로 쪼개져 비치는 초록과 햇빛',
+     '어두운 바탕에 골판 유리 말풍선',
+     '밤, 골판 유리 너머 등불'])
+
+THEMES += character(
+    'acrylic', 217, '아크릴', dict(_GLASS_LOOK, char_style='acrylic'),
+    dict(bg='#F3F2F7', bg_deep='#ECEAF3', surface='#FCFBFE', pressed='#E3E0EC',
+         border='#D8D4E4', text='#2A2838', subtext='#727088', accent='#FF5FA2',
+         accent_dim='#D94483', on_accent='#FFFFFF', recv='#FAFAFD', recv_alt='#EFEDF6',
+         send='#FFD0E4', send_alt='#CDEBFF', recv_text='#2A2838', send_text='#3A1428',
+         char_outline='#B7B3C8', edge='#FF5FA2'),
+    dict(bg='#17161E', bg_deep='#111018', surface='#1F1E28', pressed='#282632',
+         border='#32303E', text='#EEEDF5', subtext='#9A98AE', accent='#FF6FAE',
+         accent_dim='#D9508D', on_accent='#2A0A1A', recv='#26243A', recv_alt='#2E2C44',
+         send='#5A2E4C', send_alt='#2A4A62', recv_text='#EEEDF5', send_text='#FFF0F7',
+         char_outline='#5A5870', edge='#FF6FAE'),
+    _glass_scenes('acrylic', '#F1F0F6', '#E4E1EE',
+                  dict(sheets=['#FF8FC0', '#7FD3FF', '#FFE07A', '#A8F0C8'], dim_to='#F3F2F7')),
+    _glass_scenes('acrylic', '#16151D', '#1E1C28',
+                  dict(sheets=['#FF5FA2', '#4FC3FF', '#FFD24A', '#6FE8A8'], shadow='#000000', dim_to='#17161E')),
+    ['형광 모서리 아크릴 말풍선. 첫 말엔 나사',
+     '겹쳐 놓은 파스텔 아크릴판',
+     '어두운 바탕에 형광 모서리가 빛남',
+     '어둠 속에 겹친 형광 아크릴판'])
+
+THEMES += character(
+    'resin', 221, '레진', dict(_GLASS_LOOK, char_style='resin'),
+    dict(bg='#F4E9D4', bg_deep='#EEE0C6', surface='#FBF5EA', pressed='#E8D6B6',
+         border='#DECAA6', text='#3A2A14', subtext='#7E6A4C', accent='#C0801E',
+         accent_dim='#9C6614', on_accent='#FFFFFF', recv='#FFF8EA', recv_alt='#F3E4C6',
+         send='#F2C77E', send_alt='#E0CFA0', recv_text='#3A2A14', send_text='#3A2408',
+         char_outline='#B89C70', leaf='#6B8A3A'),
+    dict(bg='#221A10', bg_deep='#1A130B', surface='#2C2216', pressed='#372A1B',
+         border='#433422', text='#F5EAD8', subtext='#B39E80', accent='#F0B04A',
+         accent_dim='#C88C30', on_accent='#2A1A04', recv='#3E3020', recv_alt='#4C3B27',
+         send='#B87A2A', send_alt='#8A6A30', recv_text='#F5EAD8', send_text='#FFF4E2',
+         char_outline='#7A6448', leaf='#6B8A3A'),
+    _glass_scenes('resin', '#F6E2B4', '#E2B96A', dict(flake='#C8901E', leaf='#8A5A1A', dim_to='#F4E9D4')),
+    _glass_scenes('resin', '#7A4E14', '#2A1A08', dict(flake='#FFD66B', leaf='#3A2408', dim_to='#221A10')),
+    ['꿀빛 레진 말풍선. 첫 말엔 갇힌 잎',
+     '밝은 호박색 레진 속 금박과 기포',
+     '짙은 호박색 바탕에 레진 말풍선',
+     '호박색 레진 속 금박과 마른 잎'])
 
 
 # --- 카테고리 규칙 ------------------------------------------------------------

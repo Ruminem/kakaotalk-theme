@@ -105,11 +105,31 @@
 <tr>
 <td width="33%" align="center"><a href="docs/themes/glass.md#user-content-프리즘-글래스"><img src="assets/preview-prism-light-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/glass.md#user-content-프로스트-글래스"><img src="assets/preview-frost-light-chat.webp" width="190"></a></td>
-<td width="33%"></td>
+<td width="33%" align="center"><a href="docs/themes/glass.md#user-content-씨글래스"><img src="assets/preview-seaglass-light-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><b><a href="docs/themes/glass.md#user-content-프리즘-글래스"><img src="assets/icon-prism-light.png" width="20" valign="middle"> 프리즘 글래스</a></b><br><sub>라이트 · 다크 · 라이트 단색 · 다크 단색</sub><br>맑은 바탕. 말풍선 테두리가 무지개로 갈라짐</td>
 <td align="center"><b><a href="docs/themes/glass.md#user-content-프로스트-글래스"><img src="assets/icon-frost-light.png" width="20" valign="middle"> 프로스트 글래스</a></b><br><sub>라이트 · 다크 · 라이트 단색 · 다크 단색</sub><br>젖빛 유리. 알갱이가 도는 뿌연 말풍선</td>
+<td align="center"><b><a href="docs/themes/glass.md#user-content-씨글래스"><img src="assets/icon-seaglass-light-image.png" width="20" valign="middle"> 씨글래스</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>파도에 닳은 유리 조각 같은 무광 말풍선</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="docs/themes/glass.md#user-content-글래스-블록"><img src="assets/preview-glassblock-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/glass.md#user-content-얼음"><img src="assets/preview-ice-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/glass.md#user-content-골판-유리"><img src="assets/preview-reeded-light-image-chat.webp" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><b><a href="docs/themes/glass.md#user-content-글래스-블록"><img src="assets/icon-glassblock-light-image.png" width="20" valign="middle"> 글래스 블록</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>두께 띠가 도는 볼록 유리 말풍선</td>
+<td align="center"><b><a href="docs/themes/glass.md#user-content-얼음"><img src="assets/icon-ice-light-image.png" width="20" valign="middle"> 얼음</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>서리 낀 얼음 말풍선. 첫 말엔 기포와 금</td>
+<td align="center"><b><a href="docs/themes/glass.md#user-content-골판-유리"><img src="assets/icon-reeded-light-image.png" width="20" valign="middle"> 골판 유리</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>세로 골이 도는 유리 말풍선</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="docs/themes/glass.md#user-content-아크릴"><img src="assets/preview-acrylic-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/glass.md#user-content-레진"><img src="assets/preview-resin-light-image-chat.webp" width="190"></a></td>
+<td width="33%"></td>
+</tr>
+<tr>
+<td align="center"><b><a href="docs/themes/glass.md#user-content-아크릴"><img src="assets/icon-acrylic-light-image.png" width="20" valign="middle"> 아크릴</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>형광 모서리 아크릴 말풍선. 첫 말엔 나사</td>
+<td align="center"><b><a href="docs/themes/glass.md#user-content-레진"><img src="assets/icon-resin-light-image.png" width="20" valign="middle"> 레진</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>꿀빛 레진 말풍선. 첫 말엔 갇힌 잎</td>
 <td width="33%"></td>
 </tr>
 </table>
