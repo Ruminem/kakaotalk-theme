@@ -2444,3 +2444,241 @@ def farm(spec, w, h):
             gd.ellipse([cx - r, cy - r, cx + r, cy + r], fill=tuple(int(v * 0.5) for v in fc))
         img = ImageChops.screen(img, glow_.filter(ImageFilter.GaussianBlur(w * 0.018)))
     return _dim(img, o)
+
+
+# --- 편안함: 수채화 · 수묵화 · 비 오는 창가 · 페이퍼컷 -----------------------------------------
+# 눈이 편하다는 것을 채도·대비를 덜어내는 것으로만 풀었더니 색만 다른 회색 판이 줄지었고, 사용자가
+# "다운받고 싶지 않다" 고 했다. 조용하지만 한눈에 알아보는 그림 스타일이 있어야 한다. 넷 다 명암 폭은
+# 좁게 두고 스타일은 분명하게 간다. 밝은 쪽은 종이에 곱하기로 칠하고, 어두운 쪽은 빛을 더하기로 얹는다.
+
+def _unit_fbm(seed, n, octaves=4):
+    """-1~1 로 펼친 부드러운 1차원 잡음."""
+    v = _g()._fbm(seed, n, octaves)
+    lo, hi = min(v), max(v)
+    return [(q - lo) / (hi - lo + 1e-9) * 2 - 1 for q in v]
+
+
+def _grain(rnd, w, h):
+    """고운 종이 알갱이. 반 크기에서 뽑아 살짝 흐린다."""
+    g = Image.frombytes('L', (w // 2, h // 2), rnd.randbytes((w // 2) * (h // 2)))
+    return g.resize((w, h), Image.BILINEAR).filter(ImageFilter.GaussianBlur(0.7))
+
+
+def _paper(rnd, w, h, base, grain, amp):
+    gen = _g()
+    m = ImageChops.add(_grain(rnd, w, h).point(lambda v: v // 2), _noise(rnd, 12, 24, w, h).point(lambda v: v // 2))
+    k = m.point(lambda v: max(0, min(255, int((v - 105) * amp * 3))))
+    return Image.composite(Image.new('RGB', (w, h), gen.rgb(grain)), Image.new('RGB', (w, h), gen.rgb(base)), k)
+
+
+def _ridge(w, h, seed, base, amp, n=90, octaves=4, sharp=False):
+    v = _unit_fbm(seed, n, octaves)
+    pts = []
+    for i, q in enumerate(v):
+        if sharp:
+            q = (1 - abs(q)) ** 2 * 2 - 1
+        pts.append((i / (n - 1) * w, base - amp * (0.5 + 0.5 * q)))
+    m = Image.new('L', (w, h), 0)
+    ImageDraw.Draw(m).polygon(pts + [(w, h), (0, h)], fill=255)
+    return m
+
+
+def _tint(img, color, a, dark=False):
+    """밝은 종이는 곱하기(물감이 빛을 먹는다), 어두운 바탕은 더하기(빛이 얹힌다)."""
+    gen = _g()
+    w, h = img.size
+    if dark:
+        return ImageChops.screen(img, Image.composite(Image.new('RGB', (w, h), gen.rgb(color)),
+                                                      Image.new('RGB', (w, h), (0, 0, 0)), a))
+    return ImageChops.multiply(img, Image.composite(Image.new('RGB', (w, h), gen.rgb(color)),
+                                                    Image.new('RGB', (w, h), (255, 255, 255)), a))
+
+
+def _wash(img, m, color, rnd, alpha=0.5, edge=0.6, gran=0.35, dark=False):
+    """물감 한 번. 번진 가장자리가 진해지고 종이 굴곡에 안료가 뭉친다."""
+    w, h = img.size
+    m = ImageChops.add(m.filter(ImageFilter.GaussianBlur(w * 0.006)), _noise(rnd, 50, 100, w, h).point(lambda v: v // 3))
+    m = m.point(lambda v: 255 if v > 160 else 0).filter(ImageFilter.GaussianBlur(w * 0.002))
+    band = ImageChops.subtract(m, m.filter(ImageFilter.GaussianBlur(w * 0.01)))
+    a = ImageChops.add(m.point(lambda v: int(v * alpha)), band.point(lambda v: int(v * edge)))
+    a = ImageChops.multiply(a, _noise(rnd, 180, 360, w, h).point(lambda v: int(255 * (1 - gran) + v * gran)))
+    return _tint(img, color, a, dark)
+
+
+def _moon(img, cx, cy, r, color, glow):
+    gen = _g()
+    w, h = img.size
+    g = Image.new('L', (w, h), 0)
+    ImageDraw.Draw(g).ellipse([cx - r * 3, cy - r * 3, cx + r * 3, cy + r * 3], fill=int(255 * glow))
+    img = ImageChops.screen(img, Image.composite(Image.new('RGB', (w, h), gen.rgb(color)), Image.new('RGB', (w, h)),
+                                                 g.filter(ImageFilter.GaussianBlur(r * 2))))
+    ImageDraw.Draw(img).ellipse([cx - r, cy - r, cx + r, cy + r], fill=gen.rgb(color))
+    return img
+
+
+def watercolor(spec, w, h):
+    """물감이 번진 들판. spec = ('watercolor', 종이색, 종이결 색, 옵션dict)
+
+      sky · hills(먼 쪽부터 넷) · trees   물감 색
+      dark   참이면 어두운 종이에 빛으로 얹는다(밤)   moon  달 색
+    """
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261130))
+    dark = o.get('dark', False)
+    img = _paper(rnd, w, h, spec[1], spec[2], 0.06)
+    # 하늘은 첫 능선 아래까지 칠해 둔다. 능선 위에서 끊으면 사이에 흰 종이 띠가 떠 산처럼 보였다
+    sky = Image.new('L', (w, h), 0)
+    sp = [(i / 40 * w, h * (0.6 + 0.03 * math.sin(i * 0.7 + 1))) for i in range(41)]
+    ImageDraw.Draw(sky).polygon([(0, 0), (w, 0)] + sp[::-1], fill=255)
+    img = _wash(img, sky, o['sky'], rnd, alpha=0.4, edge=0.3, dark=dark)
+    if o.get('moon'):
+        img = _moon(img, w * 0.72, h * 0.17, w * 0.045, o['moon'], 0.35)
+    for k, (col, base, amp, al) in enumerate(zip(o['hills'], (0.5, 0.62, 0.76, 0.9), (0.1, 0.08, 0.05, 0.04),
+                                                 (0.45, 0.5, 0.5, 0.55))):
+        img = _wash(img, _ridge(w, h, 11 + k, h * base, h * amp), col, rnd, alpha=al, dark=dark)
+        if k == 1:
+            trees = Image.new('L', (w, h), 0)
+            td = ImageDraw.Draw(trees)
+            # 둥근 잎 뭉치 셋에 가는 줄기. 긴 타원 하나로 그렸더니 물방울로 보였다
+            for _ in range(10):
+                cx, cy = rnd.uniform(0.03, 0.97) * w, h * rnd.uniform(0.61, 0.67)
+                r = w * rnd.uniform(0.016, 0.028)
+                td.rectangle([cx - r * 0.12, cy - r * 1.3, cx + r * 0.12, cy], fill=255)
+                for ox, oy, rr in ((-0.6, -1.7, 0.85), (0.6, -1.75, 0.8), (0.0, -2.5, 0.9)):
+                    px, py = cx + ox * r, cy + oy * r
+                    td.ellipse([px - rr * r, py - rr * r, px + rr * r, py + rr * r], fill=255)
+            img = _wash(img, trees, o['trees'], rnd, alpha=0.55, edge=0.7, dark=dark)
+    return _dim(img, o)
+
+
+def inkwash(spec, w, h):
+    """한지 위 수묵 산수. spec = ('inkwash', 한지색, 한지결 색, 옵션dict)
+
+      ink    먹 색. dark 면 산이 바탕보다 짙어지고 달과 안개가 빛으로 얹힌다
+      mist   산 사이 안개 색     moon  달 색(달밤)     seal  낙관 색
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261131))
+    dark = o.get('dark', False)
+    img = _paper(rnd, w, h, spec[1], spec[2], 0.08)
+    if o.get('moon'):
+        img = _moon(img, w * 0.7, h * 0.2, w * 0.08, o['moon'], 0.45)
+    grad = Image.linear_gradient('L').resize((w, h))
+    for k, (base, amp, dk) in enumerate(((0.38, 0.16, 0.22), (0.52, 0.14, 0.33), (0.66, 0.1, 0.45), (0.82, 0.07, 0.6))):
+        m = _ridge(w, h, 31 + k, h * base, h * amp, sharp=True, octaves=5)
+        top = base - amp
+        # 먹은 산마루에서 진하고 아래로 옅어진다. 산 모양 전체를 같은 농도로 칠하면 실루엣 스티커가 된다
+        fade = grad.point(lambda v, top=top, dk=dk: int(255 * dk * max(0.14, min(1.0, 1 - (v / 255 - top) / 0.2))))
+        a = ImageChops.multiply(m, fade)
+        a = ImageChops.multiply(a, _noise(rnd, 60, 120, w, h).point(lambda v: 150 + v * 105 // 255))
+        img = _tint(img, o.get('ink', '#2E2C29'), a.filter(ImageFilter.GaussianBlur(w * 0.003)))
+        mist = grad.point(lambda v, b=base: int(150 * max(0.0, 1 - abs(v / 255 - (b + 0.04)) / 0.05)))
+        img = Image.composite(Image.new('RGB', (w, h), gen.rgb(o.get('mist', spec[1]))), img, mist)
+    d = ImageDraw.Draw(img, 'RGBA')
+    ink = gen.rgb(o.get('bird', o.get('ink', '#2E2C29')))
+    for _ in range(5):
+        bx, by, s = w * rnd.uniform(0.2, 0.5), h * rnd.uniform(0.12, 0.22), w * rnd.uniform(0.008, 0.013)
+        d.line([(bx - s, by - s * 0.5), (bx, by), (bx + s, by - s * 0.6)], fill=ink + (150,), width=max(2, w // 400))
+    # 낙관은 입력창에 가리지 않게 화면 아래쪽 네 번째 칸 높이에 둔다
+    sx, sy, ss = w * 0.84, h * 0.72, w * 0.04
+    seal = gen.rgb(o.get('seal', '#A85A4E'))
+    d.rectangle([sx, sy, sx + ss, sy + ss * 1.2], fill=seal + (150,))
+    for bx in ((0.25, 0.2, 0.45, 1.0), (0.55, 0.2, 0.75, 0.6)):
+        d.rectangle([sx + ss * bx[0], sy + ss * bx[1], sx + ss * bx[2], sy + ss * bx[3]], fill=gen.rgb(spec[1]) + (110,))
+    return _dim(img, o)
+
+
+def rainwindow(spec, w, h):
+    """빗방울 맺힌 창 너머로 흐리게 번진 거리 불빛. spec = ('rainwindow', 위색, 아래색, 옵션dict)
+
+      bokeh  번진 불빛 색들     dark  참이면 밤(불빛이 빛으로 얹힌다), 거짓이면 흐린 낮
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261132))
+    dark = o.get('dark', True)
+    img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGB')
+    sw, sh = w // 4, h // 4
+    bok = Image.new('RGB', (sw, sh), (0, 0, 0))
+    bd = ImageDraw.Draw(bok, 'RGBA')
+    # 불빛은 화면 전체에 흩는다. 가운데에만 모으니 말풍선 뒤가 복잡해졌다.
+    # 흐린 낮에도 번진 빛은 더하기로 얹는다 — 곱하기로 어둡게 찍었더니 창에 묻은 얼룩으로 보였다
+    for _ in range(90):
+        x, y = rnd.uniform(0, sw), rnd.uniform(sh * 0.05, sh)
+        r = sw * rnd.uniform(0.02, 0.07)
+        c = gen.rgb(rnd.choice(o['bokeh']))
+        k = rnd.uniform(0.25, 0.65) if dark else rnd.uniform(0.08, 0.24)
+        bd.ellipse([x - r, y - r, x + r, y + r], fill=tuple(int(v * k) for v in c) + (255,))
+    bok = bok.resize((w, h), Image.BICUBIC).filter(ImageFilter.GaussianBlur(w * 0.012))
+    img = ImageChops.screen(img, bok)
+    d = ImageDraw.Draw(img, 'RGBA')
+    shade, lite = ((10, 14, 20, 55), (210, 220, 230, 45)) if dark else ((60, 70, 80, 40), (255, 255, 255, 90))
+    for _ in range(14):
+        x, y = rnd.uniform(0, w), rnd.uniform(0, h * 0.6)
+        ln, wd = h * rnd.uniform(0.08, 0.25), w * rnd.uniform(0.003, 0.006)
+        d.line([(x + math.sin(i * 0.9) * wd * 0.8, y + ln * i / 10) for i in range(11)],
+               fill=(200, 210, 220, 26) if dark else (90, 100, 110, 22), width=int(wd * 2))
+    for _ in range(900):
+        x, y = rnd.uniform(0, w), rnd.uniform(0, h)
+        r = w * rnd.choice((0.002, 0.003, 0.004, 0.006, 0.009))
+        d.ellipse([x - r, y - r * 1.1, x + r, y + r * 1.1], fill=shade)
+        d.ellipse([x - r * 0.75, y + r * 0.1, x + r * 0.75, y + r], fill=lite)
+        d.ellipse([x - r * 0.5, y - r * 0.8, x - r * 0.05, y - r * 0.35], fill=(240, 245, 250, 110))
+    return _dim(img, o)
+
+
+def papercut(spec, w, h):
+    """종이를 오려 겹친 능선. spec = ('papercut', 하늘 위색, 하늘 아래색, 옵션dict)
+
+      layers  먼 쪽부터 층 색들     sun · cloud  해(달)·구름 종이 색
+      shadow  층 그림자 색          trees  앞 두 층에 세울 나무 수     stars · star  별 수와 색(밤)
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261133))
+    img = gen.vgradient(w, h, gen.rgb(spec[1]), gen.rgb(spec[2])).convert('RGB')
+    shadow = o.get('shadow', '#6E655C')
+
+    def cut(img, m, color, off=0.009, strength=0.32):
+        sh = Image.new('L', (w, h), 0)
+        sh.paste(m, (0, int(w * off)))
+        sh = sh.filter(ImageFilter.GaussianBlur(w * 0.012)).point(lambda v: int(v * strength))
+        img = _tint(img, shadow, sh)
+        return Image.composite(Image.new('RGB', (w, h), gen.rgb(color)), img, m.filter(ImageFilter.GaussianBlur(0.8)))
+
+    d = ImageDraw.Draw(img)
+    for _ in range(o.get('stars', 0)):
+        x, y, r = rnd.uniform(0, w), rnd.uniform(0, h * 0.45), w * rnd.choice((0.002, 0.003, 0.004))
+        d.ellipse([x - r, y - r, x + r, y + r], fill=gen.rgb(o.get('star', o.get('cloud', '#F4F0EA'))))
+    sun = Image.new('L', (w, h), 0)
+    sx, sy, sr = w * 0.7, h * 0.2, w * 0.11
+    ImageDraw.Draw(sun).ellipse([sx - sr, sy - sr, sx + sr, sy + sr], fill=255)
+    img = cut(img, sun, o.get('sun', '#F3EADC'), 0.006, 0.22)
+    for cx, cy, cw in ((0.08, 0.14, 0.26), (0.5, 0.3, 0.2)):
+        c = Image.new('L', (w, h), 0)
+        cd = ImageDraw.Draw(c)
+        cd.rounded_rectangle([w * cx, h * cy, w * (cx + cw), h * cy + w * 0.06], radius=w * 0.03, fill=255)
+        cd.ellipse([w * (cx + cw * 0.2), h * cy - w * 0.045, w * (cx + cw * 0.6), h * cy + w * 0.05], fill=255)
+        img = cut(img, c, o.get('cloud', '#F4F0EA'), 0.006, 0.2)
+    layers = o['layers']
+    for k, col in enumerate(layers):
+        base = h * (0.46 + k * 0.1)
+        m = _ridge(w, h, 51 + k, base, h * (0.1 - k * 0.012), n=70, octaves=3)
+        if k >= len(layers) - 2:
+            # 나무는 층보다 한 톤 짙은 종이로 따로 오린다. 같은 색이면 층에 묻혀 안 보였다
+            tm = Image.new('L', (w, h), 0)
+            td = ImageDraw.Draw(tm)
+            for _ in range(o.get('trees', 6)):
+                tx = rnd.uniform(0, w)
+                tw, th = w * rnd.uniform(0.03, 0.05), h * rnd.uniform(0.07, 0.11)
+                ty = base - h * 0.01
+                for j in range(3):
+                    yy = ty - th * (0.15 + j * 0.3)
+                    td.polygon([(tx, yy - th * 0.45), (tx + tw * (1 - j * 0.2), yy), (tx - tw * (1 - j * 0.2), yy)], fill=255)
+                td.rectangle([tx - tw * 0.12, ty - th * 0.15, tx + tw * 0.12, ty + h * 0.02], fill=255)
+            img = cut(img, tm, gen.mix(col, shadow, 0.28), 0.007, 0.3)
+        img = cut(img, m, col)
+    img = Image.composite(Image.new('RGB', (w, h), gen.rgb(shadow)), img,
+                          _grain(rnd, w, h).point(lambda v: max(0, v - 128) // 6))
+    return _dim(img, o)

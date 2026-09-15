@@ -846,6 +846,10 @@ CATEGORY = {
     '도형': '무늬',
     '차분': '편안함',
     '고요': '편안함',
+    '수채화': '편안함',
+    '수묵화': '편안함',
+    '비 오는 창가': '편안함',
+    '페이퍼컷': '편안함',
 
     '벚꽃 그늘': '자연',
     '오로라': '자연',
@@ -1938,6 +1942,106 @@ THEMES += character(
      '밤 농장. 어두운 팻말 말풍선',
      '반딧불 날리는 밤 밭'])
 
+# --- 편안함: 수채화 · 수묵화 · 비 오는 창가 · 페이퍼컷 -----------------------------------------
+# 네온·원색 계열이 눈 아프다는 의견이 있어 편안함을 채웠다. 처음엔 눈 편함을 채도·대비를 덜어내는 것으로만
+# 풀어 종이·린넨·새벽·노을·독서등 다섯을 만들었는데, 색만 다른 회색 판이 줄지어 사용자가 "딱 봤을 때
+# 다운받고 싶지 않다" 고 했다. 콘셉트 시안 넷을 한 장씩 그려 고른 뒤 계열로 만들었다 — 그림 스타일은
+# 분명하게, 색과 명암 폭은 좁게. 네 벌은 밝음/어두움 × 그림 유무이고 말풍선 모양은 계열마다 다르다.
+# 채도·대비는 카테고리 규칙이 잰다(_check_comfort). 캐릭터가 없어 프로필은 계열 모티프다.
+
+THEMES += character(
+    'watercolor', 165, '수채화', dict(char_style='wash'),
+    dict(bg='#F1EDE4', bg_deep='#E6DFD2', surface='#F8F5EF', pressed='#DFD8CA',
+         border='#D3CBBB', text='#3A3833', subtext='#76726A', accent='#7C8A70',
+         accent_dim='#65725A', on_accent='#F8F5EF', recv='#FBF9F4', recv_alt='#EDE8DE',
+         send='#C0CAB7', send_alt='#E4DFCF', recv_text='#3A3833', send_text='#2D3228',
+         char_outline='#A9B39C'),
+    dict(bg='#24272B', bg_deep='#1D2024', surface='#2C3035', pressed='#353A40',
+         border='#3E434A', text='#E1E3DE', subtext='#999D97', accent='#9DA893',
+         accent_dim='#808B77', on_accent='#1D2024', recv='#2E3237', recv_alt='#383D42',
+         send='#434F3E', send_alt='#4E5448', recv_text='#E1E3DE', send_text='#EEF1EA',
+         char_outline='#6E7868'),
+    _scenes('watercolor', '#F3EFE6', '#D8D1C3',
+            dict(sky='#C6D3DC', hills=['#B3C2C4', '#B7C3A2', '#C9C49C', '#AEAC86'], trees='#8FA088',
+                 dim_to='#F1EDE4'), (0.0, 0.3, 0.0)),
+    _scenes('watercolor', '#23272C', '#2E3238',
+            dict(dark=True, sky='#2E3A48', hills=['#2C3838', '#303A2E', '#363A2C', '#2E3226'], trees='#2A3428',
+                 moon='#8A93A0', dim_to='#1D2024'), (0.0, 0.3, 0.0)),
+    ['물감 번진 말풍선. 첫 말엔 물감 방울',
+     '종이결 위로 물감이 번진 언덕과 나무',
+     '어두운 종이에 물감 말풍선',
+     '달 뜬 밤, 물감으로 칠한 들판'])
+
+THEMES += character(
+    'inkwash', 169, '수묵화', dict(char_style='hanji'),
+    dict(bg='#EEEAE1', bg_deep='#E4DFD4', surface='#F6F3EC', pressed='#DDD7CA',
+         border='#D1CABB', text='#2F2D2A', subtext='#6F6A62', accent='#6E6860',
+         accent_dim='#57524B', on_accent='#F6F3EC', recv='#FAF8F3', recv_alt='#ECE8DF',
+         send='#CBC6BA', send_alt='#E2DDD2', recv_text='#2F2D2A', send_text='#262421',
+         char_outline='#4A4640', seal='#A85A4E'),
+    dict(bg='#24221F', bg_deep='#1D1B19', surface='#2C2A27', pressed='#35322E',
+         border='#3E3B36', text='#E4DFD6', subtext='#9C968D', accent='#A59E93',
+         accent_dim='#878075', on_accent='#1D1B19', recv='#33302C', recv_alt='#393633',
+         send='#4A4641', send_alt='#54504A', recv_text='#E4DFD6', send_text='#F0ECE4',
+         char_outline='#8A847A', seal='#8C4E44'),
+    _scenes('inkwash', '#EEEAE1', '#D4CDBE',
+            dict(ink='#2E2C29', mist='#EEEAE1', seal='#A85A4E', dim_to='#EEEAE1'), (0.0, 0.3, 0.0)),
+    _scenes('inkwash', '#262420', '#34312C',
+            dict(ink='#0E0D0B', mist='#2E2B27', moon='#CFC8BA', bird='#8A847A', seal='#8C4E44',
+                 dim_to='#1D1B19'), (0.0, 0.3, 0.0)),
+    ['한지 말풍선에 먹선. 첫 말엔 붉은 낙관',
+     '먹이 번진 겹겹 산자락과 안개',
+     '먹빛 바탕에 한지 말풍선',
+     '달밤, 짙은 먹 산 위로 달이 뜸'])
+
+THEMES += character(
+    'rainy', 173, '비 오는 창가', dict(char_style='frost'),
+    dict(bg='#E6E9EC', bg_deep='#DADFE3', surface='#F1F3F5', pressed='#D1D7DC',
+         border='#C5CCD2', text='#2F343A', subtext='#6B727A', accent='#6F8090',
+         accent_dim='#586878', on_accent='#F1F3F5', recv='#F6F8FA', recv_alt='#E4E8EC',
+         send='#BDC7D0', send_alt='#D2D9E0', recv_text='#2F343A', send_text='#242A30',
+         char_outline='#9AA5AF'),
+    dict(bg='#202329', bg_deep='#1B1D22', surface='#272B32', pressed='#30353E',
+         border='#373E49', text='#DDE3EA', subtext='#8E97A2', accent='#8FA3B5',
+         accent_dim='#72869A', on_accent='#191D24', recv='#2C3139', recv_alt='#343A43',
+         send='#3F4752', send_alt='#47505C', recv_text='#DDE3EA', send_text='#EAF0F6',
+         char_outline='#11141A'),
+    _scenes('rainwindow', '#DDE2E7', '#CDD3D9',
+            dict(dark=False, bokeh=['#FFF4E4', '#EEF4FA', '#FFFFFF', '#F4EEF6'], dim_to='#E6E9EC'),
+            (0.0, 0.3, 0.0)),
+    _scenes('rainwindow', '#1A1F27', '#2A2F38',
+            dict(dark=True, bokeh=['#9C8A6A', '#6E7E92', '#8A7A80', '#A8977A', '#6A8288'], dim_to='#191D24'),
+            (0.0, 0.3, 0.0)),
+    ['김 서린 유리 말풍선. 첫 말엔 물방울',
+     '흐린 낮, 빗방울 너머 번진 거리',
+     '어두운 유리 말풍선에 맺힌 물방울',
+     '비 오는 밤 창밖으로 번진 불빛'])
+
+THEMES += character(
+    'papercut', 177, '페이퍼컷', dict(char_style='cutpaper'),
+    dict(bg='#ECE6DC', bg_deep='#E2DACC', surface='#F5F1EA', pressed='#DBD2C4',
+         border='#CFC5B5', text='#38342E', subtext='#766F66', accent='#7C8B80',
+         accent_dim='#657368', on_accent='#F5F1EA', recv='#F9F6F0', recv_alt='#EDE7DD',
+         send='#BDC7BE', send_alt='#E3DBCB', recv_text='#38342E', send_text='#2A302B',
+         char_outline='#BDB3A3', paper_shadow='#5C544B'),
+    dict(bg='#22252C', bg_deep='#1B1E23', surface='#2A2E35', pressed='#33373F',
+         border='#3C414A', text='#DFE1E4', subtext='#969AA1', accent='#9AA7A0',
+         accent_dim='#7D8A83', on_accent='#1B1E24', recv='#2D3138', recv_alt='#373B42',
+         send='#3F4A45', send_alt='#4A4E55', recv_text='#DFE1E4', send_text='#ECEFF0',
+         char_outline='#0F1115', paper_shadow='#050608'),
+    _scenes('papercut', '#E9E3D9', '#EFE6DA',
+            dict(layers=['#D8DBD5', '#C9D0C8', '#BAC3B9', '#ABB5A9', '#9CA79A'], sun='#F3EADC',
+                 cloud='#F4F0EA', shadow='#6E655C', trees=6, dim_to='#ECE6DC'), (0.0, 0.3, 0.0)),
+    _scenes('papercut', '#1C2029', '#262A34',
+            dict(layers=['#2B303A', '#272C35', '#232730', '#1F232B', '#1B1E25'], sun='#C9C4B8',
+                 cloud='#343A45', star='#8C93A0', shadow='#050608', trees=6, stars=60,
+                 dim_to='#1B1E24'), (0.0, 0.3, 0.0)),
+    ['그림자 진 종이 말풍선. 첫 말엔 접힌 귀퉁이',
+     '오려 겹친 종이 능선과 해, 구름',
+     '어두운 종이 말풍선',
+     '별 뜬 밤, 층층이 오린 종이 산'])
+
+
 # --- 카테고리 규칙 ------------------------------------------------------------
 # 카테고리의 모든 계열에 같이 붙는 값. 계열 정의에 따로 적은 값이 이긴다(setdefault).
 # 도트는 8비트로 읽혀야 한다 — 한 칸 2pt 말풍선은 폰 크기에서 매끈한 네모로 보였다.
@@ -1946,9 +2050,62 @@ DOT_STYLES = {'rpg', 'lcd', 'window', 'board'}      # 칸 크기(pixel_unit)를 
 CATEGORY_RULES = {
     '도트': dict(pixel_unit=4, pixel_shadow=True, tab_style='pixel', flat_list=False,
                  pixel_block=0.03),
+    '편안함': dict(comfort_check=True),
 }
-# 규칙보다 먼저 나간 계열. 규칙을 붙이면 이미 깐 사람의 화면이 바뀐다
-CATEGORY_RULE_EXEMPT = {'오락실'}
+# 규칙보다 먼저 나간 계열. 규칙을 붙이면 이미 깐 사람의 화면이 바뀐다.
+# 차분·고요는 편안함 검사를 만들기 전에 나갔고, 재 보니 차분 샌드의 눌림 포인트색 채도가 0.47,
+# 보낸 말풍선 대비가 1.18 이라 걸린다. 색을 바꾸면 깐 사람의 화면이 바뀌어서 뺀다
+CATEGORY_RULE_EXEMPT = {'오락실', '차분', '고요'}
+
+COMFORT_MAX_SAT = 0.25          # 바탕·말풍선·포인트색
+COMFORT_BUBBLE = (1.2, 2.0)     # 보낸·받은 말풍선 ↔ 채팅방 바닥 대비
+COMFORT_TEXT = 4.5              # 글자 대비
+
+
+def _hex_rgb(h):
+    h = h.lstrip('#')
+    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def _sat(h):
+    r, g, b = _hex_rgb(h)
+    hi = max(r, g, b)
+    return 0.0 if hi == 0 else (hi - min(r, g, b)) / hi
+
+
+def _contrast(a, b):
+    def lum(h):
+        def ch(v):
+            v /= 255.0
+            return v / 12.92 if v <= 0.03928 else ((v + 0.055) / 1.055) ** 2.4
+        r, g, bb = _hex_rgb(h)
+        return 0.2126 * ch(r) + 0.7152 * ch(g) + 0.0722 * ch(bb)
+    la, lb = lum(a), lum(b)
+    return (max(la, lb) + 0.05) / (min(la, lb) + 0.05)
+
+
+def _check_comfort(t):
+    """편안함 기준을 잰다. 눈으로 고르면 "예쁘다" 에 끌려 채도가 올라가서 숫자로 막는다."""
+    one = lambda v: v[0] if isinstance(v, (tuple, list)) else v
+    bad = []
+    for k in ('bg', 'bg_deep', 'surface', 'pressed', 'send', 'send_alt', 'recv', 'recv_alt',
+              'accent', 'text', 'subtext'):
+        if _sat(one(t[k])) > COMFORT_MAX_SAT:
+            bad.append('%s 채도 %.2f' % (k, _sat(one(t[k]))))
+    for k, v in t.items():
+        if isinstance(v, str) and v.upper() in ('#FFFFFF', '#000000'):
+            bad.append('%s 가 순백·순흑' % k)
+    lo, hi = COMFORT_BUBBLE
+    for k in ('send', 'recv'):
+        r = _contrast(one(t[k]), t['bg_deep'])
+        if not lo <= r <= hi:
+            bad.append('%s↔바닥 대비 %.2f' % (k, r))
+    for tk, bk in (('send_text', 'send'), ('recv_text', 'recv'), ('text', 'bg')):
+        r = _contrast(t[tk], one(t[bk]))
+        if r < COMFORT_TEXT:
+            bad.append('%s 대비 %.1f' % (tk, r))
+    if bad:
+        raise ValueError('%s: 편안함 기준을 어겼다 — %s' % (t['key'], ', '.join(bad)))
 
 
 def apply_category_rules():
@@ -1962,6 +2119,9 @@ def apply_category_rules():
             raise ValueError('%s: 도트 카테고리 말풍선은 칸 크기를 따르는 스타일(%s)이어야 한다'
                              % (t['key'], ', '.join(sorted(DOT_STYLES))))
         for k, v in rule.items():
+            if k == 'comfort_check':
+                _check_comfort(t)
+                continue
             if k != 'pixel_block':
                 t.setdefault(k, v)
                 continue

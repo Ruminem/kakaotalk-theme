@@ -1341,6 +1341,137 @@ for _name in SPRITES:
     PROFILES[_name] = p_sprite
 
 
+# --- 편안함: 수채화 · 수묵화 · 비 오는 창가 · 페이퍼컷 ----------------------------------------------
+# 윤곽선 대신 재질로 모양을 낸다. 물감 테두리, 먹선과 낙관, 뿌연 유리, 그림자 진 종이. 전부 몸통 가장자리를
+# 따라 고르게 두어 늘어나는 줄에서 뭉개지지 않게 하고, 소품은 첫 장의 모서리 칸에만 둔다.
+
+def _shape_mask(p, x, y, w, h, r):
+    m = Image.new('L', p.img.size, 0)
+    ImageDraw.Draw(m).rounded_rectangle([x * p.s, y * p.s, (x + w) * p.s, (y + h) * p.s], radius=r * p.s, fill=255)
+    return m
+
+
+def _lay(p, m, color, alpha=255):
+    lay = Image.new('RGBA', p.img.size, hexc(color)[:3] + (255,))
+    lay.putalpha(m.point(lambda v: v * alpha // 255))
+    p.img.alpha_composite(lay)
+
+
+def d_wash(p, lp, x, y, w, h, first, ck, t):
+    """물감으로 칠한 말풍선. 가장자리에 안료가 고여 진해진다. 첫 장엔 바깥 아래로 물감 방울 둘."""
+    col = _c(t[ck])
+    shapes = [(x, y, w, h, 12)]
+    if first:
+        shapes += [(x + 3, y + h + 2.5, 7, 7, 3.5), (x - 1.5, y + h + 10, 4, 4, 2)]
+    for sx, sy, sw, sh, r in shapes:
+        m = _shape_mask(p, sx, sy, sw, sh, r).filter(ImageFilter.GaussianBlur(0.5 * p.s))
+        _lay(p, m, col)
+        band = ImageChops.subtract(m, m.filter(ImageFilter.GaussianBlur(2.6 * p.s)))
+        _lay(p, band, _g().mix(col, t['char_outline'], 0.65), 235)
+
+
+def f_wash(t, bw, bh, first):
+    f = [((-1, -1, bw + 1, bh + 1), ())]
+    if first:
+        f.append(((-3, bh - 1, 12, bh + 16), ('outer', 'bottom')))
+    return f
+
+
+def d_hanji(p, lp, x, y, w, h, first, ck, t):
+    """한지 조각에 가는 먹선. 첫 장엔 바깥 아래 모서리에 붉은 낙관.
+
+    처음엔 붓이 들어간 획을 모서리에 그었는데 작은 갈고리로 보였다. 낙관은 작아도 무엇인지 읽힌다.
+    """
+    col = _c(t[ck])
+    m = _shape_mask(p, x, y, w, h, 5)
+    _lay(p, m, col)
+    ring = ImageChops.subtract(m, m.filter(ImageFilter.MinFilter(3 if p.s < 3 else 5)))
+    _lay(p, ring, t['char_outline'], 190)
+    if first:
+        seal = t.get('seal', '#A85A4E')
+        sx, sy = x - 3, y + h - 8
+        sm = Image.new('L', p.img.size, 0)
+        ImageDraw.Draw(sm).rectangle([sx * p.s, sy * p.s, (sx + 8) * p.s, (sy + 9) * p.s], fill=255)
+        _lay(p, sm, seal, 225)
+        marks = Image.new('L', p.img.size, 0)
+        md = ImageDraw.Draw(marks)
+        for bx0, by0, bx1, by1 in ((1.8, 1.8, 3.6, 7.2), (4.6, 1.8, 6.2, 4.4), (4.6, 5.4, 6.2, 7.2)):
+            md.rectangle([(sx + bx0) * p.s, (sy + by0) * p.s, (sx + bx1) * p.s, (sy + by1) * p.s], fill=255)
+        _lay(p, marks, col, 150)
+
+
+def f_hanji(t, bw, bh, first):
+    f = [((-1, -1, bw + 1, bh + 1), ())]
+    if first:
+        f.append(((-4, bh - 9, 6, bh + 2), ('outer', 'bottom')))
+    return f
+
+
+def d_frost(p, lp, x, y, w, h, first, ck, t):
+    """김 서린 유리. 몸통이 살짝 비치고 위 가장자리에 빛이 걸린다. 첫 장엔 맺힌 물방울."""
+    col = _c(t[ck])
+    m = _shape_mask(p, x, y, w, h, 14)
+    _lay(p, m, col, 222)
+    _lay(p, ImageChops.subtract(m, _shape_mask(p, x, y + 1.2, w, h, 14)), '#FFFFFF', 70)
+    if first:
+        s = p.s
+        cx, cy, r = x + 7, y + 1, 3.2
+        dm = Image.new('L', p.img.size, 0)
+        dd = ImageDraw.Draw(dm)
+        dd.ellipse([(cx - r) * s, (cy - r) * s, (cx + r) * s, (cy + r) * s], fill=255)
+        dd.polygon([((cx - r * 0.85) * s, (cy - r * 0.4) * s), ((cx + r * 0.85) * s, (cy - r * 0.4) * s),
+                    (cx * s, (cy - r * 2.3) * s)], fill=255)
+        _lay(p, dm.filter(ImageFilter.GaussianBlur(0.3 * s)), t['subtext'], 170)
+        hl = Image.new('L', p.img.size, 0)
+        ImageDraw.Draw(hl).ellipse([(cx - 1.6) * s, (cy - 1.5) * s, (cx - 0.4) * s, (cy - 0.3) * s], fill=255)
+        _lay(p, hl, '#FFFFFF', 220)
+
+
+def f_frost(t, bw, bh, first):
+    f = [((-1, -1, bw + 1, bh + 1), ())]
+    if first:
+        f.append(((2, -7, 12, 5), ('outer', 'top')))
+    return f
+
+
+def d_cutpaper(p, lp, x, y, w, h, first, ck, t):
+    """오린 종이 한 장. 아래로만 부드러운 그림자, 위 가장자리에 빛. 첫 장엔 안쪽 위 귀퉁이가 접힌다.
+
+    그림자를 아래로만 두는 까닭은 보낸 쪽 장을 뒤집어도 빛 방향이 안 바뀌어서다.
+    """
+    col = _c(t[ck])
+    s = p.s
+    _lay(p, _shape_mask(p, x, y + 2.2, w, h, 9).filter(ImageFilter.GaussianBlur(1.6 * s)), t.get('paper_shadow', '#5C544B'), 75)
+    m = _shape_mask(p, x, y, w, h, 9)
+    cx, cy = x + w, y
+    if first:
+        ImageDraw.Draw(m).polygon([((cx - 11) * s, cy * s), (cx * s, cy * s), (cx * s, (cy + 11) * s)], fill=0)
+    _lay(p, m, col)
+    _lay(p, ImageChops.subtract(m, _shape_mask(p, x, y + 1, w, h, 9)), '#FFFFFF', 90)
+    if first:
+        fl = Image.new('L', p.img.size, 0)
+        ImageDraw.Draw(fl).polygon([((cx - 11) * s, cy * s), ((cx - 11) * s, (cy + 11) * s), (cx * s, (cy + 11) * s)], fill=255)
+        fsh = Image.new('L', p.img.size, 0)
+        fsh.paste(fl.filter(ImageFilter.GaussianBlur(1.2 * s)), (int(-0.8 * s), int(1.2 * s)))
+        _lay(p, fsh, t.get('paper_shadow', '#5C544B'), 60)
+        _lay(p, fl, _g().mix(col, t['char_outline'], 0.3))
+
+
+def f_cutpaper(t, bw, bh, first):
+    f = [((-1, -1, bw + 1, bh + 5), ())]
+    if first:
+        f.append(((bw - 13, -1, bw + 1, 14), ('inner', 'top')))
+    return f
+
+
+STYLES.update({
+    'wash': dict(bw=40, bh=44, radius=16, draw=d_wash, features=f_wash),
+    'hanji': dict(bw=40, bh=44, radius=7, draw=d_hanji, features=f_hanji),
+    'frost': dict(bw=40, bh=44, radius=16, draw=d_frost, features=f_frost),
+    'cutpaper': dict(bw=40, bh=44, radius=12, draw=d_cutpaper, features=f_cutpaper),
+})
+
+
 # --- 도트 액정 · 레트로 PC · 도트 농장 ----------------------------------------
 
 def _notched(p, x, y, w, h, col, n, B):
