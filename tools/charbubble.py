@@ -23,6 +23,7 @@
 import colorsys
 import math
 import os
+import random
 import sys
 
 from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageOps
@@ -1607,4 +1608,113 @@ STYLES.update({
     'lcd': dict(bw=40, bh=44, radius=_dot_radius, draw=d_lcd, features=f_lcd),
     'window': dict(bw=40, bh=44, radius=_dot_radius, draw=d_window, features=f_window),
     'board': dict(bw=40, bh=44, radius=_dot_radius, draw=d_board, features=f_board),
+})
+
+
+# --- 무늬: 깅엄 · 폴카 · 테라조 · 마린 · 체커보드 ------------------------------------
+# 바탕 무늬가 이미 요란해서 말풍선은 단색 몸통에 첫 말 소품 하나만 둔다.
+
+def _plain(p, x, y, w, h, r, col):
+    p.rr(x, y, x + w, y + h, r, hexc(col), ow=1.0)
+
+
+def d_bow(p, lp, x, y, w, h, first, ck, t):
+    """첫 말엔 안쪽 위 귀퉁이에 리본."""
+    col = _c(t[ck])
+    _plain(p, x, y, w, h, 14, col)
+    if first:
+        bx, by = x + w - 12, y + 1
+        c1, c2 = hexc(t['accent']), hexc(_g().mix(t['accent'], '#FFFFFF', 0.45))
+        p.poly([(bx, by), (bx - 9, by - 6), (bx - 9, by + 6)], c1, ow=1)
+        p.poly([(bx, by), (bx + 9, by - 6), (bx + 9, by + 6)], c1, ow=1)
+        p.ell(bx, by, 2.6, 2.6, c2, ow=1)
+        p.poly([(bx - 1, by + 2), (bx - 5, by + 11), (bx - 2, by + 10)], c1, ow=0.8)
+        p.poly([(bx + 1, by + 2), (bx + 5, by + 11), (bx + 2, by + 10)], c1, ow=0.8)
+
+
+def f_bow(t, bw, bh, first):
+    f = [((-1, -1, bw + 1, bh + 1), ())]
+    if first:
+        f.append(((bw - 23, -8, bw - 1, 13), ('inner', 'top')))
+    return f
+
+
+def d_pill(p, lp, x, y, w, h, first, ck, t):
+    """알약 모양. 첫 말엔 바깥쪽 아래로 물방울 셋이 떨어진다."""
+    col = _c(t[ck])
+    _plain(p, x, y, w, h, h / 2, col)
+    if first:
+        for ox, oy, r in ((3, h + 4, 3.2), (-3, h + 10, 2.2), (6, h + 13, 1.6)):
+            p.ell(x + ox, y + oy, r, r, hexc(t['accent']), ow=0.8)
+
+
+def f_pill(t, bw, bh, first):
+    f = [((-1, -1, bw + 1, bh + 1), ())]
+    if first:
+        f.append(((-7, bh, 10, bh + 16), ('outer', 'bottom')))
+    return f
+
+
+def d_band(p, lp, x, y, w, h, first, ck, t):
+    """위에 굵은 띠와 가는 띠를 두른다. 가로로 고른 띠라 늘어나도 뭉개지지 않는다."""
+    g = _g()
+    col = _c(t[ck])
+    band = t.get('band', t['accent'])
+    _plain(p, x, y, w, h, 10, col)
+    p.d.rounded_rectangle(p._b(x, y, x + w, y + 9), radius=10 * p.s, fill=hexc(g.mix(col, band, 0.85)))
+    p.rect(x, y + 5, x + w, y + 9, hexc(g.mix(col, band, 0.85)))
+    p.rect(x, y + 10.5, x + w, y + 11.5, hexc(g.mix(col, band, 0.4)))
+
+
+def f_band(t, bw, bh, first):
+    return [((-1, -1, bw + 1, bh + 1), ()), ((0, 0, bw, 12), ('top',))]
+
+
+def d_chips(p, lp, x, y, w, h, first, ck, t):
+    """첫 말엔 안쪽 아래 귀퉁이에 돌 조각 셋이 박힌다."""
+    col = _c(t[ck])
+    _plain(p, x, y, w, h, 8, col)
+    if first:
+        rnd = random.Random(7)
+        for (cx, cy, r), c in zip(((w - 8, h - 7, 2.6), (w - 15, h - 5, 1.6), (w - 7, h - 14, 1.3)), t['chips3']):
+            pts = [(x + cx + math.cos(i * 1.4 + rnd.uniform(0, 0.4)) * r, y + cy + math.sin(i * 1.4) * r)
+                   for i in range(5)]
+            p.poly(pts, hexc(c), ow=0.5)
+
+
+def f_chips(t, bw, bh, first):
+    f = [((-1, -1, bw + 1, bh + 1), ())]
+    if first:
+        f.append(((bw - 19, bh - 17, bw - 3, bh - 2), ('inner', 'bottom')))
+    return f
+
+
+def d_flag(p, lp, x, y, w, h, first, ck, t):
+    """첫 말엔 바깥쪽 위에 체크 깃발을 꽂는다. 칸이 3pt 면 폰에서 점으로 뭉개졌다."""
+    g = _g()
+    col = _c(t[ck])
+    _plain(p, x, y, w, h, 13, col)
+    if first:
+        fx, top, q = x + 7, y - 19, 4
+        p.line([(fx, y + 5), (fx, top)], hexc(t['char_outline']), 1.5)
+        dark, lite = hexc(t['accent_dim']), hexc(g.mix(col, '#FFFFFF', 0.7))
+        for j in range(3):
+            for i in range(4):
+                p.rect(fx + 0.8 + i * q, top + j * q, fx + 0.8 + (i + 1) * q, top + (j + 1) * q,
+                       dark if (i + j) % 2 == 0 else lite)
+
+
+def f_flag(t, bw, bh, first):
+    f = [((-1, -1, bw + 1, bh + 1), ())]
+    if first:
+        f.append(((4, -21, 26, 7), ('outer', 'top')))
+    return f
+
+
+STYLES.update({
+    'bow': dict(bw=40, bh=44, radius=15, draw=d_bow, features=f_bow),
+    'pill': dict(bw=40, bh=44, radius=23, draw=d_pill, features=f_pill),
+    'band': dict(bw=40, bh=44, radius=11, draw=d_band, features=f_band),
+    'chips': dict(bw=40, bh=44, radius=9, draw=d_chips, features=f_chips),
+    'flag': dict(bw=40, bh=44, radius=14, draw=d_flag, features=f_flag),
 })

@@ -844,6 +844,11 @@ CATEGORY = {
     '프리즘 글래스': '유리',
     '프로스트 글래스': '유리',
     '도형': '무늬',
+    '깅엄 체크': '무늬',
+    '폴카 도트': '무늬',
+    '테라조': '무늬',
+    '마린 스트라이프': '무늬',
+    '체커보드': '무늬',
     '차분': '편안함',
     '고요': '편안함',
     '수채화': '편안함',
@@ -2040,6 +2045,111 @@ THEMES += character(
      '오려 겹친 종이 능선과 해, 구름',
      '어두운 종이 말풍선',
      '별 뜬 밤, 층층이 오린 종이 산'])
+
+
+# --- 무늬: 깅엄 · 폴카 · 테라조 · 마린 · 체커보드 ------------------------------------
+# 무늬 카테고리의 새 계열도 밝음/어두움 × 배경 축이다. 배경은 반복 무늬라 목록에서도 흐리지 않고
+# (flat_list), 프로필 판에 같은 무늬를 옅게 깐다(motif_tile) — 단색 판이면 목록이 다른 무늬 계열과 같아 보인다.
+# 무늬 이름은 scenes, 말풍선은 charbubble 의 같은 이름이다.
+
+THEMES += character(
+    'gingham', 181, '깅엄 체크', dict(char_style='bow', flat_list=False, motif_tile='gingham'),
+    dict(bg='#F4F1EC', bg_deep='#EFEBE4', surface='#FBFAF7', pressed='#E4DED4',
+         border='#DAD3C8', text='#2F3A44', subtext='#6E7A84', accent='#5C86A6',
+         accent_dim='#4A6E8A', on_accent='#FFFFFF', recv='#FFFFFF', recv_alt='#EEF3F7',
+         send='#CFE0EC', send_alt='#E4ECF2', recv_text='#2F3A44', send_text='#23303B',
+         char_outline='#8BA3B5'),
+    dict(bg='#1E242B', bg_deep='#191E24', surface='#262D35', pressed='#2F3741',
+         border='#38414C', text='#E6ECF1', subtext='#94A0AB', accent='#8DB4D3',
+         accent_dim='#6F97B8', on_accent='#16202A', recv='#2A323B', recv_alt='#343D47',
+         send='#3D5468', send_alt='#475B6C', recv_text='#E6ECF1', send_text='#EEF4F9',
+         char_outline='#6F8597'),
+    _scenes('gingham', '#F6F3EE', '#9FB8C9', dict(dim_to='#F4F1EC'), (0.0, 0.25, 0.0)),
+    _scenes('gingham', '#1E242B', '#3A5064', dict(dim_to='#1E242B'), (0.0, 0.25, 0.0)),
+    ['크림 바탕에 리본 단 말풍선',
+     '하늘색 깅엄 체크 식탁보',
+     '어두운 바탕에 리본 단 말풍선',
+     '밤의 남색 깅엄 체크'])
+
+THEMES += character(
+    'polka', 185, '폴카 도트', dict(char_style='pill', flat_list=False, motif_tile='polka'),
+    dict(bg='#F7EEDC', bg_deep='#F2E6D0', surface='#FCF7EE', pressed='#EADCC2',
+         border='#E0D0B3', text='#4A3428', subtext='#8A7262', accent='#D9776A',
+         accent_dim='#B85F54', on_accent='#FFFFFF', recv='#FFFBF4', recv_alt='#F3E7D3',
+         send='#F2C9BE', send_alt='#F6DCCF', recv_text='#4A3428', send_text='#3E2A20',
+         char_outline='#C9A28F'),
+    dict(bg='#2A2220', bg_deep='#231C1A', surface='#342B28', pressed='#3E3330',
+         border='#4A3E3A', text='#F2E6DC', subtext='#AD9A8E', accent='#E58F80',
+         accent_dim='#C77668', on_accent='#2A1A16', recv='#3A302C', recv_alt='#453935',
+         send='#6E3F39', send_alt='#5E4540', recv_text='#F2E6DC', send_text='#FFEDE8',
+         char_outline='#9A7F72'),
+    _scenes('polka', '#F7EEDC', '#E7B8A8', dict(dim_to='#F7EEDC'), (0.0, 0.25, 0.0)),
+    _scenes('polka', '#2A2220', '#4E3A34', dict(dim_to='#2A2220'), (0.0, 0.25, 0.0)),
+    ['크림 바탕에 알약 말풍선. 첫 말엔 물방울 셋',
+     '크림 바탕에 산호색 물방울 무늬',
+     '짙은 갈색 바탕에 알약 말풍선',
+     '짙은 갈색에 옅은 물방울 무늬'])
+
+THEMES += character(
+    'terrazzo', 189, '테라조', dict(char_style='chips', flat_list=False, motif_tile='terrazzo'),
+    dict(bg='#F2EFEA', bg_deep='#ECE8E1', surface='#FAF8F5', pressed='#E2DDD4',
+         border='#D8D2C8', text='#34312D', subtext='#77716A', accent='#C9785B',
+         accent_dim='#A86148', on_accent='#FFFFFF', recv='#FFFFFF', recv_alt='#EEEAE3',
+         send='#E9D9CC', send_alt='#DCE3DB', recv_text='#34312D', send_text='#2B2723',
+         char_outline='#B9B1A6', chips3=['#E3A488', '#9BB6A5', '#E9C77E']),
+    dict(bg='#2A2826', bg_deep='#23211F', surface='#33302D', pressed='#3D3A36',
+         border='#48443F', text='#EDE8E1', subtext='#A39C93', accent='#D98E70',
+         accent_dim='#BA7458', on_accent='#241510', recv='#35322E', recv_alt='#3F3B37',
+         send='#5A4538', send_alt='#3F4A42', recv_text='#EDE8E1', send_text='#F5EEE7',
+         char_outline='#7A736A', chips3=['#B97F66', '#6E8A79', '#B89A5C']),
+    _scenes('terrazzo', '#F2EFEA', '#E6E1D9',
+            dict(chips=['#E3A488', '#9BB6A5', '#E9C77E', '#8FA3C0', '#D98E84', '#C9C2B6'], dim_to='#F2EFEA'),
+            (0.0, 0.25, 0.0)),
+    _scenes('terrazzo', '#2A2826', '#3A3734',
+            dict(chips=['#B97F66', '#6E8A79', '#B89A5C', '#6A7C99', '#A86E66', '#5A5650'], dim_to='#2A2826'),
+            (0.0, 0.25, 0.0)),
+    ['돌 조각이 박힌 말풍선',
+     '알록달록 돌 조각이 박힌 바닥',
+     '짙은 돌 바탕에 조각 박힌 말풍선',
+     '어두운 돌에 박힌 조각들'])
+
+THEMES += character(
+    'marine', 193, '마린 스트라이프', dict(char_style='band', flat_list=False, motif_tile='stripes'),
+    dict(bg='#F4F6F8', bg_deep='#EEF2F6', surface='#FFFFFF', pressed='#E1E7EE',
+         border='#D5DDE6', text='#1E2B40', subtext='#65738A', accent='#2B4A7A',
+         accent_dim='#223C63', on_accent='#FFFFFF', recv='#FFFFFF', recv_alt='#E8EEF5',
+         send='#DCE6F2', send_alt='#F6E4E2', recv_text='#1E2B40', send_text='#17243A',
+         char_outline='#9AABC2', band='#2B4A7A'),
+    dict(bg='#172033', bg_deep='#131B2B', surface='#1E283D', pressed='#263149',
+         border='#2F3B55', text='#E7ECF4', subtext='#8F9BB2', accent='#7F9FD1',
+         accent_dim='#6583B5', on_accent='#131B2B', recv='#222D44', recv_alt='#2B3752',
+         send='#3A5078', send_alt='#5A3A48', recv_text='#E7ECF4', send_text='#F2F5FA',
+         char_outline='#5B6A88', band='#6D8CC0'),
+    _scenes('stripes', '#F7F9FB', '#BFD0E4', dict(dim_to='#F4F6F8'), (0.0, 0.25, 0.0)),
+    _scenes('stripes', '#172033', '#243556', dict(dim_to='#172033'), (0.0, 0.25, 0.0)),
+    ['남색 띠를 두른 말풍선',
+     '흰 바탕에 남색 줄무늬',
+     '밤바다색 바탕에 띠 두른 말풍선',
+     '짙은 남색 줄무늬'])
+
+THEMES += character(
+    'checker', 197, '체커보드', dict(char_style='flag', flat_list=False, motif_tile='checker'),
+    dict(bg='#F3EEF8', bg_deep='#EEE8F5', surface='#FBF9FD', pressed='#E3DBEE',
+         border='#D9CFE8', text='#3A3148', subtext='#7B7189', accent='#8A6FB8',
+         accent_dim='#735A9C', on_accent='#FFFFFF', recv='#FFFFFF', recv_alt='#F0EAF7',
+         send='#DCD0EE', send_alt='#F4DDE6', recv_text='#3A3148', send_text='#2F273C',
+         char_outline='#B3A6C6'),
+    dict(bg='#231F2B', bg_deep='#1D1924', surface='#2B2634', pressed='#35303F',
+         border='#403A4B', text='#ECE6F3', subtext='#A39AAF', accent='#B39BDD',
+         accent_dim='#977FC2', on_accent='#1E1828', recv='#2F2A38', recv_alt='#3A3444',
+         send='#4B3F66', send_alt='#5A3F52', recv_text='#ECE6F3', send_text='#F4EFFA',
+         char_outline='#6F6580'),
+    _scenes('checker', '#F3EEF8', '#E3DAF0', dict(dim_to='#F3EEF8'), (0.0, 0.25, 0.0)),
+    _scenes('checker', '#231F2B', '#2F2939', dict(dim_to='#231F2B'), (0.0, 0.25, 0.0)),
+    ['첫 말에 체크 깃발 꽂은 말풍선',
+     '라벤더 체커보드 타일',
+     '어두운 보라 바탕에 깃발 말풍선',
+     '짙은 보라 체커보드'])
 
 
 # --- 카테고리 규칙 ------------------------------------------------------------

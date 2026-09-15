@@ -33,6 +33,11 @@ MOTIFS = {
     '수묵화': ('mountain', 'moon', 'pine'),
     '비 오는 창가': ('drop', 'cloud', 'cup'),
     '페이퍼컷': ('cloud', 'star', 'sun'),
+    '깅엄 체크': ('bow', 'cherry', 'blossom'),
+    '폴카 도트': ('button', 'cherry', 'heart'),
+    '테라조': ('chips', 'shard', 'circle'),
+    '마린 스트라이프': ('anchor', 'wave', 'sun'),
+    '체커보드': ('flag', 'star', 'heart'),
     '벚꽃 그늘': ('blossom', 'petal', 'cloud'),
     '오로라': ('aurora', 'pine', 'star'),
     '심야': ('moon', 'star', 'mountain'),
@@ -367,6 +372,52 @@ def mask(kind, S, fine=True):
             d.rectangle(P((16, 22), (84, 62)), fill=0)
             d.line(P((24, 32), (34, 40), (24, 48)), fill=255, width=W(5))
             d.rectangle(P((40, 46), (56, 51)), fill=255)
+    elif kind == 'bow':
+        d.polygon(P((50, 44), (12, 20), (6, 42), (14, 64)), fill=255)
+        d.polygon(P((50, 44), (88, 20), (94, 42), (86, 64)), fill=255)
+        d.polygon(P((44, 50), (26, 90), (38, 86), (46, 94)), fill=255)
+        d.polygon(P((56, 50), (74, 90), (62, 86), (54, 94)), fill=255)
+        d.ellipse(P((39, 33), (61, 55)), fill=255)
+        if fine:
+            d.arc(P((39, 33), (61, 55)), 0, 360, fill=0, width=W(4))
+    elif kind == 'cherry':
+        d.line(P((29, 56), (44, 28), (62, 10)), fill=255, width=W(5), joint='curve')
+        d.line(P((67, 64), (60, 36), (62, 10)), fill=255, width=W(5), joint='curve')
+        d.ellipse(P((60, 2), (92, 20)), fill=255)
+        d.ellipse(P((8, 50), (50, 92)), fill=255)
+        d.ellipse(P((46, 58), (88, 100)), fill=255)
+        if fine:
+            d.ellipse(P((17, 59), (26, 68)), fill=0)
+            d.ellipse(P((55, 67), (64, 76)), fill=0)
+    elif kind == 'button':
+        d.ellipse(P((10, 10), (90, 90)), fill=255)
+        if fine:
+            d.ellipse(P((20, 20), (80, 80)), outline=0, width=W(3))
+            for x, y in ((40, 40), (60, 40), (40, 60), (60, 60)):
+                d.ellipse(P((x - 5, y - 5), (x + 5, y + 5)), fill=0)
+    elif kind == 'chips':
+        for pts in (((10, 42), (38, 16), (52, 44), (24, 62)), ((58, 18), (92, 28), (82, 56), (58, 48)),
+                    ((30, 72), (62, 60), (76, 90), (40, 96))):
+            d.polygon(P(*pts), fill=255)
+    elif kind == 'shard':
+        d.polygon(P((14, 76), (44, 12), (88, 62), (60, 90)), fill=255)
+    elif kind == 'anchor':
+        d.ellipse(P((38, 4), (62, 28)), fill=255)
+        if fine:
+            d.ellipse(P((45, 11), (55, 21)), fill=0)
+        d.rectangle(P((45, 24), (55, 90)), fill=255)
+        d.rectangle(P((26, 32), (74, 41)), fill=255)
+        d.arc(P((14, 36), (86, 94)), 15, 165, fill=255, width=W(9))
+        d.polygon(P((6, 60), (28, 66), (14, 84)), fill=255)
+        d.polygon(P((94, 60), (72, 66), (86, 84)), fill=255)
+    elif kind == 'flag':
+        d.rectangle(P((12, 6), (21, 96)), fill=255)
+        d.rectangle(P((21, 10), (90, 60)), fill=255)
+        if fine:
+            for j in range(3):
+                for i in range(4):
+                    if (i + j) % 2:
+                        d.rectangle(P((25 + i * 15, 14 + j * 14), (25 + (i + 1) * 15, 14 + (j + 1) * 14)), fill=0)
     else:
         raise ValueError('모르는 모티프: %s' % kind)
     return m
@@ -389,6 +440,16 @@ def profile(t, idx, px):
     small = mask(kind, S, fine=not tube or kind in KEEP_HOLES).resize((int(S * 0.7), int(S * 0.7)), Image.LANCZOS)
     m = Image.new('L', (S, S), 0)
     m.paste(small, (int(S * 0.15), int(S * 0.15)))
+    tile = t.get('motif_tile')
+    if tile:
+        # 판에 계열 무늬를 옅게 깐다. 단색 판이면 목록에서 무늬 계열끼리 구분이 안 된다.
+        # 도형 둘레는 판 색으로 비워 무늬가 윤곽을 먹지 않게 한다
+        chips = [gen.mix(back, c, 0.3) for c in (t['accent'], gen.mid(*t['send']), gen.mid(*t['send_alt']))]
+        img = gen.chat_bg((tile, back, gen.mix(back, col, 0.2), dict(chips=chips, seed=idx + 1)), S, S).convert('RGBA')
+        halo = m
+        for _ in range(int(S * 0.03)):
+            halo = halo.filter(ImageFilter.MaxFilter(3))
+        _put(img, back, halo)
     if tube:
         k = max(1, int(S * 0.045))
         pipe = ImageChops.subtract(m, erode(m, k))

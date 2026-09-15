@@ -2682,3 +2682,102 @@ def papercut(spec, w, h):
     img = Image.composite(Image.new('RGB', (w, h), gen.rgb(shadow)), img,
                           _grain(rnd, w, h).point(lambda v: max(0, v - 128) // 6))
     return _dim(img, o)
+
+
+# --- 무늬: 깅엄 · 폴카 · 테라조 · 마린 · 체커보드 ------------------------------------
+# spec = (kind, 바탕색, 무늬색, 옵션dict). 반복 무늬라 어디서 잘라도 같아서 목록에서도 흐리지 않는다
+# (flat_list=False). 칸 크기는 폭에 비례한다 — 프로필 판에 까는 타일도 같은 함수로 그린다.
+
+def _weave(img, rnd, amp):
+    """천·돌 알갱이. 밝은 알갱이 자리만 살짝 누른다."""
+    w, h = img.size
+    k = _grain(rnd, w, h).point(lambda v: max(0, v - 128) * amp // 128)
+    return Image.composite(Image.new('RGB', (w, h), (0, 0, 0)), img, k)
+
+
+def gingham(spec, w, h):
+    """가로 띠와 세로 띠를 반투명으로 겹친다. 겹친 칸이 더 짙어야 깅엄으로 읽힌다."""
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261140))
+    s = max(2, int(w * 0.07))
+    hor = Image.new('L', (w, h), 0)
+    ver = Image.new('L', (w, h), 0)
+    for y in range(0, h, s * 2):
+        ImageDraw.Draw(hor).rectangle([0, y, w, y + s - 1], fill=110)
+    for x in range(0, w, s * 2):
+        ImageDraw.Draw(ver).rectangle([x, 0, x + s - 1, h], fill=110)
+    img = Image.composite(Image.new('RGB', (w, h), gen.rgb(spec[2])), Image.new('RGB', (w, h), gen.rgb(spec[1])),
+                          ImageChops.add(hor, ver))
+    d = ImageDraw.Draw(img, 'RGBA')
+    for i in range(-h, w, max(3, s // 6)):             # 실 결
+        d.line([(i, 0), (i + h, h)], fill=(255, 255, 255, 14), width=1)
+    return _dim(_weave(img, rnd, 8), o)
+
+
+def polka(spec, w, h):
+    """엇갈려 놓은 물방울. 촘촘하고 크면 물방울이 아니라 구멍 뚫린 판으로 보였다."""
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261141))
+    img = Image.new('RGB', (w, h), gen.rgb(spec[1]))
+    d = ImageDraw.Draw(img)
+    s = w * 0.16
+    r = s * 0.14
+    y, row = s / 2, 0
+    while y < h + s:
+        x = s / 2 if row % 2 else 0
+        while x < w + s:
+            d.ellipse([x - r, y - r, x + r, y + r], fill=gen.rgb(spec[2]))
+            x += s
+        y += s * 0.87
+        row += 1
+    return _dim(_weave(img, rnd, 8), o)
+
+
+def stripes(spec, w, h):
+    """마린 줄무늬. 띠가 틈보다 좁아야 흰 바탕에 줄이 그어진 것으로 읽힌다."""
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261142))
+    img = Image.new('RGB', (w, h), gen.rgb(spec[1]))
+    d = ImageDraw.Draw(img)
+    period = max(4, int(w * 0.1))
+    band = max(2, int(w * 0.045))
+    for y in range(0, h, period):
+        d.rectangle([0, y, w, y + band - 1], fill=gen.rgb(spec[2]))
+    return _dim(_weave(img, rnd, 10), o)
+
+
+def terrazzo(spec, w, h):
+    """돌 바탕에 박힌 여러 색 조각. chips 옵션이 조각 색들이다."""
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261143))
+    img = Image.new('RGB', (w, h), gen.rgb(spec[1]))
+    d = ImageDraw.Draw(img)
+    cols = [gen.rgb(c) for c in o.get('chips', [spec[2]])]
+    for _ in range(max(12, w * h // 7000)):
+        cx, cy = rnd.uniform(0, w), rnd.uniform(0, h)
+        r = w * rnd.choice((0.008, 0.012, 0.018, 0.026, 0.036))
+        n = rnd.randint(4, 7)
+        a0 = rnd.uniform(0, 2 * math.pi)
+        d.polygon([(cx + math.cos(a0 + i * 2 * math.pi / n) * r * rnd.uniform(0.6, 1.2),
+                    cy + math.sin(a0 + i * 2 * math.pi / n) * r * rnd.uniform(0.6, 1.2)) for i in range(n)],
+                  fill=rnd.choice(cols))
+    return _dim(_weave(img, rnd, 12), o)
+
+
+def checker(spec, w, h):
+    """체커보드 타일. 칸 경계를 아주 살짝 흐려 게임판이 아니라 타일로."""
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261144))
+    img = Image.new('RGB', (w, h), gen.rgb(spec[1]))
+    d = ImageDraw.Draw(img)
+    s = max(2, int(w * 0.1))
+    for j in range(h // s + 1):
+        for i in range(w // s + 1):
+            if (i + j) % 2:
+                d.rectangle([i * s, j * s, i * s + s - 1, j * s + s - 1], fill=gen.rgb(spec[2]))
+    return _dim(_weave(img.filter(ImageFilter.GaussianBlur(w * 0.001)), rnd, 8), o)

@@ -35,11 +35,31 @@
 <tr>
 <td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-캔디-팝"><img src="assets/preview-candy-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-도형"><img src="assets/preview-geo-image-chat.webp" width="190"></a></td>
-<td width="33%"></td>
+<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-깅엄-체크"><img src="assets/preview-gingham-light-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><img src="assets/icon-candy-image.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-캔디-팝">캔디 팝</a></b><br><sub>기본 · 사탕 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
 <td align="center"><img src="assets/icon-geo-image.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-도형">도형</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>도형을 걷어낸 미색 바탕</td>
+<td align="center"><img src="assets/icon-gingham-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-깅엄-체크">깅엄 체크</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림 바탕에 리본 단 말풍선</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-폴카-도트"><img src="assets/preview-polka-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-테라조"><img src="assets/preview-terrazzo-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-마린-스트라이프"><img src="assets/preview-marine-light-image-chat.webp" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/icon-polka-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-폴카-도트">폴카 도트</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림 바탕에 알약 말풍선. 첫 말엔 물방울 셋</td>
+<td align="center"><img src="assets/icon-terrazzo-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-테라조">테라조</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>돌 조각이 박힌 말풍선</td>
+<td align="center"><img src="assets/icon-marine-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-마린-스트라이프">마린 스트라이프</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>남색 띠를 두른 말풍선</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-체커보드"><img src="assets/preview-checker-light-image-chat.webp" width="190"></a></td>
+<td width="33%"></td>
+<td width="33%"></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/icon-checker-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-체커보드">체커보드</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>첫 말에 체크 깃발 꽂은 말풍선</td>
+<td width="33%"></td>
 <td width="33%"></td>
 </tr>
 </table>

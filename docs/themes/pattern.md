@@ -22,11 +22,31 @@
 <tr>
 <td width="33%" align="center"><a href="#user-content-캔디-팝"><img src="../../assets/preview-candy-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-도형"><img src="../../assets/preview-geo-image-chat.webp" width="190"></a></td>
-<td width="33%"></td>
+<td width="33%" align="center"><a href="#user-content-깅엄-체크"><img src="../../assets/preview-gingham-light-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><img src="../../assets/icon-candy-image.png" width="20" valign="middle"> <b><a href="#user-content-캔디-팝">캔디 팝</a></b><br><sub>기본 · 사탕 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
 <td align="center"><img src="../../assets/icon-geo-image.png" width="20" valign="middle"> <b><a href="#user-content-도형">도형</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>도형을 걷어낸 미색 바탕</td>
+<td align="center"><img src="../../assets/icon-gingham-light-image.png" width="20" valign="middle"> <b><a href="#user-content-깅엄-체크">깅엄 체크</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림 바탕에 리본 단 말풍선</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="#user-content-폴카-도트"><img src="../../assets/preview-polka-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-테라조"><img src="../../assets/preview-terrazzo-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-마린-스트라이프"><img src="../../assets/preview-marine-light-image-chat.webp" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><img src="../../assets/icon-polka-light-image.png" width="20" valign="middle"> <b><a href="#user-content-폴카-도트">폴카 도트</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림 바탕에 알약 말풍선. 첫 말엔 물방울 셋</td>
+<td align="center"><img src="../../assets/icon-terrazzo-light-image.png" width="20" valign="middle"> <b><a href="#user-content-테라조">테라조</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>돌 조각이 박힌 말풍선</td>
+<td align="center"><img src="../../assets/icon-marine-light-image.png" width="20" valign="middle"> <b><a href="#user-content-마린-스트라이프">마린 스트라이프</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>남색 띠를 두른 말풍선</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="#user-content-체커보드"><img src="../../assets/preview-checker-light-image-chat.webp" width="190"></a></td>
+<td width="33%"></td>
+<td width="33%"></td>
+</tr>
+<tr>
+<td align="center"><img src="../../assets/icon-checker-light-image.png" width="20" valign="middle"> <b><a href="#user-content-체커보드">체커보드</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>첫 말에 체크 깃발 꽂은 말풍선</td>
+<td width="33%"></td>
 <td width="33%"></td>
 </tr>
 </table>
@@ -203,6 +223,181 @@
 **글로우+배경** — 도형 배경에 빛나는 말풍선
 
 <img src="../../assets/preview-geo-glow-image-list.webp" width="180"> <img src="../../assets/preview-geo-glow-image-passcode.webp" width="180"> <img src="../../assets/preview-geo-glow-image-splash.webp" width="180">
+
+</details>
+
+<a name="깅엄-체크"></a>
+
+## <img src="../../assets/icon-gingham-light.png" width="26" valign="middle"> 깅엄 체크 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-gingham-light-chat.webp" width="200"><br><b>밝음</b><br><sub>크림 바탕에 리본 단 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=gingham-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/gingham-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-gingham-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>하늘색 깅엄 체크 식탁보</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=gingham-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/gingham-light-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-gingham-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>어두운 바탕에 리본 단 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=gingham-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/gingham-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-gingham-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>밤의 남색 깅엄 체크</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=gingham-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/gingham-dark-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**밝음** — 크림 바탕에 리본 단 말풍선
+
+<img src="../../assets/preview-gingham-light-list.webp" width="180"> <img src="../../assets/preview-gingham-light-passcode.webp" width="180"> <img src="../../assets/preview-gingham-light-splash.webp" width="180">
+
+**밝음+배경** — 하늘색 깅엄 체크 식탁보
+
+<img src="../../assets/preview-gingham-light-image-list.webp" width="180"> <img src="../../assets/preview-gingham-light-image-passcode.webp" width="180"> <img src="../../assets/preview-gingham-light-image-splash.webp" width="180">
+
+**어두움** — 어두운 바탕에 리본 단 말풍선
+
+<img src="../../assets/preview-gingham-dark-list.webp" width="180"> <img src="../../assets/preview-gingham-dark-passcode.webp" width="180"> <img src="../../assets/preview-gingham-dark-splash.webp" width="180">
+
+**어두움+배경** — 밤의 남색 깅엄 체크
+
+<img src="../../assets/preview-gingham-dark-image-list.webp" width="180"> <img src="../../assets/preview-gingham-dark-image-passcode.webp" width="180"> <img src="../../assets/preview-gingham-dark-image-splash.webp" width="180">
+
+</details>
+
+<a name="폴카-도트"></a>
+
+## <img src="../../assets/icon-polka-light.png" width="26" valign="middle"> 폴카 도트 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-polka-light-chat.webp" width="200"><br><b>밝음</b><br><sub>크림 바탕에 알약 말풍선. 첫 말엔 물방울 셋</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=polka-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/polka-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-polka-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>크림 바탕에 산호색 물방울 무늬</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=polka-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/polka-light-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-polka-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>짙은 갈색 바탕에 알약 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=polka-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/polka-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-polka-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>짙은 갈색에 옅은 물방울 무늬</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=polka-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/polka-dark-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**밝음** — 크림 바탕에 알약 말풍선. 첫 말엔 물방울 셋
+
+<img src="../../assets/preview-polka-light-list.webp" width="180"> <img src="../../assets/preview-polka-light-passcode.webp" width="180"> <img src="../../assets/preview-polka-light-splash.webp" width="180">
+
+**밝음+배경** — 크림 바탕에 산호색 물방울 무늬
+
+<img src="../../assets/preview-polka-light-image-list.webp" width="180"> <img src="../../assets/preview-polka-light-image-passcode.webp" width="180"> <img src="../../assets/preview-polka-light-image-splash.webp" width="180">
+
+**어두움** — 짙은 갈색 바탕에 알약 말풍선
+
+<img src="../../assets/preview-polka-dark-list.webp" width="180"> <img src="../../assets/preview-polka-dark-passcode.webp" width="180"> <img src="../../assets/preview-polka-dark-splash.webp" width="180">
+
+**어두움+배경** — 짙은 갈색에 옅은 물방울 무늬
+
+<img src="../../assets/preview-polka-dark-image-list.webp" width="180"> <img src="../../assets/preview-polka-dark-image-passcode.webp" width="180"> <img src="../../assets/preview-polka-dark-image-splash.webp" width="180">
+
+</details>
+
+<a name="테라조"></a>
+
+## <img src="../../assets/icon-terrazzo-light.png" width="26" valign="middle"> 테라조 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-terrazzo-light-chat.webp" width="200"><br><b>밝음</b><br><sub>돌 조각이 박힌 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=terrazzo-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/terrazzo-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-terrazzo-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>알록달록 돌 조각이 박힌 바닥</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=terrazzo-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/terrazzo-light-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-terrazzo-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>짙은 돌 바탕에 조각 박힌 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=terrazzo-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/terrazzo-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-terrazzo-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>어두운 돌에 박힌 조각들</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=terrazzo-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/terrazzo-dark-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**밝음** — 돌 조각이 박힌 말풍선
+
+<img src="../../assets/preview-terrazzo-light-list.webp" width="180"> <img src="../../assets/preview-terrazzo-light-passcode.webp" width="180"> <img src="../../assets/preview-terrazzo-light-splash.webp" width="180">
+
+**밝음+배경** — 알록달록 돌 조각이 박힌 바닥
+
+<img src="../../assets/preview-terrazzo-light-image-list.webp" width="180"> <img src="../../assets/preview-terrazzo-light-image-passcode.webp" width="180"> <img src="../../assets/preview-terrazzo-light-image-splash.webp" width="180">
+
+**어두움** — 짙은 돌 바탕에 조각 박힌 말풍선
+
+<img src="../../assets/preview-terrazzo-dark-list.webp" width="180"> <img src="../../assets/preview-terrazzo-dark-passcode.webp" width="180"> <img src="../../assets/preview-terrazzo-dark-splash.webp" width="180">
+
+**어두움+배경** — 어두운 돌에 박힌 조각들
+
+<img src="../../assets/preview-terrazzo-dark-image-list.webp" width="180"> <img src="../../assets/preview-terrazzo-dark-image-passcode.webp" width="180"> <img src="../../assets/preview-terrazzo-dark-image-splash.webp" width="180">
+
+</details>
+
+<a name="마린-스트라이프"></a>
+
+## <img src="../../assets/icon-marine-light.png" width="26" valign="middle"> 마린 스트라이프 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-marine-light-chat.webp" width="200"><br><b>밝음</b><br><sub>남색 띠를 두른 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=marine-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/marine-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-marine-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>흰 바탕에 남색 줄무늬</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=marine-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/marine-light-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-marine-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>밤바다색 바탕에 띠 두른 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=marine-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/marine-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-marine-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>짙은 남색 줄무늬</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=marine-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/marine-dark-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**밝음** — 남색 띠를 두른 말풍선
+
+<img src="../../assets/preview-marine-light-list.webp" width="180"> <img src="../../assets/preview-marine-light-passcode.webp" width="180"> <img src="../../assets/preview-marine-light-splash.webp" width="180">
+
+**밝음+배경** — 흰 바탕에 남색 줄무늬
+
+<img src="../../assets/preview-marine-light-image-list.webp" width="180"> <img src="../../assets/preview-marine-light-image-passcode.webp" width="180"> <img src="../../assets/preview-marine-light-image-splash.webp" width="180">
+
+**어두움** — 밤바다색 바탕에 띠 두른 말풍선
+
+<img src="../../assets/preview-marine-dark-list.webp" width="180"> <img src="../../assets/preview-marine-dark-passcode.webp" width="180"> <img src="../../assets/preview-marine-dark-splash.webp" width="180">
+
+**어두움+배경** — 짙은 남색 줄무늬
+
+<img src="../../assets/preview-marine-dark-image-list.webp" width="180"> <img src="../../assets/preview-marine-dark-image-passcode.webp" width="180"> <img src="../../assets/preview-marine-dark-image-splash.webp" width="180">
+
+</details>
+
+<a name="체커보드"></a>
+
+## <img src="../../assets/icon-checker-light.png" width="26" valign="middle"> 체커보드 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-checker-light-chat.webp" width="200"><br><b>밝음</b><br><sub>첫 말에 체크 깃발 꽂은 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=checker-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/checker-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-checker-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>라벤더 체커보드 타일</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=checker-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/checker-light-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-checker-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>어두운 보라 바탕에 깃발 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=checker-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/checker-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-checker-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>짙은 보라 체커보드</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=checker-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/checker-dark-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**밝음** — 첫 말에 체크 깃발 꽂은 말풍선
+
+<img src="../../assets/preview-checker-light-list.webp" width="180"> <img src="../../assets/preview-checker-light-passcode.webp" width="180"> <img src="../../assets/preview-checker-light-splash.webp" width="180">
+
+**밝음+배경** — 라벤더 체커보드 타일
+
+<img src="../../assets/preview-checker-light-image-list.webp" width="180"> <img src="../../assets/preview-checker-light-image-passcode.webp" width="180"> <img src="../../assets/preview-checker-light-image-splash.webp" width="180">
+
+**어두움** — 어두운 보라 바탕에 깃발 말풍선
+
+<img src="../../assets/preview-checker-dark-list.webp" width="180"> <img src="../../assets/preview-checker-dark-passcode.webp" width="180"> <img src="../../assets/preview-checker-dark-splash.webp" width="180">
+
+**어두움+배경** — 짙은 보라 체커보드
+
+<img src="../../assets/preview-checker-dark-image-list.webp" width="180"> <img src="../../assets/preview-checker-dark-image-passcode.webp" width="180"> <img src="../../assets/preview-checker-dark-image-splash.webp" width="180">
 
 </details>
 
