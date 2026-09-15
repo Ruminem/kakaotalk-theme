@@ -745,9 +745,11 @@ def _grid(T, members, link, img):
         out.append('</tr>')
         out.append('<tr>')
         out.extend(_pad(
-            '<td align="center"><img src="%sicon-%s.png" width="20" '
-            'valign="middle"> <b><a href="%s">%s</a></b>%s<br>%s</td>'
-            % (img, T.file_slug(grid_cover(T, ms)), link(fam), fam,
+            # 아이콘도 이름과 같은 링크 안에 넣는다. 링크 밖의 그림은 GitHub 이 원본 PNG 로 가는
+            # 링크를 씌워서, 누르면 계열 대신 PNG 파일 화면으로 갔다
+            '<td align="center"><b><a href="%s"><img src="%sicon-%s.png" width="20" '
+            'valign="middle"> %s</a></b>%s<br>%s</td>'
+            % (link(fam), img, T.file_slug(grid_cover(T, ms)), fam,
                ('' if len(ms) == 1 else '<br><sub>%s</sub>'
                 % ' · '.join(m['variant'] for m in ms)),
                ms[0]['note'])
@@ -851,8 +853,9 @@ def _family_block(T, name, members, img):
     # 테마 목록 단추는 제목 바로 오른쪽에 붙인다. 아래 줄 오른쪽 끝에 두었더니 넓은 화면에서
     # 제목과 멀리 떨어져 짝으로 안 읽혔다. 마크다운으로는 한 줄 안에서 오른쪽 끝으로 밀 수가
     # 없어 제목 안에 넣는다.
-    out.append('## <img src="%sicon-%s.png" width="26" valign="middle"> %s &nbsp;%s'
-               % (img, T.file_slug(members[0]), name, nav_link('top', anchor(TOP), img)))
+    # 아이콘은 제 자리로 가는 링크로 감싼다. 링크 밖의 그림은 GitHub 이 원본 PNG 링크를 씌운다
+    out.append('## <a href="%s"><img src="%sicon-%s.png" width="26" valign="middle"></a> %s &nbsp;%s'
+               % (anchor(name), img, T.file_slug(members[0]), name, nav_link('top', anchor(TOP), img)))
     out.append('')
 
     # 변형 배치. 넷이면 2x2 로 접는다 — 한 줄에 넷을 놓으면 폰에서 옆으로 밀어야 한다.

@@ -15,9 +15,9 @@
 <td width="33%" align="center"><a href="#user-content-도트-액정"><img src="../../assets/preview-lcd-light-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-arcade-light-image.png" width="20" valign="middle"> <b><a href="#user-content-오락실">오락실</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연보라 바탕에 빛나는 픽셀 말풍선과 계단 꼬리</td>
-<td align="center"><img src="../../assets/icon-quest-light-image.png" width="20" valign="middle"> <b><a href="#user-content-도트-모험">도트 모험</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>양피지색 바탕에 도트 대화창. 첫 말엔 ▼ 커서</td>
-<td align="center"><img src="../../assets/icon-lcd-light-image.png" width="20" valign="middle"> <b><a href="#user-content-도트-액정">도트 액정</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연둣빛 액정에 도트 말풍선. 첫 말엔 하트</td>
+<td align="center"><b><a href="#user-content-오락실"><img src="../../assets/icon-arcade-light-image.png" width="20" valign="middle"> 오락실</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연보라 바탕에 빛나는 픽셀 말풍선과 계단 꼬리</td>
+<td align="center"><b><a href="#user-content-도트-모험"><img src="../../assets/icon-quest-light-image.png" width="20" valign="middle"> 도트 모험</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>양피지색 바탕에 도트 대화창. 첫 말엔 ▼ 커서</td>
+<td align="center"><b><a href="#user-content-도트-액정"><img src="../../assets/icon-lcd-light-image.png" width="20" valign="middle"> 도트 액정</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연둣빛 액정에 도트 말풍선. 첫 말엔 하트</td>
 </tr>
 <tr>
 <td width="33%" align="center"><a href="#user-content-레트로-pc"><img src="../../assets/preview-retro-light-image-chat.webp" width="190"></a></td>
@@ -25,15 +25,15 @@
 <td width="33%"></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-retro-light-image.png" width="20" valign="middle"> <b><a href="#user-content-레트로-pc">레트로 PC</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>회색 창 말풍선. 첫 말엔 제목 표시줄과 닫기 단추</td>
-<td align="center"><img src="../../assets/icon-farm-light-image.png" width="20" valign="middle"> <b><a href="#user-content-도트-농장">도트 농장</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>나무 팻말 말풍선. 첫 말엔 새싹이 돋음</td>
+<td align="center"><b><a href="#user-content-레트로-pc"><img src="../../assets/icon-retro-light-image.png" width="20" valign="middle"> 레트로 PC</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>회색 창 말풍선. 첫 말엔 제목 표시줄과 닫기 단추</td>
+<td align="center"><b><a href="#user-content-도트-농장"><img src="../../assets/icon-farm-light-image.png" width="20" valign="middle"> 도트 농장</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>나무 팻말 말풍선. 첫 말엔 새싹이 돋음</td>
 <td width="33%"></td>
 </tr>
 </table>
 
 <a name="오락실"></a>
 
-## <img src="../../assets/icon-arcade-light.png" width="26" valign="middle"> 오락실 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-오락실"><img src="../../assets/icon-arcade-light.png" width="26" valign="middle"></a> 오락실 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -68,7 +68,7 @@
 
 <a name="도트-모험"></a>
 
-## <img src="../../assets/icon-quest-light.png" width="26" valign="middle"> 도트 모험 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-도트-모험"><img src="../../assets/icon-quest-light.png" width="26" valign="middle"></a> 도트 모험 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -103,7 +103,7 @@
 
 <a name="도트-액정"></a>
 
-## <img src="../../assets/icon-lcd-light.png" width="26" valign="middle"> 도트 액정 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-도트-액정"><img src="../../assets/icon-lcd-light.png" width="26" valign="middle"></a> 도트 액정 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -138,7 +138,7 @@
 
 <a name="레트로-pc"></a>
 
-## <img src="../../assets/icon-retro-light.png" width="26" valign="middle"> 레트로 PC &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-레트로-pc"><img src="../../assets/icon-retro-light.png" width="26" valign="middle"></a> 레트로 PC &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -173,7 +173,7 @@
 
 <a name="도트-농장"></a>
 
-## <img src="../../assets/icon-farm-light.png" width="26" valign="middle"> 도트 농장 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-도트-농장"><img src="../../assets/icon-farm-light.png" width="26" valign="middle"></a> 도트 농장 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>

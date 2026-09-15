@@ -15,9 +15,9 @@
 <td width="33%" align="center"><a href="#user-content-스테인드-글래스"><img src="../../assets/preview-stained-amber-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-glass-light.png" width="20" valign="middle"> <b><a href="#user-content-리퀴드-글래스">리퀴드 글래스</a></b><br><sub>라이트 · 다크 · 라이트 단색 · 다크 단색</sub><br>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</td>
-<td align="center"><img src="../../assets/icon-wood-oak.png" width="20" valign="middle"> <b><a href="#user-content-원목-글래스">원목 글래스</a></b><br><sub>오크 · 월넛 · 오크 단색 · 월넛 단색</sub><br>밝은 참나무 결 위에 반투명 유리 말풍선</td>
-<td align="center"><img src="../../assets/icon-stained-amber.png" width="20" valign="middle"> <b><a href="#user-content-스테인드-글래스">스테인드 글래스</a></b><br><sub>앰버 · 에메랄드 · 자수정 · 로즈</sub><br>납선으로 이은 호박색 유리창. 등불이 뒤에서 비침</td>
+<td align="center"><b><a href="#user-content-리퀴드-글래스"><img src="../../assets/icon-glass-light.png" width="20" valign="middle"> 리퀴드 글래스</a></b><br><sub>라이트 · 다크 · 라이트 단색 · 다크 단색</sub><br>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</td>
+<td align="center"><b><a href="#user-content-원목-글래스"><img src="../../assets/icon-wood-oak.png" width="20" valign="middle"> 원목 글래스</a></b><br><sub>오크 · 월넛 · 오크 단색 · 월넛 단색</sub><br>밝은 참나무 결 위에 반투명 유리 말풍선</td>
+<td align="center"><b><a href="#user-content-스테인드-글래스"><img src="../../assets/icon-stained-amber.png" width="20" valign="middle"> 스테인드 글래스</a></b><br><sub>앰버 · 에메랄드 · 자수정 · 로즈</sub><br>납선으로 이은 호박색 유리창. 등불이 뒤에서 비침</td>
 </tr>
 <tr>
 <td width="33%" align="center"><a href="#user-content-프리즘-글래스"><img src="../../assets/preview-prism-light-chat.webp" width="190"></a></td>
@@ -25,15 +25,15 @@
 <td width="33%"></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-prism-light.png" width="20" valign="middle"> <b><a href="#user-content-프리즘-글래스">프리즘 글래스</a></b><br><sub>라이트 · 다크 · 라이트 단색 · 다크 단색</sub><br>맑은 바탕. 말풍선 테두리가 무지개로 갈라짐</td>
-<td align="center"><img src="../../assets/icon-frost-light.png" width="20" valign="middle"> <b><a href="#user-content-프로스트-글래스">프로스트 글래스</a></b><br><sub>라이트 · 다크 · 라이트 단색 · 다크 단색</sub><br>젖빛 유리. 알갱이가 도는 뿌연 말풍선</td>
+<td align="center"><b><a href="#user-content-프리즘-글래스"><img src="../../assets/icon-prism-light.png" width="20" valign="middle"> 프리즘 글래스</a></b><br><sub>라이트 · 다크 · 라이트 단색 · 다크 단색</sub><br>맑은 바탕. 말풍선 테두리가 무지개로 갈라짐</td>
+<td align="center"><b><a href="#user-content-프로스트-글래스"><img src="../../assets/icon-frost-light.png" width="20" valign="middle"> 프로스트 글래스</a></b><br><sub>라이트 · 다크 · 라이트 단색 · 다크 단색</sub><br>젖빛 유리. 알갱이가 도는 뿌연 말풍선</td>
 <td width="33%"></td>
 </tr>
 </table>
 
 <a name="리퀴드-글래스"></a>
 
-## <img src="../../assets/icon-glass-light.png" width="26" valign="middle"> 리퀴드 글래스 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-리퀴드-글래스"><img src="../../assets/icon-glass-light.png" width="26" valign="middle"></a> 리퀴드 글래스 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -68,7 +68,7 @@
 
 <a name="원목-글래스"></a>
 
-## <img src="../../assets/icon-wood-oak.png" width="26" valign="middle"> 원목 글래스 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-원목-글래스"><img src="../../assets/icon-wood-oak.png" width="26" valign="middle"></a> 원목 글래스 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -103,7 +103,7 @@
 
 <a name="스테인드-글래스"></a>
 
-## <img src="../../assets/icon-stained-amber.png" width="26" valign="middle"> 스테인드 글래스 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-스테인드-글래스"><img src="../../assets/icon-stained-amber.png" width="26" valign="middle"></a> 스테인드 글래스 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -138,7 +138,7 @@
 
 <a name="프리즘-글래스"></a>
 
-## <img src="../../assets/icon-prism-light.png" width="26" valign="middle"> 프리즘 글래스 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-프리즘-글래스"><img src="../../assets/icon-prism-light.png" width="26" valign="middle"></a> 프리즘 글래스 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -173,7 +173,7 @@
 
 <a name="프로스트-글래스"></a>
 
-## <img src="../../assets/icon-frost-light.png" width="26" valign="middle"> 프로스트 글래스 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-프로스트-글래스"><img src="../../assets/icon-frost-light.png" width="26" valign="middle"></a> 프로스트 글래스 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>

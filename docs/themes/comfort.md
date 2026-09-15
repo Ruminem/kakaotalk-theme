@@ -15,9 +15,9 @@
 <td width="33%" align="center"><a href="#user-content-수채화"><img src="../../assets/preview-watercolor-light-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-calm-olive.png" width="20" valign="middle"> <b><a href="#user-content-고요">고요</a></b><br><sub>올리브 · 안개 · 자두 · 먹</sub><br>누런 풀빛 회색. 밝고 흙내 나는 쪽</td>
-<td align="center"><img src="../../assets/icon-calm-sage.png" width="20" valign="middle"> <b><a href="#user-content-차분">차분</a></b><br><sub>세이지 · 샌드 · 슬레이트 · 모카</sub><br>탁한 연둣빛 회색. 가장 순한 쪽</td>
-<td align="center"><img src="../../assets/icon-watercolor-light-image.png" width="20" valign="middle"> <b><a href="#user-content-수채화">수채화</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>물감 번진 말풍선. 첫 말엔 물감 방울</td>
+<td align="center"><b><a href="#user-content-고요"><img src="../../assets/icon-calm-olive.png" width="20" valign="middle"> 고요</a></b><br><sub>올리브 · 안개 · 자두 · 먹</sub><br>누런 풀빛 회색. 밝고 흙내 나는 쪽</td>
+<td align="center"><b><a href="#user-content-차분"><img src="../../assets/icon-calm-sage.png" width="20" valign="middle"> 차분</a></b><br><sub>세이지 · 샌드 · 슬레이트 · 모카</sub><br>탁한 연둣빛 회색. 가장 순한 쪽</td>
+<td align="center"><b><a href="#user-content-수채화"><img src="../../assets/icon-watercolor-light-image.png" width="20" valign="middle"> 수채화</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>물감 번진 말풍선. 첫 말엔 물감 방울</td>
 </tr>
 <tr>
 <td width="33%" align="center"><a href="#user-content-수묵화"><img src="../../assets/preview-inkwash-light-image-chat.webp" width="190"></a></td>
@@ -25,15 +25,15 @@
 <td width="33%" align="center"><a href="#user-content-페이퍼컷"><img src="../../assets/preview-papercut-light-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-inkwash-light-image.png" width="20" valign="middle"> <b><a href="#user-content-수묵화">수묵화</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>한지 말풍선에 먹선. 첫 말엔 붉은 낙관</td>
-<td align="center"><img src="../../assets/icon-rainy-light-image.png" width="20" valign="middle"> <b><a href="#user-content-비-오는-창가">비 오는 창가</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>김 서린 유리 말풍선. 첫 말엔 물방울</td>
-<td align="center"><img src="../../assets/icon-papercut-light-image.png" width="20" valign="middle"> <b><a href="#user-content-페이퍼컷">페이퍼컷</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>그림자 진 종이 말풍선. 첫 말엔 접힌 귀퉁이</td>
+<td align="center"><b><a href="#user-content-수묵화"><img src="../../assets/icon-inkwash-light-image.png" width="20" valign="middle"> 수묵화</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>한지 말풍선에 먹선. 첫 말엔 붉은 낙관</td>
+<td align="center"><b><a href="#user-content-비-오는-창가"><img src="../../assets/icon-rainy-light-image.png" width="20" valign="middle"> 비 오는 창가</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>김 서린 유리 말풍선. 첫 말엔 물방울</td>
+<td align="center"><b><a href="#user-content-페이퍼컷"><img src="../../assets/icon-papercut-light-image.png" width="20" valign="middle"> 페이퍼컷</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>그림자 진 종이 말풍선. 첫 말엔 접힌 귀퉁이</td>
 </tr>
 </table>
 
 <a name="고요"></a>
 
-## <img src="../../assets/icon-calm-olive.png" width="26" valign="middle"> 고요 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-고요"><img src="../../assets/icon-calm-olive.png" width="26" valign="middle"></a> 고요 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -68,7 +68,7 @@
 
 <a name="차분"></a>
 
-## <img src="../../assets/icon-calm-sage.png" width="26" valign="middle"> 차분 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-차분"><img src="../../assets/icon-calm-sage.png" width="26" valign="middle"></a> 차분 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -103,7 +103,7 @@
 
 <a name="수채화"></a>
 
-## <img src="../../assets/icon-watercolor-light.png" width="26" valign="middle"> 수채화 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-수채화"><img src="../../assets/icon-watercolor-light.png" width="26" valign="middle"></a> 수채화 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -138,7 +138,7 @@
 
 <a name="수묵화"></a>
 
-## <img src="../../assets/icon-inkwash-light.png" width="26" valign="middle"> 수묵화 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-수묵화"><img src="../../assets/icon-inkwash-light.png" width="26" valign="middle"></a> 수묵화 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -173,7 +173,7 @@
 
 <a name="비-오는-창가"></a>
 
-## <img src="../../assets/icon-rainy-light.png" width="26" valign="middle"> 비 오는 창가 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-비-오는-창가"><img src="../../assets/icon-rainy-light.png" width="26" valign="middle"></a> 비 오는 창가 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -208,7 +208,7 @@
 
 <a name="페이퍼컷"></a>
 
-## <img src="../../assets/icon-papercut-light.png" width="26" valign="middle"> 페이퍼컷 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-페이퍼컷"><img src="../../assets/icon-papercut-light.png" width="26" valign="middle"></a> 페이퍼컷 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>

@@ -15,9 +15,9 @@
 <td width="33%" align="center"><a href="#user-content-믹스드"><img src="../../assets/preview-mixed-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-inkmint-image.png" width="20" valign="middle"> <b><a href="#user-content-먹빛-민트">먹빛 민트</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름</td>
-<td align="center"><img src="../../assets/icon-cream-image.png" width="20" valign="middle"> <b><a href="#user-content-크림-라떼">크림 라떼</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽. 베이지 바탕에 브라운. 눈이 제일 안 피로한 조합임</td>
-<td align="center"><img src="../../assets/icon-mixed-image.png" width="20" valign="middle"> <b><a href="#user-content-믹스드">믹스드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임</td>
+<td align="center"><b><a href="#user-content-먹빛-민트"><img src="../../assets/icon-inkmint-image.png" width="20" valign="middle"> 먹빛 민트</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>먹색 바탕에 민트 포인트. 말풍선은 민트에서 하늘로, 보라에서 자주로 흐름</td>
+<td align="center"><b><a href="#user-content-크림-라떼"><img src="../../assets/icon-cream-image.png" width="20" valign="middle"> 크림 라떼</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽. 베이지 바탕에 브라운. 눈이 제일 안 피로한 조합임</td>
+<td align="center"><b><a href="#user-content-믹스드"><img src="../../assets/icon-mixed-image.png" width="20" valign="middle"> 믹스드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>어두운 보라 바탕. 말풍선 네 칸이 전부 다른 색임</td>
 </tr>
 <tr>
 <td width="33%" align="center"><a href="#user-content-캔디-팝"><img src="../../assets/preview-candy-image-chat.webp" width="190"></a></td>
@@ -25,9 +25,9 @@
 <td width="33%" align="center"><a href="#user-content-깅엄-체크"><img src="../../assets/preview-gingham-light-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-candy-image.png" width="20" valign="middle"> <b><a href="#user-content-캔디-팝">캔디 팝</a></b><br><sub>기본 · 사탕 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
-<td align="center"><img src="../../assets/icon-geo-image.png" width="20" valign="middle"> <b><a href="#user-content-도형">도형</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>도형을 걷어낸 미색 바탕</td>
-<td align="center"><img src="../../assets/icon-gingham-light-image.png" width="20" valign="middle"> <b><a href="#user-content-깅엄-체크">깅엄 체크</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림 바탕에 리본 단 말풍선</td>
+<td align="center"><b><a href="#user-content-캔디-팝"><img src="../../assets/icon-candy-image.png" width="20" valign="middle"> 캔디 팝</a></b><br><sub>기본 · 사탕 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
+<td align="center"><b><a href="#user-content-도형"><img src="../../assets/icon-geo-image.png" width="20" valign="middle"> 도형</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>도형을 걷어낸 미색 바탕</td>
+<td align="center"><b><a href="#user-content-깅엄-체크"><img src="../../assets/icon-gingham-light-image.png" width="20" valign="middle"> 깅엄 체크</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림 바탕에 리본 단 말풍선</td>
 </tr>
 <tr>
 <td width="33%" align="center"><a href="#user-content-폴카-도트"><img src="../../assets/preview-polka-light-image-chat.webp" width="190"></a></td>
@@ -35,9 +35,9 @@
 <td width="33%" align="center"><a href="#user-content-마린-스트라이프"><img src="../../assets/preview-marine-light-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-polka-light-image.png" width="20" valign="middle"> <b><a href="#user-content-폴카-도트">폴카 도트</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림 바탕에 알약 말풍선. 첫 말엔 물방울 셋</td>
-<td align="center"><img src="../../assets/icon-terrazzo-light-image.png" width="20" valign="middle"> <b><a href="#user-content-테라조">테라조</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>돌 조각이 박힌 말풍선</td>
-<td align="center"><img src="../../assets/icon-marine-light-image.png" width="20" valign="middle"> <b><a href="#user-content-마린-스트라이프">마린 스트라이프</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>남색 띠를 두른 말풍선</td>
+<td align="center"><b><a href="#user-content-폴카-도트"><img src="../../assets/icon-polka-light-image.png" width="20" valign="middle"> 폴카 도트</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림 바탕에 알약 말풍선. 첫 말엔 물방울 셋</td>
+<td align="center"><b><a href="#user-content-테라조"><img src="../../assets/icon-terrazzo-light-image.png" width="20" valign="middle"> 테라조</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>돌 조각이 박힌 말풍선</td>
+<td align="center"><b><a href="#user-content-마린-스트라이프"><img src="../../assets/icon-marine-light-image.png" width="20" valign="middle"> 마린 스트라이프</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>남색 띠를 두른 말풍선</td>
 </tr>
 <tr>
 <td width="33%" align="center"><a href="#user-content-체커보드"><img src="../../assets/preview-checker-light-image-chat.webp" width="190"></a></td>
@@ -45,7 +45,7 @@
 <td width="33%"></td>
 </tr>
 <tr>
-<td align="center"><img src="../../assets/icon-checker-light-image.png" width="20" valign="middle"> <b><a href="#user-content-체커보드">체커보드</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>첫 말에 체크 깃발 꽂은 말풍선</td>
+<td align="center"><b><a href="#user-content-체커보드"><img src="../../assets/icon-checker-light-image.png" width="20" valign="middle"> 체커보드</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>첫 말에 체크 깃발 꽂은 말풍선</td>
 <td width="33%"></td>
 <td width="33%"></td>
 </tr>
@@ -53,7 +53,7 @@
 
 <a name="먹빛-민트"></a>
 
-## <img src="../../assets/icon-inkmint-basic.png" width="26" valign="middle"> 먹빛 민트 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-먹빛-민트"><img src="../../assets/icon-inkmint-basic.png" width="26" valign="middle"></a> 먹빛 민트 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -88,7 +88,7 @@
 
 <a name="크림-라떼"></a>
 
-## <img src="../../assets/icon-cream-basic.png" width="26" valign="middle"> 크림 라떼 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-크림-라떼"><img src="../../assets/icon-cream-basic.png" width="26" valign="middle"></a> 크림 라떼 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -123,7 +123,7 @@
 
 <a name="믹스드"></a>
 
-## <img src="../../assets/icon-mixed-basic.png" width="26" valign="middle"> 믹스드 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-믹스드"><img src="../../assets/icon-mixed-basic.png" width="26" valign="middle"></a> 믹스드 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -158,7 +158,7 @@
 
 <a name="캔디-팝"></a>
 
-## <img src="../../assets/icon-candy-basic.png" width="26" valign="middle"> 캔디 팝 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-캔디-팝"><img src="../../assets/icon-candy-basic.png" width="26" valign="middle"></a> 캔디 팝 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -193,7 +193,7 @@
 
 <a name="도형"></a>
 
-## <img src="../../assets/icon-geo-basic.png" width="26" valign="middle"> 도형 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-도형"><img src="../../assets/icon-geo-basic.png" width="26" valign="middle"></a> 도형 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -228,7 +228,7 @@
 
 <a name="깅엄-체크"></a>
 
-## <img src="../../assets/icon-gingham-light.png" width="26" valign="middle"> 깅엄 체크 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-깅엄-체크"><img src="../../assets/icon-gingham-light.png" width="26" valign="middle"></a> 깅엄 체크 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -263,7 +263,7 @@
 
 <a name="폴카-도트"></a>
 
-## <img src="../../assets/icon-polka-light.png" width="26" valign="middle"> 폴카 도트 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-폴카-도트"><img src="../../assets/icon-polka-light.png" width="26" valign="middle"></a> 폴카 도트 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -298,7 +298,7 @@
 
 <a name="테라조"></a>
 
-## <img src="../../assets/icon-terrazzo-light.png" width="26" valign="middle"> 테라조 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-테라조"><img src="../../assets/icon-terrazzo-light.png" width="26" valign="middle"></a> 테라조 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -333,7 +333,7 @@
 
 <a name="마린-스트라이프"></a>
 
-## <img src="../../assets/icon-marine-light.png" width="26" valign="middle"> 마린 스트라이프 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-마린-스트라이프"><img src="../../assets/icon-marine-light.png" width="26" valign="middle"></a> 마린 스트라이프 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
@@ -368,7 +368,7 @@
 
 <a name="체커보드"></a>
 
-## <img src="../../assets/icon-checker-light.png" width="26" valign="middle"> 체커보드 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-체커보드"><img src="../../assets/icon-checker-light.png" width="26" valign="middle"></a> 체커보드 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
