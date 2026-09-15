@@ -2160,3 +2160,287 @@ def neonwall(spec, w, h):
     vig = vig.filter(ImageFilter.GaussianBlur(w * 0.15)).point(lambda v: 70 + v * 185 // 255)
     img = ImageChops.multiply(img, Image.merge('RGB', [vig] * 3))
     return _dim(img, o)
+
+
+def quest(spec, w, h):
+    """위에서 본 도트 지도. spec = ('quest', 바탕색, 둘째색, 옵션dict)
+
+      mode    'field' 들판(바탕=풀, 둘째=풀 얼룩) / 'dungeon' 던전(바탕=돌바닥, 둘째=줄눈)
+      block   도트 한 칸 크기(폭 비율)
+      field   path · path_edge 오솔길, trees · leaf · leaf_dark · trunk 나무, flowers 꽃 색들, pond 연못
+      dungeon wall 위쪽 벽, torch 횃불 빛, chests 상자 수
+      bare    참이면 바닥 질감만 그린다(들판은 풀 얼룩·꽃, 던전은 돌바닥). 목록 배경용 —
+              셀·칩에 잘려도 같은 무늬라 흐리지 않고 깔 수 있다
+      dim / dim_to
+
+    오락실(옆에서 본 풍경)과 갈리게 위에서 내려다본다. 작게 그려 NEAREST 로 키운다.
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261115))
+    B = max(4, int(w * o.get('block', 0.018)))
+    gw, gh = w // B + 1, h // B + 1
+    base, second = gen.rgb(spec[1]), gen.rgb(spec[2])
+    img = Image.new('RGB', (gw, gh), base)
+    d = ImageDraw.Draw(img)
+    torches = []
+
+    def shade(c, f):
+        return tuple(max(0, min(255, int(v * f))) for v in c)
+
+    if o.get('mode') == 'dungeon':
+        T = 4                                               # 바닥 돌 한 장이 4칸
+        for ty in range(0, gh, T):
+            for tx in range(0, gw, T):
+                d.rectangle([tx, ty, tx + T - 1, ty + T - 1], fill=shade(base, rnd.uniform(0.9, 1.1)))
+        for y in range(0, gh, T):
+            d.line([(0, y), (gw, y)], fill=second)
+        for x in range(0, gw, T):
+            d.line([(x, 0), (x, gh)], fill=second)
+        for _ in range(gw * gh // 90):                      # 금 간 돌
+            x, y = rnd.randrange(gw), rnd.randrange(gh)
+            d.point([(x, y), (x + 1, y + 1)], fill=second)
+        bare = o.get('bare')
+        wall, wh = gen.rgb(o.get('wall', '#3A3350')), (0 if bare else max(6, int(gh * 0.1)))
+        if not bare:
+            d.rectangle([0, 0, gw, wh], fill=wall)
+        for row, y in enumerate(range(0, wh, 3)):
+            d.line([(0, y), (gw, y)], fill=shade(wall, 0.6))
+            for x in range(row % 2 * 3, gw, 6):
+                d.line([(x, y), (x, y + 2)], fill=shade(wall, 0.6))
+        if not bare:
+            d.line([(0, wh), (gw, wh)], fill=shade(wall, 0.45))
+        for k in (() if bare else range(3)):
+            tx = int(gw * (0.18 + k * 0.32))
+            d.rectangle([tx - 1, wh - 3, tx + 1, wh - 2], fill=(90, 70, 50))
+            d.rectangle([tx - 1, wh - 6, tx + 1, wh - 4], fill=gen.rgb('#FF8A2A'))
+            d.point([(tx, wh - 7), (tx, wh - 5)], fill=gen.rgb('#FFE08A'))
+            torches.append((tx, wh - 5))
+        # 벽의 횃불은 채팅방 머리 단추에 가려서 바닥에도 화로를 둔다. 빛이 화면 가운데까지 들어와야
+        # 던전이 까만 판이 아니라 불 켜진 방으로 읽힌다
+        for _ in range(0 if bare else o.get('braziers', 0)):
+            bx, by = rnd.randrange(5, gw - 5), rnd.randrange(int(gh * 0.3), int(gh * 0.85))
+            d.rectangle([bx - 2, by, bx + 2, by + 2], fill=(70, 62, 80))
+            d.rectangle([bx - 1, by + 3, bx + 1, by + 4], fill=(50, 44, 58))
+            d.rectangle([bx - 1, by - 3, bx + 1, by - 1], fill=gen.rgb('#FF8A2A'))
+            d.point([(bx, by - 4), (bx, by - 2)], fill=gen.rgb('#FFE08A'))
+            torches.append((bx, by - 2))
+        gold, wood = gen.rgb('#FFD24A'), gen.rgb('#9A5E28')
+        for _ in range(0 if bare else o.get('chests', 0)):
+            cx, cy = rnd.randrange(4, gw - 8), rnd.randrange(wh + 6, gh - 8)
+            d.rectangle([cx, cy, cx + 5, cy + 4], fill=wood)
+            d.line([(cx, cy + 2), (cx + 5, cy + 2)], fill=gold)
+            d.point((cx + 2, cy + 2), fill=(255, 245, 190))
+            d.rectangle([cx - 1, cy - 1, cx + 6, cy + 5], outline=shade(base, 0.4))
+    else:
+        for _ in range(gw * gh // 7):                       # 풀 얼룩
+            d.point((rnd.randrange(gw), rnd.randrange(gh)), fill=second)
+        bare = o.get('bare')
+        if o.get('pond') and not bare:
+            px_, py_ = rnd.randrange(gw // 6, gw // 2), rnd.randrange(gh // 2, gh - gh // 5)
+            pw, ph = rnd.randint(10, 14), rnd.randint(6, 8)
+            d.ellipse([px_ - 1, py_ - 1, px_ + pw + 1, py_ + ph + 1], fill=shade(second, 0.75))
+            d.ellipse([px_, py_, px_ + pw, py_ + ph], fill=gen.rgb(o['pond']))
+            d.line([(px_ + 3, py_ + 2), (px_ + 6, py_ + 2)], fill=(235, 250, 255))
+        path, edge = gen.rgb(o.get('path', '#E3C88E')), gen.rgb(o.get('path_edge', '#C9A96A'))
+        ph0 = rnd.uniform(0, 6.28)
+        xs = [int(gw * 0.6 + math.sin(ph0 + y * 0.07) * gw * 0.14) for y in range(gh)]
+        for y, x in enumerate([] if bare else xs):
+            d.line([(x - 3, y), (x + 3, y)], fill=edge)
+            d.line([(x - 2, y), (x + 2, y)], fill=path)
+        for _ in range(0 if bare else o.get('trees', 0)):
+            for _try in range(20):
+                tx, ty = rnd.randrange(3, gw - 3), rnd.randrange(4, gh - 3)
+                if abs(tx - xs[ty]) > 7:
+                    break
+            d.rectangle([tx - 1, ty + 2, tx, ty + 3], fill=gen.rgb(o.get('trunk', '#8A5A2E')))
+            d.ellipse([tx - 4, ty - 4, tx + 3, ty + 3], fill=gen.rgb(o.get('leaf_dark', '#2F6B34')))
+            d.ellipse([tx - 3, ty - 3, tx + 2, ty + 2], fill=gen.rgb(o.get('leaf', '#4E9A4A')))
+            d.point([(tx - 2, ty - 2), (tx - 1, ty - 2)], fill=shade(gen.rgb(o.get('leaf', '#4E9A4A')), 1.3))
+        cols = [gen.rgb(c) for c in o.get('flowers', [])]
+        for _ in range(gw * gh // 60 if cols else 0):
+            x, y = rnd.randrange(gw), rnd.randrange(gh)
+            if bare or abs(x - xs[y]) > 3:
+                d.point((x, y), fill=rnd.choice(cols))
+
+    img = img.resize((gw * B, gh * B), Image.NEAREST).crop((0, 0, w, h))
+    if torches:
+        # 횃불 빛은 도트가 아니라 부드럽게 번진다. 도트로 번지면 동그란 계단 얼룩이 된다
+        from PIL import ImageChops, ImageFilter
+        glow_ = Image.new('RGB', (w, h))
+        gd = ImageDraw.Draw(glow_)
+        tc = gen.rgb(o.get('torch', '#FFB347'))
+        for tx, ty in torches:
+            cx, cy, r = tx * B + B // 2, ty * B, w * 0.16
+            gd.ellipse([cx - r, cy - r * 0.8, cx + r, cy + r * 1.2], fill=tuple(int(v * 0.55) for v in tc))
+        img = ImageChops.screen(img, glow_.filter(ImageFilter.GaussianBlur(w * 0.07)))
+    return _dim(img, o)
+
+
+def lcd(spec, w, h):
+    """네 가지 초록만 쓰는 액정 화면. spec = ('lcd', 바탕, 둘째, 옵션dict)
+
+      shades  밝은 쪽부터 네 색. 하늘·구름·언덕·땅이 이 넷만 쓴다
+      gap     칸 사이 틈의 밝기 배율. 밝은 액정은 1 아래(어두운 틈), 백라이트는 1 위
+      bare    참이면 칸 틈만 있는 빈 액정(목록 배경용)
+      dim / dim_to
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261116))
+    B = max(6, int(w * o.get('block', 0.014)))
+    gw, gh = w // B + 1, h // B + 1
+    s = [gen.rgb(c) for c in o['shades']]
+    img = Image.new('RGB', (gw, gh), s[0])
+    d = ImageDraw.Draw(img)
+    if not o.get('bare'):
+        for _ in range(o.get('clouds', 4)):
+            cx, cy = rnd.randrange(gw), rnd.randrange(int(gh * 0.1), int(gh * 0.5))
+            cw = rnd.randint(6, 8)
+            d.rectangle([cx - 1, cy - 1, cx + cw + 1, cy + 2], fill=s[2])
+            d.rectangle([cx + 2, cy - 3, cx + cw - 2, cy - 1], fill=s[2])
+            d.rectangle([cx, cy, cx + cw, cy + 1], fill=s[1])
+            d.rectangle([cx + 3, cy - 2, cx + cw - 3, cy - 1], fill=s[1])
+        for k, col in enumerate((s[1], s[2])):
+            base, amp = gh * (0.7 + k * 0.07), gh * rnd.uniform(0.04, 0.07)
+            ph, fr = rnd.uniform(0, 6.28), rnd.uniform(0.1, 0.18)
+            for x in range(0, gw, 2):
+                yy = int(base - amp * (0.5 + 0.5 * math.sin(ph + x * fr)))
+                d.rectangle([x, yy, x + 1, gh], fill=col)
+        gy = int(gh * 0.9)
+        d.rectangle([0, gy, gw, gh], fill=s[3])
+        for y in range(gy + 2, gh, 3):
+            for x in range((y // 3) % 2 * 2, gw, 4):
+                d.point((x, y), fill=s[2])
+    img = img.resize((gw * B, gh * B), Image.NEAREST).crop((0, 0, w, h))
+    # 액정 칸 사이의 틈. 그림 위 어디든 같은 격자가 지나야 액정으로 읽힌다
+    mask = Image.new('L', (w, h), 0)
+    md = ImageDraw.Draw(mask)
+    lw = max(1, B // 6)
+    for x in range(0, w, B):
+        md.line([(x, 0), (x, h)], fill=255, width=lw)
+    for y in range(0, h, B):
+        md.line([(0, y), (w, y)], fill=255, width=lw)
+    k = o.get('gap', 0.88)
+    lift = 6 if k > 1 else 0
+    img = Image.composite(img.point(lambda v: min(255, int(v * k + lift))), img, mask)
+    return _dim(img, o)
+
+
+def desktop(spec, w, h):
+    """옛 컴퓨터 바탕화면. spec = ('desktop', 바탕, 둘째, 옵션dict)
+
+      바탕·둘째 두 색을 한 칸씩 엇갈려 찍은 바둑판 무늬가 바탕화면이다
+      panel · panel_hi · panel_lo · ink   창과 작업 표시줄 색
+      title 창 제목 표시줄 색, screen 컴퓨터 아이콘 화면 색
+      bare  참이면 바둑판 무늬만(목록 배경용)
+      dim / dim_to
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261117))
+    B = max(4, int(w * o.get('block', 0.012)))
+    gw, gh = w // B + 1, h // B + 1
+    alt = gen.rgb(spec[2])
+    img = Image.new('RGB', (gw, gh), gen.rgb(spec[1]))
+    d = ImageDraw.Draw(img)
+    for y in range(gh):
+        for x in range(y % 2, gw, 2):
+            d.point((x, y), fill=alt)
+    if not o.get('bare'):
+        panel, hi = gen.rgb(o.get('panel', '#C0C4CA')), gen.rgb(o.get('panel_hi', '#F4F6F8'))
+        lo, ink = gen.rgb(o.get('panel_lo', '#6A7078')), gen.rgb(o.get('ink', '#14161A'))
+        yellow = (242, 201, 76)
+        x0 = 1
+        # 칸이 화면 폭의 3% 라 가로가 서른 칸 남짓이다. 아이콘은 여섯 칸, 창은 절반 폭으로 작게 둔다
+        for k, kind in enumerate(('pc', 'folder', 'trash')):
+            iy = int(gh * (0.22 + k * 0.13))
+            if kind == 'pc':
+                d.rectangle([x0, iy, x0 + 5, iy + 3], fill=ink)
+                d.rectangle([x0 + 1, iy + 1, x0 + 4, iy + 2], fill=gen.rgb(o.get('screen', '#7FD6E6')))
+                d.rectangle([x0 + 2, iy + 4, x0 + 3, iy + 4], fill=ink)
+            elif kind == 'folder':
+                d.rectangle([x0, iy, x0 + 2, iy], fill=ink)
+                d.rectangle([x0, iy + 1, x0 + 5, iy + 4], fill=ink)
+                d.rectangle([x0 + 1, iy + 2, x0 + 4, iy + 3], fill=yellow)
+            else:
+                d.rectangle([x0, iy, x0 + 5, iy], fill=ink)
+                d.rectangle([x0 + 1, iy + 1, x0 + 4, iy + 4], fill=ink)
+                d.rectangle([x0 + 2, iy + 2, x0 + 3, iy + 3], fill=panel)
+            d.rectangle([x0, iy + 6, x0 + 5, iy + 6], fill=hi)
+        wx, wy, ww, wh = int(gw * 0.4), int(gh * 0.32), int(gw * 0.5), int(gh * 0.16)
+        d.rectangle([wx, wy, wx + ww, wy + wh], fill=ink)
+        d.rectangle([wx + 1, wy + 1, wx + ww - 1, wy + wh - 1], fill=panel)
+        d.rectangle([wx + 1, wy + 1, wx + ww - 1, wy + 2], fill=gen.rgb(o.get('title', '#2A4FA8')))
+        d.rectangle([wx + ww - 3, wy + 1, wx + ww - 2, wy + 2], fill=panel)
+        for j in range(3):
+            d.line([(wx + 2, wy + 4 + j * 2), (wx + ww - 3 - rnd.randint(0, 5), wy + 4 + j * 2)], fill=lo)
+        ty = gh - 3
+        d.rectangle([0, ty, gw, gh], fill=panel)
+        d.line([(0, ty), (gw, ty)], fill=hi)
+        d.rectangle([1, ty + 1, 5, ty + 2], fill=ink)
+        d.rectangle([gw - 6, ty + 1, gw - 2, ty + 2], fill=lo)
+    img = img.resize((gw * B, gh * B), Image.NEAREST).crop((0, 0, w, h))
+    return _dim(img, o)
+
+
+def farm(spec, w, h):
+    """위에서 본 도트 농장. spec = ('farm', 풀, 풀 얼룩, 옵션dict)
+
+      soil · soil_dark · sprout   밭 흙·고랑·새싹 색
+      fence 울타리 색, plots 밭 수
+      fireflies · firefly         반딧불 수와 색(밤)
+      bare  참이면 밭고랑 무늬만 화면 가득(목록 배경용)
+      dim / dim_to
+    """
+    gen = _g()
+    o = spec[3] if len(spec) > 3 else {}
+    rnd = random.Random(o.get('seed', 20261118))
+    B = max(4, int(w * o.get('block', 0.018)))
+    gw, gh = w // B + 1, h // B + 1
+    soil, sd = gen.rgb(o.get('soil', '#A8744A')), gen.rgb(o.get('soil_dark', '#855836'))
+    sprout = gen.rgb(o.get('sprout', '#3E8A30'))
+    img = Image.new('RGB', (gw, gh), gen.rgb(spec[1]))
+    d = ImageDraw.Draw(img)
+    flies = []
+    if o.get('bare'):
+        d.rectangle([0, 0, gw, gh], fill=soil)
+        for y in range(0, gh, 3):
+            d.line([(0, y), (gw, y)], fill=sd)
+            for x in range(rnd.randrange(3), gw, rnd.randint(3, 5)):
+                d.point((x, y + 1), fill=sprout)
+    else:
+        for _ in range(gw * gh // 7):
+            d.point((rnd.randrange(gw), rnd.randrange(gh)), fill=gen.rgb(spec[2]))
+        for _ in range(o.get('plots', 4)):
+            px0, py0 = rnd.randrange(1, gw - 14), rnd.randrange(int(gh * 0.12), gh - 12)
+            pw, ph = rnd.randint(8, 13), rnd.randint(6, 10)
+            d.rectangle([px0 - 1, py0 - 1, px0 + pw + 1, py0 + ph + 1], fill=sd)
+            d.rectangle([px0, py0, px0 + pw, py0 + ph], fill=soil)
+            for y in range(py0 + 2, py0 + ph, 3):
+                d.line([(px0, y), (px0 + pw, y)], fill=sd)
+                for x in range(px0 + 1, px0 + pw, 3):
+                    d.point([(x, y - 1), (x, y - 2)], fill=sprout)
+        fence = gen.rgb(o.get('fence', '#D8B07A'))
+        fy = int(gh * rnd.uniform(0.55, 0.65))
+        d.line([(0, fy), (gw, fy)], fill=fence)
+        d.line([(0, fy + 2), (gw, fy + 2)], fill=fence)
+        for x in range(1, gw, 5):
+            d.line([(x, fy - 1), (x, fy + 3)], fill=tuple(int(v * 0.7) for v in fence))
+        fc = gen.rgb(o.get('firefly', '#FFE36A'))
+        for _ in range(o.get('fireflies', 0)):
+            fx, fy_ = rnd.randrange(gw), rnd.randrange(int(gh * 0.08), gh)
+            d.point((fx, fy_), fill=fc)
+            flies.append((fx, fy_))
+    img = img.resize((gw * B, gh * B), Image.NEAREST).crop((0, 0, w, h))
+    if flies:
+        # 반딧불 빛은 도트로 번지면 네모 얼룩이 되어 부드럽게 번지게 한다(던전 화로와 같다)
+        glow_ = Image.new('RGB', (w, h))
+        gd = ImageDraw.Draw(glow_)
+        fc = gen.rgb(o.get('firefly', '#FFE36A'))
+        r = w * 0.025
+        for fx, fy_ in flies:
+            cx, cy = fx * B + B / 2, fy_ * B + B / 2
+            gd.ellipse([cx - r, cy - r, cx + r, cy + r], fill=tuple(int(v * 0.5) for v in fc))
+        img = ImageChops.screen(img, glow_.filter(ImageFilter.GaussianBlur(w * 0.018)))
+    return _dim(img, o)

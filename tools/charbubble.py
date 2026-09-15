@@ -427,7 +427,10 @@ def geometry(t, variant):
     first = variant == '01'
     gl, gt, gr, gb = glow.margin(t)     # 글로우가 번질 여백. 모양마다 다르다(tools/glow.py)
     grow = glow.grow(t)                 # 글로우가 소품 둘레로 번지는 폭. 이 안도 늘어나면 안 된다
-    bw, bh, r = st['bw'], st['bh'], st['radius']
+    # 반경이 도트 크기를 따라가는 스타일은 함수로 적는다. 고정값이면 칸이 커질 때 늘어나는 줄이
+    # 안쪽 테를 지나 그 선이 옆으로 늘어났다
+    r = st['radius'](t) if callable(st['radius']) else st['radius']
+    bw, bh = st['bw'], st['bh']
     for _ in range(80):
         feats = st['features'](t, bw, bh, first)
         if t.get('firelight'):
@@ -1161,3 +1164,316 @@ def p_neon(t, idx, px):
 
 
 PROFILES['neon'] = p_neon
+
+
+# --- 도트 모험: RPG 대화창 ---------------------------------------------------
+# 모서리를 한 칸씩 계단으로 깎은 네모 창. 바깥 테두리 한 칸, 안쪽에 가는 테 한 줄. 좌표는 전부
+# 정수 pt 로 두고 끝 픽셀을 빼서 칠한다 — 반 픽셀이 걸리면 계단 경계가 번져 도트로 안 읽힌다.
+
+RPG_B = 2           # 도트 한 칸(pt)
+
+
+def _px_rect(p, x0, y0, x1, y1, col):
+    p.d.rectangle([round(x0 * p.s), round(y0 * p.s), round(x1 * p.s) - 1, round(y1 * p.s) - 1], fill=col)
+
+
+def _unit(t):
+    """도트 한 칸(pt). pixel_unit 을 안 적으면 예전 2pt."""
+    return t.get('pixel_unit', RPG_B)
+
+
+def d_rpg(p, lp, x, y, w, h, first, ck, t):
+    """대화창. 첫 장엔 안쪽 아래에 ▼ 커서 — 말이 더 남았다는 RPG 의 표시다.
+
+    전부 도트 한 칸(B) 단위로 그린다. 테두리 한 칸, 모서리 한 칸 계단, 안쪽 테 반 칸.
+    pixel_shadow 면 아래에만 한 칸 그림자를 깐다 — 오른쪽까지 깔면 보낸 쪽 장을 뒤집을 때
+    그림자도 뒤집혀 한 화면에 빛이 둘이 된다.
+    """
+    B = _unit(t)
+    col = _c(t[ck])
+    fill, oc = hexc(col), p.oc
+    rim = hexc(t.get('win_rim') or _g().mix(col, t['char_outline'], 0.5))
+    if t.get('pixel_shadow'):
+        _px_rect(lp, x + B, y + h, x + w - B, y + h + B, (0, 0, 0, 90))
+    _px_rect(p, x + B, y, x + w - B, y + h, oc)
+    _px_rect(p, x, y + B, x + w, y + h - B, oc)
+    if B >= 4:
+        _px_rect(p, x + B, y + B, x + w - B, y + h - B, fill)
+    else:
+        _px_rect(p, x + 2 * B, y + B, x + w - 2 * B, y + h - B, fill)
+        _px_rect(p, x + B, y + 2 * B, x + w - B, y + h - 2 * B, fill)
+    k, rw = B + B // 2, max(1, B // 2)                 # 안쪽 테는 테두리 안으로 반 칸 떨어져 반 칸 굵기
+    for bx in ((x + k, y + k, x + w - k, y + k + rw), (x + k, y + h - k - rw, x + w - k, y + h - k),
+               (x + k, y + k, x + k + rw, y + h - k), (x + w - k - rw, y + k, x + w - k, y + h - k)):
+        _px_rect(p, *bx, rim)
+    if first:
+        cx, top, e = x + w - 3 * B - 6, y + h - B, max(1, B // 2)
+        acc = hexc(t['accent'])
+        rows = ((-2, 3), (-1, 2), (0, 1))              # 도트 칸 단위
+        for i, (a, b) in enumerate(rows):              # 테두리 먼저 반 칸 크게
+            _px_rect(p, cx + a * B - e, top + i * B - e, cx + b * B + e, top + (i + 1) * B + e, oc)
+        for i, (a, b) in enumerate(rows):
+            _px_rect(p, cx + a * B, top + i * B, cx + b * B, top + (i + 1) * B, acc)
+
+
+def f_rpg(t, bw, bh, first):
+    B = _unit(t)
+    e = max(1, B // 2)
+    f = [((0, 0, bw, bh + (B if t.get('pixel_shadow') else 0)), ())]
+    if first:
+        f.append(((bw - 5 * B - 6 - e, bh - B - e, bw - 6 + e, bh + 2 * B + e), ('inner', 'bottom')))
+    return f
+
+
+# 테두리 한 칸 + 틈 반 칸 + 안쪽 테 반 칸 = 두 칸. 그 바깥에서 늘어나야 테가 옆으로 안 번진다
+STYLES['rpg'] = dict(bw=40, bh=44, radius=lambda t: 2 * _unit(t) + 1, draw=d_rpg, features=f_rpg)
+
+# 16 칸 도트 보물상자. 한 글자가 한 칸이다. 가장자리 한 줄은 비워 둔다 — 프로필 칸이 둥글게 잘린다
+CHEST = (
+    '................',
+    '................',
+    '...oooooooooo...',
+    '..oWWWWWWWWWWo..',
+    '.oWwwwwwwwwwwwo.',
+    '.owwwwwwwwwwwwo.',
+    '.oggggggggggggo.',
+    '.ooooooyyoooooo.',
+    '.owwwwoyyowwwwo.',
+    '.owwwwwoowwwwwo.',
+    '.owKKwwwwwwKKwo.',
+    '.owKKwwwwwwKKwo.',
+    '.owwwwwmmwwwwwo.',
+    '.oggggggggggggo.',
+    '.oooooooooooooo.',
+    '................',
+)
+
+
+FROG = (
+    '................',
+    '..ooo......ooo..',
+    '.oWWWo....oWWWo.',
+    '.oWKWooooooWKWo.',
+    '.oWWWoGGGGoWWWo.',
+    '.oGGGGGGGGGGGGo.',
+    '.oGGGGGGGGGGGGo.',
+    '.oGGoGGGGGGoGGo.',
+    '.oGGGooooooGGGo.',
+    '.oGGGGGGGGGGGGo.',
+    '..oGGggggggGGo..',
+    '.oGggggggggggGo.',
+    '.ooGGggggggGGoo.',
+    '..oooooooooooo..',
+    '................',
+    '................',
+)
+
+FLOPPY = (
+    '................',
+    '.oooooooooooooo.',
+    '.obbSSSSSSSbbbo.',
+    '.obbSSSSkSSbbbo.',
+    '.obbSSSSkSSbbbo.',
+    '.obbSSSSSSSbbbo.',
+    '.obbbbbbbbbbbbo.',
+    '.obLLLLLLLLLLbo.',
+    '.obLKKLLLLKKLbo.',
+    '.obLKKLLLLKKLbo.',
+    '.obLLLLLLLLLLbo.',
+    '.obLLLLmmLLLLbo.',
+    '.obLLLLLLLLLLbo.',
+    '.obbbbbbbbbbbbo.',
+    '.oooooooooooooo.',
+    '................',
+)
+
+TURNIP = (
+    '................',
+    '......l..l......',
+    '.....lLl.lLl....',
+    '......lLlLl.....',
+    '.......lLl......',
+    '.....oooooo.....',
+    '...ooWWWWWWoo...',
+    '..oWWWWWWWWWWo..',
+    '.oWWKKWWWWKKWWo.',
+    '.oWWKKWWWWKKWWo.',
+    '.oPWWWWmmWWWWPo.',
+    '.oppWWWWWWWWppo.',
+    '..oppppppppppo..',
+    '....oppppppo....',
+    '......oppo......',
+    '................',
+)
+
+# 스프라이트 이름 -> (16 칸 그림, 글자 -> 색). '@키' 는 테마 값을 쓴다 — 액정처럼 캐릭터도 테마 색으로 칠할 때
+SPRITES = {
+    'chest': (CHEST, {'o': '@char_outline', 'w': '#B7742F', 'W': '#D9924A', 'g': '#FFD24A',
+                      'y': '#FFF1A8', 'K': FACE, 'm': '#6B3A12'}),
+    'frog': (FROG, {'o': '@char_outline', 'K': '@char_outline', 'G': '@sprite_mid',
+                    'g': '@sprite_light', 'W': '@sprite_hi'}),
+    'floppy': (FLOPPY, {'o': '@char_outline', 'b': '@accent', 'S': '#C9CED6', 'k': '#3A3F4A',
+                        'L': '#FFFFFF', 'K': FACE, 'm': '#E0707A'}),
+    'turnip': (TURNIP, {'o': '@char_outline', 'l': '#3E8E3E', 'L': '#6CC46C', 'W': '#F7F2EA',
+                        'p': '#B45CC8', 'P': '#FF9FB0', 'K': FACE, 'm': '#C2566A'}),
+}
+
+
+def p_sprite(t, idx, px):
+    """도트 캐릭터 프로필. 16 칸을 정수 배로 키워 가운데에 둔다 — 소수 배로 키우면 칸 크기가 들쭉날쭉하다."""
+    grid, colors = SPRITES[t['char']]
+    if len(grid) != 16 or any(len(r) != 16 for r in grid):
+        raise ValueError('%s: 스프라이트는 16 x 16 이어야 한다' % t['char'])
+    pal = {k: hexc(t[v[1:]] if v.startswith('@') else v) for k, v in colors.items()}
+    small = Image.new('RGBA', (16, 16), (0, 0, 0, 0))
+    for yy, row in enumerate(grid):
+        for xx, ch in enumerate(row):
+            if ch in pal:
+                small.putpixel((xx, yy), pal[ch])
+    n = max(1, px // 16)
+    big = small.resize((16 * n, 16 * n), Image.NEAREST)
+    img = Image.new('RGBA', (px, px), hexc(t['char_backs'][idx % 3]))
+    img.alpha_composite(big, ((px - 16 * n) // 2, (px - 16 * n) // 2))
+    return img
+
+
+for _name in SPRITES:
+    PROFILES[_name] = p_sprite
+
+
+# --- 도트 액정 · 레트로 PC · 도트 농장 ----------------------------------------
+
+def _notched(p, x, y, w, h, col, n, B):
+    """모서리를 도트 n 칸 계단으로 깎은 네모. 한 칸은 B pt."""
+    for i in range(n + 1):
+        _px_rect(p, x + (n - i) * B, y + i * B, x + w - (n - i) * B, y + h - i * B, col)
+
+
+def _frame(p, x, y, w, h, k, rw, col):
+    """바깥에서 k 만큼 들어온 굵기 rw 의 네모 테."""
+    for bx in ((x + k, y + k, x + w - k, y + k + rw), (x + k, y + h - k - rw, x + w - k, y + h - k),
+               (x + k, y + k, x + k + rw, y + h - k), (x + w - k - rw, y + k, x + w - k, y + h - k)):
+        _px_rect(p, *bx, col)
+
+
+def _drop_shadow(lp, x, y, w, h, t):
+    """아래로만 한 칸 그림자. 오른쪽까지 깔면 보낸 쪽 장을 뒤집을 때 그림자도 뒤집혀 빛이 둘이 된다."""
+    if t.get('pixel_shadow'):
+        B = _unit(t)
+        _px_rect(lp, x + B, y + h, x + w - B, y + h + B, (0, 0, 0, 90))
+
+
+def _body_box(t, bw, bh):
+    return ((0, 0, bw, bh + (_unit(t) if t.get('pixel_shadow') else 0)), ())
+
+
+def _dot_radius(t):
+    """테두리 한 칸 + 틈 반 칸 + 안쪽 테 반 칸 = 두 칸. 그 바깥에서 늘어나야 테가 옆으로 안 번진다."""
+    return 2 * _unit(t) + 1
+
+
+HEART = ('.XX.XX.', 'XXXXXXX', 'XXXXXXX', '.XXXXX.', '..XXX..', '...X...')
+
+
+def d_lcd(p, lp, x, y, w, h, first, ck, t):
+    """액정 칸. 바깥 테두리 한 칸, 반 칸 틈, 안쪽에 반 칸 테. 첫 장엔 바깥 위 모서리에 도트 하트."""
+    B = _unit(t)
+    c = max(1, B // 2)
+    fill, oc = hexc(_c(t[ck])), p.oc
+    _drop_shadow(lp, x, y, w, h, t)
+    _notched(p, x, y, w, h, oc, 1, B)
+    _px_rect(p, x + B, y + B, x + w - B, y + h - B, fill)
+    _frame(p, x, y, w, h, B + c, c, oc)
+    if first:
+        hx, hy, e = x + c, y - 3 * c, 1
+        cells = [(i, j) for j, row in enumerate(HEART) for i, ch in enumerate(row) if ch == 'X']
+        for i, j in cells:
+            _px_rect(p, hx + i * c - e, hy + j * c - e, hx + (i + 1) * c + e, hy + (j + 1) * c + e, oc)
+        for i, j in cells:
+            _px_rect(p, hx + i * c, hy + j * c, hx + (i + 1) * c, hy + (j + 1) * c, hexc(t['accent']))
+
+
+def f_lcd(t, bw, bh, first):
+    c = max(1, _unit(t) // 2)
+    f = [_body_box(t, bw, bh)]
+    if first:
+        f.append(((c - 1, -3 * c - 1, 8 * c + 1, 3 * c + 1), ('outer', 'top')))
+    return f
+
+
+def d_window(p, lp, x, y, w, h, first, ck, t):
+    """옛 컴퓨터 창. 첫 장엔 위에 제목 표시줄 — 바깥 끝에 점 둘, 안쪽 끝에 닫기 단추.
+
+    가장자리 밝은 선은 사방에 같게 둔다. 왼쪽 위만 밝히면 보낸 쪽 장을 뒤집을 때 빛도 뒤집힌다.
+    """
+    B = _unit(t)
+    c = max(1, B // 2)
+    col = _c(t[ck])
+    oc = p.oc
+    _drop_shadow(lp, x, y, w, h, t)
+    if first:
+        _px_rect(p, x, y - 3 * B, x + w, y + B, oc)
+        _px_rect(p, x + B, y - 2 * B, x + w - B, y, hexc(t['accent']))
+        for k in (0, 1):
+            dx = x + 2 * B + k * B
+            _px_rect(p, dx, y - B - 1, dx + c, y - B + 1, hexc('#FFFFFF'))
+        bx0, by0 = x + w - 4 * B, y - 2 * B
+        bx1, by1 = bx0 + 2 * B, y
+        _px_rect(p, bx0, by0, bx1, by1, oc)
+        _px_rect(p, bx0 + 1, by0 + 1, bx1 - 1, by1 - 1, hexc('#E8E8E8'))
+        q = max(1, (2 * B - 2) // 3)
+        for i, j in ((0, 0), (2, 0), (1, 1), (0, 2), (2, 2)):
+            _px_rect(p, bx0 + 1 + i * q, by0 + 1 + j * q, bx0 + 1 + (i + 1) * q, by0 + 1 + (j + 1) * q, oc)
+    _px_rect(p, x, y, x + w, y + h, oc)
+    _px_rect(p, x + B, y + B, x + w - B, y + h - B, hexc(col))
+    _frame(p, x, y, w, h, B + c, c, hexc(_g().mix(col, '#FFFFFF', 0.6)))
+
+
+def f_window(t, bw, bh, first):
+    B = _unit(t)
+    c = max(1, B // 2)
+    f = [_body_box(t, bw, bh)]
+    if first:
+        f += [((0, -3 * B, bw, 0), ()),
+              ((bw - 4 * B - 1, -2 * B - 1, bw - 2 * B + 1, 1), ('inner', 'top')),
+              ((2 * B - 1, -B - 2, 3 * B + c + 1, -B + 2), ('outer', 'top'))]
+    return f
+
+
+def d_board(p, lp, x, y, w, h, first, ck, t):
+    """못 박힌 나무 팻말. 네 귀퉁이에 못, 첫 장엔 바깥 위에서 새싹이 돋는다."""
+    B = _unit(t)
+    c = max(1, B // 2)
+    col = _c(t[ck])
+    oc = p.oc
+    _drop_shadow(lp, x, y, w, h, t)
+    if first:
+        stem, leaf = hexc(t.get('stem', '#4E9A3A')), hexc('#6CC46C')
+        parts = (((x + 5 * c, y - 4 * c, x + 6 * c, y + c), stem),
+                 ((x + 2 * c, y - 6 * c, x + 5 * c, y - 4 * c), leaf),
+                 ((x + 6 * c, y - 8 * c, x + 9 * c, y - 6 * c), leaf))
+        for bx, _col in parts:
+            _px_rect(p, bx[0] - 1, bx[1] - 1, bx[2] + 1, bx[3] + 1, oc)
+        for bx, _col in parts:
+            _px_rect(p, *bx, _col)
+    _notched(p, x, y, w, h, oc, 1, B)
+    _px_rect(p, x + B, y + B, x + w - B, y + h - B, hexc(col))
+    nail = hexc(_g().mix(col, t['char_outline'], 0.55))
+    k = B + c
+    for nx, ny in ((x + k, y + k), (x + w - k - c, y + k), (x + k, y + h - k - c), (x + w - k - c, y + h - k - c)):
+        _px_rect(p, nx, ny, nx + c, ny + c, nail)
+
+
+def f_board(t, bw, bh, first):
+    c = max(1, _unit(t) // 2)
+    f = [_body_box(t, bw, bh)]
+    if first:
+        f.append(((2 * c - 1, -8 * c - 1, 9 * c + 1, c + 1), ('outer', 'top')))
+    return f
+
+
+STYLES.update({
+    'lcd': dict(bw=40, bh=44, radius=_dot_radius, draw=d_lcd, features=f_lcd),
+    'window': dict(bw=40, bh=44, radius=_dot_radius, draw=d_window, features=f_window),
+    'board': dict(bw=40, bh=44, radius=_dot_radius, draw=d_board, features=f_board),
+})

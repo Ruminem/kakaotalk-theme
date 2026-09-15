@@ -795,7 +795,7 @@ def families():
     return out
 
 
-# --- 분류 ----------------------------------------------------------------
+# --- 카테고리 ----------------------------------------------------------------
 # 계열이 열다섯이 되면서 격자 하나로는 훑어보기가 안 된다. 배경 그림이 무엇을
 # 그리는지로 묶는다.
 #
@@ -807,27 +807,31 @@ def families():
 # 순서는 담백한 쪽에서 센 쪽으로 간다. 무늬는 색과 도형만 있고, 자연은 장면을
 # 그리고, 불빛은 어둠 속에서 빛난다.
 #
-# '기타' 는 두지 않는다. 분류가 아니라 유보라서 아무도 열지 않는다.
-# 어디에도 안 맞는 계열이 생기면 분류를 하나 더 만든다.
+# '기타' 는 두지 않는다. 카테고리가 아니라 유보라서 아무도 열지 않는다.
+# 어디에도 안 맞는 계열이 생기면 카테고리를 하나 더 만든다.
 CATEGORIES = (
     ('무늬', '바탕에 색과 도형만. 담백한 쪽'),
+    ('편안함', '채도를 낮춰 눈이 편한 쪽'),
     ('유리', '말풍선이 반투명하다'),
     ('자연', '배경이 장면을 그린다'),
     ('불빛', '어두운 바탕에 인공 불빛'),
     ('캐릭터', '말풍선 모양과 캐릭터 프로필'),
+    ('도트', '8비트 도트로 그린 말풍선과 화면'),
 )
 
-# 분류 -> 분류 문서 파일 이름(docs/themes/<이름>.md). 영문으로 쓴다 — 한글 파일 이름은
-# 주소에서 %EB%AC%B4 처럼 깨져 보인다. 분류를 더하면 여기에도 한 줄 쓴다. 안 쓰면 생성이 멈춘다.
+# 카테고리 -> 카테고리 문서 파일 이름(docs/themes/<이름>.md). 영문으로 쓴다 — 한글 파일 이름은
+# 주소에서 %EB%AC%B4 처럼 깨져 보인다. 카테고리를 더하면 여기에도 한 줄 쓴다. 안 쓰면 생성이 멈춘다.
 CATEGORY_FILE = {
     '무늬': 'pattern',
+    '편안함': 'comfort',
     '유리': 'glass',
     '자연': 'nature',
     '불빛': 'lights',
     '캐릭터': 'character',
+    '도트': 'pixel',
 }
 
-# 계열 이름 -> 분류. 새 계열을 더하면 여기에 한 줄 쓴다. 안 쓰면 생성이 멈춘다 —
+# 계열 이름 -> 카테고리. 새 계열을 더하면 여기에 한 줄 쓴다. 안 쓰면 생성이 멈춘다 —
 # 조용히 맨 뒤로 빠지면 README 에서 통째로 사라진 것을 한참 뒤에 안다.
 CATEGORY = {
     '먹빛 민트': '무늬',
@@ -840,8 +844,8 @@ CATEGORY = {
     '프리즘 글래스': '유리',
     '프로스트 글래스': '유리',
     '도형': '무늬',
-    '차분': '무늬',
-    '고요': '무늬',
+    '차분': '편안함',
+    '고요': '편안함',
 
     '벚꽃 그늘': '자연',
     '오로라': '자연',
@@ -862,21 +866,26 @@ CATEGORY = {
 
     '우체국': '캐릭터',
     '책상': '캐릭터',
-    '오락실': '캐릭터',
+    '오락실': '도트',
     '빨래': '캐릭터',
     '영화관': '캐릭터',
     '빵집': '캐릭터',
     '캠핑': '캐릭터',
     '우주': '캐릭터',
     '온실': '캐릭터',
+
+    '도트 모험': '도트',
+    '도트 액정': '도트',
+    '레트로 PC': '도트',
+    '도트 농장': '도트',
 }
 
 
 def categorized():
-    """분류 순서대로 (분류, 설명, [(계열, [테마...]), ...]) 를 돌려준다.
+    """카테고리 순서대로 (카테고리, 설명, [(계열, [테마...]), ...]) 를 돌려준다.
 
-    분류 안의 계열 순서는 THEMES 순서 그대로다. 분류가 생기면서 README 순서는
-    '팔레트 표 순서' 에서 '분류 순 -> 그 안에서 팔레트 순' 으로 바뀌었다.
+    카테고리 안의 계열 순서는 THEMES 순서 그대로다. 카테고리가 생기면서 README 순서는
+    '팔레트 표 순서' 에서 '카테고리 순 -> 그 안에서 팔레트 순' 으로 바뀌었다.
     """
     fams = families()
     names = [n for n, _ in fams]
@@ -884,26 +893,26 @@ def categorized():
 
     bad = sorted({c for c in CATEGORY.values() if c not in known})
     if bad:
-        raise ValueError('CATEGORIES 에 없는 분류를 썼다: %s' % ', '.join(bad))
+        raise ValueError('CATEGORIES 에 없는 카테고리를 썼다: %s' % ', '.join(bad))
     missing = [n for n in names if n not in CATEGORY]
     if missing:
-        raise ValueError('분류가 없는 계열: %s. CATEGORY 에 한 줄 쓴다 — '
+        raise ValueError('카테고리가 없는 계열: %s. CATEGORY 에 한 줄 쓴다 — '
                          '안 쓰면 README 목록에서 통째로 빠진다' % ', '.join(missing))
     stale = [n for n in CATEGORY if n not in names]
     if stale:
         raise ValueError('없는 계열이 CATEGORY 에 남아 있다: %s' % ', '.join(stale))
-    # README 안에서 분류와 계열이 같은 앵커를 쓴다. 이름이 겹치면 링크가
+    # README 안에서 카테고리와 계열이 같은 앵커를 쓴다. 이름이 겹치면 링크가
     # 엉뚱한 자리로 뛴다.
     clash = [n for n in names if n in known]
     if clash:
-        raise ValueError('계열 이름과 분류 이름이 같다: %s. README 앵커가 겹친다'
+        raise ValueError('계열 이름과 카테고리 이름이 같다: %s. README 앵커가 겹친다'
                          % ', '.join(clash))
 
     out = []
     for name, note in CATEGORIES:
         members = [(f, ms) for f, ms in fams if CATEGORY[f] == name]
         if not members:
-            raise ValueError('%s 분류가 비었다. 넣을 계열이 생길 때 만든다 — '
+            raise ValueError('%s 카테고리가 비었다. 넣을 계열이 생길 때 만든다 — '
                              '미리 만들면 README 에 빈 표가 나온다' % name)
         out.append((name, note, members))
     return out
@@ -1781,6 +1790,193 @@ THEMES += [
                 '#C42A52', [('star', '#FFD23F'), ('heart', '#FF3B6B'), ('arrow', '#35E0FF')],
                 '꼬리까지 관 하나로 이어진 네온 말풍선'),
 ]
+
+# --- 도트 모험 --------------------------------------------------------------
+# 옛날 RPG 의 대화창. 오락실이 옆에서 본 픽셀 풍경에 둥근 픽셀 말풍선이라, 여기는 위에서 본 들판과
+# 던전에 모서리를 계단으로 깎은 네모 창으로 갈랐다. 밝음은 양피지색 창, 어두움은 남색 창에 흰 안쪽 테.
+# 프로필은 눈 달린 도트 보물상자. 도트는 한 칸이 정수 픽셀이어야 계단이 또렷해서 확대는 NEAREST 로 한다.
+
+_QUEST_FIELD = _scenes('quest', '#8FCB6A', '#7DBB5A',
+                       dict(mode='field', path='#E3C88E', path_edge='#C9A96A', leaf='#4E9A4A',
+                            leaf_dark='#2F6B34', trunk='#8A5A2E', trees=10, pond='#6EC3E8',
+                            flowers=['#FFF3A8', '#FFB3C7', '#FFFFFF'], dim_to='#FFFFFF'),
+                       (0.35, 0.5, 0.05))
+_QUEST_DUNGEON = _scenes('quest', '#3E4158', '#23243A',
+                         dict(mode='dungeon', wall='#4A4266', torch='#FFB347', chests=2, braziers=3,
+                              dim_to='#000000'),
+                         (0.12, 0.3, 0.0))
+# 목록 배경은 흐리면 도트가 뭉개져 그냥 단색 판이 됐다. 길·나무·상자·화로를 빼고 바닥 질감만 남기면
+# 어디서 잘려도 같은 무늬라 흐리지 않고 깔 수 있다(flat_list=False, 네온사인 벽돌과 같은 방식)
+_QUEST_FIELD['main_bg'] = ('quest', '#8FCB6A', '#7DBB5A',
+                           dict(mode='field', bare=True, flowers=['#FFF3A8', '#FFB3C7', '#FFFFFF'],
+                                dim=0.3, dim_to='#FFFFFF'))
+_QUEST_DUNGEON['main_bg'] = ('quest', '#3E4158', '#23243A',
+                             dict(mode='dungeon', bare=True, dim=0.2, dim_to='#000000'))
+
+THEMES += character(
+    'quest', 149, '도트 모험',
+    dict(char_style='rpg', char='chest', flat_list=False),
+    dict(bg='#F4EEDC', bg_deep='#EDE5CE', surface='#FBF7EA', pressed='#E6DCC0',
+         border='#D8CCAA', text='#2E2418', subtext='#7A6A52',
+         accent='#3F7FD9', accent_dim='#2F66B8', on_accent='#FFFFFF',
+         recv='#FFFDF4', recv_alt='#F1E6C8', send='#CFE3FF', send_alt='#FFDDB0',
+         recv_text='#2E2418', send_text='#1B2A44',
+         char_outline='#2E2418', char_backs=('#E3F0CF', '#FFE4BF', '#D9E6FF')),
+    dict(bg='#12142A', bg_deep='#0D0F20', surface='#1A1D38', pressed='#242848',
+         border='#2E3358', text='#EEF0FF', subtext='#9A9EC8',
+         accent='#FFD24A', accent_dim='#E0B02A', on_accent='#1A1406',
+         recv='#22307A', recv_alt='#2C3C8F', send='#6A2C7A', send_alt='#2C6A5A',
+         recv_text='#F2F4FF', send_text='#FFF2FF',
+         char_outline='#07081A', win_rim='#E8ECFF',
+         char_backs=('#26336A', '#43295C', '#234A44')),
+    _QUEST_FIELD, _QUEST_DUNGEON,
+    ['양피지색 바탕에 도트 대화창. 첫 말엔 ▼ 커서',
+     '위에서 본 도트 들판과 오솔길',
+     '남색 대화창에 흰 안쪽 테. 옛날 RPG 밤 화면',
+     '화로 켜진 던전. 대화창에 불빛이 비침'],
+    # 던전의 화로 불빛이 대화창에 비친다. 빛의 출처가 화면에 있는 이 변형에만 넣는다(캠핑과 같은 규칙)
+    extra={'어두움+배경': dict(glow_style='soft', char_glow_color='#FFB347',
+                               firelight='#FFB347', firelight_k=1.0)})
+
+# --- 도트 액정 · 레트로 PC · 도트 농장 ----------------------------------------
+# 픽셀 카테고리의 나머지 셋. 넷 모두 목록 배경은 바닥 질감만 흐리지 않고 깐다(도트 모험과 같다).
+
+
+def _bare(spec, dim):
+    """목록 배경용으로 같은 장면의 질감만 남긴다."""
+    return (spec[0], spec[1], spec[2], dict(spec[3], bare=True, dim=dim))
+
+
+_LCD_SHADES_L = ['#DCEBB0', '#A8C878', '#5E8A48', '#203820']
+_LCD_SHADES_D = ['#0E1A12', '#1E3A26', '#2F6A34', '#6FC060']
+_LCD_L = _scenes('lcd', '#DCEBB0', '#C8DC98', dict(shades=_LCD_SHADES_L, dim_to='#FFFFFF'),
+                 (0.15, 0.35, 0.0))
+_LCD_D = _scenes('lcd', '#0E1A12', '#15261A', dict(shades=_LCD_SHADES_D, gap=1.35, dim_to='#000000'),
+                 (0.05, 0.25, 0.0))
+_LCD_L['main_bg'] = _bare(_LCD_L['main_bg'], 0.25)
+_LCD_D['main_bg'] = _bare(_LCD_D['main_bg'], 0.15)
+
+THEMES += character(
+    'lcd', 153, '도트 액정',
+    dict(char_style='lcd', char='frog', flat_list=False),
+    dict(bg='#DCEBB0', bg_deep='#D2E3A2', surface='#E8F4C4', pressed='#C4D994',
+         border='#B4CC84', text='#1E3218', subtext='#557048',
+         accent='#3C6A30', accent_dim='#2E5424', on_accent='#E8F4C4',
+         recv='#EAF5C8', recv_alt='#CFE3A0', send='#9CC47A', send_alt='#B8D690',
+         recv_text='#1E3218', send_text='#14240F',
+         char_outline='#203820', sprite_mid='#6FA05A', sprite_light='#B7D88C', sprite_hi='#F0F8D8',
+         char_backs=('#C8DE9A', '#B6D08A', '#D8EAB0')),
+    dict(bg='#0E1A12', bg_deep='#0A140D', surface='#14241A', pressed='#1C3224',
+         border='#244030', text='#C8F0A8', subtext='#6F9A70',
+         accent='#8FE070', accent_dim='#6CC050', on_accent='#0A140D',
+         recv='#1E3A26', recv_alt='#28503A', send='#3E7A3A', send_alt='#2A5E4A',
+         recv_text='#D8F8C0', send_text='#E8FFD8',
+         char_outline='#050A06', sprite_mid='#5FB060', sprite_light='#9BE08A', sprite_hi='#E0FFD0',
+         char_backs=('#1C3A26', '#243F2A', '#16301F')),
+    _LCD_L, _LCD_D,
+    ['연둣빛 액정에 도트 말풍선. 첫 말엔 하트',
+     '네 가지 초록만 쓰는 액정 속 언덕',
+     '백라이트 켠 어두운 액정에 초록 도트',
+     '불 켜진 액정 화면 속 도트 언덕'])
+
+_PC_L = _scenes('desktop', '#3A8C8C', '#327A7A',
+                dict(title='#2A4FA8', screen='#7FD6E6', dim_to='#FFFFFF'), (0.1, 0.35, 0.0))
+_PC_D = _scenes('desktop', '#1C2446', '#18203E',
+                dict(panel='#3A4256', panel_hi='#5A6480', panel_lo='#20263A', ink='#05070B',
+                     title='#5A86E8', screen='#4FA8C8', dim_to='#000000'), (0.05, 0.25, 0.0))
+_PC_L['main_bg'] = _bare(_PC_L['main_bg'], 0.45)
+_PC_D['main_bg'] = _bare(_PC_D['main_bg'], 0.2)
+
+THEMES += character(
+    'retro', 157, '레트로 PC',
+    dict(char_style='window', char='floppy', flat_list=False),
+    dict(bg='#DCDFE3', bg_deep='#D2D6DB', surface='#EEF0F2', pressed='#C8CDD4',
+         border='#B8BEC6', text='#1A1D22', subtext='#5C636E',
+         accent='#2A4FA8', accent_dim='#203E86', on_accent='#FFFFFF',
+         recv='#F4F4F4', recv_alt='#E2E4E8', send='#CFE0FF', send_alt='#FFF0B8',
+         recv_text='#1A1D22', send_text='#10224A',
+         char_outline='#14161A', char_backs=('#D8E6FF', '#E6E8EC', '#FFF0C8')),
+    dict(bg='#10141E', bg_deep='#0B0E16', surface='#171C28', pressed='#212838',
+         border='#2A3244', text='#E6EAF2', subtext='#8A93A6',
+         accent='#5A86E8', accent_dim='#4468C0', on_accent='#0B0E16',
+         recv='#232A3A', recv_alt='#2E3648', send='#2F4E8C', send_alt='#5A4A1E',
+         recv_text='#E6EAF2', send_text='#F0F4FF',
+         char_outline='#05070B', char_backs=('#223050', '#2A3040', '#3A3420')),
+    _PC_L, _PC_D,
+    ['회색 창 말풍선. 첫 말엔 제목 표시줄과 닫기 단추',
+     '청록 바탕화면에 도트 아이콘과 작업 표시줄',
+     '어두운 창 말풍선. 밤에 켠 옛 컴퓨터',
+     '남색 바탕화면에 도트 아이콘'])
+
+_FARM_L = _scenes('farm', '#8CC56A', '#7AB45A',
+                  dict(soil='#A8744A', soil_dark='#855836', sprout='#3E8A30', fence='#D8B07A',
+                       plots=4, dim_to='#FFFFFF'), (0.3, 0.45, 0.05))
+_FARM_D = _scenes('farm', '#22341D', '#1C2C18',
+                  dict(soil='#3E2E1E', soil_dark='#2C2016', sprout='#3E6A30', fence='#6A5638',
+                       plots=4, fireflies=36, firefly='#FFE36A', dim_to='#000000'), (0.05, 0.25, 0.0))
+_FARM_L['main_bg'] = _bare(_FARM_L['main_bg'], 0.35)
+_FARM_D['main_bg'] = _bare(_FARM_D['main_bg'], 0.15)
+
+THEMES += character(
+    'farm', 161, '도트 농장',
+    dict(char_style='board', char='turnip', flat_list=False),
+    dict(bg='#F2F0DC', bg_deep='#EAE6CC', surface='#FAF8EA', pressed='#E2DCBE',
+         border='#D4CCA8', text='#2E2A18', subtext='#7A7050',
+         accent='#5A9A3A', accent_dim='#467E2C', on_accent='#FFFFFF',
+         recv='#F6E7C8', recv_alt='#EAD4A8', send='#D4EAB0', send_alt='#FFD9A8',
+         recv_text='#3A2A14', send_text='#22330F',
+         char_outline='#3A2A14', char_backs=('#DDEFC4', '#F6E2C2', '#E8E0F2')),
+    dict(bg='#141A10', bg_deep='#0F140C', surface='#1C2416', pressed='#26301E',
+         border='#303C26', text='#EEF2DC', subtext='#99A184',
+         accent='#F2D35A', accent_dim='#D4B43C', on_accent='#141A10',
+         recv='#3A2E1E', recv_alt='#4A3A26', send='#2E4A26', send_alt='#4A3A5A',
+         recv_text='#F4EAD4', send_text='#E8F6DC',
+         char_outline='#080A06', char_backs=('#24361E', '#3A2E22', '#2E2A3A')),
+    _FARM_L, _FARM_D,
+    ['나무 팻말 말풍선. 첫 말엔 새싹이 돋음',
+     '위에서 본 밭고랑과 울타리',
+     '밤 농장. 어두운 팻말 말풍선',
+     '반딧불 날리는 밤 밭'])
+
+# --- 카테고리 규칙 ------------------------------------------------------------
+# 카테고리의 모든 계열에 같이 붙는 값. 계열 정의에 따로 적은 값이 이긴다(setdefault).
+# 도트는 8비트로 읽혀야 한다 — 한 칸 2pt 말풍선은 폰 크기에서 매끈한 네모로 보였다.
+# 규칙과 까닭은 CLAUDE.md 의 "도트 카테고리" 에 있다.
+DOT_STYLES = {'rpg', 'lcd', 'window', 'board'}      # 칸 크기(pixel_unit)를 따라 그리는 말풍선
+CATEGORY_RULES = {
+    '도트': dict(pixel_unit=4, pixel_shadow=True, tab_style='pixel', flat_list=False,
+                 pixel_block=0.03),
+}
+# 규칙보다 먼저 나간 계열. 규칙을 붙이면 이미 깐 사람의 화면이 바뀐다
+CATEGORY_RULE_EXEMPT = {'오락실'}
+
+
+def apply_category_rules():
+    for t in THEMES:
+        fam = _fam_of(t)[0]
+        cat = CATEGORY.get(fam)
+        rule = CATEGORY_RULES.get(cat)
+        if not rule or fam in CATEGORY_RULE_EXEMPT:
+            continue
+        if cat == '도트' and t.get('char_style') not in DOT_STYLES:
+            raise ValueError('%s: 도트 카테고리 말풍선은 칸 크기를 따르는 스타일(%s)이어야 한다'
+                             % (t['key'], ', '.join(sorted(DOT_STYLES))))
+        for k, v in rule.items():
+            if k != 'pixel_block':
+                t.setdefault(k, v)
+                continue
+            # 배경 한 칸이 화면 폭의 3% 아래면 칸이 작고 그림이 촘촘해 고해상도 그림으로 보인다
+            for bg in ('chat_bg', 'main_bg', 'passcode_bg'):
+                s = t.get(bg)
+                if not s or len(s) < 4:
+                    continue
+                if s[3].get('block', v) < v:
+                    raise ValueError('%s: 도트 배경 한 칸이 폭의 %.3f 다. %.2f 이상이어야 한다'
+                                     % (t['key'], s[3]['block'], v))
+                t[bg] = (s[0], s[1], s[2], dict(s[3], block=s[3].get('block', v)))
+
+
+apply_category_rules()
 
 # 목록 배경 그림이 있으면 셀을 반투명하게 둔다. 불투명한 셀이 화면을 덮으면 배경을 넣은 뜻이 없고
 # 목록이 배경 없는 형제와 같아 보인다. 0.72 는 글자가 흔들리지 않고 배경이 은은하게 비치는 정도다.

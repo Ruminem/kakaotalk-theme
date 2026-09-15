@@ -1532,9 +1532,26 @@ def tab_icon_for(t, kind, px, selected):
     빛나는 변형이라 탭도 불이 켜져야 목록에서 글로우 없는 형제와 갈린다.
     """
     col = t['accent'] if selected else t['subtext']
+    if t.get('tab_style') == 'pixel':
+        return pixel_tab_icon(kind, px, col)
     if t.get('tab_style') == 'neon' or t.get('glow'):
         return neon_tab_icon(kind, px, col, selected)
     return tab_icon(kind, px, col)
+
+
+def pixel_tab_icon(kind, px, color, grid=12):
+    """도트 탭 아이콘. 같은 도형을 12 칸에 계단째 그려 정수 배로 키운다.
+
+    부드럽게 줄인 도형은 가장자리가 반투명으로 번져 도트로 안 읽힌다. 알파를 반 넘으면 켜고 아니면
+    끄는 두 값으로 자르고, 키울 때는 NEAREST 로 칸 경계를 살린다.
+    """
+    small = tab_icon(kind, grid, color, ss=1)
+    solid = Image.new('RGBA', (grid, grid), rgb(color) + (255,))
+    solid.putalpha(small.getchannel('A').point(lambda v: 255 if v > 100 else 0))
+    n = max(1, px // grid)
+    out = Image.new('RGBA', (px, px), (0, 0, 0, 0))
+    out.paste(solid.resize((grid * n, grid * n), Image.NEAREST), ((px - grid * n) // 2, (px - grid * n) // 2))
+    return out
 
 
 def neon_tab_icon(kind, px, color, lit):

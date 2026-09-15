@@ -9,15 +9,15 @@
 ## 테마
 
 받는 링크는 항상 **최신 릴리스**를 가리킴. 지난 버전은 [릴리스 목록](https://github.com/Ruminem/kakaotalk-theme/releases)에 있음.
-계열은 다섯 분류로 묶었음 — **무늬**는 색과 도형만, **유리**는 반투명 말풍선, **자연**은 장면, **불빛**은 어둠 속 인공 불빛, **캐릭터**는 모양 있는 말풍선과 캐릭터 프로필임.
-받기 링크와 화면 그림은 **분류 문서**에 있음. 아래 썸네일을 누르면 그 계열로 바로 감.
+계열은 일곱 카테고리로 묶었음 — **무늬**는 색과 도형만, **편안함**은 채도를 낮춰 눈이 편한 쪽, **유리**는 반투명 말풍선, **자연**은 장면, **불빛**은 어둠 속 인공 불빛, **캐릭터**는 모양 있는 말풍선과 캐릭터 프로필, **도트**는 8비트 도트로 그린 말풍선과 화면임.
+받기 링크와 화면 그림은 **카테고리 문서**에 있음. 아래 썸네일을 누르면 그 계열로 바로 감.
 실행화면 그림은 **안드로이드에만 있음** — iOS 테마 규격에는 스플래시 블록이 아예 없음.
 
 <!-- THEMES:START -->
 
 <a name="theme-list"></a>
 
-<sub>썸네일을 누르면 분류 문서의 그 계열로 감</sub>
+<sub>썸네일을 누르면 카테고리 문서의 그 계열로 감</sub>
 
 **[무늬](docs/themes/pattern.md)** — 바탕에 색과 도형만. 담백한 쪽
 
@@ -34,22 +34,27 @@
 </tr>
 <tr>
 <td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-캔디-팝"><img src="assets/preview-candy-image-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-고요"><img src="assets/preview-calm-olive-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-차분"><img src="assets/preview-calm-sage-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-도형"><img src="assets/preview-geo-image-chat.webp" width="190"></a></td>
+<td width="33%"></td>
 </tr>
 <tr>
 <td align="center"><img src="assets/icon-candy-image.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-캔디-팝">캔디 팝</a></b><br><sub>기본 · 사탕 배경 · 글로우 · 글로우+배경</sub><br>밝은 쪽 알록달록. 말풍선 네 칸이 전부 다르고 배경도 있음</td>
-<td align="center"><img src="assets/icon-calm-olive.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-고요">고요</a></b><br><sub>올리브 · 안개 · 자두 · 먹</sub><br>누런 풀빛 회색. 밝고 흙내 나는 쪽</td>
-<td align="center"><img src="assets/icon-calm-sage.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-차분">차분</a></b><br><sub>세이지 · 샌드 · 슬레이트 · 모카</sub><br>탁한 연둣빛 회색. 가장 순한 쪽</td>
-</tr>
-<tr>
-<td width="33%" align="center"><a href="docs/themes/pattern.md#user-content-도형"><img src="assets/preview-geo-image-chat.webp" width="190"></a></td>
-<td width="33%"></td>
-<td width="33%"></td>
-</tr>
-<tr>
 <td align="center"><img src="assets/icon-geo-image.png" width="20" valign="middle"> <b><a href="docs/themes/pattern.md#user-content-도형">도형</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>도형을 걷어낸 미색 바탕</td>
 <td width="33%"></td>
+</tr>
+</table>
+
+**[편안함](docs/themes/comfort.md)** — 채도를 낮춰 눈이 편한 쪽
+
+<table>
+<tr>
+<td width="33%" align="center"><a href="docs/themes/comfort.md#user-content-고요"><img src="assets/preview-calm-olive-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/comfort.md#user-content-차분"><img src="assets/preview-calm-sage-chat.webp" width="190"></a></td>
+<td width="33%"></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/icon-calm-olive.png" width="20" valign="middle"> <b><a href="docs/themes/comfort.md#user-content-고요">고요</a></b><br><sub>올리브 · 안개 · 자두 · 먹</sub><br>누런 풀빛 회색. 밝고 흙내 나는 쪽</td>
+<td align="center"><img src="assets/icon-calm-sage.png" width="20" valign="middle"> <b><a href="docs/themes/comfort.md#user-content-차분">차분</a></b><br><sub>세이지 · 샌드 · 슬레이트 · 모카</sub><br>탁한 연둣빛 회색. 가장 순한 쪽</td>
 <td width="33%"></td>
 </tr>
 </table>
@@ -145,32 +150,57 @@
 <tr>
 <td width="33%" align="center"><a href="docs/themes/character.md#user-content-우체국"><img src="assets/preview-post-light-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/character.md#user-content-책상"><img src="assets/preview-desk-light-image-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/character.md#user-content-오락실"><img src="assets/preview-arcade-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/character.md#user-content-빨래"><img src="assets/preview-laundry-light-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><img src="assets/icon-post-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-우체국">우체국</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림빛 편지지 바탕. 첫 말풍선엔 우표 붙은 봉투</td>
 <td align="center"><img src="assets/icon-desk-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-책상">책상</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연둣빛 바탕에 포스트잇 말풍선. 첫 장엔 테이프</td>
-<td align="center"><img src="assets/icon-arcade-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-오락실">오락실</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연보라 바탕에 빛나는 픽셀 말풍선과 계단 꼬리</td>
+<td align="center"><img src="assets/icon-laundry-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-빨래">빨래</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>하늘색 바탕에 반짝이는 젤리 말풍선. 첫 말엔 물방울</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="docs/themes/character.md#user-content-빨래"><img src="assets/preview-laundry-light-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/character.md#user-content-영화관"><img src="assets/preview-cinema-light-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/character.md#user-content-빵집"><img src="assets/preview-bakery-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/character.md#user-content-캠핑"><img src="assets/preview-camp-light-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-laundry-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-빨래">빨래</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>하늘색 바탕에 반짝이는 젤리 말풍선. 첫 말엔 물방울</td>
 <td align="center"><img src="assets/icon-cinema-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-영화관">영화관</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>크림빛 바탕에 영화표 말풍선. 첫 장엔 별 도장</td>
 <td align="center"><img src="assets/icon-bakery-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-빵집">빵집</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>버터빛 바탕에 식빵 말풍선. 첫 장엔 흘러내리는 잼</td>
+<td align="center"><img src="assets/icon-camp-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-캠핑">캠핑</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>풀빛 바탕에 나무 팻말 말풍선. 첫 장엔 말뚝</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="docs/themes/character.md#user-content-캠핑"><img src="assets/preview-camp-light-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/character.md#user-content-우주"><img src="assets/preview-space-light-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/character.md#user-content-온실"><img src="assets/preview-greenhouse-light-image-chat.webp" width="190"></a></td>
+<td width="33%"></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/icon-camp-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-캠핑">캠핑</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>풀빛 바탕에 나무 팻말 말풍선. 첫 장엔 말뚝</td>
 <td align="center"><img src="assets/icon-space-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-우주">우주</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연보라 바탕에 우주선 판 말풍선. 첫 장엔 안테나</td>
 <td align="center"><img src="assets/icon-greenhouse-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/character.md#user-content-온실">온실</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연둣빛 바탕에 잎 말풍선. 첫 장엔 잎자루와 이슬</td>
+<td width="33%"></td>
+</tr>
+</table>
+
+**[도트](docs/themes/pixel.md)** — 8비트 도트로 그린 말풍선과 화면
+
+<table>
+<tr>
+<td width="33%" align="center"><a href="docs/themes/pixel.md#user-content-오락실"><img src="assets/preview-arcade-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/pixel.md#user-content-도트-모험"><img src="assets/preview-quest-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/pixel.md#user-content-도트-액정"><img src="assets/preview-lcd-light-image-chat.webp" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/icon-arcade-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/pixel.md#user-content-오락실">오락실</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연보라 바탕에 빛나는 픽셀 말풍선과 계단 꼬리</td>
+<td align="center"><img src="assets/icon-quest-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/pixel.md#user-content-도트-모험">도트 모험</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>양피지색 바탕에 도트 대화창. 첫 말엔 ▼ 커서</td>
+<td align="center"><img src="assets/icon-lcd-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/pixel.md#user-content-도트-액정">도트 액정</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>연둣빛 액정에 도트 말풍선. 첫 말엔 하트</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="docs/themes/pixel.md#user-content-레트로-pc"><img src="assets/preview-retro-light-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/pixel.md#user-content-도트-농장"><img src="assets/preview-farm-light-image-chat.webp" width="190"></a></td>
+<td width="33%"></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/icon-retro-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/pixel.md#user-content-레트로-pc">레트로 PC</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>회색 창 말풍선. 첫 말엔 제목 표시줄과 닫기 단추</td>
+<td align="center"><img src="assets/icon-farm-light-image.png" width="20" valign="middle"> <b><a href="docs/themes/pixel.md#user-content-도트-농장">도트 농장</a></b><br><sub>밝음 · 밝음+배경 · 어두움 · 어두움+배경</sub><br>나무 팻말 말풍선. 첫 말엔 새싹이 돋음</td>
+<td width="33%"></td>
 </tr>
 </table>
 

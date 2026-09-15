@@ -638,7 +638,7 @@ BASE = 'https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/'
 # 크롬의 공유 API 는 확장자 허용목록이라 .apk 를 받지도 않는다.
 IOS = 'https://ruminem.github.io/kakaotalk-theme/docs/share.html?f='
 
-# 계열 상세에서 맨 위 분류 격자로 돌아가는 자리. 계열이 예순을 넘으면서 상세를 하나 보고 나면
+# 계열 상세에서 맨 위 카테고리 격자로 돌아가는 자리. 계열이 예순을 넘으면서 상세를 하나 보고 나면
 # 다른 계열을 고르러 한참 거슬러 올라가야 했다.
 TOP = 'theme-list'
 
@@ -652,7 +652,7 @@ W_VARIANT = 200      # 계열 안 변형 그림 폭
 W_DETAIL = 180       # 접어둔 화면 그림 폭
 NOTE_MAX = 45        # 한 줄 소개. 길면 표 칸이 세로로 늘어나 폰에서 들쭉날쭉해진다
 VARIANT_MAX = 8      # 변형 이름. 길면 칸 안에서 줄바꿈된다
-CAT_NOTE_MAX = 20    # 분류 설명. 분류 이름과 한 줄에 들어가야 한다
+CAT_NOTE_MAX = 20    # 카테고리 설명. 카테고리 이름과 한 줄에 들어가야 한다
 
 
 def _check(fams):
@@ -672,25 +672,25 @@ def _check(fams):
 
 
 def _check_cats(cats):
-    """분류 줄이 한 줄에 들어가는지."""
+    """카테고리 줄이 한 줄에 들어가는지."""
     import re
     import themes as T
     for name, note, _ in cats:
         f = T.CATEGORY_FILE.get(name)
         if not f or not re.fullmatch(r'[a-z0-9-]+', f):
-            raise ValueError('%s 분류의 문서 파일 이름이 없거나 영문이 아니다. '
+            raise ValueError('%s 카테고리의 문서 파일 이름이 없거나 영문이 아니다. '
                              'themes.CATEGORY_FILE 에 한 줄 쓴다' % name)
         if len(note) > CAT_NOTE_MAX:
-            raise ValueError('%s 분류 설명이 %d자다. %d자 넘으면 폰에서 두 줄이 된다'
+            raise ValueError('%s 카테고리 설명이 %d자다. %d자 넘으면 폰에서 두 줄이 된다'
                              % (name, len(note), CAT_NOTE_MAX))
 
 
 def _pad(cells):
     """짧은 줄을 빈 칸으로 채워 늘 세 칸으로 만든다.
 
-    `width="33%"` 는 그 표 안에서만 33% 다. 계열이 둘뿐인 분류는 표가 두 칸짜리가
-    되어 칸이 반반으로 벌어지고, 그림이 분류마다 다른 자리에 놓인다.
-    지금은 분류가 6/3/6 이라 안 드러나지만 계열 하나만 더해도 드러난다.
+    `width="33%"` 는 그 표 안에서만 33% 다. 계열이 둘뿐인 카테고리는 표가 두 칸짜리가
+    되어 칸이 반반으로 벌어지고, 그림이 카테고리마다 다른 자리에 놓인다.
+    지금은 카테고리가 6/3/6 이라 안 드러나지만 계열 하나만 더해도 드러난다.
     """
     cells = list(cells)
     return cells + ['<td width="33%"></td>'] * (PER_ROW - len(cells))
@@ -712,11 +712,11 @@ def anchor(name):
     return '#user-content-' + slug(name)
 
 
-DOCS_DIR = 'docs/themes'   # 분류 문서 자리. 저장소 뿌리 기준
+DOCS_DIR = 'docs/themes'   # 카테고리 문서 자리. 저장소 뿌리 기준
 
 
 def doc_path(cat):
-    """분류 문서의 저장소 안 경로."""
+    """카테고리 문서의 저장소 안 경로."""
     import themes as T
     return '%s/%s.md' % (DOCS_DIR, T.CATEGORY_FILE[cat])
 
@@ -759,12 +759,12 @@ def _grid(T, members, link, img):
 
 
 def readme_block(ts):
-    """README 의 테마 절. 분류마다 계열 격자 하나만 둔다.
+    """README 의 테마 절. 카테고리마다 계열 격자 하나만 둔다.
 
-    README 는 고르는 자리, 분류 문서(docs/themes/*.md)는 보는 자리다. 계열이 서른다섯이
+    README 는 고르는 자리, 카테고리 문서(docs/themes/*.md)는 보는 자리다. 계열이 서른다섯이
     되면서 상세까지 한 장에 두니 README 가 1600줄을 넘어 폰에서 스크롤을 감당 못 했다.
     GitHub 은 README 뿐 아니라 저장소 안의 어느 .md 든 렌더링하므로 나눌 수 있다.
-    썸네일을 누르면 그 분류 문서의 계열 자리로 바로 뛴다.
+    썸네일을 누르면 그 카테고리 문서의 계열 자리로 바로 뛴다.
     """
     import themes as T
     cats = T.categorized()
@@ -772,7 +772,7 @@ def readme_block(ts):
     _check(fams)
     _check_cats(cats)
     out = [START, '', '<a name="%s"></a>' % TOP, '',
-           '<sub>썸네일을 누르면 분류 문서의 그 계열로 감</sub>', '']
+           '<sub>썸네일을 누르면 카테고리 문서의 그 계열로 감</sub>', '']
     for name, note, members in cats:
         page = doc_path(name)
         out.append('**[%s](%s)** — %s' % (name, page, note))
@@ -782,7 +782,7 @@ def readme_block(ts):
     return '\n'.join(out)
 
 
-# 분류 문서의 이동 단추. 깃허브는 마크다운에 넣은 CSS 를 전부 지워서 글자 링크를 단추처럼
+# 카테고리 문서의 이동 단추. 깃허브는 마크다운에 넣은 CSS 를 전부 지워서 글자 링크를 단추처럼
 # 꾸밀 수 없다. 그림으로 그린다. 밝은/어두운 두 벌을 <picture> 로 바꿔 끼우는 길도 있었지만
 # 그 전환은 GitHub 테마가 아니라 OS 설정을 따라서, OS 가 다크 모드인데 GitHub 만 밝은 테마면
 # 어두운 단추가 나왔다. 어느 바탕에서도 또렷한 파란 알약 한 벌만 쓴다.
@@ -829,11 +829,11 @@ def write_nav_buttons():
 
 
 def category_doc(T, cat, note, members):
-    """분류 문서 한 장. 맨 위에 그 분류의 격자, 아래에 계열 상세.
+    """카테고리 문서 한 장. 맨 위에 그 카테고리의 격자, 아래에 계열 상세.
 
     계열 하나를 보고 다른 계열로 넘어가는 길이 짧아야 한다. 계열마다 이 문서 맨 위 격자로
-    돌아가는 링크를 두고, 문서 처음과 끝에는 README 의 분류 격자로 가는 링크를 둔다.
-    분류가 # 이고 계열이 ## 다 — 깃허브 문서 목차가 그 층으로 접어준다.
+    돌아가는 링크를 두고, 문서 처음과 끝에는 README 의 카테고리 격자로 가는 링크를 둔다.
+    카테고리가 # 이고 계열이 ## 다 — 깃허브 문서 목차가 그 층으로 접어준다.
     """
     back = nav_link('all', '../../README.md' + anchor(TOP), '../../assets/')
     out = ['<!-- tools/preview.py 가 만든다. 손으로 고치지 말고 tools/themes.py 를 고친다 -->',
@@ -889,7 +889,7 @@ def _family_block(T, name, members, img):
 
 
 def write_theme_docs(ts):
-    """분류 문서를 전부 새로 쓴다. 없어진 분류의 문서는 지운다 — 남겨 두면 옛 계열이 검색에 걸린다."""
+    """카테고리 문서를 전부 새로 쓴다. 없어진 카테고리의 문서는 지운다 — 남겨 두면 옛 계열이 검색에 걸린다."""
     import themes as T
     write_nav_buttons()
     d = os.path.join(ROOT_DIR, *DOCS_DIR.split('/'))
@@ -941,7 +941,7 @@ def generate(ts):
         body.append('<p class="cat"><b>%s</b>%s</p>' % (cat, note))
         for _, ms in members:
             body.extend(cards.pop(m['key']) for m in ms if m['key'] in cards)
-    body.extend(cards.values())      # 분류 밖의 테마가 있으면 뒤에 붙인다
+    body.extend(cards.values())      # 카테고리 밖의 테마가 있으면 뒤에 붙인다
 
     with open(os.path.join(gen.DOCS, 'index.html'), 'w', encoding='utf-8', newline='\n') as f:
         f.write(PAGE % '\n'.join(body))
