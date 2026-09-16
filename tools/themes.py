@@ -880,6 +880,7 @@ CATEGORY = {
     '네온사인': '불빛',
     '네온사인 v2': '불빛',
     '네온사인 v3': '불빛',
+    '네온사인 v4': '불빛',
 
     '우체국': '캐릭터',
     '책상': '캐릭터',
@@ -1094,6 +1095,10 @@ VARIANT_SLUG = {
     '간판': 'sign',
     '전극': 'electrode',
     '말꼬리': 'speech',
+    '팔각': 'octagon',
+    '꺾쇠': 'bracket',
+    '밑줄': 'underline',
+    '두 가닥': 'split',
 }
 
 
@@ -1775,7 +1780,7 @@ _NEON_BASE = dict(bg='#100C14', bg_deep='#0A070D', surface='#1A1520', pressed='#
 
 def _neon_theme(no, variant, style, material, recv, send, recv_text, send_text, accent_dim,
                 signs, note, slug='neon', family='네온사인', face=('#3A1F1B', '#140C0B'),
-                surface='brick'):
+                surface='brick', lit=False):
     """네온사인 한 벌. 받은 쪽과 보낸 쪽이 서로 다른 네온 색이고, 벽의 낙서도 그 색을 쓴다.
 
     v2·v3 는 같은 말풍선 네 가지에 색 조합과 벽(surface)만 바꾼다. face 는 벽 면색과 틈 색이다.
@@ -1792,6 +1797,7 @@ def _neon_theme(no, variant, style, material, recv, send, recv_text, send_text, 
                 # 목록 배경은 셀·칩·광고 카드에 잘리므로 낙서를 빼고 벽돌 질감만 둔다. 줄눈만 반복되는
                 # 무늬라 어디서 잘려도 같아서 흐리지 않고(flat_list=False), 셀을 반투명하게 해 벽이 비치게 한다
                 flat_list=False, cell_alpha=0.5,
+                **(dict(glow_lit=True) if lit else {}),
                 chat_bg=wall(5, 0.45), passcode_bg=wall(6, 0.12),
                 main_bg=('neonwall', face[0], face[1],
                          dict(signs=[], count=0, dim=0.22, dim_to='#000000', wall=surface)))
@@ -1841,6 +1847,24 @@ THEMES += [
     _neon_theme(232, '말꼬리', 'neon_speech', 'tube', '#4D7CFF', '#FFD23F', '#DFE7FF', '#FFF6D6',
                 '#C4A02A', [('moon', '#FFD23F'), ('star', '#4D7CFF'), ('heart', '#FF5CE1')],
                 '타일 벽에 꼬리까지 이어진 네온. 파랑과 노랑', **_TILE),
+]
+
+# v4 는 말풍선부터 새로 그렸다(charbubble 의 팔각·꺾쇠·밑줄·두 가닥). 벽은 바 안쪽 나무 판자
+_PLANK = dict(slug='neonbar', family='네온사인 v4', face=('#3A2A20', '#0C0806'), surface='plank', lit=True)
+
+THEMES += [
+    _neon_theme(233, '팔각', 'neon_octagon', 'tube', '#35E0FF', '#FF5CE1', '#D9F8FF', '#FFE0F8',
+                '#C43DA8', [('bolt', '#FF5CE1'), ('star', '#35E0FF'), ('heart', '#FFD23F')],
+                '모서리를 깎은 팔각 네온관. 첫 말엔 번개', **_PLANK),
+    _neon_theme(234, '꺾쇠', 'neon_bracket', 'tube', '#FFD23F', '#4CFF88', '#FFF6D6', '#DDFFE8',
+                '#2FB860', [('arrow', '#4CFF88'), ('moon', '#FFD23F'), ('star', '#FF3FA4')],
+                '네 모서리에만 불이 들어온 꺾쇠 네온', **_PLANK),
+    _neon_theme(235, '밑줄', 'neon_underline', 'tube', '#B45CFF', '#FF7A2F', '#EFE0FF', '#FFE6D6',
+                '#C85A1E', [('heart', '#FF7A2F'), ('moon', '#B45CFF'), ('bolt', '#35E0FF')],
+                '아래변만 빛나고 양끝이 말려 올라간 네온', **_PLANK),
+    _neon_theme(236, '두 가닥', 'neon_split', 'tube', '#FF3B6B', '#35E0FF', '#FFE0E8', '#D9F8FF',
+                '#2399B0', [('star', '#35E0FF'), ('heart', '#FF3B6B'), ('moon', '#FFD23F')],
+                '두 색 관이 모서리 틈에서 갈리는 네온', **_PLANK),
 ]
 
 # --- 도트 모험 --------------------------------------------------------------

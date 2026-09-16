@@ -42,12 +42,12 @@
 <tr>
 <td width="33%" align="center"><a href="#user-content-네온사인-v2"><img src="../../assets/preview-neonalley-double-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-네온사인-v3"><img src="../../assets/preview-neontile-double-chat.webp" width="190"></a></td>
-<td width="33%"></td>
+<td width="33%" align="center"><a href="#user-content-네온사인-v4"><img src="../../assets/preview-neonbar-octagon-chat.webp" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><b><a href="#user-content-네온사인-v2"><img src="../../assets/icon-neonalley-double.png" width="20" valign="middle"> 네온사인 v2</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>셔터 내린 골목에 관 두 줄 네온. 민트와 마젠타</td>
 <td align="center"><b><a href="#user-content-네온사인-v3"><img src="../../assets/icon-neontile-double.png" width="20" valign="middle"> 네온사인 v3</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>지하 바 타일 벽에 관 두 줄 네온. 노랑과 빨강</td>
-<td width="33%"></td>
+<td align="center"><b><a href="#user-content-네온사인-v4"><img src="../../assets/icon-neonbar-octagon.png" width="20" valign="middle"> 네온사인 v4</a></b><br><sub>팔각 · 꺾쇠 · 밑줄 · 두 가닥</sub><br>모서리를 깎은 팔각 네온관. 첫 말엔 번개</td>
 </tr>
 </table>
 
@@ -433,6 +433,41 @@
 **말꼬리** — 타일 벽에 꼬리까지 이어진 네온. 파랑과 노랑
 
 <img src="../../assets/preview-neontile-speech-list.webp" width="180"> <img src="../../assets/preview-neontile-speech-passcode.webp" width="180"> <img src="../../assets/preview-neontile-speech-splash.webp" width="180">
+
+</details>
+
+<a name="네온사인-v4"></a>
+
+## <a href="#user-content-네온사인-v4"><img src="../../assets/icon-neonbar-octagon.png" width="26" valign="middle"></a> 네온사인 v4 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-neonbar-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>모서리를 깎은 팔각 네온관. 첫 말엔 번개</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbar-octagon.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonbar-octagon.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonbar-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>네 모서리에만 불이 들어온 꺾쇠 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbar-bracket.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonbar-bracket.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-neonbar-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>아래변만 빛나고 양끝이 말려 올라간 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbar-underline.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonbar-underline.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonbar-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>두 색 관이 모서리 틈에서 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbar-split.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonbar-split.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**팔각** — 모서리를 깎은 팔각 네온관. 첫 말엔 번개
+
+<img src="../../assets/preview-neonbar-octagon-list.webp" width="180"> <img src="../../assets/preview-neonbar-octagon-passcode.webp" width="180"> <img src="../../assets/preview-neonbar-octagon-splash.webp" width="180">
+
+**꺾쇠** — 네 모서리에만 불이 들어온 꺾쇠 네온
+
+<img src="../../assets/preview-neonbar-bracket-list.webp" width="180"> <img src="../../assets/preview-neonbar-bracket-passcode.webp" width="180"> <img src="../../assets/preview-neonbar-bracket-splash.webp" width="180">
+
+**밑줄** — 아래변만 빛나고 양끝이 말려 올라간 네온
+
+<img src="../../assets/preview-neonbar-underline-list.webp" width="180"> <img src="../../assets/preview-neonbar-underline-passcode.webp" width="180"> <img src="../../assets/preview-neonbar-underline-splash.webp" width="180">
+
+**두 가닥** — 두 색 관이 모서리 틈에서 갈리는 네온
+
+<img src="../../assets/preview-neonbar-split-list.webp" width="180"> <img src="../../assets/preview-neonbar-split-passcode.webp" width="180"> <img src="../../assets/preview-neonbar-split-splash.webp" width="180">
 
 </details>
 

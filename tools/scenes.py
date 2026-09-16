@@ -2133,6 +2133,19 @@ def neonwall(spec, w, h):
             d.rectangle([0, y, w, y + sh_ * 0.3], fill=shade(k * 1.3))
             d.rectangle([0, y + sh_ * 0.78, w, y + sh_], fill=shade(k * 0.55))
             y += sh_
+    elif wall == 'plank':
+        # 바 안쪽의 세로 나무 판자(네온사인 v4). 판마다 색이 조금 다르고 세로 결이 몇 줄 지난다.
+        # 결도 화면 끝까지 곧게 내려서 어디서 잘려도 같다
+        pw = 46 * unit
+        x = 0.0
+        while x < w:
+            k = rnd.uniform(0.85, 1.1)
+            d.rectangle([x + 1.5 * unit, 0, x + pw - 1.5 * unit, h], fill=shade(k))
+            for _ in range(rnd.randint(2, 4)):
+                gx = x + rnd.uniform(0.15, 0.85) * pw
+                d.line([(gx, 0), (gx, h)], fill=shade(k * rnd.uniform(0.75, 0.88)),
+                       width=max(1, int(rnd.uniform(0.8, 2.2) * unit)))
+            x += pw
     elif wall == 'tile':
         # 지하 바의 정사각 타일(네온사인 v3). 칸마다 윤기가 달라야 한 판으로 안 보인다
         ts, gap = 38 * unit, 3 * unit

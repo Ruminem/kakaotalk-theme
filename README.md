@@ -195,12 +195,12 @@
 <tr>
 <td width="33%" align="center"><a href="docs/themes/lights.md#user-content-네온사인-v2"><img src="assets/preview-neonalley-double-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/lights.md#user-content-네온사인-v3"><img src="assets/preview-neontile-double-chat.webp" width="190"></a></td>
-<td width="33%"></td>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-네온사인-v4"><img src="assets/preview-neonbar-octagon-chat.webp" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><b><a href="docs/themes/lights.md#user-content-네온사인-v2"><img src="assets/icon-neonalley-double.png" width="20" valign="middle"> 네온사인 v2</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>셔터 내린 골목에 관 두 줄 네온. 민트와 마젠타</td>
 <td align="center"><b><a href="docs/themes/lights.md#user-content-네온사인-v3"><img src="assets/icon-neontile-double.png" width="20" valign="middle"> 네온사인 v3</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>지하 바 타일 벽에 관 두 줄 네온. 노랑과 빨강</td>
-<td width="33%"></td>
+<td align="center"><b><a href="docs/themes/lights.md#user-content-네온사인-v4"><img src="assets/icon-neonbar-octagon.png" width="20" valign="middle"> 네온사인 v4</a></b><br><sub>팔각 · 꺾쇠 · 밑줄 · 두 가닥</sub><br>모서리를 깎은 팔각 네온관. 첫 말엔 번개</td>
 </tr>
 </table>
 

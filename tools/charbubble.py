@@ -1126,6 +1126,143 @@ STYLES.update({
 })
 
 
+# --- 네온사인 v4: 팔각·꺾쇠·밑줄·두 가닥 --------------------------------------
+# 위 넷이 전부 둥근 네모를 관으로 두른 모양이라, 여기는 관이 도는 길 자체를 바꿨다.
+# 관이 끊기거나 꺾이는 자리는 전부 모서리 가까이에 두고 소품으로 알린다 — 곧은 변 한가운데서
+# 끊기면 늘어나는 줄이 그 틈을 지나 틈이 말 길이만큼 벌어진다.
+
+NEON_FAINT = 70                     # 불 꺼진 관. 몸통 경계만 알려 준다
+NEON_ARM = 12                       # 꺾쇠 한 팔 길이
+
+
+def _neon_poly(p, pts):
+    m = _neon_blank(p)
+    ImageDraw.Draw(m).polygon([(a * p.s, b * p.s) for a, b in pts], fill=255)
+    return m
+
+
+def _neon_faint(p, shape, col):
+    _neon_over(p.img, hexc(col)[:3], _neon_band(shape, 1.0 * p.s).point(lambda v: v * NEON_FAINT // 255))
+
+
+def _neon_keep(p, boxes):
+    """boxes 밖을 전부 덮는 cut. 관을 이 칸들 안에만 남긴다."""
+    m = Image.new('L', p.img.size, 255)
+    dm = ImageDraw.Draw(m)
+    for b in boxes:
+        dm.rectangle(p._b(*b), fill=0)
+    return m
+
+
+def d_neon_octagon(p, lp, x, y, w, h, first, ck, t):
+    """팔각. 모서리를 비스듬히 깎은 관. 첫 장엔 바깥 위에 번개."""
+    col, c = _c(t[ck]), 9
+    _neon(p, _neon_poly(p, [(x + c, y), (x + w - c, y), (x + w, y + c), (x + w, y + h - c),
+                            (x + w - c, y + h), (x + c, y + h), (x, y + h - c), (x, y + c)]),
+          col, fill=NEON_BODY)
+    if first:
+        z = [(0.15, -1.0), (-0.35, 0.05), (0.05, 0.05), (-0.2, 1.0), (0.45, -0.15), (0.05, -0.15)]
+        _neon(p, _neon_poly(p, [(x + 6 + a * 6, y - 4 + b * 6) for a, b in z]), col, tw=1.4,
+              fill=(12, 8, 16, 255))
+
+
+def f_neon_octagon(t, bw, bh, first):
+    f = [((-NEON_TW, -NEON_TW, bw + NEON_TW, bh + NEON_TW), ())]
+    if first:
+        f.append(((-1.5, -11.5, 12.5, 3.5), ('outer', 'top')))
+    return f
+
+
+def d_neon_bracket(p, lp, x, y, w, h, first, ck, t):
+    """꺾쇠. 몸통은 불 꺼진 관이고 네 모서리만 불이 들어온다. 첫 장엔 위에 점 셋."""
+    col, a, g = _c(t[ck]), NEON_ARM, 4
+    shape = _neon_rr(p, x, y, x + w, y + h, 8)
+    _neon_faint(p, shape, col)
+    keep = _neon_keep(p, [(x - g, y - g, x + a, y + a), (x + w - a, y - g, x + w + g, y + a),
+                          (x - g, y + h - a, x + a, y + h + g), (x + w - a, y + h - a, x + w + g, y + h + g)])
+    _neon(p, shape, col, fill=NEON_BODY, cut=keep)
+    if first:
+        for i in range(3):
+            m = _neon_blank(p)
+            cx = x + 5 + i * 6
+            ImageDraw.Draw(m).ellipse(p._b(cx - 1.8, y - 8.5, cx + 1.8, y - 4.9), fill=255)
+            _neon_over(p.img, hexc(col)[:3], m.filter(ImageFilter.GaussianBlur(0.4 * p.s)))
+
+
+def f_neon_bracket(t, bw, bh, first):
+    a, g = NEON_ARM, NEON_TW
+    f = [((-g, -g, bw + g, bh + g), ()),
+         ((-g, -g, a, a), ('outer', 'top')), ((bw - a, -g, bw + g, a), ('inner', 'top')),
+         ((-g, bh - a, a, bh + g), ('outer', 'bottom')), ((bw - a, bh - a, bw + g, bh + g), ('inner', 'bottom'))]
+    if first:
+        f.append(((2.5, -9.5, 19.5, -4), ('outer', 'top')))
+    return f
+
+
+def d_neon_underline(p, lp, x, y, w, h, first, ck, t):
+    """밑줄. 아래변만 불이 들어오고 양끝이 모서리를 따라 위로 말린다. 첫 장엔 바깥 위에 하트."""
+    col = _c(t[ck])
+    shape = _neon_rr(p, x, y, x + w, y + h, 14)
+    _neon_faint(p, shape, col)
+    _neon(p, shape, col, fill=NEON_BODY, cut=_neon_keep(p, [(x - 5, y + h - 10, x + w + 5, y + h + 5)]))
+    if first:
+        pts = []
+        for i in range(40):
+            k = 2 * math.pi * i / 40
+            pts.append((x + 7 + 16 * math.sin(k) ** 3 * 0.33,
+                        y - 3 - (13 * math.cos(k) - 5 * math.cos(2 * k) - 2 * math.cos(3 * k)
+                                 - math.cos(4 * k)) * 0.33))
+        _neon(p, _neon_poly(p, pts), col, tw=1.4, fill=(12, 8, 16, 255))
+
+
+def f_neon_underline(t, bw, bh, first):
+    g = NEON_TW
+    f = [((-g, -g, bw + g, bh + g), ()),
+         ((-g, bh - 12, 14, bh + g), ('outer', 'bottom')), ((bw - 14, bh - 12, bw + g, bh + g), ('inner', 'bottom'))]
+    if first:
+        f.append(((0, -10, 14, 4), ('outer', 'top')))
+    return f
+
+
+def d_neon_split(p, lp, x, y, w, h, first, ck, t):
+    """두 가닥. 위·바깥은 말풍선 색, 아래·안쪽은 셋째 색 관이다. 안쪽 위와 바깥 아래 모서리 곁의
+    두 틈을 잇는 선으로 가른다 — 늘어나는 줄에서 위변은 늘 한쪽, 아래변은 늘 다른 쪽에 걸리므로
+    말이 길어져도 반반이 유지된다. 첫 장엔 안쪽 위 틈에서 불꽃이 튄다."""
+    col, third = _c(t[ck]), t.get('neon_third', '#B45CFF')
+    shape = _neon_rr(p, x, y, x + w, y + h, 14)
+    ga, gb, gap, far = (x + w - 14, y), (x + 14, y + h), 2.5, 1000
+    dx, dy = gb[0] - ga[0], gb[1] - ga[1]
+    a1, a2 = (ga[0] - dx * 3, ga[1] - dy * 3), (gb[0] + dx * 3, gb[1] + dy * 3)   # 가르는 선을 늘인 두 끝
+    upper = _neon_poly(p, [(a1[0] - gap, a1[1]), (a2[0] - gap, a2[1]), (x - far, y + far), (x - far, y - far)])
+    lower = _neon_poly(p, [(a1[0] + gap, a1[1]), (x + far, y - far), (x + far, y + far), (a2[0] + gap, a2[1])])
+    _neon_over(p.img, NEON_BODY[:3], shape.point(lambda v: v * NEON_BODY[3] // 255))
+    _neon(p, shape, col, cut=ImageChops.invert(upper))
+    _neon(p, shape, third, cut=ImageChops.invert(lower))
+    if first:
+        spark = hexc(_g().glow_tint(third, 0.6))
+        for ang, ln in ((-60, 5), (-105, 4), (-20, 4)):
+            ca, sa = math.cos(math.radians(ang)), math.sin(math.radians(ang))
+            p.line([(ga[0] + ca * 2.5, ga[1] + sa * 2.5), (ga[0] + ca * (2.5 + ln), ga[1] + sa * (2.5 + ln))],
+                   spark, 1.0)
+
+
+def f_neon_split(t, bw, bh, first):
+    g = NEON_TW
+    f = [((-g, -g, bw + g, bh + g), ()),
+         ((bw - 19, -g, bw + g, 8), ('inner', 'top')), ((-g, bh - 8, 19, bh + g), ('outer', 'bottom'))]
+    if first:
+        f.append(((bw - 22, -10, bw - 6, 2), ('inner', 'top')))
+    return f
+
+
+STYLES.update({
+    'neon_octagon':   dict(bw=40, bh=44, radius=10, draw=d_neon_octagon, features=f_neon_octagon),
+    'neon_bracket':   dict(bw=40, bh=44, radius=8, draw=d_neon_bracket, features=f_neon_bracket),
+    'neon_underline': dict(bw=40, bh=44, radius=14, draw=d_neon_underline, features=f_neon_underline),
+    'neon_split':     dict(bw=40, bh=44, radius=14, draw=d_neon_split, features=f_neon_split),
+})
+
+
 def p_neon(t, idx, px):
     """네온사인 기본 프로필. 어두운 벽돌 조각 위에 하트·별·초승달 네온관 하나.
 

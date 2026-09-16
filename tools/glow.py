@@ -263,9 +263,28 @@ def render(t, img, geo, scale, ck, fl=None):
     rim = ImageChops.subtract(a, a.filter(ImageFilter.MinFilter(k)))
     col = t.get('char_glow_color') or _c(t[ck])
     fade = _edge_fade(size, geo, scale)
+    tint = None
+    if t.get('glow_lit'):
+        # 네온사인 v4. 관이 일부만 켜지거나(꺾쇠·밑줄) 두 색(두 가닥)이라, 실루엣 둘레를 한 색으로
+        # 빛내면 꺼진 변까지 켜진 것처럼 보이고 둘째 색이 묻혔다. 밝은 관에서만, 관 제 색으로 번지게 한다
+        lit = ImageChops.lighter(ImageChops.lighter(*img.split()[:2]), img.split()[2])
+        rim = ImageChops.multiply(a, lit.point(lambda v: 255 if v > 120 else 0))
+        # 빛 색은 관 색을 흐려 퍼뜨린 뒤 같은 흐림의 세기로 나눠 밝기를 되살린다. 채널마다 최댓값으로
+        # 퍼뜨렸더니 두 가닥의 틈에서 두 색 채널이 합쳐져 분홍 점이 떴다. 나누면 틈에서는 두 색의 평균이 된다
+        from PIL import ImageMath
+        blur = ImageFilter.GaussianBlur(PRESETS[name]['margin'][0] * scale * 0.6)
+        m = rim.filter(blur)
+        tint = Image.merge('RGB', [
+            ImageMath.lambda_eval(lambda e: e['convert'](e['float'](e['c']) * 255 / (e['float'](e['m']) + 1), 'L'),
+                                  c=ImageChops.multiply(ch, rim).filter(blur), m=m)
+            for ch in img.convert('RGB').split()])
     out = Image.new('RGBA', size, (0, 0, 0, 0))
     for c, al in PRESETS[name]['fn'](rim, a, scale, col):
-        lay = Image.new('RGBA', size, _rgb(c) + (255,))
+        if tint is not None:
+            lay = tint if c == col else Image.blend(tint, Image.new('RGB', size, (255, 255, 255)), 0.35)
+            lay = lay.convert('RGBA')
+        else:
+            lay = Image.new('RGBA', size, _rgb(c) + (255,))
         lay.putalpha(ImageChops.multiply(al, fade))
         out.alpha_composite(lay)
     out.alpha_composite(img)
