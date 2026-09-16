@@ -886,6 +886,7 @@ CATEGORY = {
     '네온사인 v2': '불빛',
     '네온사인 v3': '불빛',
     '네온사인 v4': '불빛',
+    '네온사인 v5': '불빛',
 
     '우체국': '캐릭터',
     '책상': '캐릭터',
@@ -1988,6 +1989,24 @@ THEMES += [
     _neon_theme(312, '두 가닥', 'neon_split', 'tube', '#FF3B6B', '#35E0FF', '#FFE0E8', '#D9F8FF',
                 '#2399B0', [('star', '#35E0FF'), ('heart', '#FF3B6B'), ('moon', '#FFD23F')],
                 '두 색 관이 모서리 틈에서 갈리는 네온', **_PLANK),
+]
+
+# v5 는 v4 의 말풍선 네 가지를 잎이 빽빽한 식물 벽에 건다. 초록 네온은 잎에 묻혀 색 짝에서 뺐다
+_GARDEN = dict(slug='neongarden', family='네온사인 v5', face=('#244A2B', '#040A05'), surface='foliage', lit=True)
+
+THEMES += [
+    _neon_theme(313, '팔각', 'neon_octagon', 'tube', '#FF5CE1', '#FFD23F', '#FFE0F8', '#FFF6D6',
+                '#C4A02A', [('star', '#FFD23F'), ('heart', '#FF5CE1'), ('moon', '#35E0FF')],
+                '잎 벽에 걸린 팔각 네온관. 분홍과 노랑', **_GARDEN),
+    _neon_theme(314, '꺾쇠', 'neon_bracket', 'tube', '#35E0FF', '#FF7A2F', '#D9F8FF', '#FFE6D6',
+                '#C85A1E', [('moon', '#35E0FF'), ('bolt', '#FF7A2F'), ('heart', '#FF5CE1')],
+                '잎 벽에 모서리만 켜진 꺾쇠 네온. 하늘색과 주황', **_GARDEN),
+    _neon_theme(315, '밑줄', 'neon_underline', 'tube', '#B45CFF', '#FFD23F', '#EFE0FF', '#FFF6D6',
+                '#C4A02A', [('star', '#FFD23F'), ('moon', '#B45CFF'), ('heart', '#FF3B6B')],
+                '잎 벽에 아래변만 빛나는 네온. 보라와 노랑', **_GARDEN),
+    _neon_theme(316, '두 가닥', 'neon_split', 'tube', '#4D7CFF', '#FF5CE1', '#DFE7FF', '#FFE0F8',
+                '#C43DA8', [('heart', '#FF5CE1'), ('star', '#4D7CFF'), ('bolt', '#FFD23F')],
+                '잎 벽에 두 색 관이 갈리는 네온. 파랑과 분홍', **_GARDEN),
 ]
 
 # --- 도트 모험 --------------------------------------------------------------

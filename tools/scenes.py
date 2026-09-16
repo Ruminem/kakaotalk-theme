@@ -2143,6 +2143,34 @@ def neonwall(spec, w, h):
                          ring=o.get('ring', 0.022), contrast=o.get('contrast', 0.55),
                          seed=rnd.randint(0, 1 << 30), blur=0.4)), w, h)
         d = ImageDraw.Draw(img)
+    elif wall == 'foliage':
+        # 잎이 빽빽한 식물 벽(네온사인 v5). 뒤 겹은 어둡고 흐리게, 앞 겹은 밝고 또렷하게 쌓아
+        # 깊이를 낸다. 큰 덩어리 없이 고르게 덮여서 목록에서 어디서 잘려도 같은 질감이다
+        img = Image.new('RGB', (w, h), mortar)
+        for layer in range(4):
+            lay = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+            ld = ImageDraw.Draw(lay)
+            k = 0.45 + layer * 0.22
+            size = (30 - layer * 3) * unit
+            for _ in range(int(w * h / (size * size) * 0.9)):
+                cx, cy = rnd.uniform(-size, w + size), rnd.uniform(-size, h + size)
+                a = rnd.uniform(0, math.pi * 2)
+                L, Wd = size * rnd.uniform(0.8, 1.3), size * rnd.uniform(0.32, 0.45)
+                ca, sa = math.cos(a), math.sin(a)
+                pts = []
+                for i in range(13):
+                    tt = i / 12.0
+                    pts.append((tt * 2 - 1, math.sin(tt * math.pi) * (1 - 0.25 * tt)))
+                pts += [(x_, -y_) for x_, y_ in reversed(pts)]
+                poly = [(cx + x_ * L * ca - y_ * Wd * sa, cy + x_ * L * sa + y_ * Wd * ca) for x_, y_ in pts]
+                c = shade(k * rnd.uniform(0.8, 1.2))
+                ld.polygon(poly, fill=c + (255,))
+                ld.line([(cx - L * ca * 0.9, cy - L * sa * 0.9), (cx + L * ca * 0.9, cy + L * sa * 0.9)],
+                        fill=shade(k * 0.7) + (160,), width=max(1, int(unit)))
+            if layer < 2:
+                lay = lay.filter(ImageFilter.GaussianBlur((2 - layer) * 1.2 * unit))
+            img.paste(lay, (0, 0), lay)
+        d = ImageDraw.Draw(img)
     elif wall == 'tile':
         # 지하 바의 정사각 타일(네온사인 v3). 칸마다 윤기가 달라야 한 판으로 안 보인다
         ts, gap = 38 * unit, 3 * unit
