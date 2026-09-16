@@ -872,6 +872,11 @@ CATEGORY = {
     '야경': '불빛',
     '사이버펑크': '불빛',
     '레드': '불빛',
+    '블루': '불빛',
+    '퍼플': '불빛',
+    '그린': '불빛',
+    '골드': '불빛',
+    '핑크': '불빛',
     '불꽃놀이': '불빛',
     '연등': '불빛',
     '알전구': '불빛',
@@ -1051,6 +1056,121 @@ THEMES += quartet(
      '어둠 속에서 붉은 불티가 떠오름',
      '말풍선이 빨갛게 달아오름',
      '불티 배경 위에 달아오른 빨강까지'])
+
+
+# 블루 — 네 벌. 레드와 같은 짜임(검은 바탕 · 쨍한 말풍선 · 아래서 올라오는 불티)을 파랑으로 옮겼다
+THEMES += quartet(
+    'blue', 225, '블루',
+    dict(bg='#050A16', bg_deep='#02050B', surface='#0A1424', pressed='#0D1B31', border='#122A4A',
+         text='#ECF3FF', subtext='#8EA6C0', accent='#1B6BFF', accent_dim='#1250C4', on_accent='#F2F7FF',
+         send=('#0057E6', '#0057E6'), send_alt=('#4F8DF5', '#4F8DF5'),
+         recv=('#0B1A3B', '#0B1A3B'), recv_alt=('#0F3A8E', '#0F3A8E'),
+         send_text='#F2F7FF', recv_text='#E8F0FF'),
+    dict(chat_bg=('ember', '#02061A', '#00185A',
+                  dict(glow='#0038FF', spark='#6B9BFF', smoke='#04102E',
+                       count=70, dim=0.30)),
+         main_bg=('ember', '#010516', '#00134A',
+                  dict(glow='#0033E6', spark='#5C8FFF', smoke='#030C28',
+                       count=50, dim=0.46)),
+         passcode_bg=('ember', '#030A22', '#002075',
+                      dict(glow='#1B50FF', spark='#8DB4FF', smoke='#061636',
+                           count=110, pool_alpha=150, dim=0.04))),
+    ['검푸른 바탕에 파랑 말풍선 네 칸',
+     '어둠 속에서 푸른 불티가 떠오름',
+     '말풍선이 파랗게 달아오름',
+     '불티 배경 위에 달아오른 파랑까지'])
+
+
+# 퍼플 — 네 벌. 레드와 같은 짜임(검은 바탕 · 쨍한 말풍선 · 아래서 올라오는 불티)을 보라로 옮겼다
+THEMES += quartet(
+    'purple', 229, '퍼플',
+    dict(bg='#0F0518', bg_deep='#08020D', surface='#1A0A28', pressed='#240D36', border='#371250',
+         text='#F5ECFF', subtext='#A98EC0', accent='#A43BFF', accent_dim='#7A1FC4', on_accent='#F8F2FF',
+         send=('#8A00E6', '#8A00E6'), send_alt=('#A45CF5', '#A45CF5'),
+         recv=('#260B3B', '#260B3B'), recv_alt=('#560F8E', '#560F8E'),
+         send_text='#F8F2FF', recv_text='#F2E8FF'),
+    dict(chat_bg=('ember', '#10021A', '#3A005A',
+                  dict(glow='#9000FF', spark='#C58DFF', smoke='#1E0430',
+                       count=70, dim=0.30)),
+         main_bg=('ember', '#0C0116', '#30004A',
+                  dict(glow='#8000E6', spark='#B77AFF', smoke='#190328',
+                       count=50, dim=0.46)),
+         passcode_bg=('ember', '#150322', '#4A0075',
+                      dict(glow='#A01BFF', spark='#D4A8FF', smoke='#260636',
+                           count=110, pool_alpha=150, dim=0.04))),
+    ['검보랏빛 바탕에 보라 말풍선 네 칸',
+     '어둠 속에서 보랏빛 불티가 떠오름',
+     '말풍선이 보랏빛으로 달아오름',
+     '불티 배경 위에 달아오른 보라까지'])
+
+
+# 그린 — 네 벌. 레드와 같은 짜임(검은 바탕 · 쨍한 말풍선 · 아래서 올라오는 불티)을 초록으로 옮겼다
+THEMES += quartet(
+    'green', 233, '그린',
+    dict(bg='#04130C', bg_deep='#020A06', surface='#092116', pressed='#0C2D1F', border='#114530',
+         text='#ECFFF5', subtext='#8EC0A8', accent='#1BE67E', accent_dim='#12A85C', on_accent='#02170C',
+         send=('#00C865', '#00C865'), send_alt=('#7CF0B0', '#7CF0B0'),
+         recv=('#0B3B24', '#0B3B24'), recv_alt=('#0E7A45', '#0E7A45'),
+         send_text='#021A0D', recv_text='#E8FFF2'),
+    dict(chat_bg=('ember', '#021A0E', '#005A2E',
+                  dict(glow='#00FF73', spark='#8DFFB9', smoke='#042E18',
+                       count=70, dim=0.30)),
+         main_bg=('ember', '#011608', '#004A26',
+                  dict(glow='#00E667', spark='#7AFFAD', smoke='#03281A',
+                       count=50, dim=0.46)),
+         passcode_bg=('ember', '#03220F', '#00753C',
+                      dict(glow='#1BFF84', spark='#B0FFD0', smoke='#063622',
+                           count=110, pool_alpha=150, dim=0.04))),
+    ['검초록 바탕에 초록 말풍선 네 칸',
+     '어둠 속에서 초록 불티가 떠오름',
+     '말풍선이 초록으로 달아오름',
+     '불티 배경 위에 달아오른 초록까지'])
+
+
+# 골드 — 네 벌. 레드와 같은 짜임(검은 바탕 · 쨍한 말풍선 · 아래서 올라오는 불티)을 금빛으로 옮겼다
+THEMES += quartet(
+    'gold', 237, '골드',
+    dict(bg='#150F05', bg_deep='#0B0802', surface='#231A0A', pressed='#30230D', border='#483412',
+         text='#FFF7EC', subtext='#C0AB8E', accent='#FFB81B', accent_dim='#C48A12', on_accent='#1F1400',
+         send=('#EBA400', '#EBA400'), send_alt=('#FFD66B', '#FFD66B'),
+         recv=('#3B2A0B', '#3B2A0B'), recv_alt=('#7A540D', '#7A540D'),
+         send_text='#1F1400', recv_text='#FFF3E0'),
+    dict(chat_bg=('ember', '#1A1002', '#5A3A00',
+                  dict(glow='#FFA800', spark='#FFE08D', smoke='#2E1E04',
+                       count=70, dim=0.30)),
+         main_bg=('ember', '#150C01', '#4A3000',
+                  dict(glow='#E69700', spark='#FFD27A', smoke='#281A03',
+                       count=50, dim=0.46)),
+         passcode_bg=('ember', '#221503', '#754C00',
+                      dict(glow='#FFB51B', spark='#FFEAB0', smoke='#362406',
+                           count=110, pool_alpha=150, dim=0.04))),
+    ['검갈색 바탕에 금빛 말풍선 네 칸',
+     '어둠 속에서 금빛 불티가 떠오름',
+     '말풍선이 금빛으로 달아오름',
+     '불티 배경 위에 달아오른 금빛까지'])
+
+
+# 핑크 — 네 벌. 레드와 같은 짜임(검은 바탕 · 쨍한 말풍선 · 아래서 올라오는 불티)을 분홍으로 옮겼다
+THEMES += quartet(
+    'pink', 241, '핑크',
+    dict(bg='#16050F', bg_deep='#0B0208', surface='#240A19', pressed='#310D22', border='#4A1234',
+         text='#FFECF6', subtext='#C08EAA', accent='#FF1BA0', accent_dim='#C41279', on_accent='#FFF2F9',
+         send=('#E0007F', '#E0007F'), send_alt=('#F55CB0', '#F55CB0'),
+         recv=('#3B0B28', '#3B0B28'), recv_alt=('#8E0F5C', '#8E0F5C'),
+         send_text='#FFF2F9', recv_text='#FFE8F4'),
+    dict(chat_bg=('ember', '#1A0212', '#5A0040',
+                  dict(glow='#FF00A0', spark='#FF8DD0', smoke='#2E0420',
+                       count=70, dim=0.30)),
+         main_bg=('ember', '#150110', '#4A0034',
+                  dict(glow='#E6008F', spark='#FF7AC4', smoke='#280318',
+                       count=50, dim=0.46)),
+         passcode_bg=('ember', '#22031A', '#750052',
+                      dict(glow='#FF1BAE', spark='#FFB0DD', smoke='#36062A',
+                           count=110, pool_alpha=150, dim=0.04))),
+    ['검자줏빛 바탕에 분홍 말풍선 네 칸',
+     '어둠 속에서 분홍 불티가 떠오름',
+     '말풍선이 분홍으로 달아오름',
+     '불티 배경 위에 달아오른 분홍까지'])
 
 # --- 배포 파일 이름 -------------------------------------------------------
 # city21.ktheme 은 뭐가 뭔지 알 수 없다. 계열과 변형이 드러나게 바꾼다.

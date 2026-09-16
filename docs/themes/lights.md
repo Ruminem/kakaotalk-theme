@@ -20,24 +20,44 @@
 <td align="center"><b><a href="#user-content-레드"><img src="../../assets/icon-red-image.png" width="20" valign="middle"> 레드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검붉은 바탕에 새빨간 말풍선 네 칸</td>
 </tr>
 <tr>
+<td width="33%" align="center"><a href="#user-content-블루"><img src="../../assets/preview-blue-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-퍼플"><img src="../../assets/preview-purple-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-그린"><img src="../../assets/preview-green-image-chat.webp" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><b><a href="#user-content-블루"><img src="../../assets/icon-blue-image.png" width="20" valign="middle"> 블루</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검푸른 바탕에 파랑 말풍선 네 칸</td>
+<td align="center"><b><a href="#user-content-퍼플"><img src="../../assets/icon-purple-image.png" width="20" valign="middle"> 퍼플</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검보랏빛 바탕에 보라 말풍선 네 칸</td>
+<td align="center"><b><a href="#user-content-그린"><img src="../../assets/icon-green-image.png" width="20" valign="middle"> 그린</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검초록 바탕에 초록 말풍선 네 칸</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="#user-content-골드"><img src="../../assets/preview-gold-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-핑크"><img src="../../assets/preview-pink-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-불꽃놀이"><img src="../../assets/preview-firework-image-chat.webp" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><b><a href="#user-content-골드"><img src="../../assets/icon-gold-image.png" width="20" valign="middle"> 골드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검갈색 바탕에 금빛 말풍선 네 칸</td>
+<td align="center"><b><a href="#user-content-핑크"><img src="../../assets/icon-pink-image.png" width="20" valign="middle"> 핑크</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검자줏빛 바탕에 분홍 말풍선 네 칸</td>
+<td align="center"><b><a href="#user-content-불꽃놀이"><img src="../../assets/icon-firework-image.png" width="20" valign="middle"> 불꽃놀이</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>남색 밤 바탕에 금빛·분홍 말풍선</td>
+</tr>
+<tr>
 <td width="33%" align="center"><a href="#user-content-연등"><img src="../../assets/preview-lantern-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-알전구"><img src="../../assets/preview-garland-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-고속도로"><img src="../../assets/preview-highway-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><b><a href="#user-content-불꽃놀이"><img src="../../assets/icon-firework-image.png" width="20" valign="middle"> 불꽃놀이</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>남색 밤 바탕에 금빛·분홍 말풍선</td>
 <td align="center"><b><a href="#user-content-연등"><img src="../../assets/icon-lantern-image.png" width="20" valign="middle"> 연등</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>자줏빛 밤 바탕에 분홍·노랑 연등 색</td>
 <td align="center"><b><a href="#user-content-알전구"><img src="../../assets/icon-garland-image.png" width="20" valign="middle"> 알전구</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>짙은 갈색 바탕에 금빛 말풍선</td>
+<td align="center"><b><a href="#user-content-고속도로"><img src="../../assets/icon-highway-image.png" width="20" valign="middle"> 고속도로</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검푸른 바탕에 빨강·주황 말풍선</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="#user-content-고속도로"><img src="../../assets/preview-highway-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-터미널"><img src="../../assets/preview-terminal-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-네온사인"><img src="../../assets/preview-neon-double-chat.webp" width="190"></a></td>
+<td width="33%"></td>
 </tr>
 <tr>
-<td align="center"><b><a href="#user-content-고속도로"><img src="../../assets/icon-highway-image.png" width="20" valign="middle"> 고속도로</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검푸른 바탕에 빨강·주황 말풍선</td>
 <td align="center"><b><a href="#user-content-터미널"><img src="../../assets/icon-terminal-image.png" width="20" valign="middle"> 터미널</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 초록 바탕에 형광 초록·호박색 말풍선</td>
 <td align="center"><b><a href="#user-content-네온사인"><img src="../../assets/icon-neon-double.png" width="20" valign="middle"> 네온사인</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>벽돌 벽에 관 두 줄 네온. 첫 말엔 네온 별</td>
+<td width="33%"></td>
 </tr>
 </table>
 
@@ -143,6 +163,181 @@
 **글로우+배경** — 불티 배경 위에 달아오른 빨강까지
 
 <img src="../../assets/preview-red-glow-image-list.webp" width="180"> <img src="../../assets/preview-red-glow-image-passcode.webp" width="180"> <img src="../../assets/preview-red-glow-image-splash.webp" width="180">
+
+</details>
+
+<a name="블루"></a>
+
+## <a href="#user-content-블루"><img src="../../assets/icon-blue-basic.png" width="26" valign="middle"></a> 블루 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-blue-basic-chat.webp" width="200"><br><b>기본</b><br><sub>검푸른 바탕에 파랑 말풍선 네 칸</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=blue-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/blue-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-blue-image-chat.webp" width="200"><br><b>배경</b><br><sub>어둠 속에서 푸른 불티가 떠오름</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=blue-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/blue-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-blue-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>말풍선이 파랗게 달아오름</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=blue-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/blue-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-blue-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>불티 배경 위에 달아오른 파랑까지</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=blue-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/blue-glow-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**기본** — 검푸른 바탕에 파랑 말풍선 네 칸
+
+<img src="../../assets/preview-blue-basic-list.webp" width="180"> <img src="../../assets/preview-blue-basic-passcode.webp" width="180"> <img src="../../assets/preview-blue-basic-splash.webp" width="180">
+
+**배경** — 어둠 속에서 푸른 불티가 떠오름
+
+<img src="../../assets/preview-blue-image-list.webp" width="180"> <img src="../../assets/preview-blue-image-passcode.webp" width="180"> <img src="../../assets/preview-blue-image-splash.webp" width="180">
+
+**글로우** — 말풍선이 파랗게 달아오름
+
+<img src="../../assets/preview-blue-glow-list.webp" width="180"> <img src="../../assets/preview-blue-glow-passcode.webp" width="180"> <img src="../../assets/preview-blue-glow-splash.webp" width="180">
+
+**글로우+배경** — 불티 배경 위에 달아오른 파랑까지
+
+<img src="../../assets/preview-blue-glow-image-list.webp" width="180"> <img src="../../assets/preview-blue-glow-image-passcode.webp" width="180"> <img src="../../assets/preview-blue-glow-image-splash.webp" width="180">
+
+</details>
+
+<a name="퍼플"></a>
+
+## <a href="#user-content-퍼플"><img src="../../assets/icon-purple-basic.png" width="26" valign="middle"></a> 퍼플 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-purple-basic-chat.webp" width="200"><br><b>기본</b><br><sub>검보랏빛 바탕에 보라 말풍선 네 칸</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=purple-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/purple-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-purple-image-chat.webp" width="200"><br><b>배경</b><br><sub>어둠 속에서 보랏빛 불티가 떠오름</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=purple-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/purple-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-purple-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>말풍선이 보랏빛으로 달아오름</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=purple-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/purple-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-purple-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>불티 배경 위에 달아오른 보라까지</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=purple-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/purple-glow-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**기본** — 검보랏빛 바탕에 보라 말풍선 네 칸
+
+<img src="../../assets/preview-purple-basic-list.webp" width="180"> <img src="../../assets/preview-purple-basic-passcode.webp" width="180"> <img src="../../assets/preview-purple-basic-splash.webp" width="180">
+
+**배경** — 어둠 속에서 보랏빛 불티가 떠오름
+
+<img src="../../assets/preview-purple-image-list.webp" width="180"> <img src="../../assets/preview-purple-image-passcode.webp" width="180"> <img src="../../assets/preview-purple-image-splash.webp" width="180">
+
+**글로우** — 말풍선이 보랏빛으로 달아오름
+
+<img src="../../assets/preview-purple-glow-list.webp" width="180"> <img src="../../assets/preview-purple-glow-passcode.webp" width="180"> <img src="../../assets/preview-purple-glow-splash.webp" width="180">
+
+**글로우+배경** — 불티 배경 위에 달아오른 보라까지
+
+<img src="../../assets/preview-purple-glow-image-list.webp" width="180"> <img src="../../assets/preview-purple-glow-image-passcode.webp" width="180"> <img src="../../assets/preview-purple-glow-image-splash.webp" width="180">
+
+</details>
+
+<a name="그린"></a>
+
+## <a href="#user-content-그린"><img src="../../assets/icon-green-basic.png" width="26" valign="middle"></a> 그린 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-green-basic-chat.webp" width="200"><br><b>기본</b><br><sub>검초록 바탕에 초록 말풍선 네 칸</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=green-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/green-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-green-image-chat.webp" width="200"><br><b>배경</b><br><sub>어둠 속에서 초록 불티가 떠오름</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=green-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/green-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-green-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>말풍선이 초록으로 달아오름</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=green-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/green-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-green-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>불티 배경 위에 달아오른 초록까지</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=green-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/green-glow-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**기본** — 검초록 바탕에 초록 말풍선 네 칸
+
+<img src="../../assets/preview-green-basic-list.webp" width="180"> <img src="../../assets/preview-green-basic-passcode.webp" width="180"> <img src="../../assets/preview-green-basic-splash.webp" width="180">
+
+**배경** — 어둠 속에서 초록 불티가 떠오름
+
+<img src="../../assets/preview-green-image-list.webp" width="180"> <img src="../../assets/preview-green-image-passcode.webp" width="180"> <img src="../../assets/preview-green-image-splash.webp" width="180">
+
+**글로우** — 말풍선이 초록으로 달아오름
+
+<img src="../../assets/preview-green-glow-list.webp" width="180"> <img src="../../assets/preview-green-glow-passcode.webp" width="180"> <img src="../../assets/preview-green-glow-splash.webp" width="180">
+
+**글로우+배경** — 불티 배경 위에 달아오른 초록까지
+
+<img src="../../assets/preview-green-glow-image-list.webp" width="180"> <img src="../../assets/preview-green-glow-image-passcode.webp" width="180"> <img src="../../assets/preview-green-glow-image-splash.webp" width="180">
+
+</details>
+
+<a name="골드"></a>
+
+## <a href="#user-content-골드"><img src="../../assets/icon-gold-basic.png" width="26" valign="middle"></a> 골드 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-gold-basic-chat.webp" width="200"><br><b>기본</b><br><sub>검갈색 바탕에 금빛 말풍선 네 칸</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=gold-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/gold-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-gold-image-chat.webp" width="200"><br><b>배경</b><br><sub>어둠 속에서 금빛 불티가 떠오름</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=gold-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/gold-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-gold-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>말풍선이 금빛으로 달아오름</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=gold-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/gold-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-gold-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>불티 배경 위에 달아오른 금빛까지</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=gold-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/gold-glow-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**기본** — 검갈색 바탕에 금빛 말풍선 네 칸
+
+<img src="../../assets/preview-gold-basic-list.webp" width="180"> <img src="../../assets/preview-gold-basic-passcode.webp" width="180"> <img src="../../assets/preview-gold-basic-splash.webp" width="180">
+
+**배경** — 어둠 속에서 금빛 불티가 떠오름
+
+<img src="../../assets/preview-gold-image-list.webp" width="180"> <img src="../../assets/preview-gold-image-passcode.webp" width="180"> <img src="../../assets/preview-gold-image-splash.webp" width="180">
+
+**글로우** — 말풍선이 금빛으로 달아오름
+
+<img src="../../assets/preview-gold-glow-list.webp" width="180"> <img src="../../assets/preview-gold-glow-passcode.webp" width="180"> <img src="../../assets/preview-gold-glow-splash.webp" width="180">
+
+**글로우+배경** — 불티 배경 위에 달아오른 금빛까지
+
+<img src="../../assets/preview-gold-glow-image-list.webp" width="180"> <img src="../../assets/preview-gold-glow-image-passcode.webp" width="180"> <img src="../../assets/preview-gold-glow-image-splash.webp" width="180">
+
+</details>
+
+<a name="핑크"></a>
+
+## <a href="#user-content-핑크"><img src="../../assets/icon-pink-basic.png" width="26" valign="middle"></a> 핑크 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+
+<table>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-pink-basic-chat.webp" width="200"><br><b>기본</b><br><sub>검자줏빛 바탕에 분홍 말풍선 네 칸</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=pink-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/pink-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-pink-image-chat.webp" width="200"><br><b>배경</b><br><sub>어둠 속에서 분홍 불티가 떠오름</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=pink-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/pink-image.apk">Android</a></td>
+</tr>
+<tr>
+<td width="50%" align="center"><img src="../../assets/preview-pink-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>말풍선이 분홍으로 달아오름</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=pink-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/pink-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-pink-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>불티 배경 위에 달아오른 분홍까지</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=pink-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/pink-glow-image.apk">Android</a></td>
+</tr>
+</table>
+
+<details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
+
+**기본** — 검자줏빛 바탕에 분홍 말풍선 네 칸
+
+<img src="../../assets/preview-pink-basic-list.webp" width="180"> <img src="../../assets/preview-pink-basic-passcode.webp" width="180"> <img src="../../assets/preview-pink-basic-splash.webp" width="180">
+
+**배경** — 어둠 속에서 분홍 불티가 떠오름
+
+<img src="../../assets/preview-pink-image-list.webp" width="180"> <img src="../../assets/preview-pink-image-passcode.webp" width="180"> <img src="../../assets/preview-pink-image-splash.webp" width="180">
+
+**글로우** — 말풍선이 분홍으로 달아오름
+
+<img src="../../assets/preview-pink-glow-list.webp" width="180"> <img src="../../assets/preview-pink-glow-passcode.webp" width="180"> <img src="../../assets/preview-pink-glow-splash.webp" width="180">
+
+**글로우+배경** — 불티 배경 위에 달아오른 분홍까지
+
+<img src="../../assets/preview-pink-glow-image-list.webp" width="180"> <img src="../../assets/preview-pink-glow-image-passcode.webp" width="180"> <img src="../../assets/preview-pink-glow-image-splash.webp" width="180">
 
 </details>
 
