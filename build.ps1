@@ -7,8 +7,9 @@ $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # 소스는 팔레트 표에서 생성된다. 원본은 tools/themes.py 하나뿐이다.
+# 미리보기는 다시 그리지 않는다 — 커밋 전에 preview.ps1 로 만들어 두고, 릴리스는 깨끗한 트리에서만 돈다.
 Write-Host "tools/gen.py 로 소스를 만듭니다"
-& python (Join-Path $root 'tools\gen.py')
+& python (Join-Path $root 'tools\gen.py') --no-preview
 if ($LASTEXITCODE -ne 0) { throw "소스 생성 실패" }
 
 $src = Join-Path $root 'build-src'

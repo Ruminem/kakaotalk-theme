@@ -432,11 +432,26 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 
 끝과 실패도 같이 본다 — 성공 표시만 기다리면 실패했을 때 조용히 멈춘 것처럼 보인다.
 
+**알림에 단계를 붙인다.** 빌드는 소스 생성 → 패키징 → (릴리스면) 업로드 순이고, 단계마다 10% 씩 따로 센다.
+`.ktheme` 만 셌더니 0.35.1 에서 앞의 소스 생성과 미리보기 3분 47초 동안 0% 로 멈춰 보였다.
+소스 생성은 `build-src/<테마>/android` 폴더 수로 센다 — iOS 를 다 만든 뒤에 생긴다.
+미리보기는 배포 빌드에서 다시 그리지 않는다(`gen.py --no-preview`). 커밋된 그림과 바이트까지 같았다.
+
 ```bash
-mark=$(mktemp); start=$(date +%s); total=84
-n=$(find dist/iOS -name '*.ktheme' -newer "$mark" 2>/dev/null | wc -l); e=$(( $(date +%s) - start ))
-echo "[$(date +%H:%M:%S)] 빌드 $(( n * 100 / total ))% — $n/$total · 경과 $((e/60))분 $((e%60))초"
+mark=$(mktemp); start=$(date +%s); total=220; last=
+while :; do
+  e=$(( $(date +%s) - start )); t="[$(date +%H:%M:%S)]"; w="경과 $((e/60))분 $((e%60))초"
+  grep -q '^EXIT' rel.log && { echo "$t 끝남: $(grep '^EXIT' rel.log) · 총 $((e/60))분 $((e%60))초"; break; }
+  if grep -q '^자산 ' rel.log; then [ "$last" != 업로드 ] && echo "$t 빌드 끝, 자산 업로드 중 · $w"; last=업로드; sleep 10; continue
+  elif grep -q '개 테마 -> build-src' rel.log; then stage=패키징; n=$(find dist/iOS -name '*.ktheme' -newer "$mark" 2>/dev/null | wc -l)
+  else stage='소스 생성'; n=$(find build-src -mindepth 2 -maxdepth 2 -name android -newer "$mark" 2>/dev/null | wc -l); fi
+  key="$stage $(( n * 10 / total ))"
+  [ "$key" != "$last" ] && { echo "$t $stage $(( n * 100 / total ))% — $n/$total · $w"; last=$key; }
+  sleep 10
+done
 ```
+
+실패 줄(`throw`·`실패`·`Exception`)도 같은 루프에서 한 번 알린다.
 
 ## 미리보기 규칙
 

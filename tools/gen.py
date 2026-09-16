@@ -1374,6 +1374,9 @@ def main():
         for line in pool.imap(build_one, themes.THEMES):
             print(line, flush=True)
     print('\n%d 개 테마 -> build-src/  (%d개씩 동시에)' % (len(themes.THEMES), n))
+    # 배포 빌드는 커밋된 미리보기를 그대로 쓴다. 같은 그림을 2분 넘게 다시 그리기만 했다
+    if '--no-preview' in sys.argv:
+        return
     preview.generate(themes.THEMES)
     print('미리보기 -> docs/index.html')
 
