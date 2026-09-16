@@ -984,6 +984,7 @@ def background(t, spec, w, h, flat=False):
     채팅방과 잠금화면은 얹히는 게 적어서 그림 그대로 쓴다.
     """
     img = chat_bg(seeded(spec, t), w, h)
+    list_bg = flat
     # 나무결처럼 방향만 있고 굴곡이 없는 질감은 흐리지 않는다. 어디서 잘라도
     # 같은 무늬라 위에 무엇이 얹혀도 잘린 자국이 안 생긴다 — 흐리면 그냥 갈색 판이 된다.
     if flat and not t.get('flat_list', True):
@@ -998,7 +999,28 @@ def background(t, spec, w, h, flat=False):
         color = t['accent'] if g[0] == 'auto' else g[0]
         # 배경은 면적이 넓어서 말풍선과 같은 세기로 넣으면 화면이 뿌예진다
         img = light_wash(img, color, int(g[1] * 0.8))
-    return img
+    return header_safe(img, hard=bool(t.get('pixel_unit'))) if list_bg else img
+
+
+def header_safe(img, hard=False):
+    """목록 배경의 위쪽을 줄마다 같게 만든다.
+
+    iOS 카톡은 목록 머리(상태줄·제목·필터 칩 줄)를 띠마다 따로 그리고 띠마다 배경을 맨 위부터
+    새로 깐다. 위아래로 달라지는 그림이면 띠 경계마다 층이 진다 — 그라데이션은 색 계단이,
+    줄무늬·벽돌은 어긋난 줄눈이 된다. 머리가 덮는 높이까지는 열마다 평균 색으로 채워
+    어느 띠든 같은 줄을 보이게 하고, 그 아래에서 원래 그림으로 서서히 넘어간다.
+    머리 높이는 기기마다 달라서 402×874pt 화면의 164pt 보다 넉넉히 잡는다.
+    도트 계열(hard)은 반투명으로 섞으면 칸이 번지므로 한 줄에서 바로 넘어간다.
+    """
+    w, h = img.size
+    y1 = int(h * 0.21)
+    y2 = y1 + 1 if hard else int(h * 0.33)
+    smear = img.crop((0, 0, w, y2)).resize((w, 1), Image.BOX).resize((w, h))
+    mask = Image.linear_gradient('L').resize((1, y2 - y1)).resize((w, y2 - y1))
+    fade = Image.new('L', (w, h), 0)
+    fade.paste(mask, (0, y1))
+    fade.paste(255, (0, y2, w, h))
+    return Image.composite(img, smear, fade)
 
 
 def cell_css(side, t, pad, geos=None):
