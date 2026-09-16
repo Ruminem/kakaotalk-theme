@@ -760,12 +760,27 @@ def _grid(T, members, link, img):
     return out
 
 
+def covers(T, cat, members):
+    """README 에 내놓을 대표 계열. themes.CATEGORY_COVER 에 없으면 앞의 셋."""
+    names = T.CATEGORY_COVER.get(cat)
+    if not names:
+        return members[:PER_ROW]
+    by = dict(members)
+    bad = [n for n in names if n not in by]
+    if bad or len(names) > PER_ROW:
+        raise ValueError('%s 대표 계열이 틀렸다: %s. 그 카테고리 계열로 %d개까지 쓴다'
+                         % (cat, ', '.join(bad) or '너무 많음', PER_ROW))
+    return [(n, by[n]) for n in names]
+
+
 def readme_block(ts):
-    """README 의 테마 절. 카테고리마다 계열 격자 하나만 둔다.
+    """README 의 테마 절. 카테고리마다 대표 계열 한 줄과 카테고리 문서로 가는 링크만 둔다.
 
     README 는 고르는 자리, 카테고리 문서(docs/themes/*.md)는 보는 자리다. 계열이 서른다섯이
     되면서 상세까지 한 장에 두니 README 가 1600줄을 넘어 폰에서 스크롤을 감당 못 했다.
     GitHub 은 README 뿐 아니라 저장소 안의 어느 .md 든 렌더링하므로 나눌 수 있다.
+    계열이 예순을 넘자 격자만 남겨도 썸네일이 예순 장이라 같은 일이 되풀이됐다 — 그래서
+    카테고리마다 대표 셋만 두고, 전체 격자는 카테고리 문서 맨 위에만 있다.
     썸네일을 누르면 그 카테고리 문서의 계열 자리로 바로 뛴다.
     """
     import themes as T
@@ -779,7 +794,11 @@ def readme_block(ts):
         page = doc_path(name)
         out.append('**[%s](%s)** — %s' % (name, page, note))
         out.append('')
-        out.extend(_grid(T, members, lambda fam, page=page: page + anchor(fam), 'assets/'))
+        out.extend(_grid(T, covers(T, name, members),
+                         lambda fam, page=page: page + anchor(fam), 'assets/'))
+        out.append('<p align="right"><a href="%s">%s 계열 %d개 전부 보기 →</a></p>'
+                   % (page, name, len(members)))
+        out.append('')
     out.append(END)
     return '\n'.join(out)
 
