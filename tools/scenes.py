@@ -2134,18 +2134,15 @@ def neonwall(spec, w, h):
             d.rectangle([0, y + sh_ * 0.78, w, y + sh_], fill=shade(k * 0.55))
             y += sh_
     elif wall == 'plank':
-        # 바 안쪽의 세로 나무 판자(네온사인 v4). 판마다 색이 조금 다르고 세로 결이 몇 줄 지난다.
-        # 결도 화면 끝까지 곧게 내려서 어디서 잘려도 같다
-        pw = 46 * unit
-        x = 0.0
-        while x < w:
-            k = rnd.uniform(0.85, 1.1)
-            d.rectangle([x + 1.5 * unit, 0, x + pw - 1.5 * unit, h], fill=shade(k))
-            for _ in range(rnd.randint(2, 4)):
-                gx = x + rnd.uniform(0.15, 0.85) * pw
-                d.line([(gx, 0), (gx, h)], fill=shade(k * rnd.uniform(0.75, 0.88)),
-                       width=max(1, int(rnd.uniform(0.8, 2.2) * unit)))
-            x += pw
+        # 바 안쪽의 세로 나무 판자(네온사인 v4). 결을 곧은 선으로 그었더니 바코드·철창으로 보여서
+        # 나이테 위상으로 결을 내는 wood() 를 빌린다. 곧은결(figure=False)에 옹이가 없어야
+        # 세로로만 흐르는 무늬라 목록에서 어디서 잘려도 같다
+        img = wood(('wood', spec[1], spec[1],
+                    dict(dark=o.get('grain_dark', '#070403'), light=o.get('grain_light', '#8A6446'),
+                         planks=o.get('planks', 6), knots=0, figure=False,
+                         ring=o.get('ring', 0.022), contrast=o.get('contrast', 0.55),
+                         seed=rnd.randint(0, 1 << 30), blur=0.4)), w, h)
+        d = ImageDraw.Draw(img)
     elif wall == 'tile':
         # 지하 바의 정사각 타일(네온사인 v3). 칸마다 윤기가 달라야 한 판으로 안 보인다
         ts, gap = 38 * unit, 3 * unit
@@ -2193,6 +2190,16 @@ def neonwall(spec, w, h):
     img = ImageChops.screen(img, wash)
     img = _light(img, lay, 5 * unit, 1.8)
     img = ImageChops.screen(img, core)
+
+    # 바 천장 등. 위에서 떨어진 따뜻한 빛이 판자 위쪽에 고인다
+    if o.get('lamp'):
+        pool = Image.new('L', (w, h), 0)
+        for lx in o['lamp']:
+            ImageDraw.Draw(pool).ellipse([w * (lx - 0.42), -h * 0.22, w * (lx + 0.42), h * 0.30], fill=255)
+        pool = pool.filter(ImageFilter.GaussianBlur(w * 0.16))
+        lamp = gen.rgb(o.get('lamp_color', '#FFB066'))
+        img = ImageChops.screen(img, Image.merge('RGB', [pool.point(lambda v, c=c: v * c * o.get('lamp_gain', 0.22) // 255)
+                                                          for c in lamp]))
 
     # 가장자리 어둠. 없으면 벽이 화면 끝까지 고르게 밝아 조명이 아니라 벽지로 보인다
     vig = Image.new('L', (w, h), 0)

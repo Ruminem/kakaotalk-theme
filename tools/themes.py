@@ -1900,13 +1900,15 @@ _NEON_BASE = dict(bg='#100C14', bg_deep='#0A070D', surface='#1A1520', pressed='#
 
 def _neon_theme(no, variant, style, material, recv, send, recv_text, send_text, accent_dim,
                 signs, note, slug='neon', family='네온사인', face=('#3A1F1B', '#140C0B'),
-                surface='brick', lit=False):
+                surface='brick', lit=False, room=None):
     """네온사인 한 벌. 받은 쪽과 보낸 쪽이 서로 다른 네온 색이고, 벽의 낙서도 그 색을 쓴다.
 
     v2·v3 는 같은 말풍선 네 가지에 색 조합과 벽(surface)만 바꾼다. face 는 벽 면색과 틈 색이다.
     """
+    # room 은 채팅방·잠금화면에만 얹는 조명 같은 것. 목록은 위아래로 달라지면 머리 띠마다 층이 져서 뺀다
     wall = lambda count, dim: ('neonwall', face[0], face[1],
-                               dict(signs=signs, count=count, dim=dim, dim_to='#000000', wall=surface))
+                               dict(signs=signs, count=count, dim=dim, dim_to='#000000', wall=surface,
+                                    **(room or {})))
     return dict(_NEON_BASE, key='%s%d' % (slug, no), name='%s %s' % (family, variant), note=note,
                 family=family, variant=variant, char_style=style, material=material,
                 accent=send, accent_dim=accent_dim,
@@ -1970,7 +1972,8 @@ THEMES += [
 ]
 
 # v4 는 말풍선부터 새로 그렸다(charbubble 의 팔각·꺾쇠·밑줄·두 가닥). 벽은 바 안쪽 나무 판자
-_PLANK = dict(slug='neonbar', family='네온사인 v4', face=('#3A2A20', '#0C0806'), surface='plank', lit=True)
+_PLANK = dict(slug='neonbar', family='네온사인 v4', face=('#3A2A20', '#0C0806'), surface='plank', lit=True,
+              room=dict(lamp=[0.5], lamp_gain=0.3, grain_light='#A8744A', contrast=0.7))
 
 THEMES += [
     _neon_theme(309, '팔각', 'neon_octagon', 'tube', '#35E0FF', '#FF5CE1', '#D9F8FF', '#FFE0F8',
