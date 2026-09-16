@@ -24,7 +24,7 @@ import sys
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
-from PIL import Image, ImageChops, ImageDraw, ImageFilter
+from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageStat
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import themes  # noqa: E402
@@ -999,10 +999,44 @@ def background(t, spec, w, h, flat=False):
         color = t['accent'] if g[0] == 'auto' else g[0]
         # 배경은 면적이 넓어서 말풍선과 같은 세기로 넣으면 화면이 뿌예진다
         img = light_wash(img, color, int(g[1] * 0.8))
-    return header_safe(img, hard=bool(t.get('pixel_unit'))) if list_bg else img
+    if not list_bg:
+        return img
+    hard = bool(t.get('pixel_unit'))
+    fixed = header_safe(img, hard=hard)
+    if header_seam(fixed) > SEAM_MAX:
+        # 머리 띠 표가 덮는 높이보다 길어진 경우다. 멈추지 않고 띠 끝까지 덮어 다시 고친다
+        cover = round(HEADER_BANDS[-1] * img.height / SCREEN_H) + int(img.height * 0.02)
+        fixed = header_safe(img, hard=hard, cover=cover)
+        print('  목록 배경 층 고침: %s (%.1f)' % (t['name'], header_seam(fixed)), flush=True)
+    return fixed
 
 
-def header_safe(img, hard=False):
+# 목록 머리 띠의 경계. 402×874pt 폰 화면에서 잰 상태줄·제목·필터 칩 줄의 아래 끝(pt)
+HEADER_BANDS = (65, 118, 164)
+SCREEN_H = 874
+SEAM_MAX = 1.0      # 띠 경계에서 원래 이웃한 줄보다 더 튀어도 되는 색 차이(0~255 평균)
+
+
+def header_seam(img):
+    """목록 배경을 머리 띠마다 맨 위부터 새로 깔았을 때 경계에서 층이 지는 세기. 가장 센 경계 값.
+
+    띠 k 의 마지막 줄은 그림의 (띠 높이 - 1) 번째 줄이고, 다음 띠는 그림 0 번째 줄부터,
+    마지막 띠 아래 목록은 화면과 같은 줄부터 보인다. 그 두 줄의 차이에서 그림이 원래
+    그 자리에서 이웃한 두 줄의 차이를 뺀 값이 층의 세기다 — 결 고운 질감은 원래 줄마다 달라서 뺀다.
+    """
+    w, h = img.size
+    row = lambda y: img.crop((0, y, w, y + 1))
+    diff = lambda a, b: sum(ImageStat.Stat(ImageChops.difference(a, b)).mean) / 3
+    ys = [round(b * h / SCREEN_H) for b in HEADER_BANDS]
+    top, worst = 0, 0.0
+    for i, y in enumerate(ys):
+        lower = row(0) if i + 1 < len(ys) else row(y)
+        worst = max(worst, diff(row(y - top - 1), lower) - diff(row(y - 1), row(y)))
+        top = y
+    return worst
+
+
+def header_safe(img, hard=False, cover=None):
     """목록 배경의 위쪽을 줄마다 같게 만든다.
 
     iOS 카톡은 목록 머리(상태줄·제목·필터 칩 줄)를 띠마다 따로 그리고 띠마다 배경을 맨 위부터
@@ -1013,8 +1047,8 @@ def header_safe(img, hard=False):
     도트 계열(hard)은 반투명으로 섞으면 칸이 번지므로 한 줄에서 바로 넘어간다.
     """
     w, h = img.size
-    y1 = int(h * 0.21)
-    y2 = y1 + 1 if hard else int(h * 0.33)
+    y1 = max(int(h * 0.21), cover or 0)
+    y2 = y1 + 1 if hard else max(int(h * 0.33), y1 + int(h * 0.12))
     smear = img.crop((0, 0, w, y2)).resize((w, 1), Image.BOX).resize((w, h))
     mask = Image.linear_gradient('L').resize((1, y2 - y1)).resize((w, y2 - y1))
     fade = Image.new('L', (w, h), 0)
