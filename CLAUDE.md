@@ -440,11 +440,26 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 
 끝과 실패도 같이 본다 — 성공 표시만 기다리면 실패했을 때 조용히 멈춘 것처럼 보인다.
 
+**알림에 단계를 붙인다.** 빌드는 소스 생성 → 패키징 → (릴리스면) 업로드 순이고, 단계마다 10% 씩 따로 센다.
+`.ktheme` 만 셌더니 0.35.1 에서 앞의 소스 생성과 미리보기 3분 47초 동안 0% 로 멈춰 보였다.
+소스 생성은 `build-src/<테마>/android` 폴더 수로 센다 — iOS 를 다 만든 뒤에 생긴다.
+미리보기는 배포 빌드에서 다시 그리지 않는다(`gen.py --no-preview`). 커밋된 그림과 바이트까지 같았다.
+
 ```bash
-mark=$(mktemp); start=$(date +%s); total=84
-n=$(find dist/iOS -name '*.ktheme' -newer "$mark" 2>/dev/null | wc -l); e=$(( $(date +%s) - start ))
-echo "[$(date +%H:%M:%S)] 빌드 $(( n * 100 / total ))% — $n/$total · 경과 $((e/60))분 $((e%60))초"
+mark=$(mktemp); start=$(date +%s); total=220; last=
+while :; do
+  e=$(( $(date +%s) - start )); t="[$(date +%H:%M:%S)]"; w="경과 $((e/60))분 $((e%60))초"
+  grep -q '^EXIT' rel.log && { echo "$t 끝남: $(grep '^EXIT' rel.log) · 총 $((e/60))분 $((e%60))초"; break; }
+  if grep -q '^자산 ' rel.log; then [ "$last" != 업로드 ] && echo "$t 빌드 끝, 자산 업로드 중 · $w"; last=업로드; sleep 10; continue
+  elif grep -q '개 테마 -> build-src' rel.log; then stage=패키징; n=$(find dist/iOS -name '*.ktheme' -newer "$mark" 2>/dev/null | wc -l)
+  else stage='소스 생성'; n=$(find build-src -mindepth 2 -maxdepth 2 -name android -newer "$mark" 2>/dev/null | wc -l); fi
+  key="$stage $(( n * 10 / total ))"
+  [ "$key" != "$last" ] && { echo "$t $stage $(( n * 100 / total ))% — $n/$total · $w"; last=$key; }
+  sleep 10
+done
 ```
+
+실패 줄(`throw`·`실패`·`Exception`)도 같은 루프에서 한 번 알린다.
 
 ## 미리보기 규칙
 
@@ -498,6 +513,13 @@ GitHub 앱에서 WebP 가 뜨는지는 확인 전이다.
 **방향만 있고 굴곡이 없는 질감은 흐리지 않는다**(`flat_list=False`). 나무결과 벽돌 줄눈이 그렇다 —
 어디서 잘라도 같은 무늬라 위에 무엇이 얹혀도 잘린 자국이 안 생긴다. 흐리면 그냥 갈색 판이 되어
 질감을 넣은 뜻이 없어진다. 옹이나 판자 이음새는 그 성질을 깨므로 목록 쪽 그림에서는 뺀다.
+
+**목록 머리는 띠마다 배경을 맨 위부터 새로 깐다**(iOS, 폰 화면에서 확인). 상태줄·제목·필터 칩 줄이
+따로 그려져서, 위아래로 달라지는 그림이면 띠 경계마다 층이 진다. 아크릴의 기운 판이 띠마다 끊겨
+사용자가 "층 생기는 거 못생겼다" 고 했고, 재 보니 그라데이션은 색 계단으로, 줄무늬·벽돌·체크는
+어긋난 줄로 110벌 거의 전부가 그랬다. 그래서 `gen.header_safe` 가 모든 목록 배경의 위 21% 를
+열마다 평균 색으로 채우고 33% 까지 원래 그림으로 섞어 넘긴다(도트는 섞지 않고 한 줄에서 넘어간다).
+테마마다 따로 막지 않는다. 띠 경계는 402×874pt 화면에서 65·118·164pt 였다.
 
 `assets/` 와 `docs/` 는 저장소에 넣는다. README 가 그 그림들로 테마 목록을 만들기 때문이다.
 **그림은 `assets/`, 글은 `docs/`** 로 나눈다 — 문서 폴더에 PNG 수십 장이 섞이면 뭐가 있는지 안 보인다.

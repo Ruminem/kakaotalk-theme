@@ -3018,6 +3018,23 @@ def acrylic(spec, w, h):
     rnd = random.Random(o.get('seed', 20261154))
     img = Image.new('RGBA', (w, h), gen.rgb(spec[1]) + (255,))
     ew = max(2, int(w * 0.006))
+    if o.get('bare'):
+        # 기운 큰 판은 목록의 반투명 셀마다 잘려 보였다. 화면 끝까지 닿는 세로 판만 두어
+        # 어느 높이에서 잘려도 같은 무늬로 한다
+        x = rnd.uniform(-0.15, 0.05) * w
+        while x < w:
+            sw, col = rnd.uniform(0.2, 0.34) * w, rnd.choice(o['sheets'])
+            lay = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+            ld = ImageDraw.Draw(lay)
+            ld.rectangle([x + ew * 2, -ew, x + sw + ew * 2, h + ew],
+                         fill=gen.rgb(o.get('shadow', '#3C325A')) + (30,))
+            ld.rectangle([x, -ew * 4, x + sw, h + ew * 4], fill=gen.rgb(col) + (55,),
+                         outline=gen.rgb(gen.mix(col, '#000000', 0.08)) + (235,), width=ew)
+            ld.rectangle([x + ew * 1.6, -ew * 4, x + sw - ew * 1.6, h + ew * 4],
+                         outline=(255, 255, 255, 150), width=max(1, ew // 2))
+            img.alpha_composite(lay)
+            x += sw * rnd.uniform(0.6, 0.9)
+        return _dim(img.convert('RGB'), o)
     for _ in range(int(9 * h / w)):
         sw, sh = int(rnd.uniform(0.35, 0.7) * w), int(rnd.uniform(0.1, 0.22) * h)
         col = rnd.choice(o['sheets'])
