@@ -173,34 +173,54 @@
 <td align="center"><b><a href="docs/themes/lights.md#user-content-레드"><img src="assets/icon-red-image.png" width="20" valign="middle"> 레드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검붉은 바탕에 새빨간 말풍선 네 칸</td>
 </tr>
 <tr>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-블루"><img src="assets/preview-blue-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-퍼플"><img src="assets/preview-purple-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-그린"><img src="assets/preview-green-image-chat.webp" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><b><a href="docs/themes/lights.md#user-content-블루"><img src="assets/icon-blue-image.png" width="20" valign="middle"> 블루</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검푸른 바탕에 파랑 말풍선 네 칸</td>
+<td align="center"><b><a href="docs/themes/lights.md#user-content-퍼플"><img src="assets/icon-purple-image.png" width="20" valign="middle"> 퍼플</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검보랏빛 바탕에 보라 말풍선 네 칸</td>
+<td align="center"><b><a href="docs/themes/lights.md#user-content-그린"><img src="assets/icon-green-image.png" width="20" valign="middle"> 그린</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검초록 바탕에 초록 말풍선 네 칸</td>
+</tr>
+<tr>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-골드"><img src="assets/preview-gold-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-핑크"><img src="assets/preview-pink-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/lights.md#user-content-불꽃놀이"><img src="assets/preview-firework-image-chat.webp" width="190"></a></td>
+</tr>
+<tr>
+<td align="center"><b><a href="docs/themes/lights.md#user-content-골드"><img src="assets/icon-gold-image.png" width="20" valign="middle"> 골드</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검갈색 바탕에 금빛 말풍선 네 칸</td>
+<td align="center"><b><a href="docs/themes/lights.md#user-content-핑크"><img src="assets/icon-pink-image.png" width="20" valign="middle"> 핑크</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검자줏빛 바탕에 분홍 말풍선 네 칸</td>
+<td align="center"><b><a href="docs/themes/lights.md#user-content-불꽃놀이"><img src="assets/icon-firework-image.png" width="20" valign="middle"> 불꽃놀이</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>남색 밤 바탕에 금빛·분홍 말풍선</td>
+</tr>
+<tr>
 <td width="33%" align="center"><a href="docs/themes/lights.md#user-content-연등"><img src="assets/preview-lantern-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/lights.md#user-content-알전구"><img src="assets/preview-garland-image-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-고속도로"><img src="assets/preview-highway-image-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><b><a href="docs/themes/lights.md#user-content-불꽃놀이"><img src="assets/icon-firework-image.png" width="20" valign="middle"> 불꽃놀이</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>남색 밤 바탕에 금빛·분홍 말풍선</td>
 <td align="center"><b><a href="docs/themes/lights.md#user-content-연등"><img src="assets/icon-lantern-image.png" width="20" valign="middle"> 연등</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>자줏빛 밤 바탕에 분홍·노랑 연등 색</td>
 <td align="center"><b><a href="docs/themes/lights.md#user-content-알전구"><img src="assets/icon-garland-image.png" width="20" valign="middle"> 알전구</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>짙은 갈색 바탕에 금빛 말풍선</td>
+<td align="center"><b><a href="docs/themes/lights.md#user-content-고속도로"><img src="assets/icon-highway-image.png" width="20" valign="middle"> 고속도로</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검푸른 바탕에 빨강·주황 말풍선</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-고속도로"><img src="assets/preview-highway-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/lights.md#user-content-터미널"><img src="assets/preview-terminal-image-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/lights.md#user-content-네온사인"><img src="assets/preview-neon-double-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-네온사인-v2"><img src="assets/preview-neonalley-double-chat.webp" width="190"></a></td>
 </tr>
 <tr>
-<td align="center"><b><a href="docs/themes/lights.md#user-content-고속도로"><img src="assets/icon-highway-image.png" width="20" valign="middle"> 고속도로</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검푸른 바탕에 빨강·주황 말풍선</td>
 <td align="center"><b><a href="docs/themes/lights.md#user-content-터미널"><img src="assets/icon-terminal-image.png" width="20" valign="middle"> 터미널</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 초록 바탕에 형광 초록·호박색 말풍선</td>
 <td align="center"><b><a href="docs/themes/lights.md#user-content-네온사인"><img src="assets/icon-neon-double.png" width="20" valign="middle"> 네온사인</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>벽돌 벽에 관 두 줄 네온. 첫 말엔 네온 별</td>
+<td align="center"><b><a href="docs/themes/lights.md#user-content-네온사인-v2"><img src="assets/icon-neonalley-double.png" width="20" valign="middle"> 네온사인 v2</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>셔터 내린 골목에 관 두 줄 네온. 민트와 마젠타</td>
 </tr>
 <tr>
-<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-네온사인-v2"><img src="assets/preview-neonalley-double-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/lights.md#user-content-네온사인-v3"><img src="assets/preview-neontile-double-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="docs/themes/lights.md#user-content-네온사인-v4"><img src="assets/preview-neonbar-octagon-chat.webp" width="190"></a></td>
+<td width="33%"></td>
 </tr>
 <tr>
-<td align="center"><b><a href="docs/themes/lights.md#user-content-네온사인-v2"><img src="assets/icon-neonalley-double.png" width="20" valign="middle"> 네온사인 v2</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>셔터 내린 골목에 관 두 줄 네온. 민트와 마젠타</td>
 <td align="center"><b><a href="docs/themes/lights.md#user-content-네온사인-v3"><img src="assets/icon-neontile-double.png" width="20" valign="middle"> 네온사인 v3</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>지하 바 타일 벽에 관 두 줄 네온. 노랑과 빨강</td>
 <td align="center"><b><a href="docs/themes/lights.md#user-content-네온사인-v4"><img src="assets/icon-neonbar-octagon.png" width="20" valign="middle"> 네온사인 v4</a></b><br><sub>팔각 · 꺾쇠 · 밑줄 · 두 가닥</sub><br>모서리를 깎은 팔각 네온관. 첫 말엔 번개</td>
+<td width="33%"></td>
 </tr>
 </table>
 
