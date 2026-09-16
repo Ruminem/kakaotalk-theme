@@ -878,6 +878,8 @@ CATEGORY = {
     '고속도로': '불빛',
     '터미널': '불빛',
     '네온사인': '불빛',
+    '네온사인 v2': '불빛',
+    '네온사인 v3': '불빛',
 
     '우체국': '캐릭터',
     '책상': '캐릭터',
@@ -1772,12 +1774,16 @@ _NEON_BASE = dict(bg='#100C14', bg_deep='#0A070D', surface='#1A1520', pressed='#
 
 
 def _neon_theme(no, variant, style, material, recv, send, recv_text, send_text, accent_dim,
-                signs, note):
-    """네온사인 한 벌. 받은 쪽과 보낸 쪽이 서로 다른 네온 색이고, 벽의 낙서도 그 색을 쓴다."""
-    wall = lambda count, dim: ('neonwall', '#3A1F1B', '#140C0B',
-                               dict(signs=signs, count=count, dim=dim, dim_to='#000000'))
-    return dict(_NEON_BASE, key='neon%d' % no, name='네온사인 %s' % variant, note=note,
-                family='네온사인', variant=variant, char_style=style, material=material,
+                signs, note, slug='neon', family='네온사인', face=('#3A1F1B', '#140C0B'),
+                surface='brick'):
+    """네온사인 한 벌. 받은 쪽과 보낸 쪽이 서로 다른 네온 색이고, 벽의 낙서도 그 색을 쓴다.
+
+    v2·v3 는 같은 말풍선 네 가지에 색 조합과 벽(surface)만 바꾼다. face 는 벽 면색과 틈 색이다.
+    """
+    wall = lambda count, dim: ('neonwall', face[0], face[1],
+                               dict(signs=signs, count=count, dim=dim, dim_to='#000000', wall=surface))
+    return dict(_NEON_BASE, key='%s%d' % (slug, no), name='%s %s' % (family, variant), note=note,
+                family=family, variant=variant, char_style=style, material=material,
                 accent=send, accent_dim=accent_dim,
                 send=(send, send), send_alt=(send, send), recv=(recv, recv), recv_alt=(recv, recv),
                 send_text=send_text, recv_text=recv_text,
@@ -1787,8 +1793,8 @@ def _neon_theme(no, variant, style, material, recv, send, recv_text, send_text, 
                 # 무늬라 어디서 잘려도 같아서 흐리지 않고(flat_list=False), 셀을 반투명하게 해 벽이 비치게 한다
                 flat_list=False, cell_alpha=0.5,
                 chat_bg=wall(5, 0.45), passcode_bg=wall(6, 0.12),
-                main_bg=('neonwall', '#3A1F1B', '#140C0B',
-                         dict(signs=[], count=0, dim=0.22, dim_to='#000000')))
+                main_bg=('neonwall', face[0], face[1],
+                         dict(signs=[], count=0, dim=0.22, dim_to='#000000', wall=surface)))
 
 
 THEMES += [
@@ -1804,6 +1810,37 @@ THEMES += [
     _neon_theme(148, '말꼬리', 'neon_speech', 'tube', '#FFD23F', '#FF3B6B', '#FFF6D6', '#FFE0E8',
                 '#C42A52', [('star', '#FFD23F'), ('heart', '#FF3B6B'), ('arrow', '#35E0FF')],
                 '꼬리까지 관 하나로 이어진 네온 말풍선'),
+]
+
+# v2 는 셔터 내린 골목, v3 는 지하 바 타일 벽. 말풍선 네 가지는 같고 색 조합은 v1 에 없던 짝이다
+_ALLEY = dict(slug='neonalley', family='네온사인 v2', face=('#2C333D', '#0E1116'), surface='shutter')
+_TILE = dict(slug='neontile', family='네온사인 v3', face=('#173338', '#07100F'), surface='tile')
+
+THEMES += [
+    _neon_theme(225, '이중관', 'neon_double', 'tube', '#FF5CE1', '#3FFFD2', '#FFE0F8', '#DAFFF5',
+                '#22B894', [('star', '#3FFFD2'), ('heart', '#FF5CE1'), ('bolt', '#FFD23F')],
+                '셔터 내린 골목에 관 두 줄 네온. 민트와 마젠타', **_ALLEY),
+    _neon_theme(226, '간판', 'neon_sign', 'sign', '#FFD23F', '#35E0FF', '#FFF6D6', '#D9F8FF',
+                '#2399B0', [('bolt', '#FFD23F'), ('arrow', '#35E0FF'), ('moon', '#FF5CE1')],
+                '셔터 위 금속 간판 네온. 노랑과 하늘색', **_ALLEY),
+    _neon_theme(227, '전극', 'neon_electrode', 'tube', '#FF7A2F', '#4D7CFF', '#FFE6D6', '#DFE7FF',
+                '#3A5CC4', [('arrow', '#FF7A2F'), ('moon', '#4D7CFF'), ('star', '#3FFFD2')],
+                '셔터 골목의 전극 달린 네온관. 주황과 파랑', **_ALLEY),
+    _neon_theme(228, '말꼬리', 'neon_speech', 'tube', '#B45CFF', '#4CFF88', '#EFE0FF', '#DDFFE8',
+                '#2FB860', [('heart', '#B45CFF'), ('star', '#4CFF88'), ('arrow', '#FF7A2F')],
+                '셔터 골목에 꼬리까지 이어진 네온. 보라와 초록', **_ALLEY),
+    _neon_theme(229, '이중관', 'neon_double', 'tube', '#FFD23F', '#FF3B6B', '#FFF6D6', '#FFE0E8',
+                '#C42A52', [('heart', '#FF3B6B'), ('moon', '#FFD23F'), ('star', '#35E0FF')],
+                '지하 바 타일 벽에 관 두 줄 네온. 노랑과 빨강', **_TILE),
+    _neon_theme(230, '간판', 'neon_sign', 'sign', '#4CFF88', '#FF3FA4', '#DDFFE8', '#FFE0F0',
+                '#C42D7E', [('star', '#FF3FA4'), ('bolt', '#4CFF88'), ('moon', '#B45CFF')],
+                '타일 벽 금속 간판 네온. 초록과 분홍', **_TILE),
+    _neon_theme(231, '전극', 'neon_electrode', 'tube', '#35E0FF', '#FF7A2F', '#D9F8FF', '#FFE6D6',
+                '#C85A1E', [('bolt', '#FF7A2F'), ('heart', '#35E0FF'), ('arrow', '#FFD23F')],
+                '타일 벽의 전극 달린 네온관. 하늘색과 주황', **_TILE),
+    _neon_theme(232, '말꼬리', 'neon_speech', 'tube', '#4D7CFF', '#FFD23F', '#DFE7FF', '#FFF6D6',
+                '#C4A02A', [('moon', '#FFD23F'), ('star', '#4D7CFF'), ('heart', '#FF5CE1')],
+                '타일 벽에 꼬리까지 이어진 네온. 파랑과 노랑', **_TILE),
 ]
 
 # --- 도트 모험 --------------------------------------------------------------

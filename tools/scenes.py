@@ -2120,18 +2120,45 @@ def neonwall(spec, w, h):
     brick, mortar = gen.rgb(spec[1]), gen.rgb(spec[2])
     img = Image.new('RGB', (w, h), mortar)
     d = ImageDraw.Draw(img)
-    bw_, bh_ = 64 * unit, 26 * unit
-    j = 0
-    y = 0.0
-    while y < h:
-        x = -(bw_ / 2 if j % 2 else 0)
-        while x < w:
-            k = rnd.uniform(0.78, 1.12)
-            c = tuple(min(255, int(v * k)) for v in brick)
-            d.rectangle([x + 2 * unit, y + 2 * unit, x + bw_ - 2 * unit, y + bh_ - 2 * unit], fill=c)
-            x += bw_
-        y += bh_
-        j += 1
+    shade = lambda k: tuple(max(0, min(255, int(v * k))) for v in brick)
+    wall = o.get('wall', 'brick')
+    if wall == 'shutter':
+        # 셔터 내린 골목(네온사인 v2). 가로 골마다 위는 빛을 받고 아래는 그늘진다.
+        # 골만 반복되는 무늬라 목록에서 어디서 잘려도 같다
+        sh_ = 15 * unit
+        y = 0.0
+        while y < h:
+            k = rnd.uniform(0.9, 1.06)
+            d.rectangle([0, y, w, y + sh_], fill=shade(k))
+            d.rectangle([0, y, w, y + sh_ * 0.3], fill=shade(k * 1.3))
+            d.rectangle([0, y + sh_ * 0.78, w, y + sh_], fill=shade(k * 0.55))
+            y += sh_
+    elif wall == 'tile':
+        # 지하 바의 정사각 타일(네온사인 v3). 칸마다 윤기가 달라야 한 판으로 안 보인다
+        ts, gap = 38 * unit, 3 * unit
+        y = 0.0
+        while y < h:
+            x = 0.0
+            while x < w:
+                k = rnd.uniform(0.82, 1.1)
+                d.rectangle([x + gap, y + gap, x + ts, y + ts], fill=shade(k))
+                d.line([(x + gap, y + gap), (x + ts, y + gap)], fill=shade(k * 1.35),
+                       width=max(1, int(1.5 * unit)))
+                x += ts
+            y += ts
+    else:
+        bw_, bh_ = 64 * unit, 26 * unit
+        j = 0
+        y = 0.0
+        while y < h:
+            x = -(bw_ / 2 if j % 2 else 0)
+            while x < w:
+                k = rnd.uniform(0.78, 1.12)
+                c = tuple(min(255, int(v * k)) for v in brick)
+                d.rectangle([x + 2 * unit, y + 2 * unit, x + bw_ - 2 * unit, y + bh_ - 2 * unit], fill=c)
+                x += bw_
+            y += bh_
+            j += 1
 
     signs = o.get('signs', [('heart', '#FF3FA4'), ('star', '#35E0FF')])
     lay = Image.new('RGB', (w, h))

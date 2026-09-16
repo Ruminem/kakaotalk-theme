@@ -192,6 +192,16 @@
 <td align="center"><b><a href="docs/themes/lights.md#user-content-터미널"><img src="assets/icon-terminal-image.png" width="20" valign="middle"> 터미널</a></b><br><sub>기본 · 배경 · 글로우 · 글로우+배경</sub><br>검은 초록 바탕에 형광 초록·호박색 말풍선</td>
 <td align="center"><b><a href="docs/themes/lights.md#user-content-네온사인"><img src="assets/icon-neon-double.png" width="20" valign="middle"> 네온사인</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>벽돌 벽에 관 두 줄 네온. 첫 말엔 네온 별</td>
 </tr>
+<tr>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-네온사인-v2"><img src="assets/preview-neonalley-double-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights.md#user-content-네온사인-v3"><img src="assets/preview-neontile-double-chat.webp" width="190"></a></td>
+<td width="33%"></td>
+</tr>
+<tr>
+<td align="center"><b><a href="docs/themes/lights.md#user-content-네온사인-v2"><img src="assets/icon-neonalley-double.png" width="20" valign="middle"> 네온사인 v2</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>셔터 내린 골목에 관 두 줄 네온. 민트와 마젠타</td>
+<td align="center"><b><a href="docs/themes/lights.md#user-content-네온사인-v3"><img src="assets/icon-neontile-double.png" width="20" valign="middle"> 네온사인 v3</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>지하 바 타일 벽에 관 두 줄 네온. 노랑과 빨강</td>
+<td width="33%"></td>
+</tr>
 </table>
 
 **[캐릭터](docs/themes/character.md)** — 말풍선 모양과 캐릭터 프로필
