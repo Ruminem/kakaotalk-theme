@@ -62,12 +62,12 @@
 <tr>
 <td width="33%" align="center"><a href="#user-content-네온사인-v3"><img src="../../assets/preview-neontile-double-chat.webp" width="190"></a></td>
 <td width="33%" align="center"><a href="#user-content-네온사인-v4"><img src="../../assets/preview-neonbar-octagon-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="#user-content-네온사인-v5"><img src="../../assets/preview-neongarden-octagon-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="#user-content-네온사인-v5"><img src="../../assets/preview-neonlounge-octagon-chat.webp" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><b><a href="#user-content-네온사인-v3"><img src="../../assets/icon-neontile-double.png" width="20" valign="middle"> 네온사인 v3</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>지하 바 타일 벽에 관 두 줄 네온. 노랑과 빨강</td>
 <td align="center"><b><a href="#user-content-네온사인-v4"><img src="../../assets/icon-neonbar-octagon.png" width="20" valign="middle"> 네온사인 v4</a></b><br><sub>팔각 · 꺾쇠 · 밑줄 · 두 가닥</sub><br>모서리를 깎은 팔각 네온관. 첫 말엔 번개</td>
-<td align="center"><b><a href="#user-content-네온사인-v5"><img src="../../assets/icon-neongarden-octagon.png" width="20" valign="middle"> 네온사인 v5</a></b><br><sub>팔각 · 꺾쇠 · 밑줄 · 두 가닥</sub><br>잎 벽에 걸린 팔각 네온관. 분홍과 노랑</td>
+<td align="center"><b><a href="#user-content-네온사인-v5"><img src="../../assets/icon-neonlounge-octagon.png" width="20" valign="middle"> 네온사인 v5</a></b><br><sub>팔각 · 꺾쇠 · 밑줄 · 두 가닥</sub><br>미장 벽에 걸린 팔각 네온관. 분홍과 노랑</td>
 </tr>
 </table>
 
@@ -668,36 +668,36 @@
 
 <a name="네온사인-v5"></a>
 
-## <a href="#user-content-네온사인-v5"><img src="../../assets/icon-neongarden-octagon.png" width="26" valign="middle"></a> 네온사인 v5 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
+## <a href="#user-content-네온사인-v5"><img src="../../assets/icon-neonlounge-octagon.png" width="26" valign="middle"></a> 네온사인 v5 &nbsp;<a href="#user-content-theme-list"><img src="../../assets/btn-top.png" height="26" valign="middle" alt="↑ 테마 목록"></a>
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neongarden-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>잎 벽에 걸린 팔각 네온관. 분홍과 노랑</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neongarden-octagon.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neongarden-octagon.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neongarden-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>잎 벽에 모서리만 켜진 꺾쇠 네온. 하늘색과 주황</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neongarden-bracket.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neongarden-bracket.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonlounge-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>미장 벽에 걸린 팔각 네온관. 분홍과 노랑</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonlounge-octagon.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonlounge-octagon.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonlounge-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>미장 벽에 모서리만 켜진 꺾쇠 네온. 하늘색과 주황</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonlounge-bracket.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonlounge-bracket.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neongarden-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>잎 벽에 아래변만 빛나는 네온. 보라와 노랑</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neongarden-underline.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neongarden-underline.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neongarden-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>잎 벽에 두 색 관이 갈리는 네온. 파랑과 분홍</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neongarden-split.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neongarden-split.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonlounge-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>미장 벽에 아래변만 빛나는 네온. 보라와 노랑</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonlounge-underline.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonlounge-underline.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonlounge-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>미장 벽에 두 색 관이 갈리는 네온. 파랑과 분홍</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonlounge-split.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonlounge-split.apk">Android</a></td>
 </tr>
 </table>
 
 <details><summary>화면 더 보기 (목록 · 잠금화면 · 실행화면)</summary>
 
-**팔각** — 잎 벽에 걸린 팔각 네온관. 분홍과 노랑
+**팔각** — 미장 벽에 걸린 팔각 네온관. 분홍과 노랑
 
-<img src="../../assets/preview-neongarden-octagon-list.webp" width="180"> <img src="../../assets/preview-neongarden-octagon-passcode.webp" width="180"> <img src="../../assets/preview-neongarden-octagon-splash.webp" width="180">
+<img src="../../assets/preview-neonlounge-octagon-list.webp" width="180"> <img src="../../assets/preview-neonlounge-octagon-passcode.webp" width="180"> <img src="../../assets/preview-neonlounge-octagon-splash.webp" width="180">
 
-**꺾쇠** — 잎 벽에 모서리만 켜진 꺾쇠 네온. 하늘색과 주황
+**꺾쇠** — 미장 벽에 모서리만 켜진 꺾쇠 네온. 하늘색과 주황
 
-<img src="../../assets/preview-neongarden-bracket-list.webp" width="180"> <img src="../../assets/preview-neongarden-bracket-passcode.webp" width="180"> <img src="../../assets/preview-neongarden-bracket-splash.webp" width="180">
+<img src="../../assets/preview-neonlounge-bracket-list.webp" width="180"> <img src="../../assets/preview-neonlounge-bracket-passcode.webp" width="180"> <img src="../../assets/preview-neonlounge-bracket-splash.webp" width="180">
 
-**밑줄** — 잎 벽에 아래변만 빛나는 네온. 보라와 노랑
+**밑줄** — 미장 벽에 아래변만 빛나는 네온. 보라와 노랑
 
-<img src="../../assets/preview-neongarden-underline-list.webp" width="180"> <img src="../../assets/preview-neongarden-underline-passcode.webp" width="180"> <img src="../../assets/preview-neongarden-underline-splash.webp" width="180">
+<img src="../../assets/preview-neonlounge-underline-list.webp" width="180"> <img src="../../assets/preview-neonlounge-underline-passcode.webp" width="180"> <img src="../../assets/preview-neonlounge-underline-splash.webp" width="180">
 
-**두 가닥** — 잎 벽에 두 색 관이 갈리는 네온. 파랑과 분홍
+**두 가닥** — 미장 벽에 두 색 관이 갈리는 네온. 파랑과 분홍
 
-<img src="../../assets/preview-neongarden-split-list.webp" width="180"> <img src="../../assets/preview-neongarden-split-passcode.webp" width="180"> <img src="../../assets/preview-neongarden-split-splash.webp" width="180">
+<img src="../../assets/preview-neonlounge-split-list.webp" width="180"> <img src="../../assets/preview-neonlounge-split-passcode.webp" width="180"> <img src="../../assets/preview-neonlounge-split-splash.webp" width="180">
 
 </details>
 

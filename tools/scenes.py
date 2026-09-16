@@ -2143,33 +2143,16 @@ def neonwall(spec, w, h):
                          ring=o.get('ring', 0.022), contrast=o.get('contrast', 0.55),
                          seed=rnd.randint(0, 1 << 30), blur=0.4)), w, h)
         d = ImageDraw.Draw(img)
-    elif wall == 'foliage':
-        # 잎이 빽빽한 식물 벽(네온사인 v5). 뒤 겹은 어둡고 흐리게, 앞 겹은 밝고 또렷하게 쌓아
-        # 깊이를 낸다. 큰 덩어리 없이 고르게 덮여서 목록에서 어디서 잘려도 같은 질감이다
-        img = Image.new('RGB', (w, h), mortar)
-        for layer in range(4):
-            lay = Image.new('RGBA', (w, h), (0, 0, 0, 0))
-            ld = ImageDraw.Draw(lay)
-            k = 0.45 + layer * 0.22
-            size = (30 - layer * 3) * unit
-            for _ in range(int(w * h / (size * size) * 0.9)):
-                cx, cy = rnd.uniform(-size, w + size), rnd.uniform(-size, h + size)
-                a = rnd.uniform(0, math.pi * 2)
-                L, Wd = size * rnd.uniform(0.8, 1.3), size * rnd.uniform(0.32, 0.45)
-                ca, sa = math.cos(a), math.sin(a)
-                pts = []
-                for i in range(13):
-                    tt = i / 12.0
-                    pts.append((tt * 2 - 1, math.sin(tt * math.pi) * (1 - 0.25 * tt)))
-                pts += [(x_, -y_) for x_, y_ in reversed(pts)]
-                poly = [(cx + x_ * L * ca - y_ * Wd * sa, cy + x_ * L * sa + y_ * Wd * ca) for x_, y_ in pts]
-                c = shade(k * rnd.uniform(0.8, 1.2))
-                ld.polygon(poly, fill=c + (255,))
-                ld.line([(cx - L * ca * 0.9, cy - L * sa * 0.9), (cx + L * ca * 0.9, cy + L * sa * 0.9)],
-                        fill=shade(k * 0.7) + (160,), width=max(1, int(unit)))
-            if layer < 2:
-                lay = lay.filter(ImageFilter.GaussianBlur((2 - layer) * 1.2 * unit))
-            img.paste(lay, (0, 0), lay)
+    elif wall == 'plaster':
+        # 짙은 미장 벽(네온사인 v5). 잎 벽은 요란해 네온과 다퉜다 — 무늬 없이 흙손 자국 같은 옅은 얼룩과
+        # 고운 알갱이만 두고, 분위기는 조명(wash)이 만든다. 얼룩은 크기가 다른 잡음 셋을 아주 옅게 겹친다
+        img = gen.vgradient(w, h, brick, mortar)
+        for n, k in ((3, 1.25), (9, 1.12), (28, 0.9)):
+            m = _noise(rnd, n, max(2, int(n * h / w)), w, h).point(lambda v: abs(v - 128) // 6)
+            img = Image.composite(Image.new('RGB', (w, h), shade(k)), img, m)
+        grain = Image.new('L', (w, h))
+        grain.putdata([rnd.randint(0, 22) for _ in range(w * h)])
+        img = Image.composite(Image.new('RGB', (w, h), shade(1.25)), img, grain)
         d = ImageDraw.Draw(img)
     elif wall == 'tile':
         # 지하 바의 정사각 타일(네온사인 v3). 칸마다 윤기가 달라야 한 판으로 안 보인다
@@ -2218,6 +2201,18 @@ def neonwall(spec, w, h):
     img = ImageChops.screen(img, wash)
     img = _light(img, lay, 5 * unit, 1.8)
     img = ImageChops.screen(img, core)
+
+    # 벽 위쪽 간접등. 벽을 쓸어내리는 부채꼴 빛이라 위가 밝고 아래로 퍼지며 사그라든다
+    if o.get('wash_lamps'):
+        pool = Image.new('L', (w, h), 0)
+        pd_ = ImageDraw.Draw(pool)
+        for lx in o['wash_lamps']:
+            for r_, a_ in ((0.55, 70), (0.36, 120), (0.18, 170)):
+                pd_.ellipse([w * (lx - r_ * 0.55), -h * r_ * 0.35, w * (lx + r_ * 0.55), h * r_], fill=a_)
+        pool = pool.filter(ImageFilter.GaussianBlur(w * 0.07))
+        lamp = gen.rgb(o.get('lamp_color', '#FFD9A8'))
+        img = ImageChops.screen(img, Image.merge('RGB', [pool.point(lambda v, c=c: v * c * o.get('lamp_gain', 0.3) // 255)
+                                                          for c in lamp]))
 
     # 바 천장 등. 위에서 떨어진 따뜻한 빛이 판자 위쪽에 고인다
     if o.get('lamp'):

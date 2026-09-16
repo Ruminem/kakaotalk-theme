@@ -1908,7 +1908,7 @@ def _neon_theme(no, variant, style, material, recv, send, recv_text, send_text, 
     """
     # room 은 채팅방·잠금화면에만 얹는 조명 같은 것. 목록은 위아래로 달라지면 머리 띠마다 층이 져서 뺀다
     wall = lambda count, dim: ('neonwall', face[0], face[1],
-                               dict(signs=signs, count=count, dim=dim, dim_to='#000000', wall=surface,
+                               dict(dict(signs=signs, count=count, dim=dim, dim_to='#000000', wall=surface),
                                     **(room or {})))
     return dict(_NEON_BASE, key='%s%d' % (slug, no), name='%s %s' % (family, variant), note=note,
                 family=family, variant=variant, char_style=style, material=material,
@@ -1991,22 +1991,24 @@ THEMES += [
                 '두 색 관이 모서리 틈에서 갈리는 네온', **_PLANK),
 ]
 
-# v5 는 v4 의 말풍선 네 가지를 잎이 빽빽한 식물 벽에 건다. 초록 네온은 잎에 묻혀 색 짝에서 뺐다
-_GARDEN = dict(slug='neongarden', family='네온사인 v5', face=('#244A2B', '#040A05'), surface='foliage', lit=True)
+# v5 는 v4 의 말풍선 네 가지를 짙은 미장 벽에 건다. 잎 벽은 요란해 네온과 다퉈서, 무늬 없는 벽에
+# 위쪽 간접등만 두고 낙서도 셋으로 줄였다 — 고급 레스토랑 벽의 네온사인이다
+_LOUNGE = dict(slug='neonlounge', family='네온사인 v5', face=('#2A2826', '#121110'), surface='plaster', lit=True,
+               room=dict(wash_lamps=[0.22, 0.78], lamp_gain=0.55, count=3))
 
 THEMES += [
     _neon_theme(313, '팔각', 'neon_octagon', 'tube', '#FF5CE1', '#FFD23F', '#FFE0F8', '#FFF6D6',
                 '#C4A02A', [('star', '#FFD23F'), ('heart', '#FF5CE1'), ('moon', '#35E0FF')],
-                '잎 벽에 걸린 팔각 네온관. 분홍과 노랑', **_GARDEN),
+                '미장 벽에 걸린 팔각 네온관. 분홍과 노랑', **_LOUNGE),
     _neon_theme(314, '꺾쇠', 'neon_bracket', 'tube', '#35E0FF', '#FF7A2F', '#D9F8FF', '#FFE6D6',
                 '#C85A1E', [('moon', '#35E0FF'), ('bolt', '#FF7A2F'), ('heart', '#FF5CE1')],
-                '잎 벽에 모서리만 켜진 꺾쇠 네온. 하늘색과 주황', **_GARDEN),
+                '미장 벽에 모서리만 켜진 꺾쇠 네온. 하늘색과 주황', **_LOUNGE),
     _neon_theme(315, '밑줄', 'neon_underline', 'tube', '#B45CFF', '#FFD23F', '#EFE0FF', '#FFF6D6',
                 '#C4A02A', [('star', '#FFD23F'), ('moon', '#B45CFF'), ('heart', '#FF3B6B')],
-                '잎 벽에 아래변만 빛나는 네온. 보라와 노랑', **_GARDEN),
+                '미장 벽에 아래변만 빛나는 네온. 보라와 노랑', **_LOUNGE),
     _neon_theme(316, '두 가닥', 'neon_split', 'tube', '#4D7CFF', '#FF5CE1', '#DFE7FF', '#FFE0F8',
                 '#C43DA8', [('heart', '#FF5CE1'), ('star', '#4D7CFF'), ('bolt', '#FFD23F')],
-                '잎 벽에 두 색 관이 갈리는 네온. 파랑과 분홍', **_GARDEN),
+                '미장 벽에 두 색 관이 갈리는 네온. 파랑과 분홍', **_LOUNGE),
 ]
 
 # --- 도트 모험 --------------------------------------------------------------
