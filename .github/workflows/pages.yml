@@ -49,8 +49,6 @@ jobs:
         run: |
           mkdir -p _site/docs _site/assets _site/files
           cp docs/index.html docs/share.html docs/make.html docs/themes.json _site/docs/
-          # 실험용. 카톡 인앱 브라우저가 서비스 워커의 .ktheme 를 받아 주는지 본 뒤 지운다
-          cp docs/probe.html docs/sw-probe.js _site/docs/
           cp assets/*.png assets/*.webp _site/assets/
           printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=docs/">' > _site/index.html
 
