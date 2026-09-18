@@ -699,10 +699,22 @@ OS 설정을 따라서, OS 가 다크 모드인데 GitHub 만 밝은 테마면 �
 `label` 이 찍히므로 폼의 `label` 과 `custominput.LABELS` 가 글자까지 같아야 한다 —
 `--check` 가 두 파일을 대조한다.
 
-**안드로이드를 브라우저에서 만드는 길을 다시 파는 중이다.** 아래 셋 중 진짜로 막는 것은
-둘째 하나였고, 그 둘째도 뚫렸다 — `docs/apksign.js` 가 WebCrypto 만으로 v2 서명을 붙이고
-안드로이드 SDK 의 `apksigner` 가 통과시킨다(`node tools/check-apksign.mjs`). **아직 폰에서
-깔아 본 적은 없다.** 깔리는 것을 확인하기 전에는 아래 문단을 지우지 않는다.
+**안드로이드도 브라우저에서 만들 수 있다. 처음 결론이 틀렸다.** 아래 셋 중 진짜로 막는 것은
+둘째 하나였고, 그 둘째가 뚫렸다 — `docs/apksign.js` 가 WebCrypto 만으로 v2 서명을 붙인다.
+`node tools/check-apksign.mjs` 가 나가 있는 APK 에 붙여 안드로이드 SDK 의 `apksigner` 로
+검증하고, **안드로이드 14 에뮬레이터가 실제로 설치했다**(`Success`, `apkSigningVersion=2`,
+서명이 새 열쇠).
+
+**안드로이드 폰이 없어도 판정할 수 있다.** 이 PC 에 에뮬레이터와 android-34 이미지가 있다
+(AVD `spamtest`). 폰을 기다리지 말고 이걸로 잰다 — 안드로이드 14 라 v2 서명 요구와
+`resources.arsc` 정렬 요구가 둘 다 걸려 있어 제일 빡센 대상이다. 끝나면 테마를 지우고
+`adb emu kill` 로 닫는다.
+
+```
+SDK=$LOCALAPPDATA/Android/Sdk
+$SDK/emulator/emulator -avd spamtest -no-window -no-audio -no-snapshot &
+$SDK/platform-tools/adb wait-for-device && $SDK/platform-tools/adb install -r <apk>
+```
 
 - **첫째는 전제가 틀렸다.** 커스텀용 열쇠는 비밀일 필요가 없다 — Actions 도 이미 매번 새
   열쇠를 만들어 쓴다. 권한 0개짜리 리소스 전용 앱이라 남이 그 열쇠로 위조해 봐야 제 열쇠로
@@ -716,7 +728,7 @@ OS 설정을 따라서, OS 가 다크 모드인데 GitHub 만 밝은 테마면 �
 - **v2 만 붙이므로 `minSdkVersion` 을 24 로 올려야 한다.** 안드로이드 6 이하는 v2 를 모르고
   옛 v1(JAR) 서명을 찾는데, 그건 PKCS#7 이라 브라우저에서 만들 것이 못 된다
 
-아래는 처음에 적어둔 것이다. 셋째 문단(서버 없이는 길이 없다)은 틀린 것으로 보고 있다.
+아래는 처음에 적어둔 것이다. 1·3 은 전제가 틀렸고 「서버 없이는 길이 없다」는 틀렸다.
 
 iOS `.ktheme` 은 그냥 zip 이라
 브라우저에서 만들 수 있지만, 안드로이드 테마는 설치되는 앱이라 서명이 있어야 한다. 막히는
@@ -730,9 +742,9 @@ iOS `.ktheme` 은 그냥 zip 이라
 3. **패키지 이름을 바꿔야 한다.** 안 바꾸면 원래 테마와 같은 앱인데 서명이 달라 설치가
    거부된다. 그런데 그 이름은 압축된 이진 `AndroidManifest.xml` 과 `resources.arsc` 안에 있다
 
-셋 다 넘겨도 "옛 안드로이드용 앱" 경고가 뜨는 테마가 나온다(targetSdk 를 낮춰야 v1 이 먹는다).
-**서버 없이는 길이 없다.** 그래서 폰에서도 되는 길인 Actions 로 넘긴다 — 페이지가 안드로이드를
-알아보면 고른 값을 실어 이슈 폼을 연다. 다시 파 보기 전에 이 문단을 읽는다.
+~~셋 다 넘겨도 "옛 안드로이드용 앱" 경고가 뜨는 테마가 나온다. 서버 없이는 길이 없다.~~
+틀렸다. `minSdkVersion` 을 24 로 올리면 v1 은 아예 필요 없고 경고도 안 뜬다. 이슈 폼 길은
+브라우저 길이 다 되기 전까지 남겨 둔다 — 안드로이드 6 이하와 포크해서 직접 돌리는 사람 몫이다.
 
 **웹 쪽은 양쪽 다 배경 그림이 있는 테마만 고르게 한다**(`preview.write_mix_manifest`).
 말풍선 쪽 `.ktheme` 을 통째로 가져와 배경 여섯 장(채팅방·목록·잠금화면 × @2x/@3x)만
