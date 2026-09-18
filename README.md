@@ -185,17 +185,17 @@ powershell -ExecutionPolicy Bypass -File build-one.ps1 -Theme build-src\custom -
 <table>
 <tr>
 <td width="33%" align="center"><a href="docs/themes/lights-neon.md#user-content-네온사인"><img src="assets/preview-neon-double-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/lights-neon.md#user-content-네온사인-v4"><img src="assets/preview-neonbar-octagon-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/lights-neon.md#user-content-네온사인-v5"><img src="assets/preview-neonlounge-octagon-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights-neon.md#user-content-네온사인-v7"><img src="assets/preview-neonpetal-octagon-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights-neon.md#user-content-네온-동물"><img src="assets/preview-neonzoo-sea-chat.webp" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><b><a href="docs/themes/lights-neon.md#user-content-네온사인"><img src="assets/icon-neon-double.png" width="20" valign="middle"> 네온사인</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>벽돌 벽에 관 두 줄 네온. 첫 말엔 네온 별</td>
-<td align="center"><b><a href="docs/themes/lights-neon.md#user-content-네온사인-v4"><img src="assets/icon-neonbar-octagon.png" width="20" valign="middle"> 네온사인 v4</a></b><br><sub>팔각 · 꺾쇠 · 밑줄 · 두 가닥</sub><br>모서리를 깎은 팔각 네온관. 첫 말엔 번개</td>
-<td align="center"><b><a href="docs/themes/lights-neon.md#user-content-네온사인-v5"><img src="assets/icon-neonlounge-octagon.png" width="20" valign="middle"> 네온사인 v5</a></b><br><sub>팔각 · 꺾쇠 · 밑줄 · 두 가닥</sub><br>미장 벽에 걸린 팔각 네온관. 분홍과 노랑</td>
+<td align="center"><b><a href="docs/themes/lights-neon.md#user-content-네온사인-v7"><img src="assets/icon-neonpetal-octagon.png" width="20" valign="middle"> 네온사인 v7</a></b><br><sub>팔각 · 꺾쇠 · 밑줄 · 두 가닥</sub><br>흐린 꽃잎이 떠다니는 어둠에 팔각 네온관</td>
+<td align="center"><b><a href="docs/themes/lights-neon.md#user-content-네온-동물"><img src="assets/icon-neonzoo-sea.png" width="20" valign="middle"> 네온 동물</a></b><br><sub>바다 · 숲 · 얼음 · 모둠</sub><br>별밤에 걸린 해파리·고래·문어 네온관</td>
 </tr>
 </table>
 
-<p align="right"><a href="docs/themes/lights-neon.md">불빛 - 네온사인 계열 5개 전부 보기 →</a></p>
+<p align="right"><a href="docs/themes/lights-neon.md">불빛 - 네온사인 계열 14개 전부 보기 →</a></p>
 
 **[캐릭터](docs/themes/character.md)** — 말풍선 모양과 캐릭터 프로필
 
@@ -331,3 +331,14 @@ release.ps1         → 태그 + 릴리스 자산 첨부
 - [Android 사용자 테마 가이드 (9.2.5)](https://t1.kakaocdn.net/kakaocorp/Service/Theme/KakaoTalk/9.2.5_UserThemeGuide_Android.pdf)
 
 가이드 PDF는 폰트 인코딩이 밀려 있어서 그냥 열면 안 읽힘. 글자 코드에 +31 하면 영문이 나옴.
+
+## 라이선스
+
+[Apache-2.0](LICENSE). 갖다 쓰고, 고치고, 팔아도 됨. 저작권 표기를 남기고 크게 고친 곳은
+고쳤다고 적으면 됨. MIT 와 달리 특허 허여 조항이 있어서 이걸 골랐음.
+
+그림과 말풍선은 전부 코드로 그린 것임. 남의 테마를 뜯거나 사진을 가져다 쓴 곳이 없고,
+블록·속성 이름만 카카오 공식 가이드에서 가져왔음.
+
+빌드에 [Pillow](https://python-pillow.org)(MIT-CMU)와 [qrcode](https://github.com/lincolnloop/python-qrcode)(BSD-3-Clause)를 씀.
+둘 다 만들 때만 쓰고 `.ktheme`·`.apk` 안에는 안 들어가므로 따로 고지할 것이 없음.

@@ -40,7 +40,7 @@ chat_bg
 
 import re
 
-VERSION = '0.37'
+VERSION = '0.38'
 
 THEMES = [
     dict(
@@ -889,6 +889,15 @@ CATEGORY = {
     '네온사인 v3': '불빛 - 네온사인',
     '네온사인 v4': '불빛 - 네온사인',
     '네온사인 v5': '불빛 - 네온사인',
+    '네온사인 v6': '불빛 - 네온사인',
+    '네온사인 v7': '불빛 - 네온사인',
+    '네온사인 v8': '불빛 - 네온사인',
+    '네온사인 v9': '불빛 - 네온사인',
+    '네온사인 v10': '불빛 - 네온사인',
+    '네온사인 v11': '불빛 - 네온사인',
+    '네온사인 v12': '불빛 - 네온사인',
+    '네온사인 v13': '불빛 - 네온사인',
+    '네온 동물': '불빛 - 네온사인',
 
     '우체국': '캐릭터',
     '책상': '캐릭터',
@@ -916,7 +925,7 @@ CATEGORY_COVER = {
     '유리': ('리퀴드 글래스', '스테인드 글래스', '레진'),
     '자연': ('벚꽃 그늘', '오로라', '설원'),
     '불빛': ('야경', '불꽃놀이', '연등'),
-    '불빛 - 네온사인': ('네온사인', '네온사인 v4', '네온사인 v5'),
+    '불빛 - 네온사인': ('네온사인', '네온사인 v7', '네온 동물'),
     '캐릭터': ('우체국', '빵집', '우주'),
     '도트': ('오락실', '도트 모험', '레트로 PC'),
 }
@@ -1237,6 +1246,10 @@ VARIANT_SLUG = {
     '꺾쇠': 'bracket',
     '밑줄': 'underline',
     '두 가닥': 'split',
+    '바다': 'sea',
+    '숲': 'forest',
+    '얼음': 'ice',
+    '모둠': 'mixed',
 }
 
 
@@ -1923,29 +1936,44 @@ _NEON_BASE = dict(bg='#100C14', bg_deep='#0A070D', surface='#1A1520', pressed='#
 
 def _neon_theme(no, variant, style, material, recv, send, recv_text, send_text, accent_dim,
                 signs, note, slug='neon', family='네온사인', face=('#3A1F1B', '#140C0B'),
-                surface='brick', lit=False, room=None):
+                surface='brick', lit=False, room=None, look=None, animals=None):
     """네온사인 한 벌. 받은 쪽과 보낸 쪽이 서로 다른 네온 색이고, 벽의 낙서도 그 색을 쓴다.
 
     v2·v3 는 같은 말풍선 네 가지에 색 조합과 벽(surface)만 바꾼다. face 는 벽 면색과 틈 색이다.
+
+    look 을 주면 벽 대신 빛으로 채운 배경을 쓴다(scenes.neonbg, v6~). 그때는 dim 도 가장자리
+    어둠도 안 쓴다 — 그 둘이 화면을 아련하게 흐리던 것이라 계열을 새로 판 까닭이 그것이다.
+    animals 는 배경에 네온관으로 얹을 동물 셋이다(tools/zoo.py).
     """
     # room 은 채팅방·잠금화면에만 얹는 조명 같은 것. 목록은 위아래로 달라지면 머리 띠마다 층이 져서 뺀다
     wall = lambda count, dim: ('neonwall', face[0], face[1],
                                dict(dict(signs=signs, count=count, dim=dim, dim_to='#000000', wall=surface),
                                     **(room or {})))
+    if look:
+        # 동물 관 색은 말풍선 두 색에 낙서 셋째 색을 더해 셋이다. 배경만 다른 색을 쓰면
+        # 한 화면에 네온 색이 다섯이 되어 어느 것이 말풍선인지 안 읽힌다
+        bg = lambda extra: ('neonbg', face[0], face[1],
+                            dict(dict(look=look, animals=animals,
+                                      colors=(send, recv, signs[2][1])), **extra))
+        screens = dict(chat_bg=bg({}), passcode_bg=bg({}), main_bg=bg({'bare': 1}))
+    else:
+        screens = dict(chat_bg=wall(5, 0.45), passcode_bg=wall(6, 0.12),
+                       main_bg=('neonwall', face[0], face[1],
+                                dict(signs=[], count=0, dim=0.22, dim_to='#000000', wall=surface)))
     return dict(_NEON_BASE, key='%s%d' % (slug, no), name='%s %s' % (family, variant), note=note,
                 family=family, variant=variant, char_style=style, material=material,
                 accent=send, accent_dim=accent_dim,
                 send=(send, send), send_alt=(send, send), recv=(recv, recv), recv_alt=(recv, recv),
                 send_text=send_text, recv_text=recv_text,
-                # 프로필은 벽 낙서의 셋째 색까지 세 장. 탭 아이콘도 네온관이다
-                char='neon', neon_third=signs[2][1], tab_style='neon',
-                # 목록 배경은 셀·칩·광고 카드에 잘리므로 낙서를 빼고 벽돌 질감만 둔다. 줄눈만 반복되는
-                # 무늬라 어디서 잘려도 같아서 흐리지 않고(flat_list=False), 셀을 반투명하게 해 벽이 비치게 한다
+                # 프로필은 벽 낙서의 셋째 색까지 세 장. 탭 아이콘도 네온관이다.
+                # 동물 계열만 프로필도 그 식구로 바꾼다 — 목록 화면도 테마로 읽혀야 한다
+                char='neonzoo' if animals else 'neon', neon_third=signs[2][1], tab_style='neon',
+                **(dict(zoo=animals) if animals else {}),
+                # 목록 배경은 셀·칩·광고 카드에 잘리므로 큰 것을 빼고 질감만 둔다. 반복되는 무늬나
+                # 알갱이라 어디서 잘려도 같아서 흐리지 않고(flat_list=False), 셀을 반투명하게 해 비치게 한다
                 flat_list=False, cell_alpha=0.5,
                 **(dict(glow_lit=True) if lit else {}),
-                chat_bg=wall(5, 0.45), passcode_bg=wall(6, 0.12),
-                main_bg=('neonwall', face[0], face[1],
-                         dict(signs=[], count=0, dim=0.22, dim_to='#000000', wall=surface)))
+                **screens)
 
 
 THEMES += [
@@ -2031,6 +2059,119 @@ THEMES += [
     _neon_theme(316, '두 가닥', 'neon_split', 'tube', '#4D7CFF', '#FF5CE1', '#DFE7FF', '#FFE0F8',
                 '#C43DA8', [('heart', '#FF5CE1'), ('star', '#4D7CFF'), ('bolt', '#FFD23F')],
                 '미장 벽에 두 색 관이 갈리는 네온. 파랑과 분홍', **_LOUNGE),
+]
+
+# v6~ 는 벽을 걷어내고 빛으로 채운 배경에 건다(scenes.neonbg). v1~v5 가 다섯 계열 모두 벽이라
+# 한 카테고리 안에서 서로 구분이 잘 안 됐다 — 벽돌·셔터·타일·판자·미장은 다 '어두운 벽'이다.
+#
+# 무엇이 달라졌나. neonwall 은 dim 0.45 와 가장자리 어둠을 붙여서 벽을 무엇으로 바꿔도 화면이
+# 아련하게 흐려졌다. neonbg 는 둘 다 안 쓰고, 목록도 흐리지 않고 알갱이층만 남겨 깐다.
+# 기존 다섯 계열은 neonwall 그대로라 그림이 한 픽셀도 안 바뀐다.
+#
+# **말풍선 네 가지는 v4·v5 와 같고 배경과 색 조합만 바꾼다.** v2·v3 가 벽만 바꾼 것과 같은 축이다.
+# 색은 계열마다 한 벌씩이고 v1~v5 에 없던 짝으로 준다 — 시안 열두 벌에서 골랐다.
+_LOOK = dict(lit=True, face=('#0A0A12', '#050508'))
+
+
+def _neon_look(no, slug, family, look, recv, send, recv_text, send_text, dim, third, notes,
+               animals=None):
+    """배경 하나를 말풍선 네 가지에 입힌 계열. 넷을 한꺼번에 만든다.
+
+    notes 는 네 벌의 한 줄 소개다. 낙서(signs)는 neonbg 가 안 그리지만 셋째 색을 프로필이
+    쓰므로 그대로 넘긴다.
+    """
+    signs = [('star', send), ('heart', recv), ('moon', third)]
+    four = (('팔각', 'neon_octagon'), ('꺾쇠', 'neon_bracket'),
+            ('밑줄', 'neon_underline'), ('두 가닥', 'neon_split'))
+    return [_neon_theme(no + i, variant, style, 'tube', recv, send, recv_text, send_text, dim,
+                        signs, notes[i], slug=slug, family=family, look=look,
+                        animals=(animals[i] if animals else None), **_LOOK)
+            for i, (variant, style) in enumerate(four)]
+
+
+THEMES += _neon_look(
+    401, 'neonstar', '네온사인 v6', 'star', '#8AD8FF', '#FFA8D8', '#E5F6FF', '#FFECF6',
+    '#B7799B', '#FFD23F',
+    ['별자리 밤하늘에 걸린 팔각 네온관. 연하늘과 연분홍',
+     '은하수 위 모서리만 켜진 꺾쇠 네온. 파스텔',
+     '별자리 아래 밑줄만 빛나는 네온. 연분홍',
+     '별자리 밤하늘에 두 색 관이 갈리는 네온'])
+
+THEMES += _neon_look(
+    405, 'neonpetal', '네온사인 v7', 'petal', '#FF8AD4', '#B58AFF', '#FFE5F5', '#EFE5FF',
+    '#8263B7', '#8AE0FF',
+    ['흐린 꽃잎이 떠다니는 어둠에 팔각 네온관',
+     '꽃잎 사이 모서리만 켜진 꺾쇠 네온. 분홍과 보라',
+     '꽃잎 어둠에 밑줄만 빛나는 네온',
+     '꽃잎 사이로 두 색 관이 갈리는 네온'])
+
+THEMES += _neon_look(
+    409, 'neonbokeh', '네온사인 v8', 'bokeh', '#E8F2FF', '#FF5CE1', '#FAFCFF', '#FFDBF8',
+    '#B742A2', '#8AD8FF',
+    ['초점 나간 빛 동그라미 위 팔각 네온관',
+     '보케 위 모서리만 켜진 꺾쇠 네온. 흰빛과 분홍',
+     '보케 위 밑줄만 빛나는 네온',
+     '보케 위로 두 색 관이 갈리는 네온'])
+
+THEMES += _neon_look(
+    413, 'neonplasma', '네온사인 v9', 'plasma', '#B8FF3F', '#9B5CFF', '#EFFFD5', '#E9DBFF',
+    '#6F42B7', '#FF5CE1',
+    ['뻗어 나가는 플라즈마 실에 팔각 네온관',
+     '플라즈마 위 모서리만 켜진 꺾쇠 네온. 라임과 보라',
+     '플라즈마 위 밑줄만 빛나는 네온',
+     '플라즈마 위로 두 색 관이 갈리는 네온'])
+
+THEMES += _neon_look(
+    417, 'neonink', '네온사인 v10', 'ink', '#3FFFD2', '#FF3FA4', '#D5FFF5', '#FFD5EB',
+    '#B72D76', '#FFD23F',
+    ['번진 잉크 위에 걸린 팔각 네온관',
+     '잉크 위 모서리만 켜진 꺾쇠 네온. 민트와 자홍',
+     '번진 잉크에 밑줄만 빛나는 네온',
+     '잉크 위로 두 색 관이 갈리는 네온'])
+
+THEMES += _neon_look(
+    421, 'neonmesh', '네온사인 v11', 'mesh', '#35E0FF', '#FF7A6B', '#D3F8FF', '#FFE2DE',
+    '#B7574D', '#FFD23F',
+    ['레이저 그물 위에 걸린 팔각 네온관',
+     '그물 위 모서리만 켜진 꺾쇠 네온. 하늘색과 산호',
+     '레이저 그물에 밑줄만 빛나는 네온',
+     '그물 위로 두 색 관이 갈리는 네온'])
+
+THEMES += _neon_look(
+    425, 'neoncrystal', '네온사인 v12', 'crystal', '#FFB03F', '#6A5CFF', '#FFEED5', '#DEDBFF',
+    '#4C42B7', '#3FFFD2',
+    ['겹친 크리스탈 조각 위 팔각 네온관',
+     '조각 위 모서리만 켜진 꺾쇠 네온. 호박과 남보라',
+     '크리스탈 조각에 밑줄만 빛나는 네온',
+     '조각 위로 두 색 관이 갈리는 네온'])
+
+THEMES += _neon_look(
+    429, 'neonchroma', '네온사인 v13', 'chroma', '#FF3B4E', '#2FE6D2', '#FFD4D8', '#D1F9F5',
+    '#22A597', '#FFD23F',
+    ['세 색으로 어긋난 덩이 위 팔각 네온관',
+     '색수차 위 모서리만 켜진 꺾쇠 네온. 빨강과 청록',
+     '색수차 위에 밑줄만 빛나는 네온',
+     '색수차 위로 두 색 관이 갈리는 네온'])
+
+# 동물 계열만 변형 축이 다르다. 말풍선은 두 가닥 하나로 고정하고 네 벌을 식구로 가른다 —
+# 고르는 사람이 여기서 궁금한 것은 관 모양이 아니라 어느 동물이 걸려 있느냐다.
+# 프로필 세 장도 그 식구가 된다(charbubble.p_neonzoo). 배경은 가장 조용한 별자리로 고정한다 —
+# 동물이 주인공이라 배경이 세면 서로 다툰다.
+_ZOO_PACKS = [zoo_pack for zoo_pack in (('jelly', 'whale', 'octopus'),
+                                        ('owl', 'fox', 'deer'),
+                                        ('penguin', 'bear', 'seahorse'),
+                                        ('butterfly', 'jelly', 'owl'))]
+
+THEMES += [
+    _neon_theme(433 + i, variant, 'neon_split', 'tube', '#FF8A3F', '#3FD6C8', '#FFE5D5', '#D5F6F3',
+                '#2D9A90', [('star', '#3FD6C8'), ('heart', '#FF8A3F'), ('moon', '#FFD23F')],
+                note, slug='neonzoo', family='네온 동물', look='star', animals=pack, **_LOOK)
+    for i, (variant, pack, note) in enumerate([
+        ('바다', _ZOO_PACKS[0], '별밤에 걸린 해파리·고래·문어 네온관'),
+        ('숲', _ZOO_PACKS[1], '별밤에 걸린 부엉이·여우·사슴 네온관'),
+        ('얼음', _ZOO_PACKS[2], '별밤에 걸린 펭귄·곰·해마 네온관'),
+        ('모둠', _ZOO_PACKS[3], '별밤에 걸린 나비·해파리·부엉이 네온관'),
+    ])
 ]
 
 # --- 도트 모험 --------------------------------------------------------------
