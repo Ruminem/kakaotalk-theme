@@ -135,17 +135,17 @@ PC로 받아서 폰으로 옮길 필요 없음. 카메라로 찍으면 릴리스
 <table>
 <tr>
 <td width="33%" align="center"><a href="docs/themes/lights-neon.md#user-content-네온사인"><img src="assets/preview-neon-double-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/lights-neon.md#user-content-네온사인-v4"><img src="assets/preview-neonbar-octagon-chat.webp" width="190"></a></td>
-<td width="33%" align="center"><a href="docs/themes/lights-neon.md#user-content-네온사인-v5"><img src="assets/preview-neonlounge-octagon-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights-neon.md#user-content-네온사인-v7"><img src="assets/preview-neonpetal-octagon-chat.webp" width="190"></a></td>
+<td width="33%" align="center"><a href="docs/themes/lights-neon.md#user-content-네온-동물"><img src="assets/preview-neonzoo-sea-chat.webp" width="190"></a></td>
 </tr>
 <tr>
 <td align="center"><b><a href="docs/themes/lights-neon.md#user-content-네온사인"><img src="assets/icon-neon-double.png" width="20" valign="middle"> 네온사인</a></b><br><sub>이중관 · 간판 · 전극 · 말꼬리</sub><br>벽돌 벽에 관 두 줄 네온. 첫 말엔 네온 별</td>
-<td align="center"><b><a href="docs/themes/lights-neon.md#user-content-네온사인-v4"><img src="assets/icon-neonbar-octagon.png" width="20" valign="middle"> 네온사인 v4</a></b><br><sub>팔각 · 꺾쇠 · 밑줄 · 두 가닥</sub><br>모서리를 깎은 팔각 네온관. 첫 말엔 번개</td>
-<td align="center"><b><a href="docs/themes/lights-neon.md#user-content-네온사인-v5"><img src="assets/icon-neonlounge-octagon.png" width="20" valign="middle"> 네온사인 v5</a></b><br><sub>팔각 · 꺾쇠 · 밑줄 · 두 가닥</sub><br>미장 벽에 걸린 팔각 네온관. 분홍과 노랑</td>
+<td align="center"><b><a href="docs/themes/lights-neon.md#user-content-네온사인-v7"><img src="assets/icon-neonpetal-octagon.png" width="20" valign="middle"> 네온사인 v7</a></b><br><sub>팔각 · 꺾쇠 · 밑줄 · 두 가닥</sub><br>흐린 꽃잎이 떠다니는 어둠에 팔각 네온관</td>
+<td align="center"><b><a href="docs/themes/lights-neon.md#user-content-네온-동물"><img src="assets/icon-neonzoo-sea.png" width="20" valign="middle"> 네온 동물</a></b><br><sub>바다 · 숲 · 얼음 · 모둠</sub><br>별밤에 걸린 해파리·고래·문어 네온관</td>
 </tr>
 </table>
 
-<p align="right"><a href="docs/themes/lights-neon.md">불빛 - 네온사인 계열 5개 전부 보기 →</a></p>
+<p align="right"><a href="docs/themes/lights-neon.md">불빛 - 네온사인 계열 14개 전부 보기 →</a></p>
 
 **[캐릭터](docs/themes/character.md)** — 말풍선 모양과 캐릭터 프로필
 

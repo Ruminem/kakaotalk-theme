@@ -2232,6 +2232,334 @@ def neonwall(spec, w, h):
     return _dim(img, o)
 
 
+# --- 네온 배경(네온사인 v6~) --------------------------------------------
+# 벽 대신 빛으로 채운 배경. neonwall 과 갈라 둔 이유는 거기 붙은 dim(0.45)과 가장자리 어둠이다 —
+# 벽을 무엇으로 바꿔도 그 둘이 그림을 뭉개서 화면이 아련하게 흐려졌다. 여기서는 둘 다 안 쓴다.
+# 기존 네온사인 다섯 계열은 neonwall 그대로라 그림이 한 픽셀도 안 바뀐다.
+#
+# 지키는 것 셋.
+#
+# 1. 물건을 그리지 않는다. 폰 크기에서 형태가 안 읽히면 색 덩어리가 된다. 밤 골목·야시장·
+#    관람차를 그려 보고 셋 다 버렸다 — 건물도 천막도 관람차도 빛 얼룩으로만 보였다. 빛과
+#    알갱이로 채운 것(별자리·성운)은 같은 크기에서 고급스러웠다. 그릴 게 없으니 못 그릴 것도 없다
+# 2. 빛은 검은 판에 그려 흐린 뒤 screen 으로 얹는다. 바탕에 바로 칠하면 빛이 아니라 형광
+#    페인트로 보인다. neonwall 의 낙서와 같은 방식이다
+# 3. bare(목록용)는 큰 구조만 빼고 알갱이층을 남긴다. 알갱이는 어디서 잘려도 같아서 흐리지
+#    않고 깔 수 있다(flat_list=False). 목록을 흐리는 것이 곧 아련함이었다
+#
+# 실패는 두 방향이다. 약함은 폰에서 배경이 거의 안 보이는 것이고, 요란은 반대로 배경이 세서
+# 네온 말풍선을 잡아먹는 것이다. 기름막·등고선·홀로그램처럼 색이 화면을 다 덮으면 말풍선이
+# 배경에 묻힌다. 서른여덟을 그려 아홉이 둘 중 하나로 걸렸고, 남은 것 중 여덟을 여기 옮겼다.
+
+# 동물을 놓는 자리. 대화가 비우는 칸을 따라간다. 처음엔 넷을 양옆 귀퉁이에 놓았는데 하필
+# 말풍선 위라 몸이 반씩 잘려 무슨 동물인지 알 수 없었다 — 무엇인지 알려주는 신호(뿔·주둥이·
+# 선 귀)가 몸 끝에 있는데 그 끝이 가려진 것이다. 받은 말풍선은 왼쪽, 보낸 말풍선은 오른쪽에
+# 붙으므로 그 반대쪽 줄이 빈다. 넷째 자리는 아래가 입력창과 마지막 말풍선으로 꽉 차서 두지 않는다.
+NEON_SPOTS = ((.77, .21), (.21, .42), (.78, .70))
+
+
+def _nb_lay(w, h):
+    im = Image.new('RGB', (w, h))
+    return im, ImageDraw.Draw(im, 'RGBA')
+
+
+def _nb_add(img, layer, blur, gain=1.0):
+    """빛 한 겹. 흐려서 screen 으로 얹는다."""
+    g = layer.filter(ImageFilter.GaussianBlur(blur))
+    if gain != 1.0:
+        g = g.point(lambda v: min(255, int(v * gain)))
+    return ImageChops.screen(img, g)
+
+
+def _nb_dust(img, rnd, n, cols, rmax=2.2, amax=190):
+    """고운 알갱이. 크기를 섞어야 뿌린 것으로 보인다 — 한 크기로만 뿌리면 잡음이 된다.
+    열에 하나꼴로 훨씬 큰 것을 섞는다."""
+    gen = _g()
+    w, h = img.size
+    u = w / 500.0
+    lay, d = _nb_lay(w, h)
+    for _ in range(n):
+        r = rnd.uniform(.3, rmax) * u * (2.6 if rnd.random() < .06 else 1)
+        x, y = rnd.uniform(0, w), rnd.uniform(0, h)
+        d.ellipse([x - r, y - r, x + r, y + r],
+                  fill=gen.rgb(rnd.choice(cols)) + (rnd.randint(40, amax),))
+    return ImageChops.screen(img, lay)
+
+
+def _nb_sparkle(d, cx, cy, R, col, a=220):
+    """네 갈래 반짝임. 가로세로로 가늘고 길게 뻗는다."""
+    d.polygon([(cx, cy - R), (cx + R * .17, cy), (cx, cy + R), (cx - R * .17, cy)], fill=col + (a,))
+    d.polygon([(cx - R, cy), (cx, cy - R * .17), (cx + R, cy), (cx, cy + R * .17)], fill=col + (a,))
+
+
+def _nb_cloud(rnd, n, w, h, lo=140, k=1.0):
+    """성긴 잡음에서 뽑은 구름 가림막. lo 아래는 버리고 위만 남겨 덩이가 되게 한다."""
+    return _noise(rnd, n, max(2, int(n * h / w)), w, h).point(
+        lambda v: 0 if v < lo else min(255, int((v - lo) * k)))
+
+
+def _nb_tint(img, mask, col, k=1.0):
+    gen = _g()
+    w, h = img.size
+    c = tuple(min(255, int(v * k)) for v in gen.rgb(col))
+    return ImageChops.screen(img, Image.composite(Image.new('RGB', (w, h), c),
+                                                  Image.new('RGB', (w, h)), mask))
+
+
+def _nb_warp(img, rnd, amp):
+    """줄마다 옆으로 민다. 미는 양을 성긴 잡음에서 뽑아 위아래로 이어지게 한다 —
+    줄마다 따로 뽑으면 찢어진 것으로 보인다."""
+    w, h = img.size
+    px = _noise(rnd, 5, 15, w, h).load()
+    out = Image.new('RGB', (w, h))
+    for y in range(h):
+        dx = int((px[w // 2, y] - 128) / 128.0 * amp)
+        out.paste(img.crop((0, y, w, y + 1)), (dx, y))
+        if dx > 0:
+            out.paste(img.crop((w - dx, y, w, y + 1)), (0, y))
+        elif dx < 0:
+            out.paste(img.crop((0, y, -dx, y + 1)), (w + dx, y))
+    return out
+
+
+def _nb_star(w, h, rnd, bare):
+    """별자리. 은하수 띠 위에 별을 선으로 잇는다. 글자는 안 넣는다 — 읽히는 글자를 넣으면
+    말풍선 글자와 다툰다."""
+    gen = _g()
+    u = w / 500.0
+    img = gen.vgradient(w, h, gen.rgb('#060A16'), gen.rgb('#0E1224'))
+    band = Image.new('L', (w, h), 0)
+    ImageDraw.Draw(band).polygon([(-w * .2, h * .12), (w * .55, -h * .08),
+                                  (w * 1.2, h * .6), (w * .5, h * .86)], fill=54)
+    band = band.filter(ImageFilter.GaussianBlur(w * .12))
+    img = ImageChops.screen(img, Image.merge('RGB', [band.point(lambda v, k=k: v * k // 255)
+                                                     for k in (170, 178, 230)]))
+    img = _nb_dust(img, rnd, 900, ('#FFFFFF', '#CFE0FF', '#FFE9CF'), 2.0)
+    if bare:
+        return img
+    lay, d = _nb_lay(w, h)
+    dl = ImageDraw.Draw(img, 'RGBA')
+    for _ in range(5):
+        cx, cy = rnd.uniform(w * .16, w * .84), rnd.uniform(h * .08, h * .92)
+        pts = [(cx + rnd.uniform(-1, 1) * w * .13, cy + rnd.uniform(-1, 1) * w * .13)
+               for _ in range(rnd.randint(4, 6))]
+        dl.line(pts, fill=(140, 168, 230, 90), width=max(1, int(1.2 * u)), joint='curve')
+        for px_, py_ in pts:
+            _nb_sparkle(d, px_, py_, rnd.uniform(6, 11) * u, gen.rgb('#DCE9FF'))
+    return _nb_add(img, lay, 4 * u, 1.3)
+
+
+def _nb_petal(w, h, rnd, bare):
+    """빛 꽃잎. 흐린 꽃잎이 크기별로 떠다니고 고운 가루가 섞인다. 꽃잎은 돌려서 붙이므로
+    RGB 판에 그려 screen 으로 얹는다 — RGBA 에 알파로 찍으면 섞이지 않고 덮어쓴다."""
+    gen = _g()
+    u = w / 500.0
+    img = gen.vgradient(w, h, gen.rgb('#12070F'), gen.rgb('#1A0A16'))
+    for col, n in (('#5E1F3E', 3), ('#2A1A4A', 6)):
+        img = _nb_tint(img, _nb_cloud(rnd, n, w, h, 130, 1.0), col)
+    for r_k, n, blur, a in ((.055, 16, 10, 44), (.024, 34, 3.4, 78), (.010, 70, 1.0, 130)):
+        lay, _ = _nb_lay(w, h)
+        for _ in range(n):
+            R = w * r_k * rnd.uniform(.7, 1.4)
+            cx, cy = rnd.uniform(0, w), rnd.uniform(0, h)
+            c = gen.rgb(rnd.choice(('#FF9EC8', '#FFC9E4', '#FFD9A8')))
+            pt = Image.new('RGBA', (int(R * 2) + 4, int(R * 1.2) + 4), (0, 0, 0, 0))
+            ImageDraw.Draw(pt).ellipse([2, 2, R * 2, R * 1.1], fill=c + (a,))
+            pt = pt.rotate(rnd.uniform(0, 180), expand=True, resample=Image.BICUBIC)
+            x0, y0 = int(cx - R), int(cy - R * .55)
+            box = lay.crop((x0, y0, x0 + pt.width, y0 + pt.height))
+            lay.paste(ImageChops.screen(box, pt.convert('RGB')), (x0, y0))
+        img = _nb_add(img, lay, blur * u)
+    return _nb_dust(img, rnd, 900, ('#FFFFFF', '#FFD9EC'), 1.6)
+
+
+def _nb_bokeh(w, h, rnd, bare):
+    """보케. 초점 나간 빛 동그라미가 크기별로 겹친다. 큰 것일수록 옅고 더 흐리다 —
+    그래야 뒤에 있는 것으로 보인다."""
+    gen = _g()
+    u = w / 500.0
+    img = gen.vgradient(w, h, gen.rgb('#0A0714'), gen.rgb('#140A1C'))
+    cols = ('#FF6BC4', '#6BD5FF', '#FFC46B', '#B98BFF')
+    for r_k, n, blur, a in ((.20, 7, 26, 30), (.10, 14, 11, 46), (.045, 26, 4, 70), (.016, 60, 1.2, 130)):
+        lay, d = _nb_lay(w, h)
+        for _ in range(n):
+            R = w * r_k * rnd.uniform(.7, 1.3)
+            cx, cy = rnd.uniform(-w * .1, w * 1.1), rnd.uniform(-h * .05, h * 1.05)
+            c = gen.rgb(rnd.choice(cols))
+            d.ellipse([cx - R, cy - R, cx + R, cy + R], fill=c + (a,))
+            d.ellipse([cx - R, cy - R, cx + R, cy + R], outline=c + (min(255, a + 60),),
+                      width=max(1, int(R * .08)))
+        img = _nb_add(img, lay, blur * u)
+    return _nb_dust(img, rnd, 420, ('#FFFFFF', '#FFE9CF'), 1.4, 120)
+
+
+def _nb_plasma(w, h, rnd, bare):
+    """플라즈마. 가운데에서 뻗어 나가며 끝이 갈라지는 실."""
+    gen = _g()
+    img = Image.new('RGB', (w, h), gen.rgb('#080512'))
+    img = _nb_tint(img, _nb_cloud(rnd, 3, w, h, 130, .9), '#3A1060')
+    if bare:
+        return _nb_dust(img, rnd, 520, ('#C86BFF', '#6BD5FF', '#FFFFFF'), 1.8, 150)
+    lay, d = _nb_lay(w, h)
+    cx0, cy0 = w * .5, h * .42
+    for _ in range(16):
+        a = rnd.uniform(0, 2 * math.pi)
+        x, y = cx0, cy0
+        pts = [(x, y)]
+        for _ in range(11):
+            a += rnd.uniform(-.45, .45)
+            x += math.cos(a) * w * .07
+            y += math.sin(a) * w * .07
+            pts.append((x, y))
+        d.line(pts, fill=gen.rgb(rnd.choice(('#C86BFF', '#6BD5FF', '#FF6BD5'))) + (190,),
+               width=max(1, int(w * .005)), joint='curve')
+    img = _nb_add(img, lay, w * .022, 2.0)
+    return ImageChops.screen(img, lay.filter(ImageFilter.GaussianBlur(w * .002)))
+
+
+def _nb_ink(w, h, rnd, bare):
+    """잉크 번짐. 덩이에서 실가닥이 뻗어 나가다 흩어진다. 다 그린 뒤 줄마다 옆으로 밀어
+    흐르게 한다 — 곧은 덩이는 물감이 아니라 도형으로 보인다."""
+    gen = _g()
+    img = Image.new('RGB', (w, h), gen.rgb('#070610'))
+    for col, n, k in (('#2A1C6E', 3, 1.1), ('#6E1C52', 5, .8), ('#1C4A6E', 8, .55)):
+        img = _nb_tint(img, _nb_cloud(rnd, n, w, h, 132, 1.1 if not bare else .55), col, k)
+    if not bare:
+        lay, d = _nb_lay(w, h)
+        for _ in range(7):
+            cx, cy = rnd.uniform(0, w), rnd.uniform(0, h)
+            R = w * rnd.uniform(.10, .22)
+            col = gen.rgb(rnd.choice(('#7B3FFF', '#FF3F9B', '#3FB4FF')))
+            d.ellipse([cx - R, cy - R, cx + R, cy + R], fill=col + (60,))
+            for _ in range(14):
+                a = rnd.uniform(0, 2 * math.pi)
+                L = R * rnd.uniform(1.1, 2.3)
+                d.line([(cx + math.cos(a) * R * .6, cy + math.sin(a) * R * .6),
+                        (cx + math.cos(a) * L, cy + math.sin(a) * L)],
+                       fill=col + (44,), width=int(R * rnd.uniform(.05, .16)))
+        img = _nb_add(img, _nb_warp(lay.filter(ImageFilter.GaussianBlur(w * .012)), rnd,
+                                    int(w * .03)), w * .01)
+    return _nb_dust(img, rnd, 420, ('#FFFFFF', '#CFD9FF'), 1.4, 110)
+
+
+def _nb_mesh(w, h, rnd, bare):
+    """레이저 그물. 점을 가까운 것끼리만 잇는다. 전부 이으면 그물이 아니라 덩어리가 된다."""
+    gen = _g()
+    u = w / 500.0
+    img = Image.new('RGB', (w, h), gen.rgb('#080614'))
+    # 점과 선 굵기를 폭에 맞춘다. 굵기를 1px 로 박아 두었더니 900px 로 그릴 때 실오라기가 되어
+    # 폰에서 그물이 거의 안 보였다 — 시안을 400px 로만 보고 정한 값이었다
+    pts = [(rnd.uniform(0, w), rnd.uniform(0, h)) for _ in range(110 if bare else 64)]
+    lay, d = _nb_lay(w, h)
+    lim = w * (.2 if bare else .26)
+    for i, (x1, y1) in enumerate(pts):
+        for x2, y2 in pts[i + 1:]:
+            dist = math.hypot(x2 - x1, y2 - y1)
+            if dist < lim:
+                d.line([(x1, y1), (x2, y2)],
+                       fill=gen.rgb('#6BD5FF') + (int(150 * (1 - dist / lim)),),
+                       width=max(1, int(1.4 * u)))
+    for x, y in pts:
+        r = rnd.uniform(2.2, 4.4) * u
+        d.ellipse([x - r, y - r, x + r, y + r], fill=gen.rgb('#CFF0FF') + (225,))
+    img = _nb_add(img, lay, 5 * u, 1.5)
+    return ImageChops.screen(img, lay)
+
+
+def _nb_crystal(w, h, rnd, bare):
+    """크리스탈. 깎은 면마다 밝기가 다른 조각이 겹친다. 면은 옅게 채우고 모서리만 진하게 —
+    가득 채우면 유리가 아니라 색종이가 된다."""
+    gen = _g()
+    img = Image.new('RGB', (w, h), gen.rgb('#080614'))
+    lay, d = _nb_lay(w, h)
+    for _ in range(30):
+        x, y = rnd.uniform(-w * .2, w * 1.2), rnd.uniform(-h * .1, h * 1.1)
+        n = rnd.randint(3, 5)
+        a0 = rnd.uniform(0, 2 * math.pi)
+        R = w * rnd.uniform(.12, .30)
+        poly = [(x + math.cos(a0 + i * 2 * math.pi / n) * R * rnd.uniform(.6, 1.2),
+                 y + math.sin(a0 + i * 2 * math.pi / n) * R * rnd.uniform(.6, 1.2)) for i in range(n)]
+        col = gen.rgb(rnd.choice(('#6B8AFF', '#C86BFF', '#6BD5FF', '#FF6BC4')))
+        d.polygon(poly, fill=col + (rnd.randint(22, 58),))
+        d.line(poly + [poly[0]], fill=col + (110,), width=max(1, int(w * .003)))
+    img = _nb_add(img, lay, w * .006, 1.2)
+    return _nb_dust(img, rnd, 280, ('#FFFFFF',), 1.2, 90)
+
+
+def _nb_chroma(w, h, rnd, bare):
+    """색수차. 같은 덩이를 세 색으로 어긋나게 겹친다. 렌즈가 색마다 다르게 꺾는 것이라
+    셋이 같은 모양이어야 한다 — 따로 그리면 그냥 얼룩 셋이다."""
+    gen = _g()
+    img = Image.new('RGB', (w, h), gen.rgb('#070610'))
+    # 덩이를 성기게 잡고 옅게 얹는다. 처음엔 화면 절반이 덩이였고 세 색을 screen 으로 겹쳐
+    # 화면이 허옇게 떠서 네온 말풍선이 배경에 묻혔다 — 요란 쪽 실패다
+    m = _nb_cloud(rnd, 4, w, h, 172, .9)
+    off = int(w * (.012 if bare else .03))
+    for col, dx, dy in (('#FF3F6B', -off, 0), ('#3FFF9B', 0, off), ('#3F7AFF', off, -off)):
+        img = _nb_tint(img, ImageChops.offset(m, dx, dy), col, .62)
+    return _nb_dust(img.filter(ImageFilter.GaussianBlur(w * .006)), rnd, 340, ('#FFFFFF',), 1.3, 100)
+
+
+NEON_LOOKS = {
+    'star': _nb_star, 'petal': _nb_petal, 'bokeh': _nb_bokeh, 'plasma': _nb_plasma,
+    'ink': _nb_ink, 'mesh': _nb_mesh, 'crystal': _nb_crystal, 'chroma': _nb_chroma,
+}
+
+
+def _nb_animals(img, names, cols, scale=.17):
+    """네온관 동물을 배경에 얹는다. 좌표는 tools/zoo.py 에서 오고 그리기는 여기서 한다.
+    검은 판에 그려 흐린 빛과 함께 screen 으로 올린다 — 바탕에 바로 칠하면 형광 페인트가 된다."""
+    import zoo
+    gen = _g()
+    w, h = img.size
+    u = w / 500.0
+    glow, core = Image.new('RGB', (w, h)), Image.new('RGB', (w, h))
+    gd, cd = ImageDraw.Draw(glow), ImageDraw.Draw(core)
+    for i, name in enumerate(names):
+        fx, fy = NEON_SPOTS[i % len(NEON_SPOTS)]
+        cx, cy, R = w * fx, h * fy, w * scale
+        col = gen.rgb(cols[i % len(cols)])
+        hot = gen.rgb(gen.glow_tint(cols[i % len(cols)], .72))
+        lines, dots = zoo.paths(name)
+        for pts in lines:
+            P = [(cx + x * R, cy + y * R) for x, y in pts]
+            gd.line(P, fill=col, width=max(2, int(4.6 * u)), joint='curve')
+            cd.line(P, fill=hot, width=max(1, int(1.7 * u)), joint='curve')
+        for x, y, r in dots:
+            b = [cx + (x - r) * R, cy + (y - r) * R, cx + (x + r) * R, cy + (y + r) * R]
+            gd.ellipse(b, fill=col)
+            cd.ellipse([b[0] + 1.6 * u, b[1] + 1.6 * u, b[2] - 1.6 * u, b[3] - 1.6 * u], fill=hot)
+    img = ImageChops.screen(img, glow.filter(ImageFilter.GaussianBlur(24 * u)).point(
+        lambda v: min(255, int(v * 2.0))))
+    img = ImageChops.screen(img, glow.filter(ImageFilter.GaussianBlur(4.5 * u)).point(
+        lambda v: min(255, int(v * 1.7))))
+    return ImageChops.screen(img, core)
+
+
+def neonbg(spec, w, h):
+    """네온사인 v6~ 의 배경. spec = ('neonbg', 바탕색, 둘째색, 옵션dict)
+
+      look     NEON_LOOKS 의 이름 하나
+      animals  네온관으로 얹을 동물 이름 셋(tools/zoo.py). 없으면 안 얹는다
+      colors   동물 관 색들
+      bare     참이면 큰 구조를 빼고 알갱이층만 남긴다. 목록 배경용이다
+      dim / dim_to
+
+    씨앗은 gen.seeded 가 키에서 만들어 넣어 준다 — 같은 테마를 다시 돌리면 같은 그림이 나온다.
+    """
+    o = spec[3] if len(spec) > 3 else {}
+    look = o.get('look', 'star')
+    if look not in NEON_LOOKS:
+        raise SystemExit('모르는 네온 배경: %s — scenes.NEON_LOOKS 에 있는 것만 쓴다' % look)
+    rnd = random.Random(o.get('seed', 20260418))
+    bare = bool(o.get('bare'))
+    img = NEON_LOOKS[look](w, h, rnd, bare)
+    # 목록에는 동물을 얹지 않는다. 셀·필터 칩에 잘리면 몸이 반만 보여 무슨 동물인지 알 수 없다
+    if o.get('animals') and not bare:
+        img = _nb_animals(img, o['animals'], o.get('colors', ('#FF5CE1', '#4D7CFF', '#FFD23F')))
+    return _dim(img, o)
+
+
 def quest(spec, w, h):
     """위에서 본 도트 지도. spec = ('quest', 바탕색, 둘째색, 옵션dict)
 

@@ -1304,6 +1304,58 @@ def p_neon(t, idx, px):
 PROFILES['neon'] = p_neon
 
 
+def p_neonzoo(t, idx, px):
+    """네온 동물 계열의 기본 프로필. 그 계열 식구 세 마리를 네온관으로 하나씩.
+
+    배경(scenes.neonbg)과 같은 좌표를 쓴다(tools/zoo.py) — 채팅방 벽에 걸린 동물이 목록에서도
+    같은 동물이라야 한 테마로 읽힌다. 벽돌 대신 빈 어둠을 깔아 v6~ 의 배경과 결을 맞춘다.
+
+    36pt 에서 읽혀야 해서 관을 p_neon 과 비슷한 굵기로 둔다. 동물은 세로로 긴 것(해마·펭귄)과
+    옆으로 넓은 것(고래·나비)이 섞여 있어 한 크기로 박으면 넓은 것이 칸 밖으로 나간다.
+    그래서 선이 차지하는 범위를 재서 칸에 맞춘다.
+    """
+    import zoo
+    g = _g()
+    k = 3
+    S = px * k
+    img = Image.new('RGB', (S, S), (10, 9, 18))
+    names = t.get('zoo') or ('jelly', 'owl', 'butterfly')
+    col = (_c(t['send']), _c(t['recv']), t.get('neon_third', '#FFD23F'))[idx % 3]
+    lines, dots = zoo.paths(names[idx % 3])
+
+    xs = [p[0] for ln in lines for p in ln] + [x for x, _, _ in dots]
+    ys = [p[1] for ln in lines for p in ln] + [y for _, y, _ in dots]
+    span = max(max(xs) - min(xs), max(ys) - min(ys)) or 1.0
+    cx0, cy0 = (max(xs) + min(xs)) / 2, (max(ys) + min(ys)) / 2
+    R = S * 0.36 / (span / 2)
+
+    lay = Image.new('RGB', (S, S))
+    core = Image.new('RGB', (S, S))
+    ld, cd = ImageDraw.Draw(lay), ImageDraw.Draw(core)
+
+    def P(x, y):
+        return (S / 2 + (x - cx0) * R, S / 2 + (y - cy0) * R)
+
+    for line in lines:
+        pts = [P(x, y) for x, y in line]
+        ld.line(pts, fill=g.rgb(col), width=max(2, int(S * 0.055)), joint='curve')
+        cd.line(pts, fill=g.rgb(g.glow_tint(col, 0.75)), width=max(1, int(S * 0.020)), joint='curve')
+    for x, y, r in dots:
+        ex, ey = P(x, y)
+        rr = r * R
+        ld.ellipse([ex - rr, ey - rr, ex + rr, ey + rr], fill=g.rgb(col))
+        cd.ellipse([ex - rr * .55, ey - rr * .55, ex + rr * .55, ey + rr * .55],
+                   fill=g.rgb(g.glow_tint(col, 0.75)))
+    img = ImageChops.screen(img, lay.filter(ImageFilter.GaussianBlur(S * 0.07)).point(
+        lambda v: min(255, int(v * 1.7))))
+    img = ImageChops.screen(img, lay)
+    img = ImageChops.screen(img, core)
+    return img.resize((px, px), Image.LANCZOS).convert('RGBA')
+
+
+PROFILES['neonzoo'] = p_neonzoo
+
+
 # --- 도트 모험: RPG 대화창 ---------------------------------------------------
 # 모서리를 한 칸씩 계단으로 깎은 네모 창. 바깥 테두리 한 칸, 안쪽에 가는 테 한 줄. 좌표는 전부
 # 정수 pt 로 두고 끝 픽셀을 빼서 칠한다 — 반 픽셀이 걸리면 계단 경계가 번져 도트로 안 읽힌다.
