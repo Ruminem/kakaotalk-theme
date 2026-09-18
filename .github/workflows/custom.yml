@@ -17,8 +17,16 @@ on:
         description: '말풍선과 색을 가져올 테마 (예: bakery-light)'
         required: true
         default: 'bakery-light'
+      send:
+        description: '보낸 말풍선 색 #RRGGBB. 비우면 말풍선 테마 것을 쓴다'
+        required: false
+        default: ''
+      recv:
+        description: '받은 말풍선 색 #RRGGBB'
+        required: false
+        default: ''
       accent:
-        description: '포인트색 #RRGGBB. 비우면 말풍선 테마 것을 쓴다'
+        description: '포인트색 #RRGGBB. 비우면 말풍선 색을 따라간다'
         required: false
         default: ''
       name:
@@ -48,9 +56,11 @@ jobs:
         env:
           BG: ${{ inputs.bg }}
           BUBBLE: ${{ inputs.bubble }}
+          SEND: ${{ inputs.send }}
+          RECV: ${{ inputs.recv }}
           ACCENT: ${{ inputs.accent }}
           NAME: ${{ inputs.name }}
-        run: python tools/mix.py --bg "$env:BG" --bubble "$env:BUBBLE" --accent "$env:ACCENT" --name "$env:NAME"
+        run: python tools/mix.py --bg "$env:BG" --bubble "$env:BUBBLE" --send "$env:SEND" --recv "$env:RECV" --accent "$env:ACCENT" --name "$env:NAME"
 
       - name: 포장
         shell: pwsh

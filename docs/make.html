@@ -28,6 +28,10 @@
   옮겨 적지 않는다 — 두 벌이 되는 순간 한쪽이 틀리기 시작한다. 말풍선을 늘이는 방식도
   카톡과 같다: cap 자리의 한 줄만 늘인다.
 
+  말풍선 색은 그림을 다시 그리지 않고 색상만 돌린다. 되는 계열은 tools/preview.py 가
+  재서 themes.json 에 적어 둔다(지금은 네온 36벌). 자세한 것은 CLAUDE.md 의
+  `커스텀 테마 제작 > 말풍선 색`.
+
   이 파일은 손으로 쓴다. 같은 폴더의 index.html 과 themes.json 은 tools/preview.py 가
   만드는 생성물이다.
 -->
@@ -83,6 +87,16 @@
   .pick .what, .pick .who { display:block; overflow:hidden; text-overflow:ellipsis;
                             white-space:nowrap; }
   .pick .arrow { color:var(--dim); font-size:12px; flex:none; }
+  .pick[hidden] { display:none; }
+  .chips { display:flex; gap:3px; flex:none; }
+  .chips i { width:15.5px; height:34px; border-radius:5px; background:#333; display:block; }
+  .swatch { display:flex; gap:4px; height:46px; }
+  .swatch i { flex:1; border-radius:7px; display:block; }
+  .card.on .swatch i { outline:2px solid var(--accent); outline-offset:2px; }
+  .mixrow { grid-column:1/-1; display:flex; gap:8px; align-items:center;
+            color:var(--dim); font-size:13px; }
+  .mixrow input[type=color] { width:52px; height:40px; padding:2px; border-radius:9px;
+                              border:1px solid var(--line); background:var(--surface); }
   input[type=text] { width:100%; padding:13px 12px; border-radius:11px;
                      border:1px solid var(--line); background:var(--surface);
                      color:var(--text); }
@@ -130,7 +144,10 @@
       <img alt=""><span class="col"><span class="who">배경</span><span class="what"></span></span><span class="arrow">바꾸기 ›</span>
     </button>
     <button class="pick" id="pick-bubble">
-      <img alt=""><span class="col"><span class="who">말풍선 · 색</span><span class="what"></span></span><span class="arrow">바꾸기 ›</span>
+      <img alt=""><span class="col"><span class="who">말풍선 모양 · 색</span><span class="what"></span></span><span class="arrow">바꾸기 ›</span>
+    </button>
+    <button class="pick" id="pick-color" hidden>
+      <span class="chips"><i></i><i></i></span><span class="col"><span class="who">말풍선 색</span><span class="what"></span></span><span class="arrow">바꾸기 ›</span>
     </button>
     <input type="text" id="name" maxlength="20" placeholder="테마 이름">
   </div>
@@ -156,7 +173,18 @@
   var REPO = 'https://github.com/Ruminem/kakaotalk-theme';
 
   var $ = function (id) { return document.getElementById(id); };
-  var DB = [], pick = { bg: 'camp-dark-image', bubble: 'bakery-light-image' };
+  var DB = [], pick = { bg: 'camp-dark-image', bubble: 'bakery-light-image',
+                        send: null, recv: null };
+
+  // 말풍선 색 짝. 네온 계열에서 고를 수 있다
+  var PAIRS = [
+    ['파랑 × 분홍', '#4D8CFF', '#FF6FD8'], ['하늘 × 산호', '#6FE3FF', '#FF8A6F'],
+    ['민트 × 자홍', '#4DFFC4', '#E066FF'], ['라임 × 보라', '#B6FF4D', '#A96BFF'],
+    ['노랑 × 하늘', '#FFD24D', '#6FC8FF'], ['주황 × 청록', '#FF8A3D', '#4DE0D0'],
+    ['분홍 × 하늘', '#FF3FA4', '#35E0FF'], ['빨강 × 연두', '#FF4D5E', '#7CFF6B'],
+    ['보라 × 노랑', '#9B6BFF', '#FFE24D'], ['청록 × 분홍', '#35E0C8', '#FF7AC6'],
+    ['자홍 × 라임', '#FF4DE0', '#A8FF4D'], ['주황 × 보라', '#FF9A3D', '#B06BFF']
+  ];
   var ready = null, token = 0;
 
   // --- zip 읽기 -----------------------------------------------------------
@@ -252,14 +280,121 @@
 
   // --- 섞기 ---------------------------------------------------------------
   function idOf() {
-    // 조합마다 다른 ID 라야 폰에서 원래 테마를 덮어쓰지 않고 따로 선다
+    // 조합마다 다른 ID 라야 폰에서 원래 테마를 덮어쓰지 않고 따로 선다. 색을 바꾼 것도
+    // 다른 조합이다 — 같은 ID 면 색만 다른 두 벌 중 하나만 남는다
+    var tint = pick.send || pick.recv
+      ? '__' + (pick.send || '').slice(1) + (pick.recv || '').slice(1) : '';
     return 'com.kakao.talk.theme.custom_' +
-      pick.bubble.replace(/-/g, '_') + '__' + pick.bg.replace(/-/g, '_');
+      pick.bubble.replace(/-/g, '_') + '__' + pick.bg.replace(/-/g, '_') + tint.toLowerCase();
+  }
+
+  // --- 말풍선 색 바꾸기 ----------------------------------------------------
+  // 브라우저는 말풍선을 다시 그릴 수 없다. 그리는 코드는 파이썬(tools/charbubble.py)에
+  // 있다. 대신 이미 그려둔 그림의 색상만 돌린다. 네온관은 색 하나로 그려져 있어서
+  // 이걸로 충분하다 — 다시 그린 것과 대조해 보니 채널 차이가 9/255 였다.
+  // 어느 테마가 그래도 되는지는 tools/preview.py 가 재서 themes.json 에 적어 둔다.
+  //
+  // 채도가 아니라 채도x명도로 가른다. 어두운 색은 값이 작아 조금만 기울어도 채도가
+  // 높게 나온다 — 네온의 검은 벽 #100C14 가 채도 0.40 이다. tools/mix.py 와 같은 기준이다.
+  var MIN_CHROMA = 0.06;
+
+  function rgb2hsv(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    var mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn, h = 0;
+    if (d) {
+      if (mx === r) h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+      else if (mx === g) h = ((b - r) / d + 2) / 6;
+      else h = ((r - g) / d + 4) / 6;
+    }
+    return [h, mx ? d / mx : 0, mx];
+  }
+  function hsv2rgb(h, s, v) {
+    h = ((h % 1) + 1) % 1; s = Math.min(1, Math.max(0, s)); v = Math.min(1, Math.max(0, v));
+    var i = Math.floor(h * 6), f = h * 6 - i, p = v * (1 - s),
+        q = v * (1 - f * s), t = v * (1 - (1 - f) * s);
+    var r = [v, q, p, p, t, v][i % 6], g = [t, v, v, q, p, p][i % 6],
+        b = [p, p, t, v, v, q][i % 6];
+    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+  }
+  function hexHsv(hex) {
+    var n = parseInt(hex.slice(1), 16);
+    return rgb2hsv(n >> 16 & 255, n >> 8 & 255, n & 255);
+  }
+  function hexOf(r, g, b) {
+    return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+  }
+
+  // 원래 색 -> 새 색 짝에서 (색상 차이, 채도 비율) 을 뽑아 둔다
+  function colorMap() {
+    var row = find(pick.bubble);
+    if (!row || !row.send || !(pick.send || pick.recv)) return null;
+    var m = [];
+    [[row.send, pick.send], [row.recv, pick.recv]].forEach(function (p) {
+      var a = hexHsv(p[0]), b = hexHsv(p[1] || p[0]);
+      m.push({ h: a[0], shift: b[0] - a[0], k: a[1] ? b[1] / a[1] : 1 });
+    });
+    return m;
+  }
+
+  function gap(a, b) { var d = Math.abs(a - b) % 1; return Math.min(d, 1 - d); }
+
+  function moveColor(map, h, s, v) {
+    var best = map[0];
+    for (var i = 1; i < map.length; i++) {
+      if (gap(h, map[i].h) < gap(h, best.h)) best = map[i];
+    }
+    return [h + best.shift, s * best.k, v];
+  }
+
+  function recolorData(d, map) {
+    var p = d.data;
+    for (var i = 0; i < p.length; i += 4) {
+      if (!p[i + 3]) continue;
+      var c = rgb2hsv(p[i], p[i + 1], p[i + 2]);
+      if (c[1] * c[2] < MIN_CHROMA) continue;
+      var n = moveColor(map, c[0], c[1], c[2]);
+      var o = hsv2rgb(n[0], n[1], n[2]);
+      p[i] = o[0]; p[i + 1] = o[1]; p[i + 2] = o[2];
+    }
+    return d;
+  }
+
+  function recolorCss(css, map) {
+    return css.replace(/#([0-9A-Fa-f]{6})\b/g, function (all, hx) {
+      var c = hexHsv('#' + hx);
+      if (c[1] * c[2] < MIN_CHROMA) return all;
+      var n = moveColor(map, c[0], c[1], c[2]);
+      var o = hsv2rgb(n[0], n[1], n[2]);
+      return hexOf(o[0], o[1], o[2]);
+    });
+  }
+
+  function recolorImage(img, map) {
+    var c = document.createElement('canvas');
+    c.width = img.width; c.height = img.height;
+    var x = c.getContext('2d');
+    x.drawImage(img, 0, 0);
+    x.putImageData(recolorData(x.getImageData(0, 0, c.width, c.height), map), 0, 0);
+    return c;
+  }
+
+  // 그림 한 장을 색 돌려 PNG 바이트로 다시 뽑는다
+  function recolorPng(rec, map) {
+    return png(rec).then(function (img) {
+      return new Promise(function (ok) {
+        recolorImage(img, map).toBlob(function (b) {
+          b.arrayBuffer().then(function (ab) { ok(new Uint8Array(ab)); });
+        }, 'image/png');
+      });
+    });
   }
 
   function mix(bub, bg, name) {
+    var map = colorMap();
     return inflate(bub.get('KakaoTalkTheme.css')).then(function (raw) {
-      var css = new TextDecoder().decode(raw)
+      var css = new TextDecoder().decode(raw);
+      if (map) css = recolorCss(css, map);
+      css = css
         .replace(/(-kakaotalk-theme-name:\s*')[^']*(')/, '$1' + name + '$2')
         .replace(/(-kakaotalk-theme-id:\s*')[^']*(')/, '$1' + idOf() + '$2');
       var out = new TextEncoder().encode(css);
@@ -270,18 +405,27 @@
           if (bg.has(k)) swap[k] = bg.get(k);
         });
       });
-      var items = [];
+      var items = [], jobs = [];
       bub.forEach(function (rec, key) {
         if (key === 'KakaoTalkTheme.css') {
           items.push({ name: key, method: 0, crc: crc32(out),
                        csize: out.length, usize: out.length, data: out });
-        } else {
-          var r = swap[key] || rec;
-          items.push({ name: key, method: r.method, crc: r.crc,
-                       csize: r.csize, usize: r.usize, data: r.data });
+          return;
+        }
+        var r = swap[key] || rec;
+        var item = { name: key, method: r.method, crc: r.crc,
+                     csize: r.csize, usize: r.usize, data: r.data };
+        items.push(item);
+        // 배경은 배경 쪽 테마 것이라 건드리지 않는다. 나머지 그림은 말풍선 색을 물려받은
+        // 것들이라(프로필·탭 아이콘·잠금화면 점) 같이 돌려야 목록 화면까지 한 테마로 보인다
+        if (map && !swap[key] && /\.png$/i.test(key) && rec.usize) {
+          jobs.push(recolorPng(rec, map).then(function (b) {
+            item.method = 0; item.data = b; item.crc = crc32(b);
+            item.csize = item.usize = b.length;
+          }));
         }
       });
-      return writeZip(items);
+      return Promise.all(jobs).then(function () { return writeZip(items); });
     });
   }
 
@@ -309,13 +453,16 @@
     var m = s.match(re);
     return m ? [+m[1], +m[2], +m[3], +m[4]] : [13, 18, 13, 18];
   }
-  function png(rec) {
+  function png(rec, keep) {
     return inflate(rec).then(function (b) {
       return new Promise(function (ok, no) {
         var im = new Image();
-        im.onload = function () { ok(im); };
-        im.onerror = no;
-        im.src = URL.createObjectURL(new Blob([b], { type: 'image/png' }));
+        var url = URL.createObjectURL(new Blob([b], { type: 'image/png' }));
+        // 색을 바꾸면 한 번 만들 때 그림 마흔 장을 이 길로 지난다. 안 놓아주면 쌓인다.
+        // 채팅방 배경만은 <div> 가 계속 들고 있어야 해서 남겨 둔다(keep)
+        im.onload = function () { if (!keep) URL.revokeObjectURL(url); ok(im); };
+        im.onerror = function (e) { URL.revokeObjectURL(url); no(e); };
+        im.src = url;
       });
     });
   }
@@ -332,12 +479,14 @@
     ['send', 1, 'ㅋㅋ 고마워']
   ];
 
+  var lastBg = null;
+
   function render(bub, bg) {
     return Promise.all([
       inflate(bub.get('KakaoTalkTheme.css')).then(function (b) {
         return new TextDecoder().decode(b);
       }),
-      png(bg.get('Images/chatroomBgImage@3x.png')),
+      png(bg.get('Images/chatroomBgImage@3x.png'), true),
       png(bub.get('Images/chatroomBubbleSend01@3x.png')),
       png(bub.get('Images/chatroomBubbleSend02@3x.png')),
       png(bub.get('Images/chatroomBubbleReceive01@3x.png')),
@@ -345,6 +494,15 @@
     ]).then(function (r) {
       var css = r[0], bgImg = r[1];
       var sheets = { send1: r[2], send2: r[3], recv1: r[4], recv2: r[5] };
+
+      // 미리보기도 같은 계산으로 돌린다. 여기만 원래 색이면 만들어 놓고 딴 것이 나온다
+      var map = colorMap();
+      if (map) {
+        css = recolorCss(css, map);
+        Object.keys(sheets).forEach(function (k) {
+          sheets[k] = recolorImage(sheets[k], map);
+        });
+      }
 
       // 말풍선 치수·색은 그 테마의 CSS 에서 그대로 읽는다. 팔레트를 여기 옮겨 적지 않는다
       var spec = {};
@@ -367,6 +525,8 @@
       var sub = (main.match(/-ios-description-text-color:\s*(#[0-9A-Fa-f]{6})/) || [])[1] || '#888';
 
       var phone = $('phone');
+      if (lastBg) URL.revokeObjectURL(lastBg);     // 앞 배경은 화면에서 내려갔다
+      lastBg = bgImg.src;
       phone.style.backgroundColor = floor;
       phone.style.backgroundImage = 'url(' + bgImg.src + ')';
       phone.innerHTML = '<div class="bar top"></div><div class="chat"></div>' +
@@ -429,12 +589,29 @@
   function byId(slug) { return find(slug) || DB[0]; }
   function shot(slug) { return ASSETS + 'preview-' + slug + '-chat.webp'; }
 
+  function pairName(s, r) {
+    for (var i = 0; i < PAIRS.length; i++) {
+      if (PAIRS[i][1] === s && PAIRS[i][2] === r) return PAIRS[i][0];
+    }
+    return s + ' × ' + r;
+  }
+
   function paintPicks() {
     [['bg', 'pick-bg'], ['bubble', 'pick-bubble']].forEach(function (p) {
       var t = byId(pick[p[0]]), el = $(p[1]);
       el.querySelector('img').src = shot(t.slug);
       el.querySelector('.what').textContent = t.name;
     });
+    // 색 고르는 줄은 색을 바꿔도 되는 말풍선일 때만 나온다. 우표나 잼처럼 말풍선 색이 아닌
+    // 소품이 있는 계열은 색상을 돌리면 그 소품까지 같이 돌아서 뺐다(themes.json 이 정한다)
+    var row = find(pick.bubble), el = $('pick-color');
+    el.hidden = !(row && row.send);
+    if (el.hidden) { pick.send = pick.recv = null; return; }
+    var s = pick.send || row.send, r = pick.recv || row.recv;
+    el.querySelectorAll('.chips i')[0].style.background = s;
+    el.querySelectorAll('.chips i')[1].style.background = r;
+    el.querySelector('.what').textContent =
+      pick.send || pick.recv ? pairName(s, r) : '원래 색';
   }
 
   var file = null;
@@ -477,6 +654,7 @@
   function openSheet(which) {
     picking = which;
     $('q').value = '';
+    $('q').hidden = which === 'color';      // 색은 열두 짝뿐이라 찾을 것이 없다
     fillGrid('');
     $('sheet').classList.add('on');
     document.body.style.overflow = 'hidden';
@@ -485,8 +663,38 @@
     $('sheet').classList.remove('on');
     document.body.style.overflow = '';
   }
+  function colorCard(name, s, r, on) {
+    return '<button class="card' + (on ? ' on' : '') + '" data-send="' + s +
+      '" data-recv="' + r + '"><span class="swatch"><i style="background:' + s +
+      '"></i><i style="background:' + r + '"></i></span><span>' + name + '</span></button>';
+  }
+
   function fillGrid(q) {
     var grid = $('grid'), cat = null, html = [];
+    if (picking === 'color') {
+      var row = find(pick.bubble);
+      var cur = (pick.send || '') + (pick.recv || '');
+      html.push('<p class="cat">보낸 색 × 받은 색</p>');
+      html.push(colorCard('원래 색', row.send, row.recv, !cur));
+      PAIRS.forEach(function (p) {
+        html.push(colorCard(p[0], p[1], p[2], cur === p[1] + p[2]));
+      });
+      html.push('<p class="cat">직접 고르기</p>');
+      html.push('<div class="mixrow">보낸 <input type="color" id="cs" value="' +
+        (pick.send || row.send) + '"> 받은 <input type="color" id="cr" value="' +
+        (pick.recv || row.recv) + '"></div>');
+      grid.innerHTML = html.join('');
+      grid.scrollTop = 0;
+      ['cs', 'cr'].forEach(function (id) {
+        $(id).addEventListener('change', function () {
+          pick.send = $('cs').value.toUpperCase();
+          pick.recv = $('cr').value.toUpperCase();
+          closeSheet();
+          refresh();
+        });
+      });
+      return;
+    }
     DB.forEach(function (t) {
       if (picking === 'bubble' && !t.bubble) return;
       if (q && t.name.indexOf(q) < 0 && t.slug.indexOf(q) < 0) return;
@@ -547,12 +755,23 @@
       '<a href="' + REPO + '/actions">저장소 Actions</a> 에서 만들면 됨.';
   $('pick-bg').addEventListener('click', function () { openSheet('bg'); });
   $('pick-bubble').addEventListener('click', function () { openSheet('bubble'); });
+  $('pick-color').addEventListener('click', function () { openSheet('color'); });
   $('close').addEventListener('click', closeSheet);
   $('q').addEventListener('input', function () { fillGrid(this.value.trim()); });
   $('grid').addEventListener('click', function (e) {
     var c = e.target.closest('.card');
     if (!c) return;
-    pick[picking] = c.dataset.slug;
+    if (picking === 'color') {
+      var row = find(pick.bubble);
+      var orig = c.dataset.send === row.send && c.dataset.recv === row.recv;
+      pick.send = orig ? null : c.dataset.send;
+      pick.recv = orig ? null : c.dataset.recv;
+    } else {
+      pick[picking] = c.dataset.slug;
+      // 말풍선을 바꾸면 고른 색은 버린다. 그 색은 앞 테마의 색을 기준으로 돌린 것이라
+      // 다른 말풍선에 그대로 씌우면 엉뚱한 색이 나온다
+      if (picking === 'bubble') pick.send = pick.recv = null;
+    }
     closeSheet();
     refresh();
   });

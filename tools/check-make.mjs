@@ -10,6 +10,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execFileSync } from 'node:child_process';
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const html = fs.readFileSync(path.join(ROOT, 'docs', 'make.html'), 'utf8');
@@ -20,14 +21,20 @@ function section(from, to) {
   if (a < 0 || b < 0 || b < a) throw new Error(`make.html 에서 "${from}" 구역을 못 찾음`);
   return html.slice(a, b);
 }
-const PRELUDE = "var BG_NAMES = ['chatroomBgImage', 'mainBgImage', 'passcodeBgImage'];";
-const code = PRELUDE + '\n' +
+// 페이지는 DOM 과 themes.json 을 쓴다. 여기서 보려는 것은 zip 과 색 계산뿐이라 그 둘만 채운다
+const PRELUDE = `
+var BG_NAMES = ['chatroomBgImage', 'mainBgImage', 'passcodeBgImage'];
+var ROW = { send: '#FF3FA4', recv: '#35E0FF' };
+function find() { return ROW; }
+`;
+const code = PRELUDE +
              section('function u16(', '// --- 테마 받아두기') +
              section('function idOf(', '// --- 미리보기');
 
-const pick = { bg: 'x-bg', bubble: 'x-bub' };
-const { readZip, writeZip, crc32, mix } = new Function(
-  'pick', code + '\nreturn { readZip, writeZip, crc32, mix, inflate };')(pick);
+const ROW_SEND = '#FF3FA4', ROW_RECV = '#35E0FF';
+const pick = { bg: 'x-bg', bubble: 'x-bub', send: null, recv: null };
+const { readZip, writeZip, crc32, mix, recolorCss, hexHsv } = new Function(
+  'pick', code + '\nreturn { readZip, writeZip, crc32, mix, inflate, recolorCss, colorMap, hexHsv };')(pick);
 
 function readTheme(slug) {
   const p = path.join(ROOT, 'dist', 'iOS', slug + '.ktheme');
@@ -86,6 +93,37 @@ async function inflateOf(rec) {
   if (rec.method === 0) return rec.data;
   const s = new Blob([rec.data]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
   return new Uint8Array(await new Response(s).arrayBuffer());
+}
+
+// 5. 말풍선 색 바꾸기 — 페이지와 tools/mix.py 가 같은 색을 내야 한다.
+// 한쪽에서 만든 테마와 다른 쪽에서 만든 테마가 달라지면 어느 쪽이 맞는지 알 수 없다.
+{
+  pick.send = '#4D8CFF';
+  pick.recv = '#FF6FD8';
+  const SRC = ['#FF3FA4', '#35E0FF', '#100C14', '#F2ECF7', '#FFE0F0', '#D9F8FF', '#C42D7E'];
+  const mine = SRC.map((c) => recolorCss(c, [
+    { h: hexHsv(ROW_SEND)[0], shift: hexHsv(pick.send)[0] - hexHsv(ROW_SEND)[0],
+      k: hexHsv(pick.send)[1] / hexHsv(ROW_SEND)[1] },
+    { h: hexHsv(ROW_RECV)[0], shift: hexHsv(pick.recv)[0] - hexHsv(ROW_RECV)[0],
+      k: hexHsv(pick.recv)[1] / hexHsv(ROW_RECV)[1] },
+  ]));
+  const py = execFileSync('python', ['-c', `
+import sys; sys.path.insert(0, r'${path.join(ROOT, 'tools')}')
+import mix
+t = dict(send=('${ROW_SEND}','${ROW_SEND}'), recv=('${ROW_RECV}','${ROW_RECV}'))
+for k, c in enumerate(${JSON.stringify(SRC)}):
+    t['k%d' % k] = c
+mix.PALETTE_KEYS = tuple('k%d' % i for i in range(${SRC.length}))
+mix.recolor_palette(t, '${pick.send}', '${pick.recv}')
+print(' '.join(t['k%d' % i] for i in range(${SRC.length})))
+`], { encoding: 'utf8', env: { ...process.env, PYTHONUTF8: '1' } }).trim().split(' ');
+  mine.forEach((v, i) => {
+    if (v.toUpperCase() !== py[i].toUpperCase()) {
+      fail(`${SRC[i]} -> 페이지 ${v}, mix.py ${py[i]}`);
+    }
+  });
+  console.log(`  색 ${SRC.length}개를 mix.py 와 대조: ${SRC.map((c, i) => c + '->' + mine[i]).join(' ')}`);
+  pick.send = pick.recv = null;
 }
 
 fs.mkdirSync(path.join(ROOT, 'build-tmp'), { recursive: true });

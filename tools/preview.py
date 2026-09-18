@@ -14,6 +14,7 @@ gen.py 가 부른다. 직접 돌려도 된다:
 뭉개져서 폰에 깐 것보다 훨씬 싸구려로 보였다. README 에서 그 그림을 보고
 지나치면 폰에서 예쁜 것은 아무 소용이 없다.
 """
+import colorsys
 import json
 import multiprocessing
 import os
@@ -942,6 +943,81 @@ def write_readme(ts):
     open(p, 'w', encoding='utf-8', newline='\n').write(head + readme_block(ts) + tail)
 
 
+# --- 말풍선 색 바꾸기 ------------------------------------------------------
+# 브라우저는 말풍선을 다시 그릴 수 없다. 그리는 코드가 파이썬에 있다. 대신 이미 그려둔
+# 그림의 색상만 돌리는 길이 있는데, 그게 다시 그린 것과 같은지는 테마마다 다르다 —
+# 우표나 잼처럼 말풍선 색이 아닌 소품이 있으면 그것까지 같이 돌아 버린다.
+#
+# 그래서 짐작하지 않고 잰다. 색상을 돌린 그림과 그 색으로 다시 그린 그림을 대조해서
+# 차이가 작은 테마만 페이지에서 색을 고를 수 있게 한다(네온 계열이 여기 든다).
+
+RECOLOR_PROBE = '#4D8CFF'   # 재 볼 때 쓰는 색. 색상만 다르면 되므로 하나면 된다
+RECOLOR_MAX = 24            # 채널 차이 한계. 네온은 9 쯤 나온다
+RECOLOR_MIN_SAT = 0.15      # 이보다 흐린 색은 색상을 돌려도 뜻이 없다
+RECOLOR_MIN_HUE = 0.08      # 두 말풍선 색의 색상이 이보다 가까우면 어느 쪽 색인지 못 가린다
+                            # (말풍선 말고 프로필·탭 아이콘은 어느 색인지 적혀 있지 않다)
+
+
+def _hsv(h):
+    h = h.lstrip('#')
+    r, g, b = (int(h[i:i + 2], 16) / 255 for i in (0, 2, 4))
+    return colorsys.rgb_to_hsv(r, g, b)
+
+
+def _hue_gap(a, b):
+    d = abs(a - b) % 1.0
+    return min(d, 1 - d)
+
+
+def recolored(im, src, dst):
+    """색상을 돌리고 채도를 비율로 바꾼다. 명도와 알파는 그대로 둔다.
+
+    채도를 목표값으로 덮어쓰면 안 된다. 네온관 한가운데의 하얗게 타는 자리는 채도가
+    0 에 가까운데, 거기까지 색이 차면 관이 아니라 색칠한 테두리로 보인다.
+    docs/make.html 의 recolor() 가 같은 계산을 한다.
+    """
+    sh, ss, _ = _hsv(src)
+    dh, ds, _ = _hsv(dst)
+    shift, k = dh - sh, (ds / ss if ss else 1.0)
+    out = im.copy()
+    px = out.load()
+    for y in range(out.height):
+        for x in range(out.width):
+            r, g, b, a = px[x, y]
+            if not a:
+                continue
+            hh, s, v = colorsys.rgb_to_hsv(r / 255, g / 255, b / 255)
+            r, g, b = colorsys.hsv_to_rgb((hh + shift) % 1.0, min(1.0, s * k), v)
+            px[x, y] = (round(r * 255), round(g * 255), round(b * 255), a)
+    return out
+
+
+def _recolorable(t):
+    """이 테마의 말풍선 색을 브라우저에서 바꿔도 되는가."""
+    send, recv = t['send'], t['recv']
+    if send[0] != send[1] or recv[0] != recv[1]:
+        return False                       # 그라데이션은 색이 둘이라 한 색으로 못 돌린다
+    hs, ss, _ = _hsv(send[0])
+    hr, sr, _ = _hsv(recv[0])
+    if min(ss, sr) < RECOLOR_MIN_SAT or _hue_gap(hs, hr) < RECOLOR_MIN_HUE:
+        return False
+    for side, col in (('send', send[0]), ('recv', recv[0])):
+        probe = dict(t, **{side: (RECOLOR_PROBE, RECOLOR_PROBE),
+                           side + '_alt': (RECOLOR_PROBE, RECOLOR_PROBE)})
+        a = bubble_sheet(t, side, '01')[0].convert('RGBA')
+        b = bubble_sheet(probe, side, '01')[0].convert('RGBA')
+        if a.size != b.size:
+            return False
+        def flat(im):
+            bg = Image.new('RGB', im.size, (20, 20, 20))
+            bg.paste(im, (0, 0), im)
+            return bg
+        d = ImageChops.difference(flat(recolored(a, col, RECOLOR_PROBE)), flat(b))
+        if max(e[1] for e in d.getextrema()) > RECOLOR_MAX:
+            return False
+    return True
+
+
 def write_mix_manifest(ts):
     """커스텀 테마 제작 페이지(docs/make.html)가 읽는 목록.
 
@@ -966,8 +1042,12 @@ def write_mix_manifest(ts):
         if not all(t.get(k) for k in ('chat_bg', 'main_bg', 'passcode_bg')):
             continue
         fam = T2._fam_of(t)[0]
-        out.append(dict(slug=T2.file_slug(t), name=t['name'], cat=cat.get(fam, fam),
-                        bubble=not t.get('firelight')))
+        row = dict(slug=T2.file_slug(t), name=t['name'], cat=cat.get(fam, fam),
+                   bubble=not t.get('firelight'))
+        if row['bubble'] and _recolorable(t):
+            # 페이지가 이 두 색을 기준으로 색상을 돌린다. 원래 색을 모르면 못 돌린다
+            row.update(send=t['send'][0], recv=t['recv'][0])
+        out.append(row)
     data = dict(version=T2.VERSION, themes=out)
     with open(os.path.join(gen.DOCS, 'themes.json'), 'w', encoding='utf-8', newline='\n') as f:
         json.dump(data, f, ensure_ascii=False, indent=0)

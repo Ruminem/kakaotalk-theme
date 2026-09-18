@@ -449,91 +449,121 @@
 "slug": "neon-double",
 "name": "네온사인 이중관",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FF3FA4",
+"recv": "#35E0FF"
 },
 {
 "slug": "neon-sign",
 "name": "네온사인 간판",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FF7A2F",
+"recv": "#4D7CFF"
 },
 {
 "slug": "neon-electrode",
 "name": "네온사인 전극",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#B45CFF",
+"recv": "#4CFF88"
 },
 {
 "slug": "neon-speech",
 "name": "네온사인 말꼬리",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FF3B6B",
+"recv": "#FFD23F"
 },
 {
 "slug": "neonalley-double",
 "name": "네온사인 v2 이중관",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#3FFFD2",
+"recv": "#FF5CE1"
 },
 {
 "slug": "neonalley-sign",
 "name": "네온사인 v2 간판",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#35E0FF",
+"recv": "#FFD23F"
 },
 {
 "slug": "neonalley-electrode",
 "name": "네온사인 v2 전극",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#4D7CFF",
+"recv": "#FF7A2F"
 },
 {
 "slug": "neonalley-speech",
 "name": "네온사인 v2 말꼬리",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#4CFF88",
+"recv": "#B45CFF"
 },
 {
 "slug": "neontile-double",
 "name": "네온사인 v3 이중관",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FF3B6B",
+"recv": "#FFD23F"
 },
 {
 "slug": "neontile-sign",
 "name": "네온사인 v3 간판",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FF3FA4",
+"recv": "#4CFF88"
 },
 {
 "slug": "neontile-electrode",
 "name": "네온사인 v3 전극",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FF7A2F",
+"recv": "#35E0FF"
 },
 {
 "slug": "neontile-speech",
 "name": "네온사인 v3 말꼬리",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FFD23F",
+"recv": "#4D7CFF"
 },
 {
 "slug": "neonbar-octagon",
 "name": "네온사인 v4 팔각",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FF5CE1",
+"recv": "#35E0FF"
 },
 {
 "slug": "neonbar-bracket",
 "name": "네온사인 v4 꺾쇠",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#4CFF88",
+"recv": "#FFD23F"
 },
 {
 "slug": "neonbar-underline",
 "name": "네온사인 v4 밑줄",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FF7A2F",
+"recv": "#B45CFF"
 },
 {
 "slug": "neonbar-split",
@@ -545,19 +575,25 @@
 "slug": "neonlounge-octagon",
 "name": "네온사인 v5 팔각",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FFD23F",
+"recv": "#FF5CE1"
 },
 {
 "slug": "neonlounge-bracket",
 "name": "네온사인 v5 꺾쇠",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FF7A2F",
+"recv": "#35E0FF"
 },
 {
 "slug": "neonlounge-underline",
 "name": "네온사인 v5 밑줄",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FFD23F",
+"recv": "#B45CFF"
 },
 {
 "slug": "neonlounge-split",
@@ -569,19 +605,25 @@
 "slug": "neonstar-octagon",
 "name": "네온사인 v6 팔각",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FFA8D8",
+"recv": "#8AD8FF"
 },
 {
 "slug": "neonstar-bracket",
 "name": "네온사인 v6 꺾쇠",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FFA8D8",
+"recv": "#8AD8FF"
 },
 {
 "slug": "neonstar-underline",
 "name": "네온사인 v6 밑줄",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FFA8D8",
+"recv": "#8AD8FF"
 },
 {
 "slug": "neonstar-split",
@@ -593,19 +635,25 @@
 "slug": "neonpetal-octagon",
 "name": "네온사인 v7 팔각",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#B58AFF",
+"recv": "#FF8AD4"
 },
 {
 "slug": "neonpetal-bracket",
 "name": "네온사인 v7 꺾쇠",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#B58AFF",
+"recv": "#FF8AD4"
 },
 {
 "slug": "neonpetal-underline",
 "name": "네온사인 v7 밑줄",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#B58AFF",
+"recv": "#FF8AD4"
 },
 {
 "slug": "neonpetal-split",
@@ -641,19 +689,25 @@
 "slug": "neonplasma-octagon",
 "name": "네온사인 v9 팔각",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#9B5CFF",
+"recv": "#B8FF3F"
 },
 {
 "slug": "neonplasma-bracket",
 "name": "네온사인 v9 꺾쇠",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#9B5CFF",
+"recv": "#B8FF3F"
 },
 {
 "slug": "neonplasma-underline",
 "name": "네온사인 v9 밑줄",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#9B5CFF",
+"recv": "#B8FF3F"
 },
 {
 "slug": "neonplasma-split",
@@ -665,19 +719,25 @@
 "slug": "neonink-octagon",
 "name": "네온사인 v10 팔각",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FF3FA4",
+"recv": "#3FFFD2"
 },
 {
 "slug": "neonink-bracket",
 "name": "네온사인 v10 꺾쇠",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FF3FA4",
+"recv": "#3FFFD2"
 },
 {
 "slug": "neonink-underline",
 "name": "네온사인 v10 밑줄",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FF3FA4",
+"recv": "#3FFFD2"
 },
 {
 "slug": "neonink-split",
@@ -689,19 +749,25 @@
 "slug": "neonmesh-octagon",
 "name": "네온사인 v11 팔각",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FF7A6B",
+"recv": "#35E0FF"
 },
 {
 "slug": "neonmesh-bracket",
 "name": "네온사인 v11 꺾쇠",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FF7A6B",
+"recv": "#35E0FF"
 },
 {
 "slug": "neonmesh-underline",
 "name": "네온사인 v11 밑줄",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#FF7A6B",
+"recv": "#35E0FF"
 },
 {
 "slug": "neonmesh-split",
@@ -713,19 +779,25 @@
 "slug": "neoncrystal-octagon",
 "name": "네온사인 v12 팔각",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#6A5CFF",
+"recv": "#FFB03F"
 },
 {
 "slug": "neoncrystal-bracket",
 "name": "네온사인 v12 꺾쇠",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#6A5CFF",
+"recv": "#FFB03F"
 },
 {
 "slug": "neoncrystal-underline",
 "name": "네온사인 v12 밑줄",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"send": "#6A5CFF",
+"recv": "#FFB03F"
 },
 {
 "slug": "neoncrystal-split",

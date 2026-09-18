@@ -15,6 +15,7 @@
 저장소에 남지 않는다.
 """
 import argparse
+import colorsys
 import os
 import sys
 
@@ -42,7 +43,64 @@ def pick(cat, slug, what):
     return cat[slug]
 
 
-def mix(bg, bubble, accent=None, name='내 테마', slug='custom'):
+# 말풍선 색을 바꾸면 그 색을 물려받은 나머지 색도 같이 돌려야 한다. 글자색은 말풍선 색을
+# 옅게 뺀 것이고 포인트색은 대개 보낸 말풍선 색이라, 말풍선만 바꾸면 그것들만 옛 색으로 남는다.
+# docs/make.html 은 그림을 다시 못 그려서 색상만 돌리는데, 여기서도 같은 계산을 해야
+# 어느 쪽에서 만들든 같은 테마가 나온다.
+# 채도가 아니라 채도x명도(실제로 눈에 띄는 색기)로 가른다. 어두운 색은 값이 작아 조금만
+# 기울어도 채도가 높게 나온다 — 네온의 검은 벽 #100C14 가 채도 0.40 이다. 채도로 가르면
+# 그 벽이 같이 돌아 테마가 통째로 물들고, 반대로 옅은 글자색 #FFE0F0(채도 0.12)은 안 돌아
+# 옛 색으로 혼자 남는다. 둘 다 겪고 나서 바꾼 기준이다.
+RECOLOR_MIN_CHROMA = 0.06
+PALETTE_KEYS = ('bg', 'bg_deep', 'surface', 'pressed', 'border', 'text', 'subtext',
+                'accent', 'accent_dim', 'on_accent', 'send_text', 'recv_text')
+
+
+def _hsv(h):
+    h = h.lstrip('#')
+    r, g, b = (int(h[i:i + 2], 16) / 255 for i in (0, 2, 4))
+    return colorsys.rgb_to_hsv(r, g, b)
+
+
+def _hex(h, s, v):
+    r, g, b = colorsys.hsv_to_rgb(h % 1.0, max(0.0, min(1.0, s)), max(0.0, min(1.0, v)))
+    return '#%02X%02X%02X' % (round(r * 255), round(g * 255), round(b * 255))
+
+
+def recolor_palette(t, send, recv):
+    """말풍선 색 둘을 바꾸고, 그 색을 따라가는 나머지 색도 같이 돌린다.
+
+    색마다 원래 두 색 중 색상이 가까운 쪽을 찾아 그쪽 변화를 그대로 적용한다.
+    채도가 낮은 색은 건드리지 않는다 — 네온의 검은 벽이 돌면 테마가 통째로 물든다.
+    """
+    pairs = []
+    for old, new in ((t['send'][0], send), (t['recv'][0], recv)):
+        if not new:
+            continue
+        oh, os_, _ = _hsv(old)
+        nh, ns, _ = _hsv(new)
+        pairs.append((oh, nh - oh, (ns / os_) if os_ else 1.0))
+    if not pairs:
+        return t
+
+    def moved(col):
+        h, s, v = _hsv(col)
+        if s * v < RECOLOR_MIN_CHROMA:
+            return col
+        gap = lambda a, b: min(abs(a - b) % 1.0, 1 - abs(a - b) % 1.0)
+        _, shift, k = min(pairs, key=lambda p: gap(h, p[0]))
+        return _hex(h + shift, s * k, v)
+
+    for k in PALETTE_KEYS:
+        if t.get(k):
+            t[k] = moved(t[k])
+    for k, new in (('send', send), ('recv', recv)):
+        if new:
+            t[k] = t[k + '_alt'] = (new, new)
+    return t
+
+
+def mix(bg, bubble, accent=None, name='내 테마', slug='custom', send=None, recv=None):
     fam, var = themes._fam_of(bubble)
     t = dict(bubble, key='custom1', slug=slug, name=name, note='',
              family=fam, variant=var)
@@ -61,6 +119,9 @@ def mix(bg, bubble, accent=None, name='내 테마', slug='custom'):
     # 배경이 있는 테마에 자동으로 붙이는 기본값이라, 배경이 바뀌면 다시 정한다.
     ca = bubble.get('cell_alpha', 1.0)
     t['cell_alpha'] = ca if ca < 0.72 else (0.72 if t.get('main_bg') else 1.0)
+
+    if send or recv:
+        recolor_palette(t, send, recv)
 
     if accent:
         t['accent'] = accent
@@ -85,6 +146,14 @@ def check():
     # 배경 없는 쪽을 고르면 목록 셀이 다시 불투명해져야 한다
     t2 = mix(cat['bakery-light'], cat['camp-dark-image'])
     assert t2.get('main_bg') is None and t2['cell_alpha'] == 1.0
+
+    # 말풍선 색을 바꾸면 그 색을 따라가던 색도 같이 돈다. 벽은 안 돈다
+    neon = cat['neon-double']
+    t3 = mix(neon, neon, send='#4D8CFF', recv='#FF6FD8')
+    assert t3['send'] == ('#4D8CFF', '#4D8CFF') and t3['recv'] == ('#FF6FD8', '#FF6FD8')
+    assert t3['bg'] == neon['bg'], '채도 낮은 벽은 그대로 있어야 한다'
+    assert t3['send_text'] != neon['send_text'], '글자색도 같이 돌아야 한다'
+    assert _hsv(t3['send_text'])[0] - _hsv('#4D8CFF')[0] < 0.08, '글자색이 새 말풍선 색을 따라야 한다'
     print('점검 통과')
 
 
@@ -93,6 +162,8 @@ def main():
     ap.add_argument('--bg', help='배경 그림을 가져올 테마')
     ap.add_argument('--bubble', help='말풍선과 색을 가져올 테마')
     ap.add_argument('--accent', help='포인트색 #RRGGBB. 없으면 말풍선 테마 것을 쓴다')
+    ap.add_argument('--send', help='보낸 말풍선 색 #RRGGBB. 없으면 말풍선 테마 것을 쓴다')
+    ap.add_argument('--recv', help='받은 말풍선 색 #RRGGBB')
     ap.add_argument('--name', default='내 테마', help='폰 테마 목록에 뜰 이름')
     ap.add_argument('--slug', default='custom', help='나올 파일 이름')
     ap.add_argument('--list', action='store_true', help='고를 수 있는 이름을 전부 찍는다')
@@ -111,7 +182,7 @@ def main():
         return
 
     t = mix(pick(cat, a.bg, '배경'), pick(cat, a.bubble, '말풍선'),
-            a.accent, a.name, a.slug)
+            a.accent, a.name, a.slug, a.send, a.recv)
     print(gen.build_one(t))
 
     if not a.no_preview:
