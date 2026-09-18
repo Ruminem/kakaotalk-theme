@@ -281,3 +281,14 @@ release.ps1         → 태그 + 릴리스 자산 첨부
 - [Android 사용자 테마 가이드 (9.2.5)](https://t1.kakaocdn.net/kakaocorp/Service/Theme/KakaoTalk/9.2.5_UserThemeGuide_Android.pdf)
 
 가이드 PDF는 폰트 인코딩이 밀려 있어서 그냥 열면 안 읽힘. 글자 코드에 +31 하면 영문이 나옴.
+
+## 라이선스
+
+[Apache-2.0](LICENSE). 갖다 쓰고, 고치고, 팔아도 됨. 저작권 표기를 남기고 크게 고친 곳은
+고쳤다고 적으면 됨. MIT 와 달리 특허 허여 조항이 있어서 이걸 골랐음.
+
+그림과 말풍선은 전부 코드로 그린 것임. 남의 테마를 뜯거나 사진을 가져다 쓴 곳이 없고,
+블록·속성 이름만 카카오 공식 가이드에서 가져왔음.
+
+빌드에 [Pillow](https://python-pillow.org)(MIT-CMU)와 [qrcode](https://github.com/lincolnloop/python-qrcode)(BSD-3-Clause)를 씀.
+둘 다 만들 때만 쓰고 `.ktheme`·`.apk` 안에는 안 들어가므로 따로 고지할 것이 없음.

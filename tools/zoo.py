@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 # -*- coding: utf-8 -*-
 """네온관으로 그리는 동물 열의 선 데이터.
 
