@@ -821,15 +821,17 @@
     $('foot').innerHTML = '<b>안드로이드는 여기서 못 만듦.</b> 안드로이드 테마는 앱이라 ' +
       '설치할 때 서명이 있어야 하는데 브라우저가 그걸 못 함. 고르는 건 여기서 하고, 아래 ' +
       '단추를 누르면 고른 값이 그대로 채워진 신청 창이 열림 — <b>Create</b> 만 누르면 3분쯤 ' +
-      '뒤에 받는 곳을 댓글로 알려줌 (깃허브 로그인 필요).' +
-      '<br><button id="toapk">깃허브에 만들어 달라고 하기</button>';
+      '뒤에 받는 곳을 댓글로 알려줌.' +
+      '<br><button id="toapk">깃허브에 만들어 달라고 하기</button>' +
+      '<br><small>깃허브 계정이 있어야 함. 로그인창이 떠도 고른 값은 안 날아가니 ' +
+      '로그인하면 그대로 이어짐. 처음 한 번만 하면 됨.</small>';
   } else if (/KAKAOTALK/i.test(navigator.userAgent)) {
     $('foot').innerHTML = '<b>카카오톡 안에서 열었음.</b> 골라 보는 건 되지만, 여기서 만든 ' +
       '테마는 넘겨줄 주소가 없어서 바로 못 깖 — 오른쪽 위 <b>⋮ → 다른 브라우저로 열기</b> 로 ' +
       '사파리에서 열면 됨.';
   } else {
     $('foot').innerHTML = '안드로이드 테마는 앱이라 서명이 있어야 해서 여기선 못 만듦. ' +
-      '<button id="toapk">깃허브에 만들어 달라고 하기</button>';
+      '<button id="toapk">깃허브에 만들어 달라고 하기</button> <small>(계정 필요)</small>';
   }
   if ($('toapk')) {
     $('toapk').addEventListener('click', function () { window.open(issueUrl(), '_blank'); });
