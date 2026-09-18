@@ -809,9 +809,8 @@ import { readZip, writeZip, crc32, inflate } from './zip.js';
     $('lead').textContent = '배경과 말풍선을 따로 골라 나만의 테마를 만듦';
     $('foot').innerHTML = '만든 뒤 <b>받은 파일을 눌러 설치</b>하면 됨. 출처를 모르는 앱 ' +
       '설치를 한 번 허용해 줘야 함.<br><small>말풍선 색 바꾸기는 아이폰에서만 됨. ' +
-      '안드로이드 말풍선은 늘어나는 자리가 그림 안에 구워져 있어서 색만 돌릴 수가 없음 — ' +
-      '색까지 바꾸고 싶으면 <a href="' + REPO + '/issues/new?template=custom-theme.yml">' +
-      '깃허브에 맡기면</a> 됨.</small>';
+      '안드로이드 말풍선은 늘어나는 자리가 그림 안에 구워져 있어서 색만 돌릴 수가 없음.' +
+      '</small><button id="toapk">색까지 바꾸려면 깃허브에 맡기기</button>';
   } else if (/KAKAOTALK/i.test(navigator.userAgent)) {
     $('foot').innerHTML = '<b>카카오톡 안에서 열었음.</b> 골라 보는 건 되지만, 여기서 만든 ' +
       '테마는 넘겨줄 주소가 없어서 바로 못 깖 — 오른쪽 위 <b>⋮ → 다른 브라우저로 열기</b> 로 ' +

@@ -6,6 +6,24 @@ into their minor version and marked inline (`0.35.1:`).
 깃허브 릴리스 본문에서 모아 소급해 적은 것임. 태그가 50개라 패치는 마이너 안에 접어 넣고
 `0.35.1:` 처럼 표시했음.
 
+## 0.39 — 2026-09-18
+
+- **Custom themes now build on Android too, right in the browser.** Open the [make page](https://ruminem.github.io/kakaotalk-theme/docs/make.html) on an Android phone, pick a background and bubbles, and you get a signed `.apk` to install. No GitHub account, no PC, nothing to install first.
+- How it works: the page drops both themes' images into a template APK, rewrites the 42 colours and the theme name in place, and signs it with APK Signature Scheme v2 using WebCrypto. The custom signing key ships with the page on purpose and is separate from the one that signs the released themes.
+- Limits: Android 7 or newer, and only one custom theme can be installed at a time — making a new one replaces the previous one. Released themes are unaffected.
+- Picking bubble colours stays iPhone-only. Android bubbles are nine-patch images, so the stretch data lives inside the PNG and is lost if the colours are rotated in a canvas.
+- Android users who do want different bubble colours can hand the job to GitHub from the same page: it opens a pre-filled issue and a bot replies with the download a few minutes later. **No fork and no Actions knowledge needed** — until now this route required forking the repository, which put it out of reach for anyone who does not use GitHub.
+- All 292 themes are unchanged image-for-image; only the version number moved, so they update in place.
+
+**한국어**
+
+- **커스텀 테마를 안드로이드에서도 브라우저로 바로 만듦.** [만들기 페이지](https://ruminem.github.io/kakaotalk-theme/docs/make.html)를 안드로이드에서 열어 배경과 말풍선을 고르면 서명까지 된 `.apk` 가 나옴. 깃허브 계정도, PC 도, 미리 깔 것도 없음.
+- 어떻게 하냐면 — 템플릿 APK 에 두 테마의 그림을 담고 색 42개와 테마 이름을 제자리에서 덮어쓴 뒤, WebCrypto 로 APK v2 서명을 붙임. 커스텀용 서명 열쇠는 일부러 페이지에 같이 실었고, 나와 있는 테마를 서명하는 열쇠와는 별개임.
+- 제약 둘: 안드로이드 7 이상이어야 하고, 커스텀 테마는 한 번에 한 벌만 깔림 — 새로 만들면 앞서 만든 것을 덮어씀. 나와 있는 테마는 그대로임.
+- 말풍선 색 고르기는 아이폰만 됨. 안드로이드 말풍선은 9-patch 라 늘어나는 자리가 그림 안에 들어 있어서, 캔버스로 색을 돌리면 그게 날아감.
+- 안드로이드에서 색까지 바꾸고 싶으면 같은 페이지에서 깃허브에 맡기면 됨. 값이 채워진 글이 열리고, 몇 분 뒤 받는 곳이 댓글로 달림. **포크도 Actions 도 필요 없음** — 여태까지는 저장소를 포크해야 해서 깃허브를 안 쓰는 사람은 아예 못 갔음.
+- 292벌 전부 그림이 한 장도 안 바뀜. 버전 번호만 올라가서 그대로 업데이트됨.
+
 ## 0.38 — 2026-09-18
 
 - Nine new Neon Sign families, 36 themes. v6–v13 keep the four tube bubbles from v4/v5 but drop the wall: constellations, drifting petals, bokeh, plasma threads, spreading ink, a laser mesh, crystal facets, chromatic aberration.
