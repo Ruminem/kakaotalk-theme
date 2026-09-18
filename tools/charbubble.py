@@ -2077,3 +2077,23 @@ STYLES.update({
     'acrylic': dict(bw=40, bh=44, radius=11, draw=d_acrylic, features=f_acrylic),
     'resin': dict(bw=40, bh=44, radius=17, draw=d_resin, features=f_resin),
 })
+
+
+# --- 말풍선 모양의 한국어 이름 ---------------------------------------------
+# 커스텀 테마 제작(docs/make.html)이 테마 이름을 지을 때 쓴다. `빵집 밝음` 이 아니라
+# `식빵` 이라고 해야 무엇을 섞은 것인지 이름에서 읽힌다 — 말풍선 쪽에서 가져오는 것은
+# 계열이 아니라 모양이다.
+#
+# 새 모양을 더하면 여기 한 줄 쓴다. 안 쓰면 목록을 낼 때 멈춘다(preview.write_mix_manifest).
+STYLE_WORD = {
+    'envelope': '봉투', 'postit': '포스트잇', 'pixel': '도트', 'jelly': '젤리',
+    'ticket': '티켓', 'toast': '식빵', 'sign': '팻말', 'panel': '창',
+    'leaf': '잎', 'rpg': '대화창', 'lcd': '액정', 'window': '창틀',
+    'board': '나무판', 'wash': '물감', 'hanji': '한지', 'frost': '서린 유리',
+    'cutpaper': '오린 종이', 'bow': '리본', 'pill': '알약', 'chips': '돌 조각',
+    'band': '띠', 'flag': '깃발', 'seaglass': '바다 유리', 'gblock': '유리 벽돌',
+    'ice': '얼음', 'reed': '골판', 'acrylic': '아크릴', 'resin': '레진',
+    'neon_double': '이중관', 'neon_sign': '간판', 'neon_electrode': '전극',
+    'neon_speech': '말꼬리', 'neon_octagon': '팔각', 'neon_bracket': '꺾쇠',
+    'neon_underline': '밑줄', 'neon_split': '두 가닥',
+}

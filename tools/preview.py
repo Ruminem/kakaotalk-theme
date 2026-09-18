@@ -1112,6 +1112,16 @@ def write_mix_manifest(ts):
                    bubble=not t.get('firelight'))
         if len(walls[fam]) == 1 and fam != t['name']:
             row['bgname'] = fam
+        # 말풍선 쪽에서 가져오는 것은 계열이 아니라 모양이다. `빵집 밝음` 말고 `식빵`.
+        # 모양 없는 말풍선(둥근 네모)은 계열 이름이 곧 그 말풍선의 이름이다
+        style = t.get('char_style')
+        if style:
+            if style not in charbubble.STYLE_WORD:
+                raise ValueError('%s: 말풍선 모양 "%s" 의 한국어 이름이 '
+                                 'charbubble.STYLE_WORD 에 없다' % (t['key'], style))
+            row['bubword'] = charbubble.STYLE_WORD[style]
+        else:
+            row['bubword'] = fam
         if row['bubble'] and _recolorable(t):
             # 페이지가 이 두 색을 기준으로 색상을 돌린다. 원래 색을 모르면 못 돌린다
             row.update(send=t['send'][0], recv=t['recv'][0])

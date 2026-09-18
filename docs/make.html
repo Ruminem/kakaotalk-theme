@@ -670,17 +670,18 @@
   // 고른 것에서 이름을 짓는다. 폰의 테마 목록에 뜨는 이름이라 무엇을 섞은 것인지
   // 거기서 바로 읽혀야 한다 — 여러 벌 만들어 두면 `내 테마` 가 여럿이 된다.
   //
-  // `+배경` 은 뗀다. 말풍선 쪽에서는 배경을 안 가져오고, 배경 쪽에서는 배경만 가져오니
-  // 양쪽 다 그 말이 남으면 군더더기다. 밝음·어두움은 남긴다 — 말풍선 색과 배경 그림이
-  // 실제로 달라지는 자리다.
+  // 테마 이름 둘을 이어 붙이지 않는다. 양쪽에서 가져오는 것이 서로 다르기 때문이다 —
+  // 배경 쪽에서는 그림을, 말풍선 쪽에서는 모양을 가져온다. 그래서 각각의 이름을 쓴다:
+  // `빵집 밝음+배경 · 캠핑 어두움+배경` 이 아니라 `캠핑 어두움 식빵` 이다.
+  // 두 이름표는 themes.json 이 들고 있다(bgname·bubword).
+  //
+  // `+배경` 은 뗀다. 배경 쪽에서는 배경만 가져오니 그 말이 군더더기다.
   function shortName(n) { return n.replace(/\s*\+?배경$/, ''); }
 
   function autoName() {
     var b = byId(pick.bubble), g = byId(pick.bg);
-    // 배경 쪽은 themes.json 이 짧은 이름을 들고 있으면 그걸 쓴다. 계열의 변형들이 같은 벽을
-    // 쓰는 경우라, 배경으로 고를 때 어느 변형인지는 뜻이 없다
     var tint = pick.send || pick.recv ? ' ' + pairName(pick.send, pick.recv) : '';
-    return shortName(b.name) + tint + ' · ' + (g.bgname || shortName(g.name));
+    return (g.bgname || shortName(g.name)) + ' ' + b.bubword + tint;
   }
 
   var autoNaming = true;

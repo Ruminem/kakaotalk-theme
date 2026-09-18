@@ -6,485 +6,559 @@
 "name": "벚꽃 그늘 v2",
 "cat": "자연",
 "bubble": true,
-"bgname": "벚꽃 그늘"
+"bgname": "벚꽃 그늘",
+"bubword": "벚꽃 그늘"
 },
 {
 "slug": "candy-image",
 "name": "캔디 팝 v3",
 "cat": "무늬",
 "bubble": true,
-"bgname": "캔디 팝"
+"bgname": "캔디 팝",
+"bubword": "캔디 팝"
 },
 {
 "slug": "wood-oak",
 "name": "원목 글래스 오크",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "원목 글래스"
 },
 {
 "slug": "wood-walnut",
 "name": "원목 글래스 월넛",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "원목 글래스"
 },
 {
 "slug": "stained-amber",
 "name": "스테인드 글래스 앰버",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "스테인드 글래스"
 },
 {
 "slug": "stained-emerald",
 "name": "스테인드 글래스 에메랄드",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "스테인드 글래스"
 },
 {
 "slug": "stained-amethyst",
 "name": "스테인드 글래스 자수정",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "스테인드 글래스"
 },
 {
 "slug": "stained-rose",
 "name": "스테인드 글래스 로즈",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "스테인드 글래스"
 },
 {
 "slug": "prism-light",
 "name": "프리즘 글래스 라이트",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "프리즘 글래스"
 },
 {
 "slug": "prism-dark",
 "name": "프리즘 글래스 다크",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "프리즘 글래스"
 },
 {
 "slug": "frost-light",
 "name": "프로스트 글래스 라이트",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "프로스트 글래스"
 },
 {
 "slug": "frost-dark",
 "name": "프로스트 글래스 다크",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "프로스트 글래스"
 },
 {
 "slug": "midnight-image",
 "name": "심야",
 "cat": "자연",
-"bubble": true
+"bubble": true,
+"bubword": "심야"
 },
 {
 "slug": "sea-image",
 "name": "바다",
 "cat": "자연",
-"bubble": true
+"bubble": true,
+"bubword": "바다"
 },
 {
 "slug": "forest-image",
 "name": "숲",
 "cat": "자연",
-"bubble": true
+"bubble": true,
+"bubword": "숲"
 },
 {
 "slug": "snow-image",
 "name": "설원",
 "cat": "자연",
-"bubble": true
+"bubble": true,
+"bubword": "설원"
 },
 {
 "slug": "geo-image",
 "name": "도형",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bubword": "도형"
 },
 {
 "slug": "city-image",
 "name": "야경 배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "야경"
+"bgname": "야경",
+"bubword": "야경"
 },
 {
 "slug": "city-glow-image",
 "name": "야경 글로우+배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "야경"
+"bgname": "야경",
+"bubword": "야경"
 },
 {
 "slug": "cyber-image",
 "name": "사이버펑크 배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "사이버펑크"
+"bgname": "사이버펑크",
+"bubword": "사이버펑크"
 },
 {
 "slug": "cyber-glow-image",
 "name": "사이버펑크 글로우+배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "사이버펑크"
+"bgname": "사이버펑크",
+"bubword": "사이버펑크"
 },
 {
 "slug": "red-image",
 "name": "레드 배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "레드"
+"bgname": "레드",
+"bubword": "레드"
 },
 {
 "slug": "red-glow-image",
 "name": "레드 글로우+배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "레드"
+"bgname": "레드",
+"bubword": "레드"
 },
 {
 "slug": "blue-image",
 "name": "블루 배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "블루"
+"bgname": "블루",
+"bubword": "블루"
 },
 {
 "slug": "blue-glow-image",
 "name": "블루 글로우+배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "블루"
+"bgname": "블루",
+"bubword": "블루"
 },
 {
 "slug": "purple-image",
 "name": "퍼플 배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "퍼플"
+"bgname": "퍼플",
+"bubword": "퍼플"
 },
 {
 "slug": "purple-glow-image",
 "name": "퍼플 글로우+배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "퍼플"
+"bgname": "퍼플",
+"bubword": "퍼플"
 },
 {
 "slug": "green-image",
 "name": "그린 배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "그린"
+"bgname": "그린",
+"bubword": "그린"
 },
 {
 "slug": "green-glow-image",
 "name": "그린 글로우+배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "그린"
+"bgname": "그린",
+"bubword": "그린"
 },
 {
 "slug": "gold-image",
 "name": "골드 배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "골드"
+"bgname": "골드",
+"bubword": "골드"
 },
 {
 "slug": "gold-glow-image",
 "name": "골드 글로우+배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "골드"
+"bgname": "골드",
+"bubword": "골드"
 },
 {
 "slug": "pink-image",
 "name": "핑크 배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "핑크"
+"bgname": "핑크",
+"bubword": "핑크"
 },
 {
 "slug": "pink-glow-image",
 "name": "핑크 글로우+배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "핑크"
+"bgname": "핑크",
+"bubword": "핑크"
 },
 {
 "slug": "inkmint-image",
 "name": "먹빛 민트 배경",
 "cat": "무늬",
 "bubble": true,
-"bgname": "먹빛 민트"
+"bgname": "먹빛 민트",
+"bubword": "먹빛 민트"
 },
 {
 "slug": "inkmint-glow-image",
 "name": "먹빛 민트 글로우+배경",
 "cat": "무늬",
 "bubble": true,
-"bgname": "먹빛 민트"
+"bgname": "먹빛 민트",
+"bubword": "먹빛 민트"
 },
 {
 "slug": "cream-image",
 "name": "크림 라떼 배경",
 "cat": "무늬",
 "bubble": true,
-"bgname": "크림 라떼"
+"bgname": "크림 라떼",
+"bubword": "크림 라떼"
 },
 {
 "slug": "cream-glow-image",
 "name": "크림 라떼 글로우+배경",
 "cat": "무늬",
 "bubble": true,
-"bgname": "크림 라떼"
+"bgname": "크림 라떼",
+"bubword": "크림 라떼"
 },
 {
 "slug": "sakura-glow-image",
 "name": "벚꽃 그늘 글로우+배경",
 "cat": "자연",
 "bubble": true,
-"bgname": "벚꽃 그늘"
+"bgname": "벚꽃 그늘",
+"bubword": "벚꽃 그늘"
 },
 {
 "slug": "mixed-image",
 "name": "믹스드 배경",
 "cat": "무늬",
 "bubble": true,
-"bgname": "믹스드"
+"bgname": "믹스드",
+"bubword": "믹스드"
 },
 {
 "slug": "mixed-glow-image",
 "name": "믹스드 글로우+배경",
 "cat": "무늬",
 "bubble": true,
-"bgname": "믹스드"
+"bgname": "믹스드",
+"bubword": "믹스드"
 },
 {
 "slug": "candy-glow-image",
 "name": "캔디 팝 글로우+배경",
 "cat": "무늬",
 "bubble": true,
-"bgname": "캔디 팝"
+"bgname": "캔디 팝",
+"bubword": "캔디 팝"
 },
 {
 "slug": "midnight-glow-image",
 "name": "심야 글로우+배경",
 "cat": "자연",
 "bubble": true,
-"bgname": "심야"
+"bgname": "심야",
+"bubword": "심야"
 },
 {
 "slug": "sea-glow-image",
 "name": "바다 글로우+배경",
 "cat": "자연",
 "bubble": true,
-"bgname": "바다"
+"bgname": "바다",
+"bubword": "바다"
 },
 {
 "slug": "forest-glow-image",
 "name": "숲 글로우+배경",
 "cat": "자연",
 "bubble": true,
-"bgname": "숲"
+"bgname": "숲",
+"bubword": "숲"
 },
 {
 "slug": "snow-glow-image",
 "name": "설원 글로우+배경",
 "cat": "자연",
 "bubble": true,
-"bgname": "설원"
+"bgname": "설원",
+"bubword": "설원"
 },
 {
 "slug": "geo-glow-image",
 "name": "도형 글로우+배경",
 "cat": "무늬",
 "bubble": true,
-"bgname": "도형"
+"bgname": "도형",
+"bubword": "도형"
 },
 {
 "slug": "post-light-image",
 "name": "우체국 밝음+배경",
 "cat": "캐릭터",
-"bubble": true
+"bubble": true,
+"bubword": "봉투"
 },
 {
 "slug": "post-dark-image",
 "name": "우체국 어두움+배경",
 "cat": "캐릭터",
-"bubble": true
+"bubble": true,
+"bubword": "봉투"
 },
 {
 "slug": "desk-light-image",
 "name": "책상 밝음+배경",
 "cat": "캐릭터",
-"bubble": true
+"bubble": true,
+"bubword": "포스트잇"
 },
 {
 "slug": "desk-dark-image",
 "name": "책상 어두움+배경",
 "cat": "캐릭터",
-"bubble": true
+"bubble": true,
+"bubword": "포스트잇"
 },
 {
 "slug": "arcade-light-image",
 "name": "오락실 밝음+배경",
 "cat": "도트",
-"bubble": true
+"bubble": true,
+"bubword": "도트"
 },
 {
 "slug": "arcade-dark-image",
 "name": "오락실 어두움+배경",
 "cat": "도트",
-"bubble": true
+"bubble": true,
+"bubword": "도트"
 },
 {
 "slug": "laundry-light-image",
 "name": "빨래 밝음+배경",
 "cat": "캐릭터",
-"bubble": true
+"bubble": true,
+"bubword": "젤리"
 },
 {
 "slug": "laundry-dark-image",
 "name": "빨래 어두움+배경",
 "cat": "캐릭터",
-"bubble": true
+"bubble": true,
+"bubword": "젤리"
 },
 {
 "slug": "firework-image",
 "name": "불꽃놀이 배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "불꽃놀이"
+"bgname": "불꽃놀이",
+"bubword": "불꽃놀이"
 },
 {
 "slug": "firework-glow-image",
 "name": "불꽃놀이 글로우+배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "불꽃놀이"
+"bgname": "불꽃놀이",
+"bubword": "불꽃놀이"
 },
 {
 "slug": "lantern-image",
 "name": "연등 배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "연등"
+"bgname": "연등",
+"bubword": "연등"
 },
 {
 "slug": "lantern-glow-image",
 "name": "연등 글로우+배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "연등"
+"bgname": "연등",
+"bubword": "연등"
 },
 {
 "slug": "garland-image",
 "name": "알전구 배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "알전구"
+"bgname": "알전구",
+"bubword": "알전구"
 },
 {
 "slug": "garland-glow-image",
 "name": "알전구 글로우+배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "알전구"
+"bgname": "알전구",
+"bubword": "알전구"
 },
 {
 "slug": "highway-image",
 "name": "고속도로 배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "고속도로"
+"bgname": "고속도로",
+"bubword": "고속도로"
 },
 {
 "slug": "highway-glow-image",
 "name": "고속도로 글로우+배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "고속도로"
+"bgname": "고속도로",
+"bubword": "고속도로"
 },
 {
 "slug": "terminal-image",
 "name": "터미널 배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "터미널"
+"bgname": "터미널",
+"bubword": "터미널"
 },
 {
 "slug": "terminal-glow-image",
 "name": "터미널 글로우+배경",
 "cat": "불빛",
 "bubble": true,
-"bgname": "터미널"
+"bgname": "터미널",
+"bubword": "터미널"
 },
 {
 "slug": "cinema-light-image",
 "name": "영화관 밝음+배경",
 "cat": "캐릭터",
-"bubble": true
+"bubble": true,
+"bubword": "티켓"
 },
 {
 "slug": "cinema-dark-image",
 "name": "영화관 어두움+배경",
 "cat": "캐릭터",
-"bubble": true
+"bubble": true,
+"bubword": "티켓"
 },
 {
 "slug": "bakery-light-image",
 "name": "빵집 밝음+배경",
 "cat": "캐릭터",
-"bubble": true
+"bubble": true,
+"bubword": "식빵"
 },
 {
 "slug": "bakery-dark-image",
 "name": "빵집 어두움+배경",
 "cat": "캐릭터",
-"bubble": true
+"bubble": true,
+"bubword": "식빵"
 },
 {
 "slug": "camp-light-image",
 "name": "캠핑 밝음+배경",
 "cat": "캐릭터",
-"bubble": true
+"bubble": true,
+"bubword": "팻말"
 },
 {
 "slug": "camp-dark-image",
 "name": "캠핑 어두움+배경",
 "cat": "캐릭터",
-"bubble": false
+"bubble": false,
+"bubword": "팻말"
 },
 {
 "slug": "space-light-image",
 "name": "우주 밝음+배경",
 "cat": "캐릭터",
-"bubble": true
+"bubble": true,
+"bubword": "창"
 },
 {
 "slug": "space-dark-image",
 "name": "우주 어두움+배경",
 "cat": "캐릭터",
-"bubble": true
+"bubble": true,
+"bubword": "창"
 },
 {
 "slug": "greenhouse-light-image",
 "name": "온실 밝음+배경",
 "cat": "캐릭터",
-"bubble": true
+"bubble": true,
+"bubword": "잎"
 },
 {
 "slug": "greenhouse-dark-image",
 "name": "온실 어두움+배경",
 "cat": "캐릭터",
-"bubble": true
+"bubble": true,
+"bubword": "잎"
 },
 {
 "slug": "neon-double",
@@ -492,6 +566,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인",
+"bubword": "이중관",
 "send": "#FF3FA4",
 "recv": "#35E0FF"
 },
@@ -501,6 +576,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인",
+"bubword": "간판",
 "send": "#FF7A2F",
 "recv": "#4D7CFF"
 },
@@ -510,6 +586,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인",
+"bubword": "전극",
 "send": "#B45CFF",
 "recv": "#4CFF88"
 },
@@ -519,6 +596,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인",
+"bubword": "말꼬리",
 "send": "#FF3B6B",
 "recv": "#FFD23F"
 },
@@ -528,6 +606,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v2",
+"bubword": "이중관",
 "send": "#3FFFD2",
 "recv": "#FF5CE1"
 },
@@ -537,6 +616,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v2",
+"bubword": "간판",
 "send": "#35E0FF",
 "recv": "#FFD23F"
 },
@@ -546,6 +626,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v2",
+"bubword": "전극",
 "send": "#4D7CFF",
 "recv": "#FF7A2F"
 },
@@ -555,6 +636,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v2",
+"bubword": "말꼬리",
 "send": "#4CFF88",
 "recv": "#B45CFF"
 },
@@ -564,6 +646,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v3",
+"bubword": "이중관",
 "send": "#FF3B6B",
 "recv": "#FFD23F"
 },
@@ -573,6 +656,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v3",
+"bubword": "간판",
 "send": "#FF3FA4",
 "recv": "#4CFF88"
 },
@@ -582,6 +666,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v3",
+"bubword": "전극",
 "send": "#FF7A2F",
 "recv": "#35E0FF"
 },
@@ -591,6 +676,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v3",
+"bubword": "말꼬리",
 "send": "#FFD23F",
 "recv": "#4D7CFF"
 },
@@ -600,6 +686,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v4",
+"bubword": "팔각",
 "send": "#FF5CE1",
 "recv": "#35E0FF"
 },
@@ -609,6 +696,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v4",
+"bubword": "꺾쇠",
 "send": "#4CFF88",
 "recv": "#FFD23F"
 },
@@ -618,6 +706,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v4",
+"bubword": "밑줄",
 "send": "#FF7A2F",
 "recv": "#B45CFF"
 },
@@ -626,7 +715,8 @@
 "name": "네온사인 v4 두 가닥",
 "cat": "불빛 - 네온사인",
 "bubble": true,
-"bgname": "네온사인 v4"
+"bgname": "네온사인 v4",
+"bubword": "두 가닥"
 },
 {
 "slug": "neonlounge-octagon",
@@ -634,6 +724,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v5",
+"bubword": "팔각",
 "send": "#FFD23F",
 "recv": "#FF5CE1"
 },
@@ -643,6 +734,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v5",
+"bubword": "꺾쇠",
 "send": "#FF7A2F",
 "recv": "#35E0FF"
 },
@@ -652,6 +744,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v5",
+"bubword": "밑줄",
 "send": "#FFD23F",
 "recv": "#B45CFF"
 },
@@ -660,7 +753,8 @@
 "name": "네온사인 v5 두 가닥",
 "cat": "불빛 - 네온사인",
 "bubble": true,
-"bgname": "네온사인 v5"
+"bgname": "네온사인 v5",
+"bubword": "두 가닥"
 },
 {
 "slug": "neonstar-octagon",
@@ -668,6 +762,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v6",
+"bubword": "팔각",
 "send": "#FFA8D8",
 "recv": "#8AD8FF"
 },
@@ -677,6 +772,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v6",
+"bubword": "꺾쇠",
 "send": "#FFA8D8",
 "recv": "#8AD8FF"
 },
@@ -686,6 +782,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v6",
+"bubword": "밑줄",
 "send": "#FFA8D8",
 "recv": "#8AD8FF"
 },
@@ -694,7 +791,8 @@
 "name": "네온사인 v6 두 가닥",
 "cat": "불빛 - 네온사인",
 "bubble": true,
-"bgname": "네온사인 v6"
+"bgname": "네온사인 v6",
+"bubword": "두 가닥"
 },
 {
 "slug": "neonpetal-octagon",
@@ -702,6 +800,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v7",
+"bubword": "팔각",
 "send": "#B58AFF",
 "recv": "#FF8AD4"
 },
@@ -711,6 +810,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v7",
+"bubword": "꺾쇠",
 "send": "#B58AFF",
 "recv": "#FF8AD4"
 },
@@ -720,6 +820,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v7",
+"bubword": "밑줄",
 "send": "#B58AFF",
 "recv": "#FF8AD4"
 },
@@ -728,35 +829,40 @@
 "name": "네온사인 v7 두 가닥",
 "cat": "불빛 - 네온사인",
 "bubble": true,
-"bgname": "네온사인 v7"
+"bgname": "네온사인 v7",
+"bubword": "두 가닥"
 },
 {
 "slug": "neonbokeh-octagon",
 "name": "네온사인 v8 팔각",
 "cat": "불빛 - 네온사인",
 "bubble": true,
-"bgname": "네온사인 v8"
+"bgname": "네온사인 v8",
+"bubword": "팔각"
 },
 {
 "slug": "neonbokeh-bracket",
 "name": "네온사인 v8 꺾쇠",
 "cat": "불빛 - 네온사인",
 "bubble": true,
-"bgname": "네온사인 v8"
+"bgname": "네온사인 v8",
+"bubword": "꺾쇠"
 },
 {
 "slug": "neonbokeh-underline",
 "name": "네온사인 v8 밑줄",
 "cat": "불빛 - 네온사인",
 "bubble": true,
-"bgname": "네온사인 v8"
+"bgname": "네온사인 v8",
+"bubword": "밑줄"
 },
 {
 "slug": "neonbokeh-split",
 "name": "네온사인 v8 두 가닥",
 "cat": "불빛 - 네온사인",
 "bubble": true,
-"bgname": "네온사인 v8"
+"bgname": "네온사인 v8",
+"bubword": "두 가닥"
 },
 {
 "slug": "neonplasma-octagon",
@@ -764,6 +870,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v9",
+"bubword": "팔각",
 "send": "#9B5CFF",
 "recv": "#B8FF3F"
 },
@@ -773,6 +880,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v9",
+"bubword": "꺾쇠",
 "send": "#9B5CFF",
 "recv": "#B8FF3F"
 },
@@ -782,6 +890,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v9",
+"bubword": "밑줄",
 "send": "#9B5CFF",
 "recv": "#B8FF3F"
 },
@@ -790,7 +899,8 @@
 "name": "네온사인 v9 두 가닥",
 "cat": "불빛 - 네온사인",
 "bubble": true,
-"bgname": "네온사인 v9"
+"bgname": "네온사인 v9",
+"bubword": "두 가닥"
 },
 {
 "slug": "neonink-octagon",
@@ -798,6 +908,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v10",
+"bubword": "팔각",
 "send": "#FF3FA4",
 "recv": "#3FFFD2"
 },
@@ -807,6 +918,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v10",
+"bubword": "꺾쇠",
 "send": "#FF3FA4",
 "recv": "#3FFFD2"
 },
@@ -816,6 +928,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v10",
+"bubword": "밑줄",
 "send": "#FF3FA4",
 "recv": "#3FFFD2"
 },
@@ -824,7 +937,8 @@
 "name": "네온사인 v10 두 가닥",
 "cat": "불빛 - 네온사인",
 "bubble": true,
-"bgname": "네온사인 v10"
+"bgname": "네온사인 v10",
+"bubword": "두 가닥"
 },
 {
 "slug": "neonmesh-octagon",
@@ -832,6 +946,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v11",
+"bubword": "팔각",
 "send": "#FF7A6B",
 "recv": "#35E0FF"
 },
@@ -841,6 +956,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v11",
+"bubword": "꺾쇠",
 "send": "#FF7A6B",
 "recv": "#35E0FF"
 },
@@ -850,6 +966,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v11",
+"bubword": "밑줄",
 "send": "#FF7A6B",
 "recv": "#35E0FF"
 },
@@ -858,7 +975,8 @@
 "name": "네온사인 v11 두 가닥",
 "cat": "불빛 - 네온사인",
 "bubble": true,
-"bgname": "네온사인 v11"
+"bgname": "네온사인 v11",
+"bubword": "두 가닥"
 },
 {
 "slug": "neoncrystal-octagon",
@@ -866,6 +984,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v12",
+"bubword": "팔각",
 "send": "#6A5CFF",
 "recv": "#FFB03F"
 },
@@ -875,6 +994,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v12",
+"bubword": "꺾쇠",
 "send": "#6A5CFF",
 "recv": "#FFB03F"
 },
@@ -884,6 +1004,7 @@
 "cat": "불빛 - 네온사인",
 "bubble": true,
 "bgname": "네온사인 v12",
+"bubword": "밑줄",
 "send": "#6A5CFF",
 "recv": "#FFB03F"
 },
@@ -892,287 +1013,334 @@
 "name": "네온사인 v12 두 가닥",
 "cat": "불빛 - 네온사인",
 "bubble": true,
-"bgname": "네온사인 v12"
+"bgname": "네온사인 v12",
+"bubword": "두 가닥"
 },
 {
 "slug": "neonchroma-octagon",
 "name": "네온사인 v13 팔각",
 "cat": "불빛 - 네온사인",
 "bubble": true,
-"bgname": "네온사인 v13"
+"bgname": "네온사인 v13",
+"bubword": "팔각"
 },
 {
 "slug": "neonchroma-bracket",
 "name": "네온사인 v13 꺾쇠",
 "cat": "불빛 - 네온사인",
 "bubble": true,
-"bgname": "네온사인 v13"
+"bgname": "네온사인 v13",
+"bubword": "꺾쇠"
 },
 {
 "slug": "neonchroma-underline",
 "name": "네온사인 v13 밑줄",
 "cat": "불빛 - 네온사인",
 "bubble": true,
-"bgname": "네온사인 v13"
+"bgname": "네온사인 v13",
+"bubword": "밑줄"
 },
 {
 "slug": "neonchroma-split",
 "name": "네온사인 v13 두 가닥",
 "cat": "불빛 - 네온사인",
 "bubble": true,
-"bgname": "네온사인 v13"
+"bgname": "네온사인 v13",
+"bubword": "두 가닥"
 },
 {
 "slug": "neonzoo-sea",
 "name": "네온 동물 바다",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bubword": "두 가닥"
 },
 {
 "slug": "neonzoo-forest",
 "name": "네온 동물 숲",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bubword": "두 가닥"
 },
 {
 "slug": "neonzoo-ice",
 "name": "네온 동물 얼음",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bubword": "두 가닥"
 },
 {
 "slug": "neonzoo-mixed",
 "name": "네온 동물 모둠",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bubword": "두 가닥"
 },
 {
 "slug": "quest-light-image",
 "name": "도트 모험 밝음+배경",
 "cat": "도트",
-"bubble": true
+"bubble": true,
+"bubword": "대화창"
 },
 {
 "slug": "quest-dark-image",
 "name": "도트 모험 어두움+배경",
 "cat": "도트",
-"bubble": false
+"bubble": false,
+"bubword": "대화창"
 },
 {
 "slug": "lcd-light-image",
 "name": "도트 액정 밝음+배경",
 "cat": "도트",
-"bubble": true
+"bubble": true,
+"bubword": "액정"
 },
 {
 "slug": "lcd-dark-image",
 "name": "도트 액정 어두움+배경",
 "cat": "도트",
-"bubble": true
+"bubble": true,
+"bubword": "액정"
 },
 {
 "slug": "retro-light-image",
 "name": "레트로 PC 밝음+배경",
 "cat": "도트",
-"bubble": true
+"bubble": true,
+"bubword": "창틀"
 },
 {
 "slug": "retro-dark-image",
 "name": "레트로 PC 어두움+배경",
 "cat": "도트",
-"bubble": true
+"bubble": true,
+"bubword": "창틀"
 },
 {
 "slug": "farm-light-image",
 "name": "도트 농장 밝음+배경",
 "cat": "도트",
-"bubble": true
+"bubble": true,
+"bubword": "나무판"
 },
 {
 "slug": "farm-dark-image",
 "name": "도트 농장 어두움+배경",
 "cat": "도트",
-"bubble": true
+"bubble": true,
+"bubword": "나무판"
 },
 {
 "slug": "watercolor-light-image",
 "name": "수채화 밝음+배경",
 "cat": "편안함",
-"bubble": true
+"bubble": true,
+"bubword": "물감"
 },
 {
 "slug": "watercolor-dark-image",
 "name": "수채화 어두움+배경",
 "cat": "편안함",
-"bubble": true
+"bubble": true,
+"bubword": "물감"
 },
 {
 "slug": "inkwash-light-image",
 "name": "수묵화 밝음+배경",
 "cat": "편안함",
-"bubble": true
+"bubble": true,
+"bubword": "한지"
 },
 {
 "slug": "inkwash-dark-image",
 "name": "수묵화 어두움+배경",
 "cat": "편안함",
-"bubble": true
+"bubble": true,
+"bubword": "한지"
 },
 {
 "slug": "rainy-light-image",
 "name": "비 오는 창가 밝음+배경",
 "cat": "편안함",
-"bubble": true
+"bubble": true,
+"bubword": "서린 유리"
 },
 {
 "slug": "rainy-dark-image",
 "name": "비 오는 창가 어두움+배경",
 "cat": "편안함",
-"bubble": true
+"bubble": true,
+"bubword": "서린 유리"
 },
 {
 "slug": "papercut-light-image",
 "name": "페이퍼컷 밝음+배경",
 "cat": "편안함",
-"bubble": true
+"bubble": true,
+"bubword": "오린 종이"
 },
 {
 "slug": "papercut-dark-image",
 "name": "페이퍼컷 어두움+배경",
 "cat": "편안함",
-"bubble": true
+"bubble": true,
+"bubword": "오린 종이"
 },
 {
 "slug": "gingham-light-image",
 "name": "깅엄 체크 밝음+배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bubword": "리본"
 },
 {
 "slug": "gingham-dark-image",
 "name": "깅엄 체크 어두움+배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bubword": "리본"
 },
 {
 "slug": "polka-light-image",
 "name": "폴카 도트 밝음+배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bubword": "알약"
 },
 {
 "slug": "polka-dark-image",
 "name": "폴카 도트 어두움+배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bubword": "알약"
 },
 {
 "slug": "terrazzo-light-image",
 "name": "테라조 밝음+배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bubword": "돌 조각"
 },
 {
 "slug": "terrazzo-dark-image",
 "name": "테라조 어두움+배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bubword": "돌 조각"
 },
 {
 "slug": "marine-light-image",
 "name": "마린 스트라이프 밝음+배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bubword": "띠"
 },
 {
 "slug": "marine-dark-image",
 "name": "마린 스트라이프 어두움+배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bubword": "띠"
 },
 {
 "slug": "checker-light-image",
 "name": "체커보드 밝음+배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bubword": "깃발"
 },
 {
 "slug": "checker-dark-image",
 "name": "체커보드 어두움+배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bubword": "깃발"
 },
 {
 "slug": "seaglass-light-image",
 "name": "씨글래스 밝음+배경",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "바다 유리"
 },
 {
 "slug": "seaglass-dark-image",
 "name": "씨글래스 어두움+배경",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "바다 유리"
 },
 {
 "slug": "glassblock-light-image",
 "name": "글래스 블록 밝음+배경",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "유리 벽돌"
 },
 {
 "slug": "glassblock-dark-image",
 "name": "글래스 블록 어두움+배경",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "유리 벽돌"
 },
 {
 "slug": "ice-light-image",
 "name": "얼음 밝음+배경",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "얼음"
 },
 {
 "slug": "ice-dark-image",
 "name": "얼음 어두움+배경",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "얼음"
 },
 {
 "slug": "reeded-light-image",
 "name": "골판 유리 밝음+배경",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "골판"
 },
 {
 "slug": "reeded-dark-image",
 "name": "골판 유리 어두움+배경",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "골판"
 },
 {
 "slug": "acrylic-light-image",
 "name": "아크릴 밝음+배경",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "아크릴"
 },
 {
 "slug": "acrylic-dark-image",
 "name": "아크릴 어두움+배경",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "아크릴"
 },
 {
 "slug": "resin-light-image",
 "name": "레진 밝음+배경",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "레진"
 },
 {
 "slug": "resin-dark-image",
 "name": "레진 어두움+배경",
 "cat": "유리",
-"bubble": true
+"bubble": true,
+"bubword": "레진"
 }
 ]
 }
