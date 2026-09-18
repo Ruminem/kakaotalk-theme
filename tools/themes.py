@@ -1293,7 +1293,12 @@ def file_slug(t):
     """배포 파일 이름. 예: city-glow-image
 
     URL 에 들어가므로 영문으로 쓴다. 한글은 퍼센트 인코딩돼서 링크가 지저분해진다.
+
+    slug 를 직접 들고 있으면 그걸 쓴다 — 커스텀 테마(tools/mix.py)는 계열도 변형도
+    없어서 VARIANT_SLUG 에서 이름 조각을 찾을 수 없다.
     """
+    if t.get('slug'):
+        return t['slug']
     fam, var = _fam_of(t)
     base = re.sub(r'\d+$', '', t['key'])            # city21 -> city
     tail = VARIANT_SLUG.get(var)

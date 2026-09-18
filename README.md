@@ -185,6 +185,42 @@ PC로 받아서 폰으로 옮길 필요 없음. 카메라로 찍으면 릴리스
 
 ---
 
+## 섞어 만들기
+
+만들어둔 **배경 그림**과 **말풍선**을 서로 다른 테마에서 하나씩 골라 섞을 수 있음.
+캠핑 밤하늘에 빵집 식빵 말풍선 같은 조합. 브라우저만 있으면 됨 — 깔 것 없음.
+
+| | 어디서 옴 |
+|---|---|
+| 채팅방·목록·잠금화면 배경 | `배경` 으로 고른 테마 |
+| 말풍선 모양·색, 프로필, 탭 아이콘 | `말풍선` 으로 고른 테마 |
+| 포인트색 (알림 숫자·전송 단추) | 비우면 말풍선 쪽, 적으면 그 색 |
+
+1. 이 저장소를 **Fork** (깃허브 로그인 필요함)
+2. 포크한 저장소의 **Actions** 탭 → **커스텀 테마 만들기** → **Run workflow**
+3. 네 칸 채우고 실행. 3분쯤 걸림
+4. 끝난 런의 **Artifacts** 에서 zip 내려받기 — `custom.ktheme` · `custom.apk` · `preview.png` 가 들어 있음
+
+배경과 말풍선에 적는 이름은 **받기 링크에 있는 그 이름**임 — `camp-dark-image`, `bakery-light` 처럼.
+카테고리 문서에서 `iOS` 링크 주소 끝을 보면 됨. `--list` 로 전부 볼 수도 있음.
+
+> 커스텀 테마는 서명 키를 그때그때 새로 만들어 씀. 같은 이름으로 다시 만들어도
+> 안드로이드는 다른 앱으로 보기 때문에, **폰에서 먼저 지우고 깔아야 함**.
+> iOS 는 그냥 덮어써도 됨.
+
+파이썬과 안드로이드 SDK 가 있으면 로컬에서도 같은 걸 함.
+
+```powershell
+python tools/mix.py --list                       # 고를 수 있는 이름 전부
+python tools/mix.py --bg camp-dark-image --bubble bakery-light --name "내 테마"
+powershell -ExecutionPolicy Bypass -File build-one.ps1 -Theme build-src\custom -Dist dist
+```
+
+말풍선을 통째로 가져오는 이유는 `char_outline`·`stamp` 같은 부속 색이 그 테마 팔레트에
+묶여 있어서임. 모양만 떼면 깨짐.
+
+---
+
 ## 만들기
 
 원본은 [tools/themes.py](tools/themes.py) 팔레트 표 **하나뿐**임.
