@@ -33,7 +33,7 @@ if (Test-Path $dist) { Remove-Item $dist -Recurse -Force }
 # 몇 초가 간다. 테마끼리는 아무것도 공유하지 않으므로(폴더도 build-tmp 도 따로) 동시에
 # 띄운다. PowerShell 5.1 에는 ForEach-Object -Parallel 이 없어서 프로세스를 직접 띄우고
 # 수를 센다.
-$parallel = [Math]::Min([Environment]::ProcessorCount, 8)
+$parallel = [Environment]::ProcessorCount
 $themes = @(Get-ChildItem $src -Directory | Sort-Object Name)
 
 # 첫 테마는 혼자 돌린다. theme.keystore 가 없으면 build-android.ps1 이 만드는데,

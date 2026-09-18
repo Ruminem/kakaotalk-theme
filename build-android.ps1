@@ -54,9 +54,43 @@ New-Item -ItemType Directory -Path $work -Force | Out-Null
 $dir = Split-Path -Parent $Out
 if (-not (Test-Path $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
 
+# --- aapt2 compile (그림이 그대로면 지난 결과를 쓴다) ---
+# 이 단계가 패키징 시간의 대부분이다. PNG 를 전부 다시 압축(crunch)하기 때문인데,
+# 테마 하나에 4초까지 간다. 그런데 이 단계의 입력은 res/ 뿐이다 — 버전은
+# AndroidManifest.xml 에만 있고 그건 다음 단계(link)에서 들어간다. 그래서 그림과
+# 색이 그대로면 결과도 그대로다. 0.39 -> 0.39.1 처럼 버전만 올리는 릴리스는
+# 292벌이 전부 여기서 걸린다.
+#
+# crunch 를 끄면(--no-crunch) 훨씬 빠르지만 APK 가 최대 33% 커진다. 받는 사람이
+# 무는 비용이라 끄지 않고, 대신 같은 결과를 두 번 만들지 않는 쪽으로 푼다.
 $resZip = Join-Path $work 'res.zip'
-& $aapt2 compile --dir (Join-Path $Source 'res') -o $resZip
-if ($LASTEXITCODE -ne 0) { throw "aapt2 compile 실패" }
+$cacheDir = Join-Path (Join-Path $env:LOCALAPPDATA 'kakaotalk-theme') 'aapt2-cache'
+$resDir = Join-Path $Source 'res'
+
+# 키는 gen.py 가 res/ 를 만들면서 적어 둔다(res.sha256). 여기서 직접 계산하면
+# 테마마다 수십 개 파일을 다시 읽어야 해서, 아껴 놓은 시간을 도로 쓴다.
+# aapt2 버전도 섞는다 - 도구가 올라가면 결과가 달라질 수 있는데 그때 낡은
+# 캐시를 쓰면 원인을 찾기 어려운 자리가 된다.
+$digest = Join-Path (Split-Path -Parent $resDir) 'res.sha256'
+$key = if (Test-Path $digest) {
+    (Get-Content $digest -Raw).Trim() + '-' + (Split-Path -Leaf $bt)
+} else { $null }
+$cached = if ($key) { Join-Path $cacheDir "$key.zip" } else { $null }
+
+if ($cached -and (Test-Path $cached)) {
+    Copy-Item $cached $resZip
+} else {
+    & $aapt2 compile --dir $resDir -o $resZip
+    if ($LASTEXITCODE -ne 0) { throw "aapt2 compile 실패" }
+    # 여러 테마가 동시에 돌므로 임시 이름으로 쓰고 옮긴다. 반쯤 쓰인 파일을 남이
+    # 캐시로 집어 가면 그 뒤로 계속 깨진 zip 을 쓰게 된다.
+    if ($key) {
+        New-Item -ItemType Directory -Path $cacheDir -Force | Out-Null
+        $tmp = "$cached.$PID.tmp"
+        Copy-Item $resZip $tmp
+        try { Move-Item $tmp $cached -ErrorAction Stop } catch { Remove-Item $tmp -Force -ErrorAction SilentlyContinue }
+    }
+}
 
 $unsigned = Join-Path $work 'unsigned.apk'
 & $aapt2 link -o $unsigned -I $androidJar --manifest (Join-Path $Source 'AndroidManifest.xml') $resZip

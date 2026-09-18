@@ -12,6 +12,7 @@ iOS 와 안드로이드는 같은 그림을 다른 형식으로 요구한다.
 """
 import colorsys
 import math
+import hashlib
 import multiprocessing
 import os
 import random
@@ -1385,6 +1386,29 @@ def gen_android(t, root, code):
         background(t, t['passcode_bg'], 1080, 1920).save(
             os.path.join(draw, 'theme_passcode_background_image.png'), optimize=True)
 
+    res_digest(os.path.join(root, 'res'))
+
+
+def res_digest(res):
+    """res/ 안의 이름과 내용을 한 줄 해시로 적어 둔다(`res.sha256`).
+
+    `build-android.ps1` 이 aapt2 compile 결과를 이 값으로 캐시한다. 여기서 적는
+    까닭은 싸기 때문이다 — 파이썬으로 292벌이 3초인데, PowerShell 이 테마마다
+    같은 일을 하게 했더니 빌드가 오히려 1분 넘게 느려졌다.
+
+    res/ 밖에 둔다. 안에 넣으면 aapt2 가 리소스로 집어 가고, 그러면 해시가
+    제 자신을 포함하게 된다.
+    """
+    h = hashlib.sha256()
+    for base, _, files in os.walk(res):
+        for name in sorted(files):
+            p = os.path.join(base, name)
+            h.update(os.path.relpath(p, res).replace(os.sep, '/').encode())
+            with open(p, 'rb') as f:
+                h.update(f.read())
+    with open(os.path.join(os.path.dirname(res), 'res.sha256'), 'w', encoding='utf-8') as f:
+        f.write(h.hexdigest())
+
 
 # 미리보기와 갤러리는 tools/preview.py 가 만든다
 DOCS = os.path.join(ROOT, 'docs')        # 문서만 — spec.md, index.html
@@ -1407,12 +1431,15 @@ def build_one(t):
 
 
 def workers():
-    """동시에 돌릴 수. 코어를 다 쓰되 8을 넘기지 않는다.
+    """동시에 돌릴 수. 코어를 다 쓴다.
 
-    테마 하나가 1080x1920 배경을 여러 장 물고 있어서, 코어가 많은 기계에서
-    전부 띄우면 메모리로 먼저 막힌다. 그 위로는 더 빨라지지도 않는다.
+    예전에는 8 에서 잘랐고 「메모리로 먼저 막힌다」 고 적어 뒀는데, 재 보니
+    메모리는 26% 였다. 다만 올려도 크게 안 빨라진다 — 이 기계(Ryzen 5 5600X)는
+    물리 6코어에 논리 12 라 8 이미 물리 코어를 넘어서 있었고, 12 로 올려 얻은
+    것은 2분 38초 -> 2분 32초 뿐이다. 손해가 없어서 둘 뿐이고, 여기를 만져서
+    빨라질 자리는 아니다.
     """
-    return max(1, min(os.cpu_count() or 1, 8))
+    return max(1, os.cpu_count() or 1)
 
 
 def picked():

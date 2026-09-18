@@ -29,7 +29,11 @@ if (Test-Path $Out) { Remove-Item $Out -Force }
 $zip = [System.IO.Compression.ZipFile]::Open($Out, 'Create')
 try {
     $prefix = (Resolve-Path $Source).Path.TrimEnd('\') + '\'
-    $zip.CreateEntry("Images/") | Out-Null
+    # CreateEntry 는 만든 시각을 엔트리에 박는다. 그래서 그림이 하나도 안 바뀌어도
+    # .ktheme 이 매번 다른 바이트로 나왔다 - 「전과 같은지」 를 해시로 못 보게 만든다.
+    # 파일 엔트리는 CreateEntryFromFile 이 파일 시각을 쓰므로 원래 결정적이다.
+    $dirEntry = $zip.CreateEntry("Images/")
+    $dirEntry.LastWriteTime = [DateTimeOffset]::new(2020, 1, 1, 0, 0, 0, [TimeSpan]::Zero)
     foreach ($f in Get-ChildItem -Path $Source -Recurse -File) {
         if ($f.Name -eq '.DS_Store' -or $f.Name -eq 'Thumbs.db') { continue }
         $entry = $f.FullName.Substring($prefix.Length).Replace('\', '/')
