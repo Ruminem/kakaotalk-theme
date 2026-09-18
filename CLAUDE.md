@@ -429,7 +429,7 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 퍼센트만으로는 얼마나 남았는지 모른다 — 경과 시간이 있어야 남은 시간을 어림한다.
 시각이 있어야 알림을 나중에 몰아 볼 때 언제 멈췄는지 보인다. 끝날 때는 총 소요 시간을 적는다.
 
-로그를 파일로 받고(`> rel.log 2>&1`) 진행률은 **시작 표식보다 새로 생긴 `.ktheme` 수로 센다.**
+로그를 파일로 받고(`> "$log" 2>&1`) 진행률은 **시작 표식보다 새로 생긴 `.ktheme` 수로 센다.**
 예전에는 테마마다 찍히는 `===== <이름> =====` 줄을 셌는데, 빌드가 여러 테마를 동시에 돌리게
 바뀌면서 로그가 끝난 순서대로 뒤섞여 찍혀 맞지 않게 됐다.
 
@@ -438,6 +438,9 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 10 초 간격 확인이 그 틈을 놓쳤고, 0.27 에서 알림이 끝까지 하나도 안 떴다.
 시작할 때 표식 파일을 하나 만들고 그보다 새 파일만 센다 — 비는 순간을 잡을 필요가 없다.
 표식은 저장소 밖(`mktemp`)에 둔다. 안에 두면 워킹 트리가 더러워져 `release.ps1` 이 멈춘다.
+**로그도 마찬가지다.** `> "$log"` 로 저장소 안에 받았더니 `release.ps1` 이 시작하자마자
+`커밋 안 된 변경이 있습니다` 로 멈췄다 — 아직 아무것도 안 만들었는데 로그 파일 하나 때문이었다.
+0.38 에서 겪었다. 표식과 로그를 같은 자리(`mktemp`)에 둔다.
 
 끝과 실패도 같이 본다 — 성공 표시만 기다리면 실패했을 때 조용히 멈춘 것처럼 보인다.
 
@@ -447,12 +450,12 @@ powershell -ExecutionPolicy Bypass -File build.ps1
 미리보기는 배포 빌드에서 다시 그리지 않는다(`gen.py --no-preview`). 커밋된 그림과 바이트까지 같았다.
 
 ```bash
-mark=$(mktemp); start=$(date +%s); total=220; last=
+mark=$(mktemp); log=$(mktemp); start=$(date +%s); total=292; last=
 while :; do
   e=$(( $(date +%s) - start )); t="[$(date +%H:%M:%S)]"; w="경과 $((e/60))분 $((e%60))초"
-  grep -q '^EXIT' rel.log && { echo "$t 끝남: $(grep '^EXIT' rel.log) · 총 $((e/60))분 $((e%60))초"; break; }
-  if grep -q '^자산 ' rel.log; then [ "$last" != 업로드 ] && echo "$t 빌드 끝, 자산 업로드 중 · $w"; last=업로드; sleep 10; continue
-  elif grep -q '개 테마 -> build-src' rel.log; then stage=패키징; n=$(find dist/iOS -name '*.ktheme' -newer "$mark" 2>/dev/null | wc -l)
+  grep -q '^EXIT' "$log" && { echo "$t 끝남: $(grep '^EXIT' "$log") · 총 $((e/60))분 $((e%60))초"; break; }
+  if grep -q '^자산 ' "$log"; then [ "$last" != 업로드 ] && echo "$t 빌드 끝, 자산 업로드 중 · $w"; last=업로드; sleep 10; continue
+  elif grep -q '개 테마 -> build-src' "$log"; then stage=패키징; n=$(find dist/iOS -name '*.ktheme' -newer "$mark" 2>/dev/null | wc -l)
   else stage='소스 생성'; n=$(find build-src -mindepth 2 -maxdepth 2 -name android -newer "$mark" 2>/dev/null | wc -l); fi
   key="$stage $(( n * 10 / total ))"
   [ "$key" != "$last" ] && { echo "$t $stage $(( n * 100 / total ))% — $n/$total · $w"; last=$key; }
