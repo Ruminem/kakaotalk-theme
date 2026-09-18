@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko"><meta charset="utf-8">
-<title>아이폰 커스텀 테마 제작</title>
+<title>커스텀 테마 제작</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!--
   폰에서 배경과 말풍선을 따로 골라 나만의 테마를 만드는 자리.
@@ -16,19 +16,17 @@
   없는 쪽을 끼우려면 CSS 에서 -ios-background-image 줄을 넣거나 빼야 하는데, 그건
   브라우저에서 할 일이 아니다. 배경 없는 테마가 좋으면 그 테마를 그냥 받으면 된다.
 
-  안드로이드는 여기서 못 만든다. 테마가 앱(.apk)이라 설치하려면 서명이 있어야 하는데,
-  브라우저에서 서명하려면 비밀 열쇠를 페이지에 넣어야 하고(그러면 누구나 가져다 쓴다),
-  요즘 안드로이드가 받는 v2 서명은 앱 파일 안쪽을 통째로 다시 짜야 한다. 패키지 이름도
-  바꿔야 하는데 그건 압축된 이진 파일 안에 있다. 그래서 어디선가 빌드가 돌아야 한다 —
-  저장소 Actions 의 `커스텀 테마 제작` 워크플로가 그걸 한다. 안드로이드로 들어온 사람은
-  고른 값이 채워진 이슈 폼으로 넘긴다(`issueUrl`). Actions 를 직접 돌리게 하지 않는 것은
-  workflow_dispatch 가 저장소 쓰기 권한을 요구해서다 — 남이 쓰려면 포크부터 해야 한다.
-  다시 파 보기 전에 CLAUDE.md 의 같은 대목을 읽는다.
+  안드로이드도 여기서 만든다. 테마가 앱(.apk)이라 서명이 있어야 하는데, 사이트에 올려둔
+  템플릿 APK 에 두 테마의 그림을 담고 색과 이름을 덮어쓴 뒤 브라우저가 v2 서명을 붙인다
+  (docs/apkmix.js·apksign.js). 서명 열쇠(docs/customkey.js)는 일부러 공개한 것이고,
+  나가 있는 테마의 열쇠와는 별개다. 재료가 사이트에 없으면 이슈 폼으로 돌린다
+  (`androidFallback`). 자세한 까닭은 CLAUDE.md 의 `커스텀 테마 제작`.
 
-  카톡 인앱 브라우저에서 바로 설치하는 길도 없다. 카톡이 가로채는 것은 사이트에 실제로
+  카톡 인앱 브라우저에서 바로 설치하는 길은 없다. 카톡이 가로채는 것은 사이트에 실제로
   있는 파일의 주소뿐인데, 여기서 만든 것은 blob: 주소라 넘겨줄 것이 없다. 서비스 워커로
   주소를 흉내 내 봤지만 카톡이 그 주소를 웹뷰가 아니라 앱에서 직접 받아 404 가 났다
-  (폰에서 확인). 그래서 공유 시트로 채팅방을 한 번 거친다 — 다시 파 보기 전에 이걸 읽는다.
+  (폰에서 확인). 그래서 아이폰은 공유 시트로 채팅방을 한 번 거친다 — 다시 파 보기 전에
+  이걸 읽는다. 안드로이드는 파일을 받아 직접 설치하므로 채팅방을 안 거친다.
 
   미리보기는 방금 받은 그 .ktheme 안의 그림과 CSS 로만 그린다. 팔레트 표를 자바스크립트로
   옮겨 적지 않는다 — 두 벌이 되는 순간 한쪽이 틀리기 시작한다. 말풍선을 늘이는 방식도
@@ -145,8 +143,8 @@
 </style>
 
 <main id="app">
-  <h1>아이폰 커스텀 테마 제작</h1>
-  <p class="lead">배경과 말풍선을 따로 골라 나만의 테마를 만듦</p>
+  <h1>커스텀 테마 제작</h1>
+  <p class="lead" id="lead">배경과 말풍선을 따로 골라 나만의 테마를 만듦</p>
 
   <div class="stage" id="stage">
     <div class="phone" id="phone"></div>
@@ -192,6 +190,8 @@ import { readZip, writeZip, crc32, inflate } from './zip.js';
   var $ = function (id) { return document.getElementById(id); };
   var DB = [], pick = { bg: 'camp-dark-image', bubble: 'bakery-light-image',
                         send: null, recv: null };
+  // 안드로이드는 나오는 것이 .apk 라 만드는 길도 보내는 길도 다르다. 그래서 맨 위에서 가른다
+  var android = /Android/i.test(navigator.userAgent);
 
   // 말풍선 색 짝. 네온 계열에서 고를 수 있다
   var PAIRS = [
@@ -547,7 +547,8 @@ import { readZip, writeZip, crc32, inflate } from './zip.js';
     // 색 고르는 줄은 색을 바꿔도 되는 말풍선일 때만 나온다. 우표나 잼처럼 말풍선 색이 아닌
     // 소품이 있는 계열은 색상을 돌리면 그 소품까지 같이 돌아서 뺐다(themes.json 이 정한다)
     var row = find(pick.bubble), el = $('pick-color');
-    el.hidden = !(row && row.send);
+    // 안드로이드는 말풍선이 9-patch 라 색을 못 돌린다(위 `안드로이드` 구역 참고)
+    el.hidden = android || !(row && row.send);
     if (el.hidden) { pick.send = pick.recv = null; return; }
     var s = pick.send || row.send, r = pick.recv || row.recv;
     el.querySelectorAll('.chips i')[0].style.background = s;
@@ -560,6 +561,51 @@ import { readZip, writeZip, crc32, inflate } from './zip.js';
   // 배경 하나 바꿨다고 지어 둔 이름이 날아가면 안 된다
   function paintName() {
     if (autoNaming) $('name').value = autoName();
+  }
+
+  // --- 안드로이드 ----------------------------------------------------------
+  // 나오는 것이 앱(.apk)이라 만드는 길이 다르다. 사이트에 올려둔 템플릿 APK 에 두 테마의
+  // 그림을 담고, 색 42개와 테마 이름을 같은 길이로 덮어쓴 뒤 다시 서명한다(docs/apkmix.js).
+  //
+  // 미리보기는 그대로 `.ktheme` 으로 그린다. APK 에는 CSS 가 없어서 말풍선의 cap 과
+  // 글자 여백을 읽을 데가 없다 — 9-patch 로 구워져 그림 안에 들어가 있다.
+  //
+  // 말풍선 색 바꾸기는 안드로이드에서 안 된다. 말풍선이 9-patch 라 늘어나는 자리가 PNG 의
+  // 덤 조각(npTc)에 들어 있는데, 캔버스로 색을 돌리면 그 조각이 날아가 말풍선이 깨진다.
+  var apkCache = new Map(), apkParts = null;
+  function grab(url, asJson) {
+    return fetch(url, { cache: 'force-cache' }).then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return asJson ? r.json() : r.arrayBuffer();
+    });
+  }
+  function apkOf(slug) {
+    if (!apkCache.has(slug)) {
+      apkCache.set(slug, grab(FILES + slug + '.apk')
+        .catch(function (e) { apkCache.delete(slug); throw e; }));
+    }
+    return apkCache.get(slug);
+  }
+  // 템플릿과 자리표는 조합이 바뀌어도 그대로라 한 번만 받는다
+  function apkBits() {
+    if (!apkParts) {
+      apkParts = Promise.all([
+        grab(FILES + 'custom-template.apk'), grab('template.json', true),
+        grab('acolors.json', true), import('./apkmix.js'), import('./customkey.js')
+      ]).catch(function (e) { apkParts = null; throw e; });
+    }
+    return apkParts;
+  }
+  function buildApk() {
+    return Promise.all([apkBits(), apkOf(pick.bubble), apkOf(pick.bg)])
+      .then(function (r) {
+        var b = r[0], k = b[4];
+        return b[3].mixApk(b[0], r[1], r[2], {
+          key: { cert: k.CERT, pubkey: k.PUBKEY, privkey: k.PRIVKEY },
+          name: nameOf(), filler: b[1].filler, marks: b[1].marks,
+          colors: b[2][pick.bubble]
+        });
+      });
   }
 
   var file = null;
@@ -576,16 +622,19 @@ import { readZip, writeZip, crc32, inflate } from './zip.js';
       if (my !== token) return null;
       return render(z[0], z[1]).then(function () {
         $('load').style.display = 'none';
-        return mix(z[0], z[1], nameOf());
+        return android ? buildApk() : mix(z[0], z[1], nameOf());
       });
-    }).then(function (blob) {
-      if (my !== token || !blob) return;
-      file = new File([blob], fileName(), { type: 'application/octet-stream' });
+    }).then(function (bytes) {
+      if (my !== token || !bytes) return;
+      file = new File([bytes], fileName(), { type: 'application/octet-stream' });
       $('go').disabled = false;
       $('go').textContent = canShare ? '카카오톡으로 보내기' : '테마 파일 받기';
     }).catch(function (e) {
       if (my !== token) return;
       $('load').style.display = 'none';
+      // 안드로이드 재료(APK·템플릿)는 릴리스를 한 번 내야 사이트에 올라온다. 그전에는
+      // 여기로 떨어지므로 깃허브에 맡기는 길로 돌린다
+      if (android) return androidFallback(e);
       $('go').textContent = '안 됨';
       $('msg').innerHTML = '테마를 못 만들었음 (' + (e && e.message ? e.message : e) + '). ' +
         '<a href="' + REPO + '/releases/latest">릴리스에서 받기</a>';
@@ -621,7 +670,8 @@ import { readZip, writeZip, crc32, inflate } from './zip.js';
   // `custom.ktheme` 로만 나가면 여러 벌 보냈을 때 어느 것이 어느 것인지 알 수 없다.
   // (custom) 을 붙여 나와 있는 테마와 구분한다.
   function fileName() {
-    return nameOf().replace(/[\/:*?"<>|]/g, '').trim() + ' (custom).ktheme';
+    return nameOf().replace(/[\/:*?"<>|]/g, '').trim() +
+           ' (custom).' + (android ? 'apk' : 'ktheme');
   }
 
   // --- 고르는 시트 --------------------------------------------------------
@@ -688,7 +738,7 @@ import { readZip, writeZip, crc32, inflate } from './zip.js';
   // --- 보내기 -------------------------------------------------------------
   var probe = null;
   try { probe = new File([new Uint8Array(1)], 'a.ktheme', { type: 'application/octet-stream' }); } catch (e) {}
-  var canShare = !!(probe && typeof navigator.share === 'function' &&
+  var canShare = !android && !!(probe && typeof navigator.share === 'function' &&
                     typeof navigator.canShare === 'function' &&
                     navigator.canShare({ files: [probe] }) &&
                     window.matchMedia('(pointer: coarse)').matches);
@@ -701,7 +751,9 @@ import { readZip, writeZip, crc32, inflate } from './zip.js';
       a.download = fileName();
       a.click();
       setTimeout(function () { URL.revokeObjectURL(a.href); }, 10000);
-      $('msg').textContent = '받았음. 폰으로 옮겨 카카오톡에 보내면 설치됨.';
+      $('msg').textContent = android
+        ? '받았음. 받은 파일을 눌러 설치하면 됨.'
+        : '받았음. 폰으로 옮겨 카카오톡에 보내면 설치됨.';
       return;
     }
     // share() 는 탭이 만든 일시적 활성화를 소비한다. 그래서 파일을 미리 만들어두고
@@ -716,20 +768,15 @@ import { readZip, writeZip, crc32, inflate } from './zip.js';
 
   // --- 시작 ---------------------------------------------------------------
   if (typeof DecompressionStream !== 'function') {
-    $('app').innerHTML = '<h1>아이폰 커스텀 테마 제작</h1>' +
+    $('app').innerHTML = '<h1>커스텀 테마 제작</h1>' +
       '<p class="lead">이 브라우저에서는 안 됨. iOS 16.4 이상의 사파리나 최신 크롬에서 열면 됨.</p>' +
       '<p class="foot"><a href="' + REPO + '">저장소로 가기</a></p>';
     return;
   }
 
-  // 인앱 브라우저에서는 만든 테마를 카톡에 넘길 길이 없다. 사이트에 진짜 파일이 있는
-  // 테마와 달리 넘겨줄 주소가 없어서다 — 서비스 워커로 주소를 흉내 내 봤지만 카톡이
-  // 그 주소를 웹뷰가 아니라 앱에서 직접 받아 404 가 났다(폰에서 확인). 막다른 길이라
-  // 들어오자마자 알려준다
-  // 안드로이드 테마는 앱이라 설치하려면 서명이 있어야 하는데 브라우저가 못 한다.
-  // 막다른 길로 두지 않고, 폰에서도 되는 길(깃허브 Actions)로 넘기면서 고른 값을 들려 보낸다
   // 고른 값을 실어 이슈 폼을 연다. 칸의 id 가 곧 쿼리 파라미터라 눌러야 할 것이
-  // Create 하나만 남는다 — 포크도 쓰기 권한도 필요 없다
+  // Create 하나만 남는다 — 포크도 쓰기 권한도 필요 없다. 안드로이드 재료가 아직 사이트에
+  // 없거나(릴리스 전) 색까지 바꾸고 싶을 때 이리로 보낸다
   function issueUrl() {
     var q = ['template=custom-theme.yml', 'bg=' + encodeURIComponent(pick.bg),
       'bubble=' + encodeURIComponent(pick.bubble),
@@ -739,26 +786,41 @@ import { readZip, writeZip, crc32, inflate } from './zip.js';
     return REPO + '/issues/new?' + q.join('&');
   }
 
-  var android = /Android/i.test(navigator.userAgent);
-  if (android) {
-    $('foot').innerHTML = '<b>안드로이드는 여기서 못 만듦.</b> 안드로이드 테마는 앱이라 ' +
-      '설치할 때 서명이 있어야 하는데 브라우저가 그걸 못 함. 고르는 건 여기서 하고, 아래 ' +
-      '단추를 누르면 고른 값이 그대로 채워진 신청 창이 열림 — <b>Create</b> 만 누르면 3분쯤 ' +
-      '뒤에 받는 곳을 댓글로 알려줌.' +
+  // 안드로이드 재료를 못 받았을 때 돌아갈 자리. 릴리스가 한 번 나가기 전까지는 늘 여기다
+  function androidFallback(e) {
+    file = null;
+    $('go').disabled = true;
+    $('go').textContent = '여기선 아직 안 됨';
+    $('foot').innerHTML = '<b>이 브라우저에서 만들 재료가 아직 사이트에 없음.</b> ' +
+      '고르는 건 여기서 하고, 아래 단추를 누르면 고른 값이 채워진 신청 창이 열림 — ' +
+      '<b>Create</b> 만 누르면 3분쯤 뒤에 받는 곳을 댓글로 알려줌.' +
       '<br><button id="toapk">깃허브에 만들어 달라고 하기</button>' +
-      '<br><small>깃허브 계정이 있어야 함. 로그인창이 떠도 고른 값은 안 날아가니 ' +
-      '로그인하면 그대로 이어짐. 처음 한 번만 하면 됨.</small>';
+      '<br><small>깃허브 계정이 있어야 함. 로그인창이 떠도 고른 값은 안 날아감. ' +
+      '(' + (e && e.message ? e.message : e) + ')</small>';
+    wireIssue();
+  }
+  function wireIssue() {
+    if ($('toapk')) {
+      $('toapk').addEventListener('click', function () { window.open(issueUrl(), '_blank'); });
+    }
+  }
+
+  if (android) {
+    $('lead').textContent = '배경과 말풍선을 따로 골라 나만의 테마를 만듦';
+    $('foot').innerHTML = '만든 뒤 <b>받은 파일을 눌러 설치</b>하면 됨. 출처를 모르는 앱 ' +
+      '설치를 한 번 허용해 줘야 함.<br><small>말풍선 색 바꾸기는 아이폰에서만 됨. ' +
+      '안드로이드 말풍선은 늘어나는 자리가 그림 안에 구워져 있어서 색만 돌릴 수가 없음 — ' +
+      '색까지 바꾸고 싶으면 <a href="' + REPO + '/issues/new?template=custom-theme.yml">' +
+      '깃허브에 맡기면</a> 됨.</small>';
   } else if (/KAKAOTALK/i.test(navigator.userAgent)) {
     $('foot').innerHTML = '<b>카카오톡 안에서 열었음.</b> 골라 보는 건 되지만, 여기서 만든 ' +
       '테마는 넘겨줄 주소가 없어서 바로 못 깖 — 오른쪽 위 <b>⋮ → 다른 브라우저로 열기</b> 로 ' +
       '사파리에서 열면 됨.';
   } else {
-    $('foot').innerHTML = '안드로이드 테마는 앱이라 서명이 있어야 해서 여기선 못 만듦. ' +
-      '<button id="toapk">깃허브에 만들어 달라고 하기</button> <small>(계정 필요)</small>';
+    $('foot').innerHTML = '여기서는 아이폰 테마(.ktheme)가 나옴. 안드로이드 테마는 ' +
+      '안드로이드 폰에서 이 쪽을 열면 <b>.apk</b> 로 나옴.';
   }
-  if ($('toapk')) {
-    $('toapk').addEventListener('click', function () { window.open(issueUrl(), '_blank'); });
-  }
+  wireIssue();
   $('pick-bg').addEventListener('click', function () { openSheet('bg'); });
   $('pick-bubble').addEventListener('click', function () { openSheet('bubble'); });
   $('pick-color').addEventListener('click', function () { openSheet('color'); });

@@ -183,12 +183,21 @@ def template(cat):
     out = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                        'docs', 'template.json')
     import json
-    with open(out, 'w', encoding='utf-8', newline='\n') as f:
-        json.dump({'marks': marks, 'filler': TEMPLATE_FILLER,
-                   'names': [n for n, _ in gen.COLORS] + ['theme_chatroom_bubble_me_color',
-                                                          'theme_chatroom_bubble_you_color']},
-                  f, ensure_ascii=False, indent=1)
-    print('자리표 -> %s (표식 %d개)' % (out, len(marks)))
+    text = json.dumps({'marks': marks, 'filler': TEMPLATE_FILLER,
+                       'names': [n for n, _ in gen.COLORS]
+                       + ['theme_chatroom_bubble_me_color',
+                          'theme_chatroom_bubble_you_color']},
+                      ensure_ascii=False, indent=1)
+    # 빌드할 때마다 도는 자리라, 내용이 같으면 파일을 안 건드린다 — 워킹 트리가
+    # 더러워지면 release.ps1 이 멈춘다
+    old = None
+    if os.path.exists(out):
+        with open(out, encoding='utf-8') as f:
+            old = f.read()
+    if old != text:
+        with open(out, 'w', encoding='utf-8', newline='\n') as f:
+            f.write(text)
+    print('자리표 -> %s (표식 %d개%s)' % (out, len(marks), '' if old != text else ', 그대로'))
 
 
 def main():

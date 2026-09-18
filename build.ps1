@@ -12,6 +12,13 @@ Write-Host "tools/gen.py 로 소스를 만듭니다"
 & python (Join-Path $root 'tools\gen.py') --no-preview
 if ($LASTEXITCODE -ne 0) { throw "소스 생성 실패" }
 
+# 브라우저가 안드로이드 커스텀 테마를 만들 때 쓰는 템플릿도 같이 만든다. 표식 색과
+# 이름 자리가 구워진 한 벌이고, 사이트가 릴리스 자산에서 받아 간다.
+# 자세한 것은 CLAUDE.md 의 `커스텀 테마 제작`.
+Write-Host "커스텀 테마 템플릿을 만듭니다"
+& python (Join-Path $root 'tools\mix.py') --template --no-preview
+if ($LASTEXITCODE -ne 0) { throw "템플릿 생성 실패" }
+
 $src = Join-Path $root 'build-src'
 $dist = Join-Path $root 'dist'
 if (Test-Path $dist) { Remove-Item $dist -Recurse -Force }
@@ -94,6 +101,10 @@ Remove-Item $logs -Recurse -Force -ErrorAction SilentlyContinue
 if (Test-Path (Join-Path $root 'build-tmp')) {
     Remove-Item (Join-Path $root 'build-tmp') -Recurse -Force -ErrorAction SilentlyContinue
 }
+
+# 템플릿은 안드로이드에서만 쓴다. 아이폰 쪽은 .ktheme 를 통째로 가져다 섞으므로
+# 필요 없고, 이름이 자리표(~~~~)라 테마 목록에 나가면 안 된다
+Remove-Item (Join-Path $dist 'iOS\custom-template.ktheme') -ErrorAction SilentlyContinue
 
 Write-Host ""
 Write-Host "===== 결과 ====="
