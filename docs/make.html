@@ -655,7 +655,7 @@
       });
     }).then(function (blob) {
       if (my !== token || !blob) return;
-      file = new File([blob], 'custom.ktheme', { type: 'application/octet-stream' });
+      file = new File([blob], fileName(), { type: 'application/octet-stream' });
       $('go').disabled = false;
       $('go').textContent = canShare ? '카카오톡으로 보내기' : '테마 파일 받기';
     }).catch(function (e) {
@@ -690,6 +690,13 @@
     // 작은따옴표는 CSS 값을 끊는다. 이름이 들어가는 자리가 '...' 라서 지운다
     var v = ($('name').value || '').replace(/['\\]/g, '').trim();
     return v || autoName();
+  }
+
+  // 받는 파일 이름. 채팅방에 그대로 뜨는 이름이라 테마 이름이 들어가야 한다 —
+  // `custom.ktheme` 로만 나가면 여러 벌 보냈을 때 어느 것이 어느 것인지 알 수 없다.
+  // (custom) 을 붙여 나와 있는 테마와 구분한다.
+  function fileName() {
+    return nameOf().replace(/[\/:*?"<>|]/g, '').trim() + ' (custom).ktheme';
   }
 
   // --- 고르는 시트 --------------------------------------------------------
@@ -766,7 +773,7 @@
     if (!canShare) {
       var a = document.createElement('a');
       a.href = URL.createObjectURL(file);
-      a.download = nameOf() + '.ktheme';
+      a.download = fileName();
       a.click();
       setTimeout(function () { URL.revokeObjectURL(a.href); }, 10000);
       $('msg').textContent = '받았음. 폰으로 옮겨 카카오톡에 보내면 설치됨.';

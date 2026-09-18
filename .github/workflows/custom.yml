@@ -66,14 +66,23 @@ jobs:
         shell: pwsh
         run: powershell -ExecutionPolicy Bypass -File build-one.ps1 -Theme build-src\custom -Dist dist
 
-      - name: 미리보기 같이 담기
+      # 파일 이름에 테마 이름을 넣는다. custom.ktheme 로만 나가면 여러 벌 만들었을 때 어느
+      # 것이 어느 것인지 알 수 없다. 빌드 폴더 이름(custom)은 그대로 둔다 — 그게 안드로이드
+      # 패키지 이름이 되므로 한글이 들어가면 안 된다
+      - name: 이름 붙여 모으기
         shell: pwsh
-        run: Copy-Item build-src\custom\preview.png dist\preview.png
+        env:
+          NAME: ${{ inputs.name }}
+        run: |
+          $bad = '[\\/:*?"<>|]'
+          $n = ($env:NAME -replace $bad, '').Trim()
+          if (-not $n) { $n = '내 테마' }
+          New-Item -ItemType Directory out | Out-Null
+          Copy-Item dist\iOS\custom.ktheme "out\$n (custom).ktheme"
+          Copy-Item dist\android\custom.apk "out\$n (custom).apk"
+          Copy-Item build-src\custom\preview.png "out\$n (custom).png"
 
       - uses: actions/upload-artifact@v4
         with:
           name: custom-theme
-          path: |
-            dist/iOS/custom.ktheme
-            dist/android/custom.apk
-            dist/preview.png
+          path: out
