@@ -6,6 +6,20 @@ into their minor version and marked inline (`0.35.1:`).
 깃허브 릴리스 본문에서 모아 소급해 적은 것임. 태그가 50개라 패치는 마이너 안에 접어 넣고
 `0.35.1:` 처럼 표시했음.
 
+## 0.39.1 — 2026-09-18
+
+- **Fixed: on Android, building a theme inside KakaoTalk's in-app browser looked like it worked but no file ever arrived.** The page said "got it, tap the file to install" while KakaoTalk showed an "unsupported file format" toast and saved nothing.
+- Why: an Android WebView cannot download a `blob:` URL. The address is handed straight to the host app, which has no way to resolve it. This hits every in-app browser, not only KakaoTalk, so the page now detects them all and says so before building instead of handing over something you cannot receive. Open it in Chrome and it works as before.
+- The iPhone route is untouched — it shares the file through the share sheet and never goes down this path.
+- All 292 themes are unchanged image-for-image; only the version number moved, so they update in place.
+
+**한국어**
+
+- **안드로이드에서 카톡 인앱 브라우저로 테마를 만들면 다 된 것처럼 보이고 파일은 안 생기던 것을 고침.** 페이지는 「받았음, 눌러 설치하면 됨」 이라고 적는데 카톡은 「지원하지 않는 파일 형식입니다」 만 띄우고 아무것도 안 남겼음.
+- 까닭: 안드로이드 WebView 는 `blob:` 주소를 못 내려받음. 주소가 그대로 앱으로 넘어가는데 앱에는 그걸 풀 길이 없음. 카톡뿐 아니라 인앱 브라우저가 전부 그래서, 이제 만들기 전에 다 가려내 알려주고 크롬으로 보냄. 크롬에서 열면 원래대로 됨.
+- 아이폰 길은 그대로임 — 공유 시트로 넘기는 길이라 이 자리를 안 지남.
+- 테마 292벌은 그림이 한 장도 안 바뀜. 버전 번호만 올라가서 덮어 설치됨.
+
 ## 0.39 — 2026-09-18
 
 - **Custom themes now build on Android too, right in the browser.** Open the [make page](https://ruminem.github.io/kakaotalk-theme/docs/make.html) on an Android phone, pick a background and bubbles, and you get a signed `.apk` to install. No GitHub account, no PC, nothing to install first.

@@ -28,6 +28,9 @@
   (폰에서 확인). 그래서 아이폰은 공유 시트로 채팅방을 한 번 거친다 — 다시 파 보기 전에
   이걸 읽는다. 안드로이드는 파일을 받아 직접 설치하므로 채팅방을 안 거친다.
 
+  그 안드로이드 길은 인앱 브라우저에서는 아예 막힌다. WebView 는 blob: 주소를 못 내려받아
+  파일이 생기지 않는다(`inApp`). 그래서 만들지 않고 다른 브라우저로 보낸다.
+
   미리보기는 방금 받은 그 .ktheme 안의 그림과 CSS 로만 그린다. 팔레트 표를 자바스크립트로
   옮겨 적지 않는다 — 두 벌이 되는 순간 한쪽이 틀리기 시작한다. 말풍선을 늘이는 방식도
   카톡과 같다: cap 자리의 한 줄만 늘인다.
@@ -192,6 +195,11 @@ import { readZip, writeZip, crc32, inflate } from './zip.js';
                         send: null, recv: null };
   // 안드로이드는 나오는 것이 .apk 라 만드는 길도 보내는 길도 다르다. 그래서 맨 위에서 가른다
   var android = /Android/i.test(navigator.userAgent);
+  // 안드로이드 인앱 브라우저(카톡·네이버 등)는 blob: 주소를 못 내려받는다. WebView 의
+  // DownloadListener 에 blob: 이 그대로 넘어가는데 앱 쪽에는 그걸 풀 길이 없어서, 카톡은
+  // 「지원하지 않는 파일 형식입니다」만 띄우고 파일은 안 생긴다. 그러면서 페이지는 받았다고
+  // 적어 뒀었다. 만들어도 못 주므로 아예 안 만들고 다른 브라우저로 보낸다
+  var inApp = android && /; ?wv\)|KAKAOTALK/i.test(navigator.userAgent);
 
   // 말풍선 색 짝. 네온 계열에서 고를 수 있다
   var PAIRS = [
@@ -622,6 +630,7 @@ import { readZip, writeZip, crc32, inflate } from './zip.js';
       if (my !== token) return null;
       return render(z[0], z[1]).then(function () {
         $('load').style.display = 'none';
+        if (inApp) { inAppStop(); return null; }
         return android ? buildApk() : mix(z[0], z[1], nameOf());
       });
     }).then(function (bytes) {
@@ -786,6 +795,13 @@ import { readZip, writeZip, crc32, inflate } from './zip.js';
     return REPO + '/issues/new?' + q.join('&');
   }
 
+  // 인앱 브라우저에서 막는 자리. 고르는 것까지는 되니 화면은 그대로 두고 단추만 잠근다
+  function inAppStop() {
+    $('go').textContent = '여기선 못 받음';
+    $('msg').innerHTML = '<b>인앱 브라우저는 앱 파일(.apk)을 못 받음.</b> 오른쪽 위 ' +
+      '<b>⋮ → 다른 브라우저로 열기</b> 로 크롬에서 이 쪽을 열면 바로 받아짐.';
+  }
+
   // 안드로이드 재료를 못 받았을 때 돌아갈 자리. 릴리스가 한 번 나가기 전까지는 늘 여기다
   function androidFallback(e) {
     file = null;
@@ -805,7 +821,12 @@ import { readZip, writeZip, crc32, inflate } from './zip.js';
     }
   }
 
-  if (android) {
+  if (inApp) {
+    $('foot').innerHTML = '<b>카카오톡 안에서 열었음.</b> 골라 보는 건 되지만 여기서는 앱 ' +
+      '파일을 못 받음 — 오른쪽 위 <b>⋮ → 다른 브라우저로 열기</b> 로 크롬에서 열면 됨.' +
+      '<br><button id="toapk">아니면 깃허브에 맡기기</button>' +
+      '<br><small>깃허브 계정이 있어야 함. 고른 값은 채워진 채로 열림.</small>';
+  } else if (android) {
     $('lead').textContent = '배경과 말풍선을 따로 골라 나만의 테마를 만듦';
     $('foot').innerHTML = '만든 뒤 <b>받은 파일을 눌러 설치</b>하면 됨. 출처를 모르는 앱 ' +
       '설치를 한 번 허용해 줘야 함.<br><small>말풍선 색 바꾸기는 아이폰에서만 됨. ' +
