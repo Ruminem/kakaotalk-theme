@@ -1,0 +1,797 @@
+{
+"version": "0.37",
+"themes": [
+{
+"slug": "sakura-image",
+"name": "벚꽃 그늘 v2",
+"cat": "자연",
+"bubble": true
+},
+{
+"slug": "candy-image",
+"name": "캔디 팝 v3",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "wood-oak",
+"name": "원목 글래스 오크",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "wood-walnut",
+"name": "원목 글래스 월넛",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "stained-amber",
+"name": "스테인드 글래스 앰버",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "stained-emerald",
+"name": "스테인드 글래스 에메랄드",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "stained-amethyst",
+"name": "스테인드 글래스 자수정",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "stained-rose",
+"name": "스테인드 글래스 로즈",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "prism-light",
+"name": "프리즘 글래스 라이트",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "prism-dark",
+"name": "프리즘 글래스 다크",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "frost-light",
+"name": "프로스트 글래스 라이트",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "frost-dark",
+"name": "프로스트 글래스 다크",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "midnight-image",
+"name": "심야",
+"cat": "자연",
+"bubble": true
+},
+{
+"slug": "sea-image",
+"name": "바다",
+"cat": "자연",
+"bubble": true
+},
+{
+"slug": "forest-image",
+"name": "숲",
+"cat": "자연",
+"bubble": true
+},
+{
+"slug": "snow-image",
+"name": "설원",
+"cat": "자연",
+"bubble": true
+},
+{
+"slug": "geo-image",
+"name": "도형",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "city-image",
+"name": "야경 배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "city-glow-image",
+"name": "야경 글로우+배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "cyber-image",
+"name": "사이버펑크 배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "cyber-glow-image",
+"name": "사이버펑크 글로우+배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "red-image",
+"name": "레드 배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "red-glow-image",
+"name": "레드 글로우+배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "blue-image",
+"name": "블루 배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "blue-glow-image",
+"name": "블루 글로우+배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "purple-image",
+"name": "퍼플 배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "purple-glow-image",
+"name": "퍼플 글로우+배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "green-image",
+"name": "그린 배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "green-glow-image",
+"name": "그린 글로우+배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "gold-image",
+"name": "골드 배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "gold-glow-image",
+"name": "골드 글로우+배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "pink-image",
+"name": "핑크 배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "pink-glow-image",
+"name": "핑크 글로우+배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "inkmint-image",
+"name": "먹빛 민트 배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "inkmint-glow-image",
+"name": "먹빛 민트 글로우+배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "cream-image",
+"name": "크림 라떼 배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "cream-glow-image",
+"name": "크림 라떼 글로우+배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "sakura-glow-image",
+"name": "벚꽃 그늘 글로우+배경",
+"cat": "자연",
+"bubble": true
+},
+{
+"slug": "mixed-image",
+"name": "믹스드 배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "mixed-glow-image",
+"name": "믹스드 글로우+배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "candy-glow-image",
+"name": "캔디 팝 글로우+배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "midnight-glow-image",
+"name": "심야 글로우+배경",
+"cat": "자연",
+"bubble": true
+},
+{
+"slug": "sea-glow-image",
+"name": "바다 글로우+배경",
+"cat": "자연",
+"bubble": true
+},
+{
+"slug": "forest-glow-image",
+"name": "숲 글로우+배경",
+"cat": "자연",
+"bubble": true
+},
+{
+"slug": "snow-glow-image",
+"name": "설원 글로우+배경",
+"cat": "자연",
+"bubble": true
+},
+{
+"slug": "geo-glow-image",
+"name": "도형 글로우+배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "post-light-image",
+"name": "우체국 밝음+배경",
+"cat": "캐릭터",
+"bubble": true
+},
+{
+"slug": "post-dark-image",
+"name": "우체국 어두움+배경",
+"cat": "캐릭터",
+"bubble": true
+},
+{
+"slug": "desk-light-image",
+"name": "책상 밝음+배경",
+"cat": "캐릭터",
+"bubble": true
+},
+{
+"slug": "desk-dark-image",
+"name": "책상 어두움+배경",
+"cat": "캐릭터",
+"bubble": true
+},
+{
+"slug": "arcade-light-image",
+"name": "오락실 밝음+배경",
+"cat": "도트",
+"bubble": true
+},
+{
+"slug": "arcade-dark-image",
+"name": "오락실 어두움+배경",
+"cat": "도트",
+"bubble": true
+},
+{
+"slug": "laundry-light-image",
+"name": "빨래 밝음+배경",
+"cat": "캐릭터",
+"bubble": true
+},
+{
+"slug": "laundry-dark-image",
+"name": "빨래 어두움+배경",
+"cat": "캐릭터",
+"bubble": true
+},
+{
+"slug": "firework-image",
+"name": "불꽃놀이 배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "firework-glow-image",
+"name": "불꽃놀이 글로우+배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "lantern-image",
+"name": "연등 배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "lantern-glow-image",
+"name": "연등 글로우+배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "garland-image",
+"name": "알전구 배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "garland-glow-image",
+"name": "알전구 글로우+배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "highway-image",
+"name": "고속도로 배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "highway-glow-image",
+"name": "고속도로 글로우+배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "terminal-image",
+"name": "터미널 배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "terminal-glow-image",
+"name": "터미널 글로우+배경",
+"cat": "불빛",
+"bubble": true
+},
+{
+"slug": "cinema-light-image",
+"name": "영화관 밝음+배경",
+"cat": "캐릭터",
+"bubble": true
+},
+{
+"slug": "cinema-dark-image",
+"name": "영화관 어두움+배경",
+"cat": "캐릭터",
+"bubble": true
+},
+{
+"slug": "bakery-light-image",
+"name": "빵집 밝음+배경",
+"cat": "캐릭터",
+"bubble": true
+},
+{
+"slug": "bakery-dark-image",
+"name": "빵집 어두움+배경",
+"cat": "캐릭터",
+"bubble": true
+},
+{
+"slug": "camp-light-image",
+"name": "캠핑 밝음+배경",
+"cat": "캐릭터",
+"bubble": true
+},
+{
+"slug": "camp-dark-image",
+"name": "캠핑 어두움+배경",
+"cat": "캐릭터",
+"bubble": false
+},
+{
+"slug": "space-light-image",
+"name": "우주 밝음+배경",
+"cat": "캐릭터",
+"bubble": true
+},
+{
+"slug": "space-dark-image",
+"name": "우주 어두움+배경",
+"cat": "캐릭터",
+"bubble": true
+},
+{
+"slug": "greenhouse-light-image",
+"name": "온실 밝음+배경",
+"cat": "캐릭터",
+"bubble": true
+},
+{
+"slug": "greenhouse-dark-image",
+"name": "온실 어두움+배경",
+"cat": "캐릭터",
+"bubble": true
+},
+{
+"slug": "neon-double",
+"name": "네온사인 이중관",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neon-sign",
+"name": "네온사인 간판",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neon-electrode",
+"name": "네온사인 전극",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neon-speech",
+"name": "네온사인 말꼬리",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonalley-double",
+"name": "네온사인 v2 이중관",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonalley-sign",
+"name": "네온사인 v2 간판",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonalley-electrode",
+"name": "네온사인 v2 전극",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonalley-speech",
+"name": "네온사인 v2 말꼬리",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neontile-double",
+"name": "네온사인 v3 이중관",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neontile-sign",
+"name": "네온사인 v3 간판",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neontile-electrode",
+"name": "네온사인 v3 전극",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neontile-speech",
+"name": "네온사인 v3 말꼬리",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonbar-octagon",
+"name": "네온사인 v4 팔각",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonbar-bracket",
+"name": "네온사인 v4 꺾쇠",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonbar-underline",
+"name": "네온사인 v4 밑줄",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonbar-split",
+"name": "네온사인 v4 두 가닥",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonlounge-octagon",
+"name": "네온사인 v5 팔각",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonlounge-bracket",
+"name": "네온사인 v5 꺾쇠",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonlounge-underline",
+"name": "네온사인 v5 밑줄",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonlounge-split",
+"name": "네온사인 v5 두 가닥",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "quest-light-image",
+"name": "도트 모험 밝음+배경",
+"cat": "도트",
+"bubble": true
+},
+{
+"slug": "quest-dark-image",
+"name": "도트 모험 어두움+배경",
+"cat": "도트",
+"bubble": false
+},
+{
+"slug": "lcd-light-image",
+"name": "도트 액정 밝음+배경",
+"cat": "도트",
+"bubble": true
+},
+{
+"slug": "lcd-dark-image",
+"name": "도트 액정 어두움+배경",
+"cat": "도트",
+"bubble": true
+},
+{
+"slug": "retro-light-image",
+"name": "레트로 PC 밝음+배경",
+"cat": "도트",
+"bubble": true
+},
+{
+"slug": "retro-dark-image",
+"name": "레트로 PC 어두움+배경",
+"cat": "도트",
+"bubble": true
+},
+{
+"slug": "farm-light-image",
+"name": "도트 농장 밝음+배경",
+"cat": "도트",
+"bubble": true
+},
+{
+"slug": "farm-dark-image",
+"name": "도트 농장 어두움+배경",
+"cat": "도트",
+"bubble": true
+},
+{
+"slug": "watercolor-light-image",
+"name": "수채화 밝음+배경",
+"cat": "편안함",
+"bubble": true
+},
+{
+"slug": "watercolor-dark-image",
+"name": "수채화 어두움+배경",
+"cat": "편안함",
+"bubble": true
+},
+{
+"slug": "inkwash-light-image",
+"name": "수묵화 밝음+배경",
+"cat": "편안함",
+"bubble": true
+},
+{
+"slug": "inkwash-dark-image",
+"name": "수묵화 어두움+배경",
+"cat": "편안함",
+"bubble": true
+},
+{
+"slug": "rainy-light-image",
+"name": "비 오는 창가 밝음+배경",
+"cat": "편안함",
+"bubble": true
+},
+{
+"slug": "rainy-dark-image",
+"name": "비 오는 창가 어두움+배경",
+"cat": "편안함",
+"bubble": true
+},
+{
+"slug": "papercut-light-image",
+"name": "페이퍼컷 밝음+배경",
+"cat": "편안함",
+"bubble": true
+},
+{
+"slug": "papercut-dark-image",
+"name": "페이퍼컷 어두움+배경",
+"cat": "편안함",
+"bubble": true
+},
+{
+"slug": "gingham-light-image",
+"name": "깅엄 체크 밝음+배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "gingham-dark-image",
+"name": "깅엄 체크 어두움+배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "polka-light-image",
+"name": "폴카 도트 밝음+배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "polka-dark-image",
+"name": "폴카 도트 어두움+배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "terrazzo-light-image",
+"name": "테라조 밝음+배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "terrazzo-dark-image",
+"name": "테라조 어두움+배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "marine-light-image",
+"name": "마린 스트라이프 밝음+배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "marine-dark-image",
+"name": "마린 스트라이프 어두움+배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "checker-light-image",
+"name": "체커보드 밝음+배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "checker-dark-image",
+"name": "체커보드 어두움+배경",
+"cat": "무늬",
+"bubble": true
+},
+{
+"slug": "seaglass-light-image",
+"name": "씨글래스 밝음+배경",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "seaglass-dark-image",
+"name": "씨글래스 어두움+배경",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "glassblock-light-image",
+"name": "글래스 블록 밝음+배경",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "glassblock-dark-image",
+"name": "글래스 블록 어두움+배경",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "ice-light-image",
+"name": "얼음 밝음+배경",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "ice-dark-image",
+"name": "얼음 어두움+배경",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "reeded-light-image",
+"name": "골판 유리 밝음+배경",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "reeded-dark-image",
+"name": "골판 유리 어두움+배경",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "acrylic-light-image",
+"name": "아크릴 밝음+배경",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "acrylic-dark-image",
+"name": "아크릴 어두움+배경",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "resin-light-image",
+"name": "레진 밝음+배경",
+"cat": "유리",
+"bubble": true
+},
+{
+"slug": "resin-dark-image",
+"name": "레진 어두움+배경",
+"cat": "유리",
+"bubble": true
+}
+]
+}

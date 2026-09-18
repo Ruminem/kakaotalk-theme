@@ -14,6 +14,7 @@ gen.py 가 부른다. 직접 돌려도 된다:
 뭉개져서 폰에 깐 것보다 훨씬 싸구려로 보였다. README 에서 그 그림을 보고
 지나치면 폰에서 예쁜 것은 아무 소용이 없다.
 """
+import json
 import multiprocessing
 import os
 import sys
@@ -604,7 +605,8 @@ PAGE = """<!doctype html>
 <h1>카카오톡 테마 미리보기</h1>
 <p class="note">python tools/gen.py 가 만든다. 팔레트를 고치고 다시 돌리면 이 페이지도 갱신된다.<br>
 실행화면은 안드로이드에만 있는 화면이다. iOS 테마 규격에는 스플래시 블록이 없다.<br>
-아래 다운로드 링크는 build.ps1 을 돌린 뒤에만 동작한다.</p>
+아래 다운로드 링크는 build.ps1 을 돌린 뒤에만 동작한다.<br>
+배경과 말풍선을 따로 골라 섞으려면 <a href="make.html" style="color:#4FD1B0">커스텀 테마 제작</a>.</p>
 %s
 </html>
 """
@@ -940,6 +942,38 @@ def write_readme(ts):
     open(p, 'w', encoding='utf-8', newline='\n').write(head + readme_block(ts) + tail)
 
 
+def write_mix_manifest(ts):
+    """커스텀 테마 제작 페이지(docs/make.html)가 읽는 목록.
+
+    페이지는 사이트의 files/ 에 있는 .ktheme 두 벌을 받아 배경 그림만 갈아끼운다.
+    그래서 세 화면(채팅방·목록·잠금화면)에 배경이 다 있는 테마여야 한다 — 없는 쪽을
+    끼우려면 CSS 에서 -ios-background-image 줄을 넣고 빼야 하는데, 그건 브라우저에서
+    할 일이 아니다. 배경 없는 테마를 쓰고 싶으면 그 테마를 그냥 받으면 된다.
+
+    셋 중 하나만 빠진 테마도 뺀다(리퀴드 글래스 밝음·어두움은 잠금화면 배경이 없다).
+    한 장이 없으면 그 화면만 말풍선 쪽 테마 것이 남아 조합이 반만 바뀐다.
+
+    말풍선 쪽에서 firelight 를 뺀다. 그 말풍선 그림에는 모닥불 빛이 구워져 있어서
+    불 없는 배경에 얹으면 까닭 없는 얼룩이 된다(tools/mix.py 도 같은 것을 턴다).
+    """
+    import themes as T2
+    cat = {}
+    for c, _note, members in T2.categorized():
+        for fam, _ms in members:
+            cat[fam] = c
+    out = []
+    for t in ts:
+        if not all(t.get(k) for k in ('chat_bg', 'main_bg', 'passcode_bg')):
+            continue
+        fam = T2._fam_of(t)[0]
+        out.append(dict(slug=T2.file_slug(t), name=t['name'], cat=cat.get(fam, fam),
+                        bubble=not t.get('firelight')))
+    data = dict(version=T2.VERSION, themes=out)
+    with open(os.path.join(gen.DOCS, 'themes.json'), 'w', encoding='utf-8', newline='\n') as f:
+        json.dump(data, f, ensure_ascii=False, indent=0)
+    return len(out)
+
+
 def generate(ts):
     os.makedirs(gen.ASSETS, exist_ok=True)
     import themes as T2
@@ -969,6 +1003,7 @@ def generate(ts):
         f.write(PAGE % '\n'.join(body))
     write_readme(ts)
     write_theme_docs(ts)
+    print('커스텀 테마 제작 목록 -> docs/themes.json (%d벌)' % write_mix_manifest(ts))
 
 if __name__ == '__main__':
     import themes

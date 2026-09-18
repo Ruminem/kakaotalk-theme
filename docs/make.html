@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="ko"><meta charset="utf-8">
+<title>커스텀 테마 제작</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!--
+  폰에서 배경과 말풍선을 따로 골라 나만의 테마를 만드는 자리.
+
+  왜 브라우저에서 되는가 — 사이트의 files/ 에 테마 .ktheme 가 전부 올라와 있다(pages.yml).
+  .ktheme 는 KakaoTalkTheme.css 와 Images/ 를 담은 zip 이고, 배경 그림은 그 안에서
+  파일 세 장(채팅방·목록·잠금화면, @2x/@3x 라 여섯 장)일 뿐이다. 그래서 말풍선 쪽 테마를
+  통째로 가져와 그 여섯 장만 배경 쪽 테마 것으로 갈아끼우면 섞인 테마가 된다.
+  CSS 에서는 테마 이름과 테마 ID 두 줄만 고친다 — ID 를 안 고치면 폰이 원래 테마를
+  덮어쓴다.
+
+  세 화면에 배경이 다 있는 테마만 고르게 한다(docs/themes.json 이 그 목록이다).
+  없는 쪽을 끼우려면 CSS 에서 -ios-background-image 줄을 넣거나 빼야 하는데, 그건
+  브라우저에서 할 일이 아니다. 배경 없는 테마가 좋으면 그 테마를 그냥 받으면 된다.
+
+  안드로이드는 여기서 못 만든다. APK 는 서명이 필요해서 어디선가 빌드가 돌아야 한다 —
+  그쪽은 저장소 Actions 의 `커스텀 테마 제작` 워크플로가 한다.
+
+  미리보기는 방금 받은 그 .ktheme 안의 그림과 CSS 로만 그린다. 팔레트 표를 자바스크립트로
+  옮겨 적지 않는다 — 두 벌이 되는 순간 한쪽이 틀리기 시작한다. 말풍선을 늘이는 방식도
+  카톡과 같다: cap 자리의 한 줄만 늘인다.
+
+  이 파일은 손으로 쓴다. 같은 폴더의 index.html 과 themes.json 은 tools/preview.py 가
+  만드는 생성물이다.
+-->
+<style>
+  /* 색은 docs/index.html · share.html 과 같은 값. 사이트가 한 덩어리로 보여야 한다 */
+  :root {
+    --bg:#0f1115; --surface:#151922; --line:#232833;
+    --text:#e6e9ee; --dim:#8b95a3; --accent:#4FD1B0; --on-accent:#0b1a16;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:24px 16px calc(32px + env(safe-area-inset-bottom));
+         background:var(--bg); color:var(--text);
+         font:15px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;
+         -webkit-text-size-adjust:100%; }
+  main { max-width:430px; margin:0 auto; display:flex; flex-direction:column; gap:14px; }
+  h1 { font-size:19px; margin:0; text-align:center; }
+  .lead { color:var(--dim); font-size:13px; text-align:center; margin:-8px 0 0; }
+  a { color:var(--accent); }
+
+  /* --- 미리보기 --- */
+  .stage { position:relative; margin:0 auto; }
+  .phone { position:absolute; top:0; left:0; width:402px; height:874px;
+           transform-origin:top left; border-radius:30px; overflow:hidden;
+           border:1px solid var(--line); background:#222 center/cover no-repeat; }
+  .phone .chat { position:absolute; left:0; right:0; bottom:60px; padding:0 12px;
+                 display:flex; flex-direction:column; align-items:stretch; }
+  .row { display:flex; align-items:flex-end; gap:4px; margin-top:6px; }
+  .row.gap { margin-top:12px; }
+  .row.send { justify-content:flex-end; }
+  .bub { font:16px/22px -apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+         max-width:252px; white-space:pre-wrap; background-size:100% 100%;
+         background-repeat:no-repeat; }
+  .time { font-size:11px; opacity:.75; white-space:nowrap; }
+  .bar { position:absolute; left:0; right:0; backdrop-filter:blur(18px);
+         -webkit-backdrop-filter:blur(18px); }
+  .bar.top { top:0; height:110px; }
+  .bar.bot { bottom:0; height:60px; }
+  .stage .load { position:absolute; inset:0; display:flex; align-items:center;
+                 justify-content:center; background:rgba(15,17,21,.72); color:var(--dim);
+                 font-size:13px; border-radius:30px; }
+
+  /* --- 고르기 --- */
+  .picks { display:flex; flex-direction:column; gap:8px; }
+  button, input { font:inherit; font-family:inherit; }
+  .pick { display:flex; align-items:center; gap:10px; width:100%; padding:9px 12px;
+          border:1px solid var(--line); background:var(--surface); color:var(--text);
+          border-radius:11px; cursor:pointer; text-align:left; }
+  .pick img { width:34px; height:34px; border-radius:7px; object-fit:cover;
+              object-position:center 30%; background:#222; flex:none; }
+  .pick .who { color:var(--dim); font-size:12px; }
+  .pick .what { font-size:14.5px; }
+  .pick .col { flex:1; min-width:0; }
+  .pick .what, .pick .who { display:block; overflow:hidden; text-overflow:ellipsis;
+                            white-space:nowrap; }
+  .pick .arrow { color:var(--dim); font-size:12px; flex:none; }
+  input[type=text] { width:100%; padding:13px 12px; border-radius:11px;
+                     border:1px solid var(--line); background:var(--surface);
+                     color:var(--text); }
+  button.primary { font-size:16px; font-weight:700; padding:15px; width:100%;
+                   border-radius:11px; cursor:pointer; border:1px solid var(--accent);
+                   background:var(--accent); color:var(--on-accent); }
+  button:disabled { opacity:.45; cursor:default; }
+  button:focus-visible, input:focus-visible { outline:2px solid var(--accent);
+                                              outline-offset:3px; }
+  .msg { text-align:center; font-size:13px; color:var(--dim); margin:0; min-height:1.4em; }
+  .foot { color:var(--dim); font-size:12.5px; text-align:center; margin:0; }
+
+  /* --- 테마 고르는 시트 --- */
+  .sheet { position:fixed; inset:0; background:var(--bg); z-index:9; display:none;
+           flex-direction:column; padding:14px 14px calc(14px + env(safe-area-inset-bottom)); }
+  .sheet.on { display:flex; }
+  .sheet .head { display:flex; gap:10px; align-items:center; margin-bottom:10px; }
+  .sheet .head input { flex:1; }
+  .sheet .close { padding:13px 14px; border-radius:11px; border:1px solid var(--line);
+                  background:var(--surface); color:var(--text); cursor:pointer; }
+  .grid { overflow-y:auto; display:grid; gap:10px;
+          grid-template-columns:repeat(auto-fill, minmax(95px, 1fr)); align-content:start; }
+  .grid .cat { grid-column:1/-1; color:var(--dim); font-size:12px; letter-spacing:.1em;
+               margin:6px 0 0; }
+  .card { border:0; padding:0; background:none; color:var(--text); cursor:pointer;
+          text-align:center; }
+  .card img { width:100%; aspect-ratio:402/874; object-fit:cover; object-position:center 32%;
+              border-radius:9px; border:1px solid var(--line); display:block; background:#222; }
+  .card.on img { border-color:var(--accent); }
+  .card span { display:block; font-size:11.5px; margin-top:4px; color:var(--dim);
+               overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+</style>
+
+<main id="app">
+  <h1>커스텀 테마 제작</h1>
+  <p class="lead">배경과 말풍선을 따로 골라 나만의 테마를 만듦</p>
+
+  <div class="stage" id="stage">
+    <div class="phone" id="phone"></div>
+    <div class="load" id="load">불러오는 중…</div>
+  </div>
+
+  <div class="picks">
+    <button class="pick" id="pick-bg">
+      <img alt=""><span class="col"><span class="who">배경</span><span class="what"></span></span><span class="arrow">바꾸기 ›</span>
+    </button>
+    <button class="pick" id="pick-bubble">
+      <img alt=""><span class="col"><span class="who">말풍선 · 색</span><span class="what"></span></span><span class="arrow">바꾸기 ›</span>
+    </button>
+    <input type="text" id="name" maxlength="20" placeholder="테마 이름">
+  </div>
+
+  <button class="primary" id="go" disabled>준비 중…</button>
+  <p class="msg" id="msg"></p>
+  <p class="foot" id="foot"></p>
+</main>
+
+<div class="sheet" id="sheet">
+  <div class="head">
+    <input type="text" id="q" placeholder="테마 이름으로 찾기">
+    <button class="close" id="close">닫기</button>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var FILES = '../files/', ASSETS = '../assets/';
+  var BG_NAMES = ['chatroomBgImage', 'mainBgImage', 'passcodeBgImage'];
+  var REPO = 'https://github.com/Ruminem/kakaotalk-theme';
+
+  var $ = function (id) { return document.getElementById(id); };
+  var DB = [], pick = { bg: 'camp-dark-image', bubble: 'bakery-light-image' };
+  var ready = null, token = 0;
+
+  // --- zip 읽기 -----------------------------------------------------------
+  // 두 테마에서 필요한 것은 바이트 몇 덩어리뿐이라 zip 라이브러리를 들이지 않는다.
+  // 그림은 풀지도 않는다 — 압축된 채로 그대로 옮겨 담는다.
+  function u16(d, o) { return d[o] | d[o + 1] << 8; }
+  function u32(d, o) { return (d[o] | d[o + 1] << 8 | d[o + 2] << 16 | d[o + 3] << 24) >>> 0; }
+
+  function readZip(buf) {
+    var d = new Uint8Array(buf), e = d.length - 22;
+    while (e >= 0 && u32(d, e) !== 0x06054b50) e--;
+    if (e < 0) throw new Error('zip 이 아님');
+    var n = u16(d, e + 10), p = u32(d, e + 16), out = new Map(), dec = new TextDecoder();
+    for (var i = 0; i < n; i++) {
+      var nl = u16(d, p + 28), el = u16(d, p + 30), cl = u16(d, p + 32);
+      var name = dec.decode(d.subarray(p + 46, p + 46 + nl));
+      var off = u32(d, p + 42);
+      var lnl = u16(d, off + 26), lel = u16(d, off + 28), at = off + 30 + lnl + lel;
+      var rec = { method: u16(d, p + 10), crc: u32(d, p + 16),
+                  csize: u32(d, p + 20), usize: u32(d, p + 24) };
+      rec.data = d.subarray(at, at + rec.csize);
+      out.set(name, rec);
+      p += 46 + nl + el + cl;
+    }
+    return out;
+  }
+
+  // 압축을 푸는 것은 CSS 와 미리보기에 쓸 그림 몇 장뿐이다.
+  function inflate(rec) {
+    if (rec.method === 0) return Promise.resolve(rec.data);
+    var s = new Blob([rec.data]).stream()
+      .pipeThrough(new DecompressionStream('deflate-raw'));
+    return new Response(s).arrayBuffer().then(function (b) { return new Uint8Array(b); });
+  }
+
+  // --- zip 쓰기 -----------------------------------------------------------
+  var CRCT = (function () {
+    var t = new Uint32Array(256);
+    for (var i = 0; i < 256; i++) {
+      var c = i;
+      for (var k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ c >>> 1 : c >>> 1;
+      t[i] = c >>> 0;
+    }
+    return t;
+  })();
+  function crc32(b) {
+    var c = 0xFFFFFFFF;
+    for (var i = 0; i < b.length; i++) c = CRCT[(c ^ b[i]) & 255] ^ c >>> 8;
+    return (c ^ 0xFFFFFFFF) >>> 0;
+  }
+
+  function writeZip(items) {
+    var enc = new TextEncoder(), parts = [], cen = [], off = 0, total = 0;
+    items.forEach(function (it) {
+      var nm = enc.encode(it.name);
+      var lh = new Uint8Array(30 + nm.length), v = new DataView(lh.buffer);
+      v.setUint32(0, 0x04034b50, true); v.setUint16(4, 20, true);
+      v.setUint16(8, it.method, true); v.setUint16(12, 0x21, true);
+      v.setUint32(14, it.crc, true); v.setUint32(18, it.csize, true);
+      v.setUint32(22, it.usize, true); v.setUint16(26, nm.length, true);
+      lh.set(nm, 30);
+      parts.push(lh, it.data);
+
+      var ch = new Uint8Array(46 + nm.length), w = new DataView(ch.buffer);
+      w.setUint32(0, 0x02014b50, true); w.setUint16(4, 20, true); w.setUint16(6, 20, true);
+      w.setUint16(10, it.method, true); w.setUint16(14, 0x21, true);
+      w.setUint32(16, it.crc, true); w.setUint32(20, it.csize, true);
+      w.setUint32(24, it.usize, true); w.setUint16(28, nm.length, true);
+      w.setUint32(42, off, true);
+      ch.set(nm, 46);
+      cen.push(ch);
+      off += lh.length + it.data.length;
+      total += ch.length;
+    });
+    var end = new Uint8Array(22), ev = new DataView(end.buffer);
+    ev.setUint32(0, 0x06054b50, true);
+    ev.setUint16(8, items.length, true); ev.setUint16(10, items.length, true);
+    ev.setUint32(12, total, true); ev.setUint32(16, off, true);
+    return new Blob(parts.concat(cen, [end]), { type: 'application/octet-stream' });
+  }
+
+  // --- 테마 받아두기 -------------------------------------------------------
+  var cache = new Map();
+  function load(slug) {
+    if (!cache.has(slug)) {
+      cache.set(slug, fetch(FILES + slug + '.ktheme', { cache: 'force-cache' })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); })
+        .then(readZip)
+        .catch(function (e) { cache.delete(slug); throw e; }));
+    }
+    return cache.get(slug);
+  }
+
+  // --- 섞기 ---------------------------------------------------------------
+  function idOf() {
+    // 조합마다 다른 ID 라야 폰에서 원래 테마를 덮어쓰지 않고 따로 선다
+    return 'com.kakao.talk.theme.custom_' +
+      pick.bubble.replace(/-/g, '_') + '__' + pick.bg.replace(/-/g, '_');
+  }
+
+  function mix(bub, bg, name) {
+    return inflate(bub.get('KakaoTalkTheme.css')).then(function (raw) {
+      var css = new TextDecoder().decode(raw)
+        .replace(/(-kakaotalk-theme-name:\s*')[^']*(')/, '$1' + name + '$2')
+        .replace(/(-kakaotalk-theme-id:\s*')[^']*(')/, '$1' + idOf() + '$2');
+      var out = new TextEncoder().encode(css);
+      var swap = {};
+      BG_NAMES.forEach(function (n) {
+        ['@2x', '@3x'].forEach(function (x) {
+          var k = 'Images/' + n + x + '.png';
+          if (bg.has(k)) swap[k] = bg.get(k);
+        });
+      });
+      var items = [];
+      bub.forEach(function (rec, key) {
+        if (key === 'KakaoTalkTheme.css') {
+          items.push({ name: key, method: 0, crc: crc32(out),
+                       csize: out.length, usize: out.length, data: out });
+        } else {
+          var r = swap[key] || rec;
+          items.push({ name: key, method: r.method, crc: r.crc,
+                       csize: r.csize, usize: r.usize, data: r.data });
+        }
+      });
+      return writeZip(items);
+    });
+  }
+
+  // --- 미리보기 -----------------------------------------------------------
+  // 말풍선은 카톡과 같은 방식으로 늘인다: cap 자리의 한 줄(1px)만 늘이고 나머지는 그대로.
+  function stretch(img, cap, W, H) {
+    var L = cap, T = cap, R = img.width - cap - 1, B = img.height - cap - 1;
+    var c = document.createElement('canvas');
+    c.width = Math.max(W, L + R); c.height = Math.max(H, T + B);
+    var x = c.getContext('2d');
+    var sx = [0, L, L + 1], sw = [L, 1, R], dx = [0, L, c.width - R], dw = [L, c.width - L - R, R];
+    var sy = [0, T, T + 1], sh = [T, 1, B], dy = [0, T, c.height - B], dh = [T, c.height - T - B, B];
+    for (var i = 0; i < 3; i++) for (var j = 0; j < 3; j++) {
+      x.drawImage(img, sx[i], sy[j], sw[i], sh[j], dx[i], dy[j], dw[i], dh[j]);
+    }
+    return c;
+  }
+
+  function blockOf(css, name) {
+    var m = css.match(new RegExp(name + '\\s*\\{([^}]*)\\}'));
+    return m ? m[1] : '';
+  }
+  function num(s, re) { var m = s.match(re); return m ? +m[1] : 0; }
+  function insets(s, re) {
+    var m = s.match(re);
+    return m ? [+m[1], +m[2], +m[3], +m[4]] : [13, 18, 13, 18];
+  }
+  function png(rec) {
+    return inflate(rec).then(function (b) {
+      return new Promise(function (ok, no) {
+        var im = new Image();
+        im.onload = function () { ok(im); };
+        im.onerror = no;
+        im.src = URL.createObjectURL(new Blob([b], { type: 'image/png' }));
+      });
+    });
+  }
+
+  var TALK = [
+    ['recv', 1, '안녕! 오랜만이야'],
+    ['recv', 2, '요즘 뭐 하고 지내?'],
+    ['send', 1, '카톡 테마 만들고 있어'],
+    ['send', 2, '주말마다 조금씩'],
+    ['recv', 1, '오 나도 보여줘'],
+    ['send', 1, '배경이랑 말풍선을\n따로 골라서 섞음'],
+    ['send', 2, '이건 내가 만든 거'],
+    ['recv', 1, '말풍선 색 예쁘다'],
+    ['send', 1, 'ㅋㅋ 고마워']
+  ];
+
+  function render(bub, bg) {
+    return Promise.all([
+      inflate(bub.get('KakaoTalkTheme.css')).then(function (b) {
+        return new TextDecoder().decode(b);
+      }),
+      png(bg.get('Images/chatroomBgImage@3x.png')),
+      png(bub.get('Images/chatroomBubbleSend01@3x.png')),
+      png(bub.get('Images/chatroomBubbleSend02@3x.png')),
+      png(bub.get('Images/chatroomBubbleReceive01@3x.png')),
+      png(bub.get('Images/chatroomBubbleReceive02@3x.png'))
+    ]).then(function (r) {
+      var css = r[0], bgImg = r[1];
+      var sheets = { send1: r[2], send2: r[3], recv1: r[4], recv2: r[5] };
+
+      // 말풍선 치수·색은 그 테마의 CSS 에서 그대로 읽는다. 팔레트를 여기 옮겨 적지 않는다
+      var spec = {};
+      ['Send', 'Receive'].forEach(function (side) {
+        var b = blockOf(css, 'MessageCellStyle-' + side);
+        var k = side === 'Send' ? 'send' : 'recv';
+        spec[k + '1'] = { cap: num(b, /-ios-background-image:\s*'[^']*'\s*(\d+)px/),
+                          ins: insets(b, /-ios-title-edgeinsets:\s*(\d+)px\s+(\d+)px\s+(\d+)px\s+(\d+)px/),
+                          color: (b.match(/-ios-text-color:\s*(#[0-9A-Fa-f]{6})/) || [])[1] || '#000' };
+        spec[k + '2'] = { cap: num(b, /-ios-group-background-image:\s*'[^']*'\s*(\d+)px/),
+                          ins: insets(b, /-ios-group-title-edgeinsets:\s*(\d+)px\s+(\d+)px\s+(\d+)px\s+(\d+)px/),
+                          color: spec[k + '1'].color };
+      });
+      var room = blockOf(css, 'BackgroundStyle-ChatRoom');
+      var floor = (room.match(/background-color:\s*(#[0-9A-Fa-f]{6})/) || [])[1] || '#222';
+      var head = blockOf(css, 'InputBarStyle-Chat');
+      var barCol = (head.match(/background-color:\s*(#[0-9A-Fa-f]{6})/) || [])[1] || floor;
+      // 시각은 말풍선 밖에 찍히므로 말풍선 글자색이 아니다. preview.py 와 같이 subtext 를 쓴다
+      var main = blockOf(css, 'MainViewStyle-Primary');
+      var sub = (main.match(/-ios-description-text-color:\s*(#[0-9A-Fa-f]{6})/) || [])[1] || '#888';
+
+      var phone = $('phone');
+      phone.style.backgroundColor = floor;
+      phone.style.backgroundImage = 'url(' + bgImg.src + ')';
+      phone.innerHTML = '<div class="bar top"></div><div class="chat"></div>' +
+                        '<div class="bar bot"></div>';
+      var bars = phone.querySelectorAll('.bar');
+      bars[0].style.background = barCol + '55';
+      bars[1].style.background = barCol + '88';
+
+      var chat = phone.querySelector('.chat'), prev = null;
+      TALK.forEach(function (m) {
+        var key = m[0] + m[1], s = spec[key];
+        var row = document.createElement('div');
+        row.className = 'row ' + m[0] + (prev && prev !== m[0] ? ' gap' : '');
+        prev = m[0];
+        var bub = document.createElement('div');
+        bub.className = 'bub';
+        bub.textContent = m[2];
+        bub.style.color = s.color;
+        bub.style.padding = s.ins[0] + 'px ' + s.ins[3] + 'px ' + s.ins[2] + 'px ' + s.ins[1] + 'px';
+        // 한 글자짜리 말에서도 프레임이 장보다 좁아지면 안 된다. 좁아지면 그림이 눌린다
+        var sheet = sheets[key];
+        bub.style.minWidth = (sheet.width - 1) / 3 + 'px';
+        bub.style.minHeight = (sheet.height - 1) / 3 + 'px';
+        var time = document.createElement('span');
+        time.className = 'time';
+        time.style.color = sub;
+        time.textContent = '오후 9:41';
+        if (m[0] === 'send') { row.appendChild(time); row.appendChild(bub); }
+        else { row.appendChild(bub); row.appendChild(time); }
+        chat.appendChild(row);
+        row._paint = function () {
+          var w = Math.round(bub.getBoundingClientRect().width / scale());
+          var h = Math.round(bub.getBoundingClientRect().height / scale());
+          bub.style.backgroundImage =
+            'url(' + stretch(sheet, s.cap * 3, w * 3, h * 3).toDataURL() + ')';
+        };
+      });
+      // 폭·높이가 정해진 뒤에 그려야 늘일 크기를 안다
+      Array.prototype.forEach.call(chat.children, function (row) { row._paint(); });
+      // 화면 아래부터 채우고 넘치는 위쪽은 잘라낸다. 카톡도 아래가 최신이다
+      while (chat.scrollHeight > 700 && chat.firstChild) chat.removeChild(chat.firstChild);
+    });
+  }
+
+  var _scale = 1;
+  function scale() { return _scale; }
+  function fit() {
+    var w = Math.min(402, $('stage').parentNode.clientWidth);
+    _scale = w / 402;
+    $('phone').style.transform = 'scale(' + _scale + ')';
+    $('stage').style.width = w + 'px';
+    $('stage').style.height = 874 * _scale + 'px';
+  }
+
+  // --- 화면 --------------------------------------------------------------
+  function find(slug) {
+    for (var i = 0; i < DB.length; i++) if (DB[i].slug === slug) return DB[i];
+    return null;
+  }
+  function byId(slug) { return find(slug) || DB[0]; }
+  function shot(slug) { return ASSETS + 'preview-' + slug + '-chat.webp'; }
+
+  function paintPicks() {
+    [['bg', 'pick-bg'], ['bubble', 'pick-bubble']].forEach(function (p) {
+      var t = byId(pick[p[0]]), el = $(p[1]);
+      el.querySelector('img').src = shot(t.slug);
+      el.querySelector('.what').textContent = t.name;
+    });
+  }
+
+  var file = null;
+  function refresh() {
+    var my = ++token;
+    file = null;
+    $('go').disabled = true;
+    $('go').textContent = '만드는 중…';
+    $('load').style.display = 'flex';
+    $('msg').textContent = '';
+    paintPicks();
+    Promise.all([load(pick.bubble), load(pick.bg)]).then(function (z) {
+      if (my !== token) return null;
+      return render(z[0], z[1]).then(function () {
+        $('load').style.display = 'none';
+        return mix(z[0], z[1], nameOf());
+      });
+    }).then(function (blob) {
+      if (my !== token || !blob) return;
+      file = new File([blob], 'custom.ktheme', { type: 'application/octet-stream' });
+      $('go').disabled = false;
+      $('go').textContent = canShare ? '카카오톡으로 보내기' : '테마 파일 받기';
+    }).catch(function (e) {
+      if (my !== token) return;
+      $('load').style.display = 'none';
+      $('go').textContent = '안 됨';
+      $('msg').innerHTML = '테마를 못 만들었음 (' + (e && e.message ? e.message : e) + '). ' +
+        '<a href="' + REPO + '/releases/latest">릴리스에서 받기</a>';
+    });
+  }
+
+  function nameOf() {
+    // 작은따옴표는 CSS 값을 끊는다. 이름이 들어가는 자리가 '...' 라서 지운다
+    var v = ($('name').value || '').replace(/['\\]/g, '').trim();
+    return v || '내 테마';
+  }
+
+  // --- 고르는 시트 --------------------------------------------------------
+  var picking = 'bg';
+  function openSheet(which) {
+    picking = which;
+    $('q').value = '';
+    fillGrid('');
+    $('sheet').classList.add('on');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSheet() {
+    $('sheet').classList.remove('on');
+    document.body.style.overflow = '';
+  }
+  function fillGrid(q) {
+    var grid = $('grid'), cat = null, html = [];
+    DB.forEach(function (t) {
+      if (picking === 'bubble' && !t.bubble) return;
+      if (q && t.name.indexOf(q) < 0 && t.slug.indexOf(q) < 0) return;
+      if (t.cat !== cat) { cat = t.cat; html.push('<p class="cat">' + cat + '</p>'); }
+      html.push('<button class="card' + (t.slug === pick[picking] ? ' on' : '') +
+        '" data-slug="' + t.slug + '"><img loading="lazy" src="' + shot(t.slug) +
+        '" alt=""><span>' + t.name + '</span></button>');
+    });
+    grid.innerHTML = html.join('') || '<p class="cat">없음</p>';
+    grid.scrollTop = 0;
+  }
+
+  // --- 보내기 -------------------------------------------------------------
+  var probe = null;
+  try { probe = new File([new Uint8Array(1)], 'a.ktheme', { type: 'application/octet-stream' }); } catch (e) {}
+  var canShare = !!(probe && typeof navigator.share === 'function' &&
+                    typeof navigator.canShare === 'function' &&
+                    navigator.canShare({ files: [probe] }) &&
+                    window.matchMedia('(pointer: coarse)').matches);
+
+  function send() {
+    if (!file) return;
+    if (!canShare) {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(file);
+      a.download = nameOf() + '.ktheme';
+      a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 10000);
+      $('msg').textContent = '받았음. 폰으로 옮겨 카카오톡에 보내면 설치됨.';
+      return;
+    }
+    // share() 는 탭이 만든 일시적 활성화를 소비한다. 그래서 파일을 미리 만들어두고
+    // 다 될 때까지 단추를 잠가둔다 — 누른 뒤에 만들면 느린 폰에서 NotAllowedError 가 난다
+    navigator.share({ files: [file] }).then(function () {
+      $('msg').textContent = '보냈음. 채팅방에서 파일을 눌러 설치하면 됨.';
+    }).catch(function (err) {
+      if (err && err.name === 'AbortError') return;
+      $('msg').textContent = '공유가 안 됨. 사파리에서 열면 됨.';
+    });
+  }
+
+  // --- 시작 ---------------------------------------------------------------
+  if (typeof DecompressionStream !== 'function') {
+    $('app').innerHTML = '<h1>커스텀 테마 제작</h1>' +
+      '<p class="lead">이 브라우저에서는 안 됨. iOS 16.4 이상의 사파리나 최신 크롬에서 열면 됨.</p>' +
+      '<p class="foot"><a href="' + REPO + '">저장소로 가기</a></p>';
+    return;
+  }
+
+  $('foot').innerHTML = '안드로이드 <code>.apk</code> 는 서명이 있어야 해서 여기선 못 만듦. ' +
+    '<a href="' + REPO + '/actions">저장소 Actions</a> 에서 만들면 됨.';
+  $('pick-bg').addEventListener('click', function () { openSheet('bg'); });
+  $('pick-bubble').addEventListener('click', function () { openSheet('bubble'); });
+  $('close').addEventListener('click', closeSheet);
+  $('q').addEventListener('input', function () { fillGrid(this.value.trim()); });
+  $('grid').addEventListener('click', function (e) {
+    var c = e.target.closest('.card');
+    if (!c) return;
+    pick[picking] = c.dataset.slug;
+    closeSheet();
+    refresh();
+  });
+  var timer = null;
+  $('name').addEventListener('input', function () {
+    clearTimeout(timer);
+    timer = setTimeout(refresh, 400);
+  });
+  $('go').addEventListener('click', send);
+  window.addEventListener('resize', fit);
+
+  fit();
+  fetch('themes.json', { cache: 'no-cache' })
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      DB = d.themes;
+      // 골라둔 기본값이 없어지거나 말풍선으로 못 쓰게 된 경우 — 목록이 원본이다
+      if (!find(pick.bg)) pick.bg = DB[0].slug;
+      var b = find(pick.bubble);
+      if (!b || !b.bubble) {
+        pick.bubble = DB.filter(function (t) { return t.bubble; })[0].slug;
+      }
+      refresh();
+    })
+    .catch(function () {
+      $('load').textContent = '테마 목록을 못 읽음';
+      $('msg').innerHTML = '<a href="' + REPO + '">저장소로 가기</a>';
+    });
+})();
+</script>
+</html>
