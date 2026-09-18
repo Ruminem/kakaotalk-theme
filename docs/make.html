@@ -81,6 +81,7 @@
           border-radius:11px; cursor:pointer; text-align:left; }
   .pick img { width:34px; height:34px; border-radius:7px; object-fit:cover;
               object-position:center 30%; background:#222; flex:none; }
+  .pick img.wide { width:51px; object-fit:contain; object-position:center; background:none; }
   .pick .who { color:var(--dim); font-size:12px; }
   .pick .what { font-size:14.5px; }
   .pick .col { flex:1; min-width:0; }
@@ -125,6 +126,9 @@
           text-align:center; }
   .card img { width:100%; aspect-ratio:402/874; object-fit:cover; object-position:center 32%;
               border-radius:9px; border:1px solid var(--line); display:block; background:#222; }
+  /* 말풍선만 그린 장은 가로가 길다. 잘라내지 않고 통째로 보여야 소품이 안 잘린다 */
+  .card img.wide { aspect-ratio:224/150; object-fit:contain; object-position:center; }
+  .grid.wide { grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); }
   .card.on img { border-color:var(--accent); }
   .card span { display:block; font-size:11.5px; margin-top:4px; color:var(--dim);
                overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
@@ -588,6 +592,9 @@
   }
   function byId(slug) { return find(slug) || DB[0]; }
   function shot(slug) { return ASSETS + 'preview-' + slug + '-chat.webp'; }
+  // 말풍선을 고르는 자리에는 채팅방 그림을 쓰지 않는다. 배경이 화면을 다 먹어서
+  // 정작 고르려는 말풍선이 안 보인다. tools/preview.py 가 말풍선만 그린 장을 따로 낸다
+  function bubbleShot(slug) { return ASSETS + 'bubble-' + slug + '.webp'; }
 
   function pairName(s, r) {
     for (var i = 0; i < PAIRS.length; i++) {
@@ -598,8 +605,9 @@
 
   function paintPicks() {
     [['bg', 'pick-bg'], ['bubble', 'pick-bubble']].forEach(function (p) {
-      var t = byId(pick[p[0]]), el = $(p[1]);
-      el.querySelector('img').src = shot(t.slug);
+      var t = byId(pick[p[0]]), el = $(p[1]), im = el.querySelector('img');
+      im.src = p[0] === 'bubble' ? bubbleShot(t.slug) : shot(t.slug);
+      im.className = p[0] === 'bubble' ? 'wide' : '';
       el.querySelector('.what').textContent = t.name;
     });
     // 색 고르는 줄은 색을 바꿔도 되는 말풍선일 때만 나온다. 우표나 잼처럼 말풍선 색이 아닌
@@ -699,10 +707,13 @@
       if (picking === 'bubble' && !t.bubble) return;
       if (q && t.name.indexOf(q) < 0 && t.slug.indexOf(q) < 0) return;
       if (t.cat !== cat) { cat = t.cat; html.push('<p class="cat">' + cat + '</p>'); }
+      var wide = picking === 'bubble';
       html.push('<button class="card' + (t.slug === pick[picking] ? ' on' : '') +
-        '" data-slug="' + t.slug + '"><img loading="lazy" src="' + shot(t.slug) +
+        '" data-slug="' + t.slug + '"><img loading="lazy"' + (wide ? ' class="wide"' : '') +
+        ' src="' + (wide ? bubbleShot(t.slug) : shot(t.slug)) +
         '" alt=""><span>' + t.name + '</span></button>');
     });
+    grid.className = 'grid' + (picking === 'bubble' ? ' wide' : '');
     grid.innerHTML = html.join('') || '<p class="cat">없음</p>';
     grid.scrollTop = 0;
   }

@@ -421,6 +421,49 @@ def chat(t):
     return img
 
 
+# --- 말풍선만 그린 썸네일 -------------------------------------------------
+# 커스텀 테마 제작 페이지에서 말풍선을 고를 때 쓴다. 채팅방 그림을 그대로 쓰면 배경이
+# 화면을 다 먹어서, 말풍선을 고르는 자리인데 배경만 보인다.
+#
+# 배경 그림은 빼고 채팅방 바닥색만 깐다. 색까지 빼면 밝은 말풍선이 흰 판에서 사라진다.
+CARD_W, CARD_H = 224, 150      # pt
+CARD_PAD = 12
+
+
+def bubble_card(t):
+    """말풍선 네 장을 바닥색 위에 놓은 그림. 위가 첫 말(01), 아래가 이어지는 말(02)."""
+    img = Image.new('RGB', (u(CARD_W), u(CARD_H)), rgb(t['bg_deep']))
+    d = ImageDraw.Draw(img)
+    rows = []
+    for variant, (rmsg, smsg) in (('01', ('안녕', 'ㅋㅋ')), ('02', ('그래', '응'))):
+        cells = []
+        for side, msg in (('recv', rmsg), ('send', smsg)):
+            sheet, geo = bubble_sheet(t, side, variant)
+            top, left, bottom, right = geo['ins']
+            cells.append((side, msg, sheet, geo,
+                          text_w(msg, MSG_PT) + left + right, LINE_H + top + bottom))
+        rows.append(cells)
+
+    gap = 10
+    total = sum(max(c[5] for c in cells) for cells in rows) + gap * (len(rows) - 1)
+    y = (CARD_H - total) / 2
+    for cells in rows:
+        h = max(c[5] for c in cells)
+        for side, msg, sheet, geo, fw, fh in cells:
+            # 받은 쪽은 왼쪽 끝, 보낸 쪽은 오른쪽 끝. 글로우 여백은 몸통이 아니라 장의 일부라
+            # 그만큼 바깥으로 밀어야 몸통이 같은 자리에서 시작한다
+            fx = CARD_PAD - geo['outer'] if side == 'recv' \
+                else CARD_W - CARD_PAD + geo['outer'] - fw
+            fy = y + (h - fh) / 2
+            b = stretch(sheet, u(geo['cap']), u(fw), u(fh))
+            img.paste(b, (u(fx), u(fy)), b)
+            tc = rgb(t['recv_text'] if side == 'recv' else t['send_text'])
+            text(d, fx + geo['ins'][1], fy + geo['ins'][0] + LINE_H / 2, msg, MSG_PT,
+                 tc, anchor='lm')
+        y += h + gap
+    return img.resize((round(CARD_W * OUT), round(CARD_H * OUT)), Image.LANCZOS)
+
+
 ROWS = [
     (NAMES[0], 'ㅋㅋ 고마워', '오후 9:41', 0),
     (NAMES[1], '내일 몇 시에 볼까?', '오후 8:20', 2),
@@ -563,6 +606,10 @@ def _render(t):
     # 번호라 README 에서 어느 변형인지 읽히지 않는다.
     slug = T2.file_slug(t)
     gen.icon(t, 128).save(os.path.join(gen.ASSETS, 'icon-%s.png' % slug), optimize=True)
+    # 말풍선만 그린 장은 커스텀 테마 제작 페이지에서만 쓴다. 거기 오르는 테마만 만든다
+    if mixable(t):
+        bubble_card(t).save(os.path.join(gen.ASSETS, 'bubble-%s.webp' % slug),
+                            lossless=True, method=6)
     for kind, draw in (('list', chat_list), ('chat', chat),
                        ('passcode', passcode), ('splash', splash)):
         # 무손실 WebP. PNG 와 화질이 같고 크기는 60% 다. 손실 압축은 3배로 확대하면
@@ -951,6 +998,16 @@ def write_readme(ts):
 # 그래서 짐작하지 않고 잰다. 색상을 돌린 그림과 그 색으로 다시 그린 그림을 대조해서
 # 차이가 작은 테마만 페이지에서 색을 고를 수 있게 한다(네온 계열이 여기 든다).
 
+def mixable(t):
+    """커스텀 테마 제작 페이지(docs/make.html)에 올릴 테마인가.
+
+    세 화면(채팅방·목록·잠금화면)에 배경이 다 있어야 한다. 페이지는 .ktheme 두 벌을 받아
+    배경 그림만 갈아끼우는데, 한 장이라도 없으면 그 화면만 말풍선 쪽 테마 것이 남아
+    조합이 반만 바뀐다(리퀴드 글래스 밝음·어두움은 잠금화면 배경이 없다).
+    """
+    return all(t.get(k) for k in ('chat_bg', 'main_bg', 'passcode_bg'))
+
+
 RECOLOR_PROBE = '#4D8CFF'   # 재 볼 때 쓰는 색. 색상만 다르면 되므로 하나면 된다
 RECOLOR_MAX = 24            # 채널 차이 한계. 네온은 9 쯤 나온다
 RECOLOR_MIN_SAT = 0.15      # 이보다 흐린 색은 색상을 돌려도 뜻이 없다
@@ -1039,7 +1096,7 @@ def write_mix_manifest(ts):
             cat[fam] = c
     out = []
     for t in ts:
-        if not all(t.get(k) for k in ('chat_bg', 'main_bg', 'passcode_bg')):
+        if not mixable(t):
             continue
         fam = T2._fam_of(t)[0]
         row = dict(slug=T2.file_slug(t), name=t['name'], cat=cat.get(fam, fam),
