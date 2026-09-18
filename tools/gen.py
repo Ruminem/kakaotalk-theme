@@ -1415,9 +1415,32 @@ def workers():
     return max(1, min(os.cpu_count() or 1, 8))
 
 
+def picked():
+    """인자로 고른 테마. 인자가 없으면 None — 전부 만든다는 뜻이다.
+
+    한 벌을 고쳐 놓고 눈으로 보려면 292벌을 다 그릴 까닭이 없다. 조각을 주면
+    키·파일이름·테마이름 어디에든 그 조각이 든 테마만 만든다.
+
+        python tools/gen.py neonlounge      # 네 벌
+        python tools/gen.py camp-light      # 두 벌(배경 있는 것까지)
+    """
+    pats = [a for a in sys.argv[1:] if not a.startswith('-')]
+    if not pats:
+        return None
+    ts = [t for t in themes.THEMES
+          if any(p in t['key'] or p in themes.file_slug(t) or p in t['name'] for p in pats)]
+    if not ts:
+        sys.exit('맞는 테마가 없다: ' + ' '.join(pats))
+    return ts
+
+
 def main():
     import preview                      # 순환 임포트를 피하려고 여기서 부른다
-    if os.path.exists(OUT):
+    some = picked()
+    ts = themes.THEMES if some is None else some
+    # 고른 것만 만들 때는 build-src 를 비우지 않는다. 비우면 나머지 291벌이 사라져
+    # 바로 이어서 도는 빌드가 그것들을 다시 그린다 — 줄이려던 시간이 그대로 돌아온다.
+    if some is None and os.path.exists(OUT):
         shutil.rmtree(OUT)
     os.makedirs(DOCS, exist_ok=True)
     os.makedirs(ASSETS, exist_ok=True)
@@ -1427,13 +1450,14 @@ def main():
     # 건네준 차례로 돌려주므로 출력 순서는 직렬로 돌릴 때와 같다.
     n = workers()
     with multiprocessing.Pool(n) as pool:
-        for line in pool.imap(build_one, themes.THEMES):
+        for line in pool.imap(build_one, ts):
             print(line, flush=True)
-    print('\n%d 개 테마 -> build-src/  (%d개씩 동시에)' % (len(themes.THEMES), n))
+    print('\n%d 개 테마 -> build-src/  (%d개씩 동시에)' % (len(ts), n))
     # 배포 빌드는 커밋된 미리보기를 그대로 쓴다. 같은 그림을 2분 넘게 다시 그리기만 했다
     if '--no-preview' in sys.argv:
         return
-    preview.generate(themes.THEMES)
+    # 페이지는 늘 292벌 전부를 담는다. 다시 그리는 것만 고른 몇 벌로 줄인다.
+    preview.generate(themes.THEMES, only=some)
     print('미리보기 -> docs/index.html')
 
 

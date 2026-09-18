@@ -1140,14 +1140,22 @@ def write_mix_manifest(ts):
     return len(out)
 
 
-def generate(ts):
+def generate(ts, only=None):
+    """ts 전부를 담은 페이지를 만든다. only 를 주면 그림은 그 몇 벌만 다시 그린다.
+
+    페이지·README·문서는 늘 전부를 담아야 한다 — 한 벌만 담으면 나머지 291벌이
+    갤러리에서 사라진다. 시간을 먹는 것은 그림(_render)뿐이고 그것은 테마마다
+    독립이므로, 고친 테마 것만 다시 그리고 나머지는 assets 에 있는 것을 그대로 쓴다.
+    """
     os.makedirs(gen.ASSETS, exist_ok=True)
     import themes as T2
     cards = {}
     # 3배로 그리면서 테마 하나에 1초를 넘게 됐다. 빌드처럼 여러 프로세스에 나눈다.
     with multiprocessing.Pool(gen.workers()) as pool:
-        slugs = pool.map(_render, ts)
-    for t, slug in zip(ts, slugs):
+        pool.map(_render, ts if only is None else only)
+    for t in ts:
+        # _render 가 돌려주던 값과 같다. 안 그린 테마도 이름은 알아야 페이지에 건다.
+        slug = T2.file_slug(t)
         chips = ''.join('<span class="chip" style="background:%s" title="%s"></span>'
                         % (t[k], k) for k in ('bg', 'bg_deep', 'surface', 'accent', 'text'))
         shots = ''.join('<figure><img src="../assets/preview-%s-%s.webp" alt="%s %s">'
