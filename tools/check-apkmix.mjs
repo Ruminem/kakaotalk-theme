@@ -57,9 +57,18 @@ const template = hasTpl
   : apk(BUB);
 if (!hasTpl) console.log('(템플릿이 없어 말풍선 쪽 APK 를 바탕으로 쓴다 — 색·이름 검사는 건너뜀)');
 
+const NAME = '점검용 커스텀';
+const json = (p) => JSON.parse(readFileSync(join('docs', p), 'utf8'));
+const tplInfo = hasTpl ? json('template.json') : null;
+const acolors = hasTpl ? json('acolors.json') : null;
+
 const bub = apk(BUB), bg = apk(BG);
 const out = Buffer.from(await mixApk(template, bub, bg, {
   key: { cert: key.CERT, pubkey: key.PUBKEY, privkey: key.PRIVKEY },
+  name: NAME,
+  filler: tplInfo ? tplInfo.filler : null,
+  marks: tplInfo ? tplInfo.marks : null,
+  colors: acolors ? acolors[BUB] : null,
 }));
 
 const dir = join(tmpdir(), 'apkmix-check');
@@ -106,6 +115,30 @@ try {
   fail(`apksigner 가 거부했다: ${String(e.stdout || e.message).split('\n')[0]}`);
 }
 
+// 6. 고친 resources.arsc 를 안드로이드 도구가 읽을 수 있는지, 그리고 색과 테마 이름이
+//    말풍선 쪽 테마 것으로 바뀌었는지. 표식을 한 칸만 잘못 덮어써도 여기서 드러난다
+if (hasTpl) {
+  const dump = run(tool('build-tools', 'aapt2.exe'), ['dump', 'resources', dst]);
+  // resource 0x7f010000 color/theme_background_color
+  //   () #ff17161e
+  const got = {};
+  for (const m of dump.matchAll(/resource 0x\S+ color\/(\w+)\s*\n\s*\(\) (#[0-9a-f]{8})/g)) {
+    got[m[1]] = m[2];
+  }
+  const want = acolors[BUB];
+  let wrong = 0;
+  tplInfo.names.forEach((n, i) => {
+    if (got[n] && got[n].toUpperCase() !== want[i].toUpperCase()) {
+      if (wrong++ < 3) fail(`${n} 이 ${got[n]} (${want[i]} 여야 한다)`);
+    }
+  });
+  const seen = tplInfo.names.filter((n) => got[n]).length;
+  if (seen < tplInfo.names.length) fail(`aapt2 가 색 ${seen}/${tplInfo.names.length}개만 읽었다`);
+  if (!dump.includes(NAME)) fail('테마 이름이 안 들어갔다');
+  if (dump.includes(tplInfo.filler.slice(0, 8))) fail('이름 자리표가 그대로 남아 있다');
+  if (!wrong) console.log(`  색 ${seen}개와 테마 이름이 말풍선 쪽 테마 것으로 바뀌었다`);
+}
+
 if (bad) { console.log(`점검 실패 — ${bad}개`); process.exit(1); }
 console.log(`점검 통과 — 엔트리 ${back.size}개, arsc 정렬 맞음, v2 서명 유효`);
 
@@ -120,12 +153,25 @@ if (install) {
       { detached: true, stdio: 'ignore' }).unref();
   }
   run(adb, ['wait-for-device']);
-  for (let i = 0; i < 60; i++) {
-    if (run(adb, ['shell', 'getprop', 'sys.boot_completed']).trim() === '1') break;
-    execFileSync('python', ['-c', 'import time;time.sleep(3)']);
+  // sys.boot_completed 만 보고 깔면 이르다. 패키지 관리자가 대답할 때까지 더 기다린다 —
+  // 일찍 부르면 adb 가 까닭도 없이 「failed to install」 만 뱉는다(겪었다)
+  let up = false;
+  for (let i = 0; i < 60 && !up; i++) {
+    try {
+      up = run(adb, ['shell', 'getprop', 'sys.boot_completed']).trim() === '1'
+        && run(adb, ['shell', 'pm', 'path', 'android']).includes('framework-res');
+    } catch (e) { up = false; }
+    if (!up) execFileSync('python', ['-c', 'import time;time.sleep(3)']);
   }
+  if (!up) { console.log('에뮬레이터가 안 깼다'); process.exit(1); }
   const rel = run(adb, ['shell', 'getprop', 'ro.build.version.release']).trim();
-  const res = run(adb, ['install', '-r', dst]);
+  let res;
+  try {
+    res = run(adb, ['install', '-r', dst]);
+  } catch (e) {
+    console.log(`설치 실패: ${String(e.stderr || e.message).trim()}`);
+    process.exit(1);
+  }
   console.log(`안드로이드 ${rel}: ${res.trim().split('\n').pop()}`);
   if (!/Success/.test(res)) { console.log('설치 실패'); process.exit(1); }
   const on = run(adb, ['shell', 'pm', 'list', 'packages']).split('\n')

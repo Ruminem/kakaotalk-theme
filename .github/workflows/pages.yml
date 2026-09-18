@@ -52,15 +52,26 @@ jobs:
           cp assets/*.png assets/*.webp _site/assets/
           printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=docs/">' > _site/index.html
 
-      # 공유에 쓰는 건 iOS 테마뿐이다. APK 는 카톡에 보내는 게 아니라 설치하는 거라
-      # README 링크가 릴리스를 직접 가리키고, 여기 둘 이유가 없다.
+      # iOS 테마는 공유 시트로 보내려고, APK 는 커스텀 테마를 만들 때 그림을 꺼내려고
+      # 둔다. 브라우저가 릴리스 자산을 직접 읽을 수 없어서다(CORS 헤더가 없다).
+      # 받는 링크는 그대로 릴리스를 가리킨다 — 여기 있는 건 재료다.
       - name: 릴리스 자산 내려받기
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          gh release download --dir _site/files --pattern '*.ktheme'
-          echo "내려받은 테마: $(ls -1 _site/files | wc -l)"
+          gh release download --dir _site/files --pattern '*.ktheme' --pattern '*.apk'
+          # 커스텀 테마에 못 쓰는 APK 는 버린다. 배경 석 장이 다 있는 테마만 고르게
+          # 하므로(docs/themes.json) 나머지는 사이트에 둘 이유가 없다
+          python3 - <<'PY'
+          import json, os, glob
+          keep = {t['slug'] for t in json.load(open('docs/themes.json', encoding='utf-8'))['themes']}
+          keep.add('custom-template')
+          for p in glob.glob('_site/files/*.apk'):
+              if os.path.basename(p)[:-4] not in keep:
+                  os.remove(p)
+          PY
+          echo "내려받은 테마: $(ls -1 _site/files/*.ktheme | wc -l) · APK $(ls -1 _site/files/*.apk | wc -l)"
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

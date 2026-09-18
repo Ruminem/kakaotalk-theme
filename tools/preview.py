@@ -1129,6 +1129,14 @@ def write_mix_manifest(ts):
     data = dict(version=T2.VERSION, themes=out)
     with open(os.path.join(gen.DOCS, 'themes.json'), 'w', encoding='utf-8', newline='\n') as f:
         json.dump(data, f, ensure_ascii=False, indent=0)
+
+    # 안드로이드 색은 따로 낸다. 테마마다 42개라 themes.json 에 넣으면 네 배가 되는데,
+    # 아이폰 쪽은 쓸 일이 없다 — 안드로이드로 들어온 사람만 받아 간다.
+    # 템플릿 APK 에는 표식 색이 구워져 있고, 브라우저가 말풍선 쪽 테마의 이 색으로 덮어쓴다.
+    acolors = {r['slug']: gen.android_colors(t)
+               for t, r in zip((t for t in ts if mixable(t)), out)}
+    with open(os.path.join(gen.DOCS, 'acolors.json'), 'w', encoding='utf-8', newline='\n') as f:
+        json.dump(acolors, f, ensure_ascii=False, indent=0)
     return len(out)
 
 

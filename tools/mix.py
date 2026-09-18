@@ -157,6 +157,40 @@ def check():
     print('점검 통과')
 
 
+# 템플릿의 바탕이 될 테마. 그림은 전부 갈아끼워지므로 무엇이든 되지만, 배경 석 장이
+# 있는 테마여야 엔트리 자리가 생긴다. 고정해 두는 것은 다시 구워도 같은 것이 나오게
+# 하려는 것이다
+TEMPLATE_BASE = 'neon-double'
+TEMPLATE_SLUG = 'custom-template'
+# 테마 이름을 담을 자리. 브라우저는 여기에 같은 바이트 수로 덮어쓴다 — 짧으면 뒤를
+# 공백으로 메운다. 공백으로 구우면 aapt2 가 양끝 공백을 털어내므로 눈에 띄는 글자를 쓴다
+TEMPLATE_FILLER = '~' * 64
+
+
+def template(cat):
+    """브라우저가 쓸 템플릿 APK 의 소스를 만들고 자리표를 docs/template.json 에 적는다.
+
+    패키지 이름·색·테마 이름은 압축된 이진 파일 안에 있어서 길이가 바뀌면 자리가 밀린다.
+    그래서 브라우저가 고칠 수 있는 꼴로 미리 구워 둔다 — 색은 찾기 쉬운 표식으로,
+    이름은 넉넉한 고정 길이 자리로, 패키지 이름은 아예 custom 으로 박는다.
+    """
+    base = pick(cat, TEMPLATE_BASE, '템플릿 바탕')
+    t = dict(base, key='custom1', slug=TEMPLATE_SLUG, pkg='custom',
+             name=TEMPLATE_FILLER, note='', color_marks=True, min_sdk=24)
+    print(gen.build_one(t))
+
+    marks = gen.android_colors(t)
+    out = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                       'docs', 'template.json')
+    import json
+    with open(out, 'w', encoding='utf-8', newline='\n') as f:
+        json.dump({'marks': marks, 'filler': TEMPLATE_FILLER,
+                   'names': [n for n, _ in gen.COLORS] + ['theme_chatroom_bubble_me_color',
+                                                          'theme_chatroom_bubble_you_color']},
+                  f, ensure_ascii=False, indent=1)
+    print('자리표 -> %s (표식 %d개)' % (out, len(marks)))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--bg', help='배경 그림을 가져올 테마')
@@ -169,11 +203,15 @@ def main():
     ap.add_argument('--list', action='store_true', help='고를 수 있는 이름을 전부 찍는다')
     ap.add_argument('--no-preview', action='store_true')
     ap.add_argument('--check', action='store_true')
+    ap.add_argument('--template', action='store_true',
+                    help='브라우저가 쓸 커스텀 테마 템플릿을 굽는다')
     a = ap.parse_args()
 
     if a.check:
         return check()
     cat = catalog()
+    if a.template:
+        return template(cat)
     if a.list or not (a.bg and a.bubble):
         for slug, t in cat.items():
             print('%-28s %-22s %s' % (slug, t['name'], '배경 있음' if t.get('main_bg') else ''))
