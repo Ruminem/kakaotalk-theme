@@ -1,5 +1,5 @@
 {
-"version": "0.37",
+"version": "0.38",
 "themes": [
 {
 "slug": "sakura-image",
@@ -562,6 +562,222 @@
 {
 "slug": "neonlounge-split",
 "name": "네온사인 v5 두 가닥",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonstar-octagon",
+"name": "네온사인 v6 팔각",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonstar-bracket",
+"name": "네온사인 v6 꺾쇠",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonstar-underline",
+"name": "네온사인 v6 밑줄",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonstar-split",
+"name": "네온사인 v6 두 가닥",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonpetal-octagon",
+"name": "네온사인 v7 팔각",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonpetal-bracket",
+"name": "네온사인 v7 꺾쇠",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonpetal-underline",
+"name": "네온사인 v7 밑줄",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonpetal-split",
+"name": "네온사인 v7 두 가닥",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonbokeh-octagon",
+"name": "네온사인 v8 팔각",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonbokeh-bracket",
+"name": "네온사인 v8 꺾쇠",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonbokeh-underline",
+"name": "네온사인 v8 밑줄",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonbokeh-split",
+"name": "네온사인 v8 두 가닥",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonplasma-octagon",
+"name": "네온사인 v9 팔각",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonplasma-bracket",
+"name": "네온사인 v9 꺾쇠",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonplasma-underline",
+"name": "네온사인 v9 밑줄",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonplasma-split",
+"name": "네온사인 v9 두 가닥",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonink-octagon",
+"name": "네온사인 v10 팔각",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonink-bracket",
+"name": "네온사인 v10 꺾쇠",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonink-underline",
+"name": "네온사인 v10 밑줄",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonink-split",
+"name": "네온사인 v10 두 가닥",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonmesh-octagon",
+"name": "네온사인 v11 팔각",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonmesh-bracket",
+"name": "네온사인 v11 꺾쇠",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonmesh-underline",
+"name": "네온사인 v11 밑줄",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonmesh-split",
+"name": "네온사인 v11 두 가닥",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neoncrystal-octagon",
+"name": "네온사인 v12 팔각",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neoncrystal-bracket",
+"name": "네온사인 v12 꺾쇠",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neoncrystal-underline",
+"name": "네온사인 v12 밑줄",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neoncrystal-split",
+"name": "네온사인 v12 두 가닥",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonchroma-octagon",
+"name": "네온사인 v13 팔각",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonchroma-bracket",
+"name": "네온사인 v13 꺾쇠",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonchroma-underline",
+"name": "네온사인 v13 밑줄",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonchroma-split",
+"name": "네온사인 v13 두 가닥",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonzoo-sea",
+"name": "네온 동물 바다",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonzoo-forest",
+"name": "네온 동물 숲",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonzoo-ice",
+"name": "네온 동물 얼음",
+"cat": "불빛 - 네온사인",
+"bubble": true
+},
+{
+"slug": "neonzoo-mixed",
+"name": "네온 동물 모둠",
 "cat": "불빛 - 네온사인",
 "bubble": true
 },
