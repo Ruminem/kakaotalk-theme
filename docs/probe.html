@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko"><meta charset="utf-8">
+<title>인앱 설치 실험</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+  실험용 페이지. 카톡 인앱 브라우저에서 열어야 뜻이 있다.
+
+  묻는 것은 하나다 — 서비스 워커가 만들어 준 .ktheme 를 카톡이 설치해 주는가.
+  사이트에 없는 주소(docs/custom/probe.ktheme)를 워커가 가로채 먹빛 민트의 바이트로
+  응답한다. 설치되면 워커를 거친 것이고, 404 가 나거나 아무 일도 없으면 카톡이 그
+  주소를 앱에서 직접 받은 것이다.
+
+  이게 되면 docs/make.html 에서 만든 테마도 인앱 브라우저에서 바로 설치할 수 있다.
+  안 되면 지금처럼 공유 시트를 거쳐야 한다.
+
+  결과가 나오면 이 파일과 sw-probe.js 는 지운다.
+-->
+<style>
+  :root { --bg:#0f1115; --surface:#151922; --line:#232833;
+          --text:#e6e9ee; --dim:#8b95a3; --accent:#4FD1B0; --on-accent:#0b1a16; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:32px 20px; background:var(--bg); color:var(--text);
+         font:15px/1.65 -apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif; }
+  main { max-width:360px; margin:0 auto; display:flex; flex-direction:column; gap:16px; }
+  h1 { font-size:19px; margin:0; }
+  p { margin:0; }
+  .dim { color:var(--dim); font-size:13px; }
+  button { font:16px/1 inherit; font-family:inherit; padding:15px; width:100%;
+           border-radius:11px; cursor:pointer; border:1px solid var(--line);
+           background:var(--surface); color:var(--text); }
+  button.primary { font-weight:700; border-color:var(--accent);
+                   background:var(--accent); color:var(--on-accent); }
+  button:disabled { opacity:.45; }
+  code { font-family:ui-monospace,SFMono-Regular,Consolas,monospace; font-size:12.5px;
+         color:var(--dim); word-break:break-all; }
+</style>
+
+<main>
+  <h1>인앱 설치 실험</h1>
+  <p class="dim">카카오톡 인앱 브라우저에서 열어야 뜻이 있음.
+    이 주소를 나와의 채팅에 보내고 거기서 열면 됨.</p>
+  <p class="dim">사이트에 없는 주소를 서비스 워커가 가로채 <b>먹빛 민트</b> 바이트로 응답함.
+    설치되면 이 길이 열린 것임.</p>
+  <p id="state" class="dim">워커 다는 중…</p>
+  <button class="primary" id="go" disabled>가짜 주소로 설치 시도</button>
+  <button id="off">워커 지우기</button>
+  <p class="dim">눌렀을 때:<br>
+    <b>테마 다운로드 완료</b> → 됨. make.html 에 붙일 수 있음<br>
+    <b>404 · 아무 일 없음</b> → 안 됨. 공유 시트를 거쳐야 함</p>
+  <p><code id="url"></code></p>
+</main>
+
+<script>
+(function () {
+  var state = document.getElementById('state');
+  var go = document.getElementById('go');
+  var url = new URL('custom/probe.ktheme', location.href).href;
+  document.getElementById('url').textContent = url;
+
+  if (!('serviceWorker' in navigator)) {
+    state.textContent = '이 브라우저에는 서비스 워커가 없음. 여기서는 판가름 안 남.';
+    return;
+  }
+
+  navigator.serviceWorker.register('sw-probe.js')
+    .then(function () { return navigator.serviceWorker.ready; })
+    .then(function () {
+      // 워커가 자리잡기 전에 누르면 그냥 404 가 나서 실험이 무의미해진다
+      state.textContent = '워커 붙었음. 눌러도 됨.';
+      go.disabled = false;
+    })
+    .catch(function (e) { state.textContent = '워커를 못 달았음: ' + e.message; });
+
+  go.addEventListener('click', function () { location.href = url; });
+
+  document.getElementById('off').addEventListener('click', function () {
+    navigator.serviceWorker.getRegistrations().then(function (rs) {
+      rs.forEach(function (r) { r.unregister(); });
+      state.textContent = '워커 지웠음.';
+      go.disabled = true;
+    });
+  });
+})();
+</script>
+</html>
