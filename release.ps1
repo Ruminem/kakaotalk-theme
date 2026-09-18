@@ -13,6 +13,12 @@ $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
+
+# build-src/·dist/·assets/ 는 브랜치로 나뉘지 않는다. 남이 같이 만들고 있으면
+# 여기서 멈춘다 - 0.39.1 첫 릴리스가 그렇게 296벌이 깨졌다. 자세한 것은 tools/lock.py.
+& python (Join-Path $root 'tools\lock.py') take $PID '릴리스'
+if ($LASTEXITCODE -ne 0) { exit 1 }
+$env:KTHEME_BUILD_LOCK = $PID
 $Version = $Version.TrimStart('v')
 $tag = "v$Version"
 
@@ -83,6 +89,8 @@ if ($LASTEXITCODE -ne 0) {
     Write-Host "  경고: 워크플로 호출 실패. 릴리스는 나갔으므로 직접 돌리세요 —"
     Write-Host "        gh workflow run pages.yml --ref main"
 }
+
+& python (Join-Path $root 'tools\lock.py') free $PID
 
 Write-Host ""
 Write-Host "완료: $tag  (자산 $($assets.Count) 개)"

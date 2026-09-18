@@ -1126,7 +1126,9 @@ def write_mix_manifest(ts):
             # 페이지가 이 두 색을 기준으로 색상을 돌린다. 원래 색을 모르면 못 돌린다
             row.update(send=t['send'][0], recv=t['recv'][0])
         out.append(row)
-    data = dict(version=T2.VERSION, themes=out)
+    # 버전은 넣지 않는다. 읽는 곳이 없는데 미리보기를 돌릴 때마다 이 한 줄 때문에
+    # 워킹 트리가 더러워지고, release.ps1 이 커밋 안 된 변경으로 보고 멈춘다.
+    data = dict(themes=out)
     with open(os.path.join(gen.DOCS, 'themes.json'), 'w', encoding='utf-8', newline='\n') as f:
         json.dump(data, f, ensure_ascii=False, indent=0)
 
@@ -1181,5 +1183,7 @@ def generate(ts, only=None):
 
 if __name__ == '__main__':
     import themes
-    generate(themes.THEMES)
+    import lock
+    with lock.hold('미리보기'):
+        generate(themes.THEMES)
     print('미리보기 -> docs/index.html')

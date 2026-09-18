@@ -6,6 +6,12 @@ $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 
+# build-src/·dist/·assets/ 는 브랜치로 나뉘지 않는다. 남이 같이 만들고 있으면
+# 여기서 멈춘다 - 0.39.1 첫 릴리스가 그렇게 296벌이 깨졌다. 자세한 것은 tools/lock.py.
+& python (Join-Path $root 'tools\lock.py') take $PID '배포 빌드'
+if ($LASTEXITCODE -ne 0) { exit 1 }
+$env:KTHEME_BUILD_LOCK = $PID
+
 # 소스는 팔레트 표에서 생성된다. 원본은 tools/themes.py 하나뿐이다.
 # 미리보기는 다시 그리지 않는다 — 커밋 전에 preview.ps1 로 만들어 두고, 릴리스는 깨끗한 트리에서만 돈다.
 Write-Host "tools/gen.py 로 소스를 만듭니다"
@@ -105,6 +111,8 @@ if (Test-Path (Join-Path $root 'build-tmp')) {
 # 템플릿은 안드로이드에서만 쓴다. 아이폰 쪽은 .ktheme 를 통째로 가져다 섞으므로
 # 필요 없고, 이름이 자리표(~~~~)라 테마 목록에 나가면 안 된다
 Remove-Item (Join-Path $dist 'iOS\custom-template.ktheme') -ErrorAction SilentlyContinue
+
+& python (Join-Path $root 'tools\lock.py') free $PID
 
 Write-Host ""
 Write-Host "===== 결과 ====="

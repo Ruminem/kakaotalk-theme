@@ -240,4 +240,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    import lock
+    with lock.hold('커스텀 테마 만들기'):
+        main()

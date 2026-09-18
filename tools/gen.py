@@ -1693,4 +1693,7 @@ def neon_tab_icon(kind, px, color, lit):
 
 
 if __name__ == '__main__':
-    main()
+    # build-src/ 와 assets/ 를 통째로 다시 만든다. 남이 같이 만들고 있으면 멈춘다.
+    import lock
+    with lock.hold('소스 생성'):
+        main()
