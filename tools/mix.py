@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-"""이미 만들어둔 배경 그림과 말풍선을 섞어 커스텀 테마 한 벌을 만든다.
+"""커스텀 테마 제작 — 이미 만들어둔 배경 그림과 말풍선을 섞어 한 벌을 만든다.
+
+폰에서 브라우저만으로 하려면 docs/make.html 을 쓴다. 이쪽은 로컬과 Actions 용이다.
 
     python tools/mix.py --list
     python tools/mix.py --bg camp-dark-image --bubble bakery-light --name "내 테마"
