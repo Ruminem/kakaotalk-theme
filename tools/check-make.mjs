@@ -11,6 +11,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
+// zip 읽기·쓰기는 페이지가 불러 쓰는 그 파일에서 바로 가져온다
+import { readZip, writeZip, crc32, inflate } from '../docs/zip.js';
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const html = fs.readFileSync(path.join(ROOT, 'docs', 'make.html'), 'utf8');
@@ -27,14 +29,13 @@ var BG_NAMES = ['chatroomBgImage', 'mainBgImage', 'passcodeBgImage'];
 var ROW = { send: '#FF3FA4', recv: '#35E0FF' };
 function find() { return ROW; }
 `;
-const code = PRELUDE +
-             section('function u16(', '// --- 테마 받아두기') +
-             section('function idOf(', '// --- 미리보기');
+const code = PRELUDE + section('function idOf(', '// --- 미리보기');
 
 const ROW_SEND = '#FF3FA4', ROW_RECV = '#35E0FF';
 const pick = { bg: 'x-bg', bubble: 'x-bub', send: null, recv: null };
-const { readZip, writeZip, crc32, mix, recolorCss, hexHsv } = new Function(
-  'pick', code + '\nreturn { readZip, writeZip, crc32, mix, inflate, recolorCss, colorMap, hexHsv };')(pick);
+const { mix, recolorCss, hexHsv } = new Function(
+  'pick', 'readZip', 'writeZip', 'crc32', 'inflate',
+  code + '\nreturn { mix, recolorCss, colorMap, hexHsv };')(pick, readZip, writeZip, crc32, inflate);
 
 function readTheme(slug) {
   const p = path.join(ROOT, 'dist', 'iOS', slug + '.ktheme');
@@ -49,9 +50,8 @@ function readTheme(slug) {
 const BUB = 'bakery-light-image', BG = 'camp-dark-image';
 const bub = readTheme(BUB), bg = readTheme(BG);
 
-const blob = await mix(bub, bg, '점검용 테마');
-const out = new Uint8Array(await blob.arrayBuffer());
-const back = readZip(out.buffer);
+const out = await mix(bub, bg, '점검용 테마');
+const back = readZip(out.buffer.slice(out.byteOffset, out.byteOffset + out.byteLength));
 
 let bad = 0;
 const fail = (m) => { console.log('  틀림: ' + m); bad++; };

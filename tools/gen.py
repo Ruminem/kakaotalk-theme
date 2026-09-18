@@ -1206,7 +1206,7 @@ MANIFEST = """<?xml version="1.0" encoding="utf-8"?>
     android:versionCode="{code}"
     android:versionName="{version}">
 
-    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34" />
+    <uses-sdk android:minSdkVersion="{minsdk}" android:targetSdkVersion="34" />
 
     <application
         android:label="@string/app_name"
@@ -1259,6 +1259,31 @@ COLORS = [
 ]
 
 
+# 셀 배경만 알파를 먹인다. 글자색까지 투명해지면 안 읽힌다
+FADED = {'theme_body_cell_color', 'theme_body_secondary_cell_color',
+         'theme_maintab_cell_color', 'theme_header_cell_color'}
+# 커스텀 테마 템플릿에 굽는 표식 색. 브라우저가 arsc 안에서 이 네 바이트를 찾아
+# 진짜 색으로 덮어쓴다. 색으로 안 쓰일 값이어야 해서 A5FF 를 위 두 바이트에 둔다
+COLOR_MARK = 0xFFA50000
+
+
+def android_colors(t):
+    """이 테마의 안드로이드 색 목록. COLORS 차례 + 말풍선 둘(보낸·받은).
+
+    `color_marks` 가 켜져 있으면 진짜 색 대신 표식을 낸다 — 커스텀 테마 템플릿용이다.
+    브라우저와 여기가 같은 차례를 써야 하므로 목록을 만드는 자리는 여기 하나뿐이다.
+    """
+    n = len(COLORS) + 2
+    if t.get('color_marks'):
+        return ['#%08X' % (COLOR_MARK + i + 1) for i in range(n)]
+    tok = dict(t)
+    tok.update(derived(t))
+    ca = t.get('cell_alpha', 1.0)
+    ba = t.get('bubble_alpha', 255) / 255.0
+    out = [argb(tok[token], ca if name in FADED else 1.0) for name, token in COLORS]
+    return out + [argb(mid(*t['send']), ba), argb(mid(*t['recv']), ba)]
+
+
 def version_code(t):
     """안드로이드 versionCode.
 
@@ -1285,8 +1310,12 @@ def gen_android(t, root, code):
     os.makedirs(draw, exist_ok=True)
 
     with open(os.path.join(root, 'AndroidManifest.xml'), 'w', encoding='utf-8', newline='\n') as f:
+        # 커스텀 테마 템플릿만 minSdk 를 24 로 올린다. 브라우저는 v2 서명만 붙일 수 있고
+        # (옛 v1 은 PKCS#7 이라 브라우저에서 만들 것이 못 된다) 안드로이드 6 이하는 v2 를
+        # 모른다. 21 로 두면 그 폰들이 「설치할 수 없음」 을 보는데, 24 면 호환되지 않는다고
+        # 제대로 뜬다
         f.write(MANIFEST.format(pkg=themes.pkg_slug(t), version=themes.VERSION,
-                                code=code))
+                                code=code, minsdk=t.get('min_sdk', 21)))
 
     with open(os.path.join(values, 'strings.xml'), 'w', encoding='utf-8', newline='\n') as f:
         f.write('<?xml version="1.0" encoding="utf-8"?>\n<resources>\n'
@@ -1297,20 +1326,13 @@ def gen_android(t, root, code):
     lines = ['<?xml version="1.0" encoding="utf-8"?>',
              '<!-- %s. tools/themes.py 에서 생성된다. 직접 고치지 말 것. -->' % t['name'],
              '<resources>', '']
-    tok = dict(t)
-    tok.update(derived(t))
-    ca = t.get('cell_alpha', 1.0)
-    # 셀 배경만 알파를 먹인다. 글자색까지 투명해지면 안 읽힌다
-    faded = {'theme_body_cell_color', 'theme_body_secondary_cell_color',
-             'theme_maintab_cell_color', 'theme_header_cell_color'}
-    for name, token in COLORS:
-        a = ca if name in faded else 1.0
-        lines.append('    <color name="%s">%s</color>' % (name, argb(tok[token], a)))
-    ba = t.get('bubble_alpha', 255) / 255.0
+    vals = android_colors(t)
+    for (name, _token), v in zip(COLORS, vals):
+        lines.append('    <color name="%s">%s</color>' % (name, v))
     lines += ['',
               '    <!-- 말풍선은 9-patch 이미지가 이긴다. 아래는 이미지가 안 먹을 때의 대비값 -->',
-              '    <color name="theme_chatroom_bubble_me_color">%s</color>' % argb(mid(*t['send']), ba),
-              '    <color name="theme_chatroom_bubble_you_color">%s</color>' % argb(mid(*t['recv']), ba),
+              '    <color name="theme_chatroom_bubble_me_color">%s</color>' % vals[-2],
+              '    <color name="theme_chatroom_bubble_you_color">%s</color>' % vals[-1],
               '', '</resources>', '']
     with open(os.path.join(values, 'colors.xml'), 'w', encoding='utf-8', newline='\n') as f:
         f.write('\n'.join(lines))

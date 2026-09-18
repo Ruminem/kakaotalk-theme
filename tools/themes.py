@@ -1328,7 +1328,13 @@ def pkg_slug(t):
     안드로이드 패키지 이름은 자바 식별자 규칙을 따라서 하이픈을 못 쓴다.
 
     키(city21)는 이제 versionCode 를 매기는 번호로만 쓴다. 겉으로 드러나지 않는다.
+
+    `pkg` 를 직접 들고 있으면 그걸 쓴다 — 커스텀 테마 템플릿은 파일 이름
+    (custom-template)과 패키지 이름(custom)이 달라야 한다. 패키지 이름은 브라우저가
+    못 고치는 자리라 템플릿에 구워지는 값이고, 파일 이름은 사이트에 올릴 때 쓴다.
     """
+    if t.get('pkg'):
+        return t['pkg']
     return file_slug(t).replace('-', '_')
 
 
