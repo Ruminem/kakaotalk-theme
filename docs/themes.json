@@ -5,13 +5,15 @@
 "slug": "sakura-image",
 "name": "벚꽃 그늘 v2",
 "cat": "자연",
-"bubble": true
+"bubble": true,
+"bgname": "벚꽃 그늘"
 },
 {
 "slug": "candy-image",
 "name": "캔디 팝 v3",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bgname": "캔디 팝"
 },
 {
 "slug": "wood-oak",
@@ -107,175 +109,204 @@
 "slug": "city-image",
 "name": "야경 배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "야경"
 },
 {
 "slug": "city-glow-image",
 "name": "야경 글로우+배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "야경"
 },
 {
 "slug": "cyber-image",
 "name": "사이버펑크 배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "사이버펑크"
 },
 {
 "slug": "cyber-glow-image",
 "name": "사이버펑크 글로우+배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "사이버펑크"
 },
 {
 "slug": "red-image",
 "name": "레드 배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "레드"
 },
 {
 "slug": "red-glow-image",
 "name": "레드 글로우+배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "레드"
 },
 {
 "slug": "blue-image",
 "name": "블루 배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "블루"
 },
 {
 "slug": "blue-glow-image",
 "name": "블루 글로우+배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "블루"
 },
 {
 "slug": "purple-image",
 "name": "퍼플 배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "퍼플"
 },
 {
 "slug": "purple-glow-image",
 "name": "퍼플 글로우+배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "퍼플"
 },
 {
 "slug": "green-image",
 "name": "그린 배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "그린"
 },
 {
 "slug": "green-glow-image",
 "name": "그린 글로우+배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "그린"
 },
 {
 "slug": "gold-image",
 "name": "골드 배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "골드"
 },
 {
 "slug": "gold-glow-image",
 "name": "골드 글로우+배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "골드"
 },
 {
 "slug": "pink-image",
 "name": "핑크 배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "핑크"
 },
 {
 "slug": "pink-glow-image",
 "name": "핑크 글로우+배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "핑크"
 },
 {
 "slug": "inkmint-image",
 "name": "먹빛 민트 배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bgname": "먹빛 민트"
 },
 {
 "slug": "inkmint-glow-image",
 "name": "먹빛 민트 글로우+배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bgname": "먹빛 민트"
 },
 {
 "slug": "cream-image",
 "name": "크림 라떼 배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bgname": "크림 라떼"
 },
 {
 "slug": "cream-glow-image",
 "name": "크림 라떼 글로우+배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bgname": "크림 라떼"
 },
 {
 "slug": "sakura-glow-image",
 "name": "벚꽃 그늘 글로우+배경",
 "cat": "자연",
-"bubble": true
+"bubble": true,
+"bgname": "벚꽃 그늘"
 },
 {
 "slug": "mixed-image",
 "name": "믹스드 배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bgname": "믹스드"
 },
 {
 "slug": "mixed-glow-image",
 "name": "믹스드 글로우+배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bgname": "믹스드"
 },
 {
 "slug": "candy-glow-image",
 "name": "캔디 팝 글로우+배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bgname": "캔디 팝"
 },
 {
 "slug": "midnight-glow-image",
 "name": "심야 글로우+배경",
 "cat": "자연",
-"bubble": true
+"bubble": true,
+"bgname": "심야"
 },
 {
 "slug": "sea-glow-image",
 "name": "바다 글로우+배경",
 "cat": "자연",
-"bubble": true
+"bubble": true,
+"bgname": "바다"
 },
 {
 "slug": "forest-glow-image",
 "name": "숲 글로우+배경",
 "cat": "자연",
-"bubble": true
+"bubble": true,
+"bgname": "숲"
 },
 {
 "slug": "snow-glow-image",
 "name": "설원 글로우+배경",
 "cat": "자연",
-"bubble": true
+"bubble": true,
+"bgname": "설원"
 },
 {
 "slug": "geo-glow-image",
 "name": "도형 글로우+배경",
 "cat": "무늬",
-"bubble": true
+"bubble": true,
+"bgname": "도형"
 },
 {
 "slug": "post-light-image",
@@ -329,61 +360,71 @@
 "slug": "firework-image",
 "name": "불꽃놀이 배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "불꽃놀이"
 },
 {
 "slug": "firework-glow-image",
 "name": "불꽃놀이 글로우+배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "불꽃놀이"
 },
 {
 "slug": "lantern-image",
 "name": "연등 배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "연등"
 },
 {
 "slug": "lantern-glow-image",
 "name": "연등 글로우+배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "연등"
 },
 {
 "slug": "garland-image",
 "name": "알전구 배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "알전구"
 },
 {
 "slug": "garland-glow-image",
 "name": "알전구 글로우+배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "알전구"
 },
 {
 "slug": "highway-image",
 "name": "고속도로 배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "고속도로"
 },
 {
 "slug": "highway-glow-image",
 "name": "고속도로 글로우+배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "고속도로"
 },
 {
 "slug": "terminal-image",
 "name": "터미널 배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "터미널"
 },
 {
 "slug": "terminal-glow-image",
 "name": "터미널 글로우+배경",
 "cat": "불빛",
-"bubble": true
+"bubble": true,
+"bgname": "터미널"
 },
 {
 "slug": "cinema-light-image",
@@ -450,6 +491,7 @@
 "name": "네온사인 이중관",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인",
 "send": "#FF3FA4",
 "recv": "#35E0FF"
 },
@@ -458,6 +500,7 @@
 "name": "네온사인 간판",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인",
 "send": "#FF7A2F",
 "recv": "#4D7CFF"
 },
@@ -466,6 +509,7 @@
 "name": "네온사인 전극",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인",
 "send": "#B45CFF",
 "recv": "#4CFF88"
 },
@@ -474,6 +518,7 @@
 "name": "네온사인 말꼬리",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인",
 "send": "#FF3B6B",
 "recv": "#FFD23F"
 },
@@ -482,6 +527,7 @@
 "name": "네온사인 v2 이중관",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v2",
 "send": "#3FFFD2",
 "recv": "#FF5CE1"
 },
@@ -490,6 +536,7 @@
 "name": "네온사인 v2 간판",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v2",
 "send": "#35E0FF",
 "recv": "#FFD23F"
 },
@@ -498,6 +545,7 @@
 "name": "네온사인 v2 전극",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v2",
 "send": "#4D7CFF",
 "recv": "#FF7A2F"
 },
@@ -506,6 +554,7 @@
 "name": "네온사인 v2 말꼬리",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v2",
 "send": "#4CFF88",
 "recv": "#B45CFF"
 },
@@ -514,6 +563,7 @@
 "name": "네온사인 v3 이중관",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v3",
 "send": "#FF3B6B",
 "recv": "#FFD23F"
 },
@@ -522,6 +572,7 @@
 "name": "네온사인 v3 간판",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v3",
 "send": "#FF3FA4",
 "recv": "#4CFF88"
 },
@@ -530,6 +581,7 @@
 "name": "네온사인 v3 전극",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v3",
 "send": "#FF7A2F",
 "recv": "#35E0FF"
 },
@@ -538,6 +590,7 @@
 "name": "네온사인 v3 말꼬리",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v3",
 "send": "#FFD23F",
 "recv": "#4D7CFF"
 },
@@ -546,6 +599,7 @@
 "name": "네온사인 v4 팔각",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v4",
 "send": "#FF5CE1",
 "recv": "#35E0FF"
 },
@@ -554,6 +608,7 @@
 "name": "네온사인 v4 꺾쇠",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v4",
 "send": "#4CFF88",
 "recv": "#FFD23F"
 },
@@ -562,6 +617,7 @@
 "name": "네온사인 v4 밑줄",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v4",
 "send": "#FF7A2F",
 "recv": "#B45CFF"
 },
@@ -569,13 +625,15 @@
 "slug": "neonbar-split",
 "name": "네온사인 v4 두 가닥",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bgname": "네온사인 v4"
 },
 {
 "slug": "neonlounge-octagon",
 "name": "네온사인 v5 팔각",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v5",
 "send": "#FFD23F",
 "recv": "#FF5CE1"
 },
@@ -584,6 +642,7 @@
 "name": "네온사인 v5 꺾쇠",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v5",
 "send": "#FF7A2F",
 "recv": "#35E0FF"
 },
@@ -592,6 +651,7 @@
 "name": "네온사인 v5 밑줄",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v5",
 "send": "#FFD23F",
 "recv": "#B45CFF"
 },
@@ -599,13 +659,15 @@
 "slug": "neonlounge-split",
 "name": "네온사인 v5 두 가닥",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bgname": "네온사인 v5"
 },
 {
 "slug": "neonstar-octagon",
 "name": "네온사인 v6 팔각",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v6",
 "send": "#FFA8D8",
 "recv": "#8AD8FF"
 },
@@ -614,6 +676,7 @@
 "name": "네온사인 v6 꺾쇠",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v6",
 "send": "#FFA8D8",
 "recv": "#8AD8FF"
 },
@@ -622,6 +685,7 @@
 "name": "네온사인 v6 밑줄",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v6",
 "send": "#FFA8D8",
 "recv": "#8AD8FF"
 },
@@ -629,13 +693,15 @@
 "slug": "neonstar-split",
 "name": "네온사인 v6 두 가닥",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bgname": "네온사인 v6"
 },
 {
 "slug": "neonpetal-octagon",
 "name": "네온사인 v7 팔각",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v7",
 "send": "#B58AFF",
 "recv": "#FF8AD4"
 },
@@ -644,6 +710,7 @@
 "name": "네온사인 v7 꺾쇠",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v7",
 "send": "#B58AFF",
 "recv": "#FF8AD4"
 },
@@ -652,6 +719,7 @@
 "name": "네온사인 v7 밑줄",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v7",
 "send": "#B58AFF",
 "recv": "#FF8AD4"
 },
@@ -659,37 +727,43 @@
 "slug": "neonpetal-split",
 "name": "네온사인 v7 두 가닥",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bgname": "네온사인 v7"
 },
 {
 "slug": "neonbokeh-octagon",
 "name": "네온사인 v8 팔각",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bgname": "네온사인 v8"
 },
 {
 "slug": "neonbokeh-bracket",
 "name": "네온사인 v8 꺾쇠",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bgname": "네온사인 v8"
 },
 {
 "slug": "neonbokeh-underline",
 "name": "네온사인 v8 밑줄",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bgname": "네온사인 v8"
 },
 {
 "slug": "neonbokeh-split",
 "name": "네온사인 v8 두 가닥",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bgname": "네온사인 v8"
 },
 {
 "slug": "neonplasma-octagon",
 "name": "네온사인 v9 팔각",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v9",
 "send": "#9B5CFF",
 "recv": "#B8FF3F"
 },
@@ -698,6 +772,7 @@
 "name": "네온사인 v9 꺾쇠",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v9",
 "send": "#9B5CFF",
 "recv": "#B8FF3F"
 },
@@ -706,6 +781,7 @@
 "name": "네온사인 v9 밑줄",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v9",
 "send": "#9B5CFF",
 "recv": "#B8FF3F"
 },
@@ -713,13 +789,15 @@
 "slug": "neonplasma-split",
 "name": "네온사인 v9 두 가닥",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bgname": "네온사인 v9"
 },
 {
 "slug": "neonink-octagon",
 "name": "네온사인 v10 팔각",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v10",
 "send": "#FF3FA4",
 "recv": "#3FFFD2"
 },
@@ -728,6 +806,7 @@
 "name": "네온사인 v10 꺾쇠",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v10",
 "send": "#FF3FA4",
 "recv": "#3FFFD2"
 },
@@ -736,6 +815,7 @@
 "name": "네온사인 v10 밑줄",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v10",
 "send": "#FF3FA4",
 "recv": "#3FFFD2"
 },
@@ -743,13 +823,15 @@
 "slug": "neonink-split",
 "name": "네온사인 v10 두 가닥",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bgname": "네온사인 v10"
 },
 {
 "slug": "neonmesh-octagon",
 "name": "네온사인 v11 팔각",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v11",
 "send": "#FF7A6B",
 "recv": "#35E0FF"
 },
@@ -758,6 +840,7 @@
 "name": "네온사인 v11 꺾쇠",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v11",
 "send": "#FF7A6B",
 "recv": "#35E0FF"
 },
@@ -766,6 +849,7 @@
 "name": "네온사인 v11 밑줄",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v11",
 "send": "#FF7A6B",
 "recv": "#35E0FF"
 },
@@ -773,13 +857,15 @@
 "slug": "neonmesh-split",
 "name": "네온사인 v11 두 가닥",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bgname": "네온사인 v11"
 },
 {
 "slug": "neoncrystal-octagon",
 "name": "네온사인 v12 팔각",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v12",
 "send": "#6A5CFF",
 "recv": "#FFB03F"
 },
@@ -788,6 +874,7 @@
 "name": "네온사인 v12 꺾쇠",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v12",
 "send": "#6A5CFF",
 "recv": "#FFB03F"
 },
@@ -796,6 +883,7 @@
 "name": "네온사인 v12 밑줄",
 "cat": "불빛 - 네온사인",
 "bubble": true,
+"bgname": "네온사인 v12",
 "send": "#6A5CFF",
 "recv": "#FFB03F"
 },
@@ -803,31 +891,36 @@
 "slug": "neoncrystal-split",
 "name": "네온사인 v12 두 가닥",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bgname": "네온사인 v12"
 },
 {
 "slug": "neonchroma-octagon",
 "name": "네온사인 v13 팔각",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bgname": "네온사인 v13"
 },
 {
 "slug": "neonchroma-bracket",
 "name": "네온사인 v13 꺾쇠",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bgname": "네온사인 v13"
 },
 {
 "slug": "neonchroma-underline",
 "name": "네온사인 v13 밑줄",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bgname": "네온사인 v13"
 },
 {
 "slug": "neonchroma-split",
 "name": "네온사인 v13 두 가닥",
 "cat": "불빛 - 네온사인",
-"bubble": true
+"bubble": true,
+"bgname": "네온사인 v13"
 },
 {
 "slug": "neonzoo-sea",

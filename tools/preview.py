@@ -1094,6 +1094,15 @@ def write_mix_manifest(ts):
     for c, _note, members in T2.categorized():
         for fam, _ms in members:
             cat[fam] = c
+
+    # 배경 쪽에 붙일 짧은 이름. 계열의 변형들이 같은 목록 배경을 쓰면 변형 이름은 군더더기다 —
+    # 네온사인 v5 의 네 벌은 말풍선만 다르고 벽이 같아서, 배경으로 고를 때 팔각이냐 밑줄이냐는
+    # 아무 뜻이 없다. 자동으로 짓는 테마 이름이 그만큼 짧아진다(docs/make.html).
+    walls = {}
+    for t in ts:
+        if mixable(t):
+            walls.setdefault(T2._fam_of(t)[0], set()).add(repr(t['main_bg']))
+
     out = []
     for t in ts:
         if not mixable(t):
@@ -1101,6 +1110,8 @@ def write_mix_manifest(ts):
         fam = T2._fam_of(t)[0]
         row = dict(slug=T2.file_slug(t), name=t['name'], cat=cat.get(fam, fam),
                    bubble=not t.get('firelight'))
+        if len(walls[fam]) == 1 and fam != t['name']:
+            row['bgname'] = fam
         if row['bubble'] and _recolorable(t):
             # 페이지가 이 두 색을 기준으로 색상을 돌린다. 원래 색을 모르면 못 돌린다
             row.update(send=t['send'][0], recv=t['recv'][0])
