@@ -1004,9 +1004,15 @@ README 배치 규칙상 테마마다 링크를 늘릴 수도 없다.
 갓 클론돼 있다) 개인 전역 규칙이 하나도 안 실린 상태다. 규칙은 `Ruminem/rules` 에 있고 평소에는
 `~/.claude/CLAUDE.md` 의 `@` import 로 실리는데, 컨테이너는 홈 폴더를 들고 오지 않는다.
 
-**시작할 때 붙여서 읽는다.** `add_repo` 로 `Ruminem/rules` 를 세션에 붙이고 클론한 뒤
-`register_repo_root` 로 알린다. `src/*.md` 가 다음 차례부터 실린다. 윈도우와 맥에서는 할 일이
-없다 — `~/.claude/CLAUDE.md` 가 있으면 이미 실린 것이다.
+**시작할 때 붙여서 직접 읽는다.** `add_repo` 로 `Ruminem/rules` 를 세션에 붙이고 클론한 뒤,
+`src/*.md` 를 **직접 읽어 컨텍스트에 싣는다**. `platform: windows` 인 `windows.md` 는 뺀다.
+윈도우와 맥에서는 할 일이 없다 — `~/.claude/CLAUDE.md` 가 있으면 이미 실린 것이다.
+
+**`register_repo_root` 만으로는 안 된다.** 그것이 싣는 것은 저장소 루트의 `CLAUDE.md` 인데,
+도중에 붙인 저장소에서는 그마저 안 실린다. 파일 읽기를 막아 두고 `core.md` 안쪽에만 있는
+문자열을 묻는 방식으로 갈랐다 — 저장소를 **열면서 시작한** 세션에는 실리고, 도중에 붙인
+세션에는 안 실린다. 처음에 이 절이 "`register_repo_root` 로 알리면 실린다" 고 적고 있었는데
+틀린 지시였다.
 
 **SessionStart 훅으로는 안 된다.** 훅은 셸이라 `add_repo` 를 못 부르고, 안 붙은 private 저장소는
 새 세션에서 클론이 인증에서 막힌다. 자식 세션을 띄워 재 보니 `could not read Username` 이었다.
