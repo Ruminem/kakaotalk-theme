@@ -67,12 +67,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neon-double-chat.webp" width="200"><br><b>이중관</b><br><sub>벽돌 벽에 관 두 줄 네온. 첫 말엔 네온 별</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neon-double.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neon-double.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neon-sign-chat.webp" width="200"><br><b>간판</b><br><sub>금속 간판에 박힌 네온. 첫 말은 사슬에 매달림</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neon-sign.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neon-sign.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neon-double-chat.webp" width="200"><br><b>이중관</b><br><sub>벽돌 벽에 관 두 줄 네온. 첫 말엔 네온 별</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neon-double.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neon-double.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neon-sign-chat.webp" width="200"><br><b>간판</b><br><sub>금속 간판에 박힌 네온. 첫 말은 사슬에 매달림</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neon-sign.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neon-sign.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neon-electrode-chat.webp" width="200"><br><b>전극</b><br><sub>끊긴 관 끝에 전극이 달린 진짜 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neon-electrode.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neon-electrode.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neon-speech-chat.webp" width="200"><br><b>말꼬리</b><br><sub>꼬리까지 관 하나로 이어진 네온 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neon-speech.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neon-speech.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neon-electrode-chat.webp" width="200"><br><b>전극</b><br><sub>끊긴 관 끝에 전극이 달린 진짜 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neon-electrode.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neon-electrode.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neon-speech-chat.webp" width="200"><br><b>말꼬리</b><br><sub>꼬리까지 관 하나로 이어진 네온 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neon-speech.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neon-speech.apk">Android</a></td>
 </tr>
 </table>
 
@@ -102,12 +102,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonalley-double-chat.webp" width="200"><br><b>이중관</b><br><sub>셔터 내린 골목에 관 두 줄 네온. 민트와 마젠타</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonalley-double.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonalley-double.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonalley-sign-chat.webp" width="200"><br><b>간판</b><br><sub>셔터 위 금속 간판 네온. 노랑과 하늘색</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonalley-sign.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonalley-sign.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonalley-double-chat.webp" width="200"><br><b>이중관</b><br><sub>셔터 내린 골목에 관 두 줄 네온. 민트와 마젠타</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonalley-double.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonalley-double.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonalley-sign-chat.webp" width="200"><br><b>간판</b><br><sub>셔터 위 금속 간판 네온. 노랑과 하늘색</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonalley-sign.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonalley-sign.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonalley-electrode-chat.webp" width="200"><br><b>전극</b><br><sub>셔터 골목의 전극 달린 네온관. 주황과 파랑</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonalley-electrode.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonalley-electrode.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonalley-speech-chat.webp" width="200"><br><b>말꼬리</b><br><sub>셔터 골목에 꼬리까지 이어진 네온. 보라와 초록</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonalley-speech.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonalley-speech.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonalley-electrode-chat.webp" width="200"><br><b>전극</b><br><sub>셔터 골목의 전극 달린 네온관. 주황과 파랑</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonalley-electrode.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonalley-electrode.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonalley-speech-chat.webp" width="200"><br><b>말꼬리</b><br><sub>셔터 골목에 꼬리까지 이어진 네온. 보라와 초록</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonalley-speech.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonalley-speech.apk">Android</a></td>
 </tr>
 </table>
 
@@ -137,12 +137,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neontile-double-chat.webp" width="200"><br><b>이중관</b><br><sub>지하 바 타일 벽에 관 두 줄 네온. 노랑과 빨강</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neontile-double.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neontile-double.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neontile-sign-chat.webp" width="200"><br><b>간판</b><br><sub>타일 벽 금속 간판 네온. 초록과 분홍</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neontile-sign.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neontile-sign.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neontile-double-chat.webp" width="200"><br><b>이중관</b><br><sub>지하 바 타일 벽에 관 두 줄 네온. 노랑과 빨강</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neontile-double.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neontile-double.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neontile-sign-chat.webp" width="200"><br><b>간판</b><br><sub>타일 벽 금속 간판 네온. 초록과 분홍</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neontile-sign.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neontile-sign.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neontile-electrode-chat.webp" width="200"><br><b>전극</b><br><sub>타일 벽의 전극 달린 네온관. 하늘색과 주황</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neontile-electrode.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neontile-electrode.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neontile-speech-chat.webp" width="200"><br><b>말꼬리</b><br><sub>타일 벽에 꼬리까지 이어진 네온. 파랑과 노랑</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neontile-speech.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neontile-speech.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neontile-electrode-chat.webp" width="200"><br><b>전극</b><br><sub>타일 벽의 전극 달린 네온관. 하늘색과 주황</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neontile-electrode.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neontile-electrode.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neontile-speech-chat.webp" width="200"><br><b>말꼬리</b><br><sub>타일 벽에 꼬리까지 이어진 네온. 파랑과 노랑</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neontile-speech.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neontile-speech.apk">Android</a></td>
 </tr>
 </table>
 
@@ -172,12 +172,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonbar-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>모서리를 깎은 팔각 네온관. 첫 말엔 번개</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbar-octagon.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonbar-octagon.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonbar-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>네 모서리에만 불이 들어온 꺾쇠 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbar-bracket.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonbar-bracket.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonbar-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>모서리를 깎은 팔각 네온관. 첫 말엔 번개</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbar-octagon.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonbar-octagon.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonbar-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>네 모서리에만 불이 들어온 꺾쇠 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbar-bracket.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonbar-bracket.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonbar-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>아래변만 빛나고 양끝이 말려 올라간 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbar-underline.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonbar-underline.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonbar-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>두 색 관이 모서리 틈에서 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbar-split.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonbar-split.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonbar-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>아래변만 빛나고 양끝이 말려 올라간 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbar-underline.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonbar-underline.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonbar-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>두 색 관이 모서리 틈에서 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbar-split.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonbar-split.apk">Android</a></td>
 </tr>
 </table>
 
@@ -207,12 +207,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonlounge-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>미장 벽에 걸린 팔각 네온관. 분홍과 노랑</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonlounge-octagon.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonlounge-octagon.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonlounge-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>미장 벽에 모서리만 켜진 꺾쇠 네온. 하늘색과 주황</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonlounge-bracket.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonlounge-bracket.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonlounge-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>미장 벽에 걸린 팔각 네온관. 분홍과 노랑</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonlounge-octagon.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonlounge-octagon.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonlounge-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>미장 벽에 모서리만 켜진 꺾쇠 네온. 하늘색과 주황</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonlounge-bracket.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonlounge-bracket.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonlounge-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>미장 벽에 아래변만 빛나는 네온. 보라와 노랑</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonlounge-underline.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonlounge-underline.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonlounge-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>미장 벽에 두 색 관이 갈리는 네온. 파랑과 분홍</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonlounge-split.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonlounge-split.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonlounge-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>미장 벽에 아래변만 빛나는 네온. 보라와 노랑</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonlounge-underline.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonlounge-underline.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonlounge-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>미장 벽에 두 색 관이 갈리는 네온. 파랑과 분홍</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonlounge-split.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonlounge-split.apk">Android</a></td>
 </tr>
 </table>
 
@@ -242,12 +242,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonstar-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>별자리 밤하늘에 걸린 팔각 네온관. 연하늘과 연분홍</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonstar-octagon.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonstar-octagon.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonstar-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>은하수 위 모서리만 켜진 꺾쇠 네온. 파스텔</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonstar-bracket.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonstar-bracket.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonstar-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>별자리 밤하늘에 걸린 팔각 네온관. 연하늘과 연분홍</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonstar-octagon.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonstar-octagon.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonstar-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>은하수 위 모서리만 켜진 꺾쇠 네온. 파스텔</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonstar-bracket.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonstar-bracket.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonstar-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>별자리 아래 밑줄만 빛나는 네온. 연분홍</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonstar-underline.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonstar-underline.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonstar-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>별자리 밤하늘에 두 색 관이 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonstar-split.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonstar-split.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonstar-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>별자리 아래 밑줄만 빛나는 네온. 연분홍</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonstar-underline.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonstar-underline.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonstar-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>별자리 밤하늘에 두 색 관이 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonstar-split.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonstar-split.apk">Android</a></td>
 </tr>
 </table>
 
@@ -277,12 +277,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonpetal-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>흐린 꽃잎이 떠다니는 어둠에 팔각 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonpetal-octagon.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonpetal-octagon.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonpetal-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>꽃잎 사이 모서리만 켜진 꺾쇠 네온. 분홍과 보라</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonpetal-bracket.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonpetal-bracket.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonpetal-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>흐린 꽃잎이 떠다니는 어둠에 팔각 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonpetal-octagon.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonpetal-octagon.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonpetal-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>꽃잎 사이 모서리만 켜진 꺾쇠 네온. 분홍과 보라</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonpetal-bracket.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonpetal-bracket.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonpetal-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>꽃잎 어둠에 밑줄만 빛나는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonpetal-underline.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonpetal-underline.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonpetal-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>꽃잎 사이로 두 색 관이 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonpetal-split.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonpetal-split.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonpetal-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>꽃잎 어둠에 밑줄만 빛나는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonpetal-underline.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonpetal-underline.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonpetal-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>꽃잎 사이로 두 색 관이 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonpetal-split.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonpetal-split.apk">Android</a></td>
 </tr>
 </table>
 
@@ -312,12 +312,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonbokeh-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>초점 나간 빛 동그라미 위 팔각 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbokeh-octagon.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonbokeh-octagon.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonbokeh-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>보케 위 모서리만 켜진 꺾쇠 네온. 흰빛과 분홍</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbokeh-bracket.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonbokeh-bracket.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonbokeh-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>초점 나간 빛 동그라미 위 팔각 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbokeh-octagon.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonbokeh-octagon.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonbokeh-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>보케 위 모서리만 켜진 꺾쇠 네온. 흰빛과 분홍</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbokeh-bracket.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonbokeh-bracket.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonbokeh-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>보케 위 밑줄만 빛나는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbokeh-underline.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonbokeh-underline.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonbokeh-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>보케 위로 두 색 관이 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbokeh-split.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonbokeh-split.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonbokeh-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>보케 위 밑줄만 빛나는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbokeh-underline.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonbokeh-underline.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonbokeh-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>보케 위로 두 색 관이 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonbokeh-split.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonbokeh-split.apk">Android</a></td>
 </tr>
 </table>
 
@@ -347,12 +347,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonplasma-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>뻗어 나가는 플라즈마 실에 팔각 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonplasma-octagon.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonplasma-octagon.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonplasma-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>플라즈마 위 모서리만 켜진 꺾쇠 네온. 라임과 보라</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonplasma-bracket.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonplasma-bracket.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonplasma-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>뻗어 나가는 플라즈마 실에 팔각 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonplasma-octagon.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonplasma-octagon.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonplasma-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>플라즈마 위 모서리만 켜진 꺾쇠 네온. 라임과 보라</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonplasma-bracket.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonplasma-bracket.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonplasma-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>플라즈마 위 밑줄만 빛나는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonplasma-underline.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonplasma-underline.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonplasma-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>플라즈마 위로 두 색 관이 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonplasma-split.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonplasma-split.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonplasma-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>플라즈마 위 밑줄만 빛나는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonplasma-underline.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonplasma-underline.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonplasma-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>플라즈마 위로 두 색 관이 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonplasma-split.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonplasma-split.apk">Android</a></td>
 </tr>
 </table>
 
@@ -382,12 +382,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonink-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>번진 잉크 위에 걸린 팔각 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonink-octagon.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonink-octagon.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonink-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>잉크 위 모서리만 켜진 꺾쇠 네온. 민트와 자홍</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonink-bracket.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonink-bracket.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonink-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>번진 잉크 위에 걸린 팔각 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonink-octagon.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonink-octagon.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonink-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>잉크 위 모서리만 켜진 꺾쇠 네온. 민트와 자홍</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonink-bracket.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonink-bracket.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonink-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>번진 잉크에 밑줄만 빛나는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonink-underline.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonink-underline.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonink-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>잉크 위로 두 색 관이 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonink-split.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonink-split.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonink-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>번진 잉크에 밑줄만 빛나는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonink-underline.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonink-underline.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonink-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>잉크 위로 두 색 관이 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonink-split.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonink-split.apk">Android</a></td>
 </tr>
 </table>
 
@@ -417,12 +417,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonmesh-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>레이저 그물 위에 걸린 팔각 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonmesh-octagon.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonmesh-octagon.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonmesh-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>그물 위 모서리만 켜진 꺾쇠 네온. 하늘색과 산호</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonmesh-bracket.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonmesh-bracket.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonmesh-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>레이저 그물 위에 걸린 팔각 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonmesh-octagon.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonmesh-octagon.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonmesh-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>그물 위 모서리만 켜진 꺾쇠 네온. 하늘색과 산호</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonmesh-bracket.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonmesh-bracket.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonmesh-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>레이저 그물에 밑줄만 빛나는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonmesh-underline.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonmesh-underline.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonmesh-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>그물 위로 두 색 관이 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonmesh-split.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonmesh-split.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonmesh-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>레이저 그물에 밑줄만 빛나는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonmesh-underline.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonmesh-underline.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonmesh-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>그물 위로 두 색 관이 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonmesh-split.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonmesh-split.apk">Android</a></td>
 </tr>
 </table>
 
@@ -452,12 +452,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neoncrystal-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>겹친 크리스탈 조각 위 팔각 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neoncrystal-octagon.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neoncrystal-octagon.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neoncrystal-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>조각 위 모서리만 켜진 꺾쇠 네온. 호박과 남보라</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neoncrystal-bracket.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neoncrystal-bracket.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neoncrystal-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>겹친 크리스탈 조각 위 팔각 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neoncrystal-octagon.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neoncrystal-octagon.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neoncrystal-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>조각 위 모서리만 켜진 꺾쇠 네온. 호박과 남보라</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neoncrystal-bracket.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neoncrystal-bracket.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neoncrystal-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>크리스탈 조각에 밑줄만 빛나는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neoncrystal-underline.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neoncrystal-underline.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neoncrystal-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>조각 위로 두 색 관이 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neoncrystal-split.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neoncrystal-split.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neoncrystal-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>크리스탈 조각에 밑줄만 빛나는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neoncrystal-underline.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neoncrystal-underline.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neoncrystal-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>조각 위로 두 색 관이 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neoncrystal-split.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neoncrystal-split.apk">Android</a></td>
 </tr>
 </table>
 
@@ -487,12 +487,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonchroma-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>세 색으로 어긋난 덩이 위 팔각 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonchroma-octagon.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonchroma-octagon.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonchroma-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>색수차 위 모서리만 켜진 꺾쇠 네온. 빨강과 청록</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonchroma-bracket.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonchroma-bracket.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonchroma-octagon-chat.webp" width="200"><br><b>팔각</b><br><sub>세 색으로 어긋난 덩이 위 팔각 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonchroma-octagon.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonchroma-octagon.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonchroma-bracket-chat.webp" width="200"><br><b>꺾쇠</b><br><sub>색수차 위 모서리만 켜진 꺾쇠 네온. 빨강과 청록</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonchroma-bracket.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonchroma-bracket.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonchroma-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>색수차 위에 밑줄만 빛나는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonchroma-underline.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonchroma-underline.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonchroma-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>색수차 위로 두 색 관이 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonchroma-split.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonchroma-split.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonchroma-underline-chat.webp" width="200"><br><b>밑줄</b><br><sub>색수차 위에 밑줄만 빛나는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonchroma-underline.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonchroma-underline.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonchroma-split-chat.webp" width="200"><br><b>두 가닥</b><br><sub>색수차 위로 두 색 관이 갈리는 네온</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonchroma-split.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonchroma-split.apk">Android</a></td>
 </tr>
 </table>
 
@@ -522,12 +522,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonzoo-sea-chat.webp" width="200"><br><b>바다</b><br><sub>별밤에 걸린 해파리·고래·문어 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonzoo-sea.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonzoo-sea.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonzoo-forest-chat.webp" width="200"><br><b>숲</b><br><sub>별밤에 걸린 부엉이·여우·사슴 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonzoo-forest.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonzoo-forest.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonzoo-sea-chat.webp" width="200"><br><b>바다</b><br><sub>별밤에 걸린 해파리·고래·문어 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonzoo-sea.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonzoo-sea.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonzoo-forest-chat.webp" width="200"><br><b>숲</b><br><sub>별밤에 걸린 부엉이·여우·사슴 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonzoo-forest.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonzoo-forest.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-neonzoo-ice-chat.webp" width="200"><br><b>얼음</b><br><sub>별밤에 걸린 펭귄·곰·해마 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonzoo-ice.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonzoo-ice.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-neonzoo-mixed-chat.webp" width="200"><br><b>모둠</b><br><sub>별밤에 걸린 나비·해파리·부엉이 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonzoo-mixed.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/neonzoo-mixed.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonzoo-ice-chat.webp" width="200"><br><b>얼음</b><br><sub>별밤에 걸린 펭귄·곰·해마 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonzoo-ice.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonzoo-ice.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-neonzoo-mixed-chat.webp" width="200"><br><b>모둠</b><br><sub>별밤에 걸린 나비·해파리·부엉이 네온관</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=neonzoo-mixed.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=neonzoo-mixed.apk">Android</a></td>
 </tr>
 </table>
 

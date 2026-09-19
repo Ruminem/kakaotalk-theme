@@ -57,12 +57,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-glass-light-chat.webp" width="200"><br><b>라이트</b><br><sub>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glass-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass-light.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-glass-dark-chat.webp" width="200"><br><b>다크</b><br><sub>같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glass-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-glass-light-chat.webp" width="200"><br><b>라이트</b><br><sub>유리 너머로 빛이 번지는 밝은 쪽. 말풍선과 목록이 반투명이라 배경이 비침</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glass-light.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=glass-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-glass-dark-chat.webp" width="200"><br><b>다크</b><br><sub>같은 유리를 어두운 쪽으로. 빛이 유리 모서리에만 걸림</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glass-dark.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=glass-dark.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-glass-light-plain-chat.webp" width="200"><br><b>라이트 단색</b><br><sub>배경 그림 없이 유리만. 바탕색을 머금어 색이 가라앉음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glass-light-plain.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass-light-plain.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-glass-dark-plain-chat.webp" width="200"><br><b>다크 단색</b><br><sub>어두운 바탕에 유리만. 빛나는 것 없이 테두리만 남음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glass-dark-plain.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glass-dark-plain.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-glass-light-plain-chat.webp" width="200"><br><b>라이트 단색</b><br><sub>배경 그림 없이 유리만. 바탕색을 머금어 색이 가라앉음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glass-light-plain.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=glass-light-plain.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-glass-dark-plain-chat.webp" width="200"><br><b>다크 단색</b><br><sub>어두운 바탕에 유리만. 빛나는 것 없이 테두리만 남음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glass-dark-plain.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=glass-dark-plain.apk">Android</a></td>
 </tr>
 </table>
 
@@ -92,12 +92,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-wood-oak-chat.webp" width="200"><br><b>오크</b><br><sub>밝은 참나무 결 위에 반투명 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=wood-oak.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/wood-oak.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-wood-walnut-chat.webp" width="200"><br><b>월넛</b><br><sub>짙은 호두나무. 결이 유리 너머로 비침</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=wood-walnut.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/wood-walnut.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-wood-oak-chat.webp" width="200"><br><b>오크</b><br><sub>밝은 참나무 결 위에 반투명 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=wood-oak.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=wood-oak.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-wood-walnut-chat.webp" width="200"><br><b>월넛</b><br><sub>짙은 호두나무. 결이 유리 너머로 비침</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=wood-walnut.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=wood-walnut.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-wood-oak-plain-chat.webp" width="200"><br><b>오크 단색</b><br><sub>결 없이 나무색 바탕. 유리만 남김</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=wood-oak-plain.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/wood-oak-plain.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-wood-walnut-plain-chat.webp" width="200"><br><b>월넛 단색</b><br><sub>어두운 나무색 바탕에 유리만</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=wood-walnut-plain.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/wood-walnut-plain.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-wood-oak-plain-chat.webp" width="200"><br><b>오크 단색</b><br><sub>결 없이 나무색 바탕. 유리만 남김</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=wood-oak-plain.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=wood-oak-plain.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-wood-walnut-plain-chat.webp" width="200"><br><b>월넛 단색</b><br><sub>어두운 나무색 바탕에 유리만</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=wood-walnut-plain.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=wood-walnut-plain.apk">Android</a></td>
 </tr>
 </table>
 
@@ -127,12 +127,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-stained-amber-chat.webp" width="200"><br><b>앰버</b><br><sub>납선으로 이은 호박색 유리창. 등불이 뒤에서 비침</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-amber.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/stained-amber.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-stained-emerald-chat.webp" width="200"><br><b>에메랄드</b><br><sub>초록 유리창. 가장 차분한 쪽</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-emerald.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/stained-emerald.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-stained-amber-chat.webp" width="200"><br><b>앰버</b><br><sub>납선으로 이은 호박색 유리창. 등불이 뒤에서 비침</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-amber.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=stained-amber.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-stained-emerald-chat.webp" width="200"><br><b>에메랄드</b><br><sub>초록 유리창. 가장 차분한 쪽</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-emerald.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=stained-emerald.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-stained-amethyst-chat.webp" width="200"><br><b>자수정</b><br><sub>보라 유리창. 어두운 쪽으로 가장 깊음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-amethyst.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/stained-amethyst.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-stained-rose-chat.webp" width="200"><br><b>로즈</b><br><sub>분홍 유리창. 가장 따뜻한 쪽</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-rose.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/stained-rose.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-stained-amethyst-chat.webp" width="200"><br><b>자수정</b><br><sub>보라 유리창. 어두운 쪽으로 가장 깊음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-amethyst.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=stained-amethyst.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-stained-rose-chat.webp" width="200"><br><b>로즈</b><br><sub>분홍 유리창. 가장 따뜻한 쪽</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=stained-rose.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=stained-rose.apk">Android</a></td>
 </tr>
 </table>
 
@@ -162,12 +162,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-prism-light-chat.webp" width="200"><br><b>라이트</b><br><sub>맑은 바탕. 말풍선 테두리가 무지개로 갈라짐</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=prism-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/prism-light.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-prism-dark-chat.webp" width="200"><br><b>다크</b><br><sub>어두운 바탕. 갈라진 테두리가 더 또렷함</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=prism-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/prism-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-prism-light-chat.webp" width="200"><br><b>라이트</b><br><sub>맑은 바탕. 말풍선 테두리가 무지개로 갈라짐</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=prism-light.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=prism-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-prism-dark-chat.webp" width="200"><br><b>다크</b><br><sub>어두운 바탕. 갈라진 테두리가 더 또렷함</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=prism-dark.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=prism-dark.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-prism-light-plain-chat.webp" width="200"><br><b>라이트 단색</b><br><sub>배경 없이 갈라진 테두리만 남김</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=prism-light-plain.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/prism-light-plain.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-prism-dark-plain-chat.webp" width="200"><br><b>다크 단색</b><br><sub>어두운 바탕에 갈라진 테두리만</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=prism-dark-plain.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/prism-dark-plain.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-prism-light-plain-chat.webp" width="200"><br><b>라이트 단색</b><br><sub>배경 없이 갈라진 테두리만 남김</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=prism-light-plain.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=prism-light-plain.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-prism-dark-plain-chat.webp" width="200"><br><b>다크 단색</b><br><sub>어두운 바탕에 갈라진 테두리만</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=prism-dark-plain.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=prism-dark-plain.apk">Android</a></td>
 </tr>
 </table>
 
@@ -197,12 +197,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-frost-light-chat.webp" width="200"><br><b>라이트</b><br><sub>젖빛 유리. 알갱이가 도는 뿌연 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=frost-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/frost-light.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-frost-dark-chat.webp" width="200"><br><b>다크</b><br><sub>어두운 젖빛. 알갱이가 빛을 물고 있음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=frost-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/frost-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-frost-light-chat.webp" width="200"><br><b>라이트</b><br><sub>젖빛 유리. 알갱이가 도는 뿌연 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=frost-light.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=frost-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-frost-dark-chat.webp" width="200"><br><b>다크</b><br><sub>어두운 젖빛. 알갱이가 빛을 물고 있음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=frost-dark.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=frost-dark.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-frost-light-plain-chat.webp" width="200"><br><b>라이트 단색</b><br><sub>배경 없이 젖빛 말풍선만</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=frost-light-plain.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/frost-light-plain.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-frost-dark-plain-chat.webp" width="200"><br><b>다크 단색</b><br><sub>어두운 바탕에 젖빛 말풍선만</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=frost-dark-plain.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/frost-dark-plain.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-frost-light-plain-chat.webp" width="200"><br><b>라이트 단색</b><br><sub>배경 없이 젖빛 말풍선만</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=frost-light-plain.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=frost-light-plain.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-frost-dark-plain-chat.webp" width="200"><br><b>다크 단색</b><br><sub>어두운 바탕에 젖빛 말풍선만</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=frost-dark-plain.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=frost-dark-plain.apk">Android</a></td>
 </tr>
 </table>
 
@@ -232,12 +232,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-seaglass-light-chat.webp" width="200"><br><b>밝음</b><br><sub>파도에 닳은 유리 조각 같은 무광 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=seaglass-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/seaglass-light.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-seaglass-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>모래 위에 흩어진 뿌연 유리 조각</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=seaglass-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/seaglass-light-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-seaglass-light-chat.webp" width="200"><br><b>밝음</b><br><sub>파도에 닳은 유리 조각 같은 무광 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=seaglass-light.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=seaglass-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-seaglass-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>모래 위에 흩어진 뿌연 유리 조각</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=seaglass-light-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=seaglass-light-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-seaglass-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>어두운 바탕에 닳은 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=seaglass-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/seaglass-dark.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-seaglass-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>밤바다 젖은 모래 위 유리 조각</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=seaglass-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/seaglass-dark-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-seaglass-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>어두운 바탕에 닳은 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=seaglass-dark.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=seaglass-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-seaglass-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>밤바다 젖은 모래 위 유리 조각</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=seaglass-dark-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=seaglass-dark-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -267,12 +267,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-glassblock-light-chat.webp" width="200"><br><b>밝음</b><br><sub>두께 띠가 도는 볼록 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glassblock-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glassblock-light.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-glassblock-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>유리 벽돌 너머로 번진 불빛</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glassblock-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glassblock-light-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-glassblock-light-chat.webp" width="200"><br><b>밝음</b><br><sub>두께 띠가 도는 볼록 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glassblock-light.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=glassblock-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-glassblock-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>유리 벽돌 너머로 번진 불빛</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glassblock-light-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=glassblock-light-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-glassblock-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>어두운 바탕에 볼록 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glassblock-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glassblock-dark.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-glassblock-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>밤, 유리 벽돌 너머 켜진 불빛</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glassblock-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/glassblock-dark-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-glassblock-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>어두운 바탕에 볼록 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glassblock-dark.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=glassblock-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-glassblock-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>밤, 유리 벽돌 너머 켜진 불빛</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=glassblock-dark-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=glassblock-dark-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -302,12 +302,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-ice-light-chat.webp" width="200"><br><b>밝음</b><br><sub>서리 낀 얼음 말풍선. 첫 말엔 기포와 금</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=ice-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/ice-light.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-ice-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>금 간 얼음판에 갇힌 기포</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=ice-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/ice-light-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-ice-light-chat.webp" width="200"><br><b>밝음</b><br><sub>서리 낀 얼음 말풍선. 첫 말엔 기포와 금</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=ice-light.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=ice-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-ice-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>금 간 얼음판에 갇힌 기포</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=ice-light-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=ice-light-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-ice-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>짙은 얼음빛 바탕에 서리 낀 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=ice-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/ice-dark.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-ice-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>깊고 푸른 얼음 속 금과 기포</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=ice-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/ice-dark-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-ice-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>짙은 얼음빛 바탕에 서리 낀 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=ice-dark.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=ice-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-ice-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>깊고 푸른 얼음 속 금과 기포</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=ice-dark-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=ice-dark-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -337,12 +337,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-reeded-light-chat.webp" width="200"><br><b>밝음</b><br><sub>세로 골이 도는 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=reeded-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/reeded-light.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-reeded-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>세로 골 너머로 쪼개져 비치는 초록과 햇빛</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=reeded-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/reeded-light-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-reeded-light-chat.webp" width="200"><br><b>밝음</b><br><sub>세로 골이 도는 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=reeded-light.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=reeded-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-reeded-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>세로 골 너머로 쪼개져 비치는 초록과 햇빛</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=reeded-light-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=reeded-light-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-reeded-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>어두운 바탕에 골판 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=reeded-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/reeded-dark.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-reeded-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>밤, 골판 유리 너머 등불</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=reeded-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/reeded-dark-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-reeded-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>어두운 바탕에 골판 유리 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=reeded-dark.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=reeded-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-reeded-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>밤, 골판 유리 너머 등불</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=reeded-dark-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=reeded-dark-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -372,12 +372,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-acrylic-light-chat.webp" width="200"><br><b>밝음</b><br><sub>형광 모서리 아크릴 말풍선. 첫 말엔 나사</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=acrylic-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/acrylic-light.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-acrylic-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>겹쳐 놓은 파스텔 아크릴판</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=acrylic-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/acrylic-light-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-acrylic-light-chat.webp" width="200"><br><b>밝음</b><br><sub>형광 모서리 아크릴 말풍선. 첫 말엔 나사</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=acrylic-light.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=acrylic-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-acrylic-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>겹쳐 놓은 파스텔 아크릴판</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=acrylic-light-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=acrylic-light-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-acrylic-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>어두운 바탕에 형광 모서리가 빛남</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=acrylic-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/acrylic-dark.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-acrylic-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>어둠 속에 겹친 형광 아크릴판</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=acrylic-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/acrylic-dark-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-acrylic-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>어두운 바탕에 형광 모서리가 빛남</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=acrylic-dark.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=acrylic-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-acrylic-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>어둠 속에 겹친 형광 아크릴판</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=acrylic-dark-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=acrylic-dark-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -407,12 +407,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-resin-light-chat.webp" width="200"><br><b>밝음</b><br><sub>꿀빛 레진 말풍선. 첫 말엔 갇힌 잎</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=resin-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/resin-light.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-resin-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>밝은 호박색 레진 속 금박과 기포</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=resin-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/resin-light-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-resin-light-chat.webp" width="200"><br><b>밝음</b><br><sub>꿀빛 레진 말풍선. 첫 말엔 갇힌 잎</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=resin-light.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=resin-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-resin-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>밝은 호박색 레진 속 금박과 기포</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=resin-light-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=resin-light-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-resin-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>짙은 호박색 바탕에 레진 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=resin-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/resin-dark.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-resin-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>호박색 레진 속 금박과 마른 잎</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=resin-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/resin-dark-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-resin-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>짙은 호박색 바탕에 레진 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=resin-dark.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=resin-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-resin-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>호박색 레진 속 금박과 마른 잎</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=resin-dark-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=resin-dark-image.apk">Android</a></td>
 </tr>
 </table>
 

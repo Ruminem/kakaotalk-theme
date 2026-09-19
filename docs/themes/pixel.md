@@ -37,12 +37,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-arcade-light-chat.webp" width="200"><br><b>밝음</b><br><sub>연보라 바탕에 빛나는 픽셀 말풍선과 계단 꼬리</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=arcade-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/arcade-light.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-arcade-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>픽셀 구름과 동전이 뜬 낮의 오락실</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=arcade-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/arcade-light-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-arcade-light-chat.webp" width="200"><br><b>밝음</b><br><sub>연보라 바탕에 빛나는 픽셀 말풍선과 계단 꼬리</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=arcade-light.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=arcade-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-arcade-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>픽셀 구름과 동전이 뜬 낮의 오락실</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=arcade-light-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=arcade-light-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-arcade-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>남색 바탕에 네온처럼 빛나는 픽셀 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=arcade-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/arcade-dark.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-arcade-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>픽셀 별이 뜬 밤 화면에 빛나는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=arcade-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/arcade-dark-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-arcade-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>남색 바탕에 네온처럼 빛나는 픽셀 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=arcade-dark.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=arcade-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-arcade-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>픽셀 별이 뜬 밤 화면에 빛나는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=arcade-dark-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=arcade-dark-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -72,12 +72,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-quest-light-chat.webp" width="200"><br><b>밝음</b><br><sub>양피지색 바탕에 도트 대화창. 첫 말엔 ▼ 커서</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=quest-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/quest-light.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-quest-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>위에서 본 도트 들판과 오솔길</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=quest-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/quest-light-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-quest-light-chat.webp" width="200"><br><b>밝음</b><br><sub>양피지색 바탕에 도트 대화창. 첫 말엔 ▼ 커서</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=quest-light.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=quest-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-quest-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>위에서 본 도트 들판과 오솔길</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=quest-light-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=quest-light-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-quest-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>남색 대화창에 흰 안쪽 테. 옛날 RPG 밤 화면</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=quest-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/quest-dark.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-quest-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>화로 켜진 던전. 대화창에 불빛이 비침</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=quest-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/quest-dark-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-quest-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>남색 대화창에 흰 안쪽 테. 옛날 RPG 밤 화면</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=quest-dark.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=quest-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-quest-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>화로 켜진 던전. 대화창에 불빛이 비침</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=quest-dark-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=quest-dark-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -107,12 +107,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-lcd-light-chat.webp" width="200"><br><b>밝음</b><br><sub>연둣빛 액정에 도트 말풍선. 첫 말엔 하트</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=lcd-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/lcd-light.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-lcd-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>네 가지 초록만 쓰는 액정 속 언덕</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=lcd-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/lcd-light-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-lcd-light-chat.webp" width="200"><br><b>밝음</b><br><sub>연둣빛 액정에 도트 말풍선. 첫 말엔 하트</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=lcd-light.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=lcd-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-lcd-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>네 가지 초록만 쓰는 액정 속 언덕</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=lcd-light-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=lcd-light-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-lcd-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>백라이트 켠 어두운 액정에 초록 도트</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=lcd-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/lcd-dark.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-lcd-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>불 켜진 액정 화면 속 도트 언덕</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=lcd-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/lcd-dark-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-lcd-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>백라이트 켠 어두운 액정에 초록 도트</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=lcd-dark.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=lcd-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-lcd-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>불 켜진 액정 화면 속 도트 언덕</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=lcd-dark-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=lcd-dark-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -142,12 +142,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-retro-light-chat.webp" width="200"><br><b>밝음</b><br><sub>회색 창 말풍선. 첫 말엔 제목 표시줄과 닫기 단추</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=retro-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/retro-light.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-retro-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>청록 바탕화면에 도트 아이콘과 작업 표시줄</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=retro-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/retro-light-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-retro-light-chat.webp" width="200"><br><b>밝음</b><br><sub>회색 창 말풍선. 첫 말엔 제목 표시줄과 닫기 단추</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=retro-light.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=retro-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-retro-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>청록 바탕화면에 도트 아이콘과 작업 표시줄</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=retro-light-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=retro-light-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-retro-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>어두운 창 말풍선. 밤에 켠 옛 컴퓨터</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=retro-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/retro-dark.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-retro-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>남색 바탕화면에 도트 아이콘</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=retro-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/retro-dark-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-retro-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>어두운 창 말풍선. 밤에 켠 옛 컴퓨터</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=retro-dark.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=retro-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-retro-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>남색 바탕화면에 도트 아이콘</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=retro-dark-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=retro-dark-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -177,12 +177,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-farm-light-chat.webp" width="200"><br><b>밝음</b><br><sub>나무 팻말 말풍선. 첫 말엔 새싹이 돋음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=farm-light.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/farm-light.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-farm-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>위에서 본 밭고랑과 울타리</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=farm-light-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/farm-light-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-farm-light-chat.webp" width="200"><br><b>밝음</b><br><sub>나무 팻말 말풍선. 첫 말엔 새싹이 돋음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=farm-light.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=farm-light.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-farm-light-image-chat.webp" width="200"><br><b>밝음+배경</b><br><sub>위에서 본 밭고랑과 울타리</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=farm-light-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=farm-light-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-farm-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>밤 농장. 어두운 팻말 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=farm-dark.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/farm-dark.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-farm-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>반딧불 날리는 밤 밭</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=farm-dark-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/farm-dark-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-farm-dark-chat.webp" width="200"><br><b>어두움</b><br><sub>밤 농장. 어두운 팻말 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=farm-dark.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=farm-dark.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-farm-dark-image-chat.webp" width="200"><br><b>어두움+배경</b><br><sub>반딧불 날리는 밤 밭</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=farm-dark-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=farm-dark-image.apk">Android</a></td>
 </tr>
 </table>
 

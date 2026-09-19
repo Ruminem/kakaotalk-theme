@@ -37,12 +37,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-sakura-basic-chat.webp" width="200"><br><b>기본</b><br><sub>밝은 분홍. 채팅방 배경 이미지가 깔림</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sakura-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-sakura-image-chat.webp" width="200"><br><b>벚꽃 배경</b><br><sub>벚꽃 그늘에 가지와 꽃잎을 그려 넣었음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sakura-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-sakura-basic-chat.webp" width="200"><br><b>기본</b><br><sub>밝은 분홍. 채팅방 배경 이미지가 깔림</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sakura-basic.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=sakura-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-sakura-image-chat.webp" width="200"><br><b>벚꽃 배경</b><br><sub>벚꽃 그늘에 가지와 꽃잎을 그려 넣었음</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sakura-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=sakura-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-sakura-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>분홍 말풍선이 빛남</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sakura-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-sakura-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>벚꽃 배경에 빛나는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sakura-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sakura-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-sakura-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>분홍 말풍선이 빛남</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sakura-glow.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=sakura-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-sakura-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>벚꽃 배경에 빛나는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sakura-glow-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=sakura-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -72,12 +72,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-aurora-basic-chat.webp" width="200"><br><b>기본</b><br><sub>오로라를 걷어낸 가장 어두운 바탕</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=aurora-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-aurora-image-chat.webp" width="200"><br><b>배경</b><br><sub>가장 어두운 테마. 채팅방 배경에 오로라가 번짐</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=aurora-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-aurora-basic-chat.webp" width="200"><br><b>기본</b><br><sub>오로라를 걷어낸 가장 어두운 바탕</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=aurora-basic.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=aurora-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-aurora-image-chat.webp" width="200"><br><b>배경</b><br><sub>가장 어두운 테마. 채팅방 배경에 오로라가 번짐</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=aurora-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=aurora-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-aurora-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>말풍선이 오로라 색으로 빛남</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=aurora-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-aurora-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>오로라 배경에 빛나는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=aurora-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/aurora-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-aurora-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>말풍선이 오로라 색으로 빛남</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=aurora-glow.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=aurora-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-aurora-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>오로라 배경에 빛나는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=aurora-glow-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=aurora-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -107,12 +107,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-midnight-basic-chat.webp" width="200"><br><b>기본</b><br><sub>밤하늘을 걷어낸 남색 바탕</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=midnight-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-midnight-image-chat.webp" width="200"><br><b>배경</b><br><sub>밤하늘을 그려 넣은 테마. 잠금화면에 달과 능선이 나옴</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=midnight-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-midnight-basic-chat.webp" width="200"><br><b>기본</b><br><sub>밤하늘을 걷어낸 남색 바탕</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=midnight-basic.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=midnight-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-midnight-image-chat.webp" width="200"><br><b>배경</b><br><sub>밤하늘을 그려 넣은 테마. 잠금화면에 달과 능선이 나옴</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=midnight-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=midnight-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-midnight-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>말풍선이 달빛처럼 빛남</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=midnight-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-midnight-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>밤하늘에 빛나는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=midnight-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/midnight-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-midnight-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>말풍선이 달빛처럼 빛남</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=midnight-glow.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=midnight-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-midnight-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>밤하늘에 빛나는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=midnight-glow-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=midnight-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -142,12 +142,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-sea-basic-chat.webp" width="200"><br><b>기본</b><br><sub>바다를 걷어낸 짙은 물빛 바탕</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sea-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-sea-image-chat.webp" width="200"><br><b>배경</b><br><sub>수평선 너머로 해가 지는 바다. 말풍선 네 칸이 산호·모래·물빛·하늘색</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sea-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-sea-basic-chat.webp" width="200"><br><b>기본</b><br><sub>바다를 걷어낸 짙은 물빛 바탕</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sea-basic.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=sea-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-sea-image-chat.webp" width="200"><br><b>배경</b><br><sub>수평선 너머로 해가 지는 바다. 말풍선 네 칸이 산호·모래·물빛·하늘색</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sea-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=sea-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-sea-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>산호와 물빛 말풍선이 빛남</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sea-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-sea-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>바다 배경에 빛나는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sea-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/sea-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-sea-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>산호와 물빛 말풍선이 빛남</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sea-glow.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=sea-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-sea-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>바다 배경에 빛나는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=sea-glow-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=sea-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -177,12 +177,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-forest-basic-chat.webp" width="200"><br><b>기본</b><br><sub>숲을 걷어낸 이끼빛 바탕</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=forest-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-forest-image-chat.webp" width="200"><br><b>배경</b><br><sub>안개 낀 침엽수 숲. 이끼·호박·하늘·흙빛 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=forest-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-forest-basic-chat.webp" width="200"><br><b>기본</b><br><sub>숲을 걷어낸 이끼빛 바탕</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=forest-basic.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=forest-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-forest-image-chat.webp" width="200"><br><b>배경</b><br><sub>안개 낀 침엽수 숲. 이끼·호박·하늘·흙빛 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=forest-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=forest-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-forest-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>이끼와 호박빛 말풍선이 빛남</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=forest-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-forest-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>숲 배경에 빛나는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=forest-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/forest-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-forest-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>이끼와 호박빛 말풍선이 빛남</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=forest-glow.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=forest-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-forest-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>숲 배경에 빛나는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=forest-glow-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=forest-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
@@ -212,12 +212,12 @@
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-snow-basic-chat.webp" width="200"><br><b>기본</b><br><sub>눈을 걷어낸 얼음빛 바탕</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=snow-basic.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-basic.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-snow-image-chat.webp" width="200"><br><b>배경</b><br><sub>눈 내리는 언덕. 얼음·살구·민트·라벤더 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=snow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-snow-basic-chat.webp" width="200"><br><b>기본</b><br><sub>눈을 걷어낸 얼음빛 바탕</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=snow-basic.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=snow-basic.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-snow-image-chat.webp" width="200"><br><b>배경</b><br><sub>눈 내리는 언덕. 얼음·살구·민트·라벤더 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=snow-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=snow-image.apk">Android</a></td>
 </tr>
 <tr>
-<td width="50%" align="center"><img src="../../assets/preview-snow-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>파스텔 말풍선이 은은하게 빛남</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=snow-glow.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-glow.apk">Android</a></td>
-<td width="50%" align="center"><img src="../../assets/preview-snow-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>설원 배경에 빛나는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=snow-glow-image.ktheme">iOS</a> · <a href="https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/snow-glow-image.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-snow-glow-chat.webp" width="200"><br><b>글로우</b><br><sub>파스텔 말풍선이 은은하게 빛남</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=snow-glow.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=snow-glow.apk">Android</a></td>
+<td width="50%" align="center"><img src="../../assets/preview-snow-glow-image-chat.webp" width="200"><br><b>글로우+배경</b><br><sub>설원 배경에 빛나는 말풍선</sub><br><a href="https://ruminem.github.io/kakaotalk-theme/docs/share.html?f=snow-glow-image.ktheme">iOS</a> · <a href="https://ruminem.github.io/kakaotalk-theme/docs/install.html?f=snow-glow-image.apk">Android</a></td>
 </tr>
 </table>
 
