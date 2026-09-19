@@ -10,11 +10,10 @@
 
 ### 폰에서 바로 받기
 
-PC로 받아서 폰으로 옮길 필요 없음. 카메라로 찍으면 릴리스 목록으로 감.
+PC로 받아서 폰으로 옮길 필요 없음. 카메라로 찍으면 이 문서가 폰에서 열림 —
+아래 테마 목록에서 고르면 각 플랫폼의 설치 안내를 타고 감.
 
-| iOS | Android |
-|---|---|
-| <img src="assets/qr-ios.png" width="150"> | <img src="assets/qr-android.png" width="150"> |
+<a href="https://github.com/Ruminem/kakaotalk-theme#user-content-받는-법"><img src="assets/qr.png" width="150" alt="받는 법 QR"></a>
 
 **iOS** — **저장소를 카카오톡 안에서 열면 제일 빠름.** 이 주소를 나와의 채팅에 보내고
 거기서 열면, 테마 문서의 `iOS` 를 누르는 순간 `테마 다운로드 완료` 가 뜨고 끝임.
