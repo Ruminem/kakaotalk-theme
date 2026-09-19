@@ -48,7 +48,7 @@ jobs:
       - name: 사이트 구성
         run: |
           mkdir -p _site/docs _site/assets _site/files
-          cp docs/index.html docs/share.html docs/make.html docs/themes.json \
+          cp docs/index.html docs/share.html docs/install.html docs/make.html docs/themes.json \
              docs/zip.js docs/apksign.js docs/apkmix.js docs/customkey.js \
              docs/template.json docs/acolors.json _site/docs/
           cp assets/*.png assets/*.webp _site/assets/

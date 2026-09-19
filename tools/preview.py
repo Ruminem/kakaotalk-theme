@@ -674,8 +674,6 @@ CARD = """<section class="card">
 
 START = '<!-- THEMES:START -->'
 END = '<!-- THEMES:END -->'
-BASE = 'https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/'
-
 # iOS 링크는 Pages 의 공유 페이지를 거친다. 브라우저마다 제일 짧은 길이 달라서,
 # 그 페이지가 보고 고른다.
 #
@@ -684,9 +682,17 @@ BASE = 'https://github.com/Ruminem/kakaotalk-theme/releases/latest/download/'
 # 가 붙어 나와서 브라우저가 내려받는 것 말고 아무것도 못 한다. 사이트의 같은 파일에는
 # 그 헤더가 없다. 사파리는 같은 주소를 줘도 그냥 내려받아서, 거기선 공유 시트를 띄운다.
 #
-# 안드로이드는 그대로 BASE 다. APK 는 카톡이 아니라 시스템이 설치하고,
-# 크롬의 공유 API 는 확장자 허용목록이라 .apk 를 받지도 않는다.
+# 안드로이드도 페이지를 거친다. 다만 막히는 자리가 다르다 — 받는 것은 되는데 **까는 것**이
+# 막힌다. 삼성 One UI 6.1.1 부터 `보안 위험 자동 차단` 이 기본으로 켜져 있어 스토어 밖 APK 를
+# 전부 거부하고, 그 밑에 안드로이드 8 부터의 `출처를 알 수 없는 앱` 이 또 있다. 릴리스 자산을
+# 바로 가리키면 받기까지는 되지만 차단 안내가 뜨는 자리에서 그대로 그만두게 된다.
+# install.html 이 받기 전에 그 준비를 시킨다 — 막힌 뒤에 안내하면 이미 늦다.
+#
+# 파일 자체는 거기서도 릴리스 자산을 가리킨다. APK 는 카톡이 아니라 시스템이 설치하므로
+# `Content-Disposition: attachment` 가 걸림돌이 아니다. 그리고 카카오톡 인앱 브라우저는
+# `.apk` 를 아예 못 받아서(WebView 제약) 그 페이지가 다른 브라우저로 내보낸다.
 IOS = 'https://ruminem.github.io/kakaotalk-theme/docs/share.html?f='
+ANDROID = 'https://ruminem.github.io/kakaotalk-theme/docs/install.html?f='
 
 # 계열 상세에서 맨 위 카테고리 격자로 돌아가는 자리. 계열이 예순을 넘으면서 상세를 하나 보고 나면
 # 다른 계열을 고르러 한참 거슬러 올라가야 했다.
@@ -941,7 +947,7 @@ def _family_block(T, name, members, img):
                        '<a href="%s%s.ktheme">iOS</a> · <a href="%s%s.apk">Android</a>'
                        '</td>'
                        % (cell, img, T.file_slug(m), W_VARIANT, m['variant'], m['note'],
-                          IOS, T.file_slug(m), BASE, T.file_slug(m)))
+                          IOS, T.file_slug(m), ANDROID, T.file_slug(m)))
         out.append('</tr>')
     out.append('</table>')
     out.append('')
