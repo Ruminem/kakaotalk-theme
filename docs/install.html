@@ -60,6 +60,12 @@
                 margin-left:auto; white-space:nowrap; }
   .path { font-size:13px; color:var(--text); background:var(--bg); border:1px solid var(--line);
           border-radius:8px; padding:9px 11px; margin:8px 0 0; word-break:keep-all; }
+  /* 폰에서 찍은 세로 화면이라 폭을 맞추면 한 장이 화면을 다 먹는다. 작게 두고 누르면
+     원본이 열리게 한다 — 여기서는 "아 이 창" 하고 알아보는 것이 할 일이다. */
+  figure { margin:10px 0 0; text-align:center; }
+  figure img { width:100%; max-width:132px; display:block; margin:0 auto;
+               border-radius:9px; border:1px solid var(--line); }
+  figcaption { font-size:11.5px; color:var(--dim); margin-top:5px; }
   .step p { margin:7px 0 0; font-size:13px; color:var(--dim); }
   .step p b { color:var(--text); font-weight:600; }
   .mine { border-color:var(--accent); }
@@ -175,14 +181,22 @@
         '<p class="path">설정 → 보안 및 개인정보 보호 → <b>보안 위험 자동 차단</b> → 끔</p>' +
         '<p>One UI 6.1.1 부터 <b>기본이 켜짐</b>이라 요즘 갤럭시는 대부분 켜져 있음. ' +
           '켜져 있으면 2번을 해도 설치가 막힘.</p>' +
+        '<figure><a href="../assets/install-autoblock.webp" target="_blank">' +
+          '<img src="../assets/install-autoblock.webp" alt="출처를 알 수 없는 앱 차단됨 안내창">' +
+        '</a><figcaption>이 창이 뜨면 이것임. <b>확인</b> 말고는 단추가 없어서 ' +
+          '여기서 설정으로 바로 못 감 — 직접 찾아가야 함 (눌러서 크게)</figcaption></figure>' +
       '</div>' +
 
       '<div class="step">' +
         '<h2><span class="n">2</span>출처를 알 수 없는 앱 허용<em>모든 안드로이드</em></h2>' +
-        '<p>받은 파일을 누르면 차단 안내가 뜸. 거기 <b>[설정]</b> 을 누르면 그 화면으로 ' +
-          '바로 감 — 메뉴를 찾아 헤맬 필요 없음. 쓰던 브라우저를 켜 주면 됨.</p>' +
-        '<p class="path">직접 찾으려면 — 설정 → 보안 및 개인정보 보호 → 기타 보안 설정 → ' +
+        '<p class="path">설정 → 보안 및 개인정보 보호 → 기타 보안 설정 → ' +
           '<b>출처를 알 수 없는 앱 설치</b></p>' +
+        '<p>목록에서 <b>쓰던 브라우저</b>(크롬 · 삼성 인터넷)를 골라 <b>권한 허용</b>을 켬. ' +
+          '받을 때 쓴 그 브라우저여야 함 — 앱마다 따로 켜는 것이라 다른 것을 켜면 안 먹음.</p>' +
+        '<figure><a href="../assets/install-unknown.webp" target="_blank">' +
+          '<img src="../assets/install-unknown.webp" alt="출처를 알 수 없는 앱 설치 권한 허용 화면">' +
+        '</a><figcaption>이 화면에도 <b>「허용해도 자동 차단이 막는다」</b>고 적혀 있음. ' +
+          '1번을 안 하면 여기만 켜도 소용없음 (눌러서 크게)</figcaption></figure>' +
       '</div>' +
 
       (guideOnly ? '' :

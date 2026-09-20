@@ -10,7 +10,7 @@
 //
 // 둘째 인자로 다른 파일을 주면 그것을 본다. 일부러 깨뜨린 사본으로 이 검사가 실제로
 // 걸리는지 확인할 때 쓴다.
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import vm from 'node:vm';
 
 const target = process.argv[2] || new URL('../docs/install.html', import.meta.url);
@@ -89,6 +89,17 @@ console.log('2) 보통 안드로이드 + ?f=');
   ok('삼성 기기를 알아본다', /내 폰이 삼성/.test(r.html), r.html);
   ok('되돌리기 안내는 처음엔 접혀 있다', /class="back hide"/.test(r.html), r.html);
   ok('미리보기 그림이 붙는다', /preview-neonsign-a-chat\.webp/.test(r.html), r.html);
+
+  // 안내 스크린샷은 글보다 먼저 읽히는 자리다. 지워지거나 이름이 어긋나면 화면에 깨진
+  // 그림이 뜨는데, 폰에서 열어 보기 전까지는 모른다.
+  const shots = [...r.html.matchAll(/\.\.\/assets\/(install-[a-z0-9-]+\.webp)/g)].map((x) => x[1]);
+  ok('안내 스크린샷 둘이 붙는다',
+     shots.includes('install-autoblock.webp') && shots.includes('install-unknown.webp'),
+     shots.join(', ') || '없음');
+  for (const s of new Set(shots)) {
+    ok(s + ' 가 assets 에 있다',
+       existsSync(new URL('../assets/' + s, import.meta.url)), '파일 없음');
+  }
 }
 
 console.log('3) 안내만 — make.html 이 ?f= 없이 보낸다');
