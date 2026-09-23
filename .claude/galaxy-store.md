@@ -77,13 +77,19 @@ python3 .claude/galaxy/check-names.py
 그려지는 글자를 전부 모아 프렌즈 이름이 있는지 본다. 바꾸기 **전에** 안 걸리면 검사가
 헛도는 것이므로 그때도 멈춘다 — 통과만 보면 아무것도 안 잡는 검사인지 알 수 없다.
 
-### 지금 그림은 근사치다
+### 그림은 PC 에서 진짜 글꼴로 다시 뽑았다 (2026-09-23)
 
-이 컨테이너에 윈도우의 `NotoSansKR-VF.ttf` 가 없어서 Noto Sans CJK KR 로 대신 그렸다.
-글자 모양이 커밋된 미리보기와 조금 다르다. **최종본은 PC 에서 다시 뽑는다** — 그쪽에는
-진짜 글꼴이 있고, 스크립트가 있으면 그걸 먼저 쓰므로 명령은 같다.
+컨테이너에서는 `NotoSansKR-VF.ttf` 가 없어 Noto Sans CJK KR 로 대신 그렸었다. PC 에서 같은
+명령으로 다시 뽑았고 글꼴 대체 경고가 안 떴다. 목록·채팅방을 눈으로 봐서 말풍선·글로우·
+바뀐 이름이 다 들어간 것을 확인했다.
 
 ## PC 에서 할 일
+
+**1–3 은 끝났다 (2026-09-23).** 빌드 대신 0.39.1 릴리스 자산을 받아
+`build-tmp/galaxy/snow-glow-image/snow-glow-image.apk`(696KB)에 두었다. `aapt2 dump badging`
+으로 패키지·`versionCode`·SDK 가 위 표와 같고, `apksigner verify` 가 v1·v2·v3 을 통과하며,
+인증서 SHA-256 이 `theme.keystore` 와 같다(`1cb5e723…cfa834`). `check-names.py` 통과.
+**남은 것은 4–6, 계정을 만들고 제출하는 일이라 사람이 한다.**
 
 여기서는 APK 빌드도 업로드도 못 한다. Android SDK 와 `theme.keystore` 가 PC 에 있고
 삼성 도메인은 이 컨테이너에서 막혀 있다.
