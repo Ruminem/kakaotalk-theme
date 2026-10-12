@@ -794,8 +794,8 @@ OS 설정을 따라서, OS 가 다크 모드인데 GitHub 만 밝은 테마면 �
 이슈 폼으로 간다 — 그쪽은 파이썬이 다시 그린다. 굳이 브라우저에서 하려면 PNG 조각을 손으로
 갈아끼워야 한다(캔버스로 푼 뒤 `IDAT` 만 `CompressionStream` 으로 다시 짜고 나머지 조각은 그대로).
 
-**안드로이드 폰이 없어도 판정한다.** 이 PC 에 에뮬레이터와 android-34 이미지가 있다(AVD
-`spamtest`). `node tools/check-apkmix.mjs --install` 이 실제 테마로 섞고 apksigner 로 검증하고
+**안드로이드 폰이 없어도 판정한다.** 에뮬레이터와 android-34 이미지로 AVD `spamtest` 를
+만들어 두면 된다. `node tools/check-apkmix.mjs --install` 이 실제 테마로 섞고 apksigner 로 검증하고
 깔아 보고 지운다. 안드로이드 14 라 v2 서명 요구와 arsc 정렬 요구가 둘 다 걸려 있어 제일 빡센
 대상이다. `sys.boot_completed` 만 보고 깔면 이르다 — 패키지 관리자가 대답할 때까지 기다린다.
 일찍 부르면 adb 가 까닭도 없이 「failed to install」 만 뱉는다.
